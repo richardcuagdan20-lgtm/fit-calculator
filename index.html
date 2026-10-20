@@ -91,6 +91,12 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
 .seg.c1{grid-template-columns:1fr}.seg.c1 .o{text-align:left;padding:12px 14px}
 .adm table{font-size:11px}.adm td{text-align:left!important;padding:6px 4px;vertical-align:top}
 .adm .wrap{overflow-x:auto}
+.fab{position:fixed;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));z-index:8;display:flex;align-items:center;gap:8px;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.fab .ic{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#00b2ff,#006aff 55%,#a033ff);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,80,200,.35);border:0;cursor:pointer}
+.fab .lb{background:#fff;color:var(--ink);border:1px solid var(--g2);font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.08);white-space:nowrap}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+@media(max-width:380px){.fab .lb{display:none}}
 </style>
 </head>
 <body>
@@ -240,11 +246,12 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
     </div>
   </section>
 </main>
-<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v3</span></footer>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v4</span></footer>
 <div class="toast" id="toast"></div>
+<a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
 
 <script>
-const APP_VERSION = 'v3';
+const APP_VERSION = 'v4';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
 const LS_KEY = 'bfc_leads';
@@ -437,6 +444,13 @@ document.querySelectorAll('input[name=seg],input[name=use]').forEach(i=>i.addEve
 })();
 function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');renderAdmin();step(5)}else{$('hero').classList.remove('hide');if(!$('s1').classList.contains('hide')||!$('admin').classList.contains('hide'))step(1)}}
 window.addEventListener('hashchange',route);route();
+$('fab').addEventListener('click',e=>{e.preventDefault();
+  const L=S.lead||null,unit=(L&&L.chosenUnit?(S.chosen||L.chosenUnit):(S.chosen||S.unitPref))||'none',id=(L&&L.leadId)||'none';
+  const url=`${MESSENGER}?ref=${encodeURIComponent('calc_float_'+String(unit).toLowerCase().replace(/[^a-z0-9]+/g,'')+'_'+id)}`;
+  if(L){try{copySync(summary());toast('Message copied, paste it in Messenger')}catch(_){}}
+  try{if(typeof window.fbq==='function')window.fbq('track','Contact',{content_name:'floating_messenger'})}catch(_){}
+  window.open(url,'_blank','noopener');
+});
 </script>
 </body>
 </html>
