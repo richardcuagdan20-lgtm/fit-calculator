@@ -96,8 +96,15 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
 .fab .lb{background:#fff;color:var(--ink);border:1px solid var(--g2);font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.08);white-space:nowrap}
 body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
-@media(max-width:380px){.fab .lb{display:none}}
+@media(max-width:480px){.fab .lb{display:none}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1820790069172672&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <header>
@@ -246,12 +253,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     </div>
   </section>
 </main>
-<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v4</span></footer>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v5</span></footer>
 <div class="toast" id="toast"></div>
 <a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
 
 <script>
-const APP_VERSION = 'v4';
+const APP_VERSION = 'v5';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
 const LS_KEY = 'bfc_leads';
@@ -349,6 +356,7 @@ function submit(){
   S.lead=lead;
   const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
   const sending=sendLead(lead,'submit'); // details go out FIRST, before anything that could throw
+  px('Lead',{content_name:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP',content_category:lead.seg});
   try{const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all))}catch(e){} // storage may be blocked in in-app browsers
   Promise.race([sending,new Promise(r=>setTimeout(r,4000))]).finally(()=>{
     b.textContent='Details received ✓';
@@ -358,6 +366,7 @@ function submit(){
 // Sends the lead to the webhook. text/plain avoids a CORS preflight (Apps Script can't answer one);
 // sendBeacon / keepalive survive the page navigating to Messenger. The server de-dupes by leadId.
 // Primary: fetch no-cors + keepalive (follows Apps Script's 302). Fallback: sendBeacon. Always resolves.
+function px(ev,o){try{if(typeof window.fbq==='function')window.fbq('track',ev,o)}catch(_){}}
 function beacon_(body){try{return !!(navigator.sendBeacon&&navigator.sendBeacon(LEAD_WEBHOOK_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))}catch(e){return false}}
 function sendLead(lead,via){
   if(!LEAD_WEBHOOK_URL||!lead)return Promise.resolve(false);
@@ -419,6 +428,7 @@ $('go3').onclick=submit;
 document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>step(+b.dataset.back));
 $('msgBtn').addEventListener('click',()=>{ // one tap: send lead + copy summary; the link itself opens m.me
   try{sendLead(S.lead,'messenger_tap')}catch(e){} // send first; nothing below can block it
+  px('Contact',{content_name:'message_richard_finalize'});
   try{if(copySync(summary()))toast('Message copied. Paste & send in Messenger.')}catch(e){}
 });
 $('copyBtn').onclick=async()=>{try{sendLead(S.lead,'copy_tap')}catch(e){}}; $('copyBtn').addEventListener('click',async()=>toast(await copy(summary())?'Message copied. Paste & send in Messenger.':'Copy failed. Please long-press the text to copy.'));
@@ -443,6 +453,7 @@ document.querySelectorAll('input[name=seg],input[name=use]').forEach(i=>i.addEve
   applySeg();
 })();
 function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');renderAdmin();step(5)}else{$('hero').classList.remove('hide');if(!$('s1').classList.contains('hide')||!$('admin').classList.contains('hide'))step(1)}}
+$('tdBtn').addEventListener('click',()=>px('Contact',{content_name:'book_test_drive'}));
 window.addEventListener('hashchange',route);route();
 $('fab').addEventListener('click',e=>{e.preventDefault();
   const L=S.lead||null,unit=(L&&L.chosenUnit?(S.chosen||L.chosenUnit):(S.chosen||S.unitPref))||'none',id=(L&&L.leadId)||'none';
