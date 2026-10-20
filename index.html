@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Budget Fit Calculator | Mitsubishi Motors – Richard Cuagdan</title>
 <meta name="description" content="Find the Mitsubishi that fits your monthly budget. L300, Xpander, Destinator all-in financing.">
@@ -239,10 +240,11 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
     </div>
   </section>
 </main>
-<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition</footer>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v3</span></footer>
 <div class="toast" id="toast"></div>
 
 <script>
+const APP_VERSION = 'v3';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
 const LS_KEY = 'bfc_leads';
@@ -338,20 +340,25 @@ function submit(){
     recommendedUnit:UNITS.find(x=>x.id===S.rec).name,chosenUnit:u.name,monthly:m,fitPercent:+(r*100).toFixed(1),
     timeline:tl,employment:emp,tier:tierOf(tl,r),consent:true,source:location.origin+location.pathname};
   S.lead=lead;
-  const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all));
-  sendLead(lead,'submit'); // details go out FIRST
   const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
-  setTimeout(()=>{b.textContent='Details received ✓';
-    setTimeout(()=>{b.disabled=false;b.textContent='Send my details & see full offer';renderOffer();step(4)},600)},900);
+  const sending=sendLead(lead,'submit'); // details go out FIRST, before anything that could throw
+  try{const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all))}catch(e){} // storage may be blocked in in-app browsers
+  Promise.race([sending,new Promise(r=>setTimeout(r,4000))]).finally(()=>{
+    b.textContent='Details received ✓';
+    setTimeout(()=>{b.disabled=false;b.textContent='Send my details & see full offer';try{renderOffer()}catch(e){console.error(e)}step(4)},500);
+  });
 }
 // Sends the lead to the webhook. text/plain avoids a CORS preflight (Apps Script can't answer one);
 // sendBeacon / keepalive survive the page navigating to Messenger. The server de-dupes by leadId.
+// Primary: fetch no-cors + keepalive (follows Apps Script's 302). Fallback: sendBeacon. Always resolves.
+function beacon_(body){try{return !!(navigator.sendBeacon&&navigator.sendBeacon(LEAD_WEBHOOK_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))}catch(e){return false}}
 function sendLead(lead,via){
-  if(!LEAD_WEBHOOK_URL||!lead)return;
-  const body=JSON.stringify({...lead,via});
-  let ok=false;
-  try{ok=navigator.sendBeacon&&navigator.sendBeacon(LEAD_WEBHOOK_URL,new Blob([body],{type:'text/plain;charset=utf-8'}))}catch(e){}
-  if(!ok){try{fetch(LEAD_WEBHOOK_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body}).catch(()=>{})}catch(e){}}
+  if(!LEAD_WEBHOOK_URL||!lead)return Promise.resolve(false);
+  let body;try{body=JSON.stringify(Object.assign({},lead,{via:via,appVersion:APP_VERSION}))}catch(e){return Promise.resolve(false)}
+  try{
+    return fetch(LEAD_WEBHOOK_URL,{method:'POST',mode:'no-cors',keepalive:true,cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})
+      .then(()=>true).catch(e=>{console.warn('lead fetch failed, using beacon',e);return beacon_(body)});
+  }catch(e){return Promise.resolve(beacon_(body))}
 }
 function copySync(t){ // synchronous copy inside the tap, before navigation
   const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
@@ -404,10 +411,10 @@ $('go2').onclick=()=>{const {u,m,r}=chosenData();
 $('go3').onclick=submit;
 document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>step(+b.dataset.back));
 $('msgBtn').addEventListener('click',()=>{ // one tap: send lead + copy summary; the link itself opens m.me
-  sendLead(S.lead,'messenger_tap');
-  if(copySync(summary()))toast('Message copied. Paste & send in Messenger.');
+  try{sendLead(S.lead,'messenger_tap')}catch(e){} // send first; nothing below can block it
+  try{if(copySync(summary()))toast('Message copied. Paste & send in Messenger.')}catch(e){}
 });
-$('copyBtn').onclick=async()=>toast(await copy(summary())?'Message copied. Paste & send in Messenger.':'Copy failed. Please long-press the text to copy.');
+$('copyBtn').onclick=async()=>{try{sendLead(S.lead,'copy_tap')}catch(e){}}; $('copyBtn').addEventListener('click',async()=>toast(await copy(summary())?'Message copied. Paste & send in Messenger.':'Copy failed. Please long-press the text to copy.'));
 $('restart').onclick=()=>{$('country').value='';$('release').value='';['income','name','mobile','loc'].forEach(i=>$(i).value='');$('consent').checked=false;
   document.querySelectorAll('input[name=tl],input[name=emp]').forEach(i=>i.checked=false);S.lead=null;step(1)};
 
