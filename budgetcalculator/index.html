@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Budget Fit Calculator | Mitsubishi Motors – Richard Cuagdan</title>
+<link rel="canonical" href="https://mitsubishipromos.online/budgetcalculator/">
+<meta property="og:url" content="https://mitsubishipromos.online/budgetcalculator/">
+<meta name="description" content="Find the Mitsubishi that fits your monthly budget. Mirage G4, Xpander, L300, Triton, Destinator, Montero Sport all-in financing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E60012;--red-d:#b8000e;--ink:#111;--g1:#f4f4f5;--g2:#e4e4e7;--g3:#71717a;--ok:#0f7b3f;--warn:#a15c00;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--g1);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
+header{background:#000;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px}
+.logo{width:28px;height:28px;flex:none}
+header .t{font-weight:700;font-size:15px;letter-spacing:.2px}
+header .s{font-size:11px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase}
+.hero{background:linear-gradient(135deg,#000 0%,#1c1c1c 100%);color:#fff;padding:6px 18px 22px;border-bottom:3px solid var(--red)}
+.hero h1{font-size:24px;font-weight:800;line-height:1.2}
+.hero p{color:#cfcfcf;font-size:14px;margin-top:6px}
+main{max-width:520px;margin:0 auto;padding:16px 16px 40px}
+.prog{display:flex;gap:6px;margin:4px 0 6px}
+.prog div{flex:1;height:4px;border-radius:4px;background:var(--g2)}
+.prog div.on{background:var(--red)}
+.plab{font-size:12px;color:var(--g3);margin-bottom:12px;font-weight:500}
+.card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:14px}
+h2{font-size:19px;font-weight:700;margin-bottom:4px}
+.sub{font-size:13px;color:var(--g3);margin-bottom:14px}
+label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+input[type=text],input[type=tel],input[type=number]{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--g2);border-radius:10px;background:#fff;outline:none}
+input:focus{border-color:var(--ink)}
+.peso{position:relative}.peso span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:600;color:var(--g3)}
+.peso input{padding-left:30px}
+.seg{display:grid;gap:8px}.seg.c2{grid-template-columns:1fr 1fr}.seg.c3{grid-template-columns:1fr 1fr 1fr}
+.seg label{cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg .o{display:block;border:1.5px solid var(--g2);border-radius:10px;padding:11px 8px;text-align:center;font-size:13px;font-weight:600;min-height:46px;display:flex;flex-direction:column;justify-content:center}
+.seg .o small{display:block;font-weight:400;color:var(--g3);font-size:11px}
+.seg input:checked+.o{border-color:var(--red);background:#fff5f5;color:var(--red)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-weight:700;font-size:16px;padding:15px;border-radius:12px;border:0;cursor:pointer;text-decoration:none;margin-top:16px}
+.btn:disabled{opacity:.85}.btn.p{background:var(--red);color:#fff}.btn.p:active{background:var(--red-d)}
+.btn.d{background:#111;color:#fff}
+.btn.g{background:#fff;color:var(--ink);border:1.5px solid var(--g2)}
+.btn.link{background:none;color:var(--g3);font-weight:600;font-size:14px;margin-top:8px}
+.btn.msg{background:#0866FF;color:#fff;font-size:18px;padding:18px;box-shadow:0 6px 18px rgba(8,102,255,.3)}
+.err{color:var(--red);font-size:12px;margin-top:5px;display:none}.err.on{display:block}
+.aff{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.aff div{background:var(--g1);border-radius:10px;padding:12px}
+.aff b{display:block;font-size:20px}.aff span{font-size:11px;color:var(--g3);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.aff .m{background:#111;color:#fff}.aff .m span{color:#aaa}
+.fam{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--g3);margin:18px 2px 8px}
+.unit{background:#fff;border:1.5px solid var(--g2);border-radius:12px;padding:14px;margin-bottom:8px;cursor:pointer;position:relative}
+.unit.sel{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.unit.rec{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.unit .row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.unit .n{font-weight:700;font-size:15px}
+.unit .srp{font-size:12px;color:var(--g3)}
+.unit .mo{text-align:right;white-space:nowrap}
+.unit .mo b{font-size:17px}.unit .mo small{display:block;font-size:11px;color:var(--g3)}
+.blur{filter:blur(5px);user-select:none}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;margin-top:6px}
+.tag.great{background:#e6f4ec;color:var(--ok)}.tag.fits{background:#eef2ff;color:#3346a8}.tag.stretch{background:#fff4e0;color:var(--warn)}
+.recb{position:absolute;top:-10px;left:12px;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:6px;text-transform:uppercase}
+.hint{font-size:12px;color:var(--warn);margin-top:6px}
+.lock{display:flex;gap:10px;align-items:center;background:#111;color:#fff;border-radius:12px;padding:14px;font-size:13px;margin-top:6px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:#444;margin-top:16px}
+.chk input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--red)}
+.chosen{background:var(--g1);border-radius:10px;padding:12px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:9px 0;border-bottom:1px solid var(--g2)}td:last-child{text-align:right;font-weight:600}
+.opt{border:1.5px solid var(--g2);border-radius:12px;padding:12px 14px;margin-top:10px}
+.opt.pick{border-color:var(--red)}
+.opt h3{font-size:14px;display:flex;justify-content:space-between}
+.opt h3 em{font-style:normal;font-size:11px;color:var(--red)}
+ul.l{list-style:none;font-size:13px}ul.l li{padding:6px 0 6px 22px;position:relative;border-bottom:1px solid var(--g1)}
+ul.l li:before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.note{font-size:11px;color:var(--g3);margin-top:10px;font-style:italic}
+.hand{background:#000;color:#fff}
+.hand h2{color:#fff}.hand p{color:#ddd;font-size:14px}
+.msgbox{background:#fff;color:#111;border-radius:10px;padding:12px;font-size:13px;margin-top:12px;white-space:pre-wrap;border-left:3px solid #0866FF}
+.steps{font-size:12px;color:#bbb;margin-top:10px;padding-left:18px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;font-size:11px;color:var(--g3);padding:10px 16px 30px}
+.hide{display:none!important}
+.ofw{background:#fff5f5;border:1.5px solid #ffd2d5;border-radius:12px;padding:14px;margin-top:14px;font-size:13px}
+.ofw b.h{display:block;color:var(--red);font-size:14px;margin-bottom:6px}
+.ofw ul{padding-left:18px;margin-top:4px}.ofw li{margin:3px 0}
+select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--g2);border-radius:10px;background:#fff}
+.seg.c1{grid-template-columns:1fr}.seg.c1 .o{text-align:left;padding:12px 14px}
+.adm table{font-size:11px}.adm td{text-align:left!important;padding:6px 4px;vertical-align:top}
+.adm .wrap{overflow-x:auto}
+.fab{position:fixed;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));z-index:8;display:flex;align-items:center;gap:8px;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.fab .ic{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#00b2ff,#006aff 55%,#a033ff);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,80,200,.35);border:0;cursor:pointer}
+.fab .lb{background:#fff;color:var(--ink);border:1px solid var(--g2);font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.08);white-space:nowrap}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+@media(max-width:480px){.fab .lb{display:none}}
+.uimg{display:block;width:100%;max-width:240px;aspect-ratio:3/2;object-fit:contain;margin:0 auto 6px;background:#fff}
+.specb{display:inline-block;margin-top:8px;background:#fff;border:1px solid var(--g2);color:var(--ink);font:600 12px/1 inherit;font-family:inherit;padding:8px 12px;border-radius:999px;cursor:pointer}
+.specb:hover{border-color:var(--red);color:var(--red)}
+.oimg{display:block;width:100%;max-width:360px;aspect-ratio:3/2;object-fit:contain;margin:6px auto 4px}
+.illus{font-size:11px;color:var(--g3);text-align:center;margin:2px 0 8px}
+.mdl{position:fixed;inset:0;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55)}
+.mdl.on{display:flex}
+.mdl .box{background:#fff;width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));position:relative;border-top:4px solid var(--red)}
+@media(min-width:600px){.mdl{align-items:center}.mdl .box{border-radius:16px}}
+.mdl h3{margin:0 40px 2px 0;font-size:18px}.mdl .sub2{font-size:12px;color:var(--g3);margin-bottom:6px}
+.mdl .x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--g2);background:#fff;font-size:20px;line-height:1;cursor:pointer;color:var(--ink)}
+.mdl img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;background:#fff}
+.mdl table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}.mdl td{padding:7px 0;border-bottom:1px solid var(--g2);vertical-align:top}.mdl td:first-child{color:var(--g3);width:40%}
+.mdl h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--g3);margin:14px 0 6px}
+.mdl ul{margin:0;padding-left:18px;font-size:13px}.mdl li{margin:3px 0}
+.sw{display:flex;flex-wrap:wrap;gap:10px}.sw button{display:flex;flex-direction:column;align-items:center;gap:4px;width:74px;background:none;border:0;padding:0;cursor:pointer;font:11px/1.2 inherit;font-family:inherit;color:var(--ink);text-align:center}
+.sw i{display:block;width:30px;height:30px;border-radius:50%;border:1px solid #ccc;box-shadow:inset 0 0 0 2px #fff}
+.sw button.on i{outline:2px solid var(--red);outline-offset:2px}
+.cname{font-size:13px;font-weight:600;margin:6px 0 0;text-align:center}
+.vrow{position:relative;margin:0 -16px}
+.vrow:after{content:"";position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(244,244,244,0),var(--g1));pointer-events:none}
+.vtrack{display:flex;gap:10px;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:12px 28px 10px 16px;scroll-padding:0 16px;scrollbar-width:none}
+.vtrack::-webkit-scrollbar{display:none}
+.vc{flex:0 0 156px;scroll-snap-align:center;margin:0;padding:10px;transition:flex-basis .28s ease,box-shadow .2s,border-color .2s}
+.vc .uimg{max-width:100%;margin-bottom:4px;transition:max-width .28s}
+.vc .n{font-size:13px;line-height:1.25;min-height:2.5em}
+.vc .mo2 b{font-size:16px}.vc .mo2 small{display:block;font-size:11px;color:var(--g3)}
+.vc .tag{margin-top:6px;font-size:10px}
+.vc .ux{display:none}
+.vc.on{flex-basis:272px;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink),0 6px 18px rgba(0,0,0,.08)}
+.vc.on.rec{border-color:var(--red);box-shadow:0 0 0 2px var(--red),0 6px 18px rgba(0,0,0,.08)}
+.vc.on .n{font-size:15px;min-height:0}.vc.on .mo2 b{font-size:20px}
+.vc.on .ux{display:block;animation:fin .25s ease}
+@keyframes fin{from{opacity:0}to{opacity:1}}
+.vc .ot{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}.vc .ot td{padding:5px 0;border-top:1px solid var(--g2)}.vc .ot td:last-child{text-align:right}.vc .ot tr.cur td{color:var(--red)}
+.vc .selt{margin-top:8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink)}
+.vc .recb{top:-9px;left:10px}
+.swh{float:right;text-transform:none;letter-spacing:0;font-weight:500;color:var(--g3)}
+@media(min-width:720px){.vrow{margin:0}.vrow:after{display:none}.vtrack{flex-wrap:wrap;overflow:visible;padding:12px 0 6px}.swh{display:none}}
+@media (prefers-reduced-motion:reduce){.vc,.vc .uimg{transition:none}.vc.on .ux{animation:none}}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1820790069172672&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<header>
+  <svg class="logo" viewBox="0 0 100 87" aria-hidden="true"><g fill="#E60012"><polygon points="50,0 63,22.5 50,45 37,22.5"/><polygon points="24,45 50,45 37,67.5 11,67.5"/><polygon points="76,45 50,45 63,67.5 89,67.5"/></g></svg>
+  <div><div class="t">Mitsubishi Motors</div><div class="s">Drive your Ambition</div></div>
+</header>
+<section class="hero" id="hero">
+  <h1>Budget Fit Calculator</h1>
+  <p>See which Mitsubishi fits your monthly budget in under a minute. All-in financing, 60 months.</p>
+</section>
+<main id="app">
+  <div id="progWrap"><div class="prog"><div></div><div></div><div></div><div></div></div><div class="plab" id="plab"></div></div>
+
+  <!-- STEP 1 -->
+  <section id="s1">
+    <div class="card">
+      <h2>Your budget</h2>
+      <p class="sub">Tell us a little about your income and needs po.</p>
+      <label class="f">Who is buying?</label>
+      <div class="seg c1">
+        <label><input type="radio" name="seg" value="ofw_abroad"><span class="o">I'm an OFW abroad</span></label>
+        <label><input type="radio" name="seg" value="ofw_family"><span class="o">I'm buying for/with an OFW family member</span></label>
+        <label><input type="radio" name="seg" value="local" checked><span class="o">Local buyer</span></label>
+      </div>
+      <label class="f" for="income" id="incLab">Monthly gross income</label>
+      <div class="peso"><span>₱</span><input id="income" type="number" inputmode="numeric" min="0" placeholder="e.g. 70000"></div>
+      <div class="err" id="eIncome">Please enter your monthly gross income.</div>
+      <label class="f">Preferred down payment</label>
+      <div class="seg c2">
+        <label><input type="radio" name="dp" value="zero"><span class="o">Zero DP<small>₱0 down</small></span></label>
+        <label><input type="radio" name="dp" value="low" checked><span class="o">Low DP<small>Lower monthly</small></span></label>
+      </div>
+      <label class="f">Main use</label>
+      <div class="seg c3">
+        <label><input type="radio" name="use" value="family" checked><span class="o">Family</span></label>
+        <label><input type="radio" name="use" value="business"><span class="o">Business / Hauling</span></label>
+        <label><input type="radio" name="use" value="commute"><span class="o">Daily commute</span></label>
+      </div>
+      <div class="seg c1" style="margin-top:8px"><label><input type="radio" name="use" value="ofwfam"><span class="o">Para sa pamilya (OFW family)</span></label></div>
+      <div class="ofw hide" id="ofwBox"><b class="h">OFW-friendly financing</b>
+        <ul><li>You can apply from abroad po. No need to fly home.</li>
+        <li>A family member in the Philippines can be your co-maker.</li>
+        <li>The unit is released to your family in Bulacan, Metro Manila or Quezon City.</li></ul>
+        <div style="margin-top:8px"><b>OFW requirements:</b> latest contract, 2 valid IDs, proof of remittance (3–6 months), and an ID of your representative.</div></div>
+      <button class="btn p" id="go1">See my fit results</button>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="s2" class="hide">
+    <div class="card">
+      <h2>Your fit results</h2>
+      <p class="sub">Based on a monthly amortization of up to 35% of gross income.</p>
+      <div class="aff">
+        <div class="m"><span>Affordable (35%)</span><b id="a35"></b></div>
+        <div><span>Comfortable (30%)</span><b id="a30"></b></div>
+      </div>
+    </div>
+    <p class="sub" style="margin:0 2px">Tap a unit to choose it. Showing <b id="dpLab"></b> monthly, 60 months all-in.</p>
+    <div id="results"></div>
+    <div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div>Full computation (SRP, down payment, both options) plus freebies is locked. Unlock it in the next step.</div></div>
+    <button class="btn p" id="go2">Unlock my offer</button>
+    <button class="btn link" data-back="1">Back</button>
+  </section>
+
+  <!-- STEP 3 -->
+  <section id="s3" class="hide">
+    <div class="card">
+      <h2>Unlock your offer</h2>
+      <p class="sub">Where should we send your full computation po?</p>
+      <div class="chosen" id="chosenBox"></div>
+      <label class="f" for="name">Full name</label>
+      <input id="name" type="text" autocomplete="name" placeholder="Juan Dela Cruz">
+      <div class="err" id="eName">Please enter your full name.</div>
+      <label class="f" for="mobile">Mobile number</label>
+      <input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XXXXXXXXX">
+      <div class="err" id="eMobile">Enter a valid PH mobile number (09XXXXXXXXX or +639XXXXXXXXX).</div>
+      <label class="f" for="loc" id="locLab">City or location</label>
+      <input id="loc" type="text" autocomplete="address-level2" placeholder="e.g. Quezon City">
+      <div class="err" id="eLoc">Please enter your city or location.</div>
+      <div id="abroadF" class="hide">
+        <label class="f" for="country">Country you're working in</label>
+        <select id="country"><option value="">Select country</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>Hong Kong</option><option>Singapore</option><option>Kuwait</option><option>Other</option></select>
+        <div class="err" id="eCountry">Please select your country.</div>
+        <label class="f" for="release">Where will the unit be released?</label>
+        <select id="release"><option value="">Select release area</option><option>Bulacan</option><option>Metro Manila</option><option>Quezon City</option><option>Other</option></select>
+        <div class="err" id="eRelease">Please select the release area.</div>
+      </div>
+      <label class="f">When are you planning to buy?</label>
+      <div class="seg c3">
+        <label><input type="radio" name="tl" value="Immediately"><span class="o">Immediately</span></label>
+        <label><input type="radio" name="tl" value="Within 30 days"><span class="o">Within 30 days</span></label>
+        <label><input type="radio" name="tl" value="Just browsing"><span class="o">Just browsing</span></label>
+      </div>
+      <div class="err" id="eTl">Please select your buying timeline.</div>
+      <label class="f">Employment type</label>
+      <div class="seg c3">
+        <label><input type="radio" name="emp" value="Employed"><span class="o">Employed</span></label>
+        <label><input type="radio" name="emp" value="Business owner"><span class="o">Business owner</span></label>
+        <label><input type="radio" name="emp" value="OFW"><span class="o">OFW</span></label>
+      </div>
+      <div class="err" id="eEmp">Please select your employment type.</div>
+      <label class="chk"><input type="checkbox" id="consent"><span>I consent to the collection and processing of my personal information in accordance with the Data Privacy Act of 2012 (RA 10173). My details will be used only to contact me about this inquiry and will not be shared with third parties for other purposes.</span></label>
+      <div class="err" id="eConsent">Please give your consent to continue.</div>
+      <button class="btn p" id="go3">Send my details &amp; see full offer</button>
+      <button class="btn link" data-back="2">Back</button>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section id="s4" class="hide">
+    <div class="card">
+      <div id="rcv" style="background:#e6f4ec;color:#0f7b3f;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600;margin-bottom:12px">✓ Details received. Here is your full computation po.</div>
+      <h2 id="oTitle"></h2>
+      <p class="sub" id="oSub"></p>
+      <table><tbody id="oSrp"></tbody></table>
+      <div id="oOpts"></div>
+      <p class="note">Sample computation only. Final terms subject to bank approval and current promo validity.</p>
+    </div>
+    <div class="card"><h2 style="font-size:16px">All-in inclusions</h2>
+      <ul class="l"><li>3 years LTO registration</li><li>3 years TPL insurance</li><li>1 year comprehensive insurance, rate locked for 3 years</li><li>Chattel mortgage</li><li>Free labor up to 5,000 km</li><li>3 years warranty</li></ul></div>
+    <div class="card"><h2 style="font-size:16px">Freebies</h2>
+      <ul class="l" id="freebies"></ul></div>
+<div id="finalCta">    <div class="card hand" id="cta">
+      <p style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#E60012;font-weight:700">Finalize your inquiry</p>
+      <h2 id="thanks" style="margin-top:4px"></h2>
+      <p style="font-size:16px;color:#fff;font-weight:600;margin-top:6px">Message Richard Cuagdan, your Car Sales Executive, to finalize your quotation.</p>
+      <div class="msgbox" id="msgText"></div>
+      <p style="font-size:12px;color:#bbb;margin-top:6px">Your message is copied, just paste and send.</p>
+      <a class="btn msg" id="msgBtn" href="#">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg>
+        Message Richard to Finalize</a>
+      <button class="btn link" id="copyBtn" style="color:#bbb;font-size:12px;margin-top:4px;text-decoration:underline">Copy message only</button>
+      <a class="btn d" id="tdBtn" href="#" target="_blank" rel="noopener" style="border:1px solid #333">Book a Test Drive</a>
+      <p style="font-size:12px;color:#aaa;text-align:center;margin-top:8px">Showroom open Mon–Sat, 8:00 AM – 5:00 PM</p>
+    </div>
+</div>
+    <button class="btn g" id="restart">Start over</button>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin" class="hide adm">
+    <div class="card"><h2>Leads (this device)</h2><p class="sub" id="admCount"></p>
+      <button class="btn p" id="csvBtn">Download CSV</button>
+      <div class="wrap" style="margin-top:14px"><table><tbody id="admRows"></tbody></table></div>
+    </div>
+  </section>
+</main>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v8</span></footer>
+<div class="toast" id="toast"></div>
+<div class="mdl" id="mdl" aria-hidden="true"><div class="box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+<button class="x" id="mX" type="button" aria-label="Close">&times;</button>
+<h3 id="mTitle"></h3><div class="sub2" id="mSub"></div>
+<img id="mImg" alt="" decoding="async"><div class="cname" id="mCName"></div><div class="illus">Images for illustration; actual unit may vary.</div>
+<h4>Key specs</h4><table><tbody id="mSpecs"></tbody></table>
+<h4>Key features</h4><ul id="mFeat"></ul>
+<div id="mColWrap"><h4>Available colors</h4><div class="sw" id="mCols"></div><div class="illus" id="mColNote" style="text-align:left;margin-top:8px"></div></div>
+<div class="illus" style="margin-top:12px">Source: Mitsubishi Motors Philippines (mitsubishi-motors.com.ph). Specs and colors may change; please confirm with Richard.</div>
+</div></div>
+<a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
+
+<script>
+const APP_VERSION = 'v8';
+const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
+const MESSENGER = 'https://m.me/504759566043148';
+const LS_KEY = 'bfc_leads';
+
+const UNITS = [
+ {id:'l300',fam:'L300',name:'L300 Dual AC 2026',srp:1039000,zero:21405,ldp:123000,low:18789,fuel:20000,use:['business']},
+ {id:'xglxmt',fam:'Xpander',name:'Xpander GLX MT',srp:1099000,zero:22641,ldp:148000,low:19811,fuel:30000,use:['family','commute','ofwfam']},
+ {id:'xglxat',fam:'Xpander',name:'Xpander GLX AT',srp:1159000,zero:23877,ldp:138000,low:20892,fuel:60000,use:['family','commute','ofwfam']},
+ {id:'xglsat',fam:'Xpander',name:'Xpander GLS AT',srp:1259000,zero:25937,ldp:148000,low:22695,fuel:60000,use:['family','commute','ofwfam']},
+ {id:'xcross',fam:'Xpander',name:'Xpander Cross',srp:1378000,zero:28389,ldp:148000,low:24840,fuel:60000,use:['family','commute','ofwfam']},
+ {id:'dglx',fam:'Destinator',name:'Destinator GLX',srp:1389000,zero:28615,ldp:93000,low:26827,fuel:0,use:['family','ofwfam']},
+ {id:'dgls',fam:'Destinator',name:'Destinator GLS',srp:1599000,zero:32942,ldp:123000,low:30883,fuel:20000,use:['family','ofwfam']},
+ {id:'dgt',fam:'Destinator',name:'Destinator GT',srp:1929000,srp2:1939000,zero:39740,ldp:88000,low:37256,fuel:40000,use:['family','ofwfam']},
+ {id:'mg4glxat',fam:'Mirage G4',name:'2026 Mirage G4 GLX AT',srp:841000,zero:null,ldp:58000,low:15160,fuel:20000,use:['family','commute','ofwfam']},
+ {id:'mg4gls',fam:'Mirage G4',name:'2026 Mirage G4 GLS',srp:937000,zero:19303,ldp:83000,low:16890,fuel:20000,use:['family','commute','ofwfam']},
+ {id:'tritongxat',fam:'Triton',name:'Triton GX AT',srp:1430000,zero:28900,ldp:140000,low:25200,fuel:20000,use:['business']},
+ {id:'mglxmt',fam:'Montero Sport',name:'Montero Sport GLX MT',srp:1568000,zero:30284,ldp:30000,low:28265,fuel:0,use:['family','ofwfam']},
+ {id:'mgls',fam:'Montero Sport',name:'Montero Sport GLS',srp:1927000,zero:39699,ldp:138000,low:37218,fuel:20000,use:['family','ofwfam']},
+ {id:'mbs2wd',fam:'Montero Sport',name:'Montero Sport Black Series AT 2WD',srp:2190000,srpTxt:'₱2,190,000 (black & gray)',zero:null,d1:88000,m1:45117,ldp:218000,low:42297,fuel:20000,fuelTxt:'FREE 20,000 Shell fuel points',use:['family','ofwfam']},
+ {id:'mbs4wd',fam:'Montero Sport',name:'Montero Sport Black Series AT 4WD',srp:2530000,srpTxt:'₱2,530,000 (black & gray) / ₱2,545,000 (white diamond)',zero:null,d1:133000,m1:52121,ldp:283000,low:48864,fuel:20000,use:['family','ofwfam']},
+];
+const Q = new URLSearchParams(location.search);
+const S = {seg:'local',unitPref:'',dp:'low',use:'family',rec:null,chosen:null,lead:null};
+const $ = id => document.getElementById(id);
+const peso = n => '₱' + Math.round(n).toLocaleString('en-PH');
+const val = n => document.querySelector(`input[name=${n}]:checked`)?.value || '';
+const fitOf = r => r<=0.30?{k:'great',l:'Great fit'}:r<=0.35?{k:'fits',l:'Fits'}:{k:'stretch',l:'Stretch'};
+const rank = {great:0,fits:1,stretch:2};
+const effDp = (u,dp) => (dp==='zero'&&(u.zero!=null||u.m1))?'zero':'low';
+const monthly = (u,dp) => effDp(u,dp)==='zero'?(u.zero!=null?u.zero:u.m1):u.low;
+const kDp = n => '₱'+Math.round(n/1000)+'K DP';
+const optLabel = (u,k) => u.zero!=null?(k==='zero'?'Zero DP':'Low DP'):u.m1?(k==='zero'?'Option 1: '+kDp(u.d1):'Option 2: '+kDp(u.ldp)):'Low DP: '+kDp(u.ldp);
+const famKey = f => ({'Mirage G4':'mirage_g4','Montero Sport':'montero'})[f]||f.toLowerCase();
+
+function step(n){
+  ['s1','s2','s3','s4','admin'].forEach((s,i)=>$(s).classList.toggle('hide',i+1!==n));
+  $('progWrap').classList.toggle('hide',n>4);
+  [...document.querySelectorAll('.prog div')].forEach((d,i)=>d.classList.toggle('on',i<n));
+  $('plab').textContent = n<=4 ? `Step ${n} of 4 · ${['Budget','Fit results','Unlock offer','Your offer'][n-1]}` : '';
+  window.scrollTo(0,0);
+}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
+function err(id,on){$(id).classList.toggle('on',on);return on}
+
+function compute(){
+  const list = UNITS.map(u=>{const m=monthly(u,S.dp),r=m/S.income;return {...u,m,r,fit:fitOf(r)}});
+  // Recommended: best fit tier available, prefer units matching usage, then the most vehicle within that tier
+  const best = Math.min(...list.map(x=>rank[x.fit.k]));
+  let pool = list.filter(x=>rank[x.fit.k]===best);
+  const pref = pool.filter(x=>x.use.includes(S.use));
+  if(pref.length) pool=pref;
+  const up = pool.filter(x=>famKey(x.fam)===S.unitPref);
+  if(up.length) pool=up;
+  else {const np=pool.filter(x=>x.fam!=='Triton'&&x.fam!=='Montero Sport'); if(np.length) pool=np;} // Triton & Montero Sport only recommended when linked or nothing else fits
+  pool.sort((a,b)=> best===2 ? a.m-b.m : (S.use!=='commute') ? b.m-a.m : a.m-b.m);
+  // For great/fits tiers, recommend the best-equipped unit that still sits in the best tier (more car for the budget); commute favors lowest monthly.
+  S.rec = pool[0].id;
+  return list;
+}
+function renderResults(){
+  const list = compute();
+  if(!S.chosen || !UNITS.find(u=>u.id===S.chosen)) S.chosen=S.rec;
+  $('a35').textContent=peso(S.income*0.35); $('a30').textContent=peso(S.income*0.30);
+  $('dpLab').textContent = S.dp==='zero'?'Zero DP':'Low DP';
+  const FAM_ORDER=['Mirage G4','Xpander','Xpander Cross','L300','Destinator','Triton','Montero Sport'];
+  const rowOf=u=>u.id==='xcross'?'Xpander Cross':u.fam, rowKey=f=>f==='Xpander Cross'?'xpander':famKey(f);
+  const fams = FAM_ORDER.map(f=>{
+    const us = list.filter(u=>rowOf(u)===f).sort((a,b)=>a.srp-b.srp);
+    return {f,us};
+  }).filter(F=>F.us.length).sort((a,b)=>((rowKey(b.f)===S.unitPref)-(rowKey(a.f)===S.unitPref))||(FAM_ORDER.indexOf(a.f)-FAM_ORDER.indexOf(b.f)));
+  const card=u=>{const d=SPEC[u.id],on=u.id===S.chosen;
+    const opts=(u.zero!=null?[['zero',u.zero]]:u.m1?[['zero',u.m1]]:[]).concat([['low',u.low]]);
+    return `<div class="unit vc ${u.id===S.rec?'rec':''} ${on?'on':''}" data-id="${u.id}" role="button" tabindex="0" aria-pressed="${on}">
+      ${u.id===S.rec?'<span class="recb">Recommended</span>':''}
+      ${d?`<img class="uimg" src="${imgSrc(d.img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="240" height="160">`:''}
+      <div class="n">${u.name}</div>
+      <div class="mo2"><b>${peso(u.m)}</b><small>/mo · 60 mos${u.zero==null?' · '+optLabel(u,effDp(u,S.dp)):''}</small></div>
+      <span class="tag ${u.fit.k}">${u.fit.l} · ${(u.r*100).toFixed(1)}%</span>
+      <div class="ux">
+        <div class="srp">SRP <span class="blur">₱0,000,000</span></div>
+        <table class="ot">${opts.map(([k,m])=>`<tr class="${effDp(u,S.dp)===k?'cur':''}"><td>${optLabel(u,k)}</td><td><b>${peso(m)}</b>/mo</td></tr>`).join('')}</table>
+        ${u.fit.k==='stretch'?`<div class="hint">${S.dp==='zero'&&u.low/S.income<=0.35?'Fits with the Low DP option.':(S.dp==='zero'?'Consider the Low DP option or adding a co-maker.':'Consider adding a co-maker to strengthen approval.')}</div>`:''}
+        ${d?`<button type="button" class="specb" data-spec="${u.id}">View specs &amp; colors</button>`:''}
+        <div class="selt">Selected</div>
+      </div>
+    </div>`};
+  $('results').innerHTML = fams.map(F=>`<div class="fam">${F.f}${F.us.length>1?`<span class="swh">${F.us.length} variants · swipe <span aria-hidden="true">&rsaquo;</span></span>`:''}</div>
+    <div class="vrow"><div class="vtrack">${F.us.map(card).join('')}</div></div>`).join('')+'<div class="illus">Images for illustration; actual unit may vary.</div>';
+  const select=(id,smooth)=>{S.chosen=id;
+    document.querySelectorAll('#results .vc').forEach(el=>{const on=el.dataset.id===id;el.classList.toggle('on',on);el.setAttribute('aria-pressed',on)});
+    const el=document.querySelector(`#results .vc[data-id="${id}"]`);if(!el)return;
+    const tr=el.parentElement,go=()=>{const x=el.offsetLeft-(tr.clientWidth-el.offsetWidth)/2;tr.scrollTo({left:Math.max(0,x),behavior:smooth?'smooth':'auto'})};
+    smooth?setTimeout(go,260):go();
+    if(smooth){const r=el.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)setTimeout(()=>el.scrollIntoView({block:'nearest',behavior:'smooth'}),280)}};
+  document.querySelectorAll('#results .vc').forEach(el=>{el.onclick=()=>select(el.dataset.id,true);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(el.dataset.id,true)}}});
+  document.querySelectorAll('#results .specb').forEach(b=>b.onclick=e=>{e.stopPropagation();openSpecs(b.dataset.spec)});
+  select(S.chosen,false);
+}
+
+// Specs/colors from official Mitsubishi Motors Philippines model pages, brochures and MMPC articles (Oct 2026). Images in /img are from the same official sources.
+const XPE=['Engine','1.5L in-line 4 DOHC 16-valve MIVEC gasoline'],XPP=['Max power / torque','105 PS / 141 Nm'],SEAT7=['Seating','7'];
+const MSE=['Engine','2.4L (2,442 cc) 4N15 MIVEC intercooled turbo diesel, Euro 4'],MSP=['Max power / torque','181 PS / 430 Nm'];
+const DEE=['Engine','1.5L turbocharged gasoline (4B40), Euro 4'],DEP=['Max power / torque','163 PS / 250 Nm'];
+const C=(n,h,i)=>({n,h,i});
+const MG4C=v=>[C('Titanium Gray Metallic','#5d6066',v+'_u17'),C('Red Metallic','#b0141c',v+'_p19'),C('Cool Silver Metallic','#bfc2c6',v+'_a66'),C('White Solid','#f3f3f1','')];
+const XGLXC=[C('Graphite Gray Metallic','#4a4c50','xpglx_graphite'),C('Blade Silver Metallic','#b8bcc4','xpglx_u33'),C('Jet Black Mica','#121212','xpglx_x37')];
+const MSC=[C('White Diamond','#f2f2f0','ms_white'),C('Jet Black Mica','#121212','ms_black'),C('Blade Silver Metallic','#b8bcc4','ms_silver')];
+const MSBC=[C('Graphite Gray Metallic with Black Roof','#4a4c50','msbs_jh3'),C('White Diamond with Black Roof','#f2f2f0','msbs_x8w'),C('Jet Black Mica','#121212','msbs_x37')];
+const SPEC={
+ mg4glxat:{img:'mg4glx_a66',specs:[['Engine','1.2L (1,193 cc) D4 MPI VVT gasoline'],['Max power / torque','78 PS / 100 Nm'],['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],['Seating','5']],
+   feats:['LED Headlamp with Daytime Running Lamp','Active Stability Control','Anti-Lock Braking System','Hill Start Assist','Embossed Fabric without Stitch'],colors:MG4C('mg4glx'),note:'White Solid is available on a per dealer firm order basis.'},
+ mg4gls:{img:'mg4gls_u17',specs:[['Engine','1.2L (1,193 cc) D4 MPI VVT gasoline'],['Max power / torque','78 PS / 100 Nm'],['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],['Seating','5']],
+   feats:['Engine Push Start System','3-Spoke Leather-Wrapped Steering Wheel','LED Headlamp with Daytime Running Lamp','Active Stability Control','Anti-Lock Braking System','Hill Start Assist'],colors:MG4C('mg4gls'),note:'White Solid is available on a per dealer firm order basis.'},
+ l300:{img:'l300_fb',specs:[['Engine','2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4'],['Transmission','5-speed manual'],['Drivetrain','2WD'],['Fuel','Diesel']],
+   feats:['Front Suspension: Independent Wishbone and Coil Spring','Rear Suspension: Semi-Elliptic Leaf Spring'],colors:[]},
+ xglxmt:{img:'xpglx_u33',specs:[XPE,XPP,['Transmission','5-speed manual'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['7-inch Smartphone Link Display Audio (Apple CarPlay, Android Auto, Bluetooth)','Reverse Camera','High ground clearance suspension'],colors:XGLXC},
+ xglxat:{img:'xpglx_x37',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['7-inch Smartphone Link Display Audio (Apple CarPlay, Android Auto, Bluetooth)','Reverse Camera','High ground clearance suspension'],colors:XGLXC},
+ xglsat:{img:'xpgls_c31',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['10-inch Smartphone Link Display Audio with wireless Apple CarPlay and Android Auto','Multi-Around Monitor','LED Daytime Running Lights'],
+   colors:[C('Red Metallic','#b0141c','xpgls_red'),C('Green Bronze Metallic','#6b6a58','xpgls_c31'),C('Graphite Gray Metallic','#4a4c50','xpgls_u28'),C('Quartz White Pearl','#f4f4f1','xpgls_w81')],note:'Quartz White Pearl is an additional ₱15,000.'},
+ xcross:{img:'xc_x3n',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['10-inch Smartphone Link Display Audio with wireless Apple CarPlay and Android Auto','Multi-Around Monitor','Two-Tone Synthetic Leather with Heat Guard'],
+   colors:[C('Green Bronze Metallic with Black Roof','#6b6a58','xc_green'),C('Quartz White Pearl with Black Roof','#f4f4f1','xc_x3n'),C('Sunrise Orange Metallic with Black Roof','#c8641e','xc_orange')],note:'Quartz White Pearl is an additional ₱15,000.'},
+ dglx:{img:'de_p26',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['8-inch Smartphone Link Display Audio with Apple CarPlay and Android Auto','Active Stability Control with TCL','LED Headlamps'],
+   colors:[C('Quartz White Pearl','#f4f4f1','de_w81'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Blade Silver Metallic','#b8bcc4','de_u33'),C('Red Metallic','#b0141c','de_p26')]},
+ dgls:{img:'de_d34',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['12.3-inch screen with wireless Apple CarPlay and Android Auto','Active Yaw Control','8-inch LCD Multi-Information Display','LED Daytime Running Lights','Engine Push Start System'],
+   colors:[C('Quartz White Pearl','#f4f4f1','de_w81'),C('Lunar Blue Mica','#2d4a7a','de_d34'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Jet Black Mica','#121212','de_x37')]},
+ dgt:{img:'de_x3n',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['Forward Collision Mitigation (FCM)','Panoramic Sunroof with power sunshade','Synthetic Leather Seats (Heat Guard), two-tone Black/Maroon','12.3-inch screen with wireless Apple CarPlay and Android Auto'],
+   colors:[C('Quartz White Pearl, two-tone with Black Roof','#f4f4f1','de_x3n'),C('Lunar Blue Mica, two-tone with Black Roof','#2d4a7a','de_xd1'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Jet Black Mica','#121212','de_x37')]},
+ tritongxat:{img:'tr_gx_u28',specs:[['Engine','2.4L (2,440 cc) 4N16 D4 intercooled turbo diesel'],['Transmission','6-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel']],
+   feats:['8-inch touchscreen with Apple CarPlay and Android Auto','Reverse camera','Anti-Lock Braking System with EBD','Hill Start Assist'],
+   colors:[C('Graphite Gray Metallic','#4a4c50','tr_gx_u28'),C('Blade Silver Metallic','#b8bcc4',''),C('White Diamond','#f2f2f0',''),C('Jet Black Mica','#121212',''),C('Red Solid','#c0161d','')]},
+ mglxmt:{img:'ms_white',specs:[MSE,MSP,['Transmission','6-speed manual'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Rear View System and Reverse Sensors','ABS with EBD','Front SRS Airbags (Driver and Passenger)','Keyless Entry','Cruise Control'],colors:MSC},
+ mgls:{img:'ms_white',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Active Stability and Traction Control','Hill Start Assist','Trailer Stability Assist','Keyless Operation System with Engine Start Switch','Cruise Control'],colors:MSC},
+ mbs2wd:{img:'msbs_jh3',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Forward Collision Mitigation (FCM)','Ultrasonic Misacceleration Mitigation System (UMS)','Adaptive Cruise Control (ACC)','Trailer Stability Assist'],colors:MSBC},
+ mbs4wd:{img:'msbs_x8w',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','4WD (Super Select 4WD-II) with Off-Road Mode and Rear Differential Lock'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Forward Collision Mitigation (FCM)','Blind Spot Warning with Lane Change Assist','Rear Cross Traffic Alert','Adaptive Cruise Control (ACC)','Sunroof'],colors:MSBC},
+};
+const imgSrc=k=>k?`img/${k}.webp`:'';
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+let mLast=null;
+function openSpecs(id){
+  const u=UNITS.find(x=>x.id===id),d=SPEC[id];if(!u||!d)return;
+  $('mTitle').textContent=u.name;$('mSub').textContent=u.srpTxt||('SRP '+peso(u.srp));
+  const show=c=>{$('mImg').src=imgSrc(c&&c.i?c.i:d.img);$('mImg').alt=u.name+(c?' in '+c.n:'');$('mCName').textContent=c?c.n+(c.i?'':' (photo not available)'):'';
+    document.querySelectorAll('#mCols button').forEach(b=>b.classList.toggle('on',c&&b.dataset.n===c.n))};
+  $('mSpecs').innerHTML=d.specs.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');
+  $('mFeat').innerHTML=d.feats.map(f=>`<li>${esc(f)}</li>`).join('');
+  $('mColWrap').style.display=d.colors.length?'':'none';
+  $('mCols').innerHTML=d.colors.map(c=>`<button type="button" data-n="${esc(c.n)}" aria-label="${esc(c.n)}"><i style="background:${c.h}"></i>${esc(c.n)}</button>`).join('');
+  $('mColNote').textContent=d.note||'';
+  $('mCols').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>show(d.colors[i]));
+  show(null);
+  mLast=document.activeElement;$('mdl').classList.add('on');$('mdl').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('mX').focus();
+  try{if(typeof window.fbq==='function')window.fbq('track','ViewContent',{content_name:u.name})}catch(_){}
+}
+function closeSpecs(){if(!$('mdl').classList.contains('on'))return;$('mdl').classList.remove('on');$('mdl').setAttribute('aria-hidden','true');document.body.style.overflow='';try{mLast&&mLast.focus()}catch(_){}}
+function chosenData(){const u=UNITS.find(x=>x.id===S.chosen);const m=monthly(u,S.dp);return {u,m,r:m/S.income}}
+
+function manilaStamp(){
+  const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(new Date()).reduce((a,x)=>(a[x.type]=x.value,a),{});
+  return `${p.year}-${p.month}-${p.day} ${p.hour==='24'?'00':p.hour}:${p.minute}:${p.second} +08:00`;
+}
+function leadId(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s}
+function tierOf(tl,r){
+  if((tl==='Immediately'||tl==='Within 30 days') && r<=0.35) return 'Hot';
+  if(tl==='Just browsing') return 'Cold';
+  return 'Warm'; // within 30 days / immediately with a stretch fit
+}
+function validMobile(m){return /^(09\d{9}|\+639\d{9})$/.test(m.replace(/[\s-]/g,''))}
+
+function submit(){
+  const abroad=S.seg==='ofw_abroad';
+  const name=$('name').value.trim(),mob=$('mobile').value.trim(),tl=val('tl'),emp=val('emp');
+  const country=abroad?$('country').value:'',release=abroad?$('release').value:'';
+  const loc=abroad?`${country} (release: ${release})`:$('loc').value.trim();
+  let bad=[err('eName',name.length<2),err('eMobile',!validMobile(mob)),err('eLoc',!abroad&&!loc),err('eCountry',abroad&&!country),err('eRelease',abroad&&!release),err('eTl',!tl),err('eEmp',!emp),err('eConsent',!$('consent').checked)];
+  if(bad.some(Boolean)){document.querySelector('.err.on')?.scrollIntoView({block:'center',behavior:'smooth'});return}
+  const {u,m,r}=chosenData();
+  const lead={leadId:leadId(),timestamp:manilaStamp(),name,mobile:mob.replace(/[\s-]/g,''),location:loc,income:S.income,
+    dpPreference:optLabel(u,effDp(u,S.dp)),usage:{family:'Family',business:'Business / Hauling',commute:'Daily commute',ofwfam:'Para sa pamilya (OFW family)'}[S.use],
+    seg:S.seg,country,releaseArea:release,unitParam:S.unitPref,utm_source:Q.get('utm_source')||'',utm_campaign:Q.get('utm_campaign')||'',
+    utm_content:Q.get('utm_content')||'',adset:Q.get('adset')||Q.get('utm_term')||Q.get('utm_medium')||'',
+    recommendedUnit:UNITS.find(x=>x.id===S.rec).name,chosenUnit:u.name,monthly:m,fitPercent:+(r*100).toFixed(1),
+    timeline:tl,employment:emp,tier:tierOf(tl,r),consent:true,source:location.origin+location.pathname};
+  S.lead=lead;
+  const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
+  const sending=sendLead(lead,'submit'); // details go out FIRST, before anything that could throw
+  px('Lead',{content_name:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP',content_category:lead.seg});
+  try{const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all))}catch(e){} // storage may be blocked in in-app browsers
+  Promise.race([sending,new Promise(r=>setTimeout(r,4000))]).finally(()=>{
+    b.textContent='Details received ✓';
+    setTimeout(()=>{b.disabled=false;b.textContent='Send my details & see full offer';try{renderOffer()}catch(e){console.error(e)}step(4)},500);
+  });
+}
+// Sends the lead to the webhook. text/plain avoids a CORS preflight (Apps Script can't answer one);
+// sendBeacon / keepalive survive the page navigating to Messenger. The server de-dupes by leadId.
+// Primary: fetch no-cors + keepalive (follows Apps Script's 302). Fallback: sendBeacon. Always resolves.
+function px(ev,o){try{if(typeof window.fbq==='function')window.fbq('track',ev,o)}catch(_){}}
+function beacon_(body){try{return !!(navigator.sendBeacon&&navigator.sendBeacon(LEAD_WEBHOOK_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))}catch(e){return false}}
+function sendLead(lead,via){
+  if(!LEAD_WEBHOOK_URL||!lead)return Promise.resolve(false);
+  let body;try{body=JSON.stringify(Object.assign({},lead,{via:via,appVersion:APP_VERSION}))}catch(e){return Promise.resolve(false)}
+  try{
+    return fetch(LEAD_WEBHOOK_URL,{method:'POST',mode:'no-cors',keepalive:true,cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})
+      .then(()=>true).catch(e=>{console.warn('lead fetch failed, using beacon',e);return beacon_(body)});
+  }catch(e){return Promise.resolve(beacon_(body))}
+}
+function copySync(t){ // synchronous copy inside the tap, before navigation
+  const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();
+  try{navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{})}catch(_){}
+  return ok;
+}
+function summary(){const L=S.lead;return `Hi Sir Richard! I'd like to finalize my quotation. Name: ${L.name}, Contact No.: ${L.mobile}, Unit: ${L.chosenUnit}, Option: ${L.dpPreference}, Monthly: ₱${L.monthly.toLocaleString('en-PH')}, Timeline: ${L.timeline}, Ref: ${L.leadId}`}
+async function copy(t){
+  try{await navigator.clipboard.writeText(t);return true}catch(e){
+    const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}
+}
+function renderOffer(){
+  const {u}=chosenData(),L=S.lead,first=L.name.split(/\s+/)[0];
+  $('oTitle').textContent=u.name;
+  {let w=$('oImgWrap');if(!w){w=document.createElement('div');w.id='oImgWrap';$('oTitle').insertAdjacentElement('afterend',w)}
+   const d=SPEC[u.id];w.innerHTML=d?`<img class="oimg" src="${imgSrc(d.img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="360" height="240"><div class="illus">Images for illustration; actual unit may vary.</div><div style="text-align:center"><button type="button" class="specb" id="oSpecBtn">View specs &amp; colors</button></div>`:'';
+   if(d)$('oSpecBtn').onclick=()=>openSpecs(u.id);}
+  $('oSub').textContent=`60 months, all-in · ${L.fitPercent}% of your income (${fitOf(L.fitPercent/100).l})`;
+  $('oSrp').innerHTML=`<tr><td>SRP</td><td>${u.srpTxt||peso(u.srp)}${u.srp2?` mono / ${peso(u.srp2)} two-tone`:''}</td></tr>`;
+  const ek=effDp(u,S.dp);const opt=(k,t,dp,mo)=>`<div class="opt ${ek===k?'pick':''}"><h3>${t}${ek===k?'<em>YOUR CHOICE</em>':''}</h3><table><tr><td>Down payment (all-in)</td><td>${dp?peso(dp):'₱0'}</td></tr><tr><td>Monthly × 60</td><td>${peso(mo)}</td></tr><tr><td>% of income</td><td>${(mo/S.income*100).toFixed(1)}%</td></tr></table></div>`;
+  $('oOpts').innerHTML=(u.zero!=null?opt('zero','Zero DP',0,u.zero):u.m1?opt('zero',optLabel(u,'zero'),u.d1,u.m1):'')+opt('low',optLabel(u,'low'),u.ldp,u.low);
+  const fb=['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain'];
+  if(u.fuel) fb.push(u.fuelTxt||`FREE ${u.fuel.toLocaleString('en-PH')} fuel points`);
+  $('freebies').innerHTML=fb.map(x=>`<li>${x}</li>`).join('');
+  $('thanks').textContent=`Thank you, ${first}!`;
+  const ref=`calc_${u.id}_${L.tier.toLowerCase()}_${L.leadId}`;
+  $('msgBtn').href=`${MESSENGER}?ref=${encodeURIComponent(ref)}`;
+  $('tdBtn').href=`${MESSENGER}?ref=${encodeURIComponent('testdrive_'+u.id+'_'+L.leadId)}`;
+  $('msgText').textContent=summary();
+}
+
+function renderAdmin(){
+  const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');
+  $('admCount').textContent=`${all.length} lead(s) stored in this browser.`;
+  const cols=['timestamp','leadId','tier','seg','name','mobile','location','country','releaseArea','chosenUnit','monthly','fitPercent','timeline','employment','income','dpPreference','usage','recommendedUnit','unitParam','utm_source','utm_campaign','utm_content','adset'];
+  $('admRows').innerHTML=`<tr>${cols.map(c=>`<td><b>${c}</b></td>`).join('')}</tr>`+all.slice().reverse().map(l=>`<tr>${cols.map(c=>`<td>${String(l[c]??'').replace(/</g,'&lt;')}</td>`).join('')}</tr>`).join('');
+  $('csvBtn').onclick=()=>{
+    const esc=v=>`"${String(v??'').replace(/"/g,'""')}"`;
+    const csv=[cols.join(','),...all.map(l=>cols.map(c=>esc(l[c])).join(','))].join('\r\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download='leads.csv';a.click();
+  };
+}
+
+$('go1').onclick=()=>{
+  const inc=parseFloat($('income').value);
+  if(err('eIncome',!(inc>0)))return;
+  S.income=inc;S.dp=val('dp');S.use=val('use');S.seg=val('seg');applySeg();S.chosen=null;renderResults();step(2);
+};
+$('go2').onclick=()=>{const {u,m,r}=chosenData();
+  $('chosenBox').innerHTML=`Unit: <b>${u.name}</b><br>${optLabel(u,effDp(u,S.dp))} · <b>${peso(m)}</b>/mo · ${fitOf(r).l}`;step(3)};
+$('go3').onclick=submit;
+document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>step(+b.dataset.back));
+$('msgBtn').addEventListener('click',()=>{ // one tap: send lead + copy summary; the link itself opens m.me
+  try{sendLead(S.lead,'messenger_tap')}catch(e){} // send first; nothing below can block it
+  px('Contact',{content_name:'message_richard_finalize'});
+  try{if(copySync(summary()))toast('Message copied. Paste & send in Messenger.')}catch(e){}
+});
+$('copyBtn').onclick=async()=>{try{sendLead(S.lead,'copy_tap')}catch(e){}}; $('copyBtn').addEventListener('click',async()=>toast(await copy(summary())?'Message copied. Paste & send in Messenger.':'Copy failed. Please long-press the text to copy.'));
+$('restart').onclick=()=>{$('country').value='';$('release').value='';['income','name','mobile','loc'].forEach(i=>$(i).value='');$('consent').checked=false;
+  document.querySelectorAll('input[name=tl],input[name=emp]').forEach(i=>i.checked=false);S.lead=null;step(1)};
+
+function applySeg(){
+  const seg=val('seg'),ofw=seg!=='local',ab=seg==='ofw_abroad';
+  $('incLab').textContent=ofw?'Monthly income or remittance (₱)':'Monthly gross income';
+  $('ofwBox').classList.toggle('hide',!ofw && val('use')!=='ofwfam');
+  $('abroadF').classList.toggle('hide',!ab);
+  ['loc','locLab'].forEach(i=>$(i).classList.toggle('hide',ab));$('eLoc').classList.remove('on');
+  $('mobile').placeholder=ab?'PH mobile, e.g. 09XXXXXXXXX (yours or family)':'09XXXXXXXXX';
+}
+document.querySelectorAll('input[name=seg],input[name=use]').forEach(i=>i.addEventListener('change',applySeg));
+(function presets(){
+  const seg=Q.get('seg'),u=(Q.get('unit')||'').toLowerCase();
+  if(['ofw_abroad','ofw_family','local'].includes(seg)){document.querySelector(`input[name=seg][value=${seg}]`).checked=true;
+    if(seg!=='local')document.querySelector('input[name=use][value=ofwfam]').checked=true;}
+  if(['xpander','l300','destinator','mirage_g4','triton','montero'].includes(u)){S.unitPref=u;
+    if((u==='l300'||u==='triton')&&seg!=='ofw_abroad'&&seg!=='ofw_family')document.querySelector('input[name=use][value=business]').checked=true;}
+  applySeg();
+})();
+function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');renderAdmin();step(5)}else{$('hero').classList.remove('hide');if(!$('s1').classList.contains('hide')||!$('admin').classList.contains('hide'))step(1)}}
+$('tdBtn').addEventListener('click',()=>px('Contact',{content_name:'book_test_drive'}));
+$('mX').onclick=closeSpecs;$('mdl').addEventListener('click',e=>{if(e.target.id==='mdl')closeSpecs()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSpecs()});
+window.addEventListener('hashchange',route);route();
+$('fab').addEventListener('click',e=>{e.preventDefault();
+  const L=S.lead||null,unit=(L&&L.chosenUnit?(S.chosen||L.chosenUnit):(S.chosen||S.unitPref))||'none',id=(L&&L.leadId)||'none';
+  const url=`${MESSENGER}?ref=${encodeURIComponent('calc_float_'+String(unit).toLowerCase().replace(/[^a-z0-9]+/g,'')+'_'+id)}`;
+  if(L){try{copySync(summary());toast('Message copied, paste it in Messenger')}catch(_){}}
+  try{if(typeof window.fbq==='function')window.fbq('track','Contact',{content_name:'floating_messenger'})}catch(_){}
+  window.open(url,'_blank','noopener');
+});
+</script>
+</body>
+</html>
