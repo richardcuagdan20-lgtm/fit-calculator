@@ -116,6 +116,27 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .sw i{display:block;width:30px;height:30px;border-radius:50%;border:1px solid #ccc;box-shadow:inset 0 0 0 2px #fff}
 .sw button.on i{outline:2px solid var(--red);outline-offset:2px}
 .cname{font-size:13px;font-weight:600;margin:6px 0 0;text-align:center}
+.vrow{position:relative;margin:0 -16px}
+.vrow:after{content:"";position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(244,244,244,0),var(--g1));pointer-events:none}
+.vtrack{display:flex;gap:10px;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:12px 28px 10px 16px;scroll-padding:0 16px;scrollbar-width:none}
+.vtrack::-webkit-scrollbar{display:none}
+.vc{flex:0 0 156px;scroll-snap-align:center;margin:0;padding:10px;transition:flex-basis .28s ease,box-shadow .2s,border-color .2s}
+.vc .uimg{max-width:100%;margin-bottom:4px;transition:max-width .28s}
+.vc .n{font-size:13px;line-height:1.25;min-height:2.5em}
+.vc .mo2 b{font-size:16px}.vc .mo2 small{display:block;font-size:11px;color:var(--g3)}
+.vc .tag{margin-top:6px;font-size:10px}
+.vc .ux{display:none}
+.vc.on{flex-basis:272px;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink),0 6px 18px rgba(0,0,0,.08)}
+.vc.on.rec{border-color:var(--red);box-shadow:0 0 0 2px var(--red),0 6px 18px rgba(0,0,0,.08)}
+.vc.on .n{font-size:15px;min-height:0}.vc.on .mo2 b{font-size:20px}
+.vc.on .ux{display:block;animation:fin .25s ease}
+@keyframes fin{from{opacity:0}to{opacity:1}}
+.vc .ot{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}.vc .ot td{padding:5px 0;border-top:1px solid var(--g2)}.vc .ot td:last-child{text-align:right}.vc .ot tr.cur td{color:var(--red)}
+.vc .selt{margin-top:8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink)}
+.vc .recb{top:-9px;left:10px}
+.swh{float:right;text-transform:none;letter-spacing:0;font-weight:500;color:var(--g3)}
+@media(min-width:720px){.vrow{margin:0}.vrow:after{display:none}.vtrack{flex-wrap:wrap;overflow:visible;padding:12px 0 6px}.swh{display:none}}
+@media (prefers-reduced-motion:reduce){.vc,.vc .uimg{transition:none}.vc.on .ux{animation:none}}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -272,7 +293,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
     </div>
   </section>
 </main>
-<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v7</span></footer>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v8</span></footer>
 <div class="toast" id="toast"></div>
 <div class="mdl" id="mdl" aria-hidden="true"><div class="box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
 <button class="x" id="mX" type="button" aria-label="Close">&times;</button>
@@ -286,7 +307,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
 
 <script>
-const APP_VERSION = 'v7';
+const APP_VERSION = 'v8';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
 const LS_KEY = 'bfc_leads';
@@ -351,23 +372,39 @@ function renderResults(){
   if(!S.chosen || !UNITS.find(u=>u.id===S.chosen)) S.chosen=S.rec;
   $('a35').textContent=peso(S.income*0.35); $('a30').textContent=peso(S.income*0.30);
   $('dpLab').textContent = S.dp==='zero'?'Zero DP':'Low DP';
-  const FAM_ORDER=['Mirage G4','Xpander','L300','Destinator','Triton','Montero Sport'];
+  const FAM_ORDER=['Mirage G4','Xpander','Xpander Cross','L300','Destinator','Triton','Montero Sport'];
+  const rowOf=u=>u.id==='xcross'?'Xpander Cross':u.fam, rowKey=f=>f==='Xpander Cross'?'xpander':famKey(f);
   const fams = FAM_ORDER.map(f=>{
-    const us = list.filter(u=>u.fam===f).sort((a,b)=>((b.id===S.rec)-(a.id===S.rec))||(rank[a.fit.k]-rank[b.fit.k])||(a.r-b.r));
-    return {f,us,best:Math.min(...us.map(u=>u.r)),hasRec:us.some(u=>u.id===S.rec)};
-  }).sort((a,b)=>((famKey(b.f)===S.unitPref)-(famKey(a.f)===S.unitPref))||(FAM_ORDER.indexOf(a.f)-FAM_ORDER.indexOf(b.f)));
-  $('results').innerHTML = fams.map(F=>`<div class="fam">${F.f}</div>`+F.us.map(u=>`
-    <div class="unit ${u.id===S.rec?'rec':''} ${u.id===S.chosen&&u.id!==S.rec?'sel':''}" data-id="${u.id}">
-      ${u.id===S.rec?'<span class="recb">Recommended for you</span>':''}
-      ${SPEC[u.id]?`<img class="uimg" src="${imgSrc(SPEC[u.id].img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="240" height="160">`:''}
-      <div class="row"><div><div class="n">${u.name}</div><div class="srp">SRP <span class="blur">₱0,000,000</span></div>
-        <span class="tag ${u.fit.k}">${u.fit.l} · ${(u.r*100).toFixed(1)}%</span>${u.id===S.chosen?' <span class="tag" style="background:#111;color:#fff">Selected</span>':''}</div>
-        <div class="mo"><b>${peso(u.m)}</b><small>/mo · 60 mos${u.zero==null?'<br>'+optLabel(u,effDp(u,S.dp)):''}</small></div></div>
-      ${u.fit.k==='stretch'?`<div class="hint">${S.dp==='zero'&&u.low/S.income<=0.35?'Fits with the Low DP option.':(S.dp==='zero'?'Consider the Low DP option or adding a co-maker.':'Consider adding a co-maker to strengthen approval.')}</div>`:''}
-      ${SPEC[u.id]?`<button type="button" class="specb" data-spec="${u.id}">View specs &amp; colors</button>`:''}
-    </div>`).join('')).join('')+'<div class="illus">Images for illustration; actual unit may vary.</div>';
-  document.querySelectorAll('.unit').forEach(el=>el.onclick=()=>{S.chosen=el.dataset.id;renderResults()});
+    const us = list.filter(u=>rowOf(u)===f).sort((a,b)=>a.srp-b.srp);
+    return {f,us};
+  }).filter(F=>F.us.length).sort((a,b)=>((rowKey(b.f)===S.unitPref)-(rowKey(a.f)===S.unitPref))||(FAM_ORDER.indexOf(a.f)-FAM_ORDER.indexOf(b.f)));
+  const card=u=>{const d=SPEC[u.id],on=u.id===S.chosen;
+    const opts=(u.zero!=null?[['zero',u.zero]]:u.m1?[['zero',u.m1]]:[]).concat([['low',u.low]]);
+    return `<div class="unit vc ${u.id===S.rec?'rec':''} ${on?'on':''}" data-id="${u.id}" role="button" tabindex="0" aria-pressed="${on}">
+      ${u.id===S.rec?'<span class="recb">Recommended</span>':''}
+      ${d?`<img class="uimg" src="${imgSrc(d.img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="240" height="160">`:''}
+      <div class="n">${u.name}</div>
+      <div class="mo2"><b>${peso(u.m)}</b><small>/mo · 60 mos${u.zero==null?' · '+optLabel(u,effDp(u,S.dp)):''}</small></div>
+      <span class="tag ${u.fit.k}">${u.fit.l} · ${(u.r*100).toFixed(1)}%</span>
+      <div class="ux">
+        <div class="srp">SRP <span class="blur">₱0,000,000</span></div>
+        <table class="ot">${opts.map(([k,m])=>`<tr class="${effDp(u,S.dp)===k?'cur':''}"><td>${optLabel(u,k)}</td><td><b>${peso(m)}</b>/mo</td></tr>`).join('')}</table>
+        ${u.fit.k==='stretch'?`<div class="hint">${S.dp==='zero'&&u.low/S.income<=0.35?'Fits with the Low DP option.':(S.dp==='zero'?'Consider the Low DP option or adding a co-maker.':'Consider adding a co-maker to strengthen approval.')}</div>`:''}
+        ${d?`<button type="button" class="specb" data-spec="${u.id}">View specs &amp; colors</button>`:''}
+        <div class="selt">Selected</div>
+      </div>
+    </div>`};
+  $('results').innerHTML = fams.map(F=>`<div class="fam">${F.f}${F.us.length>1?`<span class="swh">${F.us.length} variants · swipe <span aria-hidden="true">&rsaquo;</span></span>`:''}</div>
+    <div class="vrow"><div class="vtrack">${F.us.map(card).join('')}</div></div>`).join('')+'<div class="illus">Images for illustration; actual unit may vary.</div>';
+  const select=(id,smooth)=>{S.chosen=id;
+    document.querySelectorAll('#results .vc').forEach(el=>{const on=el.dataset.id===id;el.classList.toggle('on',on);el.setAttribute('aria-pressed',on)});
+    const el=document.querySelector(`#results .vc[data-id="${id}"]`);if(!el)return;
+    const tr=el.parentElement,go=()=>{const x=el.offsetLeft-(tr.clientWidth-el.offsetWidth)/2;tr.scrollTo({left:Math.max(0,x),behavior:smooth?'smooth':'auto'})};
+    smooth?setTimeout(go,260):go();
+    if(smooth){const r=el.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)setTimeout(()=>el.scrollIntoView({block:'nearest',behavior:'smooth'}),280)}};
+  document.querySelectorAll('#results .vc').forEach(el=>{el.onclick=()=>select(el.dataset.id,true);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(el.dataset.id,true)}}});
   document.querySelectorAll('#results .specb').forEach(b=>b.onclick=e=>{e.stopPropagation();openSpecs(b.dataset.spec)});
+  select(S.chosen,false);
 }
 
 // Specs/colors from official Mitsubishi Motors Philippines model pages, brochures and MMPC articles (Oct 2026). Images in /img are from the same official sources.
