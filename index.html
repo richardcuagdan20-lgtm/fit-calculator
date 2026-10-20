@@ -359,7 +359,7 @@ function copySync(t){ // synchronous copy inside the tap, before navigation
   try{navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{})}catch(_){}
   return ok;
 }
-function summary(){const L=S.lead;return `Hi Sir Richard! I'd like to finalize my quotation. Name: ${L.name}, Unit: ${L.chosenUnit}, Option: ${L.dpPreference}, Monthly: ₱${L.monthly.toLocaleString('en-PH')}, Timeline: ${L.timeline}, Ref: ${L.leadId}`}
+function summary(){const L=S.lead;return `Hi Sir Richard! I'd like to finalize my quotation. Name: ${L.name}, Contact No.: ${L.mobile}, Unit: ${L.chosenUnit}, Option: ${L.dpPreference}, Monthly: ₱${L.monthly.toLocaleString('en-PH')}, Timeline: ${L.timeline}, Ref: ${L.leadId}`}
 async function copy(t){
   try{await navigator.clipboard.writeText(t);return true}catch(e){
     const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
