@@ -38,7 +38,7 @@ input:focus{border-color:var(--ink)}
 .seg .o small{display:block;font-weight:400;color:var(--g3);font-size:11px}
 .seg input:checked+.o{border-color:var(--red);background:#fff5f5;color:var(--red)}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-weight:700;font-size:16px;padding:15px;border-radius:12px;border:0;cursor:pointer;text-decoration:none;margin-top:16px}
-.btn.p{background:var(--red);color:#fff}.btn.p:active{background:var(--red-d)}
+.btn:disabled{opacity:.85}.btn.p{background:var(--red);color:#fff}.btn.p:active{background:var(--red-d)}
 .btn.d{background:#111;color:#fff}
 .btn.g{background:#fff;color:var(--ink);border:1.5px solid var(--g2)}
 .btn.link{background:none;color:var(--g3);font-weight:600;font-size:14px;margin-top:8px}
@@ -195,7 +195,7 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
       <div class="err" id="eEmp">Please select your employment type.</div>
       <label class="chk"><input type="checkbox" id="consent"><span>I consent to the collection and processing of my personal information in accordance with the Data Privacy Act of 2012 (RA 10173). My details will be used only to contact me about this inquiry and will not be shared with third parties for other purposes.</span></label>
       <div class="err" id="eConsent">Please give your consent to continue.</div>
-      <button class="btn p" id="go3">Show my full offer</button>
+      <button class="btn p" id="go3">Send my details &amp; see full offer</button>
       <button class="btn link" data-back="2">Back</button>
     </div>
   </section>
@@ -203,28 +203,31 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
   <!-- STEP 4 -->
   <section id="s4" class="hide">
     <div class="card">
+      <div id="rcv" style="background:#e6f4ec;color:#0f7b3f;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600;margin-bottom:12px">✓ Details received. Here is your full computation po.</div>
       <h2 id="oTitle"></h2>
       <p class="sub" id="oSub"></p>
       <table><tbody id="oSrp"></tbody></table>
       <div id="oOpts"></div>
       <p class="note">Sample computation only. Final terms subject to bank approval and current promo validity.</p>
     </div>
-    <div class="card hand">
-      <h2 id="thanks"></h2>
-      <p>We're now connecting you to our official Car Sales Executive of Mitsubishi, <b>Richard Cuagdan</b>.</p>
-      <a class="btn msg" id="msgBtn" href="#">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg>
-        Message Richard on Messenger</a>
-      <div class="msgbox" id="msgText"></div>
-      <p class="steps" style="padding-left:0">One tap opens Messenger with your details copied. Just <b>paste</b> and <b>send</b> po. Richard will reply with your full quotation.</p>
-      <button class="btn link" id="copyBtn" style="color:#bbb;font-size:12px;margin-top:4px;text-decoration:underline">Copy message only</button>
-      <a class="btn d" id="tdBtn" href="#" target="_blank" rel="noopener" style="border:1px solid #333">Book a Test Drive</a>
-      <p style="font-size:12px;color:#aaa;text-align:center;margin-top:8px">Showroom open Mon–Sat, 8:00 AM – 5:00 PM</p>
-    </div>
     <div class="card"><h2 style="font-size:16px">All-in inclusions</h2>
       <ul class="l"><li>3 years LTO registration</li><li>3 years TPL insurance</li><li>1 year comprehensive insurance, rate locked for 3 years</li><li>Chattel mortgage</li><li>Free labor up to 5,000 km</li><li>3 years warranty</li></ul></div>
     <div class="card"><h2 style="font-size:16px">Freebies</h2>
       <ul class="l" id="freebies"></ul></div>
+<div id="finalCta">    <div class="card hand" id="cta">
+      <p style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#E60012;font-weight:700">Finalize your inquiry</p>
+      <h2 id="thanks" style="margin-top:4px"></h2>
+      <p style="font-size:16px;color:#fff;font-weight:600;margin-top:6px">Message Richard Cuagdan, your Car Sales Executive, to finalize your quotation.</p>
+      <div class="msgbox" id="msgText"></div>
+      <p style="font-size:12px;color:#bbb;margin-top:6px">Your message is copied, just paste and send.</p>
+      <a class="btn msg" id="msgBtn" href="#">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg>
+        Message Richard to Finalize</a>
+      <button class="btn link" id="copyBtn" style="color:#bbb;font-size:12px;margin-top:4px;text-decoration:underline">Copy message only</button>
+      <a class="btn d" id="tdBtn" href="#" target="_blank" rel="noopener" style="border:1px solid #333">Book a Test Drive</a>
+      <p style="font-size:12px;color:#aaa;text-align:center;margin-top:8px">Showroom open Mon–Sat, 8:00 AM – 5:00 PM</p>
+    </div>
+</div>
     <button class="btn g" id="restart">Start over</button>
   </section>
 
@@ -336,8 +339,10 @@ function submit(){
     timeline:tl,employment:emp,tier:tierOf(tl,r),consent:true,source:location.origin+location.pathname};
   S.lead=lead;
   const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all));
-  sendLead(lead,'submit');
-  renderOffer();step(4);
+  sendLead(lead,'submit'); // details go out FIRST
+  const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
+  setTimeout(()=>{b.textContent='Details received ✓';
+    setTimeout(()=>{b.disabled=false;b.textContent='Send my details & see full offer';renderOffer();step(4)},600)},900);
 }
 // Sends the lead to the webhook. text/plain avoids a CORS preflight (Apps Script can't answer one);
 // sendBeacon / keepalive survive the page navigating to Messenger. The server de-dupes by leadId.
@@ -354,7 +359,7 @@ function copySync(t){ // synchronous copy inside the tap, before navigation
   try{navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{})}catch(_){}
   return ok;
 }
-function summary(){const L=S.lead;return `Hi Sir Richard! I used the Budget Fit Calculator. Name: ${L.name}, Unit: ${L.chosenUnit}, Option: ${L.dpPreference}, Monthly: ₱${L.monthly.toLocaleString('en-PH')}, Timeline: ${L.timeline}, Ref: ${L.leadId}`}
+function summary(){const L=S.lead;return `Hi Sir Richard! I'd like to finalize my quotation. Name: ${L.name}, Unit: ${L.chosenUnit}, Option: ${L.dpPreference}, Monthly: ₱${L.monthly.toLocaleString('en-PH')}, Timeline: ${L.timeline}, Ref: ${L.leadId}`}
 async function copy(t){
   try{await navigator.clipboard.writeText(t);return true}catch(e){
     const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
