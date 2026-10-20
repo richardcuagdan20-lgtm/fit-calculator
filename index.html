@@ -97,6 +97,25 @@ select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px sol
 body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
 @media(max-width:480px){.fab .lb{display:none}}
+.uimg{display:block;width:100%;max-width:240px;aspect-ratio:3/2;object-fit:contain;margin:0 auto 6px;background:#fff}
+.specb{display:inline-block;margin-top:8px;background:#fff;border:1px solid var(--g2);color:var(--ink);font:600 12px/1 inherit;font-family:inherit;padding:8px 12px;border-radius:999px;cursor:pointer}
+.specb:hover{border-color:var(--red);color:var(--red)}
+.oimg{display:block;width:100%;max-width:360px;aspect-ratio:3/2;object-fit:contain;margin:6px auto 4px}
+.illus{font-size:11px;color:var(--g3);text-align:center;margin:2px 0 8px}
+.mdl{position:fixed;inset:0;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55)}
+.mdl.on{display:flex}
+.mdl .box{background:#fff;width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));position:relative;border-top:4px solid var(--red)}
+@media(min-width:600px){.mdl{align-items:center}.mdl .box{border-radius:16px}}
+.mdl h3{margin:0 40px 2px 0;font-size:18px}.mdl .sub2{font-size:12px;color:var(--g3);margin-bottom:6px}
+.mdl .x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--g2);background:#fff;font-size:20px;line-height:1;cursor:pointer;color:var(--ink)}
+.mdl img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;background:#fff}
+.mdl table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}.mdl td{padding:7px 0;border-bottom:1px solid var(--g2);vertical-align:top}.mdl td:first-child{color:var(--g3);width:40%}
+.mdl h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--g3);margin:14px 0 6px}
+.mdl ul{margin:0;padding-left:18px;font-size:13px}.mdl li{margin:3px 0}
+.sw{display:flex;flex-wrap:wrap;gap:10px}.sw button{display:flex;flex-direction:column;align-items:center;gap:4px;width:74px;background:none;border:0;padding:0;cursor:pointer;font:11px/1.2 inherit;font-family:inherit;color:var(--ink);text-align:center}
+.sw i{display:block;width:30px;height:30px;border-radius:50%;border:1px solid #ccc;box-shadow:inset 0 0 0 2px #fff}
+.sw button.on i{outline:2px solid var(--red);outline-offset:2px}
+.cname{font-size:13px;font-weight:600;margin:6px 0 0;text-align:center}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -253,12 +272,21 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
     </div>
   </section>
 </main>
-<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v6</span></footer>
+<footer>Richard Cuagdan · Car Sales Executive · Mitsubishi Motors Philippines<br>Drive your Ambition <span style="opacity:.6">· v7</span></footer>
 <div class="toast" id="toast"></div>
+<div class="mdl" id="mdl" aria-hidden="true"><div class="box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+<button class="x" id="mX" type="button" aria-label="Close">&times;</button>
+<h3 id="mTitle"></h3><div class="sub2" id="mSub"></div>
+<img id="mImg" alt="" decoding="async"><div class="cname" id="mCName"></div><div class="illus">Images for illustration; actual unit may vary.</div>
+<h4>Key specs</h4><table><tbody id="mSpecs"></tbody></table>
+<h4>Key features</h4><ul id="mFeat"></ul>
+<div id="mColWrap"><h4>Available colors</h4><div class="sw" id="mCols"></div><div class="illus" id="mColNote" style="text-align:left;margin-top:8px"></div></div>
+<div class="illus" style="margin-top:12px">Source: Mitsubishi Motors Philippines (mitsubishi-motors.com.ph). Specs and colors may change; please confirm with Richard.</div>
+</div></div>
 <a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
 
 <script>
-const APP_VERSION = 'v6';
+const APP_VERSION = 'v7';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
 const LS_KEY = 'bfc_leads';
@@ -312,6 +340,7 @@ function compute(){
   if(pref.length) pool=pref;
   const up = pool.filter(x=>famKey(x.fam)===S.unitPref);
   if(up.length) pool=up;
+  else {const np=pool.filter(x=>x.fam!=='Triton'&&x.fam!=='Montero Sport'); if(np.length) pool=np;} // Triton & Montero Sport only recommended when linked or nothing else fits
   pool.sort((a,b)=> best===2 ? a.m-b.m : (S.use!=='commute') ? b.m-a.m : a.m-b.m);
   // For great/fits tiers, recommend the best-equipped unit that still sits in the best tier (more car for the budget); commute favors lowest monthly.
   S.rec = pool[0].id;
@@ -322,20 +351,91 @@ function renderResults(){
   if(!S.chosen || !UNITS.find(u=>u.id===S.chosen)) S.chosen=S.rec;
   $('a35').textContent=peso(S.income*0.35); $('a30').textContent=peso(S.income*0.30);
   $('dpLab').textContent = S.dp==='zero'?'Zero DP':'Low DP';
-  const fams = ['Mirage G4','Xpander','L300','Triton','Destinator','Montero Sport'].map(f=>{
+  const FAM_ORDER=['Mirage G4','Xpander','L300','Destinator','Triton','Montero Sport'];
+  const fams = FAM_ORDER.map(f=>{
     const us = list.filter(u=>u.fam===f).sort((a,b)=>((b.id===S.rec)-(a.id===S.rec))||(rank[a.fit.k]-rank[b.fit.k])||(a.r-b.r));
     return {f,us,best:Math.min(...us.map(u=>u.r)),hasRec:us.some(u=>u.id===S.rec)};
-  }).sort((a,b)=>(b.hasRec-a.hasRec)||((famKey(b.f)===S.unitPref)-(famKey(a.f)===S.unitPref))||(a.best-b.best));
+  }).sort((a,b)=>((famKey(b.f)===S.unitPref)-(famKey(a.f)===S.unitPref))||(FAM_ORDER.indexOf(a.f)-FAM_ORDER.indexOf(b.f)));
   $('results').innerHTML = fams.map(F=>`<div class="fam">${F.f}</div>`+F.us.map(u=>`
     <div class="unit ${u.id===S.rec?'rec':''} ${u.id===S.chosen&&u.id!==S.rec?'sel':''}" data-id="${u.id}">
       ${u.id===S.rec?'<span class="recb">Recommended for you</span>':''}
+      ${SPEC[u.id]?`<img class="uimg" src="${imgSrc(SPEC[u.id].img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="240" height="160">`:''}
       <div class="row"><div><div class="n">${u.name}</div><div class="srp">SRP <span class="blur">₱0,000,000</span></div>
         <span class="tag ${u.fit.k}">${u.fit.l} · ${(u.r*100).toFixed(1)}%</span>${u.id===S.chosen?' <span class="tag" style="background:#111;color:#fff">Selected</span>':''}</div>
         <div class="mo"><b>${peso(u.m)}</b><small>/mo · 60 mos${u.zero==null?'<br>'+optLabel(u,effDp(u,S.dp)):''}</small></div></div>
       ${u.fit.k==='stretch'?`<div class="hint">${S.dp==='zero'&&u.low/S.income<=0.35?'Fits with the Low DP option.':(S.dp==='zero'?'Consider the Low DP option or adding a co-maker.':'Consider adding a co-maker to strengthen approval.')}</div>`:''}
-    </div>`).join('')).join('');
+      ${SPEC[u.id]?`<button type="button" class="specb" data-spec="${u.id}">View specs &amp; colors</button>`:''}
+    </div>`).join('')).join('')+'<div class="illus">Images for illustration; actual unit may vary.</div>';
   document.querySelectorAll('.unit').forEach(el=>el.onclick=()=>{S.chosen=el.dataset.id;renderResults()});
+  document.querySelectorAll('#results .specb').forEach(b=>b.onclick=e=>{e.stopPropagation();openSpecs(b.dataset.spec)});
 }
+
+// Specs/colors from official Mitsubishi Motors Philippines model pages, brochures and MMPC articles (Oct 2026). Images in /img are from the same official sources.
+const XPE=['Engine','1.5L in-line 4 DOHC 16-valve MIVEC gasoline'],XPP=['Max power / torque','105 PS / 141 Nm'],SEAT7=['Seating','7'];
+const MSE=['Engine','2.4L (2,442 cc) 4N15 MIVEC intercooled turbo diesel, Euro 4'],MSP=['Max power / torque','181 PS / 430 Nm'];
+const DEE=['Engine','1.5L turbocharged gasoline (4B40), Euro 4'],DEP=['Max power / torque','163 PS / 250 Nm'];
+const C=(n,h,i)=>({n,h,i});
+const MG4C=v=>[C('Titanium Gray Metallic','#5d6066',v+'_u17'),C('Red Metallic','#b0141c',v+'_p19'),C('Cool Silver Metallic','#bfc2c6',v+'_a66'),C('White Solid','#f3f3f1','')];
+const XGLXC=[C('Graphite Gray Metallic','#4a4c50','xpglx_graphite'),C('Blade Silver Metallic','#b8bcc4','xpglx_u33'),C('Jet Black Mica','#121212','xpglx_x37')];
+const MSC=[C('White Diamond','#f2f2f0','ms_white'),C('Jet Black Mica','#121212','ms_black'),C('Blade Silver Metallic','#b8bcc4','ms_silver')];
+const MSBC=[C('Graphite Gray Metallic with Black Roof','#4a4c50','msbs_jh3'),C('White Diamond with Black Roof','#f2f2f0','msbs_x8w'),C('Jet Black Mica','#121212','msbs_x37')];
+const SPEC={
+ mg4glxat:{img:'mg4glx_a66',specs:[['Engine','1.2L (1,193 cc) D4 MPI VVT gasoline'],['Max power / torque','78 PS / 100 Nm'],['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],['Seating','5']],
+   feats:['LED Headlamp with Daytime Running Lamp','Active Stability Control','Anti-Lock Braking System','Hill Start Assist','Embossed Fabric without Stitch'],colors:MG4C('mg4glx'),note:'White Solid is available on a per dealer firm order basis.'},
+ mg4gls:{img:'mg4gls_u17',specs:[['Engine','1.2L (1,193 cc) D4 MPI VVT gasoline'],['Max power / torque','78 PS / 100 Nm'],['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],['Seating','5']],
+   feats:['Engine Push Start System','3-Spoke Leather-Wrapped Steering Wheel','LED Headlamp with Daytime Running Lamp','Active Stability Control','Anti-Lock Braking System','Hill Start Assist'],colors:MG4C('mg4gls'),note:'White Solid is available on a per dealer firm order basis.'},
+ l300:{img:'l300_fb',specs:[['Engine','2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4'],['Transmission','5-speed manual'],['Drivetrain','2WD'],['Fuel','Diesel']],
+   feats:['Front Suspension: Independent Wishbone and Coil Spring','Rear Suspension: Semi-Elliptic Leaf Spring'],colors:[]},
+ xglxmt:{img:'xpglx_u33',specs:[XPE,XPP,['Transmission','5-speed manual'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['7-inch Smartphone Link Display Audio (Apple CarPlay, Android Auto, Bluetooth)','Reverse Camera','High ground clearance suspension'],colors:XGLXC},
+ xglxat:{img:'xpglx_x37',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['7-inch Smartphone Link Display Audio (Apple CarPlay, Android Auto, Bluetooth)','Reverse Camera','High ground clearance suspension'],colors:XGLXC},
+ xglsat:{img:'xpgls_c31',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['10-inch Smartphone Link Display Audio with wireless Apple CarPlay and Android Auto','Multi-Around Monitor','LED Daytime Running Lights'],
+   colors:[C('Red Metallic','#b0141c','xpgls_red'),C('Green Bronze Metallic','#6b6a58','xpgls_c31'),C('Graphite Gray Metallic','#4a4c50','xpgls_u28'),C('Quartz White Pearl','#f4f4f1','xpgls_w81')],note:'Quartz White Pearl is an additional ₱15,000.'},
+ xcross:{img:'xc_x3n',specs:[XPE,XPP,['Transmission','4-speed automatic'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['10-inch Smartphone Link Display Audio with wireless Apple CarPlay and Android Auto','Multi-Around Monitor','Two-Tone Synthetic Leather with Heat Guard'],
+   colors:[C('Green Bronze Metallic with Black Roof','#6b6a58','xc_green'),C('Quartz White Pearl with Black Roof','#f4f4f1','xc_x3n'),C('Sunrise Orange Metallic with Black Roof','#c8641e','xc_orange')],note:'Quartz White Pearl is an additional ₱15,000.'},
+ dglx:{img:'de_p26',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['8-inch Smartphone Link Display Audio with Apple CarPlay and Android Auto','Active Stability Control with TCL','LED Headlamps'],
+   colors:[C('Quartz White Pearl','#f4f4f1','de_w81'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Blade Silver Metallic','#b8bcc4','de_u33'),C('Red Metallic','#b0141c','de_p26')]},
+ dgls:{img:'de_d34',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['12.3-inch screen with wireless Apple CarPlay and Android Auto','Active Yaw Control','8-inch LCD Multi-Information Display','LED Daytime Running Lights','Engine Push Start System'],
+   colors:[C('Quartz White Pearl','#f4f4f1','de_w81'),C('Lunar Blue Mica','#2d4a7a','de_d34'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Jet Black Mica','#121212','de_x37')]},
+ dgt:{img:'de_x3n',specs:[DEE,DEP,['Transmission','CVT'],['Drivetrain','2WD'],['Fuel','Unleaded gasoline'],SEAT7],
+   feats:['Forward Collision Mitigation (FCM)','Panoramic Sunroof with power sunshade','Synthetic Leather Seats (Heat Guard), two-tone Black/Maroon','12.3-inch screen with wireless Apple CarPlay and Android Auto'],
+   colors:[C('Quartz White Pearl, two-tone with Black Roof','#f4f4f1','de_x3n'),C('Lunar Blue Mica, two-tone with Black Roof','#2d4a7a','de_xd1'),C('Graphite Gray Metallic','#4a4c50','de_jh3'),C('Jet Black Mica','#121212','de_x37')]},
+ tritongxat:{img:'tr_gx_u28',specs:[['Engine','2.4L (2,440 cc) 4N16 D4 intercooled turbo diesel'],['Transmission','6-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel']],
+   feats:['8-inch touchscreen with Apple CarPlay and Android Auto','Reverse camera','Anti-Lock Braking System with EBD','Hill Start Assist'],
+   colors:[C('Graphite Gray Metallic','#4a4c50','tr_gx_u28'),C('Blade Silver Metallic','#b8bcc4',''),C('White Diamond','#f2f2f0',''),C('Jet Black Mica','#121212',''),C('Red Solid','#c0161d','')]},
+ mglxmt:{img:'ms_white',specs:[MSE,MSP,['Transmission','6-speed manual'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Rear View System and Reverse Sensors','ABS with EBD','Front SRS Airbags (Driver and Passenger)','Keyless Entry','Cruise Control'],colors:MSC},
+ mgls:{img:'ms_white',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Active Stability and Traction Control','Hill Start Assist','Trailer Stability Assist','Keyless Operation System with Engine Start Switch','Cruise Control'],colors:MSC},
+ mbs2wd:{img:'msbs_jh3',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','2WD'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Forward Collision Mitigation (FCM)','Ultrasonic Misacceleration Mitigation System (UMS)','Adaptive Cruise Control (ACC)','Trailer Stability Assist'],colors:MSBC},
+ mbs4wd:{img:'msbs_x8w',specs:[MSE,MSP,['Transmission','8-speed automatic with Sport Mode'],['Drivetrain','4WD (Super Select 4WD-II) with Off-Road Mode and Rear Differential Lock'],['Fuel','Diesel'],SEAT7],
+   feats:['Multi-Around View Monitor','Forward Collision Mitigation (FCM)','Blind Spot Warning with Lane Change Assist','Rear Cross Traffic Alert','Adaptive Cruise Control (ACC)','Sunroof'],colors:MSBC},
+};
+const imgSrc=k=>k?`img/${k}.webp`:'';
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+let mLast=null;
+function openSpecs(id){
+  const u=UNITS.find(x=>x.id===id),d=SPEC[id];if(!u||!d)return;
+  $('mTitle').textContent=u.name;$('mSub').textContent=u.srpTxt||('SRP '+peso(u.srp));
+  const show=c=>{$('mImg').src=imgSrc(c&&c.i?c.i:d.img);$('mImg').alt=u.name+(c?' in '+c.n:'');$('mCName').textContent=c?c.n+(c.i?'':' (photo not available)'):'';
+    document.querySelectorAll('#mCols button').forEach(b=>b.classList.toggle('on',c&&b.dataset.n===c.n))};
+  $('mSpecs').innerHTML=d.specs.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');
+  $('mFeat').innerHTML=d.feats.map(f=>`<li>${esc(f)}</li>`).join('');
+  $('mColWrap').style.display=d.colors.length?'':'none';
+  $('mCols').innerHTML=d.colors.map(c=>`<button type="button" data-n="${esc(c.n)}" aria-label="${esc(c.n)}"><i style="background:${c.h}"></i>${esc(c.n)}</button>`).join('');
+  $('mColNote').textContent=d.note||'';
+  $('mCols').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>show(d.colors[i]));
+  show(null);
+  mLast=document.activeElement;$('mdl').classList.add('on');$('mdl').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('mX').focus();
+  try{if(typeof window.fbq==='function')window.fbq('track','ViewContent',{content_name:u.name})}catch(_){}
+}
+function closeSpecs(){if(!$('mdl').classList.contains('on'))return;$('mdl').classList.remove('on');$('mdl').setAttribute('aria-hidden','true');document.body.style.overflow='';try{mLast&&mLast.focus()}catch(_){}}
 function chosenData(){const u=UNITS.find(x=>x.id===S.chosen);const m=monthly(u,S.dp);return {u,m,r:m/S.income}}
 
 function manilaStamp(){
@@ -402,6 +502,9 @@ async function copy(t){
 function renderOffer(){
   const {u}=chosenData(),L=S.lead,first=L.name.split(/\s+/)[0];
   $('oTitle').textContent=u.name;
+  {let w=$('oImgWrap');if(!w){w=document.createElement('div');w.id='oImgWrap';$('oTitle').insertAdjacentElement('afterend',w)}
+   const d=SPEC[u.id];w.innerHTML=d?`<img class="oimg" src="${imgSrc(d.img)}" alt="${esc(u.name)}" loading="lazy" decoding="async" width="360" height="240"><div class="illus">Images for illustration; actual unit may vary.</div><div style="text-align:center"><button type="button" class="specb" id="oSpecBtn">View specs &amp; colors</button></div>`:'';
+   if(d)$('oSpecBtn').onclick=()=>openSpecs(u.id);}
   $('oSub').textContent=`60 months, all-in · ${L.fitPercent}% of your income (${fitOf(L.fitPercent/100).l})`;
   $('oSrp').innerHTML=`<tr><td>SRP</td><td>${u.srpTxt||peso(u.srp)}${u.srp2?` mono / ${peso(u.srp2)} two-tone`:''}</td></tr>`;
   const ek=effDp(u,S.dp);const opt=(k,t,dp,mo)=>`<div class="opt ${ek===k?'pick':''}"><h3>${t}${ek===k?'<em>YOUR CHOICE</em>':''}</h3><table><tr><td>Down payment (all-in)</td><td>${dp?peso(dp):'₱0'}</td></tr><tr><td>Monthly × 60</td><td>${peso(mo)}</td></tr><tr><td>% of income</td><td>${(mo/S.income*100).toFixed(1)}%</td></tr></table></div>`;
@@ -465,6 +568,7 @@ document.querySelectorAll('input[name=seg],input[name=use]').forEach(i=>i.addEve
 })();
 function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');renderAdmin();step(5)}else{$('hero').classList.remove('hide');if(!$('s1').classList.contains('hide')||!$('admin').classList.contains('hide'))step(1)}}
 $('tdBtn').addEventListener('click',()=>px('Contact',{content_name:'book_test_drive'}));
+$('mX').onclick=closeSpecs;$('mdl').addEventListener('click',e=>{if(e.target.id==='mdl')closeSpecs()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSpecs()});
 window.addEventListener('hashchange',route);route();
 $('fab').addEventListener('click',e=>{e.preventDefault();
   const L=S.lead||null,unit=(L&&L.chosenUnit?(S.chosen||L.chosenUnit):(S.chosen||S.unitPref))||'none',id=(L&&L.leadId)||'none';
