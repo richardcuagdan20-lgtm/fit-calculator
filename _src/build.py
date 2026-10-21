@@ -316,7 +316,7 @@ f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead"
 <section class="sec"><div class="w">
 <ol class="tdsteps" aria-label="Progress"><li id="st1" class="on">1. Choose a unit</li><li id="st2">2. Your schedule</li><li id="st3">3. Confirmed</li></ol>
 <div id="s1"><h2>Which Mitsubishi would you like to drive?</h2><p class="sub">Swipe each row to see every variant. SRP shown; ask me for this month's promo.</p>{rows_td}
-<p class="sticky"><button class="btn" type="button" id="next1" disabled>Continue</button></p></div>
+<div id="go1" class="tdgo" hidden><button class="btn" type="button" id="next1">Test drive this unit</button></div></div>
 <div id="s2" hidden>
 <div class="tdsel card"><img id="selimg" src="" alt="" width="640" height="427"><div class="pad"><p class="kick">Your unit</p><h2 class="h3" id="selname"></h2><p class="muted" id="selsrp"></p><div id="chips" class="chips" role="radiogroup" aria-label="Choose a variant" hidden></div><p><a href="#" id="chg">Change unit</a></p></div></div>
 <div class="card pad formc"><h2 class="h3">Your schedule and details</h2>
@@ -348,8 +348,8 @@ var TL={json.dumps(dict(TIMES))};
 function step(n){{[1,2,3].forEach(function(i){{$('s'+i).hidden=i!==n;$('st'+i).className=i<=n?'on':''}});window.scrollTo(0,0)}}
 function pick(id,scroll){{sel=U.filter(function(u){{return u.id===id}})[0];if(!sel)return;
  document.querySelectorAll('.tdc').forEach(function(c){{var on=c.dataset.id===id;c.classList.toggle('sel',on);c.setAttribute('aria-checked',on)}});
- $('next1').disabled=false;$('next1').textContent='Continue with '+sel.n;
- if(scroll){{var c=document.querySelector('.tdc[data-id="'+id+'"]');var t=c.parentElement;t.scrollTo({{left:Math.max(0,c.offsetLeft-(t.clientWidth-c.offsetWidth)/2),behavior:'smooth'}})}}}}
+ var c=document.querySelector('.tdc[data-id="'+id+'"]'),t=c.parentElement,g=$('go1');t.parentElement.appendChild(g);g.hidden=false;$('next1').textContent='Test drive this unit: '+sel.n;
+ if(scroll){{t.scrollTo({{left:Math.max(0,c.offsetLeft-(t.clientWidth-c.offsetWidth)/2),behavior:'smooth'}});setTimeout(function(){{g.scrollIntoView({{block:'nearest',behavior:'smooth'}})}},250)}}}}
 function toStep2(){{$('selimg').src='/assets/img/'+sel.img+'.webp';$('selimg').alt='Mitsubishi '+sel.n;$('selname').textContent=sel.n;$('selsrp').textContent='SRP '+sel.srp;step(2)}}
 document.querySelectorAll('.tdc').forEach(function(c){{c.addEventListener('click',function(){{pick(c.dataset.id,true)}})}});
 $('next1').addEventListener('click',function(){{if(sel)toStep2()}});
