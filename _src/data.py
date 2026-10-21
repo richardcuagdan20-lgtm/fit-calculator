@@ -1,4 +1,5 @@
 D="https://mitsubishipromos.online"
+FB="https://www.facebook.com/504759566043148"
 MSG="https://m.me/504759566043148"
 WEBHOOK="https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec"
 PIXEL="1820790069172672"

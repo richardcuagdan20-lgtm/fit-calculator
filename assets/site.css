@@ -76,3 +76,7 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 .hub{gap:28px}.hubc{display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}.hubc:hover{box-shadow:0 18px 44px rgba(0,0,0,.1);transform:translateY(-3px)}
 .hubc img{aspect-ratio:16/10;object-fit:cover;width:100%;background:#f4f4f5}.hubc .pad{padding:26px 28px 30px}.hubc h2{font-size:26px;margin-bottom:.3em}.hubc p{color:var(--mu)}
 @media(min-width:640px) and (max-width:959px){.hub{grid-template-columns:1fr}}
+.brand{min-width:0;flex:1 1 auto}.bt{min-width:0}.mt{flex:none;margin-left:12px}
+.brand b{font-size:clamp(14px,4vw,17px);line-height:1.2;font-weight:750;letter-spacing:-.005em}.brand small{text-transform:none!important;letter-spacing:.04em!important;font-size:12px!important;color:#b4b4bb!important;font-style:italic;margin-top:2px}
+@media(min-width:960px){.brand{flex:0 1 auto}}
+.fsoc{margin:24px 0 0}.fbl{display:inline-flex;align-items:center;gap:10px;color:#e4e4e7;text-decoration:none;border:1px solid #3f3f46;border-radius:999px;padding:8px 16px 8px 10px}.fbl:hover{border-color:#1877f2;color:#fff}.fbl svg{color:#1877f2}

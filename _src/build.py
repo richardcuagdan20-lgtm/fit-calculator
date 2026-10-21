@@ -7,11 +7,11 @@ PAGES=[]
 GA='''<!-- Google tag (gtag.js) GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');</script>'''
-DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Motors","brand":{"@type":"Brand","name":"Mitsubishi"},
+DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Motors","alternateName":"Mitsubishi Motors - SJ Legacy Motors","sameAs":[FB],"brand":{"@type":"Brand","name":"Mitsubishi"},
  "address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
-PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":"Car Sales Executive","image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[MSG]}
+PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Car Sales Executive","image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[FB,MSG]}
 PX='''<!-- Meta Pixel -->
 <script>try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}</script>'''
 CL='''<!-- Microsoft Clarity -->
@@ -45,7 +45,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 {'<meta name="robots" content="noindex">' if noindex else ''}
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="{ogtype}">
-<meta property="og:site_name" content="Richard Cuagdan · Mitsubishi SJ Legacy Motors">
+<meta property="og:site_name" content="Mitsubishi Motors - SJ Legacy Motors">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">
@@ -60,7 +60,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="hd"><div class="w hdi">
-<a class="brand" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Richard Cuagdan</b><small>Mitsubishi SJ Legacy Motors</small></span></a>
+<a class="brand" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span class="bt"><b>Mitsubishi Motors - SJ Legacy Motors</b><small>By Richard Dennis Cuagdan</small></span></a>
 <button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
 <nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="/budgetcalculator/">Compute my monthly</a></nav>
 
@@ -76,11 +76,12 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 </main>
 <footer class="ft"><div class="w">
 <div class="fg">
-<div><p class="fb">Richard Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
+<div><p class="fb">Richard Dennis Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
 <div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
-<p class="disc">Richard Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
-<p class="cp">© 2026 Richard Cuagdan</p>
+<p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors - SJ Legacy Motors on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a></p>
+<p class="disc">Richard Dennis Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
+<p class="cp">© 2026 Richard Dennis Cuagdan · Mitsubishi Motors - SJ Legacy Motors</p>
 </div></footer>
 <a class="fab" href="{MSG}" rel="noopener" aria-label="Chat with Richard on Messenger"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.2 7.1V22l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg><span>Messenger</span></a>
 </body>
@@ -116,7 +117,7 @@ CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>
 
 # ---------- HOME
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/","Mitsubishi Promos in SJDM, Bulacan | Richard Cuagdan, Mitsubishi SJ Legacy Motors",
+page("/","Mitsubishi Motors - SJ Legacy Motors | Cars & Promos in SJDM",
  "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in Zero DP and low-DP options.",
 f'''<section class="hero"><div class="w hgrid"><div>
 <p class="kick">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>
@@ -145,11 +146,11 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <section class="sec"><div class="w split">
 <div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/guides/ofw-car-buying-guide/">OFW car-buying guide</a></li></ul></div>
-</div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Promos SJDM by Richard Cuagdan","url":D+"/"}])
+</div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors - SJ Legacy Motors","url":D+"/"}])
 
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/cars/","Mitsubishi 2026 Models & SRP Price List | SJ Legacy Motors SJDM",
+page("/cars/","2026 Models & Prices | Mitsubishi Motors - SJ Legacy Motors",
  "Every current Mitsubishi model at SJ Legacy Motors, San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>2026 Mitsubishi models</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">Unlock October promos</a></p></div></section>''',
@@ -162,7 +163,7 @@ for m in MODELS:
     rel=" · ".join(f'<a href="/cars/{x["slug"]}/">{x["name"]}</a>' for x in MODELS if x is not m)
     s0=srp_from(m)
     haspromo=any(v["promo"] for v in m["variants"])
-    page(f"/cars/{m['slug']}/",f"Mitsubishi {m['name']} 2026 Price & Variants | SJ Legacy Motors SJDM",
+    page(f"/cars/{m['slug']}/",f"{m['name']} 2026 Price | Mitsubishi Motors - SJ Legacy Motors",
      f"Mitsubishi {m['name']} at SJ Legacy Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
     f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/test-drive/?unit={m['slug']}">Book a Test Drive</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
@@ -175,7 +176,7 @@ for m in MODELS:
 # ---------- promos (gated, noindex; figures live only in JS data)
 PD=[{"slug":m["slug"],"name":m["name"],"v":[{"n":v["n"],"srp":(v["promo"]["srp"] or v["srp"]),"opts":v["promo"]["opts"],"fuel":v["promo"]["fuel"]} for v in m["variants"] if v["promo"]]} for m in MODELS]
 PD=[x for x in PD if x["v"]]
-page("/promos/","Unlock Mitsubishi October 2026 Promos | Richard Cuagdan SJDM",
+page("/promos/","October 2026 Promos | Mitsubishi Motors - SJ Legacy Motors",
  "Unlock this month's Mitsubishi promo figures at SJ Legacy Motors, San Jose del Monte: Zero DP and low-DP all-in options with freebies.",
 f'''<section class="ph"><div class="w"><h1>October 2026 Mitsubishi promos</h1><p class="lead">See every down payment and monthly option this month, all-in on 60 months. Leave your name and mobile once to unlock them.</p></div></section>
 <section class="sec"><div class="w">
@@ -223,7 +224,7 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
      ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
      ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]
-page("/promos-tips/","Mitsubishi Promos, Car Buying Guides & Blog | Richard Cuagdan SJDM",
+page("/promos-tips/","Promos & Tips | Mitsubishi Motors - SJ Legacy Motors",
  "Start here for Mitsubishi promos at SJ Legacy Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
 f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>''',
@@ -240,38 +241,38 @@ def articles(base,items,label,title,desc,intro):
     for a in items:
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
         others="".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
-        page(f"/{base}/{a['slug']}/",a["title"]+" | Richard Cuagdan",a["desc"],
+        page(f"/{base}/{a['slug']}/",(a["title"]+" | Mitsubishi Motors - SJ Legacy Motors" if len(a["title"])<=27 else a["title"]),a["desc"],
         f'''<article class="art"><div class="w nar"><header><p class="kick">{label}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, Car Sales Executive · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {a["body"]}
 <aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
         crumbs=[("/","Home"),(f"/{base}/",label),(f"/{base}/{a['slug']}/",a["title"])])
-articles("guides",GUIDES,"Guides","Car Buying & Financing Guides (Philippines) | Richard Cuagdan",
+articles("guides",GUIDES,"Guides","Car Buying Guides | Mitsubishi Motors - SJ Legacy Motors",
  "Plain-language guides to buying a car in the Philippines: how financing works, loan documents, Zero DP vs low DP, OFW buying and all-in packages.",
  "Practical, plain-language guides to help you plan your purchase before you visit the showroom.")
-articles("blog",POSTS,"Blog","Blog: Mitsubishi News, Promos & Tips | Richard Cuagdan SJDM",
+articles("blog",POSTS,"Blog","Blog | Mitsubishi Motors - SJ Legacy Motors",
  "Notes from the showroom floor at Mitsubishi SJ Legacy Motors, San Jose del Monte: monthly promo roundups, model comparisons and buying tips.",
  "Promo roundups, model comparisons and buying tips from the showroom floor.")
 
 # ---------- about
-page("/about/","About Richard Cuagdan, Car Sales Executive | Mitsubishi SJ Legacy Motors",
- "Richard Cuagdan is a Car Sales Executive at Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, helping employed buyers, business owners and OFW families.",
-f'''<section class="ph"><div class="w"><h1>About Richard Cuagdan</h1><p class="lead">Car Sales Executive, Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan</p></div></section>
+page("/about/","About Richard Dennis Cuagdan | Mitsubishi SJ Legacy Motors",
+ "Richard Dennis Cuagdan is a Car Sales Executive at Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, helping employed buyers, business owners and OFW families.",
+f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p class="lead">Car Sales Executive, Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan</p></div></section>
 <section class="sec"><div class="w nar">
 <img class="pphoto" src="/assets/img/richard-600.webp" srcset="/assets/img/richard-300.webp 300w, /assets/img/richard-600.webp 600w" sizes="(min-width:640px) 300px, 240px" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="600" height="600" fetchpriority="high" decoding="async">
-<p>I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership in San Jose del Monte, Bulacan.</p>
+<p>I'm Richard Dennis Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership in San Jose del Monte, Bulacan.</p>
 <!-- PLACEHOLDER: years of experience goes here (e.g. "I've been helping car buyers for X years.") -->
 <p>Most of the people I work with fall into three groups: employed buyers looking for a monthly that fits their salary, business owners who need a dependable vehicle for work, and OFWs and their families who are buying from abroad or for loved ones at home. Each situation has different paperwork and different priorities, and I take time to understand yours before recommending a unit.</p>
 <h2>How I work</h2>
 <ul class="ticks"><li>I explain the SRP, down payment and monthly together so you can decide with complete numbers.</li><li>I tell you which documents your bank application needs and help you complete them.</li><li>I stay your single point of contact from inquiry to release.</li><li>I'm reachable on Messenger, including for clients in other time zones.</li></ul>
 <h2>Good to know</h2>
 <p>This is my personal sales website. It is not the official website of Mitsubishi Motors Philippines Corporation. Promo figures here are dealership offers and are always subject to bank approval.</p>
-<p class="row"><a class="btn" href="{MSG}" rel="noopener">Message me</a> <a class="btn ghost" href="/contact/">Contact and showroom</a></p>
+<p class="row"><a class="btn" href="{MSG}" rel="noopener">Message me</a> <a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a> <a class="btn ghost dk" href="/contact/">Contact and showroom</a></p>
 <!-- PLACEHOLDER: contact number goes here once available -->
 </div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")])
 
 # ---------- apply
-page("/apply/","Apply for a Mitsubishi in SJDM, Bulacan | Richard Cuagdan",
+page("/apply/","Apply for a Mitsubishi | Mitsubishi Motors - SJ Legacy Motors",
  "Apply online for a Mitsubishi at SJ Legacy Motors, San Jose del Monte: send your details, choose cash or financing, and Richard Cuagdan will get back to you.",
 f'''<section class="ph"><div class="w"><h1>Apply for your Mitsubishi</h1><p class="lead">Send your details below and I'll get back to you with the right unit, the latest promo and the documents you need. Prefer to check your budget first? Use the <a href="/budgetcalculator/" style="color:#fff">budget calculator</a>.</p></div></section>
 <section class="sec"><div class="w split">
@@ -330,7 +331,7 @@ $('af').addEventListener('submit',function(ev){{ev.preventDefault();
 TDU=[{"id":v["id"],"m":m["slug"],"model":m["name"],"n":v["n"],"srp":srp_txt(v),"img":v["img"]} for m in MODELS for v in m["variants"]]
 rows_td="".join(f'''<div class="tdrow"><h3>{e(m["name"])}</h3><div class="tdtrack" role="radiogroup" aria-label="{e(m["name"])} variants">'''+"".join(f'''<button type="button" class="tdc" role="radio" aria-checked="false" data-id="{v["id"]}">{img(v["img"],"Mitsubishi "+v["n"])}<span class="tdn">{e(v["n"])}</span><span class="tds">SRP {srp_txt(v)}</span></button>''' for v in m["variants"])+'</div></div>' for m in MODELS)
 TIMES=[("08:00","8:00 AM"),("09:00","9:00 AM"),("10:00","10:00 AM"),("11:00","11:00 AM"),("13:00","1:00 PM"),("14:00","2:00 PM"),("15:00","3:00 PM"),("16:00","4:00 PM")]
-page("/test-drive/","Book a Mitsubishi Test Drive in SJDM, Bulacan | Richard Cuagdan",
+page("/test-drive/","Book a Test Drive | Mitsubishi Motors - SJ Legacy Motors",
  "Book a Mitsubishi test drive at SJ Legacy Motors, San Jose del Monte, Bulacan. Pick your unit, choose a date and time from Monday to Saturday, and Richard will confirm.",
 f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead">Choose a unit, pick a schedule, and I'll have it ready for you at Mitsubishi SJ Legacy Motors, San Jose del Monte.</p></div></section>
 <section class="sec"><div class="w">
@@ -408,11 +409,12 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
 </script>''', crumbs=[("/","Home"),("/test-drive/","Book a Test Drive")])
 
 # ---------- contact
-page("/contact/","Contact Richard Cuagdan | Mitsubishi SJ Legacy Motors, San Jose del Monte",
+page("/contact/","Contact | Mitsubishi Motors - SJ Legacy Motors",
  "Message Richard Cuagdan on Messenger or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
 f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send a message any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Open Messenger</a></p></div>
+<div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
 <div class="card pad"><h2 class="h3">Showroom</h2><address>Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan<br>Philippines</address><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
 <div class="card pad"><h2 class="h3">Apply online</h2><p>Send your details and preferred unit, and I'll get back to you with the latest promo.</p><p><a class="btn" href="/apply/">Apply Now</a></p></div>
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
@@ -420,7 +422,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 </div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
 
 # ---------- 404
-page("/__404/","Page not found | Richard Cuagdan","The page you were looking for could not be found.",
+page("/__404/","Page not found | Mitsubishi Motors - SJ Legacy Motors","The page you were looking for could not be found.",
  '<section class="ph"><div class="w"><h1>Page not found</h1><p class="lead">That page doesn\'t exist or has moved.</p><p class="row"><a class="btn" href="/">Go to Home</a> <a class="btn ghost" href="/cars/">Browse cars</a></p></div></section>',noindex=True)
 s=open(R+"/__404/index.html").read().replace('<link rel="canonical" href="https://mitsubishipromos.online/__404/">\n','').replace('<meta property="og:url" content="https://mitsubishipromos.online/__404/">\n','')
 open(R+"/404.html","w").write(s); os.remove(R+"/__404/index.html"); os.rmdir(R+"/__404")
