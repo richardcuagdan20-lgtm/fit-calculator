@@ -11,7 +11,7 @@ DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Mot
  "address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
-PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":"Car Sales Executive","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[MSG]}
+PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":"Car Sales Executive","image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[MSG]}
 NAV=[("/","Home"),("/cars/","Cars"),("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog"),("/about/","About"),("/contact/","Contact")]
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
@@ -127,7 +127,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <div class="feat"><h3>Local to SJDM</h3><p>The showroom is in San Jose del Monte, Bulacan, close to Caloocan, Quezon City, Norzagaray and Santa Maria.</p></div>
 </div></div></section>
 <section class="sec"><div class="w split">
-<div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
+<div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/guides/ofw-car-buying-guide/">OFW car-buying guide</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Promos SJDM by Richard Cuagdan","url":D+"/"}])
 
@@ -195,7 +195,7 @@ page("/about/","About Richard Cuagdan, Car Sales Executive | Mitsubishi SJ Legac
  "Richard Cuagdan is a Car Sales Executive at Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, helping employed buyers, business owners and OFW families.",
 f'''<section class="ph"><div class="w"><h1>About Richard Cuagdan</h1><p class="lead">Car Sales Executive, Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan</p></div></section>
 <section class="sec"><div class="w nar">
-<!-- PLACEHOLDER: Richard's photo goes here, e.g. <img src="/assets/img/richard.webp" alt="Richard Cuagdan, Car Sales Executive" width="480" height="600" loading="lazy"> -->
+<img class="pphoto" src="/assets/img/richard-600.webp" srcset="/assets/img/richard-300.webp 300w, /assets/img/richard-600.webp 600w" sizes="(min-width:640px) 300px, 240px" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="600" height="600" fetchpriority="high" decoding="async">
 <p>I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership in San Jose del Monte, Bulacan.</p>
 <!-- PLACEHOLDER: years of experience goes here (e.g. "I've been helping car buyers for X years.") -->
 <p>Most of the people I work with fall into three groups: employed buyers looking for a monthly that fits their salary, business owners who need a dependable vehicle for work, and OFWs and their families who are buying from abroad or for loved ones at home. Each situation has different paperwork and different priorities, and I take time to understand yours before recommending a unit.</p>
@@ -228,7 +228,7 @@ f'''<section class="ph"><div class="w"><h1>Apply for financing</h1><p class="lea
 # ---------- contact
 page("/contact/","Contact Richard Cuagdan | Mitsubishi SJ Legacy Motors, San Jose del Monte",
  "Message Richard Cuagdan on Messenger or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
-f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger.</p></div></section>
+f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send a message any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Open Messenger</a></p></div>
 <div class="card pad"><h2 class="h3">Showroom</h2><address>Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan<br>Philippines</address><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
