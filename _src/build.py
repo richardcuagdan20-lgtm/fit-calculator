@@ -12,11 +12,17 @@ PAGES=[]
 GA='''<!-- Google tag (gtag.js) GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');</script>'''
+TEL="+639542911201"; TELD="0954 291 1201"
+ADDR="Mitsubishi SJ Legacy Motors, Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan"
+ADDR_HTML="Mitsubishi SJ Legacy Motors<br>Lot 9 Ebenezer Christian Academy, Sitio Gitna<br>Sto. Cristo, Quirino Highway<br>San Jose del Monte, Bulacan, Philippines"
+import urllib.parse as _up
+MAPQ=_up.quote_plus(ADDR)
 DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Motors","alternateName":"Mitsubishi SJ Legacy Motors San Jose del Monte","sameAs":[FB],"brand":{"@type":"Brand","name":"Mitsubishi"},
- "address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
+ "telephone":TEL,"hasMap":"https://www.google.com/maps/search/?api=1&query="+MAPQ,
+ "address":{"@type":"PostalAddress","streetAddress":"Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
-PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Car Sales Executive","image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[FB,MSG]}
+PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Car Sales Executive","telephone":TEL,"image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[FB,MSG]}
 PX='''<!-- Meta Pixel -->
 <script>try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}</script>'''
 CL='''<!-- Microsoft Clarity -->
@@ -87,7 +93,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 </main>
 <footer class="ft"><div class="w">
 <div class="fg">
-<div><p class="fb">Richard Dennis Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
+<div><p class="fb">Richard Dennis Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors</p><address style="font-style:normal">{ADDR_HTML}</address><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
 <div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
 <p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors by Richard Dennis Cuagdan on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a></p>
@@ -296,7 +302,7 @@ f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p c
 <h2>Good to know</h2>
 <p>This is my personal sales website. It is not the official website of Mitsubishi Motors Philippines Corporation. Promo figures here are dealership offers and are always subject to bank approval.</p>
 <p class="row"><a class="btn" href="{MSG}" rel="noopener">Message me</a> <a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a> <a class="btn ghost dk" href="/contact/">Contact and showroom</a></p>
-<!-- PLACEHOLDER: contact number goes here once available -->
+<p>Call or text me: <a href="tel:{TEL}">{TELD}</a>. Showroom: {ADDR}.</p>
 </div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")])
 
 # ---------- apply
@@ -443,11 +449,12 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send a message any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Open Messenger</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
-<div class="card pad"><h2 class="h3">Showroom</h2><address>Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan<br>Philippines</address><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
+<div class="card pad"><h2 class="h3">Call or text</h2><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p><a class="btn" href="tel:{TEL}">Call {TELD}</a></p></div>
+<div class="card pad"><h2 class="h3">Showroom</h2><address>{ADDR_HTML}</address><p><a href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
 <div class="card pad"><h2 class="h3">Apply online</h2><p>Send your details and preferred unit, and I'll get back to you with the latest promo.</p><p><a class="btn" href="/apply/">Apply Now</a></p></div>
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
-<!-- PLACEHOLDER: phone / mobile number goes here once available -->
-</div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
+</div></section>
+<section class="sec"><div class="w"><h2>Find the showroom</h2><p>{ADDR}</p><iframe title="Map to Mitsubishi SJ Legacy Motors, San Jose del Monte" src="https://www.google.com/maps?q={MAPQ}&amp;output=embed" width="100%" height="380" style="border:0;border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
 
 # ---------- 404
 page("/__404/","Page not found | Mitsubishi Motors - SJ Legacy Motors","The page you were looking for could not be found.",
@@ -478,6 +485,13 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
 - [Apply]({D}/apply/): financing or cash application
 - [About]({D}/about/) and [Contact]({D}/contact/)
+
+## Contact
+- Sales executive: Richard Dennis Cuagdan, Car Sales Executive
+- Mobile (call or text): {TELD} ({TEL})
+- Showroom: {ADDR}
+- Hours: Monday to Saturday, 8:00 AM to 5:00 PM
+- Directions: https://www.google.com/maps/dir/?api=1&destination={MAPQ}
 
 ## Models
 """+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Tips\n"+_ll(TIPS,"tips")+"\n## Blog\n"+_ll(POSTS,"blog")+"\n## Guides\n"+_ll(GUIDES,"guides"))
