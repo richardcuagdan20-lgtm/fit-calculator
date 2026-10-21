@@ -238,7 +238,7 @@ faq=[("Can I apply for a car loan while working abroad?","Yes. Many Philippine b
 ("Who can receive the car if I'm not in the Philippines?","Your attorney-in-fact named in an SPA, or your co-borrower, can sign documents and receive the unit, depending on the bank's and dealer's requirements."),
 ("How early should I start if I want the car by Christmas?","Start as early as you can. Bank approval, document authentication from abroad and unit availability all take time, so begin weeks ahead of your homecoming.")],
 body='''<p>Para sa lahat ng OFW na nagsasakripisyo abroad: you don't have to wait until you're home to start your car plan. Many of my clients apply from abroad and their family receives the car here. Here's how it works.</p>
-<p class="muted">For a shorter overview, see my <a href="/guides/ofw-car-buying-guide/">OFW car-buying guide</a>. This post goes deeper into the process and timing.</p>
+
 <h2>Can OFWs apply while abroad?</h2>
 <p>Yes. Many Philippine banks accept applications from Filipinos working abroad. Since you can't be here to sign, banks usually ask for one of these:</p>
 <ul class="ticks"><li><b>Special power of attorney (SPA)</b>: authorizes a trusted family member to sign and transact for you. SPAs signed abroad are usually notarized or authenticated through the Philippine embassy or consulate, depending on the bank's requirements.</li><li><b>Co-borrower</b>: a family member in the Philippines who applies with you and shares responsibility for the loan.</li></ul>

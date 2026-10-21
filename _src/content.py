@@ -27,7 +27,7 @@ body='''<p>Each bank has its own checklist, and the final list is always the ban
 <ul class="ticks"><li>DTI registration (sole proprietors) or SEC registration and articles (corporations and partnerships)</li><li>Mayor's or business permit</li><li>Bank statements for the past several months</li><li>ITR and audited or in-house financial statements</li><li>A short list of major suppliers or clients can help the bank verify the business</li></ul>
 <h2>If you are an OFW</h2>
 <ul class="ticks"><li>Passport and valid work visa or permit</li><li>Employment contract or certificate of employment from your employer abroad</li><li>Recent payslips or remittance records</li><li>Special Power of Attorney (SPA) if someone in the Philippines will sign on your behalf</li><li>IDs and proof of billing of your co-borrower or attorney-in-fact</li></ul>
-<p>Read more in the <a href="/guides/ofw-car-buying-guide/">OFW car-buying guide</a>.</p>
+<p>Read more in the <a href="/blog/ofw-car-buying-guide/">OFW car loan guide</a>.</p>
 <h2>Practical tips</h2>
 <ul class="ticks"><li>Make sure names, addresses and signatures are consistent across all documents.</li><li>Clear photos or scans are fine for the initial evaluation; originals may be needed at signing.</li><li>Tell me upfront about any special situation (new job, recently started business). It's easier to plan around than to fix later.</li></ul>
 <p>Ready to start? <a href="/apply/">See the application steps</a>.</p>'''),

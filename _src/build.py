@@ -2,6 +2,7 @@ import json, os, html, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from data import *
 from content import GUIDES, POSTS
+GUIDES=[g for g in GUIDES if g["slug"]!="ofw-car-buying-guide"]  # merged into /blog/ofw-car-buying-guide/
 from drafts import DRAFT_POSTS, PUBLISH
 # Posts in drafts.py go live only when their slug is in PUBLISH.
 LIVE=[a for a in DRAFT_POSTS if a["slug"] in PUBLISH]
@@ -160,9 +161,17 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <div class="feat"><h3>All-in packages</h3><p>Promos include LTO registration, insurance, chattel mortgage and more. <a href="/guides/what-all-in-includes/">Here's what "all-in" covers</a>.</p></div>
 <div class="feat"><h3>Local to SJDM</h3><p>The showroom is in San Jose del Monte, Bulacan, close to Caloocan, Quezon City, Norzagaray and Santa Maria.</p></div>
 </div></div></section>
+<section class="sec alt"><div class="w"><h2>Popular guides for SJDM buyers</h2><div class="grid g3">
+<a class="card pad mc" href="/mitsubishi-sjdm-bulacan/"><h3>Mitsubishi SJDM Bulacan</h3><p class="muted">Promos, test drive and directions</p></a>
+<a class="card pad mc" href="/mitsubishi-casa-bulacan/"><h3>Mitsubishi casa Bulacan</h3><p class="muted">Buying at the authorized dealer</p></a>
+<a class="card pad mc" href="/mitsubishi-zero-down-payment-promo/"><h3>Zero down payment promo</h3><p class="muted">How Zero DP works</p></a>
+<a class="card pad mc" href="/mirage-g4-downpayment-and-monthly/"><h3>Mirage G4 downpayment and monthly</h3><p class="muted">First-car financing guide</p></a>
+<a class="card pad mc" href="/triton-downpayment-and-monthly/"><h3>Triton downpayment and monthly</h3><p class="muted">Pickup financing guide</p></a>
+<a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
+</div></div></section>
 <section class="sec"><div class="w split">
 <div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
-<div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/guides/ofw-car-buying-guide/">OFW car-buying guide</a></li></ul></div>
+<div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li><li><a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
 # ---------- CARS index
@@ -174,6 +183,7 @@ f'''<section class="ph"><div class="w"><h1>2026 Mitsubishi models</h1><p class="
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 # ---------- model pages
+EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
 for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
     sp="".join(f"<tr><th scope='row'>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in m["specs"])
@@ -186,7 +196,7 @@ for m in MODELS:
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 <section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
-<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
+{EVM.get(m['slug'],'')}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
     ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp",
     crumbs=[("/","Home"),("/cars/","Cars"),(f"/cars/{m['slug']}/",m['name'])])
 
@@ -238,6 +248,8 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 </script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
 
 # ---------- promos & tips hub
+EVGL=[("/mitsubishi-zero-down-payment-promo/","Mitsubishi zero down payment promo"),("/mitsubishi-sjdm-bulacan/","Mitsubishi SJDM Bulacan"),("/mitsubishi-casa-bulacan/","Mitsubishi casa Bulacan"),("/mirage-g4-downpayment-and-monthly/","Mirage G4 downpayment and monthly"),("/triton-downpayment-and-monthly/","Triton downpayment and monthly"),("/l300-monthly-installment/","L300 monthly installment")]
+EVG="".join(f'<a class="card pad mc" href="{p}"><p class="kick">Guide</p><h3>{n}</h3></a>' for p,n in EVGL)
 LATEST="".join(f'<a class="card pad mc" href="/{a["base"]}/{a["slug"]}/"><p class="kick">{"Blog" if a["base"]=="blog" else "Tips"}</p><h3>{e(a["title"])}</h3><p class="muted">{e(a["desc"])}</p></a>' for a in sorted(LIVE,key=lambda a:a["date"],reverse=True))
 HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
      ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
@@ -246,9 +258,22 @@ page("/promos-tips/","Promos & Tips | Mitsubishi Motors - SJ Legacy Motors",
  "Start here for Mitsubishi promos at SJ Legacy Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
 f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>
+<section class="sec"><div class="w"><h2>Buying guides</h2><p class="sub">Evergreen guides with this month's promo table.</p><div class="grid g3">{EVG}</div></div></section>
 <section class="sec alt"><div class="w"><h2>Latest articles</h2><p class="sub">New blog posts and tips, newest first.</p><div class="grid g2">{LATEST}</div></div></section>''',
  crumbs=[("/","Home"),("/promos-tips/","Promos & Tips")])
 
+# ---------- evergreen cross-links into existing articles
+XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
+ "l300-vs-triton-for-negosyo":("triton-downpayment-and-monthly","Triton downpayment and monthly guide"),"triton-for-business-and-farm":("triton-downpayment-and-monthly","Triton downpayment and monthly guide"),
+ "triton-gx-2wd-at-first-pickup-guide":("triton-downpayment-and-monthly","Triton downpayment and monthly guide"),"zero-down-payment-car-philippines":("mitsubishi-zero-down-payment-promo","how the Mitsubishi zero down payment promo works"),
+ "xpander-monthly-amortization":("mitsubishi-zero-down-payment-promo","Mitsubishi zero down payment promo guide"),"mitsubishi-dealer-bulacan":("mitsubishi-sjdm-bulacan","Mitsubishi SJDM Bulacan page"),
+ "mitsubishi-test-drive-sjdm":("mitsubishi-sjdm-bulacan","Mitsubishi SJDM Bulacan page"),"mitsubishi-near-bulacan-towns":("mitsubishi-casa-bulacan","Mitsubishi casa Bulacan guide"),
+ "pms-schedule-guide":("mitsubishi-casa-bulacan","Mitsubishi casa Bulacan guide"),"first-time-car-buyer-checklist":("mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly guide"),
+ "minimum-salary-for-car-loan-philippines":("mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly guide")}
+for _a in POSTS+TIPS:
+    if _a["slug"] in XL:
+        _u,_t=XL[_a["slug"]];_p=f'<p>See also: the <a href="/{_u}/">{_t}</a>.</p>\n';_i=_a["body"].rfind("<h2>Your next step</h2>")
+        _a["body"]=_a["body"][:_i]+_p+_a["body"][_i:] if _i>=0 else _a["body"]+_p
 # ---------- guides / blog
 def xl(base):
     o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","Unlock this month's down payment and monthly options.")],
@@ -458,6 +483,10 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 </div></section>
 <section class="sec"><div class="w"><h2>Find the showroom</h2><p>{ADDR}</p><iframe title="Map to Mitsubishi SJ Legacy Motors, San Jose del Monte" src="https://www.google.com/maps?q={MAPQ}&amp;output=embed" width="100%" height="380" style="border:0;border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
 
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
+# ---------- OFW guide merge: redirect old URL
+os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
+open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')
 # ---------- 404
 page("/__404/","Page not found | Mitsubishi Motors - SJ Legacy Motors","The page you were looking for could not be found.",
  '<section class="ph"><div class="w"><h1>Page not found</h1><p class="lead">That page doesn\'t exist or has moved.</p><p class="row"><a class="btn" href="/">Go to Home</a> <a class="btn ghost" href="/cars/">Browse cars</a></p></div></section>',noindex=True)
@@ -488,6 +517,8 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - [Apply]({D}/apply/): financing or cash application
 - [About]({D}/about/) and [Contact]({D}/contact/)
 
+## Buying guides (evergreen, with dated monthly promo table)
+"""+"".join(f"- [{a['title']}]({D}/{a['slug']}/): {a['desc']}\n" for a in LANDINGS)+f"""
 ## Contact
 - Sales executive: Richard Dennis Cuagdan, Car Sales Executive
 - Mobile (call or text): {TELD} ({TEL})

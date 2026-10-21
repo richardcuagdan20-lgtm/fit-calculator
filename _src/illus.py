@@ -402,7 +402,47 @@ def bulk5():
     steps("bn-check","Buying second hand?","Checklist",[("Documents","OR/CR, deed of sale, no loan"),("Flood and accident signs","Rust, odor, water marks"),("Service records",""),("Mechanic inspection","Before paying")])
     photo("bn-photo",M+"Mirage G4/ext_mirageg4_exterior.png",9/16)
 
-if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk5":
+
+def bulk6():
+    M="/workspace/mmpc/final/"
+    def cut(name,src,bg=(244,244,245)):
+        im=Image.open(src).convert("RGBA");im=im.crop(im.getbbox());im.thumbnail((1040,560),Image.LANCZOS)
+        c=Image.new("RGB",(1200,675),bg);c.paste(im,((1200-im.width)//2,(675-im.height)//2+20),im);save(c,name)
+    # 1 SJDM
+    stats("sj-loc","Mitsubishi SJDM Bulacan","Mitsubishi SJ Legacy Motors",[("Quirino Highway","Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, San Jose del Monte"),("0954 291 1201","Call or text Richard before you visit")])
+    tiles("sj-what","At the SJDM dealership","What you can do",[("1","See the lineup","Ask which units are on display"),("2","Test drive","Book online first"),("3","Get the promo","All-in Zero DP and low DP"),("4","Pre-check documents","Before the bank")],cols=2)
+    steps("sj-plan","Plan your visit","3 steps before you drive over",[("Check your budget","Budget calculator"),("Book a test drive","Pick a unit and time"),("Message or call Richard","So your unit is ready")])
+    cut("sj-photo",M+"Xpander Cross/color_xpandercross_26my_rnc_color-x3n_angle4.png")
+    # 2 Casa
+    tiles("cs-what","What is a casa?","Casa = the authorized dealership",[("S","Sales","New units, promos, financing"),("S","Service","PMS and warranty work"),("P","Parts","Genuine parts"),("✓","Authorized","Appointed by the brand")],cols=2)
+    steps("cs-buy","Buying at the casa","From inquiry to release",[("Choose a unit","Test drive it"),("Pick cash or financing","Zero DP or low DP"),("Submit documents","Pre-checked first"),("Bank approval",""),("Release day","Inspect, sign, drive home")])
+    tiles("cs-pms","PMS at an authorized casa","Why owners go back",[("✓","Follows the PMS schedule",""),("✓","Genuine parts and fluids",""),("✓","Service record for warranty",""),("✓","Helps resale value","")],cols=2)
+    photo("cs-photo",M+"Xpander/ext_xpander_26my_x_3.jpg",9/16)
+    # 3 Mirage G4
+    steps("mg-how","Mirage G4 downpayment and monthly","How the numbers work",[("SRP","The unit's suggested retail price"),("Down payment","Zero DP or a bigger DP"),("Term","5 years (60 months) on these promos"),("Monthly","Fixed amortization to the bank")])
+    tiles("mg-docs","Car loan documents","Commonly required",[("✓","2 valid IDs",""),("✓","Proof of billing",""),("E","Employed","COE, payslips or ITR"),("O","OFW","Contract, remittance proof")],cols=2)
+    stats("mg-income","Income guide","Keep the monthly at 30–35%",[("30–35%","of your gross monthly income, as a guide"),("÷ 0.30","Monthly ÷ 0.30 = comfortable income")])
+    cut("mg-photo",M+"Mirage G4/color_mirageg4_26myell_glx-cvt_color-a66_angle315.png")
+    # 4 Triton
+    compare("tr-how","Triton downpayment and monthly","Zero DP or low DP?",("Zero DP","Low DP"),[("Cash-out","Lowest at signing","DP upfront"),("Monthly","Higher","Lower"),("Fits","Keep cash for the business","Lower monthly burden")])
+    tiles("tr-docs","Business owner documents","Commonly required",[("✓","DTI/SEC registration",""),("✓","Business or mayor's permit",""),("✓","ITR or financial statements",""),("✓","Bank statements","")],cols=2)
+    stats("tr-income","Income guide","Will the monthly fit?",[("30–35%","of gross monthly income, as a guide"),("Business income","Banks look at the business records")])
+    photo("tr-photo",M+"Triton/ext_triton_24my_tr_the-all-new_lhd_mv_cover_p_proxy_mitsubishi.jpg",9/16)
+    # 5 L300
+    steps("l3-how","L300 monthly installment","How it's computed",[("Start from the SRP","Dual AC"),("Less the down payment","Zero DP or with DP"),("Spread over 60 months","Bank financing"),("All-in package","Registration, insurance, chattel")])
+    tiles("l3-allin","All-in package","What's typically included",[("✓","LTO registration",""),("✓","TPL insurance",""),("✓","Comprehensive insurance","First year"),("✓","Chattel mortgage","")],cols=2)
+    tiles("l3-docs","For negosyo buyers","Prepare these",[("1","Business registration",""),("2","Permits",""),("3","ITR or financials",""),("4","Bank statements","")],cols=2)
+    photo("l3-photo",M+"L300/ext_l300_l300-side1.jpg",9/16)
+    # 6 Zero DP promo
+    compare("zp-what","Mitsubishi zero down payment promo","What zero DP means",("Zero DP","With DP"),[("At signing","No down payment","Pay the DP"),("Loan amount","Bigger","Smaller"),("Monthly","Higher","Lower")])
+    steps("zp-steps","How to avail","4 steps",[("Check your budget","30–35% income guide"),("Pick a unit","And test drive it"),("Submit documents","Pre-checked by Richard"),("Bank approval and release","")])
+    stats("zp-income","Approval","The bank decides",[("Capacity to pay","Monthly vs income and other loans"),("Complete documents","Consistent and verifiable")])
+    tiles("zp-tips","Approval tips","Strengthen your application",[("✓","Pick a monthly that fits",""),("✓","Complete documents",""),("✓","Add a co-borrower","If needed"),("✓","Answer the bank's call","")],cols=2)
+
+if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk6":
+    MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk6()
+    json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
+elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk5":
     MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk5()
     json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
 elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk4":
