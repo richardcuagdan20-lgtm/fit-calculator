@@ -1723,7 +1723,266 @@ body='''<p>Kapag may lolo, lola o family member with a disability, comfort and a
 <p>The <a href="/cars/xpander/">Xpander</a> is a common choice for families with seniors. The GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with ₱60K fuel. The <a href="/cars/destinator/">Destinator</a> GLX starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval. For any senior or PWD-specific offer, message me for the latest promo.</p>
 '''+CTA2("Bring lolo, lola or your family member to try the seats. Check your budget, then book a test drive in SJDM.","xpander")),
 ]
-DRAFT_POSTS=BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
+ADDRP='<p><b>Mitsubishi SJ Legacy Motors</b><br>Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan</p>'
+TOT='<p class="muted">Total of payments = down payment + 60 monthly amortizations, from the October 2026 promo figures. The all-in package (LTO registration, TPL, 1-year comprehensive with rate locked for 3 years, chattel mortgage, free labor up to 5,000 km, 3-year warranty) is included. Subject to bank approval.</p>'
+BULK5=[
+dict(base="blog",car="xpander",slug="mitsubishi-dealer-bulacan",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross at Mitsubishi SJ Legacy Motors, a Mitsubishi dealer in Bulacan",
+title="Mitsubishi Dealer Bulacan: SJ Legacy Motors, SJDM",
+desc="",answer="",
+faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Mitsubishi SJ Legacy Motors is at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan."),
+("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page and Richard will confirm your schedule. Bring your valid driver's license."),
+("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or send a message on Messenger."),
+("Is SJ Legacy Motors near Metro Manila?","It's on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
+body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealership on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
+
+<h2>Where to find us</h2>
+'''+ADDRP+'''
+<p>Call or text me on '''+TELL+''' before you visit so I can have your preferred unit ready. <a href="/contact/">Map and directions</a>.</p>
+
+<h2>What you can do at the showroom</h2>
+<ul class="ticks">
+<li>See and compare the current lineup: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Montero Sport, Triton, L300 and more (<a href="/cars/">all models</a>)</li>
+<li>Take a test drive (<a href="/test-drive/">book here</a>)</li>
+<li>Get the month's promo: Zero DP and low DP all-in options</li>
+<li>Have your loan documents pre-checked before bank submission</li>
+<li>Release of your new car, with a walkthrough of the unit</li>
+</ul>
+
+<h2>Popular units this month</h2>
+'''+T(["Unit","SRP","Zero DP monthly"],[("Xpander GLX AT","₱1,159,000","₱23,877"),("Xpander GLS AT","₱1,259,000","₱25,937"),("Destinator GLX","₱1,389,000","₱28,615"),("Triton GX AT","₱1,430,000","₱28,900"),("L300 Dual AC","₱1,039,000","₱21,405")])+PN+'''
+
+<h2>Who I help</h2>
+<ul class="ticks">
+<li><b>Employed buyers</b>: matching a monthly to your salary. See <a href="/blog/how-much-car-can-i-afford-philippines/">how much car can I afford</a></li>
+<li><b>Business owners</b>: trucks and pickups for negosyo. See <a href="/blog/l300-vs-triton-for-negosyo/">L300 vs Triton</a></li>
+<li><b>OFWs and their families</b>: applying from abroad. See the <a href="/blog/ofw-car-buying-guide/">OFW car loan guide</a></li>
+</ul>
+
+<h2>Before your visit</h2>
+<ol class="steps">
+<li><h3>Check your budget</h3><p>The <a href="/budgetcalculator/">Budget Fit Calculator</a> shows which units fit your income.</p></li>
+<li><h3>Book a test drive</h3><p>Pick a unit and schedule online.</p></li>
+<li><h3>Bring your license and IDs</h3><p>Plus income documents if you want them pre-checked. See <a href="/guides/car-loan-requirements/">requirements</a>.</p></li>
+</ol>
+'''+CTA2("Visit Mitsubishi SJ Legacy Motors in SJDM. Check your budget, book a test drive, or call me first.","xpander")),
+
+dict(base="blog",car="destinator",slug="mitsubishi-promo-metro-manila-buyers",date="2026-10-22",by=BY,img="de_x3n",alt="Mitsubishi Destinator for Metro Manila buyers checking promos",
+title="Mitsubishi Promo for Metro Manila Buyers: Buying in SJDM",
+desc="",answer="",
+faq=[("Can Metro Manila residents buy from a dealer in Bulacan?","Yes. You can buy from any authorized dealer. Ask about registration, release and where you'll do PMS."),
+("Where can I do PMS if I buy in SJDM but live in Manila?","Ask your sales executive about service options near you; authorized service centers follow the same warranty schedule."),
+("What is the Mitsubishi promo this month?","October 2026 promos include Zero DP options such as the Xpander GLX AT at ₱23,877 a month and the Destinator GLX at ₱28,615 a month, 60 months, all-in."),
+("Can I do the process online?","Much of it. Check your budget online, send documents for pre-check, and come in for the test drive and release.")],
+body='''<p>Shopping for a Mitsubishi promo in Metro Manila? Many of my clients from Caloocan, Quezon City and Fairview come to San Jose del Monte, just up Quirino Highway. Here's how buying from SJ Legacy Motors works if you live in Metro Manila.</p>
+
+<h2>October 2026 promo highlights</h2>
+'''+T(["Unit","Zero DP","Low DP"],[("Xpander GLX MT","₱22,641","₱148K DP: ₱19,811"),("Xpander GLX AT","₱23,877","₱138K DP: ₱20,892"),("Xpander Cross","₱28,389","₱148K DP: ₱24,840"),("Destinator GLX","₱28,615","₱93K DP: ₱26,827"),("Montero Sport GLX MT","₱30,284","₱30K DP: ₱28,265")])+PN+'''
+<p>Full list on the <a href="/promos/">promos page</a>.</p>
+
+<h2>How the process works from Metro Manila</h2>
+<ol class="steps">
+<li><h3>Check your budget online</h3><p>Use the <a href="/budgetcalculator/">Budget Fit Calculator</a>.</p></li>
+<li><h3>Send documents for pre-check</h3><p>By message, before you travel. See <a href="/guides/car-loan-requirements/">requirements</a>.</p></li>
+<li><h3>One visit for the test drive</h3><p>Book a schedule so your unit is ready.</p></li>
+<li><h3>Approval and release</h3><p>Once approved, we schedule your release in SJDM.</p></li>
+</ol>
+
+<h2>Questions to ask any dealer</h2>
+<ul class="ticks">
+<li>What's included in the all-in package? (<a href="/guides/what-all-in-includes/">here's the usual list</a>)</li>
+<li>What's the total of payments over the term?</li>
+<li>Which freebies come with my unit?</li>
+<li>Where will I do PMS near home?</li>
+</ul>
+
+<h2>Driving up from Manila</h2>
+<p>Quirino Highway runs from Fairview to SJDM. Check traffic before you leave; my <a href="/tips/sjdm-to-manila-commute-tips/">SJDM to Manila tips</a> help in reverse too. Showroom: Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte.</p>
+'''+CTA2("From Metro Manila? Check your budget, then book one trip to SJDM for your test drive.","destinator")),
+
+dict(base="blog",car="xpander",slug="xpander-monthly-amortization",date="2026-10-22",by=BY,img="xpglx_x37",alt="Mitsubishi Xpander GLX AT, with monthly amortization options",
+title="Xpander Monthly Amortization 2026: All Variants",
+desc="",answer="",
+faq=[("How much is the Xpander monthly amortization?","In October 2026 on 60 months, all-in: GLX MT ₱22,641 (Zero DP), GLX AT ₱23,877, GLS AT ₱25,937, and Xpander Cross ₱28,389. Low DP options are lower."),
+("What is the Xpander GLS monthly amortization?","₱25,937 at Zero DP or ₱22,695 with ₱148K DP, 60 months, all-in (October 2026)."),
+("How much is the Xpander Cross monthly amortization?","₱28,389 at Zero DP or ₱24,840 with ₱148K DP, 60 months, all-in (October 2026)."),
+("Is there a cheaper Xpander monthly?","The GLX MT with ₱148K DP at ₱19,811 a month is the lowest Xpander monthly this October.")],
+body='''<p>Here's the Xpander monthly amortization for every variant in October 2026, on a 5-year (60-month) all-in term, plus the total you'll pay and the income each one needs.</p>
+
+<h2>Monthly amortization by variant</h2>
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[("GLX 1.5G M/T","₱1,099,000","₱22,641","₱148K DP: ₱19,811","₱30K"),("GLX 1.5G A/T","₱1,159,000","₱23,877","₱138K DP: ₱20,892","₱60K"),("GLS 1.5G A/T","₱1,259,000","₱25,937","₱148K DP: ₱22,695","₱60K"),("Xpander Cross A/T","₱1,378,000","₱28,389","₱148K DP: ₱24,840","₱60K")])+PN+'''
+
+<h2>Total of payments over 60 months</h2>
+'''+T(["Variant","Zero DP total","Low DP total"],[("GLX M/T","₱1,358,460","₱1,336,660"),("GLX A/T","₱1,432,620","₱1,391,520"),("GLS A/T","₱1,556,220","₱1,509,700"),("Xpander Cross","₱1,703,340","₱1,638,400")])+TOT+'''
+
+<h2>Income you'll need</h2>
+<p>At 30–35% of gross monthly income for the Zero DP monthly:</p>
+<ul class="ticks"><li>GLX M/T: ₱64,700 – ₱75,500</li><li>GLX A/T: ₱68,200 – ₱79,600</li><li>GLS A/T: ₱74,100 – ₱86,500</li><li>Xpander Cross: ₱81,100 – ₱94,600</li></ul>
+<p>Full method in <a href="/blog/how-much-car-can-i-afford-philippines/">How much car can I afford?</a></p>
+
+<h2>Zero DP or low DP?</h2>
+<p>Paying the down payment lowers both the monthly and the total of payments. Zero DP keeps your cash for emergencies. See <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a> and the variant breakdown in <a href="/blog/xpander-variants-explained/">Xpander GLX vs GLS vs Cross</a>.</p>
+'''+CTA2("Find the Xpander monthly that fits you, then test drive it in SJDM.","xpander")),
+
+dict(base="blog",car="destinator",slug="destinator-price-philippines",date="2026-10-22",by=BY,img="de_jh3",alt="Mitsubishi Destinator GT, with 2026 price in the Philippines",
+title="Destinator Price Philippines 2026: SRP and Monthly",
+desc="",answer="",
+faq=[("How much is the Mitsubishi Destinator in the Philippines?","SRP: GLX ₱1,389,000, GLS ₱1,599,000, GT ₱1,929,000 (monotone) or ₱1,939,000 (two-tone)."),
+("What is the Destinator monthly?","From ₱28,615 at Zero DP (GLX) or ₱26,827 with ₱93K DP, 60 months, all-in (October 2026)."),
+("Does the Destinator come with free fuel?","In October 2026, the GLS comes with ₱20K fuel and the GT with ₱40K fuel."),
+("What engine does the Destinator have?","A 1.5L turbocharged gasoline engine (4B40) with 163 PS and 250 Nm, paired with a CVT.")],
+body='''<p>Here's the Destinator price in the Philippines for 2026, with October promo monthlies and the total of payments for each variant. All variants share the 1.5L turbo (163 PS, 250 Nm), CVT, seven seats and 214 mm ground clearance.</p>
+
+<h2>Destinator SRP and promo</h2>
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[("GLX","₱1,389,000","₱28,615","₱93K DP: ₱26,827","Ask"),("GLS","₱1,599,000","₱32,942","₱123K DP: ₱30,883","₱20K"),("GT (Monotone)","₱1,929,000","₱39,740","₱88K DP: ₱37,256","₱40K"),("GT (Two-Tone)","₱1,939,000","₱39,740","₱88K DP: ₱37,256","₱40K")])+PN+'''
+
+<h2>Total of payments over 60 months</h2>
+'''+T(["Variant","Zero DP total","Low DP total"],[("GLX","₱1,716,900","₱1,702,620"),("GLS","₱1,976,520","₱1,975,980"),("GT","₱2,384,400","₱2,323,360")])+TOT+'''
+
+<h2>Income guide</h2>
+<ul class="ticks"><li>GLX Zero DP: ₱81,800 – ₱95,400 gross monthly</li><li>GLS Zero DP: ₱94,100 – ₱109,800</li><li>GT Zero DP: ₱113,500 – ₱132,500</li></ul>
+
+<h2>Which variant?</h2>
+<p>See <a href="/blog/destinator-glx-vs-gls-vs-gt/">Destinator GLX vs GLS vs GT</a>, and compare with other 7-seaters in <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> and <a href="/blog/montero-sport-vs-destinator/">Montero Sport vs Destinator</a>.</p>
+'''+CTA2("Check which Destinator fits your budget, then test drive it in SJDM.","destinator")),
+
+dict(base="blog",car="montero-sport",slug="montero-sport-price-philippines-2026",date="2026-10-22",by=BY,img="msbs_x8w",alt="Mitsubishi Montero Sport Black Series 4WD, with 2026 price in the Philippines",
+title="Montero Sport Price Philippines 2026: SRP and Monthly",
+desc="",answer="",
+faq=[("How much is the Montero Sport in the Philippines in 2026?","SRP: GLX 2WD M/T ₱1,568,000, GLS 2WD A/T ₱1,927,000, Black Series 2WD A/T ₱2,190,000, Black Series 4WD A/T ₱2,530,000."),
+("What's the cheapest Montero Sport monthly?","The GLX M/T at ₱28,265 a month with ₱30K DP, or ₱30,284 at Zero DP (October 2026, 60 months, all-in)."),
+("How much is the Montero Sport automatic?","The GLS 2WD A/T is ₱1,927,000 SRP, from ₱37,218 a month with ₱138K DP or ₱39,699 at Zero DP."),
+("How much is the Montero Black Series 4WD monthly?","₱52,121 with ₱133K DP or ₱48,864 with ₱283K DP (October 2026).")],
+body='''<p>Here's the Montero Sport price in the Philippines for 2026, with October promo monthlies and total of payments for all four variants. Every variant has the 2.4L 4N15 turbo diesel (181 PS, 430 Nm) and seven seats.</p>
+
+<h2>Montero Sport SRP and promo</h2>
+'''+T(["Variant","SRP","Option 1","Option 2"],[("GLX 2WD M/T","₱1,568,000","Zero DP: ₱30,284","₱30K DP: ₱28,265"),("GLS 2WD A/T","₱1,927,000","Zero DP: ₱39,699","₱138K DP: ₱37,218"),("Black Series 2WD A/T","₱2,190,000","₱88K DP: ₱45,117","₱218K DP: ₱42,297"),("Black Series 4WD A/T","₱2,530,000","₱133K DP: ₱52,121","₱283K DP: ₱48,864")])+PN+'''
+<p>Fuel freebie: ₱20K on the GLS and both Black Series variants.</p>
+
+<h2>Total of payments over 60 months</h2>
+'''+T(["Variant","Option 1 total","Option 2 total"],[("GLX M/T","₱1,817,040","₱1,725,900"),("GLS A/T","₱2,381,940","₱2,371,080"),("Black Series 2WD","₱2,795,020","₱2,755,820"),("Black Series 4WD","₱3,260,260","₱3,214,840")])+TOT+'''
+
+<h2>Manual or automatic, 2WD or 4WD</h2>
+<ul class="ticks"><li><b>Manual</b>: GLX, 6-speed, lowest price</li><li><b>Automatic</b>: GLS and Black Series, 8-speed</li><li><b>4WD</b>: Black Series 4WD only</li></ul>
+<p>Details in <a href="/blog/montero-sport-variants-explained/">Montero Sport GLX vs GLS vs Black Series</a> and <a href="/blog/montero-sport-vs-destinator/">Montero Sport vs Destinator</a>.</p>
+'''+CTA2("Check which Montero Sport fits your budget, then test drive it in SJDM.","montero-sport")),
+
+dict(base="blog",car="l300",slug="l300-price-philippines-2026",date="2026-10-22",by=BY,img="l300_fb",alt="Mitsubishi L300 Dual AC, with 2026 price in the Philippines",
+title="L300 Price Philippines 2026: Down Payment and Monthly",
+desc="",answer="",
+faq=[("How much is the L300 in the Philippines in 2026?","The 2026 L300 Dual AC is ₱1,039,000 SRP. For the Cab & Chassis, message Richard for the latest promo."),
+("What is the L300 down payment and monthly?","Zero DP at ₱21,405 a month, or ₱123K DP at ₱18,789 a month, 60 months, all-in, with ₱20K fuel (October 2026)."),
+("What engine does the L300 have?","A 2.2L 16-valve DOHC turbo-intercooled diesel (4N14), Euro 4, with a 5-speed manual."),
+("Can a business finance an L300?","Yes. Banks typically ask for business registration, ITR or financial statements and bank statements.")],
+body='''<p>Here's the L300 price in the Philippines for 2026, with the down payment and monthly options this October, the total of payments, and the income guide. The L300 runs a 2.2L 4N14 turbo-intercooled diesel with a 5-speed manual.</p>
+
+<h2>L300 Dual AC price and promo</h2>
+'''+T(["2026 L300 Dual AC","Monthly (60 months)","Total of payments"],[("Zero DP","₱21,405","₱1,284,300"),("₱123K DP","₱18,789","₱1,250,340")])+'''
+<p>SRP ₱1,039,000, all-in, with ₱20K fuel. For the Cab &amp; Chassis variant, message me for the latest promo.</p>'''+TOT+'''
+
+<h2>Income guide</h2>
+<p>At 30–35% of gross income, the Zero DP monthly fits about ₱61,200 to ₱71,400 a month; the ₱123K DP option about ₱53,700 to ₱62,600. For businesses, banks look at business income and documents. See <a href="/guides/car-loan-requirements/">car loan requirements</a>.</p>
+
+<h2>Is it right for your business?</h2>
+<p>Read my <a href="/blog/l300-negosyo-guide/">L300 negosyo guide</a> and <a href="/blog/l300-vs-triton-for-negosyo/">L300 vs Triton</a> comparison.</p>
+'''+CTA2("Check if the L300 fits your negosyo budget, then test drive it in SJDM.","l300")),
+
+dict(base="blog",car="xpander",slug="zero-down-payment-car-philippines",date="2026-10-22",by=BY,img="xpglx_u33",alt="Mitsubishi Xpander available on a zero down payment car promo",
+title="Zero Down Payment Car Philippines: October 2026 List",
+desc="",answer="",
+faq=[("Which Mitsubishi has the lowest zero down payment monthly?","Among October 2026 promos, the L300 Dual AC at ₱21,405 and the Xpander GLX MT at ₱22,641 a month, 60 months, all-in."),
+("Is zero down payment really zero?","Zero DP means no down payment on the promo; the all-in package covers registration, insurance and chattel mortgage. Ask for the written breakdown of what you'll pay at signing."),
+("Is zero DP harder to get approved?","The monthly is higher, so the bank checks that it fits your income. Approval is always subject to bank evaluation."),
+("Which units don't have a zero DP option?","In October 2026, the Montero Sport Black Series variants are offered with a down payment.")],
+body='''<p>Looking for a zero down payment car in the Philippines? Here are all the Mitsubishi Zero DP promos for October 2026, ranked by monthly, with the income each needs at 30–35% of gross income.</p>
+
+<h2>Zero DP list, lowest monthly first</h2>
+'''+T(["Unit","SRP","Zero DP monthly","Gross income"],[("L300 Dual AC","₱1,039,000","₱21,405","₱61.2K–₱71.4K"),("Xpander GLX MT","₱1,099,000","₱22,641","₱64.7K–₱75.5K"),("Xpander GLX AT","₱1,159,000","₱23,877","₱68.2K–₱79.6K"),("Xpander GLS AT","₱1,259,000","₱25,937","₱74.1K–₱86.5K"),("Xpander Cross","₱1,378,000","₱28,389","₱81.1K–₱94.6K"),("Destinator GLX","₱1,389,000","₱28,615","₱81.8K–₱95.4K"),("Triton GX AT","₱1,430,000","₱28,900","₱82.6K–₱96.3K"),("Montero Sport GLX MT","₱1,568,000","₱30,284","₱86.5K–₱100.9K"),("Destinator GLS","₱1,599,000","₱32,942","₱94.1K–₱109.8K"),("Montero Sport GLS","₱1,927,000","₱39,699","₱113.4K–₱132.3K"),("Destinator GT","₱1,929,000","₱39,740","₱113.5K–₱132.5K")])+PN+'''
+
+<h2>What "zero DP all-in" means</h2>
+<p>No down payment, and the package covers LTO registration, TPL insurance, 1-year comprehensive insurance with the rate locked for 3 years, chattel mortgage, free labor up to 5,000 km and a 3-year warranty. Ask for the written breakdown of anything due at signing. More in <a href="/guides/what-all-in-includes/">what all-in includes</a>.</p>
+
+<h2>Pros and cons</h2>
+<ul class="ticks"><li><b>Pro</b>: keep your savings for emergencies or business</li><li><b>Pro</b>: drive sooner</li><li><b>Con</b>: higher monthly and total of payments than a low DP option</li><li><b>Con</b>: needs a bit more income to qualify</li></ul>
+<p>Compare both in <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a> and <a href="/blog/xpander-monthly-amortization/">Xpander monthly amortization</a>.</p>
+'''+CTA2("See which Zero DP unit fits your income, then test drive it in SJDM.","xpander")),
+
+dict(base="tips",car="xpander",slug="car-loan-approval-tips",date="2026-10-22",by=BY,img="xpgls_c31",alt="Mitsubishi Xpander GLS released after car loan approval",
+title="Car Loan Approval Tips: 10 Ways to Get Approved",
+desc="",answer="",
+faq=[("How long does car loan approval take in the Philippines?","It depends on the bank and how complete your documents are. Complete, consistent documents usually move faster."),
+("Why do car loans get declined?","Common reasons are incomplete documents, income that doesn't fit the monthly, high existing debt, or credit history issues."),
+("Does a co-borrower help car loan approval?","It can, because combined income may be considered. Ask which banks allow it."),
+("Does car loan approval expire?","Approvals are usually valid for a limited period set by the bank. Ask how long yours is valid so you can schedule release.")],
+body='''<p>These car loan approval tips come from what I see every week when applications go to the bank. None of them guarantee approval, since the bank decides, but they make your application stronger and faster.</p>
+
+<h2>10 car loan approval tips</h2>
+<ol class="steps">
+<li><h3>Choose a unit that fits</h3><p>Keep the monthly at about 30–35% of gross income. Use the <a href="/budgetcalculator/">calculator</a>.</p></li>
+<li><h3>Complete documents the first time</h3><p>See the <a href="/guides/car-loan-requirements/">requirements list</a> for employed, self-employed and OFW.</p></li>
+<li><h3>Make everything consistent</h3><p>Same name spelling, address and income across all documents.</p></li>
+<li><h3>Pay down small debts</h3><p>Lower obligations mean more capacity.</p></li>
+<li><h3>Pay cards on time</h3><p>Credit history matters.</p></li>
+<li><h3>Show stable income</h3><p>Self-employed: clean business bank statements and ITR.</p></li>
+<li><h3>Add a co-borrower if needed</h3><p>Spouse or immediate family, if the bank allows.</p></li>
+<li><h3>Consider a down payment</h3><p>A lower monthly is easier to approve. See <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a>.</p></li>
+<li><h3>Be reachable</h3><p>Answer the bank's verification call and keep your phone on.</p></li>
+<li><h3>Have your documents pre-checked</h3><p>I review them before they go to the bank.</p></li>
+</ol>
+
+<h2>Common reasons for decline</h2>
+<ul class="ticks"><li>Incomplete or inconsistent documents</li><li>Monthly too high for income</li><li>High existing debt</li><li>Credit history issues</li><li>Unreachable during verification</li></ul>
+<p>Declined before? It's not the end. Read <a href="/blog/car-loan-myths-philippines/">car loan myths</a>, and if you're starting out, the <a href="/blog/minimum-salary-for-car-loan-philippines/">minimum salary guide</a>.</p>
+'''+CTA2("Want me to pre-check your documents? Check your budget, then call or text me.","xpander")),
+
+dict(base="tips",car="xpander-cross",slug="car-reservation-fee-philippines",date="2026-10-22",by=BY,img="xc_green",alt="Reserving a Mitsubishi Xpander Cross unit",
+title="Car Reservation Fee Philippines: What to Know",
+desc="",answer="",
+faq=[("What is a car reservation fee?","An amount paid to hold a unit or color for you while your loan is processed or payment is arranged."),
+("Is a car reservation fee refundable?","It depends on the dealer's terms and the reason for cancellation. Ask for the refund terms in writing before paying."),
+("How much is the reservation fee?","It varies. Message Richard for the current amount and terms for your unit."),
+("Is the reservation fee deducted from the price?","Ask how it's applied to your purchase and get it on the receipt.")],
+body='''<p>Asked to pay a car reservation fee in the Philippines? Here's what it is, when it makes sense, and what to get in writing before you pay.</p>
+
+<h2>What a reservation fee does</h2>
+<ul class="ticks"><li>Holds a specific unit, variant or color for you</li><li>Lets the dealer process your application with the unit set aside</li><li>Shows you're a serious buyer when stock is limited</li></ul>
+
+<h2>Before you pay, ask these</h2>
+<ol class="steps">
+<li><h3>How much, and for which unit?</h3><p>Variant and color on the receipt.</p></li>
+<li><h3>How is it applied?</h3><p>Is it deducted from your down payment or charges?</p></li>
+<li><h3>Is it refundable?</h3><p>Under which conditions, for example if the bank declines.</p></li>
+<li><h3>How long is the hold?</h3><p>What happens after that period.</p></li>
+<li><h3>Official receipt</h3><p>Always get an official receipt from the dealership.</p></li>
+</ol>
+
+<h2>When to reserve</h2>
+<ul class="ticks"><li>You've test driven and decided on the unit</li><li>The monthly fits your budget (see the <a href="/blog/zero-down-payment-car-philippines/">Zero DP list</a>)</li><li>Your documents are ready (see <a href="/tips/car-loan-approval-tips/">approval tips</a>)</li></ul>
+<p>For the current reservation amount and terms for your unit, message me for the latest. After approval, prepare for <a href="/tips/new-car-release-day-checklist/">release day</a>.</p>
+'''+CTA2("Ready to reserve? Check your budget, test drive, then call or text me for the current terms.","xpander-cross")),
+
+dict(base="tips",car="destinator",slug="mitsubishi-test-drive-sjdm",date="2026-10-22",by=BY,img="de_w81",alt="Mitsubishi Destinator test drive in SJDM",
+title="Mitsubishi Test Drive in SJDM: What to Expect",
+desc="",answer="",
+faq=[("How do I book a Mitsubishi test drive in SJDM?","Use the online test drive page: pick a unit, choose a date and time, and Richard will confirm."),
+("What do I need to bring?","A valid driver's license. Bring your family if they'll ride often in the car."),
+("Can I test drive the Destinator?","Yes. Choose the Destinator variant on the booking page, subject to unit availability."),
+("Can I test drive two models on the same day?","Ask when booking so both units can be prepared.")],
+body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to bring, and what to check, so you get the most out of your drive at SJ Legacy Motors on Quirino Highway.</p>
+
+<h2>How to book</h2>
+<ol class="steps"><li><h3>Pick a unit</h3><p>On the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Choose a date and time</h3><p>Then send your details.</p></li><li><h3>I'll confirm</h3><p>By message or call. You can also call or text '''+TELL+'''.</p></li></ol>
+
+<h2>What to bring</h2>
+<ul class="ticks"><li>Valid driver's license</li><li>The people who'll ride often, especially third-row passengers</li><li>A child car seat if you use one (see <a href="/tips/child-car-seat-law-philippines/">RA 11229</a>)</li><li>Your usual cargo, like a stroller or tools</li></ul>
+
+<h2>What to check on the drive</h2>
+<ul class="ticks"><li>Seat position, visibility and mirrors</li><li>Acceleration with passengers on board</li><li>Ride over bumps, braking and steering</li><li>AC reach to every row</li><li>Parking and turning</li><li>Phone pairing and reverse camera</li></ul>
+
+<h2>Compare back-to-back</h2>
+<p>Driving two models on the same day makes the choice easier: Xpander vs Destinator, Montero Sport vs Destinator, or L300 vs Triton. Read <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> before you come.</p>
+'''+CTA2("Book your test drive at Mitsubishi SJ Legacy Motors, SJDM, after checking your budget.","destinator")),
+]
+DRAFT_POSTS=BULK5+BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
 from seo import apply as _seo
 DRAFT_POSTS=_seo(DRAFT_POSTS)
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026

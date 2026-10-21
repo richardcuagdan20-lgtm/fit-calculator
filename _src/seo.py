@@ -122,6 +122,45 @@ LEAD={
 "minimum-salary-for-car-loan-philippines":"There's no single minimum salary for car loan approval; banks decide, but you can plan.",
 "best-car-for-senior-citizens-philippines":"The best car for senior citizens is the one they can get in and out of easily.",
 }
+SEO.update({
+"mitsubishi-dealer-bulacan":("Mitsubishi dealer Bulacan",["Mitsubishi SJDM Bulacan","Mitsubishi San Jose del Monte","Mitsubishi showroom near me","SJ Legacy Motors"],None,
+ "Mitsubishi dealer Bulacan: Mitsubishi SJ Legacy Motors on Quirino Highway, SJDM. Address, what you can do there, popular October 2026 promos and how to visit."),
+"mitsubishi-promo-metro-manila-buyers":("Mitsubishi promo Metro Manila",["Mitsubishi promo zero down payment","Mitsubishi promo 2026","Mitsubishi Caloocan Quezon City","Mitsubishi promo Philippines"],"Mitsubishi Promo Metro Manila: Buying from SJDM",
+ "Mitsubishi promo Metro Manila buyers can get in SJDM: October 2026 Zero DP highlights, how the process works from Manila, and questions to ask any dealer."),
+"xpander-monthly-amortization":("Xpander monthly amortization",["Xpander GLS monthly amortization","Xpander Cross monthly amortization","Xpander 2026 monthly","Xpander monthly payment"],"Xpander Monthly Amortization 2026: All Variants",
+ "Xpander monthly amortization 2026 for GLX MT, GLX AT, GLS and Xpander Cross: Zero DP and low DP monthlies, total of payments, and the income each one needs."),
+"destinator-price-philippines":("Destinator price Philippines",["Destinator price Philippines 2026","Destinator monthly","Destinator GLX price","Destinator installment"],"Destinator Price Philippines 2026: SRP and Monthly",
+ "Destinator price Philippines 2026: GLX, GLS and GT SRPs, October promo Zero DP and low DP monthlies, fuel freebies, total of payments and income guide."),
+"montero-sport-price-philippines-2026":("Montero Sport price Philippines 2026",["Montero Sport price automatic","Montero Sport monthly","Montero Sport Black Series price","Montero Sport installment"],"Montero Sport Price Philippines 2026: SRP and Monthly",
+ "Montero Sport price Philippines 2026: GLX, GLS and Black Series 2WD/4WD SRPs, October promo down payment and monthly options, and the total of payments."),
+"l300-price-philippines-2026":("L300 price Philippines 2026",["L300 price downpayment and monthly","L300 brand new price","L300 installment","L300 Dual AC"],"L300 Price Philippines 2026: Down Payment and Monthly",
+ "L300 price Philippines 2026: Dual AC SRP ₱1,039,000, Zero DP and ₱123K DP monthly options, total of payments, income guide and tips for business buyers."),
+"zero-down-payment-car-philippines":("zero down payment car Philippines",["zero down payment car loan Philippines","Mitsubishi promo zero down payment","cheapest monthly car","all-in promo"],"Zero Down Payment Car Philippines: October 2026 List",
+ "Zero down payment car Philippines list for October 2026: every Mitsubishi Zero DP promo ranked by monthly, the income each needs, and what all-in covers."),
+"car-loan-approval-tips":("car loan approval tips",["car loan approval process Philippines","car loan approval time","why car loans get declined","co-borrower"],"Car Loan Approval Tips: 10 Ways to Get Approved",
+ "Car loan approval tips from the showroom: 10 ways to strengthen your application, common reasons for decline, and how long approval takes in the Philippines."),
+"car-reservation-fee-philippines":("car reservation fee Philippines",["reservation fee car loan","is reservation fee refundable","booking fee car","reserve a car unit"],"Car Reservation Fee Philippines: What to Know",
+ "Car reservation fee Philippines guide: what it does, 5 questions to ask before paying, refund terms to get in writing, and when it makes sense to reserve."),
+"mitsubishi-test-drive-sjdm":("Mitsubishi test drive SJDM",["Mitsubishi test drive near me","Destinator test drive","book test drive Bulacan","test drive checklist"],"Mitsubishi Test Drive in SJDM: What to Expect",
+ "Mitsubishi test drive in SJDM: how to book online, what to bring, what to check on the drive, and how to compare two models back-to-back at SJ Legacy Motors."),
+})
+ANS={
+"mitsubishi-dealer-bulacan":"Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer in Bulacan, at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte. You can see the lineup, test drive, get this month's all-in promo and have your loan documents pre-checked. Call or text Richard on 0954 291 1201.",
+"mitsubishi-promo-metro-manila-buyers":"Metro Manila buyers can get the October 2026 Mitsubishi promo at SJ Legacy Motors in SJDM, up Quirino Highway from Fairview. Zero DP examples: Xpander GLX AT ₱23,877 a month and Destinator GLX ₱28,615 a month, 60 months, all-in. Check your budget and send documents online, then make one trip for the test drive.",
+"xpander-monthly-amortization":"The Xpander monthly amortization for October 2026 (60 months, all-in) starts at ₱22,641 at Zero DP for the GLX MT, ₱23,877 for the GLX AT, ₱25,937 for the GLS AT and ₱28,389 for the Xpander Cross. With a down payment, the GLX MT goes down to ₱19,811 a month.",
+"destinator-price-philippines":"The Destinator price in the Philippines (SRP) is ₱1,389,000 for the GLX, ₱1,599,000 for the GLS, and ₱1,929,000 (monotone) or ₱1,939,000 (two-tone) for the GT. October 2026 promo monthlies start at ₱28,615 at Zero DP or ₱26,827 with ₱93K DP, 60 months, all-in.",
+"montero-sport-price-philippines-2026":"The Montero Sport price in the Philippines for 2026 (SRP) is ₱1,568,000 for the GLX M/T, ₱1,927,000 for the GLS A/T, ₱2,190,000 for the Black Series 2WD and ₱2,530,000 for the Black Series 4WD. The lowest October 2026 monthly is ₱28,265 with ₱30K DP on the GLX.",
+"l300-price-philippines-2026":"The L300 price in the Philippines for 2026 is ₱1,039,000 SRP for the L300 Dual AC. October 2026 promo: Zero DP at ₱21,405 a month or ₱123K DP at ₱18,789 a month, 60 months, all-in, with ₱20K fuel. For the Cab & Chassis, message Richard for the latest promo.",
+"zero-down-payment-car-philippines":"For a zero down payment car in the Philippines, October 2026 Mitsubishi Zero DP promos start at ₱21,405 a month (L300 Dual AC) and ₱22,641 a month (Xpander GLX MT), 60 months, all-in. Eleven units have a Zero DP option this month; the Montero Sport Black Series is offered with a down payment.",
+"car-loan-approval-tips":"The best car loan approval tips: pick a unit whose monthly is about 30–35% of your gross income, submit complete and consistent documents, reduce small debts, pay cards on time, add a co-borrower or down payment if needed, and stay reachable for the bank's verification call. Approval is always the bank's decision.",
+"car-reservation-fee-philippines":"A car reservation fee in the Philippines holds a specific unit or color while your loan or payment is processed. Before paying, ask how much it is, how it's applied to your purchase, whether and when it's refundable, how long the hold lasts, and always get an official receipt. Message Richard for the current terms.",
+"mitsubishi-test-drive-sjdm":"To book a Mitsubishi test drive in SJDM, pick a unit and schedule on the online test drive page and Richard will confirm. Bring a valid driver's license and the family members who'll ride often, and check visibility, acceleration with passengers, ride, AC reach and parking.",
+}
+STOP={"in","the","for","a","of","an","to","and","vs","car","philippines","2026","tips","guide","how","what","is","my","your","with","on","price","monthly","new"}
+def _tags(a):
+    kw=a.get("kw",("",[]))
+    t=" ".join([kw[0]]+list(kw[1])+[a["title"],a["slug"].replace("-"," ")]).lower()
+    return {w for w in re.findall(r"[a-z0-9]+",t) if w not in STOP and len(w)>2}
 def apply(posts):
     for a in posts:
         s=SEO.get(a["slug"])
@@ -129,12 +168,14 @@ def apply(posts):
         a["kw"]=(s[0],s[1])
         if s[2]: a["title"]=s[2]
         a["desc"]=s[3]
+        if a["slug"] in ANS: a["answer"]=ANS[a["slug"]]
         if a["slug"] in LEAD: a["answer"]=LEAD[a["slug"]]+" "+a["answer"]
     by={x["slug"]:x for x in posts}
     for a in posts:
         have=set(re.findall(r'href="/(?:blog|tips|guides)/([^/"]+)/"',a["body"]))
         pool=[x for x in posts if x is not a and x["slug"] not in have]
-        pool.sort(key=lambda x:(x["car"]!=a["car"],x["base"]!=a["base"]))
+        ta=_tags(a)
+        pool.sort(key=lambda x:-(len(ta&_tags(x))*2+(x["car"]==a["car"])*1.5+(x["base"]==a["base"])*0.5))
         rel=pool[:3]
         blk='<h2>Related reading</h2><ul class="links">'+"".join(f'<li><a href="/{x["base"]}/{x["slug"]}/">{x["title"]}</a></li>' for x in rel)+'</ul>\n'
         i=a["body"].rfind("<h2>Your next step</h2>")

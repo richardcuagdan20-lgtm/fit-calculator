@@ -341,7 +341,43 @@ def bulk3():
     steps("sp-td","Test drive","With your senior or PWD family member",[("Bring the person","Try every row"),("Bring the mobility aid","Load it yourself"),("Ride, don't just sit",""),("Check seatbelt reach","")])
     photo("sp-cabin",M+"Destinator/int_destinator_spaciouscabin.jpg",9/16)
 
-if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk3":
+def bulk4():
+    M="/workspace/mmpc/final/"
+    tiles("dl-what","At SJ Legacy Motors","What you can do here",[("1","See the lineup",""),("2","Test drive",""),("3","Get the month's promo","Zero DP and low DP"),("4","Pre-check loan documents",""),("5","Release and walkthrough","")],cols=1)
+    stats("dl-loc","Mitsubishi dealer Bulacan","Mitsubishi SJ Legacy Motors",[("Quirino Highway","Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, San Jose del Monte"),("0954 291 1201","Call or text Richard Cuagdan before you visit")])
+    steps("dl-before","Before your visit","3 steps",[("Check your budget","Budget Fit Calculator"),("Book a test drive","Online"),("Bring license and IDs","Plus income documents")])
+    table("mm-promo","October 2026 · 60 months, all-in","Promo highlights",["Unit","Zero DP","Low DP"],[("Xpander GLX MT","₱22,641","₱19,811"),("Xpander GLX AT","₱23,877","₱20,892"),("Xpander Cross","₱28,389","₱24,840"),("Destinator GLX","₱28,615","₱26,827"),("Montero GLX MT","₱30,284","₱28,265")],[0.42,0.27,0.31],"Low DP: ₱148K / ₱138K / ₱148K / ₱93K / ₱30K. Subject to bank approval.")
+    steps("mm-steps","From Metro Manila","How buying in SJDM works",[("Check your budget online",""),("Send documents for pre-check",""),("One visit for the test drive",""),("Approval and release in SJDM","")])
+    tiles("mm-ask","Ask any dealer","Before you sign",[("?","What's in the all-in?",""),("?","Total of payments?",""),("?","Which freebies?",""),("?","PMS near home?","")],cols=2)
+    table("xa-month","October 2026 · 60 months, all-in","Xpander monthly amortization",["Variant","Zero DP","Low DP"],[("GLX M/T","₱22,641","₱19,811"),("GLX A/T","₱23,877","₱20,892"),("GLS A/T","₱25,937","₱22,695"),("Xpander Cross","₱28,389","₱24,840")],[0.4,0.3,0.3],"Low DP: ₱148K (GLX MT, GLS, Cross) or ₱138K (GLX AT).")
+    table("xa-total","DP + 60 monthly payments","Total of payments",["Variant","Zero DP","Low DP"],[("GLX M/T","₱1,358,460","₱1,336,660"),("GLX A/T","₱1,432,620","₱1,391,520"),("GLS A/T","₱1,556,220","₱1,509,700"),("Xpander Cross","₱1,703,340","₱1,638,400")],[0.34,0.33,0.33],"All-in package included. Subject to bank approval.")
+    photo("xa-photo",M+"Xpander/ext_xpander_mmpc-rn-fl26_gls_mid_drl_headlampson_foglampson.jpg",9/16)
+    table("dp-srp","Destinator price Philippines 2026","SRP and promo",["Variant","SRP","Zero DP","Low DP"],[("GLX","₱1,389,000","₱28,615","₱26,827"),("GLS","₱1,599,000","₱32,942","₱30,883"),("GT Mono","₱1,929,000","₱39,740","₱37,256"),("GT Two-Tone","₱1,939,000","₱39,740","₱37,256")],[0.24,0.27,0.22,0.27],"Low DP: ₱93K / ₱123K / ₱88K. Fuel: GLS ₱20K, GT ₱40K.")
+    table("dp-total","DP + 60 monthly payments","Destinator total of payments",["Variant","Zero DP","Low DP"],[("GLX","₱1,716,900","₱1,702,620"),("GLS","₱1,976,520","₱1,975,980"),("GT","₱2,384,400","₱2,323,360")],[0.3,0.35,0.35],"October 2026 promos, all-in.")
+    photo("dp-photo",M+"Destinator/ext_destinator_auto-headlight.jpg",9/16)
+    table("mp-srp","Montero Sport price Philippines 2026","SRP and promo",["Variant","SRP","Option 1","Option 2"],[("GLX M/T","₱1,568,000","₱30,284 (Zero)","₱28,265 (₱30K)"),("GLS A/T","₱1,927,000","₱39,699 (Zero)","₱37,218 (₱138K)"),("BS 2WD","₱2,190,000","₱45,117 (₱88K)","₱42,297 (₱218K)"),("BS 4WD","₱2,530,000","₱52,121 (₱133K)","₱48,864 (₱283K)")],[0.2,0.24,0.28,0.28],"Monthly on 60 months, all-in. Down payment in brackets.")
+    table("mp-total","DP + 60 monthly payments","Montero Sport total of payments",["Variant","Option 1","Option 2"],[("GLX M/T","₱1,817,040","₱1,725,900"),("GLS A/T","₱2,381,940","₱2,371,080"),("BS 2WD","₱2,795,020","₱2,755,820"),("BS 4WD","₱3,260,260","₱3,214,840")],[0.3,0.35,0.35],"October 2026 promos, all-in.")
+    photo("mp-photo",M+"Montero Sport/ext_monterosport_24my_ps_lhd_mv_styling_p25-26.jpg",9/16)
+    stats("lp-promo","L300 Dual AC · October 2026","SRP ₱1,039,000",[("₱21,405/mo","Zero DP · total ₱1,284,300 over 60 months"),("₱18,789/mo","₱123K DP · total ₱1,250,340, plus ₱20K fuel")])
+    compare("lp-income","Income guide","30–35% of gross income",("Zero DP","₱123K DP"),[("Monthly","₱21,405","₱18,789"),("Gross income","₱61,200 – ₱71,400","₱53,700 – ₱62,600")])
+    photo("lp-photo",M+"L300/ext_l300_l300-side1.jpg",9/16)
+    table("zd-list","October 2026 · lowest first","Zero down payment list",["Unit","Zero DP","Gross income"],[("L300 Dual AC","₱21,405","₱61.2K–₱71.4K"),("Xpander GLX MT","₱22,641","₱64.7K–₱75.5K"),("Xpander GLX AT","₱23,877","₱68.2K–₱79.6K"),("Xpander GLS AT","₱25,937","₱74.1K–₱86.5K"),("Xpander Cross","₱28,389","₱81.1K–₱94.6K"),("Destinator GLX","₱28,615","₱81.8K–₱95.4K"),("Triton GX AT","₱28,900","₱82.6K–₱96.3K"),("Montero GLX MT","₱30,284","₱86.5K–₱100.9K"),("Destinator GLS","₱32,942","₱94.1K–₱109.8K"),("Montero GLS","₱39,699","₱113.4K–₱132.3K"),("Destinator GT","₱39,740","₱113.5K–₱132.5K")],[0.4,0.25,0.35],"60 months, all-in, subject to bank approval.")
+    compare("zd-pc","Zero DP","Pros and cons",("Pros","Cons"),[("Cash","Keep savings for emergencies","Higher monthly"),("Timing","Drive sooner","Higher total of payments"),("Approval","Simple start","Needs more income to qualify")])
+    tiles("zd-allin","Zero DP all-in","What's included",[("✓","LTO registration",""),("✓","TPL insurance",""),("✓","1-yr comprehensive","Rate locked 3 years"),("✓","Chattel mortgage",""),("✓","Free labor to 5,000 km",""),("✓","3-year warranty","")],cols=2)
+    tiles("la-10","Car loan approval tips","10 ways to strengthen your application",[("1","Unit that fits",""),("2","Complete documents",""),("3","Consistent details",""),("4","Pay down small debts",""),("5","Cards on time",""),("6","Stable income proof",""),("7","Co-borrower",""),("8","Down payment",""),("9","Be reachable",""),("10","Pre-check documents","")],cols=2)
+    tiles("la-decline","Why loans get declined","Common reasons",[("✕","Incomplete documents",""),("✕","Monthly too high",""),("✕","High existing debt",""),("✕","Credit history",""),("✕","Unreachable","")],cols=1)
+    photo("la-photo",M+"Xpander/ext_xpander_rn-fl26-gls-front-1-4-headlights-on.png",9/16)
+    tiles("rf-what","Reservation fee","What it does",[("1","Holds your unit or color",""),("2","Sets it aside during processing",""),("3","Shows you're a serious buyer","")],cols=1)
+    steps("rf-ask","Before you pay","5 questions to ask",[("How much, for which unit?",""),("How is it applied?",""),("Is it refundable, and when?",""),("How long is the hold?",""),("Official receipt","Always")])
+    tiles("rf-when","When to reserve","You're ready if…",[("✓","You've test driven",""),("✓","The monthly fits",""),("✓","Documents are ready","")],cols=1)
+    steps("td-book","Mitsubishi test drive SJDM","How to book",[("Pick a unit","Online test drive page"),("Choose date and time",""),("Richard confirms","Call or text 0954 291 1201")])
+    tiles("td-bring","Bring these","For a useful test drive",[("✓","Driver's license",""),("✓","Regular passengers",""),("✓","Child car seat",""),("✓","Usual cargo","")],cols=2)
+    tiles("td-check","On the drive","What to check",[("1","Seat and visibility",""),("2","Acceleration, loaded",""),("3","Ride and braking",""),("4","AC to every row",""),("5","Parking and turning",""),("6","Phone and camera","")],cols=2)
+
+if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk4":
+    MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk4()
+    json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
+elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk3":
     MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk3()
     json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
 elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk2":
