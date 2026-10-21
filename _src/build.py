@@ -425,8 +425,8 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
  var L=Lead.base('test_drive');L.name=v('name');L.mobile=mob;L.chosenUnit=sel.n;L.unitParam=sel.id;L.location='Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan';
  L.timeline='TD '+dt+' '+tl;L.usage=['Driver\\'s license: yes',em?'Email: '+em:'',v('notes')?'Notes: '+v('notes'):''].filter(Boolean).join(' | ');
  Lead.send(L).then(function(){{
-  try{{if(typeof window.fbq==='function')window.fbq('track','Schedule',{{content_name:sel.n}})}}catch(_){{}}
-  try{{if(typeof window.gtag==='function')window.gtag('event','book_test_drive',{{unit:sel.n,date:dt}})}}catch(_){{}}
+  if(!Lead.skipped()){{try{{if(typeof window.fbq==='function')window.fbq('track','Schedule',{{content_name:sel.n}})}}catch(_){{}}
+  try{{if(typeof window.gtag==='function')window.gtag('event','book_test_drive',{{unit:sel.n,date:dt}})}}catch(_){{}}}}
   var s=dt.replace(/-/g,'')+'T'+tm.replace(':','')+'00',h=String(+tm.slice(0,2)+1).padStart(2,'0'),en=dt.replace(/-/g,'')+'T'+h+tm.slice(3)+'00';
   var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Mitsubishi test drive: '+sel.n)+'&dates='+s+'/'+en+'&ctz=Asia/Manila&location='+encodeURIComponent('Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan')+'&details='+encodeURIComponent('Test drive with Richard Cuagdan. Bring your valid driver\\'s license. Ref: '+L.leadId+'. Messenger: https://m.me/504759566043148');
   $('gcal').href=g;$('cimg').src='/assets/img/'+sel.img+'.webp';$('cimg').alt='Mitsubishi '+sel.n;$('cname').textContent=sel.n;

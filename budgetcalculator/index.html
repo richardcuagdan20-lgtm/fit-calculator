@@ -346,6 +346,31 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
 
 <script>
+/* Anti-spam guard: honeypot + min fill time + per-form rate limit + optional Cloudflare Turnstile (invisible). Bots get a silent fake success. */
+var AS=(function(){
+var TURNSTILE_SITEKEY='0x4AAAAAAFfHOepv9hv-XBSh'; // Cloudflare Turnstile sitekey. Empty = Turnstile skipped entirely.
+var MIN_MS=3000,GAP_MS=30000,tok='',wid=null,pend=[],loading=false;
+function since(){try{return performance.now()}catch(e){return 1e9}}
+function hpVal(){var a=document.querySelectorAll('input.as-hp'),v='';for(var i=0;i<a.length;i++)v+=a[i].value||'';return v}
+function render(el){try{wid=window.turnstile.render(el,{sitekey:TURNSTILE_SITEKEY,appearance:'interaction-only',execution:'execute',callback:function(t){tok=t;flush(t)},'expired-callback':function(){tok=''},'error-callback':function(){tok='';flush('');return true}})}catch(e){}}
+var waiters=[];function flush(t){var w=waiters;waiters=[];w.forEach(function(f){f(t)})}
+function getToken(ms){return new Promise(function(res){if(!TURNSTILE_SITEKEY||wid===null||!window.turnstile){res('');return}
+ var done=false,fin=function(t){if(!done){done=true;res(t||'')}};waiters.push(fin);setTimeout(function(){fin('')},ms||5000);
+ try{window.turnstile.reset(wid);window.turnstile.execute(wid)}catch(e){fin('')}})}
+function loadTs(el){if(!TURNSTILE_SITEKEY)return;pend.push(el);if(window.turnstile){render(el);return}if(loading)return;loading=true;
+ window.__asTsReady=function(){while(pend.length)render(pend.shift())};
+ var s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__asTsReady';s.async=true;s.defer=true;s.onerror=function(){pend=[]};document.head.appendChild(s)}
+function init(el,before){if(!el||el.querySelector&&el.querySelector('.as-hp'))return;
+ var d=document.createElement('div');d.setAttribute('aria-hidden','true');d.style.cssText='position:absolute!important;left:-10000px!important;top:auto;width:1px;height:1px;overflow:hidden';
+ d.innerHTML='<label>Leave this field empty<input type="text" name="website" class="as-hp" tabindex="-1" autocomplete="off" value=""></label>';
+ if(before)el.parentNode.insertBefore(d,el);else el.appendChild(d);
+ if(TURNSTILE_SITEKEY){var t=document.createElement('div');t.className='as-ts';if(before)el.parentNode.insertBefore(t,el);else el.appendChild(t);loadTs(t)}}
+function check(key){if(hpVal())return 'bot';if(since()<MIN_MS)return 'bot';
+ var k='as_last_'+key,n=Date.now(),l=0;try{l=+localStorage.getItem(k)||0}catch(e){}
+ if(l&&n-l<GAP_MS&&n>=l)return 'dup';try{localStorage.setItem(k,String(n))}catch(e){}return 'ok'}
+function stamp(L,t){L.website=hpVal();L.cf_turnstile_token=t||'';return L}
+return {getToken:getToken,init:init,check:check,stamp:stamp,SITEKEY:TURNSTILE_SITEKEY};
+})();
 const APP_VERSION = 'v8';
 const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec'; // Google Apps Script web app URL (see apps_script.gs). Leave empty to skip.
 const MESSENGER = 'https://m.me/504759566043148';
@@ -542,9 +567,12 @@ function submit(){
     timeline:tl,employment:emp,tier:tierOf(tl,r),consent:true,source:location.origin+location.pathname};
   S.lead=lead;
   const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
-  const sending=sendLead(lead,'submit'); // details go out FIRST, before anything that could throw
+  const asc=AS.check('calc_submit');S.skip=asc!=='ok'; // bot or repeat within 30s: fake success, nothing sent or tracked
+  const sending=S.skip?new Promise(r=>setTimeout(()=>r(true),600)):AS.getToken(5000).then(t=>sendLead(lead,'submit',t));
+  if(!S.skip){ // details go out FIRST, before anything that could throw
   px('Lead',{content_name:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP',content_category:lead.seg});
   try{if(typeof window.gtag==='function')window.gtag('event','generate_lead',{unit:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP'})}catch(_){}
+  }
   try{const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all))}catch(e){} // storage may be blocked in in-app browsers
   Promise.race([sending,new Promise(r=>setTimeout(r,4000))]).finally(()=>{
     b.textContent='Details received ✓';
@@ -556,8 +584,10 @@ function submit(){
 // Primary: fetch no-cors + keepalive (follows Apps Script's 302). Fallback: sendBeacon. Always resolves.
 function px(ev,o){try{if(typeof window.fbq==='function')window.fbq('track',ev,o)}catch(_){}}
 function beacon_(body){try{return !!(navigator.sendBeacon&&navigator.sendBeacon(LEAD_WEBHOOK_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))}catch(e){return false}}
-function sendLead(lead,via){
+function sendLead(lead,via,tsTok){ // tsTok: Turnstile token (submit only; follow-up taps send none)
   if(!LEAD_WEBHOOK_URL||!lead)return Promise.resolve(false);
+  if(S.skip)return Promise.resolve(true);
+  try{lead=AS.stamp(Object.assign({},lead),tsTok)}catch(_){}
   let body;try{body=JSON.stringify(Object.assign({},lead,{via:via,appVersion:APP_VERSION}))}catch(e){return Promise.resolve(false)}
   try{
     return fetch(LEAD_WEBHOOK_URL,{method:'POST',mode:'no-cors',keepalive:true,cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})
@@ -616,6 +646,7 @@ $('go1').onclick=()=>{
 $('go2').onclick=()=>{const {u,m,r}=chosenData();
   $('chosenBox').innerHTML=`Unit: <b>${u.name}</b><br>${optLabel(u,effDp(u,S.dp))} · <b>${peso(m)}</b>/mo · ${fitOf(r).l}`;step(3)};
 $('go3').onclick=submit;
+try{AS.init($('go3'),true)}catch(_){}
 document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>step(+b.dataset.back));
 $('msgBtn').addEventListener('click',()=>{ // one tap: send lead + copy summary; the link itself opens m.me
   try{sendLead(S.lead,'messenger_tap')}catch(e){} // send first; nothing below can block it
