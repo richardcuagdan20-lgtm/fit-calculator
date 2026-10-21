@@ -62,3 +62,13 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 .btn.ghost.dk{color:var(--ink)}.vc .row{align-items:center;margin-top:8px}.pm{margin-bottom:48px}
 .ct .g3{grid-template-columns:1fr}
 .nav a[href="/apply/"]{color:#ff4d5a;font-weight:700}.nav a[href="/apply/"][aria-current]{color:#ff6b76}
+.tdsteps{list-style:none;display:flex;gap:8px;padding:0;margin:0 0 32px;font-size:14px;color:var(--mu);flex-wrap:wrap}.tdsteps li{padding:6px 12px;border-radius:999px;background:#f4f4f5}.tdsteps li.on{background:var(--ink);color:#fff}
+.tdrow{margin:0 0 28px}.tdrow h3{margin-bottom:10px}.tdtrack{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 14px;-webkit-overflow-scrolling:touch}
+.tdc{flex:0 0 72%;max-width:280px;scroll-snap-align:center;background:#fff;border:2px solid var(--ln);border-radius:var(--r);padding:0 0 14px;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;overflow:hidden}
+.tdc img{aspect-ratio:3/2;object-fit:cover;width:100%;background:#fff}.tdn{display:block;font-weight:700;padding:10px 14px 2px;color:var(--ink);font-size:15px}.tds{display:block;padding:0 14px;color:var(--mu);font-size:14px}
+.tdc.sel{border-color:var(--red);transform:scale(1.05);box-shadow:0 12px 30px rgba(230,0,18,.18)}
+@media(min-width:640px){.tdc{flex-basis:260px}}
+.sticky{position:sticky;bottom:12px;z-index:5;margin-top:8px}.sticky .btn{width:100%;max-width:520px;box-shadow:0 10px 26px rgba(0,0,0,.18)}.sticky .btn:disabled{background:#a1a1aa;border-color:#a1a1aa}
+.tdsel{max-width:620px;margin:0 0 24px}.tdsel img{width:100%;aspect-ratio:3/2;object-fit:cover}.fl{font-weight:600;font-size:15px;margin-bottom:6px;color:var(--ink)}
+.tdl{margin-top:14px}.tdl a{color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}.chip{font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid #d4d4d8;background:#fff;color:var(--ink);cursor:pointer}.chip.on{border-color:var(--red);background:#fff1f2;color:var(--redd);font-weight:700}

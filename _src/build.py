@@ -17,7 +17,7 @@ PX='''<!-- Meta Pixel -->
 CL='''<!-- Microsoft Clarity -->
 <script>try{(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z0ztjrla58");}catch(_){}</script>
 '''
-NAV=[("/","Home"),("/cars/","Cars"),("/promos/","Promos"),("/apply/","Apply Now"),("/guides/","Guides"),("/blog/","Blog"),("/about/","About"),("/contact/","Contact")]
+NAV=[("/","Home"),("/cars/","Cars"),("/promos/","Promos"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/guides/","Guides"),("/blog/","Blog"),("/about/","About"),("/contact/","Contact")]
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
     url=D+path
@@ -71,7 +71,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <footer class="ft"><div class="w">
 <div class="fg">
 <div><p class="fb">Richard Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
-<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
+<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
 <p class="disc">Richard Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
 <p class="cp">© 2026 Richard Cuagdan</p>
@@ -90,7 +90,7 @@ def img(k,alt,eager=False,cls=""):
 def vcard(v,m):
     promo=f'<a class="btn sm ghost dk" href="/promos/#{m["slug"]}">See promo</a>' if v["promo"] else f'<a class="btn sm ghost dk" href="{MSG}" rel="noopener">Ask for the latest promo</a>'
     return f'''<article class="card vc">{img(v["img"],f"Mitsubishi {v['n']}")}
-<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{srp_txt(v)}</b></p><p class="muted">All-in packages with freebies, ask for details.</p><p class="row">{promo} <a class="btn sm" href="/apply/?unit={v['id']}">Apply for this unit</a></p></div></article>'''
+<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{srp_txt(v)}</b></p><p class="muted">All-in packages with freebies, ask for details.</p><p class="row">{promo} <a class="btn sm" href="/apply/?unit={v['id']}">Apply for this unit</a> <a class="btn sm ghost dk" href="/test-drive/?unit={v['id']}">Book a Test Drive</a></p></div></article>'''
 
 def offers_ld(m):
     out=[]
@@ -117,6 +117,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <h1>Your next Mitsubishi, explained clearly and financed sensibly.</h1>
 <p class="lead">I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors. I help employed buyers, business owners and OFWs find a car and a monthly payment that fit their real budget.</p>
 <p class="row"><a class="btn" href="/apply/">Apply for Financing</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
+<p class="tdl"><a href="/test-drive/">Book a test drive →</a></p>
 </div>{img("xc_x3n","Mitsubishi Xpander Cross in Quartz White Pearl",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
@@ -157,7 +158,7 @@ for m in MODELS:
     haspromo=any(v["promo"] for v in m["variants"])
     page(f"/cars/{m['slug']}/",f"Mitsubishi {m['name']} 2026 Price & Variants | SJ Legacy Motors SJDM",
      f"Mitsubishi {m['name']} at SJ Legacy Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/test-drive/?unit={m['slug']}">Book a Test Drive</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 <section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
@@ -304,6 +305,87 @@ $('af').addEventListener('submit',function(ev){{ev.preventDefault();
 }});
 }});
 </script>''', crumbs=[("/","Home"),("/apply/","Apply")])
+
+# ---------- test drive
+TDU=[{"id":v["id"],"m":m["slug"],"model":m["name"],"n":v["n"],"srp":srp_txt(v),"img":v["img"]} for m in MODELS for v in m["variants"]]
+rows_td="".join(f'''<div class="tdrow"><h3>{e(m["name"])}</h3><div class="tdtrack" role="radiogroup" aria-label="{e(m["name"])} variants">'''+"".join(f'''<button type="button" class="tdc" role="radio" aria-checked="false" data-id="{v["id"]}">{img(v["img"],"Mitsubishi "+v["n"])}<span class="tdn">{e(v["n"])}</span><span class="tds">SRP {srp_txt(v)}</span></button>''' for v in m["variants"])+'</div></div>' for m in MODELS)
+TIMES=[("08:00","8:00 AM"),("09:00","9:00 AM"),("10:00","10:00 AM"),("11:00","11:00 AM"),("13:00","1:00 PM"),("14:00","2:00 PM"),("15:00","3:00 PM"),("16:00","4:00 PM")]
+page("/test-drive/","Book a Mitsubishi Test Drive in SJDM, Bulacan | Richard Cuagdan",
+ "Book a Mitsubishi test drive at SJ Legacy Motors, San Jose del Monte, Bulacan. Pick your unit, choose a date and time from Monday to Saturday, and Richard will confirm.",
+f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead">Choose a unit, pick a schedule, and I'll have it ready for you at Mitsubishi SJ Legacy Motors, San Jose del Monte.</p></div></section>
+<section class="sec"><div class="w">
+<ol class="tdsteps" aria-label="Progress"><li id="st1" class="on">1. Choose a unit</li><li id="st2">2. Your schedule</li><li id="st3">3. Confirmed</li></ol>
+<div id="s1"><h2>Which Mitsubishi would you like to drive?</h2><p class="sub">Swipe each row to see every variant. SRP shown; ask me for this month's promo.</p>{rows_td}
+<p class="sticky"><button class="btn" type="button" id="next1" disabled>Continue</button></p></div>
+<div id="s2" hidden>
+<div class="tdsel card"><img id="selimg" src="" alt="" width="640" height="427"><div class="pad"><p class="kick">Your unit</p><h2 class="h3" id="selname"></h2><p class="muted" id="selsrp"></p><div id="chips" class="chips" role="radiogroup" aria-label="Choose a variant" hidden></div><p><a href="#" id="chg">Change unit</a></p></div></div>
+<div class="card pad formc"><h2 class="h3">Your schedule and details</h2>
+<form id="tf" novalidate>
+<div class="fld"><label for="name">Full name *</label><input id="name" autocomplete="name" required><p class="er" id="e_name" hidden>Please enter your name.</p></div>
+<div class="fld"><label for="mobile">Mobile number *</label><input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_mobile" hidden>Enter a valid PH mobile number (09XXXXXXXXX or +639XXXXXXXXX).</p></div>
+<div class="fld"><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"><p class="er" id="e_email" hidden>Please check your email address.</p></div>
+<div class="fld"><label for="date">Preferred date *</label><input id="date" type="date" required><p class="muted" style="margin:6px 0 0">Monday to Saturday only, from tomorrow up to 60 days ahead.</p><p class="er" id="e_date" hidden>Please choose a Monday to Saturday date within the next 60 days (no Sundays).</p></div>
+<div class="fld"><label for="time">Preferred time *</label><select id="time" required><option value="">Select a time</option>{"".join(f'<option value="{a}">{b}</option>' for a,b in TIMES)}</select><p class="er" id="e_time" hidden>Please choose a time slot.</p></div>
+<div class="fld"><p class="fl">Location</p><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan<br><span class="muted">Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</span></p></div>
+<div class="fld"><label for="notes">Notes (optional)</label><textarea id="notes" rows="3" maxlength="1000" placeholder="e.g. preferred color, number of passengers joining"></textarea></div>
+<label class="chk"><input type="checkbox" id="lic" required> <span>I have a valid driver's license and will bring it to the test drive.</span></label><p class="er" id="e_lic" hidden>A valid driver's license is required for the test drive.</p>
+{CONSENT}
+<button class="btn" type="submit" id="tb">Book my test drive</button>
+</form></div></div>
+<div id="s3" hidden><div class="card tdsel"><img id="cimg" src="" alt="" width="640" height="427"><div class="pad">
+<p class="kick">Test drive request received</p><h2 id="cname"></h2>
+<p><b id="cwhen"></b><br>Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan</p>
+<p>Richard will message you to confirm your schedule. Please bring your valid driver's license.</p>
+<p>Reference: <b id="cref"></b></p>
+<p class="row"><a class="btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a> <a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard on Messenger</a></p></div></div></div>
+</div></section>
+<script src="/assets/lead.js" defer></script>
+<script type="application/json" id="tdu">{json.dumps(TDU,ensure_ascii=False)}</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){{
+var $=function(i){{return document.getElementById(i)}},U=JSON.parse($('tdu').textContent),sel=null;
+var TL={json.dumps(dict(TIMES))};
+function step(n){{[1,2,3].forEach(function(i){{$('s'+i).hidden=i!==n;$('st'+i).className=i<=n?'on':''}});window.scrollTo(0,0)}}
+function pick(id,scroll){{sel=U.filter(function(u){{return u.id===id}})[0];if(!sel)return;
+ document.querySelectorAll('.tdc').forEach(function(c){{var on=c.dataset.id===id;c.classList.toggle('sel',on);c.setAttribute('aria-checked',on)}});
+ $('next1').disabled=false;$('next1').textContent='Continue with '+sel.n;
+ if(scroll){{var c=document.querySelector('.tdc[data-id="'+id+'"]');var t=c.parentElement;t.scrollTo({{left:Math.max(0,c.offsetLeft-(t.clientWidth-c.offsetWidth)/2),behavior:'smooth'}})}}}}
+function toStep2(){{$('selimg').src='/assets/img/'+sel.img+'.webp';$('selimg').alt='Mitsubishi '+sel.n;$('selname').textContent=sel.n;$('selsrp').textContent='SRP '+sel.srp;step(2)}}
+document.querySelectorAll('.tdc').forEach(function(c){{c.addEventListener('click',function(){{pick(c.dataset.id,true)}})}});
+$('next1').addEventListener('click',function(){{if(sel)toStep2()}});
+$('chg').addEventListener('click',function(e){{e.preventDefault();$('chips').hidden=true;step(1);var c=document.querySelector('.tdc.sel');if(c)c.scrollIntoView({{block:'center'}})}});
+function ymd(d){{return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}}
+var t0=new Date();t0.setHours(0,0,0,0);var mn=new Date(t0);mn.setDate(mn.getDate()+1);var mx=new Date(t0);mx.setDate(mx.getDate()+60);
+if(mn.getDay()===0)mn.setDate(mn.getDate()+1);
+$('date').min=ymd(mn);$('date').max=ymd(mx);
+function badDate(v){{if(!v)return true;var p=v.split('-'),d=new Date(+p[0],p[1]-1,+p[2]);return d.getDay()===0||d<mn||d>mx}}
+$('date').addEventListener('change',function(){{Lead.err('date',badDate(this.value))}});
+var q=new URLSearchParams(location.search).get('unit');
+if(q){{var k=q.replace(/[^a-z0-9-]/gi,''),ex=U.filter(function(u){{return u.id===k}})[0],ms=U.filter(function(u){{return u.m===k}});
+ if(ex){{pick(ex.id,false);toStep2()}}
+ else if(ms.length){{pick(ms[0].id,false);toStep2();if(ms.length>1){{var ch=$('chips');
+  ch.innerHTML=ms.map(function(u){{return '<button type="button" class="chip" role="radio" data-id="'+u.id+'">'+u.n.replace(u.model+' ','')+'</button>'}}).join('');ch.hidden=false;
+  var mark=function(){{ch.querySelectorAll('.chip').forEach(function(c){{var on=c.dataset.id===sel.id;c.classList.toggle('on',on);c.setAttribute('aria-checked',on)}})}};mark();
+  ch.querySelectorAll('.chip').forEach(function(c){{c.addEventListener('click',function(){{pick(c.dataset.id,false);toStep2();mark()}})}})}}}}}}
+$('tf').addEventListener('submit',function(ev){{ev.preventDefault();
+ var v=function(i){{return $(i).value.trim()}},em=v('email'),mob=v('mobile').replace(/[\\s()-]/g,'');
+ var bad=[Lead.err('name',v('name').length<2),Lead.err('mobile',!/^(09\\d{{9}}|\\+639\\d{{9}})$/.test(mob)),Lead.err('email',!!em&&!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(em)),Lead.err('date',badDate(v('date'))),Lead.err('time',!v('time')),Lead.err('lic',!$('lic').checked),Lead.err('consent',!$('consent').checked)];
+ if(bad.some(Boolean)){{var x=document.querySelector('#s2 .er:not([hidden])');if(x)x.scrollIntoView({{block:'center'}});return}}
+ var b=$('tb');b.disabled=true;b.textContent='Booking...';
+ var dt=v('date'),tm=v('time'),tl=TL[tm];
+ var L=Lead.base('test_drive');L.name=v('name');L.mobile=mob;L.chosenUnit=sel.n;L.unitParam=sel.id;L.location='Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan';
+ L.timeline='TD '+dt+' '+tl;L.usage=['Driver\\'s license: yes',em?'Email: '+em:'',v('notes')?'Notes: '+v('notes'):''].filter(Boolean).join(' | ');
+ Lead.send(L).then(function(){{
+  try{{if(typeof window.fbq==='function')window.fbq('track','Schedule',{{content_name:sel.n}})}}catch(_){{}}
+  try{{if(typeof window.gtag==='function')window.gtag('event','book_test_drive',{{unit:sel.n,date:dt}})}}catch(_){{}}
+  var s=dt.replace(/-/g,'')+'T'+tm.replace(':','')+'00',h=String(+tm.slice(0,2)+1).padStart(2,'0'),en=dt.replace(/-/g,'')+'T'+h+tm.slice(3)+'00';
+  var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Mitsubishi test drive: '+sel.n)+'&dates='+s+'/'+en+'&ctz=Asia/Manila&location='+encodeURIComponent('Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan')+'&details='+encodeURIComponent('Test drive with Richard Cuagdan. Bring your valid driver\\'s license. Ref: '+L.leadId+'. Messenger: https://m.me/504759566043148');
+  $('gcal').href=g;$('cimg').src='/assets/img/'+sel.img+'.webp';$('cimg').alt='Mitsubishi '+sel.n;$('cname').textContent=sel.n;
+  var p=dt.split('-');$('cwhen').textContent=new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString('en-PH',{{weekday:'long',year:'numeric',month:'long',day:'numeric'}})+', '+tl;
+  $('cref').textContent=L.leadId;step(3)}});
+}});
+}});
+</script>''', crumbs=[("/","Home"),("/test-drive/","Book a Test Drive")])
 
 # ---------- contact
 page("/contact/","Contact Richard Cuagdan | Mitsubishi SJ Legacy Motors, San Jose del Monte",

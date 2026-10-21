@@ -19,6 +19,7 @@ Rebuild: `python3 _src/build.py` from the repo root, then commit.
 - Public pages show SRP only (official MMPC price list, `srp` in `_src/data.py`; `None` renders "Ask for price").
 - Promo DP/monthly figures live in each variant's `promo` and are rendered only by JS on `/promos/` (noindex) after the gate form; unlock is remembered in localStorage (`mp_promo_unlocked`).
 - `/apply/` and the promo gate post to the same Apps Script webhook as the calculator via `/assets/lead.js` (via = `apply_form` / `promo_gate`). Extra apply fields (income range, email, message) go into the `usage` column; payment choice into `dpPreference`.
+- `/test-drive/`: picker (no ?unit), straight to form for ?unit=<variant> or ?unit=<model> (variant chips). via/tier = `test_drive`, date+time in `timeline` ("TD YYYY-MM-DD 10:00 AM"), email/notes in `usage`. Fires Pixel Schedule + GA4 book_test_drive.
 - Meta Pixel (PageView) + GA4 on generated pages; Lead / generate_lead fire on successful submit.
 
 ## Adding a blog post
