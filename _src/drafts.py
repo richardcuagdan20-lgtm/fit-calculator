@@ -1106,5 +1106,624 @@ body='''<p>"Sir, L300 o Triton para sa negosyo?" Both are Mitsubishi workhorses,
 </ol>
 '''+CTA2("Not sure yet? Check your budget, then test drive the L300 and Triton back-to-back in SJDM.","triton")),
 ]
-DRAFT_POSTS=BULK2+BULK+DRAFT_POSTS
+BULK3=[
+dict(base="tips",car="xpander-cross",slug="rainy-season-driving-tips",date="2026-10-22",by=BY,img="xc_orange",alt="Mitsubishi Xpander Cross ready for rainy-season roads",
+title="Rainy Season Driving Tips: See, Slow, Space",
+desc="How to drive safely in heavy rain: visibility, hydroplaning, braking distance, headlights, and a pre-rain car check for wipers, tires and lights.",
+answer="In heavy rain, slow down, double your following distance, turn on your headlights (not hazards while moving), and avoid sudden steering or braking. If the car hydroplanes, ease off the gas and steer straight until the tires grip again. Before the rainy months, check wipers, tire tread and all lights.",
+faq=[("Should I use hazard lights while driving in heavy rain?","Use your headlights while moving. Hazards are for when you're stopped or a hazard to others; using them while moving can confuse drivers about your signals."),
+("What do I do if my car hydroplanes?","Don't brake hard or jerk the wheel. Ease off the accelerator, hold the steering straight, and let the tires regain grip."),
+("How often should I replace wiper blades?","When they streak, skip or squeak. Many owners check them before the rainy season; heat can also harden the rubber."),
+("How much following distance in rain?","At least double your dry-weather gap. A 3-second gap in dry weather becomes 6 seconds or more in heavy rain.")],
+body='''<p>Biglang buhos ng ulan sa Quirino Highway o sa NLEX? Rain changes everything: you see less, you're seen less, and your tires grip less. Remember three words: <b>see, slow, space</b>.</p>
+
+<h2>See and be seen</h2>
+<ul class="ticks">
+<li>Turn on your <b>headlights</b> when it rains, even in the daytime</li>
+<li>Don't drive with hazards on while moving; your turn signals won't be visible</li>
+<li>Use the AC and defogger to clear fogged glass quickly</li>
+<li>Keep the windshield clean inside and out; a dirty inside glass glares at night</li>
+</ul>
+
+<h2>Slow down and stay smooth</h2>
+<ul class="ticks">
+<li>Lower your speed: wet roads need longer stopping distances</li>
+<li>Avoid sudden braking, accelerating and steering</li>
+<li>The first minutes of rain are often the slipperiest, as oil and dust lift off the road</li>
+<li>Watch out for painted lane markings and steel plates, which get slippery</li>
+</ul>
+
+<h2>Give yourself space</h2>
+<p>Double your following distance. If you keep 3 seconds behind the car ahead in dry weather, make it 6 or more in heavy rain. Stay out of the spray of trucks and buses where you can't see.</p>
+
+<h2>If the car hydroplanes</h2>
+<ol class="steps">
+<li><h3>Don't panic or brake hard</h3><p>Sudden braking can make the skid worse.</p></li>
+<li><h3>Ease off the gas</h3><p>Let the car slow down naturally.</p></li>
+<li><h3>Steer straight</h3><p>Hold the wheel steady in the direction you want to go.</p></li>
+<li><h3>Wait for grip</h3><p>Once you feel the tires bite again, continue slowly.</p></li>
+</ol>
+
+<h2>Pre-rain car check</h2>
+<ul class="ticks">
+<li>Wiper blades: no streaks or squeaks; washer fluid filled</li>
+<li>Tire tread and pressure: worn tires hydroplane sooner. See my <a href="/tips/tire-care-tips-philippines/">tire care guide</a></li>
+<li>All lights working, including brake lights</li>
+<li>Brakes checked at PMS</li>
+<li>Payong and a towel in the car</li>
+</ul>
+<p>When the rain turns into flooding, follow my <a href="/tips/el-nino-typhoon-car-care-tips/">flood rules and after-flood checklist</a>, and keep an <a href="/tips/car-emergency-kit-list/">emergency kit</a> in the trunk.</p>
+'''+CTA2("Want more clearance for rainy days? Check your budget, then test drive the Xpander Cross or Destinator in SJDM.","xpander-cross")),
+
+dict(base="tips",car="destinator",slug="tire-care-tips-philippines",date="2026-10-22",by=BY,img="de_u33",alt="Mitsubishi Destinator wheels and tires",
+title="Tire Care Guide: Pressure, Tread and Rotation",
+desc="Tires are the only part of your car touching the road. How to check pressure and tread, when to rotate, signs of damage, and when to replace.",
+answer="Check tire pressure at least monthly when the tires are cold, using the pressure on the driver's door jamb. Check tread depth and look for cracks, bulges and uneven wear. Rotate tires as your owner's manual recommends, usually during PMS, and replace tires that are worn, damaged or aged.",
+faq=[("Where do I find the right tire pressure?","On the sticker on the driver's door jamb and in your owner's manual. Don't use the maximum number printed on the tire sidewall."),
+("When should I check tire pressure?","At least once a month and before long trips, when the tires are cold, such as in the morning before driving."),
+("How do I know if my tires are worn out?","Most tires have tread wear indicators, small raised bars in the grooves. If the tread is level with them, it's time to replace."),
+("Do tires expire even if they have tread?","Rubber ages over time, especially in heat. Check the manufacturing date on the sidewall and have older tires inspected.")],
+body='''<p>Your tires are the only part of the car that touches the road, four palm-sized patches holding your family's safety. A few minutes a month keeps them doing their job.</p>
+
+<h2>1. Pressure: check monthly, when cold</h2>
+<ul class="ticks">
+<li>Use the pressure on the <b>driver's door jamb sticker</b> or the owner's manual</li>
+<li>Check when cold: morning, before driving far</li>
+<li>Don't forget the spare</li>
+<li>Under-inflation wastes fuel and wears the edges; over-inflation wears the center and reduces grip</li>
+</ul>
+
+<h2>2. Tread: grip in the rain</h2>
+<p>Tread channels water away so the tire can grip. Worn tread is a big cause of hydroplaning. Look for the <b>tread wear indicators</b> in the grooves. When the tread is level with them, replace the tire.</p>
+
+<h2>3. Look for damage</h2>
+<ul class="ticks">
+<li>Bulges or bubbles on the sidewall: replace, don't drive far</li>
+<li>Cracks in the rubber, often from heat and age</li>
+<li>Nails, screws or cuts</li>
+<li>Uneven wear: may mean alignment or pressure problems</li>
+</ul>
+
+<h2>4. Rotate and align</h2>
+<p>Rotating tires helps them wear evenly. Follow the interval in your owner's manual; it's commonly done during <a href="/tips/pms-schedule-guide/">PMS</a>. If the car pulls to one side or the steering wheel is off-center, have the alignment checked.</p>
+
+<h2>5. When to replace</h2>
+<ul class="ticks">
+<li>Tread at the wear indicators</li>
+<li>Sidewall bulges, deep cuts or cracks</li>
+<li>Older tires, even with tread left: check the date code on the sidewall</li>
+<li>Replace in pairs or sets as recommended, with the size listed for your car</li>
+</ul>
+<p>Good tires matter most in the wet. Read my <a href="/tips/rainy-season-driving-tips/">rainy season driving tips</a> next.</p>
+'''+CTA2("Shopping for a new car with fresh tires and a 3-year warranty? Check your budget, then test drive in SJDM.","destinator")),
+
+dict(base="tips",car="xpander",slug="car-aircon-not-cooling-tips",date="2026-10-22",by=BY,img="xpglx_x37",alt="Mitsubishi Xpander with a cool cabin for the family",
+title="Car Aircon Care: Keep It Cold and Fresh",
+desc="Weak or smelly car aircon? Why it happens, simple habits that keep it cold, when to replace the cabin filter, and warning signs to have checked.",
+answer="Keep your car AC cold and fresh by replacing the cabin filter at PMS, parking in the shade, using recirculation once the cabin cools, running the fan a few minutes before switching off to dry the system, and having the AC checked if it's weak, noisy or smelly.",
+faq=[("Why does my car aircon smell?","Moisture and dirt in the system and a clogged cabin filter can cause musty odors. Have the filter replaced and the system cleaned if needed."),
+("Why is my AC not as cold as before?","A clogged filter, a dirty condenser, low refrigerant or a component issue. Have it checked at a service center."),
+("Should I use recirculation mode?","Once the cabin has cooled, recirculation helps keep it cool and blocks outside fumes. Switch to fresh air occasionally to avoid stuffiness and fogging."),
+("Does using the AC use more fuel?","It adds some engine load. Parking in shade and keeping the system clean help it work less.")],
+body='''<p>Sa init ng Pilipinas, ang aircon ay hindi luho, kailangan. Here's how to keep yours cold and fresh, especially in the El Niño heat.</p>
+
+<h2>Why AC gets weak or smelly</h2>
+<ul class="ticks">
+<li>A dirty or clogged <b>cabin filter</b> blocks airflow and traps odors</li>
+<li>Moisture in the system can lead to a musty smell</li>
+<li>A dusty condenser at the front of the car cools less efficiently</li>
+<li>Low refrigerant or a worn part, which needs a technician</li>
+</ul>
+
+<h2>Daily habits that help</h2>
+<ol class="steps">
+<li><h3>Park in the shade</h3><p>Or use a sunshade. A cooler cabin means less work for the AC.</p></li>
+<li><h3>Vent first</h3><p>Open the windows for a minute when the car is very hot, then close them and turn on the AC.</p></li>
+<li><h3>Use recirculation smartly</h3><p>Once cool, recirculate; switch to fresh air now and then.</p></li>
+<li><h3>Dry the system</h3><p>Before you arrive, turn off the AC compressor and let the fan run a few minutes to reduce moisture.</p></li>
+</ol>
+
+<h2>Maintenance</h2>
+<ul class="ticks">
+<li>Have the <b>cabin filter</b> checked and replaced at <a href="/tips/pms-schedule-guide/">PMS</a> as recommended</li>
+<li>Ask for an AC cleaning if odor persists</li>
+<li>Keep the cabin clean; food crumbs and wet mats add odor</li>
+</ul>
+
+<h2>Warning signs to have checked</h2>
+<ul class="ticks">
+<li>Air not cold, or only cold while moving</li>
+<li>Unusual noise when the AC turns on</li>
+<li>Water dripping inside the cabin</li>
+<li>Persistent bad smell after a filter change</li>
+</ul>
+<p>Families who ride in the third row should check rear AC reach on a test drive. See my <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> comparison.</p>
+'''+CTA2("Check the AC reach for every row on a test drive. See what fits your budget first, then book in SJDM.","xpander")),
+
+dict(base="tips",car="mirage-g4",slug="dashcam-philippines-parking-guide",date="2026-10-22",by=BY,img="mg4gls_p19",alt="Mitsubishi Mirage G4 parked safely",
+title="Dashcam and Parking Guide for Filipino Drivers",
+desc="Why a dashcam helps, where to mount it, and smart parking habits for malls, streets and subdivisions, plus what to do after a parking-lot scrape.",
+answer="A dashcam gives you a record if there's an accident or dispute. Mount it behind the rearview mirror so it doesn't block your view, use a reliable memory card and check it regularly. For parking, choose well-lit, busy spots, reverse in when it's safe, fold your mirrors, and never leave valuables in sight.",
+faq=[("Where should I mount a dashcam?","Usually behind the rearview mirror, where it records the road without blocking your view. Keep wires tidy and away from airbags."),
+("Does a dashcam need a special memory card?","Dashcams record continuously, so use a card rated for that and check or format it regularly as the dashcam manual advises."),
+("Is it better to reverse into a parking slot?","Often yes, when it's safe and allowed. Driving out forward gives better visibility when leaving."),
+("What do I do if my parked car gets scraped?","Take photos, check for a note, ask the guard or building management for CCTV, file a report if needed, and contact your insurer.")],
+body='''<p>Dashcams used to be for enthusiasts. Today, many Filipino drivers see them as basic protection. Combine one with smart parking habits and you avoid a lot of stress.</p>
+
+<h2>Why a dashcam helps</h2>
+<ul class="ticks">
+<li>A record of what happened in an accident or road dispute</li>
+<li>Helpful for insurance claims and police reports</li>
+<li>Footage of hit-and-run or scrapes, with parking mode on some models</li>
+<li>Peace of mind for family members driving your car</li>
+</ul>
+
+<h2>Choosing and installing</h2>
+<ol class="steps">
+<li><h3>Clear video, day and night</h3><p>Choose a model with good low-light recording and readable plate numbers.</p></li>
+<li><h3>Mount behind the mirror</h3><p>So it doesn't block your view.</p></li>
+<li><h3>Tidy, safe wiring</h3><p>Keep cables away from airbags and pedals. Have it installed properly.</p></li>
+<li><h3>Right memory card</h3><p>Use a card made for continuous recording and check it monthly.</p></li>
+</ol>
+
+<h2>Smart parking habits</h2>
+<ul class="ticks">
+<li>Choose well-lit, busy areas near guards or CCTV</li>
+<li>Reverse in when it's safe, for an easier, safer exit</li>
+<li>Fold your side mirrors in tight spaces</li>
+<li>Park away from carts and door-swing zones when you can</li>
+<li>Bags in the trunk, not on the seat; take valuables with you</li>
+<li>Note your slot or take a photo of the pillar sign</li>
+</ul>
+
+<h2>Street and subdivision parking</h2>
+<p>Many LGUs and subdivisions have rules against street parking. Settle where your car will sleep before you buy, as I mention in the <a href="/tips/first-time-car-buyer-checklist/">first-time buyer checklist</a>.</p>
+
+<h2>After a parking-lot scrape</h2>
+<ol class="steps">
+<li><h3>Take photos</h3><p>The damage, the area and nearby cars.</p></li>
+<li><h3>Ask for CCTV</h3><p>Talk to the guard or building management right away.</p></li>
+<li><h3>Report and claim</h3><p>File a report if needed and call your insurer. See <a href="/tips/car-insurance-explained-philippines/">car insurance explained</a>.</p></li>
+</ol>
+<p>New cars come with a reverse camera among the freebies, which helps with tight parking.</p>
+'''+CTA2("Looking for an easy-to-park car with a reverse camera freebie? Check your budget, then test drive in SJDM.","mirage-g4")),
+
+dict(base="tips",car="montero-sport",slug="car-emergency-kit-list",date="2026-10-22",by=BY,img="ms_black",alt="Mitsubishi Montero Sport with an emergency kit in the trunk",
+title="Car Emergency Kit Checklist (Philippines)",
+desc="What to keep in your car for breakdowns, floods, long trips and medical needs: a complete emergency kit checklist for Filipino families.",
+answer="Every car should carry an early warning device, basic tools, a spare tire with jack and wrench, a flashlight, a powerbank, jumper cables or a tow strap, a first-aid kit, water, and your documents and emergency numbers. Add a raincoat, payong and snacks for typhoon season and long trips.",
+faq=[("Is an early warning device required?","It's part of the standard freebies with a new car and essential for breakdowns. Set it up well behind your stopped vehicle."),
+("What should a car first-aid kit have?","Bandages, gauze, antiseptic, tape, scissors, gloves, and any personal maintenance medicines for family members."),
+("How often should I check my emergency kit?","Every few months and before long trips. Replace expired medicines, water and batteries."),
+("What phone numbers should I save?","Your insurer's claims and roadside assistance lines, the expressway operator's hotline, your service center and a family contact.")],
+body='''<p>Hindi natin hinihiling, pero mangyayari. Breakdowns, flat tires, floods and sudden illness happen when you least expect them. A packed emergency kit turns a crisis into an inconvenience.</p>
+
+<h2>Breakdown basics</h2>
+<ul class="ticks">
+<li>Early warning device (EWD)</li>
+<li>Spare tire, jack and lug wrench, checked for pressure</li>
+<li>Basic tools</li>
+<li>Jumper cables and a tow strap</li>
+<li>Flashlight or headlamp with extra batteries</li>
+<li>Reflective vest</li>
+</ul>
+
+<h2>Power and communication</h2>
+<ul class="ticks">
+<li>Powerbank and car charger</li>
+<li>Saved numbers: insurer, roadside assistance, expressway hotline, service center, family</li>
+<li>Small amount of cash</li>
+</ul>
+
+<h2>First aid and personal needs</h2>
+<ul class="ticks">
+<li>First-aid kit: bandages, gauze, antiseptic, tape, scissors, gloves</li>
+<li>Maintenance medicines for seniors in the family</li>
+<li>Drinking water and non-perishable snacks</li>
+<li>Wet wipes, tissue, alcohol</li>
+</ul>
+
+<h2>Bagyo and long-trip add-ons</h2>
+<ul class="ticks">
+<li>Raincoat and payong</li>
+<li>Towel and a change of clothes</li>
+<li>Plastic bags for wet items</li>
+<li>Blanket for kids and seniors</li>
+</ul>
+
+<h2>Documents</h2>
+<ul class="ticks">
+<li>Driver's license or e-license</li>
+<li>OR/CR</li>
+<li>Insurance policy details</li>
+</ul>
+
+<h2>Keep it ready</h2>
+<ol class="steps">
+<li><h3>Pack it in one bag or box</h3><p>So it's easy to find and doesn't roll around.</p></li>
+<li><h3>Check every few months</h3><p>Replace expired medicines, water and batteries.</p></li>
+<li><h3>Check before long trips</h3><p>Pair it with BLOWBAGETS in my <a href="/tips/undas-road-trip-checklist-2026/">road trip checklist</a>.</p></li>
+</ol>
+<p>New Mitsubishi units come with an early warning device and basic tools among the freebies.</p>
+'''+CTA2("Ready for a car built for long drives? Check your budget, then test drive in SJDM.","montero-sport")),
+
+dict(base="tips",car="xpander",slug="car-wash-at-home-guide",date="2026-10-22",by=BY,img="xpgls_u28",alt="Clean, freshly washed Mitsubishi Xpander",
+title="Car Wash and Detailing Guide at Home",
+desc="How to wash your car without scratching the paint, clean the interior, protect it from sun and rain, and know when to get professional detailing.",
+answer="Wash your car in the shade with car shampoo (not dish soap), use the two-bucket method and a microfiber mitt, rinse well and dry with a microfiber towel. Clean the interior regularly, protect paint from bird droppings and sap quickly, and consider professional detailing for deep cleaning or paint protection.",
+faq=[("Can I wash my car with dish soap?","It's better to use car shampoo. Dish soap can strip protective wax and dry out rubber and trim."),
+("How often should I wash my car?","Every week or two for most owners, and sooner after rain, mud or bird droppings."),
+("Why wash in the shade?","Sun dries soap and water quickly, leaving spots and streaks."),
+("Is professional detailing worth it?","For deep interior cleaning, paint correction or ceramic coating, a professional detailer has the tools and products. Ask what's included and how long it lasts.")],
+body='''<p>A clean car isn't only about pogi points. Regular washing protects your paint, keeps the cabin healthy, and helps resale value. Here's how to do it right at home.</p>
+
+<h2>What you need</h2>
+<ul class="ticks">
+<li>Two buckets: one with car shampoo, one with clean rinse water</li>
+<li>Microfiber wash mitt and drying towels (a microfiber cloth comes with new-car freebies)</li>
+<li>Separate brush or mitt for wheels</li>
+<li>Glass cleaner and interior cleaner</li>
+<li>Vacuum</li>
+</ul>
+
+<h2>Exterior wash, step by step</h2>
+<ol class="steps">
+<li><h3>Park in the shade</h3><p>Let the paint cool before washing.</p></li>
+<li><h3>Rinse first</h3><p>Remove loose dirt and sand that could scratch.</p></li>
+<li><h3>Wheels first</h3><p>Use a separate brush so brake dust doesn't touch the paint.</p></li>
+<li><h3>Two-bucket wash, top to bottom</h3><p>Dip the mitt in shampoo, wash a panel, rinse the mitt in clean water, repeat.</p></li>
+<li><h3>Rinse and dry</h3><p>Dry with a clean microfiber towel to avoid water spots.</p></li>
+</ol>
+
+<h2>Interior cleaning</h2>
+<ul class="ticks">
+<li>Remove mats, vacuum seats and floors</li>
+<li>Wipe dashboard and touchpoints: steering wheel, shifter, handles</li>
+<li>Clean glass inside to reduce night glare</li>
+<li>Dry wet mats fully to avoid odor</li>
+</ul>
+
+<h2>Protect the paint</h2>
+<ul class="ticks">
+<li>Remove bird droppings and tree sap quickly; they can etch paint in the heat</li>
+<li>Wax or sealant adds a layer of protection</li>
+<li>Use a sunshade and park in the shade when possible</li>
+<li>After a flood or muddy road, rinse the underside too</li>
+</ul>
+
+<h2>When to go professional</h2>
+<p>For deep interior shampooing, swirl removal or ceramic coating, a professional detailer has the right tools. Ask exactly what's included and how long protection lasts. A well-kept car pays you back later; see my <a href="/tips/car-resale-value-tips/">resale value tips</a>.</p>
+'''+CTA2("Ready for a brand-new car to keep shiny? Check your budget, then test drive in SJDM.","xpander")),
+
+dict(base="tips",car="xpander",slug="road-trip-from-bulacan",date="2026-10-22",by=BY,img="xpglx_u33",alt="Mitsubishi Xpander packed for a family road trip from Bulacan",
+title="Family Road Trips from Bulacan: Baguio, Zambales, Batangas",
+desc="Planning a family road trip from SJDM or Bulacan? Typical expressway routes to Baguio, Zambales and Batangas, plus prep for mountain, beach and long drives.",
+answer="From Bulacan, Baguio is usually reached via NLEX, SCTEX and TPLEX, then a mountain road up; Zambales via NLEX and SCTEX toward Subic; and Batangas via NLEX, Skyway, SLEX and STAR Tollway. Load your RFID for each operator, plan rest stops, and prepare the car for mountain climbs and beach sand.",
+faq=[("What's the usual route from Bulacan to Baguio?","Many drivers take NLEX, then SCTEX and TPLEX, then a mountain road up to Baguio. Check traffic and road advisories before leaving."),
+("How do I drive safely on mountain roads?","Use a lower gear going down instead of riding the brakes, don't overtake on blind curves, and keep to your lane."),
+("What's the route to Batangas from Bulacan?","Commonly NLEX to the Skyway, then SLEX and STAR Tollway into Batangas. Routes depend on your exact destination."),
+("Do I need different RFID for different expressways?","Different operators use different RFID systems, so check that you have and have loaded the ones your route needs.")],
+body='''<p>Weekend na! Bulacan is a great starting point for road trips: north to the mountains, west to the beaches, or south to Batangas. Here's how to plan each, plus the prep that keeps the trip fun.</p>
+<p class="muted">Routes below are typical; always check a live navigation app and toll operator advisories before leaving.</p>
+
+<h2>Baguio: mountain drive</h2>
+<ul class="ticks">
+<li><b>Typical route</b>: NLEX, then SCTEX and TPLEX, then a mountain road up to Baguio</li>
+<li><b>Going up</b>: steady throttle, don't tailgate on climbs</li>
+<li><b>Going down</b>: use a lower gear (or the low range on an automatic) instead of riding the brakes</li>
+<li>No overtaking on blind curves; watch for fog and rain</li>
+<li>Bring jackets, it's cold up there</li>
+</ul>
+
+<h2>Zambales: beach drive</h2>
+<ul class="ticks">
+<li><b>Typical route</b>: NLEX, then SCTEX toward Subic, then the coastal road</li>
+<li>Don't drive onto soft sand unless you know it's firm</li>
+<li>Rinse the car, especially the underside, after salty air and sand</li>
+<li>Pack shade, water and sunblock</li>
+</ul>
+
+<h2>Batangas: south trip</h2>
+<ul class="ticks">
+<li><b>Typical route</b>: NLEX to the Skyway, then SLEX and STAR Tollway</li>
+<li>Crossing Metro Manila: time it outside peak hours</li>
+<li>Check the RFID systems your route needs, and load them</li>
+</ul>
+
+<h2>Prep for any road trip</h2>
+<ol class="steps">
+<li><h3>BLOWBAGETS</h3><p>The 10-point check in my <a href="/tips/undas-road-trip-checklist-2026/">road trip checklist</a>.</p></li>
+<li><h3>RFID loaded</h3><p>For every operator on your route.</p></li>
+<li><h3>Rest every 2 hours</h3><p>Stretch, restroom, coffee. Switch drivers if you can.</p></li>
+<li><h3>Emergency kit</h3><p>See my <a href="/tips/car-emergency-kit-list/">emergency kit checklist</a>.</p></li>
+<li><h3>Kids and seniors</h3><p>Car seats for kids under 150 cm (<a href="/tips/child-car-seat-law-philippines/">RA 11229</a>), and easy-access seats for lolo and lola.</p></li>
+</ol>
+
+<h2>The right car for barkada and family trips</h2>
+<p>Seven seats and cargo room make a big difference. The Xpander GLX AT (₱1,159,000 SRP) starts at ₱23,877 a month at Zero DP with ₱60K fuel. For more power on mountain climbs with a full car, the Destinator GLX's 1.5L turbo (163 PS, 250 Nm) starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval.</p>
+'''+CTA2("Planning more family trips? Check which 7-seater fits your budget, then test drive in SJDM.","xpander")),
+]
+BULK4=[
+dict(base="blog",car="xpander",slug="bank-vs-in-house-car-financing-philippines",date="2026-10-22",by=BY,img="xpglx_x37",alt="Mitsubishi Xpander financed through a bank car loan",
+title="Bank vs In-House Car Financing: How to Compare",
+desc="Bank financing or in-house financing? How they differ in requirements, approval and total cost, and the questions to ask before you sign.",
+answer="Bank financing is the common route for brand-new cars and is subject to bank approval, with requirements and terms set by the bank. In-house or other non-bank financing may differ in requirements, speed and total cost. Compare the total amount you'll pay over the term, the inclusions, the requirements and the fees, not just the monthly.",
+faq=[("Which is cheaper, bank or in-house financing?","It depends on the offer. Compare the total amount paid over the full term, including fees and inclusions, from each option."),
+("Are this site's promos bank-financed?","Promo monthlies here are all-in packages subject to bank approval. Message me for details of the financing behind your chosen unit."),
+("Is in-house financing easier to get approved?","Requirements can differ, but easier approval may come with different costs or terms. Read everything before signing."),
+("What should I ask before signing any car loan?","Total amount payable, term, what's included, fees and charges, penalties for late payment, and early payoff rules.")],
+body='''<p>"Bank o in-house?" Both are ways to finance a car, but they're not the same deal. Here's a fair way to compare, so you're choosing based on numbers, not pressure.</p>
+
+<h2>How bank financing works</h2>
+<ul class="ticks">
+<li>A bank pays the dealer; you pay the bank monthly over the term</li>
+<li>Approval depends on the bank's evaluation of your capacity, documents and credit history</li>
+<li>The car is under a chattel mortgage until the loan is paid (included in the all-in package)</li>
+<li>Banks typically require comprehensive insurance while financed</li>
+</ul>
+<p>More in my <a href="/guides/how-car-financing-works-philippines/">how car financing works</a> guide.</p>
+
+<h2>What "in-house" usually means</h2>
+<p>In-house or non-bank financing is offered by the seller or a financing company rather than a bank. Requirements, approval speed and total cost can differ from a bank loan. Every offer is different, so treat each one on its own terms.</p>
+
+<h2>Compare these five things</h2>
+<ol class="steps">
+<li><h3>Total amount payable</h3><p>Monthly × number of months + down payment + fees. This is the real price.</p></li>
+<li><h3>Inclusions</h3><p>Registration, insurance, chattel mortgage, warranty. See <a href="/guides/what-all-in-includes/">what all-in includes</a>.</p></li>
+<li><h3>Requirements</h3><p>What documents and income proof each option needs.</p></li>
+<li><h3>Fees and penalties</h3><p>Processing fees, late payment penalties, early payoff rules.</p></li>
+<li><h3>Flexibility</h3><p>Term options and what happens if your situation changes.</p></li>
+</ol>
+
+<h2>A sample: what an all-in promo includes</h2>
+<p>For example, the Xpander GLX AT this month is ₱23,877 a month at Zero DP for 60 months, all-in, with ₱60K fuel. The all-in package covers LTO registration, TPL insurance, 1-year comprehensive insurance with the rate locked for 3 years, chattel mortgage, free labor up to 5,000 km and a 3-year warranty. When comparing offers, check that the other one includes the same items, or add their cost. (October 2026 promo, subject to bank approval.)</p>
+
+<h2>Red flags</h2>
+<ul class="ticks">
+<li>No written breakdown of the total cost</li>
+<li>Pressure to sign the same day</li>
+<li>Unclear who holds the car's documents</li>
+<li>Fees that appear only at signing</li>
+</ul>
+<p>Not sure you'll be approved? Read <a href="/blog/car-loan-myths-philippines/">car loan myths</a> and prepare with the <a href="/guides/car-loan-requirements/">requirements list</a>.</p>
+'''+CTA2("Want a clear, written all-in breakdown? Check your budget, then message me or book a test drive in SJDM.","xpander")),
+
+dict(base="blog",car="montero-sport",slug="montero-sport-vs-destinator",date="2026-10-22",by=BY,img="ms_white",alt="Mitsubishi Montero Sport compared with the Destinator for families",
+title="Montero Sport vs Destinator: Which SUV for Your Family?",
+desc="Diesel ladder-frame Montero Sport or turbo-gas Destinator? Compare engines, use, variants and October 2026 promo monthlies for families.",
+answer="Both seat seven. The Montero Sport is a ladder-frame SUV with a 2.4L turbo diesel (181 PS, 430 Nm), available in 4WD on the Black Series, built for long drives, heavy loads and rough roads. The Destinator has a 1.5L turbo gasoline engine (163 PS, 250 Nm), a CVT and 214 mm clearance, and a lower entry price. Destinator GLX starts at ₱1,389,000; Montero Sport GLX MT at ₱1,568,000.",
+faq=[("Which is more powerful?","The Montero Sport has more torque: 430 Nm from its 2.4L diesel versus 250 Nm from the Destinator's 1.5L turbo. Power is 181 PS vs 163 PS."),
+("Which one has 4WD?","The Montero Sport Black Series 4WD A/T. The Destinator is 2WD."),
+("Which is cheaper per month?","The Destinator GLX from ₱26,827 a month with ₱93K DP, versus the Montero Sport GLX MT from ₱28,265 with ₱30K DP (October 2026, 60 months, all-in)."),
+("Which is better for the city?","The Destinator's CVT and smaller turbo engine suit city traffic well. The Montero Sport GLS and Black Series have an 8-speed automatic for those who want the diesel.")],
+body='''<p>Two 7-seat SUVs, two different personalities. The <a href="/cars/montero-sport/">Montero Sport</a> is the tough, long-distance diesel. The <a href="/cars/destinator/">Destinator</a> is the newer turbo-gas family SUV. Here's how to choose.</p>
+
+<h2>Side by side</h2>
+'''+T(["","Montero Sport","Destinator"],[
+("Engine","2.4L 4N15 turbo diesel","1.5L 4B40 turbo gasoline"),
+("Power / torque","181 PS / 430 Nm","163 PS / 250 Nm"),
+("Transmission","6-speed MT or 8-speed AT","CVT"),
+("Drivetrain","2WD; 4WD on Black Series 4WD","2WD"),
+("Build","Ladder frame","SUV, 214 mm clearance"),
+("Starting SRP","₱1,568,000","₱1,389,000")])+'''
+
+<h2>Promo monthlies, October 2026</h2>
+'''+T(["Variant","Zero DP","Low DP"],[
+("Destinator GLX","₱28,615","₱93K DP: ₱26,827"),
+("Destinator GLS","₱32,942","₱123K DP: ₱30,883"),
+("Destinator GT","₱39,740","₱88K DP: ₱37,256"),
+("Montero Sport GLX MT","₱30,284","₱30K DP: ₱28,265"),
+("Montero Sport GLS AT","₱39,699","₱138K DP: ₱37,218"),
+("Montero Black Series 2WD","—","₱88K DP: ₱45,117"),
+("Montero Black Series 4WD","—","₱133K DP: ₱52,121")])+PN+'''
+
+<h2>Choose the Montero Sport if…</h2>
+<ul class="ticks">
+<li>You drive long distances often, or tow and carry heavy loads</li>
+<li>Your roads include rough or unpaved stretches; consider the Black Series 4WD</li>
+<li>You want diesel torque for mountain drives with a full car</li>
+</ul>
+<p>Variant details in <a href="/blog/montero-sport-variants-explained/">Montero Sport variants explained</a>.</p>
+
+<h2>Choose the Destinator if…</h2>
+<ul class="ticks">
+<li>Most driving is city and highway with occasional provincial trips</li>
+<li>You want a lower entry price and monthly</li>
+<li>You prefer an easy CVT for daily traffic</li>
+</ul>
+<p>Variant details in <a href="/blog/destinator-glx-vs-gls-vs-gt/">Destinator GLX vs GLS vs GT</a>.</p>
+
+<h2>Test drive both with the family</h2>
+<ul class="ticks">
+<li>Third-row access and comfort</li>
+<li>Cargo space with all seats up</li>
+<li>Ride over bumps and steering feel</li>
+<li>Ease of parking at your home and office</li>
+</ul>
+'''+CTA2("Drive the Montero Sport and Destinator back-to-back in SJDM after checking which fits your budget.","montero-sport")),
+
+dict(base="blog",car="xpander-cross",slug="xpander-cross-2026-price-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross for provincial roads",
+title="Xpander Cross for Provincial Roads and Probinsya Life",
+desc="Is the Xpander Cross right for provincial roads and frequent uwian? What it shares with the Xpander, what it adds, and the October 2026 promo.",
+answer="The Xpander Cross keeps the Xpander's seven seats and 1.5L MIVEC engine (105 PS, 141 Nm) with a 4-speed automatic, and adds a rugged crossover look and a more premium cabin. It suits families who split time between the city and the province. In October 2026: SRP ₱1,378,000, Zero DP ₱28,389 a month or ₱148K DP ₱24,840, with ₱60K fuel.",
+faq=[("Is the Xpander Cross 4WD?","No. It's a 2WD crossover-styled MPV. For regular off-road use, look at a 4WD Triton or the Montero Sport Black Series 4WD."),
+("Does the Xpander Cross have a bigger engine than the Xpander?","No. Both use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm."),
+("How much is the Xpander Cross monthly?","₱28,389 at Zero DP or ₱24,840 with ₱148K DP, 60 months, all-in, with ₱60K fuel (October 2026, subject to bank approval)."),
+("Is it good for rough provincial roads?","Like the Xpander, it has high ground clearance for rough patches and flooded streets. Drive carefully on unpaved roads and avoid deep water.")],
+body='''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families live between two places. The <a href="/cars/xpander-cross/">Xpander Cross</a> is built for that life: an MPV's practicality with an SUV-style look.</p>
+
+<h2>What it shares with the Xpander</h2>
+<ul class="ticks">
+<li>Seven seats for the whole family</li>
+<li>1.5L MIVEC gasoline engine, 105 PS and 141 Nm</li>
+<li>4-speed automatic</li>
+<li>High ground clearance for rough patches and flooded streets</li>
+</ul>
+
+<h2>What the Cross adds</h2>
+<ul class="ticks">
+<li>A rugged crossover look with bolder bumpers and skid-plate styling</li>
+<li>A more premium cabin</li>
+<li>A two-tone finish</li>
+</ul>
+<p>Ask me for the official spec sheet to compare it with the Xpander GLS. My <a href="/blog/xpander-variants-explained/">Xpander variants explained</a> post has all four side by side.</p>
+
+<h2>The October 2026 promo</h2>
+'''+T(["Xpander Cross 1.5G 2WD A/T","Monthly (60 months)"],[("Zero DP","₱28,389"),("₱148K DP","₱24,840")])+'''
+<p>SRP ₱1,378,000, all-in, with ₱60K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱81,100 to ₱94,600 a month.</p>
+'''+PN+'''
+
+<h2>Provincial road tips</h2>
+<ol class="steps">
+<li><h3>Slow down on unpaved stretches</h3><p>Potholes and loose gravel hide under puddles.</p></li>
+<li><h3>Mind the clearance, not just the look</h3><p>It's still a 2WD MPV. Avoid deep water and very rough trails.</p></li>
+<li><h3>Watch for animals and tricycles</h3><p>Especially at night on barangay roads.</p></li>
+<li><h3>Rinse after muddy trips</h3><p>Including the underside.</p></li>
+</ol>
+<p>For more power on mountain climbs, compare with the Destinator in <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
+'''+CTA2("Check if the Xpander Cross fits your budget, then test drive it on Quirino Highway in SJDM.","xpander-cross")),
+
+dict(base="blog",car="triton",slug="triton-gx-2wd-at-first-pickup-guide",date="2026-10-22",by=BY,img="tr_gx_u28",alt="Mitsubishi Triton GX automatic pickup",
+title="Triton GX AT: A Guide for First-Time Pickup Owners",
+desc="Buying your first pickup? What's different from a sedan or MPV, how to drive and park a pickup, cargo bed basics, and the Triton GX AT October 2026 promo.",
+answer="A pickup is longer, sits higher and rides firmer when empty than a sedan or MPV, so give yourself time to learn its size, turning and parking. The Triton GX 2.4D 2WD A/T is an automatic, which makes the switch easier. In October 2026: SRP ₱1,430,000, Zero DP ₱28,900 a month or ₱140K DP ₱25,200, with ₱20K fuel.",
+faq=[("Is a pickup hard to drive?","Not with an automatic and some practice. The main adjustment is its length and turning circle in tight streets and parking."),
+("Why does a pickup ride firmer when empty?","Its rear suspension is built to carry loads, so it can feel firmer with an empty bed."),
+("Can a pickup be a family car?","The Triton is a double cab with a rear seat, so it can carry the family. Try the rear seat during the test drive."),
+("Is the Triton GX automatic?","Yes, the Triton GX 2.4D 2WD A/T is an automatic with the 2.4L turbo diesel.")],
+body='''<p>Unang pickup mo? Congrats, it's one of the most useful vehicles you can own. But it drives differently from a sedan or MPV. Here's what to expect with the <a href="/cars/triton/">Triton GX AT</a>.</p>
+
+<h2>What's different about a pickup</h2>
+<ul class="ticks">
+<li><b>Longer body</b>: give more room when turning and parking</li>
+<li><b>Higher seating</b>: better view ahead, but check blind spots and the area close to the bumpers</li>
+<li><b>Firmer ride when empty</b>: the rear is built to carry loads</li>
+<li><b>Diesel torque</b>: strong pulling power for loads and climbs</li>
+</ul>
+
+<h2>Why the GX AT suits first-timers</h2>
+<ul class="ticks">
+<li>Automatic: one less thing to learn in traffic</li>
+<li>2.4L 4N16 intercooled turbo diesel</li>
+<li>2WD, which suits paved and provincial roads</li>
+<li>Double cab with rear seat for family use</li>
+</ul>
+
+<h2>The October 2026 promo</h2>
+'''+T(["Triton GX 2.4D 2WD A/T","Monthly (60 months)"],[("Zero DP","₱28,900"),("₱140K DP","₱25,200")])+'''
+<p>SRP ₱1,430,000, all-in, with ₱20K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱82,600 to ₱96,300 a month.</p>
+'''+PN+'''
+
+<h2>Driving and parking tips</h2>
+<ol class="steps">
+<li><h3>Practice in an open lot</h3><p>Learn the turning circle and where the corners are.</p></li>
+<li><h3>Take wider turns</h3><p>Watch the rear wheels in tight corners.</p></li>
+<li><h3>Use mirrors and the reverse camera</h3><p>A reverse camera is among the new-car freebies; still turn your head.</p></li>
+<li><h3>Check height limits</h3><p>Some parking buildings have low clearance.</p></li>
+</ol>
+
+<h2>Cargo bed basics</h2>
+<ul class="ticks">
+<li>Stay within the rated payload for your variant</li>
+<li>Tie down loads with straps or a net</li>
+<li>Cover rain-sensitive cargo with a tarpaulin</li>
+<li>Don't let passengers ride in the bed</li>
+</ul>
+<p>Using it for business? Read <a href="/blog/triton-for-business-and-farm/">Triton for business and farm</a> and <a href="/blog/l300-vs-triton-for-negosyo/">L300 vs Triton</a>.</p>
+'''+CTA2("Try the Triton GX AT yourself. Check your budget, then book a test drive in SJDM.","triton")),
+
+dict(base="blog",car="mirage-g4",slug="minimum-salary-for-car-loan-philippines",date="2026-10-22",by=BY,img="mg4glx_u17",alt="Mitsubishi Mirage G4 for young professionals",
+title="Car Budget Plan for Young Professionals",
+desc="First job, first car? A simple budget plan for young professionals: income guide, emergency fund first, ownership costs, and choosing the right unit.",
+answer="Build an emergency fund first, then keep your car monthly at about 30 to 35 percent of gross income, and budget separately for fuel, parking, tolls, PMS and insurance renewal. Start with a unit that fits comfortably rather than the dream car, and consider a co-borrower or larger down payment if needed.",
+faq=[("How much salary do I need to buy a car?","Use the 30–35% guide. For example, the Xpander GLX MT at ₱22,641 a month (Zero DP, October 2026) fits a gross income of roughly ₱64,700 to ₱75,500. Banks make the final assessment."),
+("Should I save an emergency fund before buying a car?","Yes. A few months of expenses saved protects you if income stops, so the car never becomes a burden."),
+("Is it better to buy a car or keep commuting?","Compare the full monthly cost of owning (amortization plus running costs) with your current commuting costs and the time you'd save."),
+("Can I apply if I'm newly employed?","Banks usually look at length of employment. Ask me what your bank requires; a co-borrower can help.")],
+body='''<p>Unang sahod, unang kotse? It's a big step, and done right, a car makes work and life easier. Done wrong, it eats your sahod every month. Here's a simple plan.</p>
+
+<h2>Step 1: Emergency fund first</h2>
+<p>Before buying, save a few months of expenses. Jobs change, emergencies happen, and the monthly doesn't wait.</p>
+
+<h2>Step 2: Use the 30–35% guide</h2>
+<p>Keep the amortization at about 30 to 35 percent of gross monthly income. Divide the monthly by 0.35 for the minimum income and by 0.30 for a comfortable one. Full table in <a href="/blog/how-much-car-can-i-afford-philippines/">How much car can I afford?</a></p>
+'''+T(["Unit (Zero DP, Oct 2026)","Monthly","Gross income"],[
+("Xpander GLX MT","₱22,641","₱64,700 – ₱75,500"),
+("Xpander GLX AT","₱23,877","₱68,200 – ₱79,600"),
+("Xpander GLS AT","₱25,937","₱74,100 – ₱86,500")])+PN+'''
+<p>For a compact sedan like the <a href="/cars/mirage-g4/">Mirage G4</a>, message me for the latest promo.</p>
+
+<h2>Step 3: Budget the costs after the monthly</h2>
+<ul class="ticks">
+<li>Fuel: estimate weekly kilometers × pump price</li>
+<li>Parking at home, at work, and where you go often</li>
+<li>Tolls if you use expressways</li>
+<li>PMS, tires and battery over time</li>
+<li>Comprehensive insurance renewal after the locked period</li>
+</ul>
+
+<h2>Step 4: Pick the right car, not the dream car</h2>
+<ul class="ticks">
+<li>Start with what fits comfortably; you can upgrade later with a trade-in (see <a href="/tips/car-trade-in-tips/">trade-in tips</a>)</li>
+<li>Manual can lower the monthly if you're comfortable with it</li>
+<li>Think about who rides with you: barkada, family, carpool</li>
+</ul>
+
+<h2>Step 5: Strengthen your application</h2>
+<ol class="steps">
+<li><h3>Complete documents</h3><p>COE with compensation, payslips, IDs, proof of billing. See the <a href="/guides/car-loan-requirements/">requirements</a>.</p></li>
+<li><h3>Keep credit clean</h3><p>Pay credit cards on time.</p></li>
+<li><h3>Consider a co-borrower</h3><p>A parent or spouse, if the bank allows.</p></li>
+<li><h3>Bigger down payment</h3><p>Lowers the monthly; see <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a>.</p></li>
+</ol>
+'''+CTA2("See which unit fits your first-job salary, then book a test drive in SJDM.","mirage-g4")),
+
+dict(base="blog",car="xpander",slug="best-car-for-senior-citizens-philippines",date="2026-10-22",by=BY,img="xpgls_c31",alt="Mitsubishi Xpander with easy entry for senior passengers",
+title="Choosing a Car for Seniors and PWD Family Members",
+desc="Buying a car for lolo, lola or a family member with a disability? What to check: seat height, door opening, step-in, wheelchair space and driving aids.",
+answer="For senior or PWD family members, look for a seat height that's easy to slide into, wide door openings, a low step-in, grab handles, cargo space for a wheelchair or walker, and an automatic transmission for easier driving. Test it with the actual person and their mobility aid before deciding.",
+faq=[("Which is easier for seniors to get into, a sedan or an MPV?","Many seniors find a seat at hip height easier, like an MPV, because they slide in rather than step down or climb up. Test with the person."),
+("Will a folding wheelchair fit?","It depends on the wheelchair and the car. Bring it to the test drive and try loading it with the seats in your usual setup."),
+("Is an automatic better for older drivers?","Often yes. It reduces effort in traffic and lets the driver focus on the road."),
+("Are there special discounts for senior or PWD car buyers?","I don't want to promise one. Message me for the latest promo and I'll tell you exactly what applies.")],
+body='''<p>Kapag may lolo, lola o family member with a disability, comfort and access matter as much as price. The best car is the one they can get in and out of with dignity. Here's what to check.</p>
+
+<h2>Getting in and out</h2>
+<ul class="ticks">
+<li><b>Seat height</b>: around hip height lets them slide in rather than climb or drop down</li>
+<li><b>Door opening</b>: wide openings make it easier with a cane or walker</li>
+<li><b>Step-in height</b>: a lower floor helps people with knee or hip pain</li>
+<li><b>Grab handles</b>: check where they are for the front and second rows</li>
+</ul>
+
+<h2>Space for mobility aids</h2>
+<ul class="ticks">
+<li>Bring the actual wheelchair, walker or cane to the test drive</li>
+<li>Try loading it with the seats in your usual setup</li>
+<li>A 7-seater gives flexibility to fold seats when needed</li>
+</ul>
+
+<h2>For senior drivers</h2>
+<ul class="ticks">
+<li>Automatic transmission for less effort in traffic</li>
+<li>Good visibility and easy-to-read instruments</li>
+<li>Reverse camera for parking (part of the new-car freebies)</li>
+<li>Comfortable seat adjustment and steering position</li>
+</ul>
+
+<h2>Test-drive checklist</h2>
+<ol class="steps">
+<li><h3>Bring the person</h3><p>Let them try getting in and out of each row.</p></li>
+<li><h3>Bring the aid</h3><p>Load and unload it yourself.</p></li>
+<li><h3>Ride, don't just sit</h3><p>Check ride comfort over bumps.</p></li>
+<li><h3>Check the seatbelt reach</h3><p>Easy to buckle without twisting.</p></li>
+</ol>
+
+<h2>Units worth trying</h2>
+<p>The <a href="/cars/xpander/">Xpander</a> is a common choice for families with seniors. The GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with ₱60K fuel. The <a href="/cars/destinator/">Destinator</a> GLX starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval. For any senior or PWD-specific offer, message me for the latest promo.</p>
+'''+CTA2("Bring lolo, lola or your family member to try the seats. Check your budget, then book a test drive in SJDM.","xpander")),
+]
+DRAFT_POSTS=BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
+from seo import apply as _seo
+DRAFT_POSTS=_seo(DRAFT_POSTS)
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026
