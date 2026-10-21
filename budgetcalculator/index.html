@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<!-- Google tag (gtag.js) GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>
+<script>try{window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');}catch(_){}</script>
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Budget Fit Calculator | Mitsubishi Motors – Richard Cuagdan</title>
@@ -507,6 +511,7 @@ function submit(){
   const b=$('go3');b.disabled=true;b.textContent='Sending your details...';
   const sending=sendLead(lead,'submit'); // details go out FIRST, before anything that could throw
   px('Lead',{content_name:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP',content_category:lead.seg});
+  try{if(typeof window.gtag==='function')window.gtag('event','generate_lead',{unit:lead.chosenUnit,value:Number(lead.monthly)||0,currency:'PHP'})}catch(_){}
   try{const all=JSON.parse(localStorage.getItem(LS_KEY)||'[]');all.push(lead);localStorage.setItem(LS_KEY,JSON.stringify(all))}catch(e){} // storage may be blocked in in-app browsers
   Promise.race([sending,new Promise(r=>setTimeout(r,4000))]).finally(()=>{
     b.textContent='Details received ✓';
