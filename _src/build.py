@@ -2,6 +2,11 @@ import json, os, html, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from data import *
 from content import GUIDES, POSTS
+from drafts import DRAFT_POSTS, PUBLISH
+# Posts in drafts.py go live only when their slug is in PUBLISH.
+LIVE=[a for a in DRAFT_POSTS if a["slug"] in PUBLISH]
+TIPS=[a for a in LIVE if a["base"]=="tips"]
+POSTS=[a for a in LIVE if a["base"]=="blog"]+POSTS
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES=[]
 GA='''<!-- Google tag (gtag.js) GA4 -->
@@ -227,7 +232,7 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 # ---------- promos & tips hub
 HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
      ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
-     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]
+     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]+([("/tips/","Tips","Quick checklists for road trips, fuel, LTO and car care","xpglx_x37","Mitsubishi Xpander GLX")] if TIPS else [])
 page("/promos-tips/","Promos & Tips | Mitsubishi Motors - SJ Legacy Motors",
  "Start here for Mitsubishi promos at SJ Legacy Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
 f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
@@ -237,6 +242,7 @@ f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>
 # ---------- guides / blog
 def xl(base):
     o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","Unlock this month's down payment and monthly options.")],
+       "tips":[("/blog/","Blog","Longer guides on financing, OFW buying and model comparisons."),("/guides/","Guides","Plain-language guides to financing, documents and OFW buying.")],
        "blog":[("/guides/","Guides","Plain-language guides to financing, documents and OFW buying."),("/promos/","Promos","Unlock this month's down payment and monthly options.")]}[base]
     return '<section class="sec alt"><div class="w"><h2>More in Promos &amp; Tips</h2><div class="grid g2">'+"".join(f'<a class="card pad mc" href="{p}"><h3>{n} →</h3><p class="muted">{d}</p></a>' for p,n,d in o)+'</div></div></section>'
 def articles(base,items,label,title,desc,intro):
@@ -244,16 +250,28 @@ def articles(base,items,label,title,desc,intro):
     page(f"/{base}/",title,desc,f'<section class="ph"><div class="w"><h1>{label}</h1><p class="lead">{intro}</p></div></section><section class="sec"><div class="w"><ul class="grid g2 plain">{lst}</ul></div></section>'+xl(base),crumbs=[("/","Home"),(f"/{base}/",label)])
     for a in items:
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
+        if a.get("by"):
+            ld[0]["author"]={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":a["by"],"url":D+"/about/"}
+        top=f'<div class="box ans"><p><b>Quick answer:</b> {e(a["answer"])}</p></div>' if a.get("answer") else ""
+        fq=""
+        if a.get("faq"):
+            ld.append({"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":x}} for q,x in a["faq"]]})
+            fq='<h2>Frequently asked questions</h2>'+"".join(f'<h3>{e(q)}</h3><p>{e(x)}</p>' for q,x in a["faq"])
         others="".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
         page(f"/{base}/{a['slug']}/",(a["title"]+" | Mitsubishi Motors - SJ Legacy Motors" if len(a["title"])<=27 else a["title"]),a["desc"],
-        f'''<article class="art"><div class="w nar"><header><p class="kick">{label}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, Car Sales Executive · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
+        f'''<article class="art"><div class="w nar"><header><p class="kick">{label}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, {a.get("by","Car Sales Executive")} · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
+{top}
 {a["body"]}
+{fq}
 <aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
         crumbs=[("/","Home"),(f"/{base}/",label),(f"/{base}/{a['slug']}/",a["title"])])
 articles("guides",GUIDES,"Guides","Car Buying Guides | Mitsubishi Motors - SJ Legacy Motors",
  "Plain-language guides to buying a car in the Philippines: how financing works, loan documents, Zero DP vs low DP, OFW buying and all-in packages.",
  "Practical, plain-language guides to help you plan your purchase before you visit the showroom.")
+if TIPS: articles("tips",TIPS,"Tips","Car Tips & Checklists | Mitsubishi by Richard Cuagdan",
+ "Quick, save-worthy checklists for Filipino drivers: road trips, fuel saving, LTO rules, weather car care and first-car buying.",
+ "Short, practical checklists you can save before your next drive or car purchase.")
 articles("blog",POSTS,"Blog","Blog | Mitsubishi Motors - SJ Legacy Motors",
  "Notes from the showroom floor at Mitsubishi SJ Legacy Motors, San Jose del Monte: monthly promo roundups, model comparisons and buying tips.",
  "Promo roundups, model comparisons and buying tips from the showroom floor.")
@@ -440,5 +458,21 @@ s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
 open(R+"/sitemap.xml","w").write(sm)
-open(R+"/robots.txt","w").write(f"User-agent: *\nAllow: /\n\nSitemap: {D}/sitemap.xml\n")
+AI_BOTS=["GPTBot","OAI-SearchBot","ChatGPT-User","PerplexityBot","ClaudeBot","Google-Extended","Bingbot"]
+open(R+"/robots.txt","w").write(f"User-agent: *\nAllow: /\n\n"+"".join(f"User-agent: {b}\nAllow: /\n\n" for b in AI_BOTS)+f"Sitemap: {D}/sitemap.xml\n")
+def _ll(items,base): return "".join(f"- [{a['title']}]({D}/{base}/{a['slug']}/): {a['desc']}\n" for a in items)
+open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
+
+> Personal sales website of Richard Cuagdan, Mitsubishi Sales Executive at Mitsubishi SJ Legacy Motors, San Jose del Monte (SJDM), Bulacan, Philippines. Not the official Mitsubishi Motors Philippines website. Prices shown are official SRPs; promos are subject to bank approval.
+
+## Key pages
+- [Home]({D}/): Mitsubishi lineup and SRPs
+- [Cars]({D}/cars/): every current model and variant with SRP
+- [Budget calculator]({D}/budgetcalculator/): match a unit to your income
+- [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
+- [Apply]({D}/apply/): financing or cash application
+- [About]({D}/about/) and [Contact]({D}/contact/)
+
+## Models
+"""+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Tips\n"+_ll(TIPS,"tips")+"\n## Blog\n"+_ll(POSTS,"blog")+"\n## Guides\n"+_ll(GUIDES,"guides"))
 print(len(PAGES),"pages")
