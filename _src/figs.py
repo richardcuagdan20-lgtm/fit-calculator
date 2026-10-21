@@ -101,3 +101,46 @@ FIGS.update({
 ("How to file","ins-allin","All-in package insurance: TPL, 1-year comprehensive with rate locked for 3 years, chattel mortgage, warranty"),
 ("Your next step","ins-claim","How to file a car insurance claim in five steps")],
 })
+FIGS.update({
+"child-car-seat-law-philippines":[
+("The rule in one","cs-rule","RA 11229 car seat rule: children 12 and below need a car seat unless at least 150 cm tall and secured with a seat belt"),
+("Back seat for","cs-front","Where children should sit under RA 11229: under 150 cm in a car seat in the rear, 150 cm or taller with seat belt"),
+("Choosing the right","cs-cabin","Mitsubishi second-row seats with room for a child car seat"),
+("Installation checklist","cs-stages","Car seat stages: rear-facing infant seat, forward-facing harness seat, booster, regular seat belt"),
+("Family cars with","cs-install","Child car seat installation checklist")],
+"new-driver-tips-philippines":[
+("Step up gradually","nd-plan","New driver plan for the first 3 months: quiet routes, busier roads, expressway, then night and rain"),
+("Parking without","nd-habits","Safe driving habits for new drivers: 3-second gap, mirrors, early signals, phone away, yield, never tired or drunk"),
+("Keep these in","nd-mirage","Mitsubishi Mirage G4 compact sedan, easy to maneuver and park"),
+("Choosing a car","nd-kit","What to always keep in the car: license and OR/CR, early warning device, tools, powerbank, insurer hotline, first aid")],
+"sjdm-to-manila-commute-tips":[
+("Know your routes","cm-routes","SJDM to Metro Manila routes: Quirino Highway toward Fairview and Commonwealth, or NLEX, with a live traffic check"),
+("Timing is","cm-timing","Commute timing tips: leave 15 to 30 minutes earlier, avoid school days and paydays peaks, rainy days, shift hours"),
+("Number coding","cm-coding","Before you go: check MMDA number coding and keep RFID loaded"),
+("Stay fresh","cm-xpander","Xpander GLX A/T October 2026 promo: 23,877 pesos a month Zero DP with 60K fuel")],
+"car-trade-in-tips":[
+("How a trade-in","ti-destinator","Mitsubishi Destinator, an upgrade option when trading in an older car"),
+("Prepare your documents","ti-how","How a car trade-in works: appraisal, offer, paperwork, applied to your new car"),
+("Prepare the car","ti-docs","Trade-in documents: original OR/CR, IDs, loan payoff amount, service records, spare key and manual"),
+("Trade-in vs","ti-vs","Trade-in vs selling your car privately: effort, price and risk")],
+"car-resale-value-tips":[
+("8 habits","rv-montero","Well-kept Mitsubishi Montero Sport SUV"),
+("Choices at purchase","rv-habits","Eight habits that protect a car's resale value"),
+("What hurts","rv-buy","Choices at purchase that help resale value: popular model, common colors, right transmission, warranty and records"),
+("When it's time","rv-hurts","What hurts resale value most: flood or accident history, missing records, odor, extreme modifications, incomplete documents")],
+"new-car-release-day-checklist":[
+("Before you go","rd-cross","Mitsubishi Xpander Cross ready for release"),
+("Exterior walkaround","rd-bring","Release day prep: confirm schedule, IDs and documents, driver's license, daylight, bring a helper"),
+("Documents and","rd-inspect","New car inspection checklist: exterior and interior"),
+("Ask before","rd-docs","Release day documents: VIN and engine number, insurance, registration status, freebies, manual and warranty")],
+"christmas-holiday-driving-tips":[
+("Simbang Gabi","xm-sg","Simbang Gabi early-morning driving tips"),
+("Christmas parties","xm-mall","December mall parking tips: weekday mornings, one trip, well-lit spots, bags in the trunk"),
+("Probinsya trips","xm-party","If you drink, don't drive: designated driver, book a ride, host responsibly"),
+("Thinking of a new","xm-xpander","Xpander GLS A/T October 2026 promo: 25,937 pesos a month Zero DP or 22,695 with 148K DP, 60K fuel")],
+"l300-vs-triton-for-negosyo":[
+("At a glance","lt-glance","Mitsubishi L300 Dual AC truck vs Triton GX AT pickup: engine, gearbox and best use"),
+("Choose the L300","lt-promo","L300 Dual AC and Triton GX AT October 2026 promo SRP and monthlies"),
+("Choose the Triton","lt-fit","L300 vs Triton: which fits your business, routes and family use"),
+("Your next step","lt-steps","Run the numbers: weekly cargo, ownership costs, income guide, test drive both")],
+})

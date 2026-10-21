@@ -243,7 +243,56 @@ def bulk():
     tiles("ins-allin","All-in package","Insurance already included",[("✓","TPL insurance",""),("✓","1-year comprehensive","Rate locked for 3 years"),("✓","Chattel mortgage",""),("✓","3-year warranty","")],cols=2)
     steps("ins-claim","Accident?","How to file a claim",[("Stay safe and take photos","Scene, both cars, plates"),("Get a police or incident report",""),("Call your insurer right away",""),("Submit the documents","Claim form, OR/CR, license, photos"),("Pay the participation fee","Per your policy")])
 
-if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk":
+def bulk2():
+    M="/workspace/mmpc/final/"
+    L3=M+"L300/ext_l300_l300-fb_1080_fl.png"
+    # car seat
+    stats("cs-rule","RA 11229 · Child Safety in Motor Vehicles Act","The car seat rule",[("12 & below","Must use an appropriate car seat while the engine is running or on the road"),("150 cm","Unless at least 150 cm (59 in) tall and secured with the regular seat belt")])
+    compare("cs-front","Front or back?","Where your child should sit",("Under 150 cm","150 cm or taller"),[("Restraint","Approved car seat for age, height, weight","Regular seat belt"),("Seat","Rear seat","Front allowed if properly belted"),("Always","Never left alone in the car","Never left alone in the car")])
+    steps("cs-stages","Car seat stages","Grow through the stages",[("Rear-facing infant seat","Babies"),("Forward-facing with harness","Toddlers"),("Booster seat","Older kids"),("Regular seat belt","At least 150 cm tall")])
+    tiles("cs-install","Installation","Check before every trip",[("✓","Read both manuals",""),("✓","ISOFIX or correct belt path",""),("✓","Minimal side movement",""),("✓","Snug harness, clip at armpit",""),("✓","No thick jackets",""),("?","Ask me on release day","")],cols=2)
+    photo("cs-cabin",M+"Xpander Cross/int_xpandercross_26my_xs_lhd_ft_2ndseat.jpg",9/16)
+    # new driver
+    steps("nd-plan","Step up gradually","Your first 3 months",[("Weeks 1–2: quiet, familiar routes","Off-peak, with an experienced driver"),("Weeks 3–4: busier roads","Lane discipline and signals"),("Month 2: expressway","Short off-peak stretch"),("Month 3: night and rain","One new condition at a time")])
+    tiles("nd-habits","Safe habits","Drive like a pro from day one",[("3s","Following distance","More in rain"),("✓","Mirrors and blind spots",""),("✓","Signal early",""),("✓","Phone away",""),("✓","Yield to pedestrians",""),("✕","Tired or drunk","Never")],cols=2)
+    tiles("nd-kit","Glovebox and trunk","Always in the car",[("✓","License, OR/CR",""),("✓","Early warning device",""),("✓","Basic tools",""),("✓","Powerbank",""),("✓","Insurer's hotline",""),("✓","Payong, water, first aid","")],cols=2)
+    photo("nd-mirage",M+"Mirage G4/ext_mirageg4_easy_to_manoeuvre_1080x760.jpg",9/16)
+    # commute
+    tiles("cm-routes","SJDM to Metro Manila","Know your route, and a backup",[("1","Quirino Highway","Toward Fairview and Commonwealth"),("2","NLEX","Depending on where you work"),("3","Live traffic check","Before leaving and at junctions")],cols=1)
+    tiles("cm-timing","Timing","Beat the peak",[("15–30","Leave earlier","Minutes make a difference"),("✓","School days, paydays","Usually heavier"),("!","Rainy days","Leave earlier still"),("✓","Shift your hours","If work allows")],cols=2)
+    stats("cm-coding","Before you go","Coding and toll checks",[("Number coding","MMDA's scheme applies on covered Metro Manila roads, wherever your car is registered"),("RFID","Keep it loaded and the sticker readable")])
+    stats("cm-xpander","Carpool and school-run pick","Xpander GLX A/T · October 2026",[("₱23,877/mo","Zero DP, 60 months, all-in. SRP ₱1,159,000"),("₱60K fuel","Plus ₱20,892/mo option with ₱138K DP")])
+    # trade-in
+    steps("ti-how","Trade-in","How it works",[("Appraisal","Condition, mileage, model, demand"),("Offer","Ask how it was computed"),("Paperwork","Deed of sale, loan payoff if any"),("Applied to your new car","Ask how it works with the promo")])
+    tiles("ti-docs","Documents","Bring these to the appraisal",[("✓","Original OR/CR",""),("✓","Owner's valid IDs",""),("✓","Loan payoff amount","If financed"),("✓","Service records",""),("✓","Spare key and manual","")],cols=2)
+    compare("ti-vs","Two ways to sell","Trade-in vs selling it yourself",("Trade-in","Sell privately"),[("Effort","One transaction, less paperwork","Listings, haggling, viewings"),("Price","Fair, convenient","Possibly higher"),("Risk","Low","Strangers, test drives, payment")])
+    photo("ti-destinator",M+"Destinator/ext_destinator_mam.jpg",9/16)
+    # resale
+    tiles("rv-habits","Resale value","8 habits that protect it",[("1","PMS on schedule",""),("2","Keep service records",""),("3","Avoid floods",""),("4","Repair damage properly",""),("5","Protect paint and interior",""),("6","Easy on modifications",""),("7","Reasonable mileage",""),("8","Complete documents","")],cols=2)
+    tiles("rv-buy","At purchase","Choices that help later",[("✓","Popular model and variant",""),("✓","Common colors","White, silver, black"),("✓","Right transmission",""),("✓","Warranty and records","")],cols=2)
+    tiles("rv-hurts","Avoid these","What hurts resale value most",[("✕","Flood or major accident",""),("✕","Missing service records",""),("✕","Smoke and pet odor",""),("✕","Extreme modifications",""),("✕","Incomplete documents","")],cols=1)
+    photo("rv-montero",M+"Montero Sport/ext_monterosport_24my_ps_lhd_mv_p1-2_lux.jpg",9/16)
+    # release day
+    tiles("rd-bring","Before you go","Release day prep",[("✓","Confirm the schedule",""),("✓","Valid IDs and documents",""),("✓","Driver's license",""),("✓","Arrive with daylight",""),("✓","Bring a helper","")],cols=2)
+    compare("rd-inspect","Inspect the unit","Outside and inside",("Exterior","Interior"),[("Look","Paint, panels, gaps","Seats, trim, upholstery"),("Check","Glass, mirrors, tires and spare","AC, windows, locks, wipers"),("Test","All lights and hazards","Infotainment, camera, low mileage")])
+    steps("rd-docs","Documents and inclusions","Before you sign off",[("Match VIN and engine number",""),("Insurance details and hotline",""),("Registration, CR and plates status",""),("Freebies on your release list",""),("Manual, warranty, PMS schedule","")])
+    photo("rd-cross",M+"Xpander Cross/ext_xpandercross_mmpc-rnc-fl26_mid.jpg",9/16)
+    # christmas
+    tiles("xm-sg","Simbang Gabi","Early-morning drives",[("1","Leave earlier","Parking fills up fast"),("2","Watch for pedestrians","Kids and seniors in the dark"),("3","Clean windshield, proper lights",""),("4","Not puyat","Switch drivers")],cols=2)
+    tiles("xm-mall","Mall runs","December parking smarts",[("✓","Weekday mornings",""),("✓","One list, one trip",""),("✓","Well-lit, busy spots",""),("✓","Bags in the trunk",""),("✓","Note your slot",""),("✓","Patience in the lot","")],cols=2)
+    steps("xm-party","Christmas parties","If you drink, don't drive",[("Choose a designated driver","Before you leave the house"),("Or book a ride","Pick up the car the next day"),("Host responsibly","Help guests get home safely")])
+    stats("xm-xpander","Family 7-seater · October 2026","Xpander GLS A/T",[("₱25,937/mo","Zero DP, 60 months, all-in. SRP ₱1,259,000"),("₱22,695/mo","With ₱148K DP, plus ₱60K fuel")])
+    # L300 vs Triton
+    TR=M+"Triton/ext_triton_24my_tr_the-all-new_lhd_mv_intro_p_proxy_mitsubishi.jpg"
+    compare("lt-glance","Truck or pickup?","L300 vs Triton",("L300 Dual AC","Triton GX AT"),[("Engine","2.2L 4N14 turbo diesel","2.4L 4N16 turbo diesel"),("Gearbox","5-speed manual","Automatic"),("Best at","Daily cargo","Work plus family")],imgs=[L3,R+"/assets/img/tr_gx_u28.webp"])
+    table("lt-promo","October 2026 · 60 months, all-in","Promo monthlies",["Unit","SRP","Zero DP","Low DP"],[("L300 Dual AC","₱1,039,000","₱21,405","₱18,789 (₱123K)"),("Triton GX AT","₱1,430,000","₱28,900","₱25,200 (₱140K)")],[0.27,0.24,0.20,0.29],"Both with ₱20K fuel. Subject to bank approval and change without notice.")
+    compare("lt-fit","Which fits your negosyo?","Choose by the job",("L300","Triton"),[("Business","Deliveries, restocking, hardware, catering","Contractors, farms, resorts"),("Routes","City and highway","Farm roads, sites, rough roads"),("Family use","Work truck","Weekend family vehicle")])
+    steps("lt-steps","Before you decide","Run the numbers both ways",[("List what you carry weekly","Heaviest regular load"),("Add up ownership costs","Fuel, insurance, PMS, driver, tolls"),("Check the income guide","30–35% of gross income"),("Test drive both","On your real routes")])
+
+if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk2":
+    MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk2()
+    json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
+elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk":
     MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk()
     json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
 elif __name__=="__main__":

@@ -721,5 +721,390 @@ body='''<p>"Insured naman 'yan, di ba?" Many owners only learn what their insura
 </ol>
 '''+CTA2("Want a unit with insurance already in the all-in package? Check your budget, then book a test drive in SJDM.","xpander-cross")),
 ]
-DRAFT_POSTS=BULK+DRAFT_POSTS
+BULK2=[
+dict(base="tips",car="xpander",slug="child-car-seat-law-philippines",date="2026-10-22",by=BY,img="xpgls_w81",alt="Mitsubishi Xpander family MPV with room for child car seats",
+title="Child Car Seat Law (RA 11229): Parent Guide",
+desc="RA 11229 in plain English: who needs a car seat, the 150 cm rule, why kids 12 and below ride in the back, and how to choose and install a seat.",
+answer="Under RA 11229, the Child Safety in Motor Vehicles Act, children 12 and below must ride in an appropriate, approved child restraint system unless they are at least 150 cm (59 inches) tall and can use the regular seat belt. Children 12 and below can't sit in the front seat unless they meet that height and are belted, and a child must never be left alone in a vehicle.",
+faq=[("Who needs a car seat in the Philippines?","Children 12 years old and below who are shorter than 150 cm (59 inches). Once a child reaches 150 cm, they can use the regular seat belt."),
+("Can my child sit in the front seat?","Not if they're 12 or below, unless they're at least 150 cm tall and properly secured with the regular seat belt."),
+("What kind of car seat is allowed?","One appropriate to your child's age, height and weight, and compliant with the standards set by the DTI, including recognized UN regulations. Look for the approval markings on the seat."),
+("Are there exceptions?","The law lists cases where a car seat would put the child in greater danger, such as medical emergencies or a child's medical or developmental condition, plus others in the implementing rules.")],
+body='''<p>Sa Pilipinas, kandong is love, pero sa sasakyan, it's risky. In a sudden stop, even a careful parent can't hold a child in place. That's why the <b>Child Safety in Motor Vehicles Act (RA 11229)</b> exists. Here's what it means for your family car.</p>
+
+<h2>The rule in one sentence</h2>
+<p>Children <b>12 years old and below</b> must be secured in an appropriate child restraint system (car seat) whenever the engine is running or the car is on the road, <b>unless they are at least 150 cm (59 inches) tall</b> and properly secured with the regular seat belt.</p>
+
+<h2>Back seat for 12 and below</h2>
+<p>No child 12 and below may sit in the front seat unless they meet the 150 cm height requirement and are properly belted. The LTO also notes that car seats should be mounted in a rear seat.</p>
+<ul class="ticks">
+<li>Shorter than 150 cm: car seat, in the back</li>
+<li>150 cm or taller: regular seat belt; front seat allowed if properly belted</li>
+<li>Never leave a child alone in the car, even if they're buckled in</li>
+</ul>
+
+<h2>Choosing the right seat</h2>
+<p>The law requires a seat that fits your child's <b>age, height and weight</b> and that complies with the DTI standard and recognized UN regulations. In practice, seats come in stages:</p>
+<ol class="steps">
+<li><h3>Rear-facing infant seat</h3><p>For babies. Rear-facing protects the head and neck best.</p></li>
+<li><h3>Forward-facing seat with harness</h3><p>For toddlers who have outgrown the rear-facing limits of their seat.</p></li>
+<li><h3>Booster seat</h3><p>For older kids, so the adult seat belt crosses the shoulder and hips correctly.</p></li>
+<li><h3>Regular seat belt</h3><p>Once your child is at least 150 cm tall.</p></li>
+</ol>
+<p>Follow the height and weight limits printed on the seat itself, and keep the manual.</p>
+
+<h2>Installation checklist</h2>
+<ul class="ticks">
+<li>Read both the car seat manual and your car's owner's manual</li>
+<li>Use the car's ISOFIX/anchor points if your seat and car support them, or the seat belt routing in the seat manual</li>
+<li>The seat shouldn't move more than a little side to side at the belt path</li>
+<li>Harness straps snug, chest clip at armpit level</li>
+<li>No thick jackets under the harness</li>
+<li>Ask me to show you the anchor points on release day</li>
+</ul>
+
+<h2>Family cars with room for car seats</h2>
+<p>If you'll carry two or more car seats plus lolo and lola, a 7-seater gives you flexibility. The <a href="/cars/xpander/">Xpander</a> and <a href="/cars/destinator/">Destinator</a> both seat seven. Bring your car seat to the test drive and try it in the second row. My <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> comparison helps you choose.</p>
+'''+SRC(("Lawphil: Republic Act No. 11229","https://lawphil.net/statutes/repacts/ra2019/ra_11229_2019.html"),("Philippine News Agency: Child car seat enforcement to start with education, LTO","https://www.pna.gov.ph/articles/1129213"),("WHO Philippines: Child restraint law","https://www.who.int/philippines/news/detail/13-03-2019-child-restraint-law-will-save-children-s-lives-on-philippine-roads"))+CTA2("Bring your car seat and test it in our 7-seaters. Check your budget first, then book a test drive in SJDM.","xpander")),
+
+dict(base="tips",car="mirage-g4",slug="new-driver-tips-philippines",date="2026-10-22",by=BY,img="mg4glx_a66",alt="Mitsubishi Mirage G4, an easy car for new drivers",
+title="New Driver Tips: Your First Months Behind the Wheel",
+desc="Bagong lisensya? Practical tips for new drivers in the Philippines: first drives, parking, expressways, rain, night driving and what to keep in the car.",
+answer="Start with short, familiar routes at off-peak hours, keep a safe following distance, master parking before rush hour, and add expressway, night and rain driving one at a time. Always carry your license, OR/CR and early warning device, and never drive tired or after drinking.",
+faq=[("Should a new driver get a manual or automatic?","An automatic or CVT is easier while you learn traffic, especially in stop-and-go roads. A manual can lower the monthly if you're confident with a clutch."),
+("What should I always have in the car?","Your driver's license (or e-license), OR/CR, early warning device, a basic tool kit, a powerbank and your insurer's hotline."),
+("When can a new driver use the expressway?","Once you're comfortable with lane changes, merging and steady speeds in normal traffic. Start with a short stretch at an off-peak time with an experienced driver along."),
+("Is it okay to drive after one or two drinks?","Don't. The Anti-Drunk and Drugged Driving Act penalizes driving under the influence. Arrange a designated driver or a ride.")],
+body='''<p>May lisensya ka na, congrats! The license says you can drive. Experience is what makes you confident. Here's a step-by-step plan for your first months, based on what I see from first-time owners every week.</p>
+
+<h2>Step up gradually</h2>
+<ol class="steps">
+<li><h3>Weeks 1–2: familiar, quiet routes</h3><p>Your subdivision, the barangay roads, the grocery. Practice at off-peak hours with an experienced driver beside you.</p></li>
+<li><h3>Weeks 3–4: busier roads</h3><p>Quirino Highway or your main road at mid-morning. Focus on lane discipline and signals.</p></li>
+<li><h3>Month 2: expressway</h3><p>A short NLEX stretch at off-peak. Practice merging and keeping a steady speed.</p></li>
+<li><h3>Month 3: night and rain</h3><p>Add one new condition at a time, never both on the same first try.</p></li>
+</ol>
+
+<h2>Habits that keep you safe</h2>
+<ul class="ticks">
+<li><b>Following distance</b>: keep at least a 3-second gap, more in rain</li>
+<li><b>Mirrors every few seconds</b>, and check blind spots before changing lanes</li>
+<li><b>Signal early</b>, not while you're already turning</li>
+<li><b>Phone away</b>: set navigation before you move</li>
+<li><b>Yield to pedestrians</b>: see the latest in my <a href="/tips/lto-rules-2026-car-owners/">LTO rules 2026</a> guide</li>
+<li><b>No driving tired or after drinking</b>, ever</li>
+</ul>
+
+<h2>Parking without panic</h2>
+<ul class="ticks">
+<li>Practice in an empty parking lot first: forward, reverse and parallel</li>
+<li>Go slow. Slow is smooth, smooth is fast</li>
+<li>Use your mirrors and reverse camera, but turn your head too</li>
+<li>Choose end spots at the mall while you're learning</li>
+</ul>
+
+<h2>Keep these in the car</h2>
+<ul class="ticks">
+<li>Driver's license or e-license, OR/CR</li>
+<li>Early warning device and basic tools (usually part of new-car freebies)</li>
+<li>Powerbank and charger</li>
+<li>Your insurer's claims hotline and roadside assistance number</li>
+<li>Payong, water and a small first-aid kit</li>
+</ul>
+
+<h2>Choosing a car as a new driver</h2>
+<p>A compact, easy-to-park car with good visibility makes learning easier. The <a href="/cars/mirage-g4/">Mirage G4</a> is a common first car; message me for the latest promo. If your family needs more seats, the Xpander GLX AT gives you an automatic 7-seater from ₱23,877 a month at Zero DP (October 2026 promo, 60 months). Start with my <a href="/tips/first-time-car-buyer-checklist/">first-time car buyer checklist</a>.</p>
+'''+CTA2("New driver and choosing your first car? Check what fits your budget, then book an unhurried test drive in SJDM.","mirage-g4")),
+
+dict(base="tips",car="xpander",slug="sjdm-to-manila-commute-tips",date="2026-10-22",by=BY,img="xpglx_graphite",alt="Mitsubishi Xpander for the daily SJDM to Metro Manila commute",
+title="SJDM to Manila Commute: Daily Driving Tips",
+desc="Driving daily from San Jose del Monte to Metro Manila? Timing, route planning, number coding, RFID, fuel and comfort tips for the Bulacan commute.",
+answer="For the daily SJDM to Metro Manila drive, leave before the peak, pick your main route (Quirino Highway toward Fairview and Commonwealth, or via NLEX) and keep a backup, check MMDA number coding for your plate, keep RFID loaded, and choose an automatic if you face stop-and-go traffic every day.",
+faq=[("What's the best time to leave SJDM for Manila?","As early as you can before the morning peak. Traffic changes with school days, road works and weather, so check a live traffic app before leaving."),
+("Does number coding apply if I'm from Bulacan?","MMDA's number coding applies to vehicles on covered Metro Manila roads, regardless of where the car is registered. Check MMDA's current scheme and exemptions."),
+("Manual or automatic for the daily commute?","Automatic or CVT is much less tiring in stop-and-go traffic. If your budget prefers a manual, practice smooth clutch work and take breaks."),
+("How do I cut fuel costs on a long commute?","Correct tire pressure, smooth driving, less idling, and keeping up with PMS. See my fuel-saving tips.")],
+body='''<p>Taga-SJDM ka pero sa Maynila ang trabaho? You're one of many. The commute can be long, but a few habits make it more predictable, and a lot less stressful.</p>
+
+<h2>Know your routes, and a backup</h2>
+<p>Most SJDM drivers head down <b>Quirino Highway</b> toward Fairview and Commonwealth, or take <b>NLEX</b> depending on where in Metro Manila they work. Know both, because a single accident or road work can change everything.</p>
+<ul class="ticks">
+<li>Check a live traffic app before leaving and before major junctions</li>
+<li>Save your main and backup routes in your navigation app</li>
+<li>Watch for advisories on road works and rerouting from your LGU and the toll operator</li>
+</ul>
+
+<h2>Timing is everything</h2>
+<ul class="ticks">
+<li>Leaving even 15 to 30 minutes earlier can make a big difference before the peak</li>
+<li>School days and paydays are usually heavier</li>
+<li>Rainy days slow everyone down: leave earlier</li>
+<li>If your work allows, shift your hours away from the peak</li>
+</ul>
+
+<h2>Number coding and RFID</h2>
+<p>MMDA's number coding (UVVRP) applies on covered Metro Manila roads based on your plate's last digit, wherever your car is registered. Check the MMDA's current scheme, hours and exemptions, since they can change.</p>
+<p>If you use NLEX or the skyways, keep your RFID loaded and the sticker in good condition. A failed read at the toll gate costs you time every single day.</p>
+
+<h2>Make the car part of the solution</h2>
+<ul class="ticks">
+<li><b>Automatic or CVT</b>: much easier in daily stop-and-go</li>
+<li><b>Fuel economy habits</b>: see my <a href="/tips/fuel-saving-tips-diesel-vs-gasoline/">fuel-saving tips</a></li>
+<li><b>Carpooling</b>: a 7-seater can share costs with officemates or bring the kids to school on the way</li>
+<li><b>Comfort</b>: good AC, a comfortable seat and phone charging make long drives easier</li>
+</ul>
+<p>For carpools and school runs, the Xpander GLX AT is a popular choice: an automatic 7-seater at ₱1,159,000 SRP, from ₱23,877 a month at Zero DP, with ₱60K fuel (October 2026 promo, 60 months).</p>
+
+<h2>Stay fresh on long drives</h2>
+<ul class="ticks">
+<li>Sleep well. Puyat driving is dangerous driving</li>
+<li>Keep water and a light snack in the car</li>
+<li>Use podcasts or music, not your phone screen</li>
+<li>Keep up with PMS so the car never adds to your stress. See my <a href="/tips/pms-schedule-guide/">PMS schedule guide</a></li>
+</ul>
+'''+SRC(("MMDA: Official website (number coding advisories)","https://mmda.gov.ph/"))+CTA2("Want an easier daily commute? Check what fits your budget, then test drive an automatic right here on Quirino Highway, SJDM.","xpander")),
+
+dict(base="tips",car="destinator",slug="car-trade-in-tips",date="2026-10-22",by=BY,img="de_xd1",alt="Trading in an old car for a new Mitsubishi Destinator",
+title="Car Trade-In Tips: Get a Fair Value for Your Old Car",
+desc="Trading in your old car for a new one? How trade-in works, the documents you need, how to prepare the car, and how to compare offers fairly.",
+answer="To get a fair trade-in value, prepare your documents (OR/CR, IDs and, if financed, the loan release), clean the car and fix small issues, bring service records, and know your car's market range before the appraisal. Compare the trade-in offer against selling it yourself, counting the time and hassle saved.",
+faq=[("Can I trade in a car that still has a loan?","Often yes, but the remaining loan balance must be settled as part of the process. Ask your bank for the exact payoff amount first."),
+("What documents do I need to trade in a car?","Usually the original OR/CR, valid IDs, and a deed of sale. If the car was financed, you'll need the release of chattel mortgage once the loan is paid."),
+("Does a dealer trade-in pay less than selling privately?","Sometimes, but trade-in saves you time, safety risks and paperwork. Compare the net amount and the hassle before deciding."),
+("Do service records really matter?","Yes. Complete PMS records show the car was maintained and help support the appraisal.")],
+body='''<p>Panahon na para mag-upgrade? Your current car can help pay for the next one. Here's how to prepare so you get a fair value and a smooth process.</p>
+
+<h2>How a trade-in works</h2>
+<ol class="steps">
+<li><h3>Appraisal</h3><p>Your car is inspected and given a value based on condition, mileage, model and market demand.</p></li>
+<li><h3>Offer</h3><p>You receive an offer. Ask how it was computed.</p></li>
+<li><h3>Paperwork</h3><p>Deed of sale, documents and, if there's a loan, settling the balance.</p></li>
+<li><h3>Applied to your new car</h3><p>The agreed value can go toward your new car. Message me to check if a trade-in applies to your purchase and how it works with the current promo.</p></li>
+</ol>
+
+<h2>Prepare your documents</h2>
+<ul class="ticks">
+<li>Original OR/CR, with the registration up to date</li>
+<li>Valid IDs of the registered owner</li>
+<li>If financed: your bank's payoff amount, and later the release of chattel mortgage</li>
+<li>Service and repair records</li>
+<li>Spare key, owner's manual and accessories</li>
+</ul>
+
+<h2>Prepare the car</h2>
+<ul class="ticks">
+<li><b>Clean it inside and out</b>: first impressions affect appraisals</li>
+<li><b>Fix the small things</b>: bulbs, wipers, minor warning lights</li>
+<li><b>Don't over-invest</b>: big repairs rarely pay back in trade-in value</li>
+<li><b>Be honest</b> about accidents or flood history. It always comes out in inspection</li>
+</ul>
+
+<h2>Know your car's value</h2>
+<p>Before the appraisal, check listings of the same model, year, variant and mileage to get a realistic range. Remember that listing prices are asking prices, not selling prices.</p>
+
+<h2>Trade-in vs selling it yourself</h2>
+<ul class="ticks">
+<li><b>Trade-in</b>: one transaction, less paperwork, no strangers test-driving your car</li>
+<li><b>Selling privately</b>: possibly a higher price, but more time, haggling and risk</li>
+<li>Compare the <b>net amount</b> and the time and hassle saved, not just the headline offer</li>
+</ul>
+<p>Thinking of upgrading to a 7-seat SUV? See <a href="/blog/destinator-glx-vs-gls-vs-gt/">Destinator GLX vs GLS vs GT</a>, and to keep your next car's value high, read my <a href="/tips/car-resale-value-tips/">resale value tips</a>.</p>
+'''+CTA2("Planning to upgrade? Check what your next car's monthly could be, then book a test drive and message me about your trade-in.","destinator")),
+dict(base="tips",car="montero-sport",slug="car-resale-value-tips",date="2026-10-22",by=BY,img="ms_white",alt="Well-kept Mitsubishi Montero Sport that holds its resale value",
+title="Car Resale Value Tips: Protect Your Car's Worth",
+desc="Want a better price when you sell or trade in later? 8 habits that protect resale value, from PMS records and color choice to flood and accident care.",
+answer="Resale value is protected by habits: follow PMS at an authorized service center and keep the records, avoid floods and fix damage properly, keep the interior and paint clean, skip extreme modifications, and keep all documents, keys and accessories. Popular models, variants and colors also tend to sell more easily.",
+faq=[("Does PMS at an authorized service center affect resale value?","Complete, documented service history gives buyers and appraisers confidence and supports a better price."),
+("Do modifications increase resale value?","Usually not. Extreme modifications can narrow your buyers. Keep original parts if you modify, so you can restore the car."),
+("Does car color affect resale value?","Common colors like white, silver and black are often easier to sell because more buyers want them, but demand varies by model."),
+("Does flood damage affect resale value?","Yes, significantly. Avoid floods, and if the car is submerged, have it towed and inspected and keep the repair records.")],
+body='''<p>The day you buy a car is also the day you start building its resale value. Hindi mo kailangang maging car expert. You just need a few consistent habits.</p>
+
+<h2>8 habits that protect resale value</h2>
+<ol class="steps">
+<li><h3>Follow the PMS schedule</h3><p>At an authorized service center, on time. See my <a href="/tips/pms-schedule-guide/">PMS schedule guide</a>.</p></li>
+<li><h3>Keep every service record</h3><p>A complete folder of receipts is one of the strongest selling points.</p></li>
+<li><h3>Avoid floods</h3><p>Flood history hurts value badly. Follow my <a href="/tips/el-nino-typhoon-car-care-tips/">flood rules</a>.</p></li>
+<li><h3>Repair damage properly</h3><p>Use proper body shops and insurance claims, and keep the paperwork.</p></li>
+<li><h3>Protect paint and interior</h3><p>Regular washing, shade parking, seat covers and floor mats.</p></li>
+<li><h3>Go easy on modifications</h3><p>Keep the original parts if you do modify.</p></li>
+<li><h3>Keep mileage reasonable</h3><p>Not always possible, but well-documented mileage matters.</p></li>
+<li><h3>Keep documents and extras complete</h3><p>OR/CR, spare key, manuals, tools and accessories.</p></li>
+</ol>
+
+<h2>Choices at purchase that help later</h2>
+<ul class="ticks">
+<li><b>Popular models and variants</b> tend to have more buyers</li>
+<li><b>Common colors</b> like white, silver and black are often easier to sell</li>
+<li><b>The right transmission</b>: automatics are in demand for city driving, manuals for work and budget buyers</li>
+<li><b>Warranty and records</b>: the 3-year warranty in the all-in package plus your PMS records reassure the next buyer</li>
+</ul>
+
+<h2>What hurts resale value most</h2>
+<ul class="ticks">
+<li>Flood or major accident history</li>
+<li>Missing service records</li>
+<li>Smoke and pet odor inside the cabin</li>
+<li>Extreme modifications</li>
+<li>Incomplete documents or unsettled violations</li>
+</ul>
+
+<h2>When it's time to sell</h2>
+<p>Clean it well, gather every record and accessory, and compare a trade-in with selling privately. My <a href="/tips/car-trade-in-tips/">car trade-in tips</a> walk you through the process.</p>
+<p>Full-size SUVs like the <a href="/cars/montero-sport/">Montero Sport</a> are built for long service lives, and good care shows when you sell. See <a href="/blog/montero-sport-variants-explained/">Montero Sport variants explained</a>.</p>
+'''+CTA2("Choosing a car you'll keep for years? Check your budget, then test drive in SJDM.","montero-sport")),
+
+dict(base="tips",car="xpander-cross",slug="new-car-release-day-checklist",date="2026-10-22",by=BY,img="xc_green",alt="Mitsubishi Xpander Cross on release day",
+title="New Car Release Day Checklist",
+desc="Getting your new car soon? What to bring, how to inspect the unit, which documents to check, and what to ask before you drive home.",
+answer="On release day, bring your valid IDs and any remaining payment or documents, inspect the car in good light (paint, glass, tires, interior, lights and features), check that the VIN and engine numbers match your documents, confirm the freebies and accessories, and ask for the owner's manual, warranty booklet and PMS schedule before driving home.",
+faq=[("What should I bring on release day?","Valid IDs, any remaining payment or documents requested by your sales executive, and your driver's license if you'll drive home."),
+("What do I check on the car itself?","Paint and body panels, glass, tires including the spare, lights, AC, infotainment, windows, locks, and that the mileage is low."),
+("What documents should I receive?","Your insurance documents, registration documents or their status, the owner's manual and warranty booklet. Ask what to expect and when for plates and the CR."),
+("Can I bring someone to help inspect?","Yes, it helps. Bring someone who can check while you listen to the walkaround.")],
+body='''<p>Excited na sa release? Me too, it's my favorite part of the job. A calm, thorough check now saves you questions later. Here's the list I walk my clients through.</p>
+
+<h2>Before you go</h2>
+<ul class="ticks">
+<li>Confirm the release schedule and the time with your sales executive</li>
+<li>Bring valid IDs and any remaining payment or documents requested</li>
+<li>Bring your driver's license if you'll drive home</li>
+<li>Plan to arrive with daylight left, so you can inspect in good light</li>
+<li>Bring a family member to help check</li>
+</ul>
+
+<h2>Exterior walkaround</h2>
+<ul class="ticks">
+<li>Paint and body panels: scratches, dents, uneven gaps</li>
+<li>Glass and mirrors: chips or cracks</li>
+<li>Tires: all four plus the spare, no damage</li>
+<li>Lights: headlights, signals, brake lights, hazards</li>
+</ul>
+
+<h2>Interior and features</h2>
+<ul class="ticks">
+<li>Seats, upholstery and trim clean and undamaged</li>
+<li>AC cold, front and rear where applicable</li>
+<li>Windows, locks, mirrors and wipers working</li>
+<li>Infotainment, phone pairing and reverse camera</li>
+<li>Odometer shows low delivery mileage</li>
+</ul>
+
+<h2>Documents and inclusions</h2>
+<ol class="steps">
+<li><h3>Match the numbers</h3><p>The VIN and engine number on the car should match your documents.</p></li>
+<li><h3>Insurance</h3><p>Check your TPL and comprehensive insurance details, and save the claims hotline.</p></li>
+<li><h3>Registration</h3><p>Ask about the status of your LTO registration, CR and plates, and what to carry in the meantime. See <a href="/tips/lto-rules-2026-car-owners/">LTO rules 2026</a>.</p></li>
+<li><h3>Freebies and accessories</h3><p>Check each item on your release list: tint, mats, early warning device, tools and others.</p></li>
+<li><h3>Manuals and warranty</h3><p>Owner's manual, warranty booklet and PMS schedule.</p></li>
+</ol>
+
+<h2>Ask before you drive home</h2>
+<ul class="ticks">
+<li>When is my first PMS, and how do I book it?</li>
+<li>What does the free labor up to 5,000 km cover?</li>
+<li>Who do I call for warranty or roadside concerns?</li>
+<li>How do I use the key features: lights, wipers, safety systems, phone pairing?</li>
+</ul>
+<p>Then drive gently. My <a href="/tips/first-1000-km-break-in-tips/">first 1,000 km tips</a> are your next read.</p>
+'''+CTA2("Haven't picked your unit yet? Check what fits your budget, then book a test drive in San Jose del Monte.","xpander-cross")),
+
+dict(base="tips",car="xpander",slug="christmas-holiday-driving-tips",date="2026-10-22",by=BY,img="xpgls_red",alt="Mitsubishi Xpander ready for Christmas holiday family trips",
+title="Christmas Holiday Driving Tips for Families",
+desc="Simbang Gabi, mall traffic, Noche Buena runs and probinsya trips: holiday driving tips for Filipino families, plus a no-drinking-and-driving reminder.",
+answer="For Christmas driving, plan around mall and Simbang Gabi traffic, go early for errands, park in well-lit areas and never leave valuables in sight, do a BLOWBAGETS check before probinsya trips, and never drive after drinking at parties. Arrange a designated driver or a ride home.",
+faq=[("When is holiday traffic usually worst?","Weekends and paydays in December, the days before Christmas Eve and New Year's Eve, and areas around malls and churches during Simbang Gabi."),
+("How can I keep my car safe at crowded malls?","Park in well-lit, busy areas, lock the car, take valuables with you or keep them out of sight, and note where you parked."),
+("Is it okay to drive after a few drinks at a Christmas party?","No. The Anti-Drunk and Drugged Driving Act (RA 10586) penalizes driving under the influence. Use a designated driver or book a ride."),
+("What should I check before a long holiday trip?","Do a BLOWBAGETS check, load your RFID, plan stopovers, and pack water, medicines and an early warning device.")],
+body='''<p>Pasko na naman! Between Simbang Gabi, Christmas parties, mall runs and uwian sa probinsya, December is the busiest driving month for many families. Here's how to enjoy it without the stress.</p>
+
+<h2>Simbang Gabi and early-morning drives</h2>
+<ul class="ticks">
+<li>Leave earlier: church parking fills up fast</li>
+<li>Watch for pedestrians, especially kids and seniors walking in the dark</li>
+<li>Use headlights properly and keep your windshield clean</li>
+<li>Don't drive puyat: switch drivers if you need to</li>
+</ul>
+
+<h2>Mall and errand runs</h2>
+<ul class="ticks">
+<li>Shop on weekday mornings if you can; weekends and paydays are heaviest</li>
+<li>Make one list and combine errands into one trip</li>
+<li>Park in well-lit, busy areas and note your parking slot</li>
+<li>Keep bags in the trunk, never on the seat in plain sight</li>
+<li>Be patient in parking lots. Fender benders spike in December</li>
+</ul>
+
+<h2>Christmas parties: plan your ride home</h2>
+<p>If you'll drink, don't drive. The <b>Anti-Drunk and Drugged Driving Act (RA 10586)</b> penalizes driving under the influence, and no party is worth the risk.</p>
+<ol class="steps">
+<li><h3>Choose a designated driver</h3><p>Decide before you leave the house, not at the party.</p></li>
+<li><h3>Or book a ride</h3><p>Leave the car parked safely and pick it up the next day.</p></li>
+<li><h3>Host responsibly</h3><p>If you're the host, offer non-alcoholic drinks and help guests get home safely.</p></li>
+</ol>
+
+<h2>Probinsya trips for Pasko and Bagong Taon</h2>
+<p>For long drives, use the same prep as Undas: BLOWBAGETS, RFID, off-peak departure and a packing list for kids and seniors. My <a href="/tips/undas-road-trip-checklist-2026/">road trip checklist</a> covers it step by step.</p>
+<ul class="ticks">
+<li>Check toll operator advisories for holiday traffic before leaving</li>
+<li>Pack gifts so they don't block the rear view</li>
+<li>Plan rest stops every couple of hours</li>
+</ul>
+
+<h2>Thinking of a new car for the holidays?</h2>
+<p>If you're planning to use your 13th month toward a car, read my <a href="/blog/13th-month-pay-car-budget-plan/">13th month car budget plan</a> first. For a family 7-seater, the Xpander GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with ₱60K fuel (October 2026 promo, 60 months). For December promos, message me for the latest.</p>
+'''+SRC(("Lawphil: Republic Act No. 10586, Anti-Drunk and Drugged Driving Act of 2013","https://lawphil.net/statutes/repacts/ra2013/ra_10586_2013.html"))+CTA2("Want a roomier car for the family's Christmas trips? Check your budget, then test drive in SJDM.","xpander")),
+
+dict(base="blog",car="triton",slug="l300-vs-triton-for-negosyo",date="2026-10-22",by=BY,img="tr_glx",alt="Mitsubishi Triton pickup compared with the L300 truck for business",
+title="L300 vs Triton: Which Workhorse for Your Negosyo?",
+desc="Truck or pickup for your business? L300 Dual AC vs Triton GX AT compared: body, engine, use cases and October 2026 promo monthlies.",
+answer="Choose the L300 if your business is mainly about moving cargo: it's a 2.2L turbo-diesel truck with a 5-speed manual and body options, and the Dual AC is ₱1,039,000 SRP, from ₱21,405 a month at Zero DP. Choose the Triton if you need a pickup that works on rough roads and doubles as a family vehicle: the Triton GX AT is ₱1,430,000 SRP, from ₱28,900 a month at Zero DP.",
+faq=[("Which is cheaper, L300 or Triton?","In October 2026, the L300 Dual AC is ₱1,039,000 SRP (Zero DP ₱21,405 a month, or ₱123K DP at ₱18,789), while the Triton GX AT is ₱1,430,000 SRP (Zero DP ₱28,900, or ₱140K DP at ₱25,200)."),
+("Which carries more cargo?","It depends on the variant and body. The L300 is designed around cargo with body options like dropside and aluminum van. Check the official spec of each exact unit."),
+("Is the Triton automatic?","The Triton GX 2.4D 2WD is an automatic. The L300 uses a 5-speed manual."),
+("Can I use the L300 for family trips?","The L300 is a work truck. If you need one vehicle for both work and family, the Triton double cab is usually the better fit.")],
+body='''<p>"Sir, L300 o Triton para sa negosyo?" Both are Mitsubishi workhorses, but they do different jobs. The right one depends on what you carry, where you drive and who else rides with you.</p>
+
+<h2>At a glance</h2>
+'''+T(["","L300 Dual AC","Triton GX AT"],[
+("Type","Commercial truck","Pickup"),
+("Engine","2.2L 4N14 turbo-intercooled diesel","2.4L 4N16 intercooled turbo diesel"),
+("Transmission","5-speed manual","Automatic"),
+("Best at","Moving cargo every day","Work plus family, rough roads"),
+("SRP","₱1,039,000","₱1,430,000")])+'''
+
+<h2>October 2026 promos</h2>
+'''+T(["Unit","Zero DP","Low DP","Fuel"],[
+("L300 Dual AC","₱21,405/mo","₱123K DP: ₱18,789/mo","₱20K"),
+("Triton GX AT","₱28,900/mo","₱140K DP: ₱25,200/mo","₱20K")])+PN+'''
+
+<h2>Choose the L300 if…</h2>
+<ul class="ticks">
+<li>Your business is about volume: deliveries, sari-sari restocking, hardware, water refilling, catering</li>
+<li>You want a body built for your cargo; the Cab &amp; Chassis variant lets you fit a dropside or aluminum van</li>
+<li>A driver, not the owner, will do most of the daily driving</li>
+<li>Lowest monthly is a priority</li>
+</ul>
+<p>More in my <a href="/blog/l300-negosyo-guide/">L300 negosyo guide</a>.</p>
+
+<h2>Choose the Triton if…</h2>
+<ul class="ticks">
+<li>You need one vehicle for work on weekdays and family on weekends</li>
+<li>Your routes include farm roads, sites or rough provincial roads (consider a 4WD variant)</li>
+<li>You carry tools, materials and a crew rather than full truckloads</li>
+<li>You want an automatic</li>
+</ul>
+<p>More in my <a href="/blog/triton-for-business-and-farm/">Triton for business and farm</a> guide.</p>
+
+<h2>Run the numbers both ways</h2>
+<ol class="steps">
+<li><h3>List what you carry every week</h3><p>Volume, weight and how often. Your heaviest regular load decides a lot.</p></li>
+<li><h3>Add up ownership costs</h3><p>Monthly, fuel, insurance, PMS, a driver's pay, tolls and parking.</p></li>
+<li><h3>Check the income guide</h3><p>At 30–35% of gross income, the L300 Zero DP monthly fits about ₱61,200 to ₱71,400 a month, the Triton GX AT about ₱82,600 to ₱96,300. For business owners, banks look at business income and documents. See <a href="/guides/car-loan-requirements/">car loan requirements</a>.</p></li>
+<li><h3>Test drive both</h3><p>Drive the routes you actually use, if possible.</p></li>
+</ol>
+'''+CTA2("Not sure yet? Check your budget, then test drive the L300 and Triton back-to-back in SJDM.","triton")),
+]
+DRAFT_POSTS=BULK2+BULK+DRAFT_POSTS
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026
