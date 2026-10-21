@@ -60,3 +60,5 @@ address{font-style:normal;margin-bottom:1em}
 .chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mu);margin:6px 0 4px}.chk input{margin-top:4px;width:18px;height:18px;flex:none}
 form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:disabled{opacity:.6}
 .btn.ghost.dk{color:var(--ink)}.vc .row{align-items:center;margin-top:8px}.pm{margin-bottom:48px}
+.hap{margin-left:auto;margin-right:10px}@media(min-width:960px){.hap{order:3;margin:0 0 0 18px}}
+.ct .g3{grid-template-columns:1fr}

@@ -53,6 +53,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <a class="skip" href="#main">Skip to content</a>
 <header class="hd"><div class="w hdi">
 <a class="brand" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Richard Cuagdan</b><small>Mitsubishi SJ Legacy Motors</small></span></a>
+<a class="btn sm hap" href="/apply/">Apply Now</a>
 <button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
 <nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="/budgetcalculator/">Compute my monthly</a></nav>
 </div></header>
@@ -67,7 +68,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 </main>
 <footer class="ft"><div class="w">
 <div class="fg">
-<div><p class="fb">Richard Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p></div>
+<div><p class="fb">Richard Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan, Philippines</p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
 <div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
 <p class="disc">Richard Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
@@ -87,7 +88,7 @@ def img(k,alt,eager=False,cls=""):
 def vcard(v,m):
     promo=f'<a class="btn sm ghost dk" href="/promos/#{m["slug"]}">See promo</a>' if v["promo"] else f'<a class="btn sm ghost dk" href="{MSG}" rel="noopener">Ask for the latest promo</a>'
     return f'''<article class="card vc">{img(v["img"],f"Mitsubishi {v['n']}")}
-<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{srp_txt(v)}</b></p><p class="muted">All-in packages with freebies, ask for details.</p><p class="row">{promo} <a class="more" href="/apply/?unit={v['id']}">Apply →</a></p></div></article>'''
+<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{srp_txt(v)}</b></p><p class="muted">All-in packages with freebies, ask for details.</p><p class="row">{promo} <a class="btn sm" href="/apply/?unit={v['id']}">Apply for this unit</a></p></div></article>'''
 
 def offers_ld(m):
     out=[]
@@ -102,7 +103,7 @@ ALLIN_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in ALLIN)+"</ul>"
 FREE_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in FREEBIES)+"</ul>"
 def from_txt(m):
     s=srp_from(m); return f'SRP from <b>{f(s)}</b>' if s else 'Ask for price'
-UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
+UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}" data-model="{m["slug"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
 CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
 
 # ---------- HOME
@@ -113,7 +114,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <p class="kick">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>
 <h1>Your next Mitsubishi, explained clearly and financed sensibly.</h1>
 <p class="lead">I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors. I help employed buyers, business owners and OFWs find a car and a monthly payment that fit their real budget.</p>
-<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
+<p class="row"><a class="btn" href="/apply/">Apply for Financing</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
 </div>{img("xc_x3n","Mitsubishi Xpander Cross in Quartz White Pearl",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
@@ -154,7 +155,7 @@ for m in MODELS:
     haspromo=any(v["promo"] for v in m["variants"])
     page(f"/cars/{m['slug']}/",f"Mitsubishi {m['name']} 2026 Price & Variants | SJ Legacy Motors SJDM",
      f"Mitsubishi {m['name']} at SJ Legacy Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 <section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
@@ -193,7 +194,7 @@ function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='
  d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
   m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel: <b>'+peso(v.fuel)+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
   h+='</div></section>'}});
- h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV, Versa Van and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
+ h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV, Versa Van and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
  var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
  if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
 var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}
@@ -285,7 +286,7 @@ f'''<section class="ph"><div class="w"><h1>Apply for your Mitsubishi</h1><p clas
 <script>
 document.addEventListener('DOMContentLoaded',function(){{
 var $=function(i){{return document.getElementById(i)}};
-var q=new URLSearchParams(location.search).get('unit');if(q){{var o=document.querySelector('#unit option[data-id="'+q.replace(/[^a-z0-9]/gi,'')+'"]');if(o)o.selected=true}}
+var q=new URLSearchParams(location.search).get('unit');if(q){{var k=q.replace(/[^a-z0-9-]/gi,''),o=document.querySelector('#unit option[data-id="'+k+'"]')||document.querySelector('#unit option[data-model="'+k+'"]');if(o)o.selected=true}}
 $('af').addEventListener('submit',function(ev){{ev.preventDefault();
  var v=function(i){{return $(i).value.trim()}};
  var em=v('email');
@@ -309,6 +310,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send a message any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Open Messenger</a></p></div>
 <div class="card pad"><h2 class="h3">Showroom</h2><address>Mitsubishi SJ Legacy Motors<br>San Jose del Monte, Bulacan<br>Philippines</address><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
+<div class="card pad"><h2 class="h3">Apply online</h2><p>Send your details and preferred unit, and I'll get back to you with the latest promo.</p><p><a class="btn" href="/apply/">Apply Now</a></p></div>
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
 <!-- PLACEHOLDER: phone / mobile number goes here once available -->
 </div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
