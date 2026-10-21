@@ -145,6 +145,30 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .swh{float:right;text-transform:none;letter-spacing:0;font-weight:500;color:var(--g3)}
 @media(min-width:720px){.vrow{margin:0}.vrow:after{display:none}.vtrack{flex-wrap:wrap;overflow:visible;padding:12px 0 6px}.swh{display:none}}
 @media (prefers-reduced-motion:reduce){.vc,.vc .uimg{transition:none}.vc.on .ux{animation:none}}
+
+/* site header/footer (scoped) */
+header.sh{display:block;padding:0;background:#0b0b0c;color:#fff;position:sticky;top:0;z-index:15}
+.shi{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:64px;gap:10px}
+.sb{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;min-width:0;flex:0 1 auto}
+.sb span{display:flex;flex-direction:column;line-height:1.2}
+.sb b{font-size:clamp(14px,4vw,17px);font-weight:750}
+.sb small{font-size:12px;color:#b4b4bb;font-style:italic;letter-spacing:.04em;margin-top:2px}
+.smt{background:none;border:1px solid #3f3f46;color:#fff;border-radius:10px;padding:8px 14px;font:inherit;font-size:15px;cursor:pointer}
+.snav{display:none;width:100%;flex-direction:column;padding:8px 0 18px}
+.snav.open{display:flex}
+.snav a{color:#e4e4e7;text-decoration:none;padding:10px 0;font-size:16px}
+.snav a:hover{color:#fff}
+.snav a.ap{color:#ff4d5a;font-weight:700}
+@media(min-width:960px){.smt{display:none}.snav{display:flex;width:auto;flex-direction:row;align-items:center;gap:22px;padding:0}.snav a{font-size:15px;padding:0}}
+.sft{background:#0b0b0c;color:#a1a1aa;padding:48px 22px 110px;font-size:14px;margin-top:24px}
+.sft .fi{max-width:1160px;margin:0 auto}
+.sft a{color:#e4e4e7}
+.sft .fb{color:#fff;font-weight:700;margin-bottom:6px}
+.sft p{margin-bottom:12px}
+.sft .ap{color:#ff4d5a;font-weight:700}
+.hero{padding-top:28px}
+@media(min-width:700px){.hero h1,.hero p{max-width:1116px;margin-left:auto;margin-right:auto}}
+html{scroll-padding-top:80px}#app,#app section,.card{scroll-margin-top:80px}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -155,10 +179,11 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<header>
-  <svg class="logo" viewBox="0 0 100 87" aria-hidden="true"><g fill="#E60012"><polygon points="50,0 63,22.5 50,45 37,22.5"/><polygon points="24,45 50,45 37,67.5 11,67.5"/><polygon points="76,45 50,45 63,67.5 89,67.5"/></g></svg>
-  <div><div class="t">Mitsubishi Motors</div><div class="s">By Richard Dennis Cuagdan</div></div>
-</header>
+<header class="sh"><div class="shi">
+<a class="sb" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Mitsubishi Motors</b><small>By Richard Dennis Cuagdan</small></span></a>
+<button class="smt" type="button" aria-expanded="false" aria-controls="snav" onclick="var n=document.getElementById('snav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
+<nav id="snav" class="snav" aria-label="Main"><a href="/">Home</a><a href="/cars/">Cars</a><a href="/promos-tips/">Promos &amp; Tips</a><a href="/apply/" class="ap">Apply Now</a><a href="/test-drive/">Book a Test Drive</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+</div></header>
 <section class="hero" id="hero">
   <h1>Budget Fit Calculator</h1>
   <p>See which Mitsubishi fits your monthly budget in under a minute. All-in financing, 60 months.</p>
@@ -301,6 +326,12 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
     </div>
   </section>
 </main>
+<footer class="sft"><div class="fi">
+<p class="fb">Richard Dennis Cuagdan</p>
+<p>Car Sales Executive, Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>
+<p><a href="/">Home</a> · <a href="/cars/">Cars</a> · <a href="/promos-tips/">Promos &amp; Tips</a> · <a class="ap" href="/apply/">Apply Now</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p>
+<p>© 2026 Richard Dennis Cuagdan · Mitsubishi SJ Legacy Motors</p>
+</div></footer>
 <footer>Richard Dennis Cuagdan · Car Sales Executive · Mitsubishi SJ Legacy Motors (authorized dealer)<br><a href="https://www.facebook.com/504759566043148" target="_blank" rel="noopener" style="color:inherit">Facebook</a> <span style="opacity:.6">· v8</span></footer>
 <div class="toast" id="toast"></div>
 <div class="mdl" id="mdl" aria-hidden="true"><div class="box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
