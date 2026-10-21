@@ -7,7 +7,8 @@ function stamp(){var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',y
 function lid(){var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';for(var i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s}
 function okMobile(m){m=m.replace(/[\s()-]/g,'');return /^(09\d{9}|\+639\d{9}|\+\d{8,15})$/.test(m)}
 function beacon(b){try{return !!(navigator.sendBeacon&&navigator.sendBeacon(URL_,new Blob([b],{type:'text/plain;charset=utf-8'})))}catch(e){return false}}
-function send(lead){var b;try{b=JSON.stringify(lead)}catch(e){return Promise.resolve(false)}
+function send(lead){return Promise.race([send0(lead),new Promise(function(r){setTimeout(function(){r(true)},2500)})])}
+function send0(lead){var b;try{b=JSON.stringify(lead)}catch(e){return Promise.resolve(false)}
   try{return fetch(URL_,{method:'POST',mode:'no-cors',keepalive:true,cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:b}).then(function(){return true}).catch(function(){return beacon(b)})}catch(e){return Promise.resolve(beacon(b))}}
 function track(unit){
   try{if(typeof window.fbq==='function')window.fbq('track','Lead',{content_name:unit})}catch(_){}
