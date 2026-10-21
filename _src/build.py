@@ -17,14 +17,22 @@ PX='''<!-- Meta Pixel -->
 CL='''<!-- Microsoft Clarity -->
 <script>try{(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z0ztjrla58");}catch(_){}</script>
 '''
-NAV=[("/","Home"),("/cars/","Cars"),("/promos/","Promos"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/guides/","Guides"),("/blog/","Blog"),("/about/","About"),("/contact/","Contact")]
+NAV=[("/","Home"),("/cars/","Cars"),("GROUP","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
+DDJS="<script>(function(){var b=document.querySelector('.ddb'),d=b&&b.parentNode;if(!b)return;function set(o){d.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}b.addEventListener('click',function(e){e.stopPropagation();set(!d.classList.contains('open'))});document.addEventListener('click',function(e){if(!d.contains(e.target))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false)}})})();</script>"
+GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
     url=D+path
     graph=[DEALER,PERSON]+(ld or [])
     if crumbs:
         graph.append({"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":D+p} for i,(p,n) in enumerate(crumbs)]})
-    nav="".join(f'<a href="{p}"{" aria-current=\"page\"" if (p==path or (p!="/" and path.startswith(p))) else ""}>{n}</a>' for p,n in NAV)
+    cur=lambda p:(p==path or (p!="/" and path.startswith(p)))
+    def item(p,n):
+        if p!="GROUP": return f'<a href="{p}"{" aria-current=\"page\"" if cur(p) else ""}>{e(n)}</a>'
+        on=any(cur(q) for q,_ in GROUP)
+        sub="".join(f'<a href="{q}"{" aria-current=\"page\"" if cur(q) else ""}>{m}</a>' for q,m in GROUP)
+        return f'<div class="dd"><button type="button" class="ddb{" cur" if on else ""}" aria-expanded="false" aria-controls="ddm">{e(n)}<svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><div class="ddm" id="ddm">{sub}</div></div>'
+    nav="".join(item(p,n) for p,n in NAV)
     bc=""
     if crumbs:
         bc='<nav class="bc" aria-label="Breadcrumb"><div class="w">'+" <span>/</span> ".join(f'<a href="{p}">{e(n)}</a>' for p,n in crumbs[:-1])+f' <span>/</span> <span aria-current="page">{e(crumbs[-1][1])}</span></div></nav>'
@@ -58,6 +66,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <a class="brand" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Richard Cuagdan</b><small>Mitsubishi SJ Legacy Motors</small></span></a>
 <button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
 <nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="/budgetcalculator/">Compute my monthly</a></nav>
+{DDJS}
 </div></header>
 {bc}
 <main id="main">
@@ -214,9 +223,13 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 </script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
 
 # ---------- guides / blog
+def xl(base):
+    o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","Unlock this month's down payment and monthly options.")],
+       "blog":[("/guides/","Guides","Plain-language guides to financing, documents and OFW buying."),("/promos/","Promos","Unlock this month's down payment and monthly options.")]}[base]
+    return '<section class="sec alt"><div class="w"><h2>More in Promos &amp; Tips</h2><div class="grid g2">'+"".join(f'<a class="card pad mc" href="{p}"><h3>{n} →</h3><p class="muted">{d}</p></a>' for p,n,d in o)+'</div></div></section>'
 def articles(base,items,label,title,desc,intro):
     lst="".join(f'<li class="card pad"><h2 class="h3"><a href="/{base}/{a["slug"]}/">{e(a["title"])}</a></h2><p>{e(a["desc"])}</p>{f"<p class=muted>{a['date']}</p>" if base=="blog" else ""}</li>' for a in items)
-    page(f"/{base}/",title,desc,f'<section class="ph"><div class="w"><h1>{label}</h1><p class="lead">{intro}</p></div></section><section class="sec"><div class="w"><ul class="grid g2 plain">{lst}</ul></div></section>',crumbs=[("/","Home"),(f"/{base}/",label)])
+    page(f"/{base}/",title,desc,f'<section class="ph"><div class="w"><h1>{label}</h1><p class="lead">{intro}</p></div></section><section class="sec"><div class="w"><ul class="grid g2 plain">{lst}</ul></div></section>'+xl(base),crumbs=[("/","Home"),(f"/{base}/",label)])
     for a in items:
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
         others="".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
