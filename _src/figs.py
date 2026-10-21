@@ -56,3 +56,48 @@ FIGS={
 ("Safety and features","xvd-variants","Xpander vs Destinator variants, transmission and ground clearance comparison"),
 ("Test drive both","xvd-fit","Which family car fits: Xpander for city and budget, Destinator for probinsya trips and rough roads"),
 ("Sources","xvd-xpander","Mitsubishi Xpander 7-seater MPV, compared with the Destinator")]}
+FIGS.update({
+"how-much-car-can-i-afford-philippines":[
+("The rule in one line","afford-rule","The 30 to 35 percent income guide: monthly divided by 0.35 for minimum income, by 0.30 for comfortable income"),
+("How a down payment","afford-table","Table of October 2026 Zero DP monthlies for Mitsubishi units and the gross monthly income each needs"),
+("Three ways","afford-dp","Zero DP vs low DP monthly comparison for Xpander, Destinator and Triton, October 2026 promos"),
+("Don't forget","afford-ways","Three ways to make a car fit your budget: co-borrower, bigger down payment, right variant"),
+("Your next step","afford-xpander","Mitsubishi Xpander GLX in silver, a family MPV that fits many budgets")],
+"triton-for-business-and-farm":[
+("Who the Triton","tr-glance","Mitsubishi Triton at a glance: 2.4L 4N16 turbo diesel, manual or automatic, 2WD or 4WD, open cargo bed"),
+("2WD or 4WD","tr-cargo-photo","Mitsubishi Triton pickup cargo bed loaded for work"),
+("The October 2026","tr-2wd4wd","Triton 2WD vs 4WD comparison by road type and use"),
+("Cargo bed tips","tr-promo","Triton GX 2.4D 2WD A/T October 2026 promo: SRP 1,430,000 pesos, 28,900 a month Zero DP or 25,200 with 140K DP"),
+("Financing for business","tr-bed","Pickup cargo bed rules: rated payload, tie down loads, bed liner, tarpaulin")],
+"montero-sport-variants-explained":[
+("The four variants","ms-shared","Every Montero Sport shares the 2.4L 4N15 turbo diesel with 181 PS and 430 Nm and seven seats"),
+("GLX MT:","ms-table","Montero Sport GLX, GLS and Black Series 2WD and 4WD SRPs and lowest October 2026 promo monthlies"),
+("Black Series:","ms-bs-photo","Mitsubishi Montero Sport Black Series 4WD front view"),
+("Which income","ms-pick","Which Montero Sport variant fits: GLX M/T, GLS A/T, Black Series 2WD or 4WD")],
+"xpander-variants-explained":[
+("October 2026 promos","xv-engine","Every Xpander variant shares the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm and seven seats"),
+("GLX MT:","xv-table","Xpander GLX MT, GLX AT, GLS AT and Xpander Cross October 2026 Zero DP and low DP monthlies with fuel freebies"),
+("Xpander Cross:","xv-cross-photo","Mitsubishi Xpander Cross dashboard and cabin"),
+("Your next step","xv-pick","Quick picker: which Xpander variant fits your budget and driving")],
+"destinator-glx-vs-gls-vs-gt":[
+("October 2026 promos","dv-shared","Every Destinator has the 1.5L turbo with 163 PS and 250 Nm, a CVT and 214 mm ground clearance"),
+("GLX:","dv-table","Destinator GLX, GLS and GT SRPs with October 2026 Zero DP and low DP monthlies"),
+("GT:","dv-cabin","Mitsubishi Destinator interior and dashboard"),
+("Your next step","dv-steps","Three steps to choose a Destinator variant: income, must-have features, family test drive")],
+"pms-schedule-guide":[
+("Where to find","pms-what","What PMS does: replace fluids and filters, inspect wear items, catch problems early, protect your warranty"),
+("What usually gets checked","pms-rule","PMS is due by kilometers or months, whichever comes first, per the owner's manual"),
+("Free labor","pms-checks","What PMS usually covers: oil and filter, air and cabin filters, brakes, fluids, tires, battery and lights, underchassis"),
+("PMS habits","pms-free","All-in package: free labor up to 5,000 km and a 3-year warranty"),
+("Your next step","pms-habits","PMS owner habits: book ahead, stay on schedule, keep receipts, mention anything odd")],
+"first-1000-km-break-in-tips":[
+("The do's","bi-1000","New car break-in: gentle, varied driving for the first 1,000 km, per the owner's manual"),
+("Week-one","bi-dodont","First 1,000 km do's and don'ts: speed, throttle, brakes and load"),
+("After 1,000 km","bi-week","Week-one new car owner checklist: manual, leaks, freebies, phone numbers, first PMS"),
+("Your next step","bi-destinator","Brand-new Mitsubishi Destinator SUV on the road")],
+"car-insurance-explained-philippines":[
+("Comprehensive:","ins-ctpl","CTPL vs comprehensive car insurance comparison: what's required, what's covered, floods"),
+("Acts of nature","ins-comp","What comprehensive car insurance typically covers, with acts of nature as an add-on"),
+("How to file","ins-allin","All-in package insurance: TPL, 1-year comprehensive with rate locked for 3 years, chattel mortgage, warranty"),
+("Your next step","ins-claim","How to file a car insurance claim in five steps")],
+})

@@ -238,13 +238,15 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 </script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
 
 # ---------- promos & tips hub
+LATEST="".join(f'<a class="card pad mc" href="/{a["base"]}/{a["slug"]}/"><p class="kick">{"Blog" if a["base"]=="blog" else "Tips"}</p><h3>{e(a["title"])}</h3><p class="muted">{e(a["desc"])}</p></a>' for a in sorted(LIVE,key=lambda a:a["date"],reverse=True))
 HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
      ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
-     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]+([("/tips/","Tips","Quick checklists for road trips, fuel, LTO and car care","xpglx_x37","Mitsubishi Xpander GLX")] if TIPS else [])
+     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]+([("/tips/","Tips","Checklists for road trips, PMS, insurance, LTO and car care","xpglx_x37","Mitsubishi Xpander GLX")] if TIPS else [])
 page("/promos-tips/","Promos & Tips | Mitsubishi Motors - SJ Legacy Motors",
  "Start here for Mitsubishi promos at SJ Legacy Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
 f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>''',
+<section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>
+<section class="sec alt"><div class="w"><h2>Latest articles</h2><p class="sub">New blog posts and tips, newest first.</p><div class="grid g2">{LATEST}</div></div></section>''',
  crumbs=[("/","Home"),("/promos-tips/","Promos & Tips")])
 
 # ---------- guides / blog

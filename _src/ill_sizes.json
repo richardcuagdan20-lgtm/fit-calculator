@@ -1,1 +1,330 @@
-{"undas-blowbagets": [1080, 1416], "undas-rfid": [1080, 1064], "undas-traffic": [1080, 780], "undas-packing": [1200, 675], "undas-breakdown": [1080, 952], "undas-xpander": [1200, 675], "ftb-checklist": [1080, 972], "ftb-costs": [1080, 750], "ftb-testdrive": [1080, 1416], "ftb-mirage": [1200, 675], "fuel-oct20": [1080, 780], "fuel-habits": [1080, 1332], "fuel-diesel-gas": [1080, 728], "fuel-l300-mirage": [1080, 1126], "lto-timeline": [1080, 1110], "lto-5year": [1080, 792], "lto-15days": [1080, 604], "lto-destinator": [1200, 675], "lto-checklist": [1080, 1018], "weather-outlook": [1080, 780], "weather-heat": [1080, 1110], "weather-rain": [1200, 675], "weather-flood": [1080, 856], "weather-clearance": [1200, 675], "myths-overview": [1080, 1156], "myths-selfemployed": [1080, 842], "myths-bankcheck": [1080, 840], "myths-xpander": [1200, 675], "ofw-flatlay": [1200, 675], "ofw-spa": [1080, 728], "ofw-docs": [1080, 1064], "ofw-release": [1080, 840], "ofw-3rdrow": [1200, 675], "13th-flatlay": [1200, 675], "13th-formula": [1080, 780], "13th-split": [1080, 880], "13th-costs": [1080, 972], "13th-mirage": [1200, 675], "l300-spec": [1080, 1170], "l300-bodies": [1080, 882], "l300-load": [1080, 842], "l300-roi": [1080, 840], "xvd-power": [1080, 980], "xvd-3rdrow": [1200, 675], "xvd-variants": [1080, 806], "xvd-fit": [1080, 972], "xvd-xpander": [1200, 675]}
+{
+"undas-blowbagets": [
+1080,
+1416
+],
+"undas-rfid": [
+1080,
+1064
+],
+"undas-traffic": [
+1080,
+780
+],
+"undas-packing": [
+1200,
+675
+],
+"undas-breakdown": [
+1080,
+952
+],
+"undas-xpander": [
+1200,
+675
+],
+"ftb-checklist": [
+1080,
+972
+],
+"ftb-costs": [
+1080,
+750
+],
+"ftb-testdrive": [
+1080,
+1416
+],
+"ftb-mirage": [
+1200,
+675
+],
+"fuel-oct20": [
+1080,
+780
+],
+"fuel-habits": [
+1080,
+1332
+],
+"fuel-diesel-gas": [
+1080,
+728
+],
+"fuel-l300-mirage": [
+1080,
+1126
+],
+"lto-timeline": [
+1080,
+1110
+],
+"lto-5year": [
+1080,
+792
+],
+"lto-15days": [
+1080,
+604
+],
+"lto-destinator": [
+1200,
+675
+],
+"lto-checklist": [
+1080,
+1018
+],
+"weather-outlook": [
+1080,
+780
+],
+"weather-heat": [
+1080,
+1110
+],
+"weather-rain": [
+1200,
+675
+],
+"weather-flood": [
+1080,
+856
+],
+"weather-clearance": [
+1200,
+675
+],
+"myths-overview": [
+1080,
+1156
+],
+"myths-selfemployed": [
+1080,
+842
+],
+"myths-bankcheck": [
+1080,
+840
+],
+"myths-xpander": [
+1200,
+675
+],
+"ofw-flatlay": [
+1200,
+675
+],
+"ofw-spa": [
+1080,
+728
+],
+"ofw-docs": [
+1080,
+1064
+],
+"ofw-release": [
+1080,
+840
+],
+"ofw-3rdrow": [
+1200,
+675
+],
+"13th-flatlay": [
+1200,
+675
+],
+"13th-formula": [
+1080,
+780
+],
+"13th-split": [
+1080,
+880
+],
+"13th-costs": [
+1080,
+972
+],
+"13th-mirage": [
+1200,
+675
+],
+"l300-spec": [
+1080,
+1170
+],
+"l300-bodies": [
+1080,
+882
+],
+"l300-load": [
+1080,
+842
+],
+"l300-roi": [
+1080,
+840
+],
+"xvd-power": [
+1080,
+980
+],
+"xvd-3rdrow": [
+1200,
+675
+],
+"xvd-variants": [
+1080,
+806
+],
+"xvd-fit": [
+1080,
+972
+],
+"xvd-xpander": [
+1200,
+675
+],
+"afford-rule": [
+1080,
+846
+],
+"afford-table": [
+1080,
+1288
+],
+"afford-dp": [
+1080,
+742
+],
+"afford-ways": [
+1080,
+1110
+],
+"afford-xpander": [
+1200,
+675
+],
+"tr-glance": [
+1080,
+842
+],
+"tr-cargo-photo": [
+1200,
+675
+],
+"tr-2wd4wd": [
+1080,
+728
+],
+"tr-promo": [
+1080,
+780
+],
+"tr-bed": [
+1080,
+840
+],
+"ms-shared": [
+1080,
+780
+],
+"ms-table": [
+1080,
+742
+],
+"ms-bs-photo": [
+1200,
+675
+],
+"ms-pick": [
+1080,
+880
+],
+"xv-engine": [
+1080,
+780
+],
+"xv-table": [
+1080,
+774
+],
+"xv-cross-photo": [
+1200,
+675
+],
+"xv-pick": [
+1080,
+842
+],
+"dv-shared": [
+1080,
+780
+],
+"dv-table": [
+1080,
+780
+],
+"dv-cabin": [
+1200,
+675
+],
+"dv-steps": [
+1080,
+704
+],
+"pms-what": [
+1080,
+796
+],
+"pms-rule": [
+1080,
+822
+],
+"pms-checks": [
+1080,
+1194
+],
+"pms-free": [
+1080,
+780
+],
+"pms-habits": [
+1080,
+840
+],
+"bi-1000": [
+1080,
+780
+],
+"bi-dodont": [
+1080,
+928
+],
+"bi-week": [
+1080,
+976
+],
+"bi-destinator": [
+1200,
+675
+],
+"ins-ctpl": [
+1080,
+938
+],
+"ins-comp": [
+1080,
+1064
+],
+"ins-allin": [
+1080,
+796
+],
+"ins-claim": [
+1080,
+928
+]
+}

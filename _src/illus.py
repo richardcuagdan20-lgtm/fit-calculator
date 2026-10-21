@@ -1,5 +1,5 @@
 # Generates article illustrations (brand: charcoal/white + Mitsubishi red). Run: python3 _src/illus.py
-import os,json
+import os,json,sys
 from PIL import Image,ImageDraw,ImageFont
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));OUT=R+"/assets/img/ill/"
 FP='/usr/share/fonts/truetype/sand-box/google/Inter/Inter-VariableFont_opsz,wght.ttf'
@@ -156,6 +156,35 @@ def bars(name,kick,title,groups,cols,imgs):
             y+=24
         return y+P
     canvas(fn,name)
+def table(name,kick,title,header,rows,widths=None,note=""):
+    # header: column titles; rows: list of cell tuples; first column bold
+    n=len(header);tw=W-2*P;ws=widths or [1/n]*n;cw=[int(tw*x) for x in ws]
+    def fn(d,m):
+        y=head(d,kick,title);fs=F(28);fb=F(28,'SemiBold');pad=18
+        x=P
+        hl=[wrap(d,h,F(26,'SemiBold'),cw[i]-2*pad) for i,h in enumerate(header)];hh=max(len(l) for l in hl)*34+2*pad
+        if not m:
+            d.rounded_rectangle([P,y,W-P,y+hh],radius=16,fill=INK)
+            for i,ls in enumerate(hl):
+                for j,ln in enumerate(ls): d.text((x+pad,y+pad+j*34),ln.upper(),font=F(26,'SemiBold'),fill=BG)
+                x+=cw[i]
+        y+=hh+6
+        for r_,row in enumerate(rows):
+            cl=[wrap(d,c,fb if i==0 else fs,cw[i]-2*pad) for i,c in enumerate(row)];rh=max(len(l) for l in cl)*38+2*pad
+            if not m:
+                if r_%2==0: d.rounded_rectangle([P,y,W-P,y+rh],radius=14,fill=SOFT)
+                x=P
+                for i,ls in enumerate(cl):
+                    for j,ln in enumerate(ls): d.text((x+pad,y+pad+j*38),ln,font=fb if i==0 else fs,fill=INK if i==0 else (RED if i==n-1 and n>2 else INK))
+                    x+=cw[i]
+            y+=rh+4
+        if note:
+            y+=16
+            for ln in wrap(d,note,F(24,'Regular'),tw):
+                if not m: d.text((P,y),ln,font=F(24,'Regular'),fill=MU)
+                y+=32
+        return y+P+10
+    canvas(fn,name)
 def photo(name,src,crop=None):
     im=Image.open(src).convert("RGB")
     if crop: 
@@ -164,7 +193,60 @@ def photo(name,src,crop=None):
         im=im.crop(((w-tw)//2,(h-th)//2,(w-tw)//2+tw,(h-th)//2+th))
     im.thumbnail((1200,1200),Image.LANCZOS);save(im,name)
 
-if __name__=="__main__":
+def bulk():
+    M="/workspace/mmpc/final/"
+    XP=M+"Xpander/color_xpander_26my_rn_color-c31_angle45.png"
+    def cut(name,src,bg=(244,244,245)):
+        im=Image.open(src).convert("RGBA");im=im.crop(im.getbbox());im.thumbnail((1040,560),Image.LANCZOS)
+        c=Image.new("RGB",(1200,675),bg);c.paste(im,((1200-im.width)//2,(675-im.height)//2+20),im);save(c,name)
+    # B1 afford
+    stats("afford-rule","Income guide","Keep the monthly at 30–35% of income",[("÷ 0.35","Monthly ÷ 0.35 = minimum gross monthly income"),("÷ 0.30","Monthly ÷ 0.30 = comfortable gross monthly income")])
+    table("afford-table","October 2026 · Zero DP, 60 months","Income each monthly needs",["Unit","Zero DP / mo","Gross income"],[("L300 Dual AC","₱21,405","₱61.2K–₱71.4K"),("Xpander GLX MT","₱22,641","₱64.7K–₱75.5K"),("Xpander GLX AT","₱23,877","₱68.2K–₱79.6K"),("Xpander GLS AT","₱25,937","₱74.1K–₱86.5K"),("Xpander Cross","₱28,389","₱81.1K–₱94.6K"),("Destinator GLX","₱28,615","₱81.8K–₱95.4K"),("Triton GX AT","₱28,900","₱82.6K–₱96.3K"),("Montero GLX MT","₱30,284","₱86.5K–₱100.9K"),("Destinator GLS","₱32,942","₱94.1K–₱109.8K"),("Montero GLS","₱39,699","₱113.4K–₱132.3K"),("Destinator GT","₱39,740","₱113.5K–₱132.5K")],[0.4,0.27,0.33],"Dealer promos, all-in, subject to bank approval and change without notice.")
+    table("afford-dp","Zero DP vs low DP","A bigger DP lowers the monthly",["Unit","Zero DP","With DP"],[("Xpander GLX MT","₱22,641","₱19,811 (₱148K DP)"),("Xpander GLS AT","₱25,937","₱22,695 (₱148K DP)"),("Destinator GLS","₱32,942","₱30,883 (₱123K DP)"),("Triton GX AT","₱28,900","₱25,200 (₱140K DP)")],[0.36,0.24,0.40],"October 2026 promos, 60 months, all-in.")
+    tiles("afford-ways","Doesn't fit yet?","Three ways to make it fit",[("1","Add a co-borrower","Combined income"),("2","Bigger down payment","Lower monthly"),("3","Right variant","GLX MT vs GLS AT")],cols=1)
+    cut("afford-xpander",M+"Xpander/color_xpander_26my_rn_color-u33_angle45.png")
+    # B2 triton
+    tiles("tr-glance","Triton at a glance","Built for work and family",[("1","2.4L 4N16 turbo diesel",""),("2","Manual or automatic","By variant"),("3","2WD or 4WD","By variant"),("4","Open cargo bed","")],cols=2)
+    photo("tr-cargo-photo",M+"Triton/int_triton_24my_tr_the-all-new_lhd_mv_cargo_proxy_mitsubishi.jpg",9/16)
+    compare("tr-2wd4wd","2WD or 4WD?","Choose by your roads",("2WD","4WD"),[("Roads","Paved highways, city, well-kept provincial roads","Mud, steep farm roads, river crossings, hills"),("Good for","Deliveries, contractors in town","Farms, resorts, rough rainy-season routes")])
+    stats("tr-promo","Triton GX 2.4D 2WD A/T · October 2026","SRP ₱1,430,000",[("₱28,900/mo","Zero DP, 60 months, all-in"),("₱25,200/mo","With ₱140K DP, plus ₱20K fuel")])
+    steps("tr-bed","Cargo bed","Rules for working owners",[("Stay within the rated payload","Check the spec for your variant"),("Tie down every load","Straps or cargo net"),("Protect the bed","Ask about a bed liner"),("Cover what needs cover","Keep a tarpaulin in the cab")])
+    # B3 montero
+    stats("ms-shared","Every Montero Sport","Same 2.4L turbo diesel",[("181 PS · 430 Nm","2.4L 4N15 MIVEC intercooled turbo diesel, Euro 4"),("7 seats","Ladder frame for long drives and heavy loads")])
+    table("ms-table","October 2026 promos · 60 months","Montero Sport variants",["Variant","SRP","Lowest monthly"],[("GLX 2WD M/T","₱1,568,000","₱28,265 (₱30K DP)"),("GLS 2WD A/T","₱1,927,000","₱37,218 (₱138K DP)"),("Black Series 2WD A/T","₱2,190,000","₱42,297 (₱218K DP)"),("Black Series 4WD A/T","₱2,530,000","₱48,864 (₱283K DP)")],[0.38,0.26,0.36],"All-in, subject to bank approval and change without notice.")
+    photo("ms-bs-photo",M+"Montero Sport/ext_monterosport_24my_ps_phl_black_4wd_8at_straight-front_lhd_jh3.jpg",9/16)
+    tiles("ms-pick","Which variant?","Match it to how you drive",[("MT","GLX M/T","Lowest monthly, comfortable with a clutch"),("AT","GLS A/T","Daily traffic, 8-speed automatic"),("2WD","Black Series 2WD","Top trim for city and highway"),("4WD","Black Series 4WD","Rough, muddy or steep roads")],cols=2)
+    # B4 xpander variants
+    stats("xv-engine","Every Xpander","Same engine, different packages",[("105 PS · 141 Nm","1.5L MIVEC gasoline in all four"),("7 seats","GLX MT, GLX AT, GLS AT and Xpander Cross")])
+    table("xv-table","October 2026 promos · 60 months","Xpander variants and monthlies",["Variant","Zero DP","Low DP","Fuel"],[("GLX M/T","₱22,641","₱19,811","₱30K"),("GLX A/T","₱23,877","₱20,892","₱60K"),("GLS A/T","₱25,937","₱22,695","₱60K"),("Cross A/T","₱28,389","₱24,840","₱60K")],[0.28,0.24,0.26,0.22],"Low DP: ₱148K (GLX MT, GLS, Cross) or ₱138K (GLX AT). SRP ₱1,099,000 / ₱1,159,000 / ₱1,259,000 / ₱1,378,000.")
+    photo("xv-cross-photo",M+"Xpander Cross/int_xpandercross_26my_xs_lhd_mv_dashboard.jpg",9/16)
+    tiles("xv-pick","Quick picker","Which Xpander fits you?",[("MT","GLX M/T","Tightest budget, manual driver"),("AT","GLX A/T","Daily traffic, many drivers"),("GLS","GLS A/T","A nicer daily cabin"),("X","Xpander Cross","Crossover look")],cols=2)
+    # B5 destinator variants
+    stats("dv-shared","Every Destinator","Same turbo in all three",[("163 PS · 250 Nm","1.5L turbo 4B40 with CVT"),("214 mm","Ground clearance, seven seats")],)
+    table("dv-table","October 2026 promos · 60 months","Destinator GLX, GLS, GT",["Variant","SRP","Zero DP","Low DP"],[("GLX","₱1,389,000","₱28,615","₱26,827 (₱93K)"),("GLS","₱1,599,000","₱32,942","₱30,883 (₱123K)"),("GT Mono","₱1,929,000","₱39,740","₱37,256 (₱88K)"),("GT Two-Tone","₱1,939,000","₱39,740","₱37,256 (₱88K)")],[0.22,0.25,0.22,0.31],"Fuel: GLS ₱20K, GT ₱40K. All-in, subject to bank approval.")
+    photo("dv-cabin",M+"Destinator/int_destinator_interior_dsyp.jpg",9/16)
+    steps("dv-steps","How to choose","3 steps to the right Destinator",[("Start with your income","30–35% of gross monthly income"),("List 3 must-have features","Check them on the spec sheet"),("Test drive with the family","Bring your third-row passengers")])
+    # T1 PMS
+    tiles("pms-what","PMS in one line","Preventive, not repair",[("✓","Replace fluids and filters",""),("✓","Inspect wear items",""),("✓","Catch problems early",""),("✓","Protect your warranty","")],cols=2)
+    stats("pms-rule","Your schedule","Whichever comes first",[("Km or months","Each PMS is due by kilometers or months, whichever comes first"),("Owner's manual","Your exact intervals are in the manual and warranty booklet")])
+    tiles("pms-checks","At the service center","What PMS usually covers",[("1","Engine oil and filter",""),("2","Air and cabin filters",""),("3","Brakes and brake fluid",""),("4","Coolant and fluids",""),("5","Tires and rotation",""),("6","Battery, lights, wipers",""),("7","Underchassis","")],cols=2)
+    stats("pms-free","All-in package","Included with your new car",[("Up to 5,000 km","Free labor on early services; parts and fluids usually paid"),("3 years","Warranty. Keep to the PMS schedule to protect it")])
+    steps("pms-habits","Owner habits","PMS habits that pay off",[("Book ahead","Before long weekends"),("Stay on schedule","Protect your warranty"),("Keep every receipt","Helps claims and resale"),("Mention anything odd","Noises, lights, vibrations")])
+    # T2 break-in
+    stats("bi-1000","Break-in","The first 1,000 km",[("Gentle and varied","Vary speed and RPM, accelerate smoothly"),("Owner's manual","Follow the exact guidance for your unit")])
+    compare("bi-dodont","First 1,000 km","Do's and don'ts",("Do","Don't"),[("Speed","Vary speed and RPM","Hold one speed for very long"),("Throttle","Accelerate smoothly","Full-throttle starts"),("Brakes","Gentle braking","Hard, sudden stops"),("Load","Normal loads","Tow or overload")])
+    steps("bi-week","Week one","New owner checklist",[("Read the manual","Break-in, PMS, warning lights"),("Look under the car","Any drips overnight?"),("Check the freebies","Against your release list"),("Save the numbers","Service, insurer, sales executive"),("Mark your first PMS","In your calendar")])
+    photo("bi-destinator",M+"Destinator/ext_destinator_new_launch_kv13_no_copy.jpg",9/16)
+    # T3 insurance
+    compare("ins-ctpl","Two kinds of cover","CTPL vs comprehensive",("CTPL","Comprehensive"),[("Required?","Yes, for LTO registration","Usually required by banks while financed"),("Covers","Injury or death of third parties","Your own car, theft, third-party property and more"),("Floods","No","Only with acts of nature (AON)")])
+    tiles("ins-comp","Comprehensive","What it typically covers",[("1","Own damage",""),("2","Theft",""),("3","Third-party property",""),("4","Excess bodily injury",""),("5","Auto personal accident","By policy"),("?","Acts of nature","Often an add-on")],cols=2)
+    tiles("ins-allin","All-in package","Insurance already included",[("✓","TPL insurance",""),("✓","1-year comprehensive","Rate locked for 3 years"),("✓","Chattel mortgage",""),("✓","3-year warranty","")],cols=2)
+    steps("ins-claim","Accident?","How to file a claim",[("Stay safe and take photos","Scene, both cars, plates"),("Get a police or incident report",""),("Call your insurer right away",""),("Submit the documents","Claim form, OR/CR, license, photos"),("Pay the participation fee","Per your policy")])
+
+if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk":
+    MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk()
+    json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
+elif __name__=="__main__":
     M="/workspace/mmpc/final/";G="/cursor/stores/store-6b56a977-1b9b-4b05-adeb-6cd0f5ea5ec8/grok-bot/agents/eb5f84df-816b-4ceb-85a4-a92853d3a24a/attachments/"
     XP=M+"Xpander/color_xpander_26my_rn_color-c31_angle45.png";DE=M+"Destinator/color_destinator_26myrx_gt_color-x3n_angle45.png"
     L3=M+"L300/color_l300_20sl-front-r_color-w50_angle135.png";MG=M+"Mirage G4/color_mirageg4_26myell_glx-mt_color-u17_angle45.png"
