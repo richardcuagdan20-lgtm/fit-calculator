@@ -2,7 +2,7 @@
 <html lang="en-PH">
 <head>
 <meta charset="utf-8">
-<script>(function(){var q=location.search;if(/(seg=|unit=|utm_|adset=|fbclid)/i.test(q)){location.replace('/budgetcalculator/'+q+location.hash);}})();</script>
+<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSearchParams(q);var sg=(p.get('seg')||'').toLowerCase();if(/^(local|ofw_abroad|ofw_family)$/.test(sg)||p.has('adset')||/^ad\d+$/i.test(p.get('utm_content')||'')){location.replace('/budgetcalculator/'+q+location.hash);}}catch(_){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Google tag (gtag.js) GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>

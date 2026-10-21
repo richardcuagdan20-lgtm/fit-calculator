@@ -433,7 +433,7 @@ open(R+"/404.html","w").write(s); os.remove(R+"/__404/index.html"); os.rmdir(R+"
 
 # ---------- root redirect injection
 s=open(R+"/index.html").read()
-rd="<script>(function(){var q=location.search;if(/(seg=|unit=|utm_|adset=|fbclid)/i.test(q)){location.replace('/budgetcalculator/'+q+location.hash);}})();</script>\n"
+rd="<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSearchParams(q);var sg=(p.get('seg')||'').toLowerCase();if(/^(local|ofw_abroad|ofw_family)$/.test(sg)||p.has('adset')||/^ad\\d+$/i.test(p.get('utm_content')||'')){location.replace('/budgetcalculator/'+q+location.hash);}}catch(_){}})();</script>\n"
 s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+"/index.html","w").write(s)
 
 # ---------- sitemap/robots

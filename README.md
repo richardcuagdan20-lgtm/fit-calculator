@@ -5,7 +5,7 @@ Static site for Richard Cuagdan, Car Sales Executive, Mitsubishi SJ Legacy Motor
 - `/budgetcalculator/` – ad landing page (Meta Pixel + lead webhook). Hand-edited; NOT generated. Do not move.
 - `/privacy/` – privacy policy used in Meta lead forms. Hand-edited; do not move.
 - Everything else (`/`, `/cars/`, `/promos/`, `/guides/`, `/blog/`, `/about/`, `/apply/`, `/contact/`, `404.html`, `sitemap.xml`, `robots.txt`) is generated.
-- Root `/` redirects to `/budgetcalculator/` (query + hash kept) when the query contains `seg=`, `unit=`, `utm_`, `adset=` or `fbclid`.
+- Root `/` is the Home page. It forwards to `/budgetcalculator/` (query + hash kept) ONLY for legacy calculator ad links: `seg` is `local`/`ofw_abroad`/`ofw_family`, or an `adset` param is present, or `utm_content` matches `ad<digits>`. Plain, organic, fbclid-only and other utm traffic stay on Home.
 
 ## Generator
 Source lives in `_src/` (Python 3, no dependencies):
