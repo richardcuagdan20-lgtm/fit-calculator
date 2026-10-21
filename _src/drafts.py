@@ -1982,7 +1982,249 @@ body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to
 <p>Driving two models on the same day makes the choice easier: Xpander vs Destinator, Montero Sport vs Destinator, or L300 vs Triton. Read <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> before you come.</p>
 '''+CTA2("Book your test drive at Mitsubishi SJ Legacy Motors, SJDM, after checking your budget.","destinator")),
 ]
-DRAFT_POSTS=BULK5+BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
+MAPL='<p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Mitsubishi+SJ+Legacy+Motors+Quirino+Highway+San+Jose+del+Monte+Bulacan" target="_blank" rel="noopener">Get directions in Google Maps</a></p>'
+def LOCAL(area,slug,img,alt,title,intro,route,near,car):
+    return dict(base="blog",car=car,slug=slug,date="2026-10-22",by=BY,img=img,alt=alt,title=title,desc="",answer="",
+faq=[(f"Is there a Mitsubishi dealer near {area}?",f"Mitsubishi SJ Legacy Motors is on Quirino Highway in San Jose del Monte, Bulacan, reachable from {area} by car. There are other Mitsubishi dealers in the region too; choose the one that serves you best."),
+("Can I do part of the process online?","Yes. Check your budget with the calculator, send documents for pre-check, and book your test drive online before you travel."),
+("Where will I do PMS if I buy in SJDM?","Ask about service options near your home. Authorized service centers follow the same warranty schedule."),
+("How do I contact the sales executive?","Call or text Richard Cuagdan on 0954 291 1201.")],
+body=f'''<p>{intro}</p>
+
+<h2>Getting to the showroom</h2>
+'''+ADDRP+f'''<p>{route}</p>'''+MAPL+'''<p>Traffic changes by hour and day, so check a live map before leaving, and call or text me on '''+TELL+''' so your unit is ready when you arrive.</p>
+
+<h2>Why some buyers from '''+area+''' choose SJDM</h2>
+<ul class="ticks">
+<li><b>One point of contact</b>: I handle your inquiry, test drive, bank application follow-up and release</li>
+<li><b>Online-first process</b>: budget check, document pre-check and test drive booking before you travel</li>
+<li><b>Same all-in promos</b>: October 2026 Zero DP and low DP options on 60 months</li>
+<li><b>Help for OFW families</b>: coordination across time zones (see the <a href="/blog/ofw-car-buying-guide/">OFW car loan guide</a>)</li>
+</ul>
+<p>There are other Mitsubishi dealers in the area too. Compare service, the written all-in breakdown and convenience, then choose what works for you.</p>
+
+<h2>Popular units for '''+area+''' drivers</h2>
+'''+T(["Unit","SRP","Zero DP monthly"],[("Xpander GLX AT","₱1,159,000","₱23,877"),("Xpander Cross","₱1,378,000","₱28,389"),("Destinator GLX","₱1,389,000","₱28,615"),("Triton GX AT","₱1,430,000","₱28,900"),("L300 Dual AC","₱1,039,000","₱21,405")])+PN+f'''
+<p>{near}</p>
+
+<h2>Plan your visit in 3 steps</h2>
+<ol class="steps">
+<li><h3>Check your budget</h3><p>Use the <a href="/budgetcalculator/">Budget Fit Calculator</a>.</p></li>
+<li><h3>Book a test drive</h3><p>On the <a href="/test-drive/">test drive page</a>; see <a href="/tips/mitsubishi-test-drive-sjdm/">what to expect</a>.</p></li>
+<li><h3>Bring your documents</h3><p>For pre-check. See <a href="/tips/car-loan-approval-tips/">car loan approval tips</a>.</p></li>
+</ol>
+'''+CTA2(f"From {area}? Check your budget, book a test drive, or call me before you drive up to SJDM.",car))
+BULK6=[
+LOCAL("Caloocan and Novaliches","mitsubishi-near-caloocan-novaliches","xpglx_x37","Mitsubishi Xpander for families in Caloocan and Novaliches","Mitsubishi Near Caloocan and Novaliches: SJDM Showroom",
+"Looking for a Mitsubishi near Caloocan or Novaliches? Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, is a short drive north along Quirino Highway for many North Caloocan and Novaliches residents. Here's how to get there and how to make the trip worth it.",
+"From Novaliches, Quirino Highway runs north into San Jose del Monte. From North Caloocan, head to Quirino Highway and continue north to Sto. Cristo.",
+"Driving daily into Metro Manila from the north? Read my <a href=\"/tips/sjdm-to-manila-commute-tips/\">SJDM to Manila commute tips</a>.","xpander"),
+LOCAL("Fairview and Quezon City","mitsubishi-near-fairview-quezon-city","de_x3n","Mitsubishi Destinator for Fairview and Quezon City families","Mitsubishi Near Fairview, Quezon City: SJDM Showroom",
+"Looking for a Mitsubishi near Fairview or elsewhere in Quezon City? Quirino Highway runs from Fairview to San Jose del Monte, where Mitsubishi SJ Legacy Motors is located. Here's the route and how to plan a visit.",
+"From Fairview, take Quirino Highway north toward San Jose del Monte and continue to Sto. Cristo. From other parts of Quezon City, navigation apps usually route you to Quirino Highway.",
+"Comparing family SUVs? See <a href=\"/blog/montero-sport-vs-destinator/\">Montero Sport vs Destinator</a> and <a href=\"/blog/destinator-price-philippines/\">Destinator price Philippines</a>.","destinator"),
+LOCAL("Bulacan towns","mitsubishi-near-bulacan-towns","tr_gx_u28","Mitsubishi Triton for Bulacan business owners","Mitsubishi Near Marilao, Meycauayan, Sta. Maria and Malolos",
+"Looking for a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos? Mitsubishi SJ Legacy Motors is on Quirino Highway in San Jose del Monte, Bulacan. Here's how to plan a visit from other Bulacan towns, and the units Bulacan negosyo owners and families ask about most.",
+"Routes depend on your town and barangay, so use the directions link below. Set your destination to Mitsubishi SJ Legacy Motors, Quirino Highway, Sto. Cristo, San Jose del Monte.",
+"Running a negosyo in Bulacan? See <a href=\"/blog/l300-vs-triton-for-negosyo/\">L300 vs Triton</a> and the <a href=\"/blog/l300-price-philippines-2026/\">L300 price 2026</a>.","triton"),
+]
+BULK6+=[
+dict(base="tips",car="xpander",slug="paano-mag-car-loan",date="2026-10-22",by=BY,img="xpglx_u33",alt="Mitsubishi Xpander, a common first car loan unit",
+title="Paano Mag Car Loan: Step-by-Step Guide (2026)",desc="",answer="",
+faq=[("Paano mag apply ng car loan sa bangko?","Pumili ng unit na pasok sa budget, ihanda ang requirements, at ang dealer o sales executive ang magsa-submit sa bangko. Ang bangko ang mag-a-approve."),
+("Gaano katagal ang car loan approval?","Depende sa bangko at sa kumpletong documents. Mas mabilis kapag kumpleto at consistent ang papeles."),
+("Kailangan ba ng down payment?","Hindi palagi. May Zero DP all-in promos, halimbawa ang Xpander GLX AT sa ₱23,877 kada buwan (October 2026, 60 months)."),
+("Pwede ba mag car loan kahit self-employed?","Oo. Karaniwang hinihingi ang DTI o SEC registration, business permit, ITR o financial statements at bank statements.")],
+body='''<p>Paano mag car loan? Mas simple kaysa sa iniisip mo. Here's the step-by-step process I walk my clients through, mula pagpili ng unit hanggang release.</p>
+
+<h2>Step 1: Alamin ang budget mo</h2>
+<p>Keep the monthly at about 30–35% of your gross monthly income. Halimbawa, ang Xpander GLX MT na ₱22,641 kada buwan (Zero DP) ay pasok sa gross income na around ₱64,700 hanggang ₱75,500. Try the <a href="/budgetcalculator/">Budget Fit Calculator</a>.</p>
+
+<h2>Step 2: Pumili ng unit at mag test drive</h2>
+<p>Subukan muna bago magdesisyon. <a href="/test-drive/">Mag-book ng test drive</a> at isama ang pamilya.</p>
+
+<h2>Step 3: Ihanda ang requirements</h2>
+<ul class="ticks">
+<li>Dalawang valid ID at proof of billing</li>
+<li><b>Employed</b>: COE with compensation, payslips o ITR</li>
+<li><b>Self-employed</b>: DTI/SEC, business permit, ITR o financial statements, bank statements</li>
+<li><b>OFW</b>: contract, payslips, remittance proof, SPA o co-borrower</li>
+</ul>
+<p>Buong listahan: <a href="/guides/car-loan-requirements/">car loan requirements</a>.</p>
+
+<h2>Step 4: Submission at bank approval</h2>
+<ol class="steps">
+<li><h3>Pre-check</h3><p>Ire-review ko muna ang documents mo.</p></li>
+<li><h3>Submit sa bangko</h3><p>Ang bangko ang mag-e-evaluate: capacity to pay, documents, credit history.</p></li>
+<li><h3>Verification</h3><p>Sagutin ang tawag ng bangko.</p></li>
+<li><h3>Approval</h3><p>Kapag approved, ise-schedule ang release.</p></li>
+</ol>
+
+<h2>Step 5: Release</h2>
+<p>Sa release day, i-check ang unit, documents at freebies. Gamitin ang <a href="/tips/new-car-release-day-checklist/">release day checklist</a>. Kasama na sa all-in ang LTO registration, TPL insurance, 1-year comprehensive insurance (rate locked for 3 years), chattel mortgage, free labor up to 5,000 km at 3-year warranty.</p>
+<p>Para mas mataas ang chance ng approval, basahin ang <a href="/tips/car-loan-approval-tips/">car loan approval tips</a>.</p>
+'''+CTA2("Handa ka na? I-check ang budget mo, mag-book ng test drive, o tawagan ako.","xpander")),
+
+dict(base="tips",car="mirage-g4",slug="paano-bumili-ng-bagong-sasakyan",date="2026-10-22",by=BY,img="mg4gls_u17",alt="Bagong Mitsubishi Mirage G4 sedan",
+title="Paano Bumili ng Bagong Sasakyan: Cash o Financing",desc="",answer="",
+faq=[("Ano ang mas mainam, cash o car loan?","Depende. Walang interest ang cash pero mauubos ang ipon mo. Ikumpara ang total na babayaran at kung ano ang magagawa ng pera mo sa iba."),
+("Ano ang kailangan kapag cash ang bayad?","Valid IDs at ang bayad sa paraang tinatanggap ng dealer. Kumuha palagi ng official receipt."),
+("Kasama na ba ang registration sa bagong sasakyan?","Sa all-in promo packages, kasama ang LTO registration, TPL insurance at iba pa. Itanong ang listahan nang nakasulat."),
+("Gaano katagal bago makuha ang sasakyan?","Depende sa availability ng unit at, kung financing, sa bank approval.")],
+body='''<p>Paano bumili ng bagong sasakyan sa Pilipinas? Dalawa ang daan: cash o financing. Here's how each works, step by step, para alam mo ang aasahan.</p>
+
+<h2>Cash vs financing</h2>
+'''+T(["","Cash","Financing"],[("Bayad","Buong halaga","Down payment (o Zero DP) + monthly"),("Interest","Wala","Kasama sa monthly"),("Approval","Hindi kailangan","Subject to bank approval"),("Ipon","Mababawasan nang malaki","Mananatili para sa emergency")])+'''
+
+<h2>Kung cash</h2>
+<ol class="steps">
+<li><h3>Pumili ng unit at variant</h3><p>Mag test drive muna.</p></li>
+<li><h3>Itanong ang cash price at inclusions</h3><p>Maaaring iba ang promo sa cash at financing.</p></li>
+<li><h3>Magbayad at kumuha ng official receipt</h3><p>Sa paraang tinatanggap ng dealer.</p></li>
+<li><h3>Release</h3><p>Gamitin ang <a href="/tips/new-car-release-day-checklist/">release checklist</a>.</p></li>
+</ol>
+
+<h2>Kung financing</h2>
+<p>Sundan ang <a href="/tips/paano-mag-car-loan/">paano mag car loan</a> guide. Halimbawa ng October 2026 promo: Xpander GLS AT, Zero DP sa ₱25,937 kada buwan o ₱148K DP sa ₱22,695, 60 months, all-in, may ₱60K fuel.</p>
+
+<h2>Huwag kalimutan ang ownership costs</h2>
+<ul class="ticks"><li>Gas, parking at toll</li><li>PMS (tingnan ang <a href="/tips/pms-schedule-guide/">PMS schedule guide</a>)</li><li>Insurance renewal</li><li>Gulong at baterya sa paglipas ng panahon</li></ul>
+<p>Para sa Mirage G4 at iba pang units na wala sa listahan, message me for the latest promo.</p>
+'''+CTA2("Cash man o financing, i-check muna ang budget at mag test drive sa SJDM.","mirage-g4")),
+
+dict(base="tips",car="destinator",slug="co-borrower-car-loan-philippines",date="2026-10-22",by=BY,img="de_d34",alt="Family co-borrowers buying a Mitsubishi Destinator",
+title="Co-Borrower Car Loan Philippines: How It Works",desc="",answer="",
+faq=[("Who can be a co-borrower for a car loan?","Banks commonly accept a spouse or immediate family member. Each bank sets its own rules."),
+("What does a co-borrower sign up for?","A co-borrower shares responsibility for the loan, so they should understand the monthly and the term before signing."),
+("Does a co-borrower need documents?","Yes. Typically IDs and income documents, similar to the main borrower."),
+("Can an OFW use a co-borrower in the Philippines?","Yes. A co-borrower or an attorney-in-fact under an SPA is common for OFW applications.")],
+body='''<p>A co-borrower car loan in the Philippines lets two people apply together, so the bank can consider combined income. It's common for couples, families and OFWs. Here's how it works and what to think about first.</p>
+
+<h2>When a co-borrower helps</h2>
+<ul class="ticks"><li>Your income alone is a bit short for the monthly</li><li>You're an OFW and need someone in the Philippines to sign</li><li>A couple wants to share the loan</li><li>You're newly employed and want a stronger application</li></ul>
+
+<h2>Who can be a co-borrower</h2>
+<p>Banks commonly accept a spouse or immediate family member. Rules vary by bank, so ask before you prepare documents.</p>
+
+<h2>What the co-borrower needs</h2>
+<ul class="ticks"><li>Valid IDs</li><li>Income documents (COE and payslips, or business documents)</li><li>Proof of billing</li></ul>
+<p>Full lists in <a href="/guides/car-loan-requirements/">car loan requirements</a>.</p>
+
+<h2>Think it through first</h2>
+<ol class="steps">
+<li><h3>Shared responsibility</h3><p>The co-borrower shares the loan. Both should agree on the monthly and the term.</p></li>
+<li><h3>Agree who pays</h3><p>Put it in writing between you.</p></li>
+<li><h3>Check the budget together</h3><p>Use the 30–35% guide on combined gross income. Example: the Destinator GLX Zero DP at ₱28,615 a month fits about ₱81,800 to ₱95,400 combined (October 2026).</p></li>
+</ol>
+
+<h2>Co-borrower vs SPA for OFWs</h2>
+<p>An SPA lets someone sign on your behalf; a co-borrower shares the loan. See the <a href="/blog/ofw-car-buying-guide/">OFW car loan guide</a> and <a href="/tips/car-loan-approval-tips/">car loan approval tips</a>.</p>
+'''+CTA2("Applying with a co-borrower? Check your combined budget, then book a test drive in SJDM.","destinator")),
+
+dict(base="tips",car="xpander",slug="manual-vs-automatic-car-philippines",date="2026-10-22",by=BY,img="xpglx_graphite",alt="Mitsubishi Xpander available in manual and automatic",
+title="Manual vs Automatic Car Philippines: Which to Buy?",desc="",answer="",
+faq=[("Is a manual car cheaper in the Philippines?","Often the manual variant has a lower SRP and monthly. Example: Xpander GLX MT ₱1,099,000 vs GLX AT ₱1,159,000."),
+("Is automatic better for traffic?","For daily stop-and-go traffic, most drivers find an automatic or CVT far less tiring."),
+("Can I drive an automatic with a manual license?","Check your license restrictions with the LTO; restriction codes and categories define what you may drive."),
+("Which is better for business?","Many work vehicles like the L300 are manual. For delivery drivers used to manual, it's a practical choice.")],
+body='''<p>Manual vs automatic car in the Philippines: the right answer depends on your traffic, budget and who'll drive. Here's a clear comparison using real Xpander promo numbers.</p>
+
+<h2>The price difference, in real numbers</h2>
+'''+T(["Xpander GLX","Manual (M/T)","Automatic (A/T)"],[("SRP","₱1,099,000","₱1,159,000"),("Zero DP monthly","₱22,641","₱23,877"),("Low DP monthly","₱148K DP: ₱19,811","₱138K DP: ₱20,892"),("Fuel freebie","₱30K","₱60K")])+PN+'''
+<p>At Zero DP, the automatic is ₱1,236 more a month, and this month it comes with ₱30K more fuel.</p>
+
+<h2>Choose manual if…</h2>
+<ul class="ticks"><li>Your budget is tight and every peso of the monthly counts</li><li>You already drive manual comfortably</li><li>It's a work vehicle and your drivers prefer manual</li></ul>
+
+<h2>Choose automatic if…</h2>
+<ul class="ticks"><li>You face daily traffic, like the <a href="/tips/sjdm-to-manila-commute-tips/">SJDM to Manila commute</a></li><li>Several family members will drive</li><li>You're a <a href="/tips/new-driver-tips-philippines/">new driver</a></li><li>Senior drivers in the family (see <a href="/blog/best-car-for-senior-citizens-philippines/">best car for senior citizens</a>)</li></ul>
+
+<h2>Test both</h2>
+<p>Drive the GLX MT and GLX AT back-to-back. More in <a href="/blog/xpander-variants-explained/">Xpander GLX vs GLS vs Cross</a>.</p>
+'''+CTA2("Test drive manual and automatic back-to-back in SJDM after checking your budget.","xpander")),
+
+dict(base="tips",car="xpander",slug="best-car-color-philippines",date="2026-10-22",by=BY,img="xpgls_red",alt="Mitsubishi Xpander in red, one of several color choices",
+title="Best Car Color Philippines: Heat, Care and Resale",desc="",answer="",
+faq=[("What is the best car color for the Philippine heat?","Lighter colors like white and silver generally absorb less heat than dark colors in direct sun."),
+("Which car colors hide dirt best?","Silver and gray tend to show dust and water spots less than black."),
+("Does car color affect resale value?","Common colors like white, silver and black are often easier to sell because more buyers want them."),
+("Are all colors available for every variant?","No. Colors vary by model and variant. Ask Richard for the current color options and availability.")],
+body='''<p>What's the best car color in the Philippines? There's no single answer, but heat, dust, maintenance and resale all point in useful directions. Here's how to choose with your head, not just your heart.</p>
+
+<h2>Heat</h2>
+<p>In direct sun, lighter colors like white and silver generally absorb less heat than black or very dark colors. Your AC still does the heavy lifting, but parking in the sun is a little kinder to light colors. See <a href="/tips/car-aircon-not-cooling-tips/">car aircon care</a>.</p>
+
+<h2>Dust, rain and scratches</h2>
+<ul class="ticks"><li><b>Silver and gray</b>: hide dust and water spots well</li><li><b>White</b>: shows mud but hides fine swirl marks</li><li><b>Black and dark colors</b>: look sharp clean, but show dust, swirls and water spots</li><li><b>Bold colors like red</b>: stand out; keep them waxed</li></ul>
+<p>Whatever you choose, wash properly. See <a href="/tips/car-wash-at-home-guide/">car wash at home</a>.</p>
+
+<h2>Resale</h2>
+<p>Common colors such as white, silver and black are often easier to sell later because more buyers look for them. Unique colors can take longer to find the right buyer. More in <a href="/tips/car-resale-value-tips/">car resale value tips</a>.</p>
+
+<h2>Practical checklist</h2>
+<ol class="steps">
+<li><h3>See it in daylight</h3><p>Showroom lights change how colors look.</p></li>
+<li><h3>Check availability</h3><p>Colors vary by variant and stock.</p></li>
+<li><h3>Two-tone options</h3><p>Some variants, like the Xpander Cross and Destinator GT, come in two-tone.</p></li>
+<li><h3>Think 5 years ahead</h3><p>You'll see this color every day.</p></li>
+</ol>
+'''+CTA2("Want to see the colors in person? Check your budget, then visit or book a test drive in SJDM.","xpander")),
+
+dict(base="tips",car="xforce",slug="car-accessories-worth-getting",date="2026-10-22",by=BY,img="xf_gls",alt="Mitsubishi Xforce with useful car accessories",
+title="Car Accessories Philippines: What's Worth Getting",desc="",answer="",
+faq=[("What accessories come free with a new Mitsubishi?","Typical freebies include full tint, floor mats, seat cover (fabric seats), reverse camera, early warning device, basic tools, umbrella, microfiber cloth and keychain. Freebies vary by variant."),
+("Is a dashcam worth it?","Many drivers find it worth it for accident and insurance records. See the dashcam guide."),
+("Do accessories affect my warranty?","Some modifications can affect warranty coverage. Ask before installing anything that touches the electrical system or engine."),
+("Which accessories should I skip?","Extreme modifications that reduce safety or resale value, and anything that blocks visibility or airbags.")],
+body='''<p>Car accessories in the Philippines range from essential to useless. Here's what's worth getting for a new car, what already comes free, and what to skip.</p>
+
+<h2>Already included: new-car freebies</h2>
+<ul class="ticks"><li>Full tint</li><li>Floor mats</li><li>Seat cover (fabric seats)</li><li>Reverse camera</li><li>Early warning device and basic tools</li><li>Umbrella, microfiber cloth and keychain</li></ul>
+<p class="muted">Freebies vary by variant; ask for the list for your unit.</p>
+
+<h2>Worth getting</h2>
+<ul class="ticks">
+<li><b>Dashcam</b>: records for accidents and claims. See the <a href="/tips/dashcam-philippines-parking-guide/">dashcam guide</a></li>
+<li><b>Sunshade</b>: cooler cabin, protected dashboard</li>
+<li><b>Tire pressure gauge</b>: for monthly checks (<a href="/tips/tire-care-tips-philippines/">tire care</a>)</li>
+<li><b>Emergency kit additions</b>: jumper cables, flashlight, first aid (<a href="/tips/car-emergency-kit-list/">kit list</a>)</li>
+<li><b>Child car seat</b>: required for kids under 150 cm (<a href="/tips/child-car-seat-law-philippines/">RA 11229</a>)</li>
+<li><b>Trunk organizer or cargo mat</b>: keeps groceries and tools in place</li>
+</ul>
+
+<h2>Think twice</h2>
+<ul class="ticks"><li>Electrical add-ons that might affect warranty: ask first</li><li>Anything that blocks airbags, mirrors or your view</li><li>Extreme modifications that hurt resale</li><li>Cheap seat covers that interfere with side airbags</li></ul>
+
+<h2>Before installing</h2>
+<ol class="steps"><li><h3>Ask about warranty</h3><p>Especially for electrical work.</p></li><li><h3>Use proper installers</h3><p>Tidy wiring, no cut harnesses.</p></li><li><h3>Keep original parts</h3><p>Helps resale.</p></li></ol>
+<p>For the Xforce and other units not in this month's promo list, message me for the latest promo.</p>
+'''+CTA2("Ask me which freebies come with your unit. Check your budget, then test drive in SJDM.","xforce")),
+
+dict(base="tips",car="mirage-g4",slug="brand-new-vs-second-hand-car-philippines",date="2026-10-22",by=BY,img="mg4glx_a66",alt="Brand-new Mitsubishi Mirage G4 compared with buying second hand",
+title="Brand New vs Second Hand Car Philippines",desc="",answer="",
+faq=[("Is a second-hand car cheaper?","Usually the price is lower, but add repairs, unknown history and shorter or no warranty when you compare."),
+("What do I get with a brand-new car?","A full warranty (3 years in the all-in package), known history, and an all-in package with registration and insurance."),
+("What should I check on a second-hand car?","Documents (OR/CR, deed of sale), flood or accident history, service records, and a mechanic's inspection."),
+("Can I finance a brand-new car with zero down?","Yes, through Zero DP all-in promos, subject to bank approval. Example: Xpander GLX MT at ₱22,641 a month (October 2026).")],
+body='''<p>Brand new vs second hand car in the Philippines: the second-hand price looks cheaper, but the full picture includes warranty, history, repairs and financing. Here's a fair comparison.</p>
+
+<h2>Side by side</h2>
+'''+T(["","Brand new","Second hand"],[("History","Known: you're the first owner","Unknown unless documented"),("Warranty","3-year warranty in the all-in package","Usually short or none"),("Registration and insurance","Included in all-in package","Your cost"),("Flood or accident risk","None at release","Needs inspection"),("Down payment","Zero DP promos available","Depends on the seller")])+'''
+
+<h2>When brand new makes sense</h2>
+<ul class="ticks"><li>You want predictable costs and a warranty</li><li>You'll keep the car many years</li><li>Zero DP lets you keep your savings: see the <a href="/blog/zero-down-payment-car-philippines/">Zero DP list</a></li></ul>
+
+<h2>When second hand can make sense</h2>
+<ul class="ticks"><li>You're paying cash on a tight budget</li><li>You can have it inspected by a trusted mechanic</li><li>Documents are complete and history is clear</li></ul>
+
+<h2>Second-hand checklist</h2>
+<ol class="steps"><li><h3>Documents</h3><p>OR/CR, deed of sale, IDs; no unsettled loan.</p></li><li><h3>Flood and accident signs</h3><p>Rust, odor, water marks, uneven panels.</p></li><li><h3>Service records</h3><p>Proof of regular PMS.</p></li><li><h3>Mechanic inspection</h3><p>Before paying anything.</p></li></ol>
+
+<h2>Compare the monthly</h2>
+<p>An Xpander GLX MT brand new is ₱22,641 a month at Zero DP (October 2026, 60 months, all-in). Run your numbers in <a href="/blog/how-much-car-can-i-afford-philippines/">how much car can I afford</a> and read <a href="/tips/car-resale-value-tips/">resale value tips</a>.</p>
+'''+CTA2("Compare a brand-new monthly with your options. Check your budget, then test drive in SJDM.","mirage-g4")),
+]
+DRAFT_POSTS=BULK6+BULK5+BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
 from seo import apply as _seo
 DRAFT_POSTS=_seo(DRAFT_POSTS)
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026

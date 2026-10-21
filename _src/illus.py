@@ -374,7 +374,38 @@ def bulk4():
     tiles("td-bring","Bring these","For a useful test drive",[("✓","Driver's license",""),("✓","Regular passengers",""),("✓","Child car seat",""),("✓","Usual cargo","")],cols=2)
     tiles("td-check","On the drive","What to check",[("1","Seat and visibility",""),("2","Acceleration, loaded",""),("3","Ride and braking",""),("4","AC to every row",""),("5","Parking and turning",""),("6","Phone and camera","")],cols=2)
 
-if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk4":
+def bulk5():
+    M="/workspace/mmpc/final/"
+    for k,area in [("cn","Caloocan and Novaliches"),("fv","Fairview and Quezon City"),("bt","Bulacan towns")]:
+        stats(k+"-loc","From "+area,"Mitsubishi SJ Legacy Motors, SJDM",[("Quirino Highway","Sto. Cristo, San Jose del Monte, Bulacan"),("0954 291 1201","Call or text Richard before you drive up")])
+        tiles(k+"-why","Buyers from "+area,"Why some choose SJDM",[("1","One point of contact","Inquiry to release"),("2","Online-first","Budget, documents, booking"),("3","All-in promos","Zero DP and low DP"),("4","OFW family help","Across time zones")],cols=2)
+        steps(k+"-plan","Plan your visit","3 steps from "+area,[("Check your budget","Budget Fit Calculator"),("Book a test drive","Online"),("Bring documents","For pre-check")])
+    steps("pl-steps","Paano mag car loan","5 steps",[("Alamin ang budget","30–35% ng gross income"),("Pumili at mag test drive",""),("Ihanda ang requirements","Employed, self-employed, OFW"),("Pre-check at bank approval",""),("Release","All-in na")])
+    tiles("pl-req","Requirements","Karaniwang hinihingi",[("✓","2 valid IDs",""),("✓","Proof of billing",""),("E","Employed","COE, payslips o ITR"),("S","Self-employed","DTI/SEC, permit, ITR, bank statements"),("O","OFW","Contract, payslips, remittance, SPA")],cols=1)
+    photo("pl-photo",M+"Xpander/int_xpander_26my_xp_lhd_ft_floorconsolebox.jpg",9/16)
+    compare("pb-cash","Cash o financing?","Paano bumili ng bagong sasakyan",("Cash","Financing"),[("Bayad","Buong halaga","DP o Zero DP + monthly"),("Interest","Wala","Kasama sa monthly"),("Ipon","Mababawasan","Mananatili")])
+    steps("pb-steps","Kung cash","4 steps",[("Pumili ng unit at variant","Test drive muna"),("Itanong ang cash price at inclusions",""),("Magbayad, kumuha ng OR",""),("Release","Gamitin ang checklist")])
+    tiles("pb-costs","Ownership costs","Huwag kalimutan",[("✓","Gas, parking, toll",""),("✓","PMS",""),("✓","Insurance renewal",""),("✓","Gulong at baterya","")],cols=2)
+    tiles("cb-when","Co-borrower car loan","When it helps",[("1","Income a bit short",""),("2","OFW abroad",""),("3","Couples sharing",""),("4","Newly employed","")],cols=2)
+    compare("cb-vs","For OFW families","Co-borrower vs SPA",("Co-borrower","SPA"),[("Role","Shares the loan","Signs on your behalf"),("Income","Can be combined","Not added")])
+    steps("cb-think","Before signing","Think it through",[("Shared responsibility",""),("Agree who pays","In writing"),("Check the combined budget","30–35% guide")])
+    table("ma-num","Xpander GLX · October 2026","Manual vs automatic in pesos",["","Manual","Automatic"],[("SRP","₱1,099,000","₱1,159,000"),("Zero DP","₱22,641","₱23,877"),("Low DP","₱19,811","₱20,892"),("Fuel","₱30K","₱60K")],[0.3,0.35,0.35],"Low DP: ₱148K (MT), ₱138K (AT). 60 months, all-in.")
+    compare("ma-who","Who should pick which","Manual or automatic?",("Manual","Automatic"),[("Budget","Tightest monthly","A bit more per month"),("Driver","Already drives manual","New, senior or many drivers"),("Use","Work vehicle","Daily traffic")])
+    photo("ma-photo",M+"Xpander/ext_xpander_26my_xp_lhd_ft_shift_cvt_with_mgda.jpg",9/16)
+    compare("cc-heat","Light vs dark","Car color trade-offs",("Light colors","Dark colors"),[("Heat in sun","Generally absorb less","Generally absorb more"),("Shows","Mud (white)","Dust, swirls, water spots"),("Resale","White, silver: common","Black: common")])
+    tiles("cc-check","Before you choose","Color checklist",[("1","See it in daylight",""),("2","Check availability","By variant"),("3","Two-tone options",""),("4","Think 5 years ahead","")],cols=2)
+    photo("cc-photo",M+"Xforce/ext_xforce_25my_xf_phl_p2_mc28_mc30_front-left_x4y-1.png",9/16)
+    tiles("ca-free","Already included","New-car freebies",[("✓","Full tint",""),("✓","Floor mats",""),("✓","Seat cover","Fabric seats"),("✓","Reverse camera",""),("✓","EWD and tools",""),("✓","Umbrella, cloth, keychain","")],cols=2)
+    tiles("ca-worth","Worth getting","Accessories that pay off",[("✓","Dashcam",""),("✓","Sunshade",""),("✓","Tire pressure gauge",""),("✓","Emergency kit extras",""),("✓","Child car seat",""),("✓","Trunk organizer","")],cols=2)
+    tiles("ca-skip","Think twice","Before you install",[("!","Electrical add-ons","Ask about warranty"),("✕","Blocks airbags or view",""),("✕","Extreme modifications",""),("✕","Seat covers over side airbags","")],cols=1)
+    compare("bn-vs","Brand new vs second hand","What you get",("Brand new","Second hand"),[("History","Known","Unknown unless documented"),("Warranty","3 years (all-in)","Short or none"),("Registration","Included","Your cost"),("DP","Zero DP promos","Depends on seller")])
+    steps("bn-check","Buying second hand?","Checklist",[("Documents","OR/CR, deed of sale, no loan"),("Flood and accident signs","Rust, odor, water marks"),("Service records",""),("Mechanic inspection","Before paying")])
+    photo("bn-photo",M+"Mirage G4/ext_mirageg4_exterior.png",9/16)
+
+if __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk5":
+    MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk5()
+    json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
+elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk4":
     MAN.update({k:tuple(v) for k,v in json.load(open(R+"/_src/ill_sizes.json")).items()});bulk4()
     json.dump({k:list(v) for k,v in MAN.items()},open(R+"/_src/ill_sizes.json","w"),indent=0)
 elif __name__=="__main__" and len(sys.argv)>1 and sys.argv[1]=="bulk3":

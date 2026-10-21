@@ -156,6 +156,40 @@ ANS={
 "car-reservation-fee-philippines":"A car reservation fee in the Philippines holds a specific unit or color while your loan or payment is processed. Before paying, ask how much it is, how it's applied to your purchase, whether and when it's refundable, how long the hold lasts, and always get an official receipt. Message Richard for the current terms.",
 "mitsubishi-test-drive-sjdm":"To book a Mitsubishi test drive in SJDM, pick a unit and schedule on the online test drive page and Richard will confirm. Bring a valid driver's license and the family members who'll ride often, and check visibility, acceleration with passengers, ride, AC reach and parking.",
 }
+SEO.update({
+"mitsubishi-near-caloocan-novaliches":("Mitsubishi near Caloocan",["Mitsubishi Novaliches","Mitsubishi Caloocan","Mitsubishi Quirino Highway","car dealer near Novaliches"],None,
+ "Mitsubishi near Caloocan and Novaliches: how to reach SJ Legacy Motors on Quirino Highway, SJDM, popular October 2026 promos, and how to plan one visit."),
+"mitsubishi-near-fairview-quezon-city":("Mitsubishi near Fairview",["Mitsubishi Fairview","Mitsubishi Quezon City","Quirino Highway Fairview to SJDM","Mitsubishi promo QC"],None,
+ "Mitsubishi near Fairview and Quezon City: the Quirino Highway route to SJ Legacy Motors in SJDM, October 2026 promo monthlies, and planning your visit."),
+"mitsubishi-near-bulacan-towns":("Mitsubishi near Marilao",["Mitsubishi Meycauayan Bulacan","Mitsubishi Malolos","Mitsubishi Sta. Maria","Mitsubishi Norzagaray"],None,
+ "Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos: directions to SJ Legacy Motors in SJDM, Bulacan, plus popular units and promos."),
+"paano-mag-car-loan":("paano mag car loan",["paano mag apply ng car loan sa bangko","car loan requirements","car loan process Philippines","Zero DP"],None,
+ "Paano mag car loan? Step-by-step guide sa Taglish: budget, test drive, requirements para sa employed, self-employed at OFW, bank approval at release day."),
+"paano-bumili-ng-bagong-sasakyan":("paano bumili ng bagong sasakyan",["paano bumili ng cash na sasakyan","cash vs car loan","brand new car Philippines","all-in promo"],None,
+ "Paano bumili ng bagong sasakyan? Cash vs financing, step-by-step para sa bawat isa, ano ang kasama sa all-in promo, at ownership costs na dapat i-budget."),
+"co-borrower-car-loan-philippines":("co-borrower car loan Philippines",["co-borrower requirements","borrower vs co-borrower","OFW co-borrower","combined income car loan"],None,
+ "Co-borrower car loan Philippines guide: when it helps, who can be one, documents needed, shared responsibility, and co-borrower vs SPA for OFW families."),
+"manual-vs-automatic-car-philippines":("manual vs automatic car Philippines",["Xpander GLX MT vs AT","manual or automatic which is better","automatic for traffic","manual car price"],None,
+ "Manual vs automatic car Philippines: real Xpander GLX MT vs AT prices and monthlies, who should pick each, and why traffic and new drivers favor automatic."),
+"best-car-color-philippines":("best car color Philippines",["most popular car color Philippines","car color heat","car color resale value","two-tone car"],None,
+ "Best car color Philippines guide: which colors handle heat, dust and scratches best, how color affects resale value, and a checklist before you choose."),
+"car-accessories-worth-getting":("car accessories Philippines",["best car accessories Philippines","new car freebies","dashcam","car accessories warranty"],None,
+ "Car accessories Philippines guide: what already comes free with a new Mitsubishi, accessories worth getting, what to skip, and warranty tips before installing."),
+"brand-new-vs-second-hand-car-philippines":("brand new vs second hand car Philippines",["second hand car checklist","paano bumili ng second hand","brand new car warranty","used car flood check"],None,
+ "Brand new vs second hand car Philippines: warranty, history, registration and financing compared, when each makes sense, and a second-hand car checklist."),
+})
+ANS.update({
+"mitsubishi-near-caloocan-novaliches":"If you're looking for a Mitsubishi near Caloocan or Novaliches, Mitsubishi SJ Legacy Motors is north along Quirino Highway in Sto. Cristo, San Jose del Monte. Check your budget and book a test drive online first, then call or text Richard on 0954 291 1201 so your unit is ready.",
+"mitsubishi-near-fairview-quezon-city":"For a Mitsubishi near Fairview or Quezon City, Mitsubishi SJ Legacy Motors is up Quirino Highway in Sto. Cristo, San Jose del Monte. Book a test drive online, send documents for pre-check, and call or text Richard on 0954 291 1201 before you drive up.",
+"mitsubishi-near-bulacan-towns":"For a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos, Mitsubishi SJ Legacy Motors is on Quirino Highway, Sto. Cristo, San Jose del Monte, Bulacan. Use the directions link, book a test drive online, and call or text Richard on 0954 291 1201.",
+"paano-mag-car-loan":"Paano mag car loan: alamin ang budget (monthly na around 30–35% ng gross income), pumili ng unit at mag test drive, ihanda ang requirements, ipa-pre-check sa sales executive, at hintayin ang bank approval bago ang release. Subject to bank approval palagi.",
+"paano-bumili-ng-bagong-sasakyan":"Paano bumili ng bagong sasakyan: pumili muna ng unit at mag test drive, tapos piliin kung cash o financing. Sa cash, itanong ang cash price at inclusions at kumuha ng official receipt. Sa financing, ihanda ang requirements para sa bank approval. Parehong may release day checklist.",
+"co-borrower-car-loan-philippines":"A co-borrower car loan in the Philippines lets two people, usually spouses or immediate family, apply together so the bank can consider combined income. The co-borrower shares responsibility for the loan and submits IDs and income documents. Each bank sets its own rules.",
+"manual-vs-automatic-car-philippines":"Manual vs automatic car in the Philippines: manual is usually cheaper (Xpander GLX MT ₱22,641 vs GLX AT ₱23,877 a month at Zero DP, October 2026), while automatic is far easier in daily traffic and for new or senior drivers.",
+"best-car-color-philippines":"The best car color in the Philippines depends on your priorities: white and silver generally stay cooler in the sun, silver and gray hide dust best, and common colors like white, silver and black are often easier to resell. See colors in daylight before choosing.",
+"car-accessories-worth-getting":"Car accessories in the Philippines worth getting for a new car: a dashcam, sunshade, tire pressure gauge, emergency kit extras and a child car seat if you have kids under 150 cm. Tint, mats, seat cover, reverse camera and an early warning device already come as freebies.",
+"brand-new-vs-second-hand-car-philippines":"Brand new vs second hand car in the Philippines: a second-hand car usually costs less upfront, but a brand-new car gives a known history, a 3-year warranty and an all-in package with registration and insurance, plus Zero DP options.",
+})
 STOP={"in","the","for","a","of","an","to","and","vs","car","philippines","2026","tips","guide","how","what","is","my","your","with","on","price","monthly","new"}
 def _tags(a):
     kw=a.get("kw",("",[]))
