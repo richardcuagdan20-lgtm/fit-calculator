@@ -17,8 +17,7 @@ PX='''<!-- Meta Pixel -->
 CL='''<!-- Microsoft Clarity -->
 <script>try{(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z0ztjrla58");}catch(_){}</script>
 '''
-NAV=[("/","Home"),("/cars/","Cars"),("GROUP","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
-DDJS="<script>(function(){var b=document.querySelector('.ddb'),d=b&&b.parentNode;if(!b)return;function set(o){d.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}b.addEventListener('click',function(e){e.stopPropagation();set(!d.classList.contains('open'))});document.addEventListener('click',function(e){if(!d.contains(e.target))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false)}})})();</script>"
+NAV=[("/","Home"),("/cars/","Cars"),("/promos-tips/","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
 GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
@@ -28,10 +27,8 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         graph.append({"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":D+p} for i,(p,n) in enumerate(crumbs)]})
     cur=lambda p:(p==path or (p!="/" and path.startswith(p)))
     def item(p,n):
-        if p!="GROUP": return f'<a href="{p}"{" aria-current=\"page\"" if cur(p) else ""}>{e(n)}</a>'
-        on=any(cur(q) for q,_ in GROUP)
-        sub="".join(f'<a href="{q}"{" aria-current=\"page\"" if cur(q) else ""}>{m}</a>' for q,m in GROUP)
-        return f'<div class="dd"><button type="button" class="ddb{" cur" if on else ""}" aria-expanded="false" aria-controls="ddm">{e(n)}<svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><div class="ddm" id="ddm">{sub}</div></div>'
+        act=cur(p) or (p=="/promos-tips/" and any(cur(q) for q,_ in GROUP))
+        return f'<a href="{p}"{" aria-current=\"page\"" if act else ""}>{e(n)}</a>'
     nav="".join(item(p,n) for p,n in NAV)
     bc=""
     if crumbs:
@@ -66,7 +63,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <a class="brand" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Richard Cuagdan</b><small>Mitsubishi SJ Legacy Motors</small></span></a>
 <button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
 <nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="/budgetcalculator/">Compute my monthly</a></nav>
-{DDJS}
+
 </div></header>
 {bc}
 <main id="main">
@@ -221,6 +218,16 @@ document.getElementById('gf').addEventListener('submit',function(ev){{ev.prevent
 }});
 }});
 </script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
+
+# ---------- promos & tips hub
+HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
+     ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
+     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]
+page("/promos-tips/","Mitsubishi Promos, Car Buying Guides & Blog | Richard Cuagdan SJDM",
+ "Start here for Mitsubishi promos at SJ Legacy Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
+f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
+<section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>''',
+ crumbs=[("/","Home"),("/promos-tips/","Promos & Tips")])
 
 # ---------- guides / blog
 def xl(base):
