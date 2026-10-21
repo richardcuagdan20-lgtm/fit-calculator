@@ -25,6 +25,8 @@ CL='''<!-- Microsoft Clarity -->
 SUF0=" | Mitsubishi Motors - SJ Legacy Motors"
 NAV=[("/","Home"),("/cars/","Cars"),("/promos-tips/","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
 GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
+from figs import FIGS
+ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill_sizes.json")))
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
     url=D+path
@@ -252,6 +254,10 @@ def articles(base,items,label,title,desc,intro):
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
         if a.get("by"):
             ld[0]["author"]={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":a["by"],"url":D+"/about/"}
+        body=a["body"]
+        for key,k,alt in FIGS.get(a["slug"],[]) if base!="guides" else []:
+            w,h=ILLS[k];tag=f'<figure class="fig"><img src="/assets/img/ill/{k}.webp" alt="{e(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"></figure>\n'
+            i=body.find("<h2>"+key);assert i>=0,(a["slug"],key);body=body[:i]+tag+body[i:]
         top=f'<div class="box ans"><p><b>Quick answer:</b> {e(a["answer"])}</p></div>' if a.get("answer") else ""
         fq=""
         if a.get("faq"):
@@ -262,7 +268,7 @@ def articles(base,items,label,title,desc,intro):
         f'''<article class="art"><div class="w nar"><header><p class="kick">{label}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, {a.get("by","Car Sales Executive")} · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {top}
-{a["body"]}
+{body}
 {fq}
 <aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
         crumbs=[("/","Home"),(f"/{base}/",label),(f"/{base}/{a['slug']}/",a["title"])])
