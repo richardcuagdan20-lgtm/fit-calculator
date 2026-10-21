@@ -15,6 +15,12 @@ Source lives in `_src/` (Python 3, no dependencies):
 
 Rebuild: `python3 _src/build.py` from the repo root, then commit.
 
+## Prices, promos and leads
+- Public pages show SRP only (official MMPC price list, `srp` in `_src/data.py`; `None` renders "Ask for price").
+- Promo DP/monthly figures live in each variant's `promo` and are rendered only by JS on `/promos/` (noindex) after the gate form; unlock is remembered in localStorage (`mp_promo_unlocked`).
+- `/apply/` and the promo gate post to the same Apps Script webhook as the calculator via `/assets/lead.js` (via = `apply_form` / `promo_gate`). Extra apply fields (income range, email, message) go into the `usage` column; payment choice into `dpPreference`.
+- Meta Pixel (PageView) + GA4 on generated pages; Lead / generate_lead fire on successful submit.
+
 ## Adding a blog post
 1. Open `_src/content.py` and append a dict to `POSTS`:
    `dict(slug="my-post", date="2026-11-05", img="xpglx_x37", alt="Describe the image", title="...", desc="Meta description, ~150 chars", body='''<p>HTML…</p><h2>…</h2>''')`

@@ -35,11 +35,9 @@ dict(slug="zero-dp-vs-low-dp",date="2026-10-21",img="xpgls_c31",alt="Mitsubishi 
 title="Zero DP vs Low DP: Which Car Promo Is Right for You?",
 desc="Compare Zero Down Payment and low down payment car promos: upfront cash, monthly amortization, and how to decide based on your budget and savings.",
 body='''<p>Many promos give you two choices on the same unit: Zero DP, where you pay no down payment, or a low-DP option where you pay a modest amount upfront in exchange for a lower monthly.</p>
-<h2>A real example</h2>
-<p>Using the October 2026 promo for the <a href="/cars/xpander/">Xpander GLX AT</a> on 60 months:</p>
-<div class="tw"><table class="pt"><thead><tr><th scope="col">Option</th><th scope="col">Upfront</th><th scope="col">Monthly</th></tr></thead><tbody><tr><th scope="row">Zero DP</th><td>₱0</td><td>₱23,877</td></tr><tr><th scope="row">Low DP</th><td>₱138,000</td><td>₱20,892</td></tr></tbody></table></div>
-<p>The low-DP option saves about ₱2,985 a month. Over 60 months that adds up to roughly ₱179,100, which is more than the ₱138,000 paid upfront. In this example, paying the down payment costs less overall.</p>
-'''+NOTE_B+'''
+<h2>The trade-off in one sentence</h2>
+<p>Zero DP keeps your cash in your pocket today; a down payment shrinks the loan, so every monthly payment for the next five years is smaller. Because you borrow less, you also pay less in total over the term, often by more than the down payment itself.</p>
+<p>To see the exact Zero DP and low-DP figures for a specific unit this month, <a href="/promos/">unlock the current promos</a> or run the <a href="/budgetcalculator/">budget calculator</a>.</p>
 <h2>When Zero DP makes sense</h2>
 <ul class="ticks"><li>You need a car now but want to keep your savings intact as an emergency fund.</li><li>Your monthly income comfortably covers the higher amortization.</li><li>You'd rather put spare cash into your business or other priorities.</li></ul>
 <h2>When low DP makes sense</h2>
@@ -70,7 +68,7 @@ body='''<p>"All-in" means the usual extra charges of buying a car are already pa
 <h2>Included in the all-in package</h2>
 <ul class="ticks"><li><b>3 years LTO registration</b> – your plates and registration are handled for the first three years.</li><li><b>3 years TPL insurance</b> – the compulsory third-party liability insurance required for registration.</li><li><b>1 year comprehensive insurance, rate locked for 3 years</b> – covers damage and theft; the rate is locked for the following renewals within three years.</li><li><b>Chattel mortgage</b> – the fee to register the bank's lien on the car.</li><li><b>Free labor up to 5,000 km</b> – labor for the early periodic maintenance service.</li><li><b>3 years warranty</b> – manufacturer warranty coverage, subject to its terms.</li></ul>
 <h2>Freebies</h2>
-<p>Current promos also come with full tint, floor mats, a seat cover (for fabric seats), a reverse camera, an early warning device, basic tools, an umbrella, a microfiber cloth and a keychain. Many variants include a free fuel allowance as well; the amount per variant is on each <a href="/cars/">car page</a>.</p>
+<p>Current promos also come with full tint, floor mats, a seat cover (for fabric seats), a reverse camera, an early warning device, basic tools, an umbrella, a microfiber cloth and a keychain. Many variants also come with a fuel freebie; ask me for the details on the unit you like.</p>
 <h2>What's not included</h2>
 <p>Fuel beyond the freebie, toll fees, parts and fluids for maintenance, and renewal of comprehensive insurance after the first year are still on you. Planning for these keeps ownership stress-free.</p>
 '''+NOTE_B),
@@ -83,10 +81,10 @@ body='''<p>All three seat seven and are popular with families in Bulacan. The ri
 <tr><th scope="row">Power / torque</th><td>105 PS / 141 Nm</td><td>105 PS / 141 Nm</td><td>163 PS / 250 Nm</td></tr>
 <tr><th scope="row">Transmission</th><td>5MT or 4AT</td><td>4AT</td><td>CVT</td></tr>
 <tr><th scope="row">SRP from</th><td>₱1,099,000</td><td>₱1,378,000</td><td>₱1,389,000</td></tr>
-<tr><th scope="row">Monthly as low as</th><td>₱19,811</td><td>₱24,840</td><td>₱26,827</td></tr></tbody></table></div>
-'''+NOTE_B+'''
+</tbody></table></div>
+'''+'''<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). <a href="/promos/">Unlock this month's promos</a>.</p>
 <h2>Choose the Xpander if…</h2>
-<p>You want the most affordable 7-seater monthly, mostly drive around town and on weekend trips, and value practicality over extras. The GLS AT adds a 10-inch display with wireless smartphone connectivity and a Multi-Around Monitor. <a href="/cars/xpander/">See Xpander promos</a>.</p>
+<p>You want the most affordable 7-seater, mostly drive around town and on weekend trips, and value practicality over extras. The GLS AT adds a 10-inch display with wireless smartphone connectivity and a Multi-Around Monitor. <a href="/cars/xpander/">See Xpander promos</a>.</p>
 <h2>Choose the Xpander Cross if…</h2>
 <p>You like the Xpander's packaging but want a tougher crossover look and a nicer cabin, including two-tone synthetic leather with Heat Guard. <a href="/cars/xpander-cross/">See Xpander Cross promos</a>.</p>
 <h2>Choose the Destinator if…</h2>
@@ -100,25 +98,27 @@ title="Best 7-Seater for Filipino Families in 2026",
 desc="Which Mitsubishi 7-seater suits your family in 2026? A practical look at the Xpander, Xpander Cross, Destinator and Montero Sport by budget and lifestyle.",
 body='''<p>Seven seats is the magic number for many Filipino households: parents, kids, a lola or yaya, and room for pasalubong. Mitsubishi has four 7-seaters in the current lineup, and each fits a different kind of family.</p>
 <h2>For the tightest budget: Xpander</h2>
-<p>With all-in monthly promos as low as ₱19,811 on 60 months, the <a href="/cars/xpander/">Xpander</a> is the most affordable way into a Mitsubishi 7-seater. Its high ground clearance is a real advantage during the rainy season.</p>
+<p>With an SRP starting at ₱1,099,000, the <a href="/cars/xpander/">Xpander</a> is the most affordable way into a Mitsubishi 7-seater. Its high ground clearance is a real advantage during the rainy season.</p>
 <h2>For style with practicality: Xpander Cross</h2>
-<p>The <a href="/cars/xpander-cross/">Xpander Cross</a> keeps the Xpander's space and adds a crossover look and a more upscale interior, from ₱24,840 a month.</p>
+<p>The <a href="/cars/xpander-cross/">Xpander Cross</a> keeps the Xpander's space and adds a crossover look and a more upscale interior, at an SRP of ₱1,378,000.</p>
 <h2>For more power and tech: Destinator</h2>
 <p>The <a href="/cars/destinator/">Destinator</a>'s turbocharged engine makes 163 PS, a big step up for families who regularly fill every seat and head north or south on the expressway.</p>
 <h2>For long drives and rough roads: Montero Sport</h2>
 <p>If you travel to the province often or need a diesel with real towing and off-road ability, the <a href="/cars/montero-sport/">Montero Sport</a> and its Black Series variants are built for it.</p>
-'''+NOTE_B+'''
+<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). For this month's down payment and monthly options, <a href="/promos/">unlock the promos</a>.</p>
 <h2>How to narrow it down</h2>
 <p>Start with your comfortable monthly using the <a href="/budgetcalculator/">calculator</a>, then compare the models that fit. My <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator guide</a> goes deeper on the three gasoline options.</p>'''),
 dict(slug="mitsubishi-october-2026-promos-bulacan",date="2026-10-21",img="msbs_jh3",alt="Mitsubishi Montero Sport Black Series in Graphite Gray with black roof",
 title="Mitsubishi October 2026 Promos in Bulacan",
-desc="Highlights of the October 2026 Mitsubishi promos at SJ Legacy Motors, San Jose del Monte: lowest all-in monthlies, Zero DP options and fuel freebies.",
-body='''<p>Here are the highlights of this month's offers at Mitsubishi SJ Legacy Motors in San Jose del Monte. Every variant and figure is on the <a href="/promos/">promos page</a>.</p>
-<h2>Lowest all-in monthly per model (60 months)</h2>
-<ul class="ticks"><li><a href="/cars/mirage-g4/">Mirage G4</a> GLX AT: ₱15,160/mo with ₱58K DP</li><li><a href="/cars/l300/">L300</a> Dual AC: ₱18,789/mo with ₱123K DP</li><li><a href="/cars/xpander/">Xpander</a> GLX MT: ₱19,811/mo with ₱148K DP</li><li><a href="/cars/xpander-cross/">Xpander Cross</a>: ₱24,840/mo with ₱148K DP</li><li><a href="/cars/triton/">Triton</a> GX AT: ₱25,200/mo with ₱140K DP</li><li><a href="/cars/destinator/">Destinator</a> GLX: ₱26,827/mo with ₱93K DP</li><li><a href="/cars/montero-sport/">Montero Sport</a> GLX MT: ₱28,265/mo with ₱30K DP</li></ul>
-<h2>Zero DP options</h2>
-<p>Most variants also have a Zero DP option, for example the Xpander GLX AT at ₱23,877/mo or the 2026 L300 Dual AC at ₱21,405/mo. Not sure which is better for you? Read <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a>.</p>
-<h2>Fuel freebies</h2>
-<p>The Xpander GLX AT, Xpander GLS AT and Xpander Cross come with ₱60,000 worth of fuel, and the Destinator GT with ₱40,000. The Xpander GLX MT gets ₱30,000, and most other variants ₱20,000 (the Destinator GLX and Montero Sport GLX MT have no fuel freebie).</p>
+desc="October 2026 at Mitsubishi SJ Legacy Motors, San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to unlock this month's promo figures.",
+body='''<p>October is a good month to shop at Mitsubishi SJ Legacy Motors in San Jose del Monte. Most models come with all-in packages, Zero DP or low-DP financing options and freebies. Here is where each model starts, based on the official SRP.</p>
+<h2>Starting SRP per model</h2>
+<ul class="ticks"><li><a href="/cars/mirage-g4/">Mirage G4</a>: from ₱793,000</li><li><a href="/cars/l300/">L300</a>: from ₱829,000 (cab and chassis)</li><li><a href="/cars/xpander/">Xpander</a>: from ₱1,099,000</li><li><a href="/cars/xforce/">Xforce</a>: from ₱1,119,000</li><li><a href="/cars/triton/">Triton</a>: from ₱1,266,000</li><li><a href="/cars/xpander-cross/">Xpander Cross</a>: ₱1,378,000</li><li><a href="/cars/destinator/">Destinator</a>: from ₱1,389,000</li><li><a href="/cars/montero-sport/">Montero Sport</a>: from ₱1,568,000</li><li><a href="/cars/versa-van/">Versa Van</a>: ₱1,649,000</li><li><a href="/cars/outlander-phev/">Outlander PHEV</a>: ₱2,848,000</li></ul>
+<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026), subject to change without notice.</p>
+<h2>What this month's promos include</h2>
+<p>Promo packages are all-in: three years of LTO registration and TPL, first-year comprehensive insurance with the rate locked for three years, chattel mortgage, free labor up to 5,000 km and a three-year warranty. Freebies include full tint and floor mats, and many variants add a fuel freebie. <a href="/guides/what-all-in-includes/">See the full list</a>.</p>
+<h2>See the exact figures</h2>
+<p>Down payment and monthly options change every month, so I share them on request. Leave your name and mobile number on the <a href="/promos/">promos page</a> to see every October figure right away, or use the <a href="/budgetcalculator/">budget calculator</a> to match a unit to your income.</p>
+<p><a class="btn" href="/promos/">Unlock October promos</a></p>
 '''+NOTE_B),
 ]

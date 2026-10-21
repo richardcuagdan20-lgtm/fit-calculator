@@ -12,6 +12,8 @@ DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Mot
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
 PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":"Car Sales Executive","image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[MSG]}
+PX='''<!-- Meta Pixel -->
+<script>try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}</script>'''
 NAV=[("/","Home"),("/cars/","Cars"),("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog"),("/about/","About"),("/contact/","Contact")]
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
@@ -29,6 +31,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {GA}
+{PX}
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 {'<meta name="robots" content="noindex">' if noindex else ''}
@@ -82,27 +85,30 @@ def img(k,alt,eager=False,cls=""):
     return f'<img src="/assets/img/{k}.webp" alt="{e(alt)}" width="640" height="427" {"fetchpriority=\"high\"" if eager else "loading=\"lazy\""} decoding="async"{f" class=\"{cls}\"" if cls else ""}>'
 
 def vcard(v,m):
-    srp=v.get("srpl") or f(v["srp"])
-    opts="".join(f'<li><span>{e(l)}</span><b>{f(mo)}<small>/mo</small></b></li>' for l,mo in v["opts"])
-    fuel=f'<p class="fuel">Free fuel: <b>{f(v["fuel"])}</b></p>' if v["fuel"] else ""
+    promo=f'<a class="btn sm ghost dk" href="/promos/#{m["slug"]}">See promo</a>' if v["promo"] else f'<a class="btn sm ghost dk" href="{MSG}" rel="noopener">Ask for the latest promo</a>'
     return f'''<article class="card vc">{img(v["img"],f"Mitsubishi {v['n']}")}
-<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{e(srp)}</b></p>
-<ul class="opts">{opts}</ul>{fuel}<p class="muted">60 months, all-in.</p></div></article>'''
+<div class="pad"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{srp_txt(v)}</b></p><p class="muted">All-in packages with freebies, ask for details.</p><p class="row">{promo} <a class="more" href="/apply/?unit={v['id']}">Apply →</a></p></div></article>'''
 
 def offers_ld(m):
     out=[]
     for v in m["variants"]:
-        out.append({"@type":"Product","name":"Mitsubishi "+v["n"],"brand":{"@type":"Brand","name":"Mitsubishi"},"image":D+"/assets/img/"+v["img"]+".webp","category":m["cat"],
-          "offers":{"@type":"Offer","price":v["srp"],"priceCurrency":"PHP","priceValidUntil":"2026-10-31","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":D+"/#dealer"},"url":D+f"/cars/{m['slug']}/"}})
+        p={"@type":"Product","name":"Mitsubishi "+v["n"],"brand":{"@type":"Brand","name":"Mitsubishi"},"image":D+"/assets/img/"+v["img"]+".webp","category":m["cat"]}
+        if v["srp"]:
+            p["offers"]={"@type":"Offer","price":v["srp"],"priceCurrency":"PHP","priceValidUntil":"2026-10-31","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":D+"/#dealer"},"url":D+f"/cars/{m['slug']}/"}
+        out.append(p)
     return out
 
 ALLIN_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in ALLIN)+"</ul>"
 FREE_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in FREEBIES)+"</ul>"
+def from_txt(m):
+    s=srp_from(m); return f'SRP from <b>{f(s)}</b>' if s else 'Ask for price'
+UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
+CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
 
 # ---------- HOME
-feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">as low as <b>{f(lowest(m))}</b>/mo</p></div></a>''' for m in MODELS)
+feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/","Mitsubishi Promos in SJDM, Bulacan | Richard Cuagdan, Mitsubishi SJ Legacy Motors",
- "October 2026 Mitsubishi promos in San Jose del Monte, Bulacan: Xpander, Destinator, Montero Sport, Triton, L300 and Mirage G4 with Zero DP and low-DP all-in monthly options.",
+ "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in Zero DP and low-DP options.",
 f'''<section class="hero"><div class="w hgrid"><div>
 <p class="kick">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>
 <h1>Your next Mitsubishi, explained clearly and financed sensibly.</h1>
@@ -110,10 +116,10 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
 </div>{img("xc_x3n","Mitsubishi Xpander Cross in Quartz White Pearl",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w">
-<h2>October 2026 featured promos</h2>
-<p class="sub">Lowest all-in monthly per model on 60-month terms. Tap a model for every variant, down payment option and freebie.</p>
+<h2>The 2026 Mitsubishi lineup</h2>
+<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">unlock this month's promo figures</a>.</p>
 <div class="grid g3">{feat}</div>
-<p class="note">{NOTE}</p>
+<p class="note">{SRPNOTE}</p>
 <p><a class="more" href="/cars/">View all current models →</a></p>
 </div></section>
 <section class="sec alt"><div class="w">
@@ -132,13 +138,11 @@ f'''<section class="hero"><div class="w hgrid"><div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Promos SJDM by Richard Cuagdan","url":D+"/"}])
 
 # ---------- CARS index
-cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} promo variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">as low as <b>{f(lowest(m))}</b>/mo</p></div></a>''' for m in MODELS)
-others="".join(f'<li class="card pad"><h3>{n}</h3><p class="muted">{c}</p><p><a href="{MSG}" rel="noopener">Ask for the latest promo →</a></p></li>' for n,c in OTHER)
-page("/cars/","Mitsubishi Models & Prices October 2026 | SJ Legacy Motors SJDM",
- "Current Mitsubishi lineup at SJ Legacy Motors, San Jose del Monte: SRP, Zero DP and low-DP monthly options for Xpander, Destinator, Montero Sport, Triton, L300 and Mirage G4.",
-f'''<section class="ph"><div class="w"><h1>Current Mitsubishi models</h1><p class="lead">Pick a model to compare variants, down payment options and fuel freebies. All monthly figures are all-in on 60 months.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{NOTE}</p></div></section>
-<section class="sec alt"><div class="w"><h2>Also in the lineup</h2><p class="sub">These are current Mitsubishi Philippines models. Promo figures change often, so message me for this month's offer.</p><ul class="grid g3 plain">{others}</ul></div></section>''',
+cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
+page("/cars/","Mitsubishi 2026 Models & SRP Price List | SJ Legacy Motors SJDM",
+ "Every current Mitsubishi model at SJ Legacy Motors, San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
+f'''<section class="ph"><div class="w"><h1>2026 Mitsubishi models</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
+<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">Unlock October promos</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 # ---------- model pages
@@ -146,29 +150,64 @@ for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
     sp="".join(f"<tr><th scope='row'>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in m["specs"])
     rel=" · ".join(f'<a href="/cars/{x["slug"]}/">{x["name"]}</a>' for x in MODELS if x is not m)
-    page(f"/cars/{m['slug']}/",f"Mitsubishi {m['name']} Promo October 2026, SRP & Monthly | SJDM Bulacan",
-     f"Mitsubishi {m['name']} October 2026 promo at SJ Legacy Motors SJDM: SRP from {f(min(v['srp'] for v in m['variants']))}, all-in monthly as low as {f(lowest(m))} on 60 months.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a></p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
-<section class="sec"><div class="w"><h2>{m['name']} variants and October 2026 promos</h2><p class="sub">All-in monthly amortization on 60 months.</p><div class="grid g3">{vs}</div><p class="note">{NOTE}</p></div></section>
+    s0=srp_from(m)
+    haspromo=any(v["promo"] for v in m["variants"])
+    page(f"/cars/{m['slug']}/",f"Mitsubishi {m['name']} 2026 Price & Variants | SJ Legacy Motors SJDM",
+     f"Mitsubishi {m['name']} at SJ Legacy Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+<section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 <section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
-<div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Fuel freebie amount depends on the variant, as shown above.</p></div></div></section>
+<div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
 <section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
     ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp",
     crumbs=[("/","Home"),("/cars/","Cars"),(f"/cars/{m['slug']}/",m['name'])])
 
-# ---------- promos
-rows=""
-for m in MODELS:
-    for v in m["variants"]:
-        rows+=f'<tr><th scope="row"><a href="/cars/{m["slug"]}/">{e(v["n"])}</a></th><td>{e(v.get("srpl") or f(v["srp"]))}</td><td>{"<br>".join(f"{e(l)}: <b>{f(mo)}</b>" for l,mo in v["opts"])}</td><td>{f(v["fuel"]) if v["fuel"] else "None"}</td></tr>'
-page("/promos/","Mitsubishi Promos October 2026 Bulacan: Zero DP & Low DP | Richard Cuagdan",
- "Every October 2026 Mitsubishi promo at SJ Legacy Motors SJDM in one table: SRP, Zero DP and low-DP all-in monthly on 60 months, plus fuel freebies.",
-f'''<section class="ph"><div class="w"><h1>October 2026 Mitsubishi promos</h1><p class="lead">All current figures in one place. Monthly amounts are all-in on 60 months.</p></div></section>
-<section class="sec"><div class="w"><div class="tw"><table class="pt"><caption class="vh">October 2026 promo figures</caption><thead><tr><th scope="col">Variant</th><th scope="col">SRP</th><th scope="col">Down payment and monthly</th><th scope="col">Free fuel</th></tr></thead><tbody>{rows}</tbody></table></div>
-<p class="note">{NOTE}</p>
-<p class="muted">Xforce, Outlander PHEV and Versa Van are also available. <a href="{MSG}" rel="noopener">Ask for the latest promo</a>.</p></div></section>
-<section class="sec alt"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>''',
- crumbs=[("/","Home"),("/promos/","Promos")])
+# ---------- promos (gated, noindex; figures live only in JS data)
+PD=[{"slug":m["slug"],"name":m["name"],"v":[{"n":v["n"],"srp":(v["promo"]["srp"] or v["srp"]),"opts":v["promo"]["opts"],"fuel":v["promo"]["fuel"]} for v in m["variants"] if v["promo"]]} for m in MODELS]
+PD=[x for x in PD if x["v"]]
+page("/promos/","Unlock Mitsubishi October 2026 Promos | Richard Cuagdan SJDM",
+ "Unlock this month's Mitsubishi promo figures at SJ Legacy Motors, San Jose del Monte: Zero DP and low-DP all-in options with freebies.",
+f'''<section class="ph"><div class="w"><h1>October 2026 Mitsubishi promos</h1><p class="lead">See every down payment and monthly option this month, all-in on 60 months. Leave your name and mobile once to unlock them.</p></div></section>
+<section class="sec"><div class="w">
+<div id="gate" class="card pad formc nar">
+<h2 class="h3">Unlock the promo figures</h2>
+<form id="gf" novalidate>
+<div class="fld"><label for="name">Full name</label><input id="name" autocomplete="name" required><p class="er" id="e_name" hidden>Please enter your name.</p></div>
+<div class="fld"><label for="mobile">Mobile number</label><input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_mobile" hidden>Enter a valid mobile number (09XXXXXXXXX or +country code).</p></div>
+<div class="fld"><label for="unit">Unit of interest</label><select id="unit" required><option value="">Select a unit</option>{UNIT_OPTS}<option value="Not sure yet">Not sure yet</option></select><p class="er" id="e_unit" hidden>Please choose a unit.</p></div>
+{CONSENT}
+<button class="btn" type="submit" id="gb">Show the promos</button>
+</form></div>
+<div id="pv" hidden></div>
+<noscript><p>Please enable JavaScript to view promo figures, or <a href="{MSG}">message Richard</a>.</p></noscript>
+</div></section>
+<section class="sec alt"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>
+<script src="/assets/lead.js" defer></script>
+<script type="application/json" id="pd">{json.dumps(PD,ensure_ascii=False)}</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){{
+var KEY='mp_promo_unlocked',MSG='{MSG}',NOTE={json.dumps(NOTE)};
+function peso(n){{return '₱'+Number(n).toLocaleString('en-PH')}}
+function esc(t){{return String(t).replace(/[&<>"]/g,function(c){{return {{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}}[c]}})}}
+function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='';
+ d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
+  m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel: <b>'+peso(v.fuel)+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
+  h+='</div></section>'}});
+ h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV, Versa Van and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
+ var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
+ if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
+var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}
+if(un){{show();return}}
+document.getElementById('gf').addEventListener('submit',function(ev){{ev.preventDefault();
+ var n=document.getElementById('name').value.trim(),mo=document.getElementById('mobile').value.trim(),u=document.getElementById('unit').value,c=document.getElementById('consent').checked;
+ var bad=[Lead.err('name',n.length<2),Lead.err('mobile',!Lead.okMobile(mo)),Lead.err('unit',!u),Lead.err('consent',!c)];
+ if(bad.some(Boolean)){{var x=document.querySelector('.er:not([hidden])');if(x)x.scrollIntoView({{block:'center'}});return}}
+ var b=document.getElementById('gb');b.disabled=true;b.textContent='Unlocking...';
+ var L=Lead.base('promo_gate');L.name=n;L.mobile=mo.replace(/[\\s()-]/g,'');L.chosenUnit=u;L.seg='';
+ Lead.send(L).then(function(){{try{{localStorage.setItem(KEY,'1')}}catch(_){{}}Lead.track(u);show();window.scrollTo(0,document.getElementById('pv').offsetTop-80)}});
+}});
+}});
+</script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
 
 # ---------- guides / blog
 def articles(base,items,label,title,desc,intro):
@@ -208,22 +247,60 @@ f'''<section class="ph"><div class="w"><h1>About Richard Cuagdan</h1><p class="l
 </div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")])
 
 # ---------- apply
-page("/apply/","Apply for Mitsubishi Car Financing in SJDM | Steps & Requirements",
- "How to apply for Mitsubishi financing with Richard Cuagdan at SJ Legacy Motors: start with the budget calculator, then submit documents for bank approval.",
-f'''<section class="ph"><div class="w"><h1>Apply for financing</h1><p class="lead">The fastest way to start is the budget calculator. It matches a unit to your income and sends your details to me so I can follow up.</p><p class="row"><a class="btn" href="/budgetcalculator/">Start with the calculator</a></p></div></section>
-<section class="sec"><div class="w nar">
-<h2>The steps</h2>
-<ol class="steps"><li><h3>Check your fit</h3><p>Use the <a href="/budgetcalculator/">calculator</a> to see which models fit your monthly budget and choose a down payment option.</p></li>
-<li><h3>Talk with me</h3><p>I'll message or call you to confirm the unit, color and terms, and answer your questions.</p></li>
-<li><h3>Submit documents</h3><p>Send the requirements for your situation. I'll check them before they go to the bank.</p></li>
-<li><h3>Bank approval</h3><p>The bank evaluates your application. Approval time varies by bank and by how complete the documents are.</p></li>
-<li><h3>Pay the down payment and release</h3><p>Once approved, settle the down payment (if any), sign the documents and drive home your Mitsubishi.</p></li></ol>
-<h2>Typical documents</h2>
-<p>Banks set the final list, but most ask for the following:</p>
-<ul class="ticks"><li>Two valid government IDs with matching signatures</li><li>Proof of billing for your current address</li><li>Employed: certificate of employment with compensation and recent payslips or ITR</li><li>Business owner: DTI or SEC registration, business permit, bank statements and ITR or financial statements</li><li>OFW: employment contract, recent payslips or remittance records, and details of your co-borrower or attorney-in-fact in the Philippines</li></ul>
-<p>See the full <a href="/guides/car-loan-requirements/">car loan requirements guide</a>.</p>
-<p class="note">{NOTE}</p>
-</div></section>''', crumbs=[("/","Home"),("/apply/","Apply")])
+page("/apply/","Apply for a Mitsubishi in SJDM, Bulacan | Richard Cuagdan",
+ "Apply online for a Mitsubishi at SJ Legacy Motors, San Jose del Monte: send your details, choose cash or financing, and Richard Cuagdan will get back to you.",
+f'''<section class="ph"><div class="w"><h1>Apply for your Mitsubishi</h1><p class="lead">Send your details below and I'll get back to you with the right unit, the latest promo and the documents you need. Prefer to check your budget first? Use the <a href="/budgetcalculator/" style="color:#fff">budget calculator</a>.</p></div></section>
+<section class="sec"><div class="w split">
+<div>
+<div id="af-wrap" class="card pad formc">
+<h2 class="h3">Application form</h2>
+<form id="af" novalidate>
+<div class="fld"><label for="name">Full name *</label><input id="name" autocomplete="name" required><p class="er" id="e_name" hidden>Please enter your name.</p></div>
+<div class="fld"><label for="mobile">Mobile number *</label><input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_mobile" hidden>Enter a valid mobile number (09XXXXXXXXX or +country code).</p></div>
+<div class="fld"><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"><p class="er" id="e_email" hidden>Please check your email address.</p></div>
+<div class="fld"><label for="loc">City / location *</label><input id="loc" autocomplete="address-level2" placeholder="e.g. San Jose del Monte, Bulacan" required><p class="er" id="e_loc" hidden>Please enter your city or location.</p></div>
+<div class="fld"><label for="unit">Unit of interest *</label><select id="unit" required><option value="">Select a unit</option>{UNIT_OPTS}<option value="Not sure yet">Not sure yet</option></select><p class="er" id="e_unit" hidden>Please choose a unit.</p></div>
+<div class="fld"><label for="pay">Preferred payment *</label><select id="pay" required><option value="">Select</option><option>Financing</option><option>Cash</option></select><p class="er" id="e_pay" hidden>Please choose a payment option.</p></div>
+<div class="fld"><label for="emp">Employment type *</label><select id="emp" required><option value="">Select</option><option value="Employed">Employed</option><option value="Business owner">Business owner</option><option value="OFW">OFW</option><option value="OFW family">OFW family</option></select><p class="er" id="e_emp" hidden>Please choose your employment type.</p></div>
+<div class="fld"><label for="inc">Gross monthly income *</label><select id="inc" required><option value="">Select a range</option><option data-min="0">Below ₱30,000</option><option data-min="30000">₱30,000 to ₱49,999</option><option data-min="50000">₱50,000 to ₱79,999</option><option data-min="80000">₱80,000 to ₱119,999</option><option data-min="120000">₱120,000 to ₱199,999</option><option data-min="200000">₱200,000 and above</option></select><p class="er" id="e_inc" hidden>Please choose an income range.</p></div>
+<div class="fld"><label for="tl">When do you plan to buy? *</label><select id="tl" required><option value="">Select</option><option>This month</option><option>Within 1 to 3 months</option><option>Within 3 to 6 months</option><option>Just checking options</option></select><p class="er" id="e_tl" hidden>Please choose a timeline.</p></div>
+<div class="fld"><label for="msg">Message (optional)</label><textarea id="msg" rows="4" maxlength="1000"></textarea></div>
+{CONSENT}
+<button class="btn" type="submit" id="ab">Send my application</button>
+</form></div>
+<div id="thanks" class="card pad formc" hidden><h2 class="h3">Thank you!</h2><p>Your details were sent. I'll get in touch with you soon. Reference: <b id="ref"></b></p><p>For a faster reply, message me on Messenger with your reference number.</p><p><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a></p></div>
+</div>
+<div>
+<h2>What happens next</h2>
+<ol class="steps"><li><h3>I review your details</h3><p>I check which unit and payment option fit what you shared.</p></li>
+<li><h3>We talk</h3><p>I'll message or call you to confirm the unit, color and terms and share this month's promo.</p></li>
+<li><h3>Submit documents</h3><p>For financing, send the requirements for your situation. I'll check them before they go to the bank.</p></li>
+<li><h3>Approval and release</h3><p>Once the bank approves (or once payment is settled for cash), we schedule your release.</p></li></ol>
+<h2>Typical documents for financing</h2>
+<ul class="ticks"><li>Two valid government IDs with matching signatures</li><li>Proof of billing</li><li>Employed: certificate of employment with compensation, payslips or ITR</li><li>Business owner: DTI or SEC registration, business permit, bank statements, ITR or financial statements</li><li>OFW: employment contract, payslips or remittance records, and co-borrower or attorney-in-fact details</li></ul>
+<p>Full list: <a href="/guides/car-loan-requirements/">car loan requirements guide</a>.</p>
+<p class="muted">Financing is subject to bank approval.</p>
+</div></div></section>
+<script src="/assets/lead.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){{
+var $=function(i){{return document.getElementById(i)}};
+var q=new URLSearchParams(location.search).get('unit');if(q){{var o=document.querySelector('#unit option[data-id="'+q.replace(/[^a-z0-9]/gi,'')+'"]');if(o)o.selected=true}}
+$('af').addEventListener('submit',function(ev){{ev.preventDefault();
+ var v=function(i){{return $(i).value.trim()}};
+ var em=v('email');
+ var bad=[Lead.err('name',v('name').length<2),Lead.err('mobile',!Lead.okMobile(v('mobile'))),Lead.err('email',!!em&&!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(em)),Lead.err('loc',!v('loc')),Lead.err('unit',!v('unit')),Lead.err('pay',!v('pay')),Lead.err('emp',!v('emp')),Lead.err('inc',!v('inc')),Lead.err('tl',!v('tl')),Lead.err('consent',!$('consent').checked)];
+ if(bad.some(Boolean)){{var x=document.querySelector('.er:not([hidden])');if(x)x.scrollIntoView({{block:'center'}});return}}
+ var b=$('ab');b.disabled=true;b.textContent='Sending...';
+ var emp=v('emp'),inc=$('inc').selectedOptions[0];
+ var L=Lead.base('apply_form');
+ L.name=v('name');L.mobile=v('mobile').replace(/[\\s()-]/g,'');L.location=v('loc');L.chosenUnit=v('unit');L.dpPreference=v('pay');L.employment=emp;
+ L.seg=emp==='OFW'?'ofw_abroad':(emp==='OFW family'?'ofw_family':'local');L.income=Number(inc.dataset.min)||0;L.timeline=v('tl');
+ L.usage=['Income range: '+inc.textContent,em?'Email: '+em:'',v('msg')?'Message: '+v('msg'):''].filter(Boolean).join(' | ');
+ Lead.send(L).then(function(){{Lead.track(L.chosenUnit);$('ref').textContent=L.leadId;$('af-wrap').hidden=true;$('thanks').hidden=false;$('thanks').scrollIntoView({{block:'center'}})}});
+}});
+}});
+</script>''', crumbs=[("/","Home"),("/apply/","Apply")])
 
 # ---------- contact
 page("/contact/","Contact Richard Cuagdan | Mitsubishi SJ Legacy Motors, San Jose del Monte",
