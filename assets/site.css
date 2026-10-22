@@ -82,3 +82,4 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 .fsoc{margin:24px 0 0}.fbl{display:inline-flex;align-items:center;gap:10px;color:#e4e4e7;text-decoration:none;border:1px solid #3f3f46;border-radius:999px;padding:8px 16px 8px 10px}.fbl:hover{border-color:#1877f2;color:#fff}.fbl svg{color:#1877f2}
 .brand{flex:1 1 0%}@media(min-width:960px){.brand{flex:0 1 auto}}
 .fig{margin:28px 0 32px}.fig img{width:100%;height:auto;border-radius:16px}
+.lacta{background:linear-gradient(135deg,#0b0b0c,#2a0a0d);color:#fff;border-radius:18px;padding:20px 22px;margin:24px 0}.lacta h2{color:#fff;margin:0 0 6px;font-size:22px}.lacta p{color:#d4d4d8;margin:0 0 12px}
