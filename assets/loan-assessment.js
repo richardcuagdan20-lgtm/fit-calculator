@@ -74,9 +74,9 @@ function ga(ev,p){try{if(typeof window.gtag==='function')window.gtag('event',ev,
 /* Phase 2 stub: call after the backend returns an MP-XXXXX ref. Not fired in Phase 1. */
 window.LoanApp={submitApplication:function(ref){if(!/^MP-[A-HJKMNP-Z2-9]{5}$/i.test(ref))return false;px('SubmitApplication',{ref_no:ref.toUpperCase()});ga('submit_application',{ref_no:ref.toUpperCase()});return true},CFG:CFG};
 
-function prog(n){stepN=n;document.querySelectorAll('.la-steps li').forEach(function(li,i){li.className=i<n?'on':''})}
+function prog(n){stepN=n;document.querySelectorAll('.la-steps li').forEach(function(li,i){li.className=i<n-1?'done':i===n-1?'on':'';li.querySelector('.n').textContent=i<n-1?'✓':String(i+1);if(i===n-1)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')})}
 function bot(html){var d=document.createElement('div');d.className='la-b bot';d.innerHTML='<span class="la-av" aria-hidden="true">R</span><div class="la-bu">'+html+'</div>';log.appendChild(d);return d}
-function me(t){var d=document.createElement('div');d.className='la-b me';d.innerHTML='<div class="la-bu">'+esc(t)+'</div>';log.appendChild(d)}
+function me(t){var d=document.createElement('div');d.className='la-b me';d.innerHTML='<div class="la-bu">'+esc(t)+'</div>';log.appendChild(d);return d}
 function scroll(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'end'})},40)}
 
 /* ---------- Step 1: contact + consent ---------- */
@@ -123,32 +123,42 @@ var Q=[
  {id:'preferred_bank',q:['May preferred bank ka ba?','Do you have a preferred bank?'],t:'c',o:[['no_preference','Wala, kayo na bahala','No preference'],['MMPF','Mitsubishi Motors Finance PH'],['BPI','BPI'],['BDO','BDO'],['Metrobank','Metrobank'],['Security Bank','Security Bank'],['PSBank','PSBank'],['RCBC','RCBC'],['EastWest','EastWest']]},
  {id:'source_of_sale',q:['Last na: paano mo kami nahanap?','Last one: how did you find us?'],t:'c',o:[['facebook','Facebook','Facebook'],['google','Google','Google'],['referral','Referral','Referral'],['walk_in','Walk-in','Walk-in'],['other','Iba pa','Other']]}
 ];
-function next(i){while(i<Q.length&&Q[i].show&&!Q[i].show())i++;if(i>=Q.length){unitStep();return}ask(Q[i],function(){next(i+1)})}
-function ask(q,done){
-  var qt=Array.isArray(q.q)?T(q.q[0],q.q[1]):q.q,b=bot(esc(qt)),bu=b.querySelector('.la-bu'),w=document.createElement('div');w.className='la-in';
-  if(q.t==='c'){q.o.forEach(function(o){var x=document.createElement('button');x.type='button';x.className='chip';var lb=A.lang==='en'&&o[2]?o[2]:o[1];x.textContent=lb;
-     x.onclick=function(){A[q.id]=o[0];w.remove();me(lb);done()};w.appendChild(x)})}
+/* Unit/plan steps join the same linear flow so Back/Edit work everywhere */
+function modelsList(){var m=[];U.forEach(function(u){if(m.indexOf(u.model)<0)m.push(u.model)});return m}
+Q.push(
+ {id:'_model',unit:true,q:['Ayos! Ngayon, piliin natin ang unit. Ang DP at monthly ay galing sa promo ngayong buwan. Anong Mitsubishi model ang gusto mo?','Great! Now let\'s pick your unit. DP and monthly figures are from this month\'s promo. Which Mitsubishi model do you want?'],t:'c',o:function(){return modelsList().map(function(m){return [m,m]})}},
+ {id:'_variant',unit:true,q:['Anong variant?','Which variant?'],t:'c',o:function(){return U.filter(function(u){return u.model===A._model}).map(function(u){return [u.id,u.n+' · SRP '+peso(u.price)]})}},
+ {id:'_opt',unit:true,q:function(){return T('Anong promo ang kaya mo? (All-in, ','Which promo fits you? (All-in, ')+CFG.promo_term_months+' months)'},t:'c',o:function(){return A.unit.opts.map(function(o,i){return [i,(o.dp?peso(o.dp)+' DP':'Zero DP')+' · '+peso(o.mo)+'/mo']})}},
+ {id:'_color',unit:true,q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:function(){return COLORS.map(function(c){return [c,c]}).concat([['undecided','Bahala na / undecided','Undecided']])}}
+);
+var COLORS=['White Pearl','Silver','Graphite Gray','Black','Red'];
+var hist=[],cur=null;  /* hist: [{i,nodes}] answered steps; cur: open question {i,node} */
+function clearAns(id){delete A[id];if(id==='_variant')delete A.unit}
+function next(i){while(i<Q.length&&Q[i].show&&!Q[i].show())i++;if(i>=Q.length){cur=null;result();return}ask(i)}
+function popTo(k){if(cur){cur.node.remove();cur=null}while(hist.length>k){var h=hist.pop();h.nodes.forEach(function(n){n.remove()});clearAns(Q[h.i].id)}}
+function goBack(){if(!hist.length)return;var i=hist[hist.length-1].i;popTo(hist.length-1);ask(i)}
+function editAt(k){var i=hist[k].i;popTo(k);ask(i)}
+function ask(i){
+  var q=Q[i];prog(q.unit?3:2);
+  var qt=typeof q.q==='function'?q.q():Array.isArray(q.q)?T(q.q[0],q.q[1]):q.q,b=bot(esc(qt)),bu=b.querySelector('.la-bu'),w=document.createElement('div');w.className='la-in';cur={i:i,node:b};
+  function done(label){w.remove();var bk=bu.querySelector('.la-back');if(bk)bk.remove();var m=me(label);var k=hist.length;hist.push({i:i,nodes:[b,m]});
+    m.classList.add('la-edit');m.title=T('Palitan','Edit');m.querySelector('.la-bu').insertAdjacentHTML('beforeend',' <span class="la-pen">✎ '+T('Palitan','Edit')+'</span>');
+    m.onclick=function(){editAt(k)};cur=null;next(i+1)}
+  if(q.t==='c'){var opts=typeof q.o==='function'?q.o():q.o;opts.forEach(function(o){var x=document.createElement('button');x.type='button';x.className='chip';var lb=A.lang==='en'&&o[2]?o[2]:o[1];x.textContent=lb;
+     x.onclick=function(){if(w.dataset.busy)return;w.dataset.busy='1';x.classList.add('sel');w.querySelectorAll('.chip').forEach(function(c){if(c!==x)c.disabled=true});
+       setTimeout(function(){A[q.id]=o[0];if(q.id==='_variant')A.unit=U.filter(function(u){return u.id===o[0]})[0];done(lb)},250)};w.appendChild(x)})}
   else{var inp=document.createElement('input');inp.type=q.t==='date'?'date':'number';inp.inputMode=q.t==='n'?'decimal':'';
-    if(q.t==='n'){inp.min=q.min;inp.max=q.max;inp.step=q.step}else{var t=new Date();inp.max=t.toISOString().slice(0,10)}
+    if(q.t==='n'){inp.min=q.min;inp.max=q.max;inp.step=q.step}else{inp.max=new Date().toISOString().slice(0,10)}
+    if(A['_prev_'+q.id]!==undefined)inp.value=A['_prev_'+q.id];
     inp.setAttribute('aria-label',qt);var ok=document.createElement('button');ok.type='button';ok.className='btn sm';ok.textContent='OK';
     var er=document.createElement('p');er.className='er';er.hidden=true;er.textContent=q.t==='date'?T('Pakilagay ang tamang petsa.','Please enter a valid date.'):T('Pakilagay ang tamang numero.','Please enter a valid number.');
-    var go=function(){var v=inp.value;if(q.t==='n'){var n=parseFloat(v);if(isNaN(n)||n<q.min||n>q.max){er.hidden=false;return}A[q.id]=n;w.remove();me(q.id.indexOf('income')>=0||q.id.indexOf('oblig')>=0?peso(n):String(n))}
-      else{if(!v||new Date(v)>new Date()){er.hidden=false;return}A[q.id]=v;w.remove();me(new Date(v+'T00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}))}done()};
+    var go=function(){var v=inp.value;if(q.t==='n'){var n=parseFloat(v);if(isNaN(n)||n<q.min||n>q.max){er.hidden=false;return}A[q.id]=n;A['_prev_'+q.id]=v;done(q.id.indexOf('income')>=0||q.id.indexOf('oblig')>=0?peso(n):String(n))}
+      else{if(!v||new Date(v)>new Date()){er.hidden=false;return}A[q.id]=v;A['_prev_'+q.id]=v;done(new Date(v+'T00:00').toLocaleDateString(A.lang==='en'?'en-PH':'en-PH',{year:'numeric',month:'long',day:'numeric'}))}};
     ok.onclick=go;inp.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};w.appendChild(inp);w.appendChild(ok);w.appendChild(er);setTimeout(function(){inp.focus({preventScroll:true})},60)}
-  bu.appendChild(w);scroll(b);
+  bu.appendChild(w);
+  if(hist.length){var bk=document.createElement('button');bk.type='button';bk.className='la-back';bk.textContent='← '+T('Bumalik','Back');bk.onclick=goBack;bu.appendChild(bk)}
+  scroll(b);
 }
-var COLORS=['White Pearl','Silver','Graphite Gray','Black','Red'];
-function unitStep(){prog(3);
-  bot(T('Ayos! Ngayon, piliin natin ang <b>unit</b>. Ang DP at monthly ay galing sa promo ngayong buwan.','Great! Now let\'s pick your <b>unit</b>. DP and monthly figures are from this month\'s promo.'));
-  var models=[];U.forEach(function(u){if(models.indexOf(u.model)<0)models.push(u.model)});
-  ask({id:'_model',q:['Anong Mitsubishi model ang gusto mo?','Which Mitsubishi model do you want?'],t:'c',o:models.map(function(m){return [m,m]})},function(){
-    var vs=U.filter(function(u){return u.model===A._model});
-    ask({id:'_variant',q:['Anong variant?','Which variant?'],t:'c',o:vs.map(function(u){return [u.id,u.n+' · SRP '+peso(u.price)]})},function(){
-      var u=U.filter(function(x){return x.id===A._variant})[0];A.unit=u;
-      ask({id:'_opt',q:T('Anong promo ang kaya mo? (All-in, ','Which promo fits you? (All-in, ')+CFG.promo_term_months+' months)',t:'c',o:u.opts.map(function(o,i){return [i,(o.dp?peso(o.dp)+' DP':'Zero DP')+' · '+peso(o.mo)+'/mo']})},function(){
-        ask({id:'_color',q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:COLORS.map(function(c){return [c,c]}).concat([['undecided','Bahala na / undecided','Undecided']])},function(){result()})})})});
-}
-
 /* ---------- Interactive computation + recommendation panel (estimates only) ---------- */
 var TERMS=[12,24,36,48,60];
 function estMo(fin,n){return fin*(1+CFG.est_addon_rates[n])/n}
