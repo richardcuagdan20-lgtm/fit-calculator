@@ -491,6 +491,9 @@ exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py"))
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')
+# ---------- /preview-loan/ retired: redirect stub to the live assessment
+os.makedirs(R+"/preview-loan",exist_ok=True)
+open(R+"/preview-loan/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: AI Car Loan Application Assessment</title><link rel="canonical" href="'+D+'/loan-assessment/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/loan-assessment/"><script>location.replace("/loan-assessment/"+location.search)</script></head><body><p>Moved to <a href="/loan-assessment/">the AI Car Loan Application Assessment</a>.</p></body></html>\n')
 # ---------- 404
 page("/__404/","Page not found | Mitsubishi Motors - SJ Legacy Motors","The page you were looking for could not be found.",
  '<section class="ph"><div class="w"><h1>Page not found</h1><p class="lead">That page doesn\'t exist or has moved.</p><p class="row"><a class="btn" href="/">Go to Home</a> <a class="btn ghost" href="/cars/">Browse cars</a></p></div></section>',noindex=True)
