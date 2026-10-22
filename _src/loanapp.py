@@ -9,20 +9,27 @@ for m in MODELS:
         price=v["srp"] or v["promo"].get("srp")
         if not price: continue
         LAU.append({"id":v["id"],"model":m["name"],"n":v["n"],"price":price,"opts":[{"dp":_dp(l),"mo":mo} for l,mo in v["promo"]["opts"]]})
-LA_CONSENT=('Sa pag-check ng box na ito, pinapayagan ko ang <b>[Dealer Legal Name]</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
+def B(tl,en): return f'<span class="tl">{tl}</span><span class="en">{en}</span>'
+LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>[Dealer Legal Name]</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
  '(kasama ang IDs, income, at financial documents) para lamang sa pag-assess ng aking car loan application, at i-share ito sa piling partner banks at financing companies '
  '(hal. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) para sa credit evaluation, alinsunod sa Republic Act No. 10173 (Data Privacy Act of 2012). '
  'Alam ko ang aking karapatan na ma-access, maitama, ma-withdraw ang consent, at ipabura ang aking data, at maaari akong makipag-ugnayan sa aming Data Protection Officer sa <b>[DPO email]</b>. '
- 'Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.')
+ 'Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.',
+ 'By checking this box, I allow <b>[Dealer Legal Name]</b> / mitsubishipromos.online to collect, process, and store my personal and sensitive personal information '
+ '(including IDs, income, and financial documents) solely to assess my car loan application, and to share it with selected partner banks and financing companies '
+ '(e.g. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) for credit evaluation, in accordance with Republic Act No. 10173 (Data Privacy Act of 2012). '
+ 'I know my rights to access, correct, withdraw consent, and have my data erased, and I may contact the Data Protection Officer at <b>[DPO email]</b>. '
+ 'I have read the <a href="/privacy/">Privacy Notice</a>.')
 LA_CSS='''<style>
-.la{background:linear-gradient(180deg,#0b0b0c 0,#17171a 260px,#f4f4f6 260px);padding:28px 0 48px}
+.la [hidden]{display:none!important}html:not([data-lang=en]) .la .en,html[data-lang=en] .la .tl{display:none!important}.la-lang{display:flex;gap:8px;margin:0 0 14px}.la-lang button{background:none;border:1px solid #52525b;color:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}html:not([data-lang=en]) .la-lang [data-setlang=tl],html[data-lang=en] .la-lang [data-setlang=en]{background:#fff;color:#0b0b0c}.la-start{display:flex;flex-wrap:wrap;gap:10px}.la-done{background:#166534!important;opacity:1!important}
+.la{padding-bottom:110px!important;background:linear-gradient(180deg,#0b0b0c 0,#17171a 260px,#f4f4f6 260px);padding:28px 0 48px}
 .la .w{max-width:720px}.la h1{color:#fff;font-size:clamp(28px,6vw,42px)}.la .lead{color:#d4d4d8}
 .la-steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 18px;counter-reset:s}.la-steps li{flex:1;font-size:12px;color:#a1a1aa;border-top:3px solid #3f3f46;padding-top:6px}.la-steps li.on{color:#fff;border-color:var(--red)}
 .la-card{background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.12);padding:22px}
 .la-card .fld{margin-bottom:14px}.la-card label{font-weight:600;display:block;margin-bottom:4px}.la-card input[type=text],.la-card input[type=tel],.la-card input[type=email]{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;font:inherit}
 .la-cons{font-size:14px;background:#f8f8fa;border:1px solid var(--ln);border-radius:12px;padding:12px;max-height:180px;overflow:auto;margin:0 0 10px}
 .la-log{display:flex;flex-direction:column;gap:12px;min-height:200px}
-.la-b{display:flex;gap:8px;align-items:flex-end}.la-b.me{justify-content:flex-end}
+.la-b{scroll-margin-bottom:110px;display:flex;gap:8px;align-items:flex-end}.la-b.me{justify-content:flex-end}
 .la-av{flex:0 0 32px;height:32px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
 .la-bu{max-width:86%;padding:12px 14px;border-radius:18px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);font-size:16px}
 .bot .la-bu{border-bottom-left-radius:6px}.me .la-bu{background:var(--ink);color:#fff;border-bottom-right-radius:6px}
@@ -42,22 +49,24 @@ LA_CSS='''<style>
 page("/loan-assessment/","AI Car Loan Application Assessment | Mitsubishi Motors - SJ Legacy Motors",
  "AI Car Loan Application Assessment para sa Mitsubishi: sagutin ang ilang tanong, piliin ang unit at promo, at alamin kung Pre-qualified ka. 3 minuto lang.",
 LA_CSS+f'''<section class="la"><div class="w">
-<p class="kick" style="color:#fca5a5">Libreng pre-assessment · 3 minuto</p>
+<div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="tl">Tagalog / Taglish</button><button type="button" data-setlang="en">English</button></div>
+<p class="kick" style="color:#fca5a5">{B("Libreng pre-assessment · 3 minuto","Free pre-assessment · 3 minutes")}</p>
 <h1>AI Car Loan Application Assessment</h1>
-<p class="lead">Alamin agad kung pasok ka sa car loan bago ka pumunta sa showroom. Sagutin lang ang ilang tanong, piliin ang Mitsubishi mo, at makikita mo ang resulta at mga options.</p>
-<ol class="la-steps" aria-label="Progress"><li class="on">1. Contact</li><li>2. Tanong</li><li>3. Unit</li><li>4. Resulta</li><li>5. Requirements</li></ol>
-<div id="la-intro" class="la-card"><h2 class="h3">Paano ito gumagana?</h2>
-<div class="la-x"><div><b>Sagutin</b><br>Income, trabaho at existing loans.</div><div><b>Pumili</b><br>Unit, DP at monthly mula sa promo ngayong buwan.</div><div><b>Alamin</b><br>Pre-qualified, Needs Review, o mga options para pumasa.</div></div>
-<p class="muted small" style="margin-top:14px">Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito.</p>
-<button class="btn" type="button" id="la-start">Simulan ang assessment</button></div>
-<div id="la-s1" class="la-card" hidden><h2 class="h3">Hi! Ako si Richard. Unahin natin ang contact details mo.</h2>
+<p class="lead">{B("Alamin agad kung pasok ka sa car loan bago ka pumunta sa showroom. Sagutin lang ang ilang tanong, piliin ang Mitsubishi mo, at makikita mo ang resulta at mga options.","Find out if you qualify for a car loan before you visit the showroom. Answer a few questions, pick your Mitsubishi, and see your result and options.")}</p>
+<ol class="la-steps" aria-label="Progress"><li class="on">1. Contact</li><li>2. {B("Tanong","Questions")}</li><li>3. Unit</li><li>4. {B("Resulta","Result")}</li><li>5. Requirements</li></ol>
+<div id="la-intro" class="la-card"><h2 class="h3">{B("Paano ito gumagana?","How does it work?")}</h2>
+<div class="la-x"><div><b>{B("Sagutin","Answer")}</b><br>{B("Income, trabaho at existing loans.","Income, work and existing loans.")}</div><div><b>{B("Pumili","Choose")}</b><br>{B("Unit, DP at monthly mula sa promo ngayong buwan.","Unit, DP and monthly from this month's promo.")}</div><div><b>{B("Alamin","Find out")}</b><br>{B("Pre-qualified, Needs Review, o mga options para pumasa.","Pre-qualified, Needs Review, or options to qualify.")}</div></div>
+<p class="muted small" style="margin-top:14px">{B("Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito.","This is a pre-screening only, not a bank approval. No IDs or documents are needed here.")}</p>
+<p class="fl"><b>Piliin ang wika / Choose your language:</b></p>
+<div class="la-start"><button class="btn" type="button" id="la-start" data-start="tl">Simulan sa Tagalog / Taglish</button><button class="btn ghost dk" type="button" data-start="en">Start in English</button></div></div>
+<div id="la-s1" class="la-card" hidden><h2 class="h3">{B("Hi! Ako si Richard. Unahin natin ang contact details mo.","Hi! I'm Richard. Let's start with your contact details.")}</h2>
 <form id="la-f1" novalidate>
-<div class="fld"><label for="la-name">Buong pangalan *</label><input type="text" id="la-name" autocomplete="name" required><p class="er" id="e_la-name" hidden>Pakilagay ang pangalan mo.</p></div>
-<div class="fld"><label for="la-mobile">Mobile number *</label><input type="tel" id="la-mobile" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_la-mobile" hidden>Pakilagay ang tamang PH mobile (09XXXXXXXXX o +639XXXXXXXXX).</p></div>
-<div class="fld"><label for="la-email">Email (optional)</label><input type="email" id="la-email" autocomplete="email"><p class="er" id="e_la-email" hidden>Pakicheck ang email.</p></div>
+<div class="fld"><label for="la-name">{B("Buong pangalan","Full name")} *</label><input type="text" id="la-name" autocomplete="name" required><p class="er" id="e_la-name" hidden>{B("Pakilagay ang pangalan mo.","Please enter your name.")}</p></div>
+<div class="fld"><label for="la-mobile">Mobile number *</label><input type="tel" id="la-mobile" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_la-mobile" hidden>{B("Pakilagay ang tamang PH mobile (09XXXXXXXXX o +639XXXXXXXXX).","Please enter a valid PH mobile (09XXXXXXXXX or +639XXXXXXXXX).")}</p></div>
+<div class="fld"><label for="la-email">Email (optional)</label><input type="email" id="la-email" autocomplete="email"><p class="er" id="e_la-email" hidden>{B("Pakicheck ang email.","Please check your email.")}</p></div>
 <p class="fl"><b>Data Privacy Consent</b></p><div class="la-cons" tabindex="0">{LA_CONSENT}</div>
-<label class="chk"><input type="checkbox" id="la-consent"> <span>I agree / Sumasang-ayon ako</span></label><p class="er" id="e_la-consent" hidden>Kailangan ang consent bago tayo magpatuloy.</p>
-<button class="btn" type="submit">Tuloy</button></form></div>
+<label class="chk"><input type="checkbox" id="la-consent"> <span>{B("Sumasang-ayon ako / I agree","I agree / Sumasang-ayon ako")}</span></label><p class="er" id="e_la-consent" hidden>{B("Kailangan ang consent bago tayo magpatuloy.","Consent is required before we continue.")}</p>
+<button class="btn" type="submit">{B("Tuloy","Continue")}</button></form></div>
 <div id="la-chat" hidden><div id="la-log" class="la-log" aria-live="polite"></div></div>
 <div id="la-res" hidden></div>
 <p id="la-note" hidden>{e(NOTE)}</p>
