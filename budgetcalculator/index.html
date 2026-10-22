@@ -394,6 +394,7 @@ const UNITS = [
  {id:'mgls',fam:'Montero Sport',name:'Montero Sport GLS',srp:1927000,zero:39699,ldp:138000,low:37218,fuel:20000,use:['family','ofwfam']},
  {id:'mbs2wd',fam:'Montero Sport',name:'Montero Sport Black Series AT 2WD',srp:2190000,srpTxt:'₱2,190,000 (black & gray)',zero:null,d1:88000,m1:45117,ldp:218000,low:42297,fuel:20000,fuelTxt:'FREE 20,000 Shell fuel points',use:['family','ofwfam']},
  {id:'mbs4wd',fam:'Montero Sport',name:'Montero Sport Black Series AT 4WD',srp:2530000,srpTxt:'₱2,530,000 (black & gray) / ₱2,545,000 (white diamond)',zero:null,d1:133000,m1:52121,ldp:283000,low:48864,fuel:20000,use:['family','ofwfam']},
+ {id:'vvglx',fam:'Versa Van',name:'2026 Versa Van GLX MT',srp:1764000,zero:null,d1:33000,m1:36340,ldp:243000,low:31798,fuel:20000,use:['business','family']},
 ];
 const Q = new URLSearchParams(location.search);
 const S = {seg:'local',unitPref:'',dp:'low',use:'family',rec:null,chosen:null,lead:null};
@@ -406,7 +407,7 @@ const effDp = (u,dp) => (dp==='zero'&&(u.zero!=null||u.m1))?'zero':'low';
 const monthly = (u,dp) => effDp(u,dp)==='zero'?(u.zero!=null?u.zero:u.m1):u.low;
 const kDp = n => '₱'+Math.round(n/1000)+'K DP';
 const optLabel = (u,k) => u.zero!=null?(k==='zero'?'Zero DP':'Low DP'):u.m1?(k==='zero'?'Option 1: '+kDp(u.d1):'Option 2: '+kDp(u.ldp)):'Low DP: '+kDp(u.ldp);
-const famKey = f => ({'Mirage G4':'mirage_g4','Montero Sport':'montero'})[f]||f.toLowerCase();
+const famKey = f => ({'Mirage G4':'mirage_g4','Montero Sport':'montero','Versa Van':'versa-van'})[f]||f.toLowerCase();
 
 function step(n){
   ['s1','s2','s3','s4','admin'].forEach((s,i)=>$(s).classList.toggle('hide',i+1!==n));
@@ -438,7 +439,7 @@ function renderResults(){
   if(!S.chosen || !UNITS.find(u=>u.id===S.chosen)) S.chosen=S.rec;
   $('a35').textContent=peso(S.income*0.35); $('a30').textContent=peso(S.income*0.30);
   $('dpLab').textContent = S.dp==='zero'?'Zero DP':'Low DP';
-  const FAM_ORDER=['Mirage G4','Xpander','Xpander Cross','L300','Destinator','Triton','Montero Sport'];
+  const FAM_ORDER=['Mirage G4','Xpander','Xpander Cross','L300','Destinator','Triton','Montero Sport','Versa Van'];
   const rowOf=u=>u.id==='xcross'?'Xpander Cross':u.fam, rowKey=f=>f==='Xpander Cross'?'xpander':famKey(f);
   const fams = FAM_ORDER.map(f=>{
     const us = list.filter(u=>rowOf(u)===f).sort((a,b)=>a.srp-b.srp);
@@ -672,8 +673,8 @@ document.querySelectorAll('input[name=seg],input[name=use]').forEach(i=>i.addEve
   const seg=Q.get('seg'),u=(Q.get('unit')||'').toLowerCase();
   if(['ofw_abroad','ofw_family','local'].includes(seg)){document.querySelector(`input[name=seg][value=${seg}]`).checked=true;
     if(seg!=='local')document.querySelector('input[name=use][value=ofwfam]').checked=true;}
-  if(['xpander','l300','destinator','mirage_g4','triton','montero'].includes(u)){S.unitPref=u;
-    if((u==='l300'||u==='triton')&&seg!=='ofw_abroad'&&seg!=='ofw_family')document.querySelector('input[name=use][value=business]').checked=true;}
+  if(['xpander','l300','destinator','mirage_g4','triton','montero','versa-van'].includes(u)){S.unitPref=u;
+    if((u==='l300'||u==='triton'||u==='versa-van')&&seg!=='ofw_abroad'&&seg!=='ofw_family')document.querySelector('input[name=use][value=business]').checked=true;}
   applySeg();
 })();
 function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');renderAdmin();step(5)}else{$('hero').classList.remove('hide');if(!$('s1').classList.contains('hide')||!$('admin').classList.contains('hide'))step(1)}}

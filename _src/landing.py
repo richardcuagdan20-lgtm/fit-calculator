@@ -3,8 +3,8 @@
 PROMO_MONTH="October 2026"; PROMO_UPDATED="2026-10-22"
 # Which verified options to show per variant id (count of options); fuel shown only where verified.
 SHOW={"mg4glxat":1,"mg4gls":2,"tritongxat":2,"l300":2,"xglxmt":2,"xglxat":2,"xglsat":2,"xcross":2,
-      "dglx":2,"dgls":2,"dgtm":2,"mglxmt":2,"mgls":2,"mbs2wd":1,"mbs4wd":1}
-FUEL_OK={"tritongxat","l300","mg4glxat","mg4gls"}
+      "dglx":2,"dgls":2,"dgtm":2,"mglxmt":2,"mgls":2,"mbs2wd":1,"mbs4wd":1,"vvglx":2}
+FUEL_OK={"tritongxat","l300","vvglx","mg4glxat","mg4gls"}
 VBY={v["id"]:(m,v) for m in MODELS for v in m["variants"]}
 def prow(i):
     m,v=VBY[i]; p=v["promo"]; srp=p["srp"] or v["srp"]
@@ -40,7 +40,7 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
  kick="San Jose del Monte, Bulacan",
  lead="Searching for Mitsubishi SJDM Bulacan? Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer on Quirino Highway in Sto. Cristo, San Jose del Monte, and I'm Richard Cuagdan, one of its sales executives. Here's how to see a unit, test drive it, get the current all-in promo and finance it, kahit first time mo pa lang.",
  figs=[("Where to find us","sj-loc","Mitsubishi SJDM Bulacan: Mitsubishi SJ Legacy Motors on Quirino Highway, Sto. Cristo, San Jose del Monte"),("What you can do","sj-what","What you can do at the Mitsubishi dealership in SJDM: see units, test drive, get the promo, pre-check documents"),("Plan your visit","sj-plan","Three steps to plan a Mitsubishi showroom visit in SJDM"),("Popular units","sj-photo","Mitsubishi Xpander Cross 7-seater")],
- table=["mg4gls","xglxat","xcross","dglx","tritongxat","l300","mglxmt"],tcap="Popular units at SJ Legacy Motors.",
+ table=["mg4gls","xglxat","xcross","dglx","tritongxat","l300","vvglx","mglxmt"],tcap="Popular units at SJ Legacy Motors.",
  body=lambda T:f'''<h2>Where to find us</h2>
 <p><b>Mitsubishi SJ Legacy Motors</b>, Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan. It's along the main Quirino Highway corridor, so it's a straightforward drive from the rest of SJDM, Norzagaray, Santa Maria and the northern edge of Metro Manila (Fairview, Novaliches, Caloocan North).</p>
 <p class="row"><a class="btn ghost dk" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions on Google Maps</a> <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
@@ -52,7 +52,7 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
 <h2>Popular units</h2>
 <p>These are the units SJDM families and negosyo owners ask about most. The figures live in one dated table so they're easy to check against the latest promo.</p>
 {T}
-<p>For variants not shown (Mirage G4 GLX MT, other Triton variants, L300 Cab &amp; Chassis, Xforce, Outlander PHEV, Versa Van), <a href="{MSG}" rel="noopener">message Richard for the latest promo</a>.</p>
+<p>For variants not shown (Mirage G4 GLX MT, other Triton variants, L300 Cab &amp; Chassis, Xforce, Outlander PHEV), <a href="{MSG}" rel="noopener">message Richard for the latest promo</a>.</p>
 <h2>How financing works here</h2>
 {HOW}
 <h2>Documents to prepare</h2>
