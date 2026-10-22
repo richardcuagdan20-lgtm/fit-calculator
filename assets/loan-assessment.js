@@ -24,7 +24,15 @@ var CFG={
   promo_dp_passes:true,
   rf07_min_stay_rented_yrs:0.5,             // RF-07 [U]
   max_term:60,                              // [V BPI/Metrobank]
-  promo_term_months:60                      // promo table term [U for Destinator/L300]
+  promo_term_months:60,                     // promo table term [U for Destinator/L300]
+  /* ESTIMATED bank add-on rates (whole-term, standard/in-arrears, brand-new, private use), PENDING CONFIRMATION.
+     Median of BPI, Metrobank, PSBank, RCBC, Security Bank, EastWest public rate pages (Oct 2026); see /workspace/loanapp/rates_research.md.
+     Monthly = amount_financed x (1 + addon[term]) / months. Excludes insurance, chattel mortgage, LTO and fees (dealer all-in promos include them).
+     Not shown to clients as rates (rulebook §0/§2.1): only used for labelled estimates. */
+  est_addon_rates:{12:0.0552,24:0.1144,36:0.1737,48:0.2413,60:0.3026},
+  est_rates_status:'ESTIMATE - pending bank/dealer confirmation',
+  calc_min_dp_pct:20, calc_max_dp_pct:80,   // banks' usual min DP 20% [V BPI 15%/Metrobank 20%]; max for slider
+  fit_max_ratio:0.35                        // "fits income" = monthly <= 35% of income (AFF-01 review ceiling)
 };
 /* Messenger: ONE config value. Page username per Mark.
    Fallback (page ID): 'https://m.me/504759566043148' */
@@ -119,6 +127,69 @@ function unitStep(){prog(3);
         ask({id:'_color',q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:COLORS.map(function(c){return [c,c]}).concat([['undecided','Bahala na / undecided','Undecided']])},function(){result()})})})});
 }
 
+/* ---------- Interactive computation + recommendation panel (estimates only) ---------- */
+var TERMS=[12,24,36,48,60];
+function estMo(fin,n){return fin*(1+CFG.est_addon_rates[n])/n}
+function initCalc(S,res){
+  var u=A.unit,P=u.price,inc=(A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0),box=$('la-calc'),st={dp:Math.round(P*0.2),n:60};
+  var promos=u.opts.map(function(o){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
+  function yrs(n){var y=n/12;return y+(A.lang==='en'?(y>1?' years':' year'):' taon')}
+  function opt(dp,n){return {kind:'custom',dp:dp,n:n,mo:estMo(P-dp,n),label:Math.round(dp/P*100)+'% DP · '+yrs(n)}}
+  function tot(o){return o.dp+o.mo*o.n}
+  function fit(o){return inc>0&&o.mo/inc<=CFG.fit_max_ratio}
+  function ratio(o){return inc>0?(o.mo/inc*100).toFixed(1)+'%':'—'}
+  function fitTxt(o){if(!inc)return '';var x=o.mo/inc;return x<=CFG.aff.pass?'<span class="la-fit ok">'+T('Pasok sa income (≤30%)','Fits your income (≤30%)')+'</span>':x<=CFG.fit_max_ratio?'<span class="la-fit mid">'+T('Medyo mabigat (30–35%)','A bit tight (30–35%)')+'</span>':'<span class="la-fit no">'+T('Lampas sa 35% ng income','Over 35% of income')+'</span>'}
+  box.innerHTML=safe('<div class="la-calcbox"><h2 class="h3">'+T('Compute at i-compare ang options','Compute and compare options')+'</h2>'+
+   '<div class="la-tabs"><button type="button" class="chip on" data-mode="dp">'+T('Piliin ang DP at term','Choose DP and term')+'</button><button type="button" class="chip" data-mode="tg">Target monthly</button></div>'+
+   '<div id="la-m-dp"><p class="fl">Down payment</p><div class="la-in" id="la-dpchips">'+[20,30,40,50].map(function(x){return '<button type="button" class="chip" data-dpp="'+x+'">'+x+'%</button>'}).join('')+'</div>'+
+   '<input type="range" id="la-dpr" min="'+CFG.calc_min_dp_pct+'" max="'+CFG.calc_max_dp_pct+'" step="1" value="20" aria-label="DP %"><div class="la-in"><label for="la-dpa" class="small">'+T('O i-type ang eksaktong DP (₱)','Or type the exact DP (₱)')+'</label><input type="number" id="la-dpa" inputmode="numeric" min="0" step="1000"></div><p class="er" id="la-dpw" hidden></p>'+
+   '<p class="fl">Term</p><div class="la-in" id="la-terms">'+TERMS.map(function(n){return '<button type="button" class="chip" data-n="'+n+'">'+yrs(n)+'</button>'}).join('')+'</div>'+
+   '<dl class="la-sum" id="la-cres"></dl></div>'+
+   '<div id="la-m-tg" hidden><div class="la-in"><label for="la-tgt" class="small">'+T('Magkano ang gusto mong monthly? (₱)','What monthly do you want? (₱)')+'</label><input type="number" id="la-tgt" inputmode="numeric" min="0" step="500"></div><table class="la-tbl" id="la-tgres"></table></div>'+
+   '<div id="la-best"></div>'+
+   '<h3 class="h3" style="margin-top:16px">'+T('Halimbawang computation','Sample computation')+': '+esc(u.n)+'</h3><table class="la-tbl"><thead><tr><th>Term</th><th>20% DP ('+peso(P*0.2)+')</th><th>40% DP ('+peso(P*0.4)+')</th></tr></thead><tbody>'+
+     TERMS.map(function(n){return '<tr><td>'+n+' mo</td><td>'+peso(estMo(P*0.8,n))+'/mo</td><td>'+peso(estMo(P*0.6,n))+'/mo</td></tr>'}).join('')+'</tbody></table>'+
+   '<p class="muted small">'+T('Estimate lang ito, subject sa bank evaluation. Ang final na rate at halaga ay manggagaling sa bank o dealer. Ang custom computation ay hindi pa kasama ang insurance, chattel mortgage, LTO at fees; ang dealer promo ay all-in.','Estimates only, subject to bank evaluation. Final rates and amounts come from the bank or dealer. Custom computations exclude insurance, chattel mortgage, LTO and fees; dealer promos are all-in.')+'</p>'+
+   '<p class="la-ok" id="la-planok" hidden></p></div>');
+  function mark(){box.querySelectorAll('[data-dpp]').forEach(function(b){b.classList.toggle('on',Math.abs(st.dp-Math.round(P*b.dataset.dpp/100))<1)});box.querySelectorAll('[data-n]').forEach(function(b){b.classList.toggle('on',+b.dataset.n===st.n)})}
+  var LIST=[];
+  function card(o,i,hl){return '<button type="button" class="la-opt'+(hl?' hl':'')+'" data-pick="'+i+'"><b>'+esc(o.label)+'</b><span>'+peso(o.mo)+'/mo × '+o.n+' · DP '+peso(o.dp)+'</span><span>Total '+peso(tot(o))+' · '+ratio(o)+' '+T('ng income','of income')+'</span>'+fitTxt(o)+'<em>'+T('Piliin ito','Choose this')+'</em></button>'}
+  function best(cur){
+    var better=promos.filter(function(p){var same=opt(p.dp,p.n);return p.mo<same.mo-1||tot(p)<tot(cur)-1||(fit(p)&&!fit(cur))});
+    var pool=[];[20,30,40,50].forEach(function(x){TERMS.forEach(function(n){pool.push(opt(Math.round(P*x/100),n))})});pool.push(cur);
+    var top=promos.concat(pool).filter(fit).sort(function(a,b){return tot(a)-tot(b)});
+    var seen={},t3=[];top.forEach(function(o){var k=o.kind+Math.round(o.dp)+'-'+o.n;if(!seen[k]&&t3.length<3){seen[k]=1;t3.push(o)}});
+    LIST=better.concat(t3);var h='';
+    if(better.length)h+='<div class="la-promo"><p><b>💡 '+T('Mas makakatipid ka sa promo','You can save more with the promo')+'</b><br><span class="small">'+T('Mas mababa ang monthly o total kumpara sa custom computation sa parehong DP, at all-in pa.','Lower monthly or total cost than a custom computation at the same DP, and it is all-in.')+'</span></p>'+better.map(function(o,i){return card(o,i,true)}).join('')+'</div>';
+    h+='<p class="fl" style="margin-top:12px"><b>'+T('Top 3 options na pasok sa income mo (≤35%), pinakamura sa total','Top 3 options that fit your income (≤35%), lowest total cost first')+'</b></p>';
+    h+=t3.length?t3.map(function(o,i){return card(o,better.length+i,false)}).join(''):'<p>'+T('Wala pang option na pasok sa 35% ng income. Subukan ang mas mataas na DP, co-maker, o ibang unit.','No option fits 35% of your income yet. Try a higher DP, a co-maker, or another unit.')+'</p>';
+    h+='<p class="small"><button type="button" class="la-link" data-pick="cur">'+T('Piliin ang sarili kong computation','Choose my own computation')+' ('+esc(cur.label)+')</button></p>';
+    $('la-best').innerHTML=safe(h);LIST.cur=cur;
+    $('la-best').querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(){choose(b.dataset.pick==='cur'?LIST.cur:LIST[+b.dataset.pick])}})}
+  function calc(){var o=opt(st.dp,st.n);mark();
+    $('la-cres').innerHTML=safe('<div><dt>Amount financed</dt><dd>'+peso(P-st.dp)+'</dd></div><div><dt>Monthly (estimate)</dt><dd>'+peso(o.mo)+'</dd></div><div><dt>'+T('Total cost (DP + lahat ng monthly)','Total cost (DP + all monthlies)')+'</dt><dd>'+peso(tot(o))+'</dd></div><div><dt>Monthly vs income</dt><dd>'+ratio(o)+' '+fitTxt(o)+'</dd></div>');
+    best(o)}
+  function choose(o){A.plan={dp:Math.round(o.dp),dp_pct:+(o.dp/P*100).toFixed(1),term_months:o.n,monthly:Math.round(o.mo),total_cost:Math.round(tot(o)),type:o.kind,ratio:inc?+(o.mo/inc).toFixed(4):null};
+    $('la-planok').hidden=false;$('la-planok').textContent=T('✓ Napili: ','✓ Selected: ')+o.label+' · '+peso(o.mo)+'/mo × '+o.n+'. '+T('Ime-message ka ni Richard para i-confirm sa bank o dealer.','Richard will message you to confirm with the bank or dealer.');
+    $('la-planok').scrollIntoView({block:'center',behavior:'smooth'});
+    ga('select_plan',{plan_type:o.kind,term_months:o.n,unit:u.n,result:res});
+    var L=Lead.base('loan_plan_select');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.language=A.lang;L.dpPreference=peso(A.plan.dp)+' DP ('+A.plan.dp_pct+'%)';
+    L.planType=o.kind;L.planDp=A.plan.dp;L.planDpPct=A.plan.dp_pct;L.planTerm=o.n;L.planMonthly=A.plan.monthly;L.planTotal=A.plan.total_cost;
+    L.timeline='Plan: '+o.kind+' '+A.plan.dp_pct+'% DP, '+o.n+' mo, '+peso(o.mo)+'/mo';L.usage='Selected plan ('+o.kind+'): DP '+peso(A.plan.dp)+', '+o.n+' mo, monthly '+peso(o.mo)+' (estimate), total '+peso(tot(o))+' | Language: '+A.lang;
+    Lead.send(L)}
+  box.querySelectorAll('[data-dpp]').forEach(function(b){b.onclick=function(){st.dp=Math.round(P*b.dataset.dpp/100);$('la-dpr').value=b.dataset.dpp;$('la-dpa').value='';$('la-dpw').hidden=true;calc()}});
+  $('la-dpr').oninput=function(){st.dp=Math.round(P*this.value/100);$('la-dpa').value='';$('la-dpw').hidden=true;calc()};
+  $('la-dpa').oninput=function(){var v=parseFloat(this.value),w=$('la-dpw');if(isNaN(v)||v<0)return;if(v>=P){w.hidden=false;w.textContent=T('Mas mataas sa presyo ang DP.','DP is higher than the price.');return}
+    w.hidden=v>=P*CFG.calc_min_dp_pct/100;w.textContent=T('Karaniwang minimum ng bank ay '+CFG.calc_min_dp_pct+'% DP ('+peso(P*CFG.calc_min_dp_pct/100)+'). Pwede pa ring i-compute, pero mas malaki ang chance na hindi pumasa.','Banks usually require at least '+CFG.calc_min_dp_pct+'% DP ('+peso(P*CFG.calc_min_dp_pct/100)+'). We can still compute it, but it may not pass.');st.dp=v;calc()};
+  box.querySelectorAll('[data-n]').forEach(function(b){b.onclick=function(){st.n=+b.dataset.n;calc()}});
+  box.querySelectorAll('[data-mode]').forEach(function(b){b.onclick=function(){box.querySelectorAll('[data-mode]').forEach(function(x){x.classList.toggle('on',x===b)});$('la-m-dp').hidden=b.dataset.mode!=='dp';$('la-m-tg').hidden=b.dataset.mode!=='tg'}});
+  $('la-tgt').oninput=function(){var t=parseFloat(this.value);if(isNaN(t)||t<=0){$('la-tgres').innerHTML='';return}
+    var mn=P*CFG.calc_min_dp_pct/100;
+    $('la-tgres').innerHTML=safe('<thead><tr><th>Term</th><th>'+T('Kailangang DP','DP needed')+'</th></tr></thead><tbody>'+TERMS.map(function(n){var dp=P-t*n/(1+CFG.est_addon_rates[n]);
+      var cell=dp>=P*0.9?'<span class="la-fit no">'+T('Hindi kaya sa term na ito','Not possible on this term')+'</span>':dp<=mn?peso(mn)+' ('+CFG.calc_min_dp_pct+'% min) · ~'+peso(estMo(P-mn,n))+'/mo':peso(Math.ceil(dp/1000)*1000)+' ('+Math.round(dp/P*100)+'%)';return '<tr><td>'+n+' mo</td><td>'+cell+'</td></tr>'}).join('')+'</tbody>')};
+  calc();
+}
+
 /* ---------- Step 4: scoring (rulebook §2.3/§2.4) ---------- */
 function age(d,at){var b=new Date(d+'T00:00'),a=at.getFullYear()-b.getFullYear();var m=at.getMonth()-b.getMonth();if(m<0||(m===0&&at.getDate()<b.getDate()))a--;return a}
 function assess(){
@@ -188,14 +259,14 @@ function result(){
   var REQ=reqs(),et=A.employment_type,req=REQ.common.concat(REQ[et]||[]).concat(A.co_borrower==='yes'||S.recommendations.join().indexOf('co-maker')>=0?REQ.comaker:[]);
   $('la-chat').hidden=true;var R=$('la-res');R.hidden=false;
   R.innerHTML=safe('<div class="la-card res-'+res.toLowerCase()+'"><p class="kick">'+T('Resulta ng assessment','Assessment result')+'</p><p class="la-badge">'+LBL[res]+'</p><p>'+head+'</p>'+
-   '<dl class="la-sum"><div><dt>Documents</dt><dd id="la-docsum">'+T('I-check sa Step 5','Check in Step 5')+'</dd></div><div><dt>Unit</dt><dd>'+esc(u.n)+' · '+esc(A._color==='undecided'?T('Bahala na','Undecided'):A._color)+'</dd></div><div><dt>SRP / promo price</dt><dd>'+peso(u.price)+'</dd></div><div><dt>Down payment</dt><dd>'+(S._dp?peso(S._dp):'Zero DP')+'</dd></div><div><dt>Monthly (promo, '+S._term+' mo)</dt><dd>'+peso(S._amort)+'</dd></div><div><dt>Monthly vs income</dt><dd>'+(S.affordability_ratio*100).toFixed(1)+'%</dd></div></dl>'+
+   '<div id="la-calc"></div><dl class="la-sum"><div><dt>Documents</dt><dd id="la-docsum">'+T('I-check sa Step 5','Check in Step 5')+'</dd></div><div><dt>Unit</dt><dd>'+esc(u.n)+' · '+esc(A._color==='undecided'?T('Bahala na','Undecided'):A._color)+'</dd></div><div><dt>SRP / promo price</dt><dd>'+peso(u.price)+'</dd></div><div><dt>Down payment</dt><dd>'+(S._dp?peso(S._dp):'Zero DP')+'</dd></div><div><dt>Monthly (promo, '+S._term+' mo)</dt><dd>'+peso(S._amort)+'</dd></div><div><dt>Monthly vs income</dt><dd>'+(S.affordability_ratio*100).toFixed(1)+'%</dd></div></dl>'+
    (S.recommendations.length?'<h2 class="h3">'+T('Mga options para pumasa','Options to qualify')+'</h2><ol class="la-rec">'+S.recommendations.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol>':'')+
    '<h2 class="h3">'+T('Banks na pwedeng i-try','Banks you can try')+'</h2><p>'+S.eligible_banks.map(esc).join(' · ')+'</p><p class="muted">'+T('Subject to bank evaluation. Hindi kami nagbibigay ng interest rate; ang bank ang magko-compute.','Subject to bank evaluation. We do not quote interest rates; the bank computes them.')+'</p>'+
    '<div id="la-docbox"><h2 class="h3">Step 5: Requirements checklist</h2><p>'+T('Base sa checklist ni Fina para sa '+esc(EMPL[et]||et)+'. I-tick ang mga documents na <b>meron ka na</b>. Wala pang upload dito.','Based on Fina\'s checklist for '+esc(EMPL[et]||et)+'. Tick the documents you <b>already have</b>. No uploads here yet.')+'</p><ul class="la-docs">'+req.map(function(x,i){return '<li><span>'+esc(x)+'</span><label><input type="checkbox" data-doc="'+i+'"'+(x.indexOf('Data Privacy')===0?' checked':'')+'> '+T('Meron na ako','I have this')+'</label></li>'}).join('')+'</ul><p class="la-cnt" id="la-cnt"></p><button class="btn" type="button" id="la-docsave">'+T('I-save ang checklist','Save checklist')+'</button><p id="la-docerr" class="er" hidden>'+T('Hindi na-save. Pakisubukan ulit.','Not saved. Please try again.')+'</p><div id="la-docres" hidden></div></div>'+
    contactBtns(res)+
    '<div class="la-next"><h2 class="h3">'+T('Ituloy ang full application','Continue to the full application')+'</h2><p>'+T('Malapit na: online full application with secure document upload at reference number para ma-track mo ang status. Gusto mo bang mauna? I-tap lang at ime-message ka ni Richard pag ready na.','Coming soon: an online full application with secure document upload and a reference number to track your status. Want to be first? Tap below and Richard will message you when it is ready.')+'</p><button class="btn" type="button" id="la-intent">'+T('Oo, gusto kong ituloy','Yes, I want to continue')+'</button><p id="la-intent-err" class="er" hidden>'+T('Hindi na-send. Pakisubukan ulit, o mag-message na lang sa Messenger.','Not sent. Please try again, or message us on Messenger.')+'</p><p id="la-intent-ok" class="la-ok" hidden>'+T('Salamat! Naka-note na. Ime-message ka namin pag bukas na ang full application. Pwede ka ring mag-message na ngayon.','Thank you! Noted. We will message you once the full application opens. You can also message us now.')+'</p></div>'+
    '<p class="muted small">'+T('Initial pre-screening lang ito base sa sagot mo, hindi bank approval. Lahat ng figures ay subject sa bank evaluation at promo validity (','This is an initial pre-screening based on your answers, not a bank approval. All figures are subject to bank evaluation and promo validity (')+esc($('la-note').textContent)+').</p></div>');
-  bindContact(R,res);window.scrollTo(0,0);
+  bindContact(R,res);window.scrollTo(0,0);initCalc(S,res);
   /* lead capture: existing pipeline (Apps Script webhook via /assets/lead.js, honeypot + Turnstile) */
   var L=Lead.base('loan_assessment');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.dpPreference=S._dp?peso(S._dp)+' DP':'Zero DP';
   L.employment=et;L.seg=isOFW()?'ofw_abroad':'local';L.income=A.gross_monthly_income;L.timeline='Assessment: '+LBL[res];
