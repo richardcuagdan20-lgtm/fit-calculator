@@ -55,7 +55,8 @@ function crispSync(){if(!window.__crispLoaded)return;
   if(A.rec)d.push(['recommended',A.rec.primary.label+' | '+Math.round(A.rec.primary.mo)+'/mo']);if(A.dp_capacity)d.push(['dp_capacity',String(A.dp_capacity==='custom'?A.dp_custom:A.dp_capacity)]);if(A.preferred_term)d.push(['preferred_term',String(A.preferred_term)]);if(A.target_monthly)d.push(['target_monthly',String(A.target_monthly==='custom'?A.target_custom:A.target_monthly)]);
   if(A.plan)d.push(['plan',A.plan.type+' | DP '+A.plan.dp+' ('+A.plan.dp_pct+'%) | '+A.plan.term_months+' mo | '+A.plan.monthly+'/mo']);
   if(A.docs){d.push(['docs_ready',A.docs.ready]);d.push(['docs_lacking',A.docs.lacking]);d.push(['missing_items',A.docs.missing.join('; ').slice(0,500)])}
-  cp('set','session:data',[d]);var sg=['loan-assessment'];if(A.assessment)sg.push(A.assessment.result.toLowerCase().replace(/_/g,'-'));cp('set','session:segments',[sg])}
+  if(A.employment_type)d.push(['employment_type',A.employment_type]);if(A.length_of_stay_months!=null)d.push(['residence_months',String(A.length_of_stay_months)]);if(A.years_in_employment!=null)d.push(['job_tenure_years',String(A.years_in_employment)]);
+  cp('set','session:data',[d]);var sg=['loan_assessment','loan-assessment'];if(A.assessment)sg.push(A.assessment.result.toLowerCase().replace(/_/g,'-'));cp('set','session:segments',[sg])}
 function finaMsg(){var u=A.unit,x=A.assessment,L={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
   var parts=[T('Hi Fina! Ako si ','Hi Fina! I am ')+A.name+'.'];
   if(u)parts.push('Unit: '+u.n+'.');if(x)parts.push(T('Resulta ng assessment: ','Assessment result: ')+L[x.result]+'.');
@@ -63,7 +64,10 @@ function finaMsg(){var u=A.unit,x=A.assessment,L={PRE_QUALIFIED:'Pre-qualified',
   if(A.plan)parts.push(T('Napiling plan: ','Chosen plan: ')+(A.plan.type==='promo'?'promo':'custom')+', DP '+peso(A.plan.dp)+', '+A.plan.term_months+' mo, ~'+peso(A.plan.monthly)+'/mo.');
   if(A.docs)parts.push('Documents: '+A.docs.ready+' ready / '+A.docs.lacking+T(' kulang',' lacking')+(A.docs.missing.length?' ('+A.docs.missing.join(', ')+').':'.'));
   parts.push(T('Pwede mo ba akong tulungan sa requirements?','Can you help me with the requirements?'));if(A.leadId)parts.push('Ref: '+A.leadId);return parts.join(' ')}
-function openFina(){crispLoad();crispSync();cp('do','chat:open');if(!A.finaSent){A.finaSent=true;cp('do','message:send',['text',finaMsg()])}
+function finaGreet(){var m=A.docs&&A.docs.missing.length?A.docs.missing.join(', '):'';
+  return m?T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kulang pa ang: '+m+'. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and you still need: '+m+'. Any questions before we proceed to the official application?')
+   :T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kumpleto ka na sa documents. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and your documents are complete. Any questions before we proceed to the official application?')}
+function openFina(){crispLoad();crispSync();cp('do','chat:open');var g=finaGreet();if(A.finaShown!==g){A.finaShown=g;cp('do','message:show',['text',safe(g)])}
   ga('chat_open',{provider:'crisp'})}
 function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+T('Magtanong pa sa aming live chat','Ask more questions to our live chat')+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
@@ -374,7 +378,7 @@ function result(){
     $('la-docres').hidden=false;A.docs={ready:r,lacking:lack.length,missing:lack};crispSync();
     var D=Lead.base('loan_docs_checklist');D.leadId=L.leadId;D.name=A.name;D.mobile=A.mobile;D.chosenUnit=u.n;D.employment=et;D.docsReady=r;D.docsLacking=lack.length;D.docsTotal=req.length;D.language=A.lang;
     D.timeline='Docs: '+r+' ready / '+lack.length+' kulang ('+LBL[res]+')';D.usage='Docs ready '+r+'/'+req.length+(lack.length?' | Kulang: '+lack.join('; '):'');
-    btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');Lead.send(D).then(function(ok){if(ok===false)throw 0;btn.disabled=false;btn.textContent=T('✓ Na-save · I-update ang checklist','✓ Saved · Update checklist');$('la-docerr').hidden=true}).catch(function(){btn.disabled=false;btn.textContent=T('I-save ang checklist','Save checklist');$('la-docerr').hidden=false});ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});
+    btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');Lead.send(D).then(function(ok){if(ok===false)throw 0;btn.disabled=false;btn.textContent=T('✓ Na-save · I-update ang checklist','✓ Saved · Update checklist');$('la-docerr').hidden=true;px('Contact',{method:'crisp_chat',content_name:u.n});ga('contact',{method:'crisp_chat',result:res,trigger:'checklist_save'});openFina()}).catch(function(){btn.disabled=false;btn.textContent=T('I-save ang checklist','Save checklist');$('la-docerr').hidden=false});ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});
 }
 document.addEventListener('DOMContentLoaded',function(){try{AS.init($('la-f1'))}catch(_){}});
 })();
