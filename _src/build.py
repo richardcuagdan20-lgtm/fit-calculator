@@ -335,61 +335,7 @@ f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p c
 <p>Call or text me: <a href="tel:{TEL}">{TELD}</a>. Showroom: {ADDR}.</p>
 </div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")])
 
-# ---------- apply
-page("/apply/","Apply for a Mitsubishi | Mitsubishi Motors - SJ Legacy Motors",
- "Apply online for a Mitsubishi at SJ Legacy Motors, San Jose del Monte: send your details, choose cash or financing, and Richard Cuagdan will get back to you.",
-f'''<section class="ph"><div class="w"><h1>Apply for your Mitsubishi</h1><p class="lead">Send your details below and I'll get back to you with the right unit, the latest promo and the documents you need. Prefer to check your budget first? Use the <a href="/budgetcalculator/" style="color:#fff">budget calculator</a>.</p></div></section>
-<section class="sec"><div class="w split">
-<div>
-<div id="af-wrap" class="card pad formc">
-<h2 class="h3">Application form</h2>
-<form id="af" novalidate>
-<div class="fld"><label for="name">Full name *</label><input id="name" autocomplete="name" required><p class="er" id="e_name" hidden>Please enter your name.</p></div>
-<div class="fld"><label for="mobile">Mobile number *</label><input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_mobile" hidden>Enter a valid mobile number (09XXXXXXXXX or +country code).</p></div>
-<div class="fld"><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"><p class="er" id="e_email" hidden>Please check your email address.</p></div>
-<div class="fld"><label for="loc">City / location *</label><input id="loc" autocomplete="address-level2" placeholder="e.g. San Jose del Monte, Bulacan" required><p class="er" id="e_loc" hidden>Please enter your city or location.</p></div>
-<div class="fld"><label for="unit">Unit of interest *</label><select id="unit" required><option value="">Select a unit</option>{UNIT_OPTS}<option value="Not sure yet">Not sure yet</option></select><p class="er" id="e_unit" hidden>Please choose a unit.</p></div>
-<div class="fld"><label for="pay">Preferred payment *</label><select id="pay" required><option value="">Select</option><option>Financing</option><option>Cash</option></select><p class="er" id="e_pay" hidden>Please choose a payment option.</p></div>
-<div class="fld"><label for="emp">Employment type *</label><select id="emp" required><option value="">Select</option><option value="Employed">Employed</option><option value="Business owner">Business owner</option><option value="OFW">OFW</option><option value="OFW family">OFW family</option></select><p class="er" id="e_emp" hidden>Please choose your employment type.</p></div>
-<div class="fld"><label for="inc">Gross monthly income *</label><select id="inc" required><option value="">Select a range</option><option data-min="0">Below ₱30,000</option><option data-min="30000">₱30,000 to ₱49,999</option><option data-min="50000">₱50,000 to ₱79,999</option><option data-min="80000">₱80,000 to ₱119,999</option><option data-min="120000">₱120,000 to ₱199,999</option><option data-min="200000">₱200,000 and above</option></select><p class="er" id="e_inc" hidden>Please choose an income range.</p></div>
-<div class="fld"><label for="tl">When do you plan to buy? *</label><select id="tl" required><option value="">Select</option><option>This month</option><option>Within 1 to 3 months</option><option>Within 3 to 6 months</option><option>Just checking options</option></select><p class="er" id="e_tl" hidden>Please choose a timeline.</p></div>
-<div class="fld"><label for="msg">Message (optional)</label><textarea id="msg" rows="4" maxlength="1000"></textarea></div>
-{CONSENT}
-<button class="btn" type="submit" id="ab">Send my application</button>
-</form></div>
-<div id="thanks" class="card pad formc" hidden><h2 class="h3">Thank you!</h2><p>Your details were sent. I'll get in touch with you soon. Reference: <b id="ref"></b></p><p>For a faster reply, message me on Messenger with your reference number.</p><p><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a></p></div>
-</div>
-<div>
-<h2>What happens next</h2>
-<ol class="steps"><li><h3>I review your details</h3><p>I check which unit and payment option fit what you shared.</p></li>
-<li><h3>We talk</h3><p>I'll message or call you to confirm the unit, color and terms and share this month's promo.</p></li>
-<li><h3>Submit documents</h3><p>For financing, send the requirements for your situation. I'll check them before they go to the bank.</p></li>
-<li><h3>Approval and release</h3><p>Once the bank approves (or once payment is settled for cash), we schedule your release.</p></li></ol>
-<h2>Typical documents for financing</h2>
-<ul class="ticks"><li>Two valid government IDs with matching signatures</li><li>Proof of billing</li><li>Employed: certificate of employment with compensation, payslips or ITR</li><li>Business owner: DTI or SEC registration, business permit, bank statements, ITR or financial statements</li><li>OFW: employment contract, payslips or remittance records, and co-borrower or attorney-in-fact details</li></ul>
-<p>Full list: <a href="/guides/car-loan-requirements/">car loan requirements guide</a>.</p>
-<p class="muted">Financing is subject to bank approval.</p>
-</div></div></section>
-<script src="/assets/lead.js" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){{
-var $=function(i){{return document.getElementById(i)}};
-var q=new URLSearchParams(location.search).get('unit');if(q){{var k=q.replace(/[^a-z0-9-]/gi,''),o=document.querySelector('#unit option[data-id="'+k+'"]')||document.querySelector('#unit option[data-model="'+k+'"]');if(o)o.selected=true}}
-$('af').addEventListener('submit',function(ev){{ev.preventDefault();
- var v=function(i){{return $(i).value.trim()}};
- var em=v('email');
- var bad=[Lead.err('name',v('name').length<2),Lead.err('mobile',!Lead.okMobile(v('mobile'))),Lead.err('email',!!em&&!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(em)),Lead.err('loc',!v('loc')),Lead.err('unit',!v('unit')),Lead.err('pay',!v('pay')),Lead.err('emp',!v('emp')),Lead.err('inc',!v('inc')),Lead.err('tl',!v('tl')),Lead.err('consent',!$('consent').checked)];
- if(bad.some(Boolean)){{var x=document.querySelector('.er:not([hidden])');if(x)x.scrollIntoView({{block:'center'}});return}}
- var b=$('ab');b.disabled=true;b.textContent='Sending...';
- var emp=v('emp'),inc=$('inc').selectedOptions[0];
- var L=Lead.base('apply_form');
- L.name=v('name');L.mobile=v('mobile').replace(/[\\s()-]/g,'');L.location=v('loc');L.chosenUnit=v('unit');L.dpPreference=v('pay');L.employment=emp;
- L.seg=emp==='OFW'?'ofw_abroad':(emp==='OFW family'?'ofw_family':'local');L.income=Number(inc.dataset.min)||0;L.timeline=v('tl');
- L.usage=['Income range: '+inc.textContent,em?'Email: '+em:'',v('msg')?'Message: '+v('msg'):''].filter(Boolean).join(' | ');
- Lead.send(L).then(function(){{Lead.track(L.chosenUnit);$('ref').textContent=L.leadId;$('af-wrap').hidden=true;$('thanks').hidden=false;$('thanks').scrollIntoView({{block:'center'}})}});
-}});
-}});
-</script>''', crumbs=[("/","Home"),("/apply/","Apply")])
+# ---------- apply: Official Application Form, see _src/applyform.py (exec'd after loanapp.py)
 
 # ---------- test drive
 TDU=[{"id":v["id"],"m":m["slug"],"model":m["name"],"n":v["n"],"srp":srp_txt(v),"img":v["img"]} for m in MODELS for v in m["variants"]]
@@ -488,6 +434,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')

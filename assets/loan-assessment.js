@@ -378,7 +378,32 @@ function result(){
     $('la-docres').hidden=false;A.docs={ready:r,lacking:lack.length,missing:lack};crispSync();
     var D=Lead.base('loan_docs_checklist');D.leadId=L.leadId;D.name=A.name;D.mobile=A.mobile;D.chosenUnit=u.n;D.employment=et;D.docsReady=r;D.docsLacking=lack.length;D.docsTotal=req.length;D.language=A.lang;
     D.timeline='Docs: '+r+' ready / '+lack.length+' kulang ('+LBL[res]+')';D.usage='Docs ready '+r+'/'+req.length+(lack.length?' | Kulang: '+lack.join('; '):'');
-    btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');Lead.send(D).then(function(ok){if(ok===false)throw 0;btn.disabled=false;btn.textContent=T('✓ Na-save · I-update ang checklist','✓ Saved · Update checklist');$('la-docerr').hidden=true;px('Contact',{method:'crisp_chat',content_name:u.n});ga('contact',{method:'crisp_chat',result:res,trigger:'checklist_save'});openFina()}).catch(function(){btn.disabled=false;btn.textContent=T('I-save ang checklist','Save checklist');$('la-docerr').hidden=false});ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});
+    btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');Lead.send(D).then(function(ok){if(ok===false)throw 0;btn.disabled=false;btn.textContent=T('✓ Na-save · I-update ang checklist','✓ Saved · Update checklist');$('la-docerr').hidden=true;crispSync();showSummary(S,res)}).catch(function(){btn.disabled=false;btn.textContent=T('I-save ang checklist','Save checklist');$('la-docerr').hidden=false});ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});
 }
+/* After "I-save ang checklist": clean summary with ONE CTA to the Official Application Form (/apply/), prefilled via sessionStorage.
+   Crisp session data is set quietly (no auto-open); the floating Crisp chat stays available. */
+function planNow(S){if(A.plan)return {dp:A.plan.dp,term_months:A.plan.term_months,monthly:A.plan.monthly,type:A.plan.type};var p=A.rec&&A.rec.primary;
+  return p?{dp:Math.round(p.dp),term_months:p.n,monthly:Math.round(p.mo),type:p.kind}:{dp:S._dp,term_months:S._term,monthly:Math.round(S._amort),type:'promo'}}
+function savePrefill(S,res){var pl=planNow(S);
+  var d={v:1,lang:A.lang,name:A.name,mobile:A.mobile,email:A.email,dob:A.dob,civil_status:A.civil_status,residential_status:A.residential_status,stay_months:A.length_of_stay_months,
+   employment_type:A.employment_type,employment_status:A.employment_status,tenure_months:A.years_in_employment!=null?Math.round(A.years_in_employment*12):null,
+   gross_monthly_income:A.gross_monthly_income,other_household_income:A.other_household_income,existing_monthly_obligations:A.existing_monthly_obligations,
+   co_borrower:A.co_borrower,co_income:A.co_income,ofw_remit:A.ofw_remit,purpose:A.purpose,preferred_bank:A.preferred_bank,source_of_sale:A.source_of_sale,
+   unit_id:A.unit.id,color:A._color,plan:pl,result:res,docs:A.docs,leadId:A.leadId,consent_ts:A.privacy_consent&&A.privacy_consent.timestamp};
+  try{sessionStorage.setItem('mp_app_prefill',JSON.stringify(d))}catch(_){}return pl}
+function showSummary(S,res){var u=A.unit,pl=savePrefill(S,res),R=$('la-res');
+  var col=A._color==='undecided'?T('Bahala na','Undecided'):A._color,m=A.docs.missing;
+  var head={PRE_QUALIFIED:T('Base sa initial assessment, <b>Pre-qualified</b> ka. Hindi pa ito bank decision.','Based on the initial assessment, you are <b>Pre-qualified</b>. This is not yet a bank decision.'),
+   NEEDS_REVIEW:T('Kailangan pa naming i-review ang ilang details. Pwede ka nang mag-apply; tutulungan ka namin.','We still need to review a few details. You can already apply; we will help you.'),
+   NOT_YET_QUALIFIED:T('Hindi pa pasok ang profile sa ngayon, pero pwede ka pa ring mag-apply at titingnan namin ang options (co-maker, mas mataas na DP, ibang unit).','Your profile does not meet the requirements yet, but you can still apply and we will look at options (co-maker, higher DP, another unit).')}[res];
+  R.innerHTML=safe('<div class="la-card la-summ res-'+res.toLowerCase()+'" id="la-summary"><p class="kick">'+T('Summary ng assessment mo','Your assessment summary')+'</p><h2 class="h3">'+esc(A.name)+'</h2>'+
+   '<p class="la-badge">'+LBL[res]+'</p><p>'+head+'</p>'+
+   '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(u.model)+'</dd></div><div><dt>Variant</dt><dd>'+esc(u.n)+'</dd></div><div><dt>Color</dt><dd>'+esc(col)+'</dd></div><div><dt>'+T('Rekomendadong plan','Recommended plan')+'</dt><dd>'+(pl.type==='promo'?'Promo (all-in)':T('Bank estimate','Bank estimate'))+'</dd></div>'+
+   '<div><dt>Down payment</dt><dd>'+(pl.dp?peso(pl.dp):'Zero DP')+'</dd></div><div><dt>Term</dt><dd>'+termTxt(pl.term_months)+'</dd></div><div><dt>Monthly'+(pl.type==='promo'?'':' (estimate)')+'</dt><dd>'+peso(pl.monthly)+'</dd></div><div><dt>Documents</dt><dd>'+A.docs.ready+' ready / '+A.docs.lacking+T(' kulang',' lacking')+'</dd></div></dl>'+
+   (m.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p class="small">'+T('Okay lang! Si Fina ang tutulong at kukuha ng documents sa live chat pagkatapos mong mag-apply.','That\'s okay! Fina will help and collect documents in live chat after you apply.')+'</p></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents!','Your documents are complete!')+'</p>')+
+   '<div class="la-final"><a class="btn af-apply" id="la-apply" href="/apply/?from=assessment&amp;unit='+encodeURIComponent(u.id)+'" style="font-size:18px;padding:16px;width:100%;justify-content:center">'+T('Mag-apply na sa aming Official Application Form','Apply Now to our Official Application Form')+'</a></div>'+
+   '<p class="muted small">'+T('Initial pre-screening lang ito, hindi bank decision. Subject sa bank evaluation at promo validity.','Initial pre-screening only, not a bank decision. Subject to bank evaluation and promo validity.')+'</p></div>');
+  $('la-apply').addEventListener('click',function(){savePrefill(S,res);ga('apply_click',{from:'assessment_summary',result:res})});
+  document.querySelectorAll('section.cta').forEach(function(x){x.hidden=true});window.scrollTo(0,0);ga('assessment_summary',{result:res})}
 document.addEventListener('DOMContentLoaded',function(){try{AS.init($('la-f1'))}catch(_){}});
 })();
