@@ -169,6 +169,7 @@ var REQ={common:['2 valid government IDs (hindi expired)','Proof of billing (hin
  freelancer:['PayPal / Wise statements','Client contracts','6 months bank statements'],
  comaker:['Co-maker: 2 IDs + sariling income documents']};
 REQ.seafarer=REQ.ofw;REQ.pensioner=['Pension statement / proof of pension'];REQ.other=['Proof of income (ipapaalam namin kung ano)'];
+var EMPL={employed:'Employed',business_owner:'Business owner',ofw:'OFW',seafarer:'Seafarer',freelancer:'Freelancer / VA',pensioner:'Pensioner',other:'iba pang income type'};
 var LBL={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
 function msgr(res){var ref=('loan-assessment-'+res.toLowerCase().replace(/_/g,'-')+'-'+A.unit.id).replace(/[^a-z0-9-]/gi,'').slice(0,240);return MESSENGER_URL+'?ref='+encodeURIComponent(ref)}
 function contactBtns(res){return '<div class="la-cta"><a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 Makipag-usap sa tao sa Messenger</a><a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 Tumawag: 0954 291 1201</a></div>'}
@@ -181,10 +182,10 @@ function result(){
   var et=A.employment_type,req=REQ.common.concat(REQ[et]||[]).concat(A.co_borrower==='yes'||S.recommendations.join().indexOf('co-maker')>=0?REQ.comaker:[]);
   $('la-chat').hidden=true;var R=$('la-res');R.hidden=false;
   R.innerHTML=safe('<div class="la-card res-'+res.toLowerCase()+'"><p class="kick">Resulta ng assessment</p><p class="la-badge">'+LBL[res]+'</p><p>'+head+'</p>'+
-   '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(u.n)+' · '+esc(A._color)+'</dd></div><div><dt>SRP / promo price</dt><dd>'+peso(u.price)+'</dd></div><div><dt>Down payment</dt><dd>'+(S._dp?peso(S._dp):'Zero DP')+'</dd></div><div><dt>Monthly (promo, '+S._term+' mo)</dt><dd>'+peso(S._amort)+'</dd></div><div><dt>Monthly vs income</dt><dd>'+(S.affordability_ratio*100).toFixed(1)+'%</dd></div></dl>'+
+   '<dl class="la-sum"><div><dt>Documents</dt><dd id="la-docsum">I-check sa Step 5</dd></div><div><dt>Unit</dt><dd>'+esc(u.n)+' · '+esc(A._color)+'</dd></div><div><dt>SRP / promo price</dt><dd>'+peso(u.price)+'</dd></div><div><dt>Down payment</dt><dd>'+(S._dp?peso(S._dp):'Zero DP')+'</dd></div><div><dt>Monthly (promo, '+S._term+' mo)</dt><dd>'+peso(S._amort)+'</dd></div><div><dt>Monthly vs income</dt><dd>'+(S.affordability_ratio*100).toFixed(1)+'%</dd></div></dl>'+
    (S.recommendations.length?'<h2 class="h3">Mga options para pumasa</h2><ol class="la-rec">'+S.recommendations.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol>':'')+
    '<h2 class="h3">Banks na pwedeng i-try</h2><p>'+S.eligible_banks.map(esc).join(' · ')+'</p><p class="muted">Subject to bank evaluation. Hindi kami nagbibigay ng interest rate; ang bank ang magko-compute.</p>'+
-   '<h2 class="h3">Requirements checklist</h2><ul class="la-req">'+req.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'+
+   '<div id="la-docbox"><h2 class="h3">Step 5: Requirements checklist</h2><p>Base sa checklist ni Fina para sa '+esc(EMPL[et]||et)+'. I-tick ang mga documents na <b>meron ka na</b>. Wala pang upload dito.</p><ul class="la-docs">'+req.map(function(x,i){return '<li><span>'+esc(x)+'</span><label><input type="checkbox" data-doc="'+i+'"'+(x.indexOf('Data Privacy')===0?' checked':'')+'> Meron na ako</label></li>'}).join('')+'</ul><p class="la-cnt" id="la-cnt">0 ready / '+req.length+' kulang</p><button class="btn" type="button" id="la-docsave">I-save ang checklist</button><div id="la-docres" hidden></div></div>'+
    contactBtns(res)+
    '<div class="la-next"><h2 class="h3">Ituloy ang full application</h2><p>Malapit na: online full application with secure document upload at reference number para ma-track mo ang status. Gusto mo bang mauna? I-tap lang at ime-message ka ni Richard pag ready na.</p><button class="btn" type="button" id="la-intent">Oo, gusto kong ituloy</button><p id="la-intent-ok" class="la-ok" hidden>Salamat! Naka-note na. Ime-message ka namin pag bukas na ang full application. Pwede ka ring mag-message na ngayon.</p></div>'+
    '<p class="muted small">Initial pre-screening lang ito base sa sagot mo, hindi bank approval. Lahat ng figures ay subject sa bank evaluation at promo validity ('+esc($('la-note').textContent)+').</p></div>');
@@ -193,8 +194,18 @@ function result(){
   var L=Lead.base('loan_assessment');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.dpPreference=S._dp?peso(S._dp)+' DP':'Zero DP';
   L.employment=et;L.seg=isOFW()?'ofw_abroad':'local';L.income=A.gross_monthly_income;L.timeline='Assessment: '+LBL[res];
   L.usage=['Result: '+LBL[res],'Monthly '+peso(S._amort)+' ('+(S.affordability_ratio*100).toFixed(1)+'% AFF, '+(S.dti_ratio*100).toFixed(1)+'% DTI)','Color: '+A._color,'Purpose: '+A.purpose,A.email?'Email: '+A.email:'','Rules: '+S.rule_results.map(function(x){return x.rule_id+'='+x.outcome}).join(','),S.red_flags.length?'Flags: '+S.red_flags.join(','):'','Banks: '+S.eligible_banks.join('/'),'Pref bank: '+A.preferred_bank,'Source: '+A.source_of_sale,'Consent: '+A.privacy_consent.version+' '+A.privacy_consent.timestamp].filter(Boolean).join(' | ');
-  L.assessment=JSON.stringify({result:res,affordability_ratio:S.affordability_ratio,dti_ratio:S.dti_ratio,rule_results:S.rule_results,red_flags:S.red_flags,eligible_banks:S.eligible_banks,recommendations:S.recommendations});
+  L.docsTotal=req.length;L.docsReady=0;L.docsLacking=req.length;L.assessment=JSON.stringify({result:res,affordability_ratio:S.affordability_ratio,dti_ratio:S.dti_ratio,rule_results:S.rule_results,red_flags:S.red_flags,eligible_banks:S.eligible_banks,recommendations:S.recommendations});
   Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n,content_category:'loan_assessment',status:res});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
+  /* Step 5: documents client already has (no uploads) */
+  var boxes=R.querySelectorAll('[data-doc]');function cnt(){var r=0;boxes.forEach(function(b){if(b.checked)r++});$('la-cnt').textContent=r+' ready / '+(req.length-r)+' kulang';return r}
+  boxes.forEach(function(b){b.addEventListener('change',cnt)});cnt();
+  $('la-docsave').addEventListener('click',function(){var btn=this,r=cnt(),lack=[];boxes.forEach(function(b){if(!b.checked)lack.push(req[+b.dataset.doc])});prog(5);
+    $('la-docsum').textContent=r+' ready / '+lack.length+' kulang';
+    $('la-docres').innerHTML=safe(lack.length?'<div class="la-lack"><p><b>Kulang pa ('+lack.length+'):</b></p><ul>'+lack.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p>Okay lang yan! Tutulungan ka nina Fina at Richard kung paano at saan makukuha ang mga ito, at ano ang pwedeng ipalit kung wala ka pa. Mag-message lang sa Messenger.</p></div>':'<p class="la-ok">Wow, kumpleto ka na sa '+r+' documents! Ihanda lang ang malinaw na kopya. Tutulungan ka nina Fina at Richard sa next step.</p>');
+    $('la-docres').hidden=false;btn.textContent='I-update ang checklist';
+    var D=Lead.base('loan_docs_checklist');D.leadId=L.leadId;D.name=A.name;D.mobile=A.mobile;D.chosenUnit=u.n;D.employment=et;D.docsReady=r;D.docsLacking=lack.length;D.docsTotal=req.length;
+    D.timeline='Docs: '+r+' ready / '+lack.length+' kulang ('+LBL[res]+')';D.usage='Docs ready '+r+'/'+req.length+(lack.length?' | Kulang: '+lack.join('; '):'');
+    Lead.send(D);ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});
   $('la-intent').addEventListener('click',function(){var b=this;b.disabled=true;b.textContent='Sending...';
     var I=Lead.base('loan_app_intent');I.name=A.name;I.mobile=A.mobile;I.chosenUnit=u.n;I.timeline='Wants full application ('+LBL[res]+')';I.usage='Phase 2 intent: full application';
     Lead.send(I).then(function(){b.hidden=true;$('la-intent-ok').hidden=false;ga('full_application_intent',{unit:u.n,result:res})})});
