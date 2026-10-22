@@ -2,13 +2,28 @@
 def _dp(lbl):
     import re
     m=re.search(r"([\d.]+)K",lbl); return int(float(m.group(1))*1000) if m else 0
+QWP=("Quartz White Pearl",15000);WD=("White Diamond",15000)
+_C={"mg4glxat":["Titanium Gray Metallic","Red Metallic","Cool Silver Metallic","White Solid (order basis)"],
+"xglxmt":["Blade Silver Metallic","Graphite Grey Metallic","Jet Black Mica"],
+"xglsat":["Green Bronze Metallic","Red Metallic","Graphite Grey Metallic",QWP],
+"xcross":["Sunrise Orange Metallic / Jet Black Mica roof","Green Bronze Metallic / Jet Black Mica roof",("Quartz White Pearl / Jet Black Mica roof",15000)],
+"dglx":["Blade Silver Metallic","Graphite Gray Metallic","Red Metallic",QWP],
+"dgls":["Lunar Blue Mica","Graphite Gray Metallic","Jet Black Mica",QWP],
+"dgtm":["Graphite Gray Metallic","Jet Black Mica"],
+"dgtt":["Lunar Blue Mica / Jet Black Mica roof","Graphite Gray Metallic / Jet Black Mica roof",("Quartz White Pearl / Jet Black Mica roof",15000)],
+"mglxmt":["Jet Black Mica","Blade Silver Metallic",WD],
+"mbs2wd":["Jet Black Mica","Graphite Gray Metallic with Black Roof",("White Diamond with Black Roof",15000)],
+"tritongxat":["Red Solid","Blade Silver Metallic","Graphite Gray Metallic","Jet Black Mica",WD],
+"l300":["White"]}
+_C["mg4gls"]=_C["mg4glxat"];_C["xglxat"]=_C["xglxmt"];_C["mgls"]=_C["mglxmt"];_C["mbs4wd"]=_C["mbs2wd"]
+def _cl(i): return [[c,0] if isinstance(c,str) else list(c) for c in _C.get(i,[])]
 LAU=[]
 for m in MODELS:
     for v in m["variants"]:
         if not v["promo"]: continue
         price=v["srp"] or v["promo"].get("srp")
         if not price: continue
-        LAU.append({"id":v["id"],"model":m["name"],"n":v["n"],"price":price,"opts":[{"dp":_dp(l),"mo":mo} for l,mo in v["promo"]["opts"]]})
+        LAU.append({"id":v["id"],"model":m["name"],"n":v["n"],"price":price,"colors":_cl(v["id"]),"opts":[{"dp":_dp(l),"mo":mo} for l,mo in v["promo"]["opts"]]})
 def B(tl,en): return f'<span class="tl">{tl}</span><span class="en">{en}</span>'
 LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>SJ Legacy Motors</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
  '(kasama ang IDs, income, at financial documents) para lamang sa pag-assess ng aking car loan application, at i-share ito sa piling partner banks at financing companies '

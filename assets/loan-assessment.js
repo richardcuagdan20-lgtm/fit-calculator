@@ -139,9 +139,9 @@ function modelsList(){var m=[];U.forEach(function(u){if(m.indexOf(u.model)<0)m.p
 Q.push(
  {id:'_model',unit:true,q:['Ayos! Ngayon, piliin natin ang unit. Ang DP at monthly ay galing sa promo ngayong buwan. Anong Mitsubishi model ang gusto mo?','Great! Now let\'s pick your unit. DP and monthly figures are from this month\'s promo. Which Mitsubishi model do you want?'],t:'c',o:function(){return modelsList().map(function(m){return [m,m]})}},
  {id:'_variant',unit:true,q:['Anong variant?','Which variant?'],t:'c',o:function(){return U.filter(function(u){return u.model===A._model}).map(function(u){return [u.id,u.n+' · SRP '+peso(u.price)]})}},
- {id:'_color',unit:true,q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:function(){return COLORS.map(function(c){return [c,c]}).concat([['undecided','Bahala na / undecided','Undecided']])}}
+ {id:'_color',unit:true,q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:function(){var u=U.filter(function(x){return x.id===A._variant})[0];return ((u&&u.colors&&u.colors.length)?u.colors:COLORS).map(function(c){return [c[0],c[1]?c[0]+' (+'+peso(c[1])+')':c[0]]}).concat([['undecided','Bahala na / undecided','Undecided']])}}
 );
-var COLORS=['White Pearl','Silver','Graphite Gray','Black','Red'];
+var COLORS=[];
 var hist=[],cur=null;  /* hist: [{i,nodes}] answered steps; cur: open question {i,node} */
 function clearAns(id){delete A[id];delete A['_prev_'+id];if(id==='_variant'){delete A.unit;delete A.rec}}
 function next(i){while(i<Q.length&&Q[i].show&&!Q[i].show())i++;if(i>=Q.length){cur=null;result();return}ask(i)}
@@ -328,7 +328,7 @@ function assess(){
   }
   return {result:res,affordability_ratio:+aff.toFixed(4),dti_ratio:+dti.toFixed(4),rule_results:R,red_flags:flags,eligible_banks:banks,recommendations:rec.slice(0,3),_amort:amort,_fin:fin,_dp:o.dp,_term:term,_dpPct:dpPct};
 }
-function reqs(){var REQ={common:[T('2 valid government IDs (hindi expired)','2 valid government IDs (unexpired)'),T('Proof of billing (hindi lalampas ng 3 months)','Proof of billing (not older than 3 months)'),'Signed credit application','Data Privacy consent'],
+function reqs(){var REQ={common:[T('2 valid government IDs (hindi expired)','2 valid government IDs (unexpired)'),T('Proof of billing (hindi lalampas ng 3 months)','Proof of billing (not older than 3 months)'),'Data Privacy consent'],
  employed:['COE with compensation','Latest 3 months payslips','ITR / BIR 2316'],
  business_owner:['DTI / SEC registration','Mayor\'s permit','3–6 months bank statements','Audited FS / ITR'],
  ofw:['Employment contract','3–6 months remittance proof',T('IDs ng AIF + SPA','AIF\'s IDs + SPA')],
