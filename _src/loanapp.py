@@ -14,7 +14,8 @@ _C={"mg4glxat":["Titanium Gray Metallic","Red Metallic","Cool Silver Metallic","
 "mglxmt":["Jet Black Mica","Blade Silver Metallic",WD],
 "mbs2wd":["Jet Black Mica","Graphite Gray Metallic with Black Roof",("White Diamond with Black Roof",15000)],
 "tritongxat":["Red Solid","Blade Silver Metallic","Graphite Gray Metallic","Jet Black Mica",WD],
-"l300":["White"]}
+"l300":["White"],
+"vvglx":["Silver Metallic","White Solid"]}
 _C["mg4gls"]=_C["mg4glxat"];_C["xglxat"]=_C["xglxmt"];_C["mgls"]=_C["mglxmt"];_C["mbs4wd"]=_C["mbs2wd"]
 def _cl(i): return [[c,0] if isinstance(c,str) else list(c) for c in _C.get(i,[])]
 LAU=[]

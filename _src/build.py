@@ -233,7 +233,7 @@ function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='
  d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
   m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel: <b>'+peso(v.fuel)+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
   h+='</div></section>'}});
- h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV, Versa Van and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
+ h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
  var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
  if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
 var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}

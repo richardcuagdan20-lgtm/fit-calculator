@@ -75,11 +75,11 @@ MODELS=[
   specs=[("Engine","2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4"),("Transmission","5-speed manual"),("Fuel","Diesel")],
   variants=[V("l300cc","L300 Cab & Chassis 2.2D M/T",829000,"l300_fb"),
             V("l300","2026 L300 Dual AC",None,"l300_fb",P([("Zero DP",21405),("₱123K DP",18789)],20000,srp=1039000))]),
- dict(slug="versa-van",name="Versa Van",cat="Passenger and cargo van",img="vv_cover",
+ dict(slug="versa-van",name="Versa Van",cat="15-seater diesel van",img="vv_glx",
   blurb="A full-size diesel van for shuttle services, company transport and big families who travel together.",
   who="shuttle and tour operators, companies and large families",
-  specs=[("Engine","2.5L diesel"),("Transmission","Manual"),("Drivetrain","2WD")],
-  variants=[V("vvglx","Versa Van GLX 2.5D 2WD M/T",1649000,"vv_cover")]),
+  specs=[("Engine","2.5L (2,488 cc) DOHC 16-valve VGS turbo diesel"),("Max power / torque","129 PS / 356 Nm"),("Transmission","5-speed manual"),("Drivetrain","2WD"),("Seating","15 (including driver)"),("Colors","Silver Metallic, White Solid")],
+  variants=[V("vvglx","2026 Versa Van GLX 2.5D 2WD M/T",1764000,"vv_glx",P([("₱33K DP",36340),("₱243K DP",31798)],20000,srp=1764000))]),
 ]
 ALLIN=["3 years LTO registration","3 years TPL insurance","1 year comprehensive insurance, rate locked for 3 years","Chattel mortgage","Free labor up to 5,000 km","3 years warranty"]
 FREEBIES=['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain']
