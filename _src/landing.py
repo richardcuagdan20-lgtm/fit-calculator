@@ -249,6 +249,7 @@ for a in LANDINGS:
 <p class="lead" style="color:inherit">{e(a["lead"])}</p>
 <p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost dk" href="/test-drive/{"?unit="+a["car"] if a.get("car") else ""}">Book a Test Drive</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p>
 {body}
+{LACTA}
 {fq}
 <aside class="box"><h2 class="h3">More guides</h2><ul class="links">{"".join(f'<li><a href="/{b["slug"]}/">{e(b["title"])}</a></li>' for b in LANDINGS if b is not a)}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
     crumbs=[("/","Home"),("/promos-tips/","Promos & Tips"),(path,a["kw"])])

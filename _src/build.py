@@ -131,6 +131,7 @@ FREE_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in FREEBIES)+"</ul>
 def from_txt(m):
     s=srp_from(m); return f'SRP from <b>{f(s)}</b>' if s else 'Ask for price'
 UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}" data-model="{m["slug"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
+LACTA='<aside class="lacta"><h2>Pasok ka ba sa car loan?</h2><p>Alamin sa loob ng 3 minuto gamit ang libreng AI Car Loan Application Assessment. Walang documents na kailangan.</p><a class="btn" href="/loan-assessment/">Simulan ang AI Car Loan Application Assessment</a></aside>'
 CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
 
 # ---------- HOME
@@ -144,6 +145,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <p class="row"><a class="btn" href="/apply/">Apply for Financing</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
 <p class="tdl"><a href="/test-drive/">Book a test drive →</a></p>
 </div>{img("xc_x3n","Mitsubishi Xpander Cross in Quartz White Pearl",eager=True,cls="himg")}</div></section>
+<div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
 <p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">unlock this month's promo figures</a>.</p>
@@ -302,6 +304,7 @@ def articles(base,items,label,title,desc,intro):
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {top}
 {body}
+{LACTA}
 {fq}
 <aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
         crumbs=[("/","Home"),(f"/{base}/",label),(f"/{base}/{a['slug']}/",a["title"])])
@@ -484,6 +487,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <section class="sec"><div class="w"><h2>Find the showroom</h2><p>{ADDR}</p><iframe title="Map to Mitsubishi SJ Legacy Motors, San Jose del Monte" src="https://www.google.com/maps?q={MAPQ}&amp;output=embed" width="100%" height="380" style="border:0;border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
 
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')
