@@ -81,3 +81,9 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 <script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/loan-assessment.js" defer></script>''', crumbs=[("/","Home"),("/loan-assessment/","AI Car Loan Application Assessment")])
+# Cache-busting: content hashes on the loan page's JS/CSS (Cloudflare caches /assets for 4h).
+import hashlib as _hl
+def _vh(f): return _hl.md5(open(R+f,'rb').read()).hexdigest()[:8]
+_lp=R+"/loan-assessment/index.html"; _s=open(_lp).read()
+_s=_s.replace('src="/assets/loan-assessment.js"',f'src="/assets/loan-assessment.js?v={_vh("/assets/loan-assessment.js")}"').replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
+open(_lp,'w').write(_s)
