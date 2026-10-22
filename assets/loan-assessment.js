@@ -161,7 +161,13 @@ function ask(i){
 }
 /* ---------- Interactive computation + recommendation panel (estimates only) ---------- */
 var TERMS=[12,24,36,48,60];
-function estMo(fin,n){return fin*(1+CFG.est_addon_rates[n])/n}
+/* Add-on rate for any term: known 12-month steps from CFG; in-between terms (18/30/42/54) interpolated linearly. ESTIMATE. */
+function addon(n){var r=CFG.est_addon_rates;if(r[n]!=null)return r[n];var lo=Math.floor(n/12)*12,hi=lo+12;return r[lo]+(r[hi]-r[lo])*(n-lo)/12}
+function estMo(fin,n){return fin*(1+addon(n))/n}
+var MTERMS=[12,18,24,30,36,42,48,54,60];
+function yrTxt(n){var y=n/12;return A.lang==='en'?y+(y===1?' yr':' yrs'):y+' taon'}
+function moTxt(n){return n+(A.lang==='en'?' mo':' buwan')}
+function termTxt(n){return n%12===0?yrTxt(n)+' ('+moTxt(n)+')':moTxt(n)+' ('+yrTxt(n)+')'}
 function initCalc(S,res){
   var u=A.unit,P=u.price,inc=(A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0),box=$('la-calc'),st={dp:Math.round(P*0.2),n:60};
   var promos=u.opts.map(function(o){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
@@ -175,17 +181,17 @@ function initCalc(S,res){
    '<div class="la-tabs"><button type="button" class="chip on" data-mode="dp">'+T('Piliin ang DP at term','Choose DP and term')+'</button><button type="button" class="chip" data-mode="tg">Target monthly</button></div>'+
    '<div id="la-m-dp"><p class="fl">Down payment</p><div class="la-in" id="la-dpchips">'+[20,30,40,50].map(function(x){return '<button type="button" class="chip" data-dpp="'+x+'">'+x+'%</button>'}).join('')+'</div>'+
    '<input type="range" id="la-dpr" min="'+CFG.calc_min_dp_pct+'" max="'+CFG.calc_max_dp_pct+'" step="1" value="20" aria-label="DP %"><div class="la-in"><label for="la-dpa" class="small">'+T('O i-type ang eksaktong DP (₱)','Or type the exact DP (₱)')+'</label><input type="number" id="la-dpa" inputmode="numeric" min="0" step="1000"></div><p class="er" id="la-dpw" hidden></p>'+
-   '<p class="fl">Term</p><div class="la-in" id="la-terms">'+TERMS.map(function(n){return '<button type="button" class="chip" data-n="'+n+'">'+yrs(n)+'</button>'}).join('')+'</div>'+
+   '<p class="fl">Term <span class="la-tabs" style="display:inline-flex;gap:6px;margin-left:8px;vertical-align:middle"><button type="button" class="chip on" data-tu="y" style="padding:4px 12px;min-height:0">'+T('Taon','Years')+'</button><button type="button" class="chip" data-tu="m" style="padding:4px 12px;min-height:0">'+T('Buwan','Months')+'</button></span></p><div class="la-in" id="la-terms"></div>'+
    '<dl class="la-sum" id="la-cres"></dl></div>'+
    '<div id="la-m-tg" hidden><div class="la-in"><label for="la-tgt" class="small">'+T('Magkano ang gusto mong monthly? (₱)','What monthly do you want? (₱)')+'</label><input type="number" id="la-tgt" inputmode="numeric" min="0" step="500"></div><table class="la-tbl" id="la-tgres"></table></div>'+
    '<div id="la-best"></div>'+
-   '<h3 class="h3" style="margin-top:16px">'+T('Halimbawang computation','Sample computation')+': '+esc(u.n)+'</h3><table class="la-tbl"><thead><tr><th>Term</th><th>20% DP ('+peso(P*0.2)+')</th><th>40% DP ('+peso(P*0.4)+')</th></tr></thead><tbody>'+
-     TERMS.map(function(n){return '<tr><td>'+n+' mo</td><td>'+peso(estMo(P*0.8,n))+'/mo</td><td>'+peso(estMo(P*0.6,n))+'/mo</td></tr>'}).join('')+'</tbody></table>'+
+   '<h3 class="h3" style="margin-top:16px">'+T('Halimbawang computation','Sample computation')+'</h3><p class="small" style="margin:0 0 8px">'+T('Halimbawa: '+esc(u.n)+' — magkano ang monthly depende sa DP at taon','Example: '+esc(u.n)+' — your monthly depending on DP and years')+'</p><table class="la-tbl la-sample"><thead><tr><th>'+T('Taon','Years')+'</th><th>20% DP<br><span class="small">'+peso(P*0.2)+'</span></th><th>40% DP<br><span class="small">'+peso(P*0.4)+'</span></th></tr></thead><tbody>'+
+     TERMS.map(function(n){return '<tr><td><b>'+yrTxt(n)+'</b></td><td><b style="font-size:1.2em">'+peso(estMo(P*0.8,n))+'</b></td><td><b style="font-size:1.2em">'+peso(estMo(P*0.6,n))+'</b></td></tr>'}).join('')+'</tbody></table>'+
    '<p class="muted small">'+T('Estimate lang ito, subject sa bank evaluation. Ang final na rate at halaga ay manggagaling sa bank o dealer. Ang custom computation ay hindi pa kasama ang insurance, chattel mortgage, LTO at fees; ang dealer promo ay all-in.','Estimates only, subject to bank evaluation. Final rates and amounts come from the bank or dealer. Custom computations exclude insurance, chattel mortgage, LTO and fees; dealer promos are all-in.')+'</p>'+
    '<p class="la-ok" id="la-planok" hidden></p></div>');
   function mark(){box.querySelectorAll('[data-dpp]').forEach(function(b){b.classList.toggle('on',Math.abs(st.dp-Math.round(P*b.dataset.dpp/100))<1)});box.querySelectorAll('[data-n]').forEach(function(b){b.classList.toggle('on',+b.dataset.n===st.n)})}
   var LIST=[];
-  function card(o,i,hl){return '<button type="button" class="la-opt'+(hl?' hl':'')+'" data-pick="'+i+'"><b>'+esc(o.label)+'</b><span>'+peso(o.mo)+'/mo × '+o.n+' · DP '+peso(o.dp)+'</span><span>Total '+peso(tot(o))+' · '+ratio(o)+' '+T('ng income','of income')+'</span>'+fitTxt(o)+'<em>'+T('Piliin ito','Choose this')+'</em></button>'}
+  function card(o,i,hl){return '<button type="button" class="la-opt'+(hl?' hl':'')+'" data-pick="'+i+'"><b>'+esc(o.label)+'</b><span>'+peso(o.mo)+'/mo × '+termTxt(o.n)+' · DP '+peso(o.dp)+'</span><span>Total '+peso(tot(o))+' · '+ratio(o)+' '+T('ng income','of income')+'</span>'+fitTxt(o)+'<em>'+T('Piliin ito','Choose this')+'</em></button>'}
   function best(cur){
     var better=promos.filter(function(p){var same=opt(p.dp,p.n);return p.mo<same.mo-1||tot(p)<tot(cur)-1||(fit(p)&&!fit(cur))});
     var pool=[];[20,30,40,50].forEach(function(x){TERMS.forEach(function(n){pool.push(opt(Math.round(P*x/100),n))})});pool.push(cur);
@@ -202,7 +208,7 @@ function initCalc(S,res){
     $('la-cres').innerHTML=safe('<div><dt>Amount financed</dt><dd>'+peso(P-st.dp)+'</dd></div><div><dt>Monthly (estimate)</dt><dd>'+peso(o.mo)+'</dd></div><div><dt>'+T('Total cost (DP + lahat ng monthly)','Total cost (DP + all monthlies)')+'</dt><dd>'+peso(tot(o))+'</dd></div><div><dt>Monthly vs income</dt><dd>'+ratio(o)+' '+fitTxt(o)+'</dd></div>');
     best(o)}
   function choose(o){A.plan={dp:Math.round(o.dp),dp_pct:+(o.dp/P*100).toFixed(1),term_months:o.n,monthly:Math.round(o.mo),total_cost:Math.round(tot(o)),type:o.kind,ratio:inc?+(o.mo/inc).toFixed(4):null};
-    $('la-planok').hidden=false;$('la-planok').textContent=T('✓ Napili: ','✓ Selected: ')+o.label+' · '+peso(o.mo)+'/mo × '+o.n+'. '+T('Ime-message ka ni Richard para i-confirm sa bank o dealer.','Richard will message you to confirm with the bank or dealer.');
+    $('la-planok').hidden=false;$('la-planok').textContent=T('✓ Napili: ','✓ Selected: ')+o.label+' · '+peso(o.mo)+'/mo × '+termTxt(o.n)+'. '+T('Ime-message ka ni Richard para i-confirm sa bank o dealer.','Richard will message you to confirm with the bank or dealer.');
     crispSync();$('la-planok').scrollIntoView({block:'center',behavior:'smooth'});
     ga('select_plan',{plan_type:o.kind,term_months:o.n,unit:u.n,result:res});
     var L=Lead.base('loan_plan_select');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.language=A.lang;L.dpPreference=peso(A.plan.dp)+' DP ('+A.plan.dp_pct+'%)';
@@ -213,12 +219,15 @@ function initCalc(S,res){
   $('la-dpr').oninput=function(){st.dp=Math.round(P*this.value/100);$('la-dpa').value='';$('la-dpw').hidden=true;calc()};
   $('la-dpa').oninput=function(){var v=parseFloat(this.value),w=$('la-dpw');if(isNaN(v)||v<0)return;if(v>=P){w.hidden=false;w.textContent=T('Mas mataas sa presyo ang DP.','DP is higher than the price.');return}
     w.hidden=v>=P*CFG.calc_min_dp_pct/100;w.textContent=T('Karaniwang minimum ng bank ay '+CFG.calc_min_dp_pct+'% DP ('+peso(P*CFG.calc_min_dp_pct/100)+'). Pwede pa ring i-compute, pero mas malaki ang chance na hindi pumasa.','Banks usually require at least '+CFG.calc_min_dp_pct+'% DP ('+peso(P*CFG.calc_min_dp_pct/100)+'). We can still compute it, but it may not pass.');st.dp=v;calc()};
-  box.querySelectorAll('[data-n]').forEach(function(b){b.onclick=function(){st.n=+b.dataset.n;calc()}});
+  function terms(unit){var L=unit==='m'?MTERMS:TERMS;$('la-terms').innerHTML=safe(L.map(function(n){return '<button type="button" class="chip" data-n="'+n+'">'+(unit==='m'?'<b>'+n+'</b> <span class="small">'+T('buwan','mo')+'</span>':yrTxt(n)+'<br><span class="small" style="opacity:.7">'+moTxt(n)+'</span>')+'</button>'}).join(''));
+    box.querySelectorAll('[data-tu]').forEach(function(b){b.classList.toggle('on',b.dataset.tu===unit)});
+    $('la-terms').querySelectorAll('[data-n]').forEach(function(b){b.onclick=function(){st.n=+b.dataset.n;calc()}});mark()}
+  box.querySelectorAll('[data-tu]').forEach(function(b){b.onclick=function(){terms(b.dataset.tu)}});terms(st.n%12?'m':'y');
   box.querySelectorAll('[data-mode]').forEach(function(b){b.onclick=function(){box.querySelectorAll('[data-mode]').forEach(function(x){x.classList.toggle('on',x===b)});$('la-m-dp').hidden=b.dataset.mode!=='dp';$('la-m-tg').hidden=b.dataset.mode!=='tg'}});
   $('la-tgt').oninput=function(){var t=parseFloat(this.value);if(isNaN(t)||t<=0){$('la-tgres').innerHTML='';return}
     var mn=P*CFG.calc_min_dp_pct/100;
-    $('la-tgres').innerHTML=safe('<thead><tr><th>Term</th><th>'+T('Kailangang DP','DP needed')+'</th></tr></thead><tbody>'+TERMS.map(function(n){var dp=P-t*n/(1+CFG.est_addon_rates[n]);
-      var cell=dp>=P*0.9?'<span class="la-fit no">'+T('Hindi kaya sa term na ito','Not possible on this term')+'</span>':dp<=mn?peso(mn)+' ('+CFG.calc_min_dp_pct+'% min) · ~'+peso(estMo(P-mn,n))+'/mo':peso(Math.ceil(dp/1000)*1000)+' ('+Math.round(dp/P*100)+'%)';return '<tr><td>'+n+' mo</td><td>'+cell+'</td></tr>'}).join('')+'</tbody>')};
+    $('la-tgres').innerHTML=safe('<thead><tr><th>'+T('Taon','Years')+'</th><th>'+T('Kailangang DP','DP needed')+'</th></tr></thead><tbody>'+TERMS.map(function(n){var dp=P-t*n/(1+addon(n));
+      var cell=dp>=P*0.9?'<span class="la-fit no">'+T('Hindi kaya sa term na ito','Not possible on this term')+'</span>':dp<=mn?peso(mn)+' ('+CFG.calc_min_dp_pct+'% min) · ~'+peso(estMo(P-mn,n))+'/mo':peso(Math.ceil(dp/1000)*1000)+' ('+Math.round(dp/P*100)+'%)';return '<tr><td><b>'+yrTxt(n)+'</b> <span class="small">('+moTxt(n)+')</span></td><td>'+cell+'</td></tr>'}).join('')+'</tbody>')};
   calc();
 }
 
