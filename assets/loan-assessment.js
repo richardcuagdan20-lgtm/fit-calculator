@@ -47,6 +47,7 @@ function T(t,e){return A.lang==='en'?e:t}
 var A={lang:'tl'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+/* Meta Pixel: NO credit/income/assessment-result fields in payloads (Meta restricted-data policy). Only unit name / contact method / Phase-2 ref. */
 function px(ev,p){try{if(typeof window.fbq==='function'){if(ev==='StartAssessment'||ev==='SubmitApplication')window.fbq('trackCustom',ev,p||{});else window.fbq('track',ev,p||{})}}catch(_){}}
 function ga(ev,p){try{if(typeof window.gtag==='function')window.gtag('event',ev,p||{})}catch(_){}}
 /* Phase 2 stub: call after the backend returns an MP-XXXXX ref. Not fired in Phase 1. */
@@ -63,7 +64,7 @@ try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')setLang(sl)}c
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 document.querySelectorAll('[data-start]').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.dataset.start);
   $('la-intro').hidden=true;$('la-s1').hidden=false;prog(1);
-  if(!started){started=true;px('StartAssessment',{page:'loan-assessment'});ga('start_assessment',{})}
+  if(!started){started=true;px('StartAssessment',{});ga('start_assessment',{})}
   $('la-name').focus();
 })});
 $('la-f1').addEventListener('submit',function(ev){ev.preventDefault();
@@ -248,7 +249,7 @@ var EMPL={employed:'Employed',business_owner:'Business owner',ofw:'OFW',seafarer
 var LBL={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
 function msgr(res){var ref=('loan-assessment-'+res.toLowerCase().replace(/_/g,'-')+'-'+A.unit.id).replace(/[^a-z0-9-]/gi,'').slice(0,240);return MESSENGER_URL+'?ref='+encodeURIComponent(ref)}
 function contactBtns(res){return '<div class="la-cta"><a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a><a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
-function bindContact(el,res){el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,result:res,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
+function bindContact(el,res){el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
 function result(){
   var S=assess(),u=A.unit,first=A.name.split(' ')[0],res=S.result;A.assessment=S;prog(4);
   first=esc(first);var head=A.lang==='en'?{PRE_QUALIFIED:'Good news, '+first+'! Based on the initial assessment, you are <b>Pre-qualified</b> for the '+esc(u.n)+'. This is not yet a bank approval; the final decision is still the bank\'s. Next step: get your requirements ready.',
@@ -272,7 +273,7 @@ function result(){
   L.employment=et;L.seg=isOFW()?'ofw_abroad':'local';L.income=A.gross_monthly_income;L.timeline='Assessment: '+LBL[res];
   L.usage=['Result: '+LBL[res],'Monthly '+peso(S._amort)+' ('+(S.affordability_ratio*100).toFixed(1)+'% AFF, '+(S.dti_ratio*100).toFixed(1)+'% DTI)','Color: '+A._color,'Purpose: '+A.purpose,A.email?'Email: '+A.email:'','Rules: '+S.rule_results.map(function(x){return x.rule_id+'='+x.outcome}).join(','),S.red_flags.length?'Flags: '+S.red_flags.join(','):'','Banks: '+S.eligible_banks.join('/'),'Pref bank: '+A.preferred_bank,'Source: '+A.source_of_sale,'Consent: '+A.privacy_consent.version+' '+A.privacy_consent.timestamp].filter(Boolean).join(' | ');
   L.language=A.lang;L.usage+=' | Language: '+A.lang;L.docsTotal=req.length;L.docsReady=0;L.docsLacking=req.length;L.assessment=JSON.stringify({result:res,affordability_ratio:S.affordability_ratio,dti_ratio:S.dti_ratio,rule_results:S.rule_results,red_flags:S.red_flags,eligible_banks:S.eligible_banks,recommendations:S.recommendations});
-  Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n,content_category:'loan_assessment',status:res});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
+  Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
   /* Step 5: documents client already has (no uploads) */
   var boxes=R.querySelectorAll('[data-doc]');function cnt(){var r=0;boxes.forEach(function(b){if(b.checked)r++});$('la-cnt').textContent=r+' ready / '+(req.length-r)+T(' kulang',' lacking');return r}
   boxes.forEach(function(b){b.addEventListener('change',cnt)});cnt();
