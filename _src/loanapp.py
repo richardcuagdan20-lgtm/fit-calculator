@@ -33,18 +33,19 @@ LA_CSS='''<style>
 .la-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.la-sum div{background:#f8f8fa;border-radius:12px;padding:10px}.la-sum dt{font-size:12px;color:var(--mu)}.la-sum dd{margin:0;font-weight:700}
 .la-cta{display:flex;flex-direction:column;gap:10px;margin:20px 0}.la-cta .btn{text-align:center;justify-content:center}.la-msg{background:#0866ff!important;font-size:18px;padding:16px!important}
 .la-next{border:2px dashed #d4d4d8;border-radius:16px;padding:16px;margin:16px 0}.la-ok{color:#166534;font-weight:600}.small{font-size:13px}
+.la-docs{list-style:none;padding:0;margin:10px 0}.la-docs li{border:1px solid var(--ln);border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;align-items:center}.la-docs label{display:flex;gap:6px;align-items:center;font-weight:600;white-space:nowrap;font-size:14px;margin:0}.la-docs input{width:20px;height:20px}.la-cnt{font-weight:700}.la-lack{background:#fff7ed;border-radius:12px;padding:12px;margin:10px 0}
 .la-x{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin:16px 0 0}.la-x div{background:#f8f8fa;border-radius:12px;padding:10px;font-size:14px}
 @media(min-width:760px){.la-cta{flex-direction:row}.la-cta .btn{flex:1}}
 @media(max-width:520px){.la-sum,.la-x{grid-template-columns:1fr}}
 .lacta{background:linear-gradient(135deg,#0b0b0c,#2a0a0d);color:#fff;border-radius:18px;padding:20px 22px;margin:24px 0}.lacta h2{color:#fff;margin:0 0 6px;font-size:22px}.lacta p{color:#d4d4d8;margin:0 0 12px}
 </style>'''
-page("/loan-assessment/","AI Car Loan Assessment | Mitsubishi Motors - SJ Legacy Motors",
- "Libreng car loan pre-assessment para sa Mitsubishi: sagutin ang ilang tanong, piliin ang unit at promo, at alamin kung Pre-qualified ka. 3 minuto lang.",
+page("/loan-assessment/","AI Car Loan Application Assessment | Mitsubishi Motors - SJ Legacy Motors",
+ "AI Car Loan Application Assessment para sa Mitsubishi: sagutin ang ilang tanong, piliin ang unit at promo, at alamin kung Pre-qualified ka. 3 minuto lang.",
 LA_CSS+f'''<section class="la"><div class="w">
 <p class="kick" style="color:#fca5a5">Libreng pre-assessment · 3 minuto</p>
-<h1>Car Loan Assessment</h1>
+<h1>AI Car Loan Application Assessment</h1>
 <p class="lead">Alamin agad kung pasok ka sa car loan bago ka pumunta sa showroom. Sagutin lang ang ilang tanong, piliin ang Mitsubishi mo, at makikita mo ang resulta at mga options.</p>
-<ol class="la-steps" aria-label="Progress"><li class="on">1. Contact</li><li>2. Tanong</li><li>3. Unit</li><li>4. Resulta</li></ol>
+<ol class="la-steps" aria-label="Progress"><li class="on">1. Contact</li><li>2. Tanong</li><li>3. Unit</li><li>4. Resulta</li><li>5. Requirements</li></ol>
 <div id="la-intro" class="la-card"><h2 class="h3">Paano ito gumagana?</h2>
 <div class="la-x"><div><b>Sagutin</b><br>Income, trabaho at existing loans.</div><div><b>Pumili</b><br>Unit, DP at monthly mula sa promo ngayong buwan.</div><div><b>Alamin</b><br>Pre-qualified, Needs Review, o mga options para pumasa.</div></div>
 <p class="muted small" style="margin-top:14px">Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito.</p>
@@ -63,4 +64,4 @@ LA_CSS+f'''<section class="la"><div class="w">
 </div></section>
 <script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
 <script src="/assets/lead.js" defer></script>
-<script src="/assets/loan-assessment.js" defer></script>''', crumbs=[("/","Home"),("/loan-assessment/","Loan Assessment")])
+<script src="/assets/loan-assessment.js" defer></script>''', crumbs=[("/","Home"),("/loan-assessment/","AI Car Loan Application Assessment")])
