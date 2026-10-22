@@ -38,11 +38,32 @@ var CFG={
    Fallback (page ID): 'https://m.me/504759566043148' */
 var MESSENGER_URL='https://m.me/MitsubishiRDC';
 var CALL_TEL='tel:09542911201';
+/* Crisp live chat (Fina + Richard). Loaded only after Data Privacy consent. Page-only embed. */
+var CRISP_WEBSITE_ID='ca443e7b-7d1e-4819-87d3-59b97b4fa8c8';
+function crispLoad(){if(window.__crispLoaded)return;window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
+  var d=document.createElement('script');d.src='https://client.crisp.chat/l.js';d.async=1;document.head.appendChild(d)}
+function cp(){try{window.$crisp=window.$crisp||[];window.$crisp.push([].slice.call(arguments))}catch(_){}}
 var BANNED=/\b(approved|aprobado|sure na|guaranteed|suzuki)\b/ig;
 function safe(s){return String(s).replace(BANNED,'pre-qualified')}   // §2.4 banned-word filter
 
 var $=function(i){return document.getElementById(i)};
 var U=JSON.parse($('la-units').textContent);
+function crispSync(){if(!window.__crispLoaded)return;
+  cp('set','user:nickname',[A.name]);if(A.mobile)cp('set','user:phone',[A.mobile]);if(A.email)cp('set','user:email',[A.email]);
+  var d=[['language',A.lang],['source','loan-assessment']];if(A.leadId)d.push(['lead_id',A.leadId]);
+  if(A.assessment){d.push(['result',A.assessment.result])}if(A.unit)d.push(['unit',A.unit.n]);
+  if(A.plan)d.push(['plan',A.plan.type+' | DP '+A.plan.dp+' ('+A.plan.dp_pct+'%) | '+A.plan.term_months+' mo | '+A.plan.monthly+'/mo']);
+  if(A.docs){d.push(['docs_ready',A.docs.ready]);d.push(['docs_lacking',A.docs.lacking]);d.push(['missing_items',A.docs.missing.join('; ').slice(0,500)])}
+  cp('set','session:data',[d]);var sg=['loan-assessment'];if(A.assessment)sg.push(A.assessment.result.toLowerCase().replace(/_/g,'-'));cp('set','session:segments',[sg])}
+function finaMsg(){var u=A.unit,x=A.assessment,L={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
+  var parts=[T('Hi Fina! Ako si ','Hi Fina! I am ')+A.name+'.'];
+  if(u)parts.push('Unit: '+u.n+'.');if(x)parts.push(T('Resulta ng assessment: ','Assessment result: ')+L[x.result]+'.');
+  if(A.plan)parts.push(T('Napiling plan: ','Chosen plan: ')+(A.plan.type==='promo'?'promo':'custom')+', DP '+peso(A.plan.dp)+', '+A.plan.term_months+' mo, ~'+peso(A.plan.monthly)+'/mo.');
+  if(A.docs)parts.push('Documents: '+A.docs.ready+' ready / '+A.docs.lacking+T(' kulang',' lacking')+(A.docs.missing.length?' ('+A.docs.missing.join(', ')+').':'.'));
+  parts.push(T('Pwede mo ba akong tulungan sa requirements?','Can you help me with the requirements?'));if(A.leadId)parts.push('Ref: '+A.leadId);return parts.join(' ')}
+function openFina(){crispLoad();crispSync();cp('do','chat:open');if(!A.finaSent){A.finaSent=true;cp('do','message:send',['text',finaMsg()])}
+  ga('chat_open',{provider:'crisp'})}
+function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">🤖 '+T('Chat kay Fina ngayon','Chat with Fina now')+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
 var A={lang:'tl'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
@@ -72,7 +93,7 @@ $('la-f1').addEventListener('submit',function(ev){ev.preventDefault();
   var bad=[Lead.err('la-name',nm.length<2),Lead.err('la-mobile',!/^(09\d{9}|\+639\d{9})$/.test(mob)),Lead.err('la-email',!!em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)),Lead.err('la-consent',!$('la-consent').checked)];
   if(bad.some(Boolean))return;
   A.name=nm;A.mobile=mob;A.email=em;A.privacy_consent={accepted:true,timestamp:new Date().toISOString(),version:CFG.consent_version};
-  $('la-s1').hidden=true;$('la-chat').hidden=false;prog(2);
+  $('la-s1').hidden=true;$('la-chat').hidden=false;prog(2);crispLoad();crispSync();
   bot(T('Salamat, <b>'+esc(nm.split(' ')[0])+'</b>! Ilang tanong lang tungkol sa income at trabaho mo. Mga 2 minuto lang ito.','Thanks, <b>'+esc(nm.split(' ')[0])+'</b>! Just a few questions about your income and work. This takes about 2 minutes.'));
   next(0);
 });
@@ -172,7 +193,7 @@ function initCalc(S,res){
     best(o)}
   function choose(o){A.plan={dp:Math.round(o.dp),dp_pct:+(o.dp/P*100).toFixed(1),term_months:o.n,monthly:Math.round(o.mo),total_cost:Math.round(tot(o)),type:o.kind,ratio:inc?+(o.mo/inc).toFixed(4):null};
     $('la-planok').hidden=false;$('la-planok').textContent=T('✓ Napili: ','✓ Selected: ')+o.label+' · '+peso(o.mo)+'/mo × '+o.n+'. '+T('Ime-message ka ni Richard para i-confirm sa bank o dealer.','Richard will message you to confirm with the bank or dealer.');
-    $('la-planok').scrollIntoView({block:'center',behavior:'smooth'});
+    crispSync();$('la-planok').scrollIntoView({block:'center',behavior:'smooth'});
     ga('select_plan',{plan_type:o.kind,term_months:o.n,unit:u.n,result:res});
     var L=Lead.base('loan_plan_select');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.language=A.lang;L.dpPreference=peso(A.plan.dp)+' DP ('+A.plan.dp_pct+'%)';
     L.planType=o.kind;L.planDp=A.plan.dp;L.planDpPct=A.plan.dp_pct;L.planTerm=o.n;L.planMonthly=A.plan.monthly;L.planTotal=A.plan.total_cost;
@@ -248,8 +269,8 @@ REQ.seafarer=REQ.ofw;REQ.pensioner=['Pension statement / proof of pension'];REQ.
 var EMPL={employed:'Employed',business_owner:'Business owner',ofw:'OFW',seafarer:'Seafarer',freelancer:'Freelancer / VA',pensioner:'Pensioner',other:'other income type'};
 var LBL={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
 function msgr(res){var ref=('loan-assessment-'+res.toLowerCase().replace(/_/g,'-')+'-'+A.unit.id).replace(/[^a-z0-9-]/gi,'').slice(0,240);return MESSENGER_URL+'?ref='+encodeURIComponent(ref)}
-function contactBtns(res){return '<div class="la-cta"><a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a><a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
-function bindContact(el,res){el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
+function contactBtns(res){return '<div class="la-cta">'+finaBtn()+'<a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a><a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
+function bindContact(el,res){el.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('[data-fina]');if(f){e.preventDefault();px('Contact',{method:'crisp_chat',content_name:A.unit.n});openFina()}});el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
 function result(){
   var S=assess(),u=A.unit,first=A.name.split(' ')[0],res=S.result;A.assessment=S;prog(4);
   first=esc(first);var head=A.lang==='en'?{PRE_QUALIFIED:'Good news, '+first+'! Based on the initial assessment, you are <b>Pre-qualified</b> for the '+esc(u.n)+'. This is not yet a bank approval; the final decision is still the bank\'s. Next step: get your requirements ready.',
@@ -273,6 +294,7 @@ function result(){
   L.employment=et;L.seg=isOFW()?'ofw_abroad':'local';L.income=A.gross_monthly_income;L.timeline='Assessment: '+LBL[res];
   L.usage=['Result: '+LBL[res],'Monthly '+peso(S._amort)+' ('+(S.affordability_ratio*100).toFixed(1)+'% AFF, '+(S.dti_ratio*100).toFixed(1)+'% DTI)','Color: '+A._color,'Purpose: '+A.purpose,A.email?'Email: '+A.email:'','Rules: '+S.rule_results.map(function(x){return x.rule_id+'='+x.outcome}).join(','),S.red_flags.length?'Flags: '+S.red_flags.join(','):'','Banks: '+S.eligible_banks.join('/'),'Pref bank: '+A.preferred_bank,'Source: '+A.source_of_sale,'Consent: '+A.privacy_consent.version+' '+A.privacy_consent.timestamp].filter(Boolean).join(' | ');
   L.language=A.lang;L.usage+=' | Language: '+A.lang;L.docsTotal=req.length;L.docsReady=0;L.docsLacking=req.length;L.assessment=JSON.stringify({result:res,affordability_ratio:S.affordability_ratio,dti_ratio:S.dti_ratio,rule_results:S.rule_results,red_flags:S.red_flags,eligible_banks:S.eligible_banks,recommendations:S.recommendations});
+  A.leadId=L.leadId;crispSync();
   Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
   /* Step 5: documents client already has (no uploads) */
   var boxes=R.querySelectorAll('[data-doc]');function cnt(){var r=0;boxes.forEach(function(b){if(b.checked)r++});$('la-cnt').textContent=r+' ready / '+(req.length-r)+T(' kulang',' lacking');return r}
@@ -280,7 +302,7 @@ function result(){
   $('la-docsave').addEventListener('click',function(){var btn=this,r=cnt(),lack=[];boxes.forEach(function(b){if(!b.checked)lack.push(req[+b.dataset.doc])});prog(5);
     $('la-docsum').textContent=r+' ready / '+lack.length+T(' kulang',' lacking');
     $('la-docres').innerHTML=safe(lack.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still lacking')+' ('+lack.length+'):</b></p><ul>'+lack.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p>'+T('Okay lang yan! Tutulungan ka nina Fina at Richard kung paano at saan makukuha ang mga ito, at ano ang pwedeng ipalit kung wala ka pa. Mag-message lang sa Messenger.','That\'s okay! Fina and Richard will help you with how and where to get these, and what alternatives you can use. Just message us on Messenger.')+'</p></div>':'<p class="la-ok">'+T('Wow, kumpleto ka na sa '+r+' documents! Ihanda lang ang malinaw na kopya. Tutulungan ka nina Fina at Richard sa next step.','Great, you have all '+r+' documents! Just prepare clear copies. Fina and Richard will help you with the next step.')+'</p>');
-    $('la-docres').hidden=false;
+    $('la-docres').hidden=false;A.docs={ready:r,lacking:lack.length,missing:lack};crispSync();$('la-docres').insertAdjacentHTML('beforeend','<div class="la-cta">'+finaBtn()+'</div>');
     var D=Lead.base('loan_docs_checklist');D.leadId=L.leadId;D.name=A.name;D.mobile=A.mobile;D.chosenUnit=u.n;D.employment=et;D.docsReady=r;D.docsLacking=lack.length;D.docsTotal=req.length;D.language=A.lang;
     D.timeline='Docs: '+r+' ready / '+lack.length+' kulang ('+LBL[res]+')';D.usage='Docs ready '+r+'/'+req.length+(lack.length?' | Kulang: '+lack.join('; '):'');
     btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');Lead.send(D).then(function(ok){if(ok===false)throw 0;btn.disabled=false;btn.textContent=T('✓ Na-save · I-update ang checklist','✓ Saved · Update checklist');$('la-docerr').hidden=true}).catch(function(){btn.disabled=false;btn.textContent=T('I-save ang checklist','Save checklist');$('la-docerr').hidden=false});ga('docs_checklist',{ready:r,lacking:lack.length,result:res})});

@@ -14,14 +14,14 @@ LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>[Dealer Legal Na
  '(kasama ang IDs, income, at financial documents) para lamang sa pag-assess ng aking car loan application, at i-share ito sa piling partner banks at financing companies '
  '(hal. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) para sa credit evaluation, alinsunod sa Republic Act No. 10173 (Data Privacy Act of 2012). '
  'Alam ko ang aking karapatan na ma-access, maitama, ma-withdraw ang consent, at ipabura ang aking data, at maaari akong makipag-ugnayan sa aming Data Protection Officer sa <b>[DPO email]</b>. '
- 'Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.',
+ 'Gagamitin din ang Crisp (crisp.chat) bilang chat provider para sa live chat kina Fina (AI assistant) at Richard; ang chat messages ay ipo-process ng Crisp. Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.',
  'By checking this box, I allow <b>[Dealer Legal Name]</b> / mitsubishipromos.online to collect, process, and store my personal and sensitive personal information '
  '(including IDs, income, and financial documents) solely to assess my car loan application, and to share it with selected partner banks and financing companies '
  '(e.g. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) for credit evaluation, in accordance with Republic Act No. 10173 (Data Privacy Act of 2012). '
  'I know my rights to access, correct, withdraw consent, and have my data erased, and I may contact the Data Protection Officer at <b>[DPO email]</b>. '
- 'I have read the <a href="/privacy/">Privacy Notice</a>.')
+ 'Crisp (crisp.chat) is also used as the chat provider for live chat with Fina (AI assistant) and Richard; chat messages are processed by Crisp. I have read the <a href="/privacy/">Privacy Notice</a>.')
 LA_CSS='''<style>
-.la [hidden]{display:none!important}html:not([data-lang=en]) .la .en,html[data-lang=en] .la .tl{display:none!important}.la-lang{display:flex;gap:8px;margin:0 0 14px}.la-lang button{background:none;border:1px solid #52525b;color:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}html:not([data-lang=en]) .la-lang [data-setlang=tl],html[data-lang=en] .la-lang [data-setlang=en]{background:#fff;color:#0b0b0c}.la-start{display:flex;flex-wrap:wrap;gap:10px}.la-done{background:#166534!important;opacity:1!important}
+.fab{display:none!important}.la-fina{background:#16a34a!important}.la [hidden]{display:none!important}html:not([data-lang=en]) .la .en,html[data-lang=en] .la .tl{display:none!important}.la-lang{display:flex;gap:8px;margin:0 0 14px}.la-lang button{background:none;border:1px solid #52525b;color:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}html:not([data-lang=en]) .la-lang [data-setlang=tl],html[data-lang=en] .la-lang [data-setlang=en]{background:#fff;color:#0b0b0c}.la-start{display:flex;flex-wrap:wrap;gap:10px}.la-done{background:#166534!important;opacity:1!important}
 .la{padding-bottom:110px!important;background:linear-gradient(180deg,#0b0b0c 0,#17171a 260px,#f4f4f6 260px);padding:28px 0 48px}
 .la .w{max-width:720px}.la h1{color:#fff;font-size:clamp(28px,6vw,42px)}.la .lead{color:#d4d4d8}
 .la-steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 18px;counter-reset:s}.la-steps li{flex:1;font-size:12px;color:#a1a1aa;border-top:3px solid #3f3f46;padding-top:6px}.la-steps li.on{color:#fff;border-color:var(--red)}
