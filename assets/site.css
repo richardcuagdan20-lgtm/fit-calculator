@@ -83,3 +83,13 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 .brand{flex:1 1 0%}@media(min-width:960px){.brand{flex:0 1 auto}}
 .fig{margin:28px 0 32px}.fig img{width:100%;height:auto;border-radius:16px}
 .lacta{background:linear-gradient(135deg,#0b0b0c,#2a0a0d);color:#fff;border-radius:18px;padding:20px 22px;margin:24px 0}.lacta h2{color:#fff;margin:0 0 6px;font-size:22px}.lacta p{color:#d4d4d8;margin:0 0 12px}
+/* Zero DP guide: CTA + PDF gate */
+.zcta .zsm{font-size:13px;color:#d4d4d8;margin:10px 0 0}
+.zgate{border:2px solid var(--red);border-radius:18px;padding:22px;margin:28px 0;background:#fff}.zgate h2{margin-top:0}
+.zform .fld{margin-bottom:12px}.zform .chk{font-size:13px;display:flex;gap:8px;align-items:flex-start;margin:6px 0 12px}.zform .zok{background:#fff5f5;border-radius:12px;padding:14px}
+.zsm{font-size:13px;color:var(--mu)}.zsteps li{margin:0 0 8px}
+.zpop{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:flex-end;justify-content:center}.zpop[hidden]{display:none}
+.zpop_in{background:#fff;border-top:5px solid var(--red);border-radius:18px 18px 0 0;padding:20px;max-width:480px;width:100%;max-height:90vh;overflow:auto;position:relative}
+.zx{position:absolute;right:10px;top:8px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:var(--mu)}
+@media(min-width:640px){.zpop{align-items:center}.zpop_in{border-radius:18px}}
+.zform [hidden],.zpop[hidden]{display:none!important}
