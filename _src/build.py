@@ -454,7 +454,7 @@ rd="<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSear
 s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+"/index.html","w").write(s)
 
 # ---------- Car loan guide (TL + EN): cache-busting, html lang, hreflang, EN assessment box, old-slug redirect
-from loanguide import SLUGS as _ZS, PDFS as _ZP, OLD_SLUG as _ZO
+from loanguide import SLUGS as _ZS, PDFS as _ZP, OLD_SLUG as _ZO, SWITCH as _ZSW
 import re as _re
 _HL={"tl":"fil-PH","en":"en-PH"}
 _ALT="".join(f'<link rel="alternate" hreflang="{_HL[l]}" href="{D}/blog/{_ZS[l]}/">\n' for l in ("tl","en"))+f'<link rel="alternate" hreflang="x-default" href="{D}/blog/{_ZS["en"]}/">\n'
@@ -462,6 +462,7 @@ for _l in ("tl","en"):
     _zp=R+f"/blog/{_ZS[_l]}/index.html"; _s=open(_zp).read()
     _s=_s.replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
     if os.path.exists(R+_ZP[_l]): _s=_s.replace(f'href="{_ZP[_l]}"',f'href="{_ZP[_l]}?v={_vh(_ZP[_l])}"')
+    _s=_s.replace('<article class="art"><div class="w nar"><header>','<article class="art"><div class="w nar">'+_ZSW[_l]+'<header>',1)
     _s=_s.replace('<html lang="en-PH">',f'<html lang="{_HL[_l]}">',1).replace('</head>',_ALT+'</head>',1)
     _s=_s.replace(f'<meta property="og:locale" content="en_PH">',f'<meta property="og:locale" content="{"fil_PH" if _l=="tl" else "en_PH"}">',1)
     # no zero-downpayment promotion on these pages (dealer restriction)
