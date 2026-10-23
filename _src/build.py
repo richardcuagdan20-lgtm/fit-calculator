@@ -452,6 +452,12 @@ s=open(R+"/index.html").read()
 rd="<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSearchParams(q);var sg=(p.get('seg')||'').toLowerCase();if(/^(local|ofw_abroad|ofw_family)$/.test(sg)||p.has('adset')||/^ad\\d+$/i.test(p.get('utm_content')||'')){location.replace('/budgetcalculator/'+q+location.hash);}}catch(_){}})();</script>\n"
 s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+"/index.html","w").write(s)
 
+# ---------- Zero DP guide: cache-busting for lead.js/site.css/PDF
+from zerodp import SLUG as _ZS, PDF as _ZPDF
+_zp=R+f"/blog/{_ZS}/index.html"; _s=open(_zp).read()
+_s=_s.replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
+if os.path.exists(R+_ZPDF): _s=_s.replace(f'href="{_ZPDF}"',f'href="{_ZPDF}?v={_vh(_ZPDF)}"')
+open(_zp,'w').write(_s)
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
