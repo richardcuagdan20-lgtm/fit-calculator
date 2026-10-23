@@ -2,8 +2,10 @@ import re
 # SEO layer (keyword research Oct 22, 2026: Google PH autocomplete + related searches).
 # slug -> (primary keyword, [secondary keywords], title override or None, meta description 150-160 chars)
 SEO={
-"paano-ma-approve-sa-car-loan":("bank approval for car loan philippines",["paano ma approve sa car loan","how to get car loan approved","car loan requirements philippines","how many days for car loan approval philippines","how do banks approve car loans","car loan denied"],None,
- "Paano ma-approve sa car loan? What PH banks check: the 30% income rule, CIC credit, documents per employment type, denial reasons, timeline and a free PDF."),
+"paano-ma-approve-sa-car-loan":("paano ma approve sa car loan",["bank approval for car loan philippines","car loan requirements philippines","how many days for car loan approval philippines","car loan denied"],None,
+ "Paano ma-approve sa car loan? Ang tinitingnan ng bank: 30% income rule, CIC credit, documents per employment type, denial reasons, timeline at libreng PDF."),
+"how-to-get-car-loan-approved-philippines":("how to get car loan approved philippines",["bank approval for car loan philippines","how do banks approve car loans","car loan requirements philippines","how long does car loan approval take philippines","car loan denied"],None,
+ "How to get your car loan approved in the Philippines: what banks check, the 30% income rule, CIC credit, documents per employment type and a free PDF."),
 # --- original 10
 "undas-road-trip-checklist-2026":("undas road trip checklist",["NLEX Undas traffic 2026","BLOWBAGETS","road trip checklist Philippines","what to bring on a road trip"],"Undas Road Trip Checklist 2026 for Families",
  "Undas road trip checklist for 2026: BLOWBAGETS pre-trip check, RFID and NLEX traffic dates, packing for kids and seniors, and what to do if you break down."),

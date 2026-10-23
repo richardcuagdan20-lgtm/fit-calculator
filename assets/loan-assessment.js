@@ -88,6 +88,7 @@ function scroll(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',b
 /* ---------- Step 1: contact + consent ---------- */
 function setLang(l){A.lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('la_lang',l)}catch(_){}}
 try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')setLang(sl)}catch(_){}
+try{var ql=new URLSearchParams(location.search).get('lang');if(ql==='en'||ql==='tl')setLang(ql)}catch(_){}
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 document.querySelectorAll('[data-start]').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.dataset.start);
   $('la-intro').hidden=true;$('la-s1').hidden=false;prog(1);
