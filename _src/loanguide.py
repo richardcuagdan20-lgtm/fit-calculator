@@ -56,7 +56,6 @@ window.addEventListener('scroll',function(){{if(shown||seen())return;var h=docum
 </script>
 '''
     other="en" if tl else "tl"
-    SW=f'<p class="zlang">{T("Read in English:","Basahin sa Taglish:")} <a href="/blog/{SLUGS[other]}/" hreflang="{"en-PH" if tl else "fil-PH"}" lang="{"en" if tl else "fil"}">{T("How to Get Your Car Loan Approved","Paano Ma-approve sa Car Loan")}</a></p>\n'
     if tl:
         FAQ=[("Ano ang tinitingnan ng bank bago i-approve ang car loan?","Pangunahin: ang capacity to pay mo (monthly amortization vs. gross income), ang credit history mo kasama ang CIC record, gaano ka-stable ang trabaho o negosyo mo, at kung kumpleto, consistent at nave-verify ang documents mo."),
 ("Nakakatulong ba ang mas malaking down payment?","Kadalasan, oo. Mas malaking DP = mas maliit na loan at mas mababang monthly, kaya mas madaling pumasok sa income ratio ng bank. Ang down payment options ay depende sa bank at sa current dealer offer."),
@@ -72,7 +71,7 @@ window.addEventListener('scroll',function(){{if(shown||seen())return;var h=docum
         desc="Paano ma-approve sa car loan? Ang tinitingnan ng bank: 30% income rule, CIC credit, documents per employment type, denial reasons, timeline at libreng PDF."
         answer="Para ma-approve sa car loan, panatilihin ang monthly amortization sa mga 30% ng gross monthly income mo, siguraduhing malinis ang CIC credit record, at magsumite ng kumpleto at consistent na documents para sa employment type mo. Mas malaking DP, co-borrower o mas abot-kayang variant ang nagpapataas ng chances mo. Ang final approval ay laging nasa bank."
         alt="Paano ma-approve sa car loan: guide cover na may official Mitsubishi Xpander photo"
-        body=f'''{SW}<p>"Sir, ma-a-approve kaya ako sa bank?" Ito ang pinaka-common na tanong sa showroom namin sa SJDM, mula sa mga buyer sa Bulacan hanggang Caloocan, Fairview at buong Metro Manila. Good news: hindi swerte ang bank approval. May sinusundang checklist ang mga bank, at kapag alam mo na ito, makakapaghanda ka na parang pro.</p>
+        body=f'''<p>"Sir, ma-a-approve kaya ako sa bank?" Ito ang pinaka-common na tanong sa showroom namin sa SJDM, mula sa mga buyer sa Bulacan hanggang Caloocan, Fairview at buong Metro Manila. Good news: hindi swerte ang bank approval. May sinusundang checklist ang mga bank, at kapag alam mo na ito, makakapaghanda ka na parang pro.</p>
 <p>Sa guide na ito: ano ang tinitingnan ng bank, ang documents per employment type, ang income rule na nagdedesisyon sa karamihan ng applications, at ang mga karaniwang dahilan ng denial. Gusto mo ng printable version? Kunin ang libreng PDF checklist sa ibaba.</p>
 <h2>Paano naaapektuhan ng down payment ang approval</h2>
 <p>Unang tinitingnan ng bank ang monthly amortization mo kumpara sa income mo. Kapag <b>mas malaki ang down payment</b>, mas maliit ang loan at mas mababa ang monthly, kaya mas madaling pumasok sa ratio. Kapag maliit ang down payment, mas malaki ang loan, kaya kailangang kayanin ng income mo ang mas mataas na monthly. Depende sa bank at sa current dealer offer ang down payment options, kaya magtanong muna bago magdesisyon. (Para sa quick tips, basahin ang <a href="/tips/car-loan-approval-tips/">10 car loan approval tips</a>; para sa application steps, basahin ang <a href="/tips/paano-mag-car-loan/">paano mag car loan</a>.)</p>
@@ -130,7 +129,7 @@ window.addEventListener('scroll',function(){{if(shown||seen())return;var h=docum
         desc="How to get a car loan approved in the Philippines: what banks check, the 30% income rule, CIC credit, documents per employment type, denial reasons and a free PDF."
         answer="To get your car loan approved, keep your monthly amortization within about 30% of your gross monthly income, keep a clean CIC credit record, and submit complete, consistent documents for your employment type. A bigger down payment, a co-borrower or a more affordable variant all improve your chances. Final approval always rests with the bank."
         alt="How to get your car loan approved: guide cover with an official Mitsubishi Xpander photo"
-        body=f'''{SW}<p>"Will the bank approve me?" It's the question I hear most at our showroom in San Jose del Monte, from buyers across Bulacan, Caloocan, Fairview and the rest of Metro Manila. The good news: bank approval isn't luck. Banks follow a fairly predictable checklist, and once you know it, you can prepare like a pro.</p>
+        body=f'''<p>"Will the bank approve me?" It's the question I hear most at our showroom in San Jose del Monte, from buyers across Bulacan, Caloocan, Fairview and the rest of Metro Manila. The good news: bank approval isn't luck. Banks follow a fairly predictable checklist, and once you know it, you can prepare like a pro.</p>
 <p>This guide covers what banks look at, the documents for each employment type, the income rule behind most decisions, and the most common reasons for denial. Want a printable version? Get the free PDF checklist below.</p>
 <h2>How your down payment affects approval</h2>
 <p>The bank looks first at your monthly amortization versus your income. A <b>bigger down payment</b> means a smaller loan and a lower monthly, which makes that ratio easier to meet. A smaller down payment means a bigger loan, so your income has to carry a higher monthly. Down payment options depend on the bank and the current dealer offer, so ask before you decide. (For quick tips, see my <a href="/tips/car-loan-approval-tips/">10 car loan approval tips</a>; for the application steps, see <a href="/tips/paano-mag-car-loan/">how to apply for a car loan</a>.)</p>
@@ -178,5 +177,5 @@ window.addEventListener('scroll',function(){{if(shown||seen())return;var h=docum
         f=f"cl-{k}-{L}";w,hh=_SZ[f];i=body.index(h)
         body=body[:i]+f'<figure class="fig"><img src="/assets/img/guide/{f}.webp" alt="{a}" width="{w}" height="{hh}" loading="lazy" decoding="async"><figcaption class="zsm">{c}</figcaption></figure>\n'+body[i:]
     return dict(base="blog",car="xpander",slug=SLUGS[L],date="2026-10-23",by="Mitsubishi Sales Executive",img=f"guide/cl-hero-{L}",alt=alt,title=title,desc=desc,answer=answer,faq=FAQ,body=body,lang=L)
-POSTS_L=[build("tl"),build("en")]
-ZPOST=POSTS_L[0]
+POSTS_L=[build("en"),build("tl")]  # EN = main version (listed first)
+SWITCH={"en":'<p class="zlang"><a href="/blog/paano-ma-approve-sa-car-loan/" hreflang="fil-PH" lang="fil">Basahin sa Taglish →</a></p>',"tl":'<p class="zlang"><a href="/blog/how-to-get-car-loan-approved-philippines/" hreflang="en-PH" lang="en">Read in English →</a></p>'}

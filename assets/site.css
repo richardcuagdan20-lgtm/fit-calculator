@@ -93,4 +93,4 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 .zx{position:absolute;right:10px;top:8px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:var(--mu)}
 @media(min-width:640px){.zpop{align-items:center}.zpop_in{border-radius:18px}}
 .zform [hidden],.zpop[hidden]{display:none!important}
-.zlang{font-size:14px;margin:0 0 16px;padding:8px 14px;border:1px solid #f6c3c7;border-radius:999px;display:inline-block;background:#fff5f5}
+.zlang{margin:4px 0 14px}.zlang a{display:inline-flex;align-items:center;min-height:44px;padding:10px 20px;border:2px solid var(--red);border-radius:999px;background:#fff;color:var(--red);font-weight:700;font-size:15px;text-decoration:none}.zlang a:hover{background:#fff5f5}
