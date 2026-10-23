@@ -452,12 +452,19 @@ s=open(R+"/index.html").read()
 rd="<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSearchParams(q);var sg=(p.get('seg')||'').toLowerCase();if(/^(local|ofw_abroad|ofw_family)$/.test(sg)||p.has('adset')||/^ad\\d+$/i.test(p.get('utm_content')||'')){location.replace('/budgetcalculator/'+q+location.hash);}}catch(_){}})();</script>\n"
 s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+"/index.html","w").write(s)
 
-# ---------- Zero DP guide: cache-busting for lead.js/site.css/PDF
-from zerodp import SLUG as _ZS, PDF as _ZPDF
+# ---------- Car loan guide: cache-busting for lead.js/site.css/PDF + redirect from old slug
+from loanguide import SLUG as _ZS, PDF as _ZPDF, OLD_SLUG as _ZO
 _zp=R+f"/blog/{_ZS}/index.html"; _s=open(_zp).read()
 _s=_s.replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
+# no Zero DP promotion on this page (dealer restriction): neutral footer band wording, drop Zero DP related links
+_s=_s.replace('with all-in Zero DP and low-DP options.','with all-in down payment and monthly options.')
+import re as _re
+_s=_re.sub(r'<li><a href="/(?:blog|tips|guides)/[^"]*zero[^"]*/">[^<]*</a></li>','',_s)
+_s=_re.sub(r'<li><a href="/mitsubishi-zero-down-payment-promo/">[^<]*</a></li>','',_s)
 if os.path.exists(R+_ZPDF): _s=_s.replace(f'href="{_ZPDF}"',f'href="{_ZPDF}?v={_vh(_ZPDF)}"')
 open(_zp,'w').write(_s)
+os.makedirs(R+f'/blog/{_ZO}',exist_ok=True)
+open(R+f'/blog/{_ZO}/index.html','w').write(f'<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Paano Ma-approve sa Car Loan</title><link rel="canonical" href="{D}/blog/{_ZS}/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/{_ZS}/"><script>location.replace("/blog/{_ZS}/"+location.search+location.hash)</script></head><body><p>This guide has moved to <a href="/blog/{_ZS}/">Paano Ma-approve sa Car Loan</a>.</p></body></html>\n')
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
