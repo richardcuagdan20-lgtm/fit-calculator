@@ -287,6 +287,7 @@ def articles(base,items,label,title,desc,intro):
     page(f"/{base}/",title,desc,f'<section class="ph"><div class="w"><h1>{label}</h1><p class="lead">{intro}</p></div></section><section class="sec"><div class="w"><ul class="grid g2 plain">{lst}</ul></div></section>'+xl(base),crumbs=[("/","Home"),(f"/{base}/",label)])
     for a in items:
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
+        if a.get("lang"): ld[0]["inLanguage"]={"tl":"fil-PH","en":"en-PH"}[a["lang"]]
         if a.get("by"):
             ld[0]["author"]={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":a["by"],"url":D+"/about/"}
         body=a["body"]
@@ -452,19 +453,26 @@ s=open(R+"/index.html").read()
 rd="<script>(function(){try{var q=location.search;if(!q)return;var p=new URLSearchParams(q);var sg=(p.get('seg')||'').toLowerCase();if(/^(local|ofw_abroad|ofw_family)$/.test(sg)||p.has('adset')||/^ad\\d+$/i.test(p.get('utm_content')||'')){location.replace('/budgetcalculator/'+q+location.hash);}}catch(_){}})();</script>\n"
 s=s.replace('<meta charset="utf-8">\n','<meta charset="utf-8">\n'+rd,1); open(R+"/index.html","w").write(s)
 
-# ---------- Car loan guide: cache-busting for lead.js/site.css/PDF + redirect from old slug
-from loanguide import SLUG as _ZS, PDF as _ZPDF, OLD_SLUG as _ZO
-_zp=R+f"/blog/{_ZS}/index.html"; _s=open(_zp).read()
-_s=_s.replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
-# no Zero DP promotion on this page (dealer restriction): neutral footer band wording, drop Zero DP related links
-_s=_s.replace('with all-in Zero DP and low-DP options.','with all-in down payment and monthly options.')
+# ---------- Car loan guide (TL + EN): cache-busting, html lang, hreflang, EN assessment box, old-slug redirect
+from loanguide import SLUGS as _ZS, PDFS as _ZP, OLD_SLUG as _ZO
 import re as _re
-_s=_re.sub(r'<li><a href="/(?:blog|tips|guides)/[^"]*zero[^"]*/">[^<]*</a></li>','',_s)
-_s=_re.sub(r'<li><a href="/mitsubishi-zero-down-payment-promo/">[^<]*</a></li>','',_s)
-if os.path.exists(R+_ZPDF): _s=_s.replace(f'href="{_ZPDF}"',f'href="{_ZPDF}?v={_vh(_ZPDF)}"')
-open(_zp,'w').write(_s)
+_HL={"tl":"fil-PH","en":"en-PH"}
+_ALT="".join(f'<link rel="alternate" hreflang="{_HL[l]}" href="{D}/blog/{_ZS[l]}/">\n' for l in ("tl","en"))+f'<link rel="alternate" hreflang="x-default" href="{D}/blog/{_ZS["en"]}/">\n'
+for _l in ("tl","en"):
+    _zp=R+f"/blog/{_ZS[_l]}/index.html"; _s=open(_zp).read()
+    _s=_s.replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
+    if os.path.exists(R+_ZP[_l]): _s=_s.replace(f'href="{_ZP[_l]}"',f'href="{_ZP[_l]}?v={_vh(_ZP[_l])}"')
+    _s=_s.replace('<html lang="en-PH">',f'<html lang="{_HL[_l]}">',1).replace('</head>',_ALT+'</head>',1)
+    _s=_s.replace(f'<meta property="og:locale" content="en_PH">',f'<meta property="og:locale" content="{"fil_PH" if _l=="tl" else "en_PH"}">',1)
+    # no zero-downpayment promotion on these pages (dealer restriction)
+    _s=_s.replace('with all-in Zero DP and low-DP options.','with all-in down payment and monthly options.')
+    _s=_re.sub(r'<li><a href="/(?:blog|tips|guides)/[^"]*zero[^"]*/">[^<]*</a></li>','',_s)
+    _s=_re.sub(r'<li><a href="/mitsubishi-zero-down-payment-promo/">[^<]*</a></li>','',_s)
+    if _l=="en": _s=_s.replace(LACTA,'<aside class="lacta"><h2>Will you qualify for a car loan?</h2><p>Find out in 3 minutes with the free AI Car Loan Application Assessment. No documents needed. Your result is a Pre-qualified estimate; financing is subject to bank approval.</p><a class="btn" href="/loan-assessment/?lang=en">Start the AI Car Loan Application Assessment</a></aside>')
+    _s=_s.replace('href="/loan-assessment/"',f'href="/loan-assessment/?lang={_l}"')
+    open(_zp,'w').write(_s)
 os.makedirs(R+f'/blog/{_ZO}',exist_ok=True)
-open(R+f'/blog/{_ZO}/index.html','w').write(f'<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Paano Ma-approve sa Car Loan</title><link rel="canonical" href="{D}/blog/{_ZS}/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/{_ZS}/"><script>location.replace("/blog/{_ZS}/"+location.search+location.hash)</script></head><body><p>This guide has moved to <a href="/blog/{_ZS}/">Paano Ma-approve sa Car Loan</a>.</p></body></html>\n')
+open(R+f'/blog/{_ZO}/index.html','w').write(f'<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Paano Ma-approve sa Car Loan</title><link rel="canonical" href="{D}/blog/{_ZS["tl"]}/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/{_ZS["tl"]}/"><script>location.replace("/blog/{_ZS["tl"]}/"+location.search+location.hash)</script></head><body><p>This guide has moved to <a href="/blog/{_ZS["tl"]}/">Paano Ma-approve sa Car Loan</a>.</p></body></html>\n')
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"

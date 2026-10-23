@@ -2225,8 +2225,8 @@ body='''<p>Brand new vs second hand car in the Philippines: the second-hand pric
 '''+CTA2("Compare a brand-new monthly with your options. Check your budget, then test drive in SJDM.","mirage-g4")),
 ]
 DRAFT_POSTS=BULK6+BULK5+BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
-from loanguide import ZPOST as _Z
-DRAFT_POSTS.insert(0,_Z)
+from loanguide import POSTS_L as _ZL
+DRAFT_POSTS[0:0]=_ZL
 from seo import apply as _seo
 DRAFT_POSTS=_seo(DRAFT_POSTS)
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026
