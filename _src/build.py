@@ -37,6 +37,8 @@ ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill
 def e(s): return html.escape(s,quote=True)
 def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
     url=D+path
+    import og as _og
+    ogimg=_og.make(path,_og.heading(path,title,crumbs,[SUF0," | Mitsubishi Motors"]),img)
     if title.endswith(SUF0):
         base_=title[:-len(SUF0)]
         title=next(base_+x for x in [" | Mitsubishi Motors by Richard Dennis Cuagdan"," | Mitsubishi Motors by Richard Cuagdan"," | Mitsubishi by Richard Cuagdan",""] if len(base_+x)<=65)
@@ -67,7 +69,13 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{D}{img}">
+<meta property="og:image" content="{D}{ogimg}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:image" content="{D}{ogimg}">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(desc)}">
 <meta property="og:locale" content="en_PH">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0b0c">
@@ -504,4 +512,7 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 
 ## Models
 """+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Tips\n"+_ll(TIPS,"tips")+"\n## Blog\n"+_ll(POSTS,"blog")+"\n## Guides\n"+_ll(GUIDES,"guides"))
+import og as _og
+_og.inject("/budgetcalculator/","/assets/img/xpglx_x37.webp","Budget Fit Calculator | Mitsubishi Motors by Richard","Find the Mitsubishi that fits your monthly budget: Mirage G4, Xpander, L300, Triton, Destinator, Montero Sport all-in financing.")
+_og.inject("/privacy/","/assets/img/xpglx_x37.webp","Privacy Policy | Mitsubishi Motors by Richard Dennis Cuagdan","How Richard Dennis Cuagdan (Mitsubishi SJ Legacy Motors) collects and protects your personal information under the Data Privacy Act.")
 print(len(PAGES),"pages")
