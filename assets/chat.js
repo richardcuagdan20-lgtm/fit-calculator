@@ -52,7 +52,7 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))hide()});
  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
  if(pend){var o=pend;pend=null;show(o)}}
-function label(){var l=b&&b.querySelector('.oc-bl');if(l)l.innerHTML=T('Chat kay Richard','Chat with Richard')+'<small>'+T('Online · mabilis sumagot','Online · quick replies')+'</small>'}
+function label(){var l=b&&b.querySelector('.oc-bl');if(l)l.innerHTML=T('Chat kay Richard','Chat with Richard')+'<small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
 function hide(){p.classList.remove('on');clearInterval(timer);timer=null}
 function show(o){var rs=refSess();
  if(rs){var inl=document.querySelector('#af-rc .rc,#st-rc .rc');if(inl){inl.scrollIntoView({behavior:'smooth',block:'center'});var i=inl.querySelector('.rc-f input');if(i)setTimeout(function(){i.focus()},400);return}
