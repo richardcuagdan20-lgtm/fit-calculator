@@ -60,13 +60,13 @@ var REQ={common:[['2 valid government IDs (hindi expired)','2 valid government I
 REQ.seafarer=REQ.ofw;
 var have={},later={},files={};  // key = Tagalog label -> true / File info
 /* FEATURE FLAG: real uploads need the Apps Script upload handler (see /workspace/loanapp/uploads/apps_script_uploads.gs). Keep false until verified end-to-end. */
-var UPLOADS_ON=false,MAXF=5,MAXB=5*1024*1024;
+var UPLOADS_ON=true,MAXF=5,MAXB=5*1024*1024;
 function stat(k){return files[k]?'Uploaded':have[k]?'Ready (send in chat)':'To follow'}
 function reqList(){var e=val('emp'),l=REQ.common.concat(REQ[e]||[]);if(val('cm')==='yes'||val('cm')==='spouse')l=l.concat(REQ.comaker);return l}
 function renderDocs(){var ul=$('af-docs');if(!ul)return;var l=reqList();
   document.querySelectorAll('.af-up').forEach(function(e){e.hidden=!UPLOADS_ON});
   ul.innerHTML=l.map(function(x,i){var k=x[0],f=files[k];return '<li class="af-rq"><span class="af-rn">'+esc(lang==='en'&&x[1]?x[1]:x[0])+'</span><div class="af-st">'+
-   '<label><input type="radio" name="rq'+i+'" value="ready" data-k="'+esc(k)+'"'+(have[k]?' checked':'')+'> ✅ '+T('Meron na ako','I have this')+'</label>'+
+   '<label><input type="radio" name="rq'+i+'" value="ready" data-k="'+esc(k)+'"'+(have[k]?' checked':'')+'> '+(UPLOADS_ON?'📎 '+T('Meron na / I-upload','I have it / Upload'):'✅ '+T('Meron na ako','I have this'))+'</label>'+
    '<label><input type="radio" name="rq'+i+'" value="later" data-k="'+esc(k)+'"'+(later[k]?' checked':'')+'> ⏳ '+T('Susunod na lang','I\'ll submit later')+'</label></div>'+
    (UPLOADS_ON&&have[k]?'<div class="af-fl"><input type="file" accept="image/*,application/pdf" data-k="'+esc(k)+'" aria-label="Upload"><p class="af-fn">'+(f?'📎 '+esc(f.name):T('Optional: i-upload ngayon','Optional: upload now'))+'</p></div>':'')+'</li>'}).join('');
   ul.querySelectorAll('input[type=radio]').forEach(function(b){b.onchange=function(){var k=b.dataset.k;have[k]=b.value==='ready';later[k]=b.value==='later';if(!have[k])delete files[k];renderDocs()}});
@@ -76,10 +76,11 @@ function pick(b){var k=b.dataset.k,f=b.files&&b.files[0],n=b.parentNode.querySel
   if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang 5 files lang. Ipadala ang iba kay Fina.','Max 5 files. Send the rest to Fina.');b.value='';return}
   n.textContent=T('Pinoproseso...','Processing...');
   (/^image\//.test(f.type)?shrink(f):readB64(f)).then(function(o){if(o.data.length*0.75>MAXB){n.textContent=T('Masyadong malaki (max 5MB).','Too large (max 5MB).');b.value='';return}
-    o.name=f.name;o.req=k;files[k]=o;n.textContent='📎 '+f.name;cnt()}).catch(function(){n.textContent=T('Hindi mabasa ang file.','Could not read the file.')})}
+    o.name=f.name;o.req=lbl(k);files[k]=o;n.textContent='📎 '+f.name;cnt()}).catch(function(){n.textContent=T('Hindi mabasa ang file.','Could not read the file.')})}
 function readB64(f){return new Promise(function(r,j){var fr=new FileReader();fr.onload=function(){r({type:f.type,data:String(fr.result).split(',')[1]})};fr.onerror=j;fr.readAsDataURL(f)})}
 function shrink(f){return new Promise(function(r,j){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){var m=1600,sc=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);
   c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);r({type:'image/jpeg',data:c.toDataURL('image/jpeg',0.8).split(',')[1]})};im.onerror=function(){readB64(f).then(r,j)};im.src=u})}
+function lbl(k){var x=reqList().filter(function(y){return y[0]===k})[0];return x?(x[1]||x[0]):k}
 function docStatus(){return reqList().map(function(x){return (x[1]||x[0])+': '+stat(x[0])})}
 function missing(){return reqList().filter(function(x){return !have[x[0]]})}
 function cnt(){var l=reqList(),m=missing(),u=l.filter(function(x){return files[x[0]]}).length;$('af-cnt').textContent=(l.length-m.length)+' ready / '+m.length+T(' to follow',' to follow')+(u?' · '+u+' uploaded':'')}
