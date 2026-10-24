@@ -40,7 +40,8 @@ var MESSENGER_URL='https://m.me/MitsubishiRDC';
 var CALL_TEL='tel:09542911201';
 /* Crisp live chat (Fina + Richard). Loaded only after Data Privacy consent. Page-only embed. */
 var CRISP_WEBSITE_ID='ca443e7b-7d1e-4819-87d3-59b97b4fa8c8';
-function crispLoad(){if(window.__crispLoaded)return;window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
+function crispLoad(){if(window.__crispLoaded||(window.Lead&&Lead.CHAT))return;   /* own site chat replaces Crisp when Lead.CHAT */
+window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
   var d=document.createElement('script');d.src='https://client.crisp.chat/l.js';d.async=1;document.head.appendChild(d)}
 function cp(){try{window.$crisp=window.$crisp||[];window.$crisp.push([].slice.call(arguments))}catch(_){}}
 var BANNED=/\b(approved|aprobado|sure na|guaranteed|suzuki)\b/ig;
@@ -67,9 +68,10 @@ function finaMsg(){var u=A.unit,x=A.assessment,L={PRE_QUALIFIED:'Pre-qualified',
 function finaGreet(){var m=A.docs&&A.docs.missing.length?A.docs.missing.join(', '):'';
   return m?T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kulang pa ang: '+m+'. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and you still need: '+m+'. Any questions before we proceed to the official application?')
    :T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kumpleto ka na sa documents. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and your documents are complete. Any questions before we proceed to the official application?')}
-function openFina(){crispLoad();crispSync();cp('do','chat:open');var g=finaGreet();if(A.finaShown!==g){A.finaShown=g;cp('do','message:show',['text',safe(g)])}
+function openFina(){if(window.Lead&&Lead.CHAT&&window.SiteChat){SiteChat.open({name:A.name,mobile:A.mobile,email:A.email,text:finaMsg().replace(/^Hi Fina! /,'Hi Richard! ')});ga('chat_open',{provider:'own'});return}
+crispLoad();crispSync();cp('do','chat:open');var g=finaGreet();if(A.finaShown!==g){A.finaShown=g;cp('do','message:show',['text',safe(g)])}
   ga('chat_open',{provider:'crisp'})}
-function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+T('Magtanong pa sa aming live chat','Ask more questions to our live chat')+'</button>'}
+function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+((window.Lead&&Lead.CHAT)?T('Mag-chat kay Richard','Chat with Richard'):T('Magtanong pa sa aming live chat','Ask more questions to our live chat'))+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
 var A={lang:'en'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
@@ -339,7 +341,7 @@ REQ.seafarer=REQ.ofw;REQ.pensioner=['Pension statement / proof of pension'];REQ.
 var EMPL={employed:'Employed',business_owner:'Business owner',ofw:'OFW',seafarer:'Seafarer',freelancer:'Freelancer / VA',pensioner:'Pensioner',other:'other income type'};
 var LBL={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALIFIED:'Not yet qualified'};
 function msgr(res){var ref=('loan-assessment-'+res.toLowerCase().replace(/_/g,'-')+'-'+A.unit.id).replace(/[^a-z0-9-]/gi,'').slice(0,240);return MESSENGER_URL+'?ref='+encodeURIComponent(ref)}
-function contactBtns(res){return '<div class="la-cta">'+finaBtn()+'<a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a><a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
+function contactBtns(res){return '<div class="la-cta">'+finaBtn()+((window.Lead&&Lead.CHAT)?'':'<a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a>')+'<a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
 function bindContact(el,res){el.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('[data-fina]');if(f){e.preventDefault();px('Contact',{method:'crisp_chat',content_name:A.unit.n});ga('contact',{method:'crisp_chat',result:res});openFina()}});el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
 function recHtml(){var r=A.rec,inc=incTot();if(!r)return '';
   function c(o,k,main){var tot=o.dp+o.mo*o.n;return '<div class="la-opt'+(main?' hl':'')+'"><b>'+(main?'⭐ '+T('Rekomendado','Recommended')+': ':T('Alternative','Alternative')+': ')+esc(o.label)+'</b><span style="font-size:1.25em"><b>'+peso(o.mo)+'</b>/mo × '+termTxt(o.n)+'</span><span>DP '+(o.dp?peso(o.dp):'₱0')+' · Total '+peso(tot)+(inc?' · '+(o.mo/inc*100).toFixed(1)+'% '+T('ng income','of income'):'')+'</span>'+(o.kind==='custom'?'<span class="small muted">'+T('Hindi pa kasama ang insurance, LTO at fees.','Excludes insurance, LTO and fees.')+'</span>':'')+'<button type="button" class="btn sm'+(main?'':' ghost dk')+'" data-rec="'+k+'">'+T('Piliin ito','Choose this')+'</button></div>'}

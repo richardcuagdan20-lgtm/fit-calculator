@@ -32,7 +32,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function tm(t){try{return new Date(t).toLocaleString('en-PH',{timeZone:'Asia/Manila',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}catch(e){return ''}}
 function api(o){return fetch(Lead.url,{method:'POST',cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(o)}).then(function(r){return r.json()})}
 var EM=/^[^@\s<>"',;]+@[^@\s<>"',;]+\.[A-Za-z]{2,}$/;
-function mount(host,o){if(!host||!o||!o.ref||!/^\d{4}$/.test(o.last4||''))return;var ref=o.ref,l4=o.last4,timer,sys=[],asked=false,skipK='rc_em_skip_'+ref;
+function mount(host,o){if(!host||!o||!o.ref||!/^\d{4}$/.test(o.last4||''))return;try{sessionStorage.setItem('rc_sess',JSON.stringify({ref:o.ref,last4:o.last4,name:o.name||''}))}catch(e){}var ref=o.ref,l4=o.last4,timer,sys=[],asked=false,skipK='rc_em_skip_'+ref;
  host.innerHTML='<section class="rc" aria-label="Application chat"><div class="rc-h"><div class="rc-av"><img src="/assets/img/richard-300.webp" alt="" width="42" height="42"></div><div class="rc-t"><b>'+esc(o.title||'Questions about your application? Chat with us')+'</b><small>'+AGENT+' · '+ROLE+'</small></div><span class="rc-ref">'+esc(ref)+'</span></div>'+
   '<div class="rc-m" role="log" aria-live="polite"></div><div class="rc-emw"></div><form class="rc-f"><label class="vh" for="rc-in-'+esc(ref)+'">Message</label><input id="rc-in-'+esc(ref)+'" placeholder="Type your question…" maxlength="1000" autocomplete="off"><button>Send</button></form>'+
   '<div class="rc-b"><span>Usually replies within the day (Mon–Sat, 8AM–5PM)</span><button type="button" class="rc-hu">🙋 Talk to a human</button></div>'+

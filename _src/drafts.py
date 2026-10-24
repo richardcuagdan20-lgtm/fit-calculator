@@ -1731,7 +1731,7 @@ title="Mitsubishi Dealer Bulacan: SJ Legacy Motors, SJDM",
 desc="",answer="",
 faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Mitsubishi SJ Legacy Motors is at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan."),
 ("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page and Richard will confirm your schedule. Bring your valid driver's license."),
-("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or send a message on Messenger."),
+("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or use the live chat on this website."),
 ("Is SJ Legacy Motors near Metro Manila?","It's on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
 body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealership on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
 

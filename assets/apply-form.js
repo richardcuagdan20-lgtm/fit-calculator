@@ -17,7 +17,8 @@ function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
 function px(ev,p){try{if(typeof window.fbq==='function')window.fbq('trackCustom',ev,p||{})}catch(_){}}
 function ga(ev,p){try{if(typeof window.gtag==='function')window.gtag('event',ev,p||{})}catch(_){}}
 function cp(){try{window.$crisp=window.$crisp||[];window.$crisp.push([].slice.call(arguments))}catch(_){}}
-function crispLoad(){if(window.__crispLoaded)return;window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
+function crispLoad(){if(window.__crispLoaded||(window.Lead&&Lead.CHAT))return;   /* own site chat replaces Crisp when Lead.CHAT */
+window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
   var d=document.createElement('script');d.src='https://client.crisp.chat/l.js';d.async=1;document.head.appendChild(d)}
 /* MP-XXXXX with crypto randomness + rejection sampling (31 chars; 248 = 31*8). Uniqueness is enforced server-side in Phase 2. */
 function newRef(){var s='',b=new Uint8Array(1),c=window.crypto||window.msCrypto;while(s.length<5){c.getRandomValues(b);if(b[0]<248)s+=REF_ALPHA[b[0]%31]}return 'MP-'+s}

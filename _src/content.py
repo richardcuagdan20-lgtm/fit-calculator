@@ -60,7 +60,7 @@ body='''<p>Buying a car while working abroad is very doable. Many of my clients 
 <h2>Paying while abroad</h2>
 <p>Monthly amortizations are usually paid through post-dated checks or auto-debit from a Philippine bank account. Make sure the account is funded on time each month, especially around holidays when remittances can take longer.</p>
 <h2>Working across time zones</h2>
-<p>Message me on <a href="https://m.me/504759566043148" rel="noopener">Messenger</a> whenever it's convenient for you. I'll coordinate with your family for viewing, test drive and release.</p>'''),
+<p><a href="https://m.me/504759566043148" rel="noopener">Chat with me here</a> whenever it's convenient for you. I'll coordinate with your family for viewing, test drive and release.</p>'''),
 dict(slug="what-all-in-includes",date="2026-10-21",img="tr_gx_u28",alt="Mitsubishi Triton GX AT in Graphite Gray Metallic",
 title="What Does 'All-In' Include in a Car Promo?",
 desc="What an all-in Mitsubishi promo covers at SJ Legacy Motors: LTO registration, TPL, comprehensive insurance, chattel mortgage, free labor, warranty and freebies.",

@@ -67,7 +67,7 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
  ("Is Mitsubishi SJ Legacy Motors an authorized Mitsubishi dealer?","Yes. Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer."),
  ("Can I test drive a Mitsubishi in SJDM?","Yes. Book a schedule on the test drive page and bring a valid driver's license. Richard will confirm your slot."),
  ("Does the SJDM dealership have Zero DP promos?","Yes. This month's Zero DP and low-DP options are in the dated promo table on this page. They're all-in and subject to bank approval."),
- ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or send a message on Messenger."),
+ ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or use the live chat on this website."),
  ("Can OFWs buy from the SJDM dealership?","Yes. OFWs can apply from abroad with an SPA or a co-borrower in the Philippines. See the OFW car loan guide.")])
 
 L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",alt="Mitsubishi Xpander GLX at a Mitsubishi casa in Bulacan",

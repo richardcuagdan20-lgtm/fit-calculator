@@ -182,7 +182,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
 </div></div></section>
 <section class="sec"><div class="w split">
-<div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
+<div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li><li><a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
@@ -243,7 +243,7 @@ function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='
  d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
   m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel: <b>'+peso(v.fuel)+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
   h+='</div></section>'}});
- h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Message Richard on Messenger</a></p>';
+ h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Chat with Richard</a></p>';
  var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
  if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
 var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}
@@ -379,7 +379,7 @@ f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead"
 <p><b id="cwhen"></b><br>Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan</p>
 <p>Richard will message you to confirm your schedule. Please bring your valid driver's license.</p>
 <p>Reference: <b id="cref"></b></p>
-<p class="row"><a class="btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a> <a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard on Messenger</a></p></div></div></div>
+<p class="row"><a class="btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a> <a class="btn ghost dk" href="{MSG}" rel="noopener">Chat with Richard</a></p></div></div></div>
 </div></section>
 <script src="/assets/lead.js" defer></script>
 <script type="application/json" id="tdu">{json.dumps(TDU,ensure_ascii=False)}</script>
@@ -434,7 +434,7 @@ page("/contact/","Contact | Mitsubishi Motors - SJ Legacy Motors",
  "Message Richard Cuagdan on Messenger or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
 f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
 <section class="sec"><div class="w grid g3">
-<div class="card pad"><h2 class="h3">Messenger</h2><p>Send a message any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Open Messenger</a></p></div>
+<div class="card pad"><h2 class="h3">Live chat</h2><p>Chat with me here on the website any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
 <div class="card pad"><h2 class="h3">Call or text</h2><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p><a class="btn" href="tel:{TEL}">Call {TELD}</a></p></div>
 <div class="card pad"><h2 class="h3">Showroom</h2><address>{ADDR_HTML}</address><p><a href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
@@ -536,4 +536,30 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 import og as _og
 _og.inject("/budgetcalculator/","/assets/img/xpglx_x37.webp","Budget Fit Calculator | Mitsubishi Motors by Richard","Find the Mitsubishi that fits your monthly budget: Mirage G4, Xpander, L300, Triton, Destinator, Montero Sport all-in financing.")
 _og.inject("/privacy/","/assets/img/xpglx_x37.webp","Privacy Policy | Mitsubishi Motors by Richard Dennis Cuagdan","How Richard Dennis Cuagdan (Mitsubishi SJ Legacy Motors) collects and protects your personal information under the Data Privacy Act.")
+
+# --- Own site chat: every in-content Messenger CTA becomes an own-chat opener ([data-chat]); the footer .fbl link stays Messenger.
+# Without JS / before the own chat boots, the link still falls back to Messenger. ---
+import re as _re, glob as _gl
+_LBL={'Message Richard':'Chat with Richard','Message me':'Chat with me','message me on Messenger':'chat with me here','mag-message sa akin sa Messenger':'mag-chat sa akin dito'}
+def _chatify(m):
+    a,txt=m.group(1),m.group(2)
+    if 'class="fbl"' in a or 'data-chat' in a: return m.group(0)
+    a=a.replace('<a ','<a data-chat ',1)
+    return a+_LBL.get(txt,txt)
+for _f in _gl.glob(R+'/**/*.html',recursive=True):
+    if '/_src/' in _f: continue
+    _s=open(_f).read()
+    _n=_re.sub(r'(<a [^>]*href="https://m\.me/[^"]*"[^>]*>)([^<]*)',_chatify,_s)
+    if _n!=_s: open(_f,'w').write(_n)
+
+# --- inject the site chat flag + loader into every page (skip redirect stubs) ---
+_SCV=_vh("/assets/chat.js"); _SCL=_vh("/assets/sitechat.js")
+_SCTAG=f'<script>window.SITECHAT_ON={"true" if SITECHAT else "false"};window.SITECHAT_V="{_SCV}"</script><script src="/assets/sitechat.js?v={_SCL}" defer></script>'
+for _f in _gl.glob(R+'/**/*.html',recursive=True):
+    if '/_src/' in _f: continue
+    _s=open(_f).read()
+    if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
+    _n=_re.sub(r'<script>window\.SITECHAT_ON=.*?</script><script src="/assets/sitechat\.js[^"]*" defer></script>','',_s)
+    _n=_n.replace('</body>',_SCTAG+'</body>',1)
+    if _n!=_s: open(_f,'w').write(_n)
 print(len(PAGES),"pages")
