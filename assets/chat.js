@@ -56,7 +56,7 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);if(/^\/status\//.test(location.pathname)){var lm;new MutationObserver(function(){var m=appMode();if(m!==lm){lm=m;label()}}).observe(document.body,{childList:true,subtree:true})}
  if(pend){var o=pend;pend=null;show(o)}}
 function appMode(){return /^\/status\/?$/.test(location.pathname)&&!!document.querySelector('#st-rc .rc')}
-function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();
+function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();b.style.setProperty('display',ap?'none':'','important');var pp=document.querySelector('.oc-p');if(pp&&ap)pp.style.setProperty('display','none','important');
  l.innerHTML='<b class="oc-full">'+(ap?T('May tanong sa application mo? Chat with us','Questions about your application? Chat with us'):T('Mag-inquire kay Richard','Inquire with Richard'))+'</b><b class="oc-short">'+(ap?'Chat with us':T('Mag-inquire kay Richard','Inquire with Richard'))+'</b><small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
 function hide(){p.classList.remove('on');clearInterval(timer);timer=null}
 function show(o){var rs=refSess();
