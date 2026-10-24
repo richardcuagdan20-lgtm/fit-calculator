@@ -30,7 +30,8 @@ CL='''<!-- Microsoft Clarity -->
 <script>try{(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z0ztjrla58");}catch(_){}</script>
 '''
 SUF0=" | Mitsubishi Motors - SJ Legacy Motors"
-NAV=[("/","Home"),("/cars/","Cars"),("/promos-tips/","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
+V4="V4:true" in open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"assets","lead.js")).read()  # status page flag lives in assets/lead.js
+NAV=[("/","Home"),("/cars/","Cars"),("/promos-tips/","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]+([("/status/","Track Application")] if V4 else [])
 GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
 from figs import FIGS
 ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill_sizes.json")))
@@ -103,7 +104,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <footer class="ft"><div class="w">
 <div class="fg">
 <div><p class="fb">Richard Dennis Cuagdan</p><p>Car Sales Executive, Mitsubishi SJ Legacy Motors</p><address style="font-style:normal">{ADDR_HTML}</address><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
-<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
+<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a>{' · <a href="/status/">Track your application</a>' if V4 else ''}</p></div>
 </div>
 <p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors by Richard Dennis Cuagdan on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a></p>
 <p class="disc">Richard Dennis Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
@@ -444,6 +445,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"statuspage.py")).read())
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')

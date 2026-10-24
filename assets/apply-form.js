@@ -60,7 +60,7 @@ var REQ={common:[['2 valid government IDs (hindi expired)','2 valid government I
 REQ.seafarer=REQ.ofw;
 var have={},later={},files={};  // key = Tagalog label -> true / File info
 /* FEATURE FLAG: real uploads need the Apps Script upload handler (see /workspace/loanapp/uploads/apps_script_uploads.gs). Keep false until verified end-to-end. */
-var UPLOADS_ON=true,MAXF=5,MAXB=5*1024*1024;
+var UPLOADS_ON=true,MAXF=(window.Lead&&Lead.V4)?10:5,MAXB=5*1024*1024;
 function stat(k){return files[k]?'Uploaded':have[k]?'Ready (send in chat)':'To follow'}
 function reqList(){var e=val('emp'),l=REQ.common.concat(REQ[e]||[]);if(val('cm')==='yes'||val('cm')==='spouse')l=l.concat(REQ.comaker);return l}
 function renderDocs(){var ul=$('af-docs');if(!ul)return;var l=reqList();
@@ -68,12 +68,12 @@ function renderDocs(){var ul=$('af-docs');if(!ul)return;var l=reqList();
   ul.innerHTML=l.map(function(x,i){var k=x[0],f=files[k];return '<li class="af-rq"><span class="af-rn">'+esc(lang==='en'&&x[1]?x[1]:x[0])+'</span><div class="af-st">'+
    '<label><input type="radio" name="rq'+i+'" value="ready" data-k="'+esc(k)+'"'+(have[k]?' checked':'')+'> '+(UPLOADS_ON?'📎 '+T('Meron na / I-upload','I have it / Upload'):'✅ '+T('Meron na ako','I have this'))+'</label>'+
    '<label><input type="radio" name="rq'+i+'" value="later" data-k="'+esc(k)+'"'+(later[k]?' checked':'')+'> ⏳ '+T('Susunod na lang','I\'ll submit later')+'</label></div>'+
-   (UPLOADS_ON&&have[k]?'<div class="af-fl"><input type="file" accept="image/*,application/pdf" data-k="'+esc(k)+'" aria-label="Upload"><p class="af-fn">'+(f?'📎 '+esc(f.name):T('Optional: i-upload ngayon','Optional: upload now'))+'</p></div>':'')+'</li>'}).join('');
+   (UPLOADS_ON&&have[k]?'<div class="af-fl"><div class="af-cam st-pick"><label>📷 '+T('Kumuha ng Photo','Take Photo')+'<input type="file" accept="image/*" capture="environment" data-k="'+esc(k)+'"></label><label>📁 '+T('Pumili ng file','Choose file')+'<input type="file" accept="image/*,application/pdf" data-k="'+esc(k)+'"></label></div><p class="af-fn">'+(f?'📎 '+esc(f.name):T('Optional: i-upload ngayon','Optional: upload now'))+'</p></div>':'')+'</li>'}).join('');
   ul.querySelectorAll('input[type=radio]').forEach(function(b){b.onchange=function(){var k=b.dataset.k;have[k]=b.value==='ready';later[k]=b.value==='later';if(!have[k])delete files[k];renderDocs()}});
   ul.querySelectorAll('input[type=file]').forEach(function(b){b.onchange=function(){pick(b)}});cnt()}
-function pick(b){var k=b.dataset.k,f=b.files&&b.files[0],n=b.parentNode.querySelector('.af-fn');if(!f)return;
+function pick(b){var k=b.dataset.k,f=b.files&&b.files[0],n=b.closest('.af-fl').querySelector('.af-fn');if(!f)return;
   if(!/^image\/|^application\/pdf$/.test(f.type)){n.textContent=T('Photo o PDF lang.','Photo or PDF only.');b.value='';return}
-  if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang 5 files lang. Ipadala ang iba kay Fina.','Max 5 files. Send the rest to Fina.');b.value='';return}
+  if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang '+MAXF+' files lang. Ipadala ang iba kay Fina.','Max '+MAXF+' files. Send the rest to Fina.');b.value='';return}
   n.textContent=T('Pinoproseso...','Processing...');
   (/^image\//.test(f.type)?shrink(f):readB64(f)).then(function(o){if(o.data.length*0.75>MAXB){n.textContent=T('Masyadong malaki (max 5MB).','Too large (max 5MB).');b.value='';return}
     o.name=f.name;o.req=lbl(k);files[k]=o;n.textContent='📎 '+f.name;cnt()}).catch(function(){n.textContent=T('Hindi mabasa ang file.','Could not read the file.')})}
@@ -145,7 +145,7 @@ var DONE=null;
 /* Uploads: separate non-keepalive POST (keepalive caps bodies at 64KB). Only when UPLOADS_ON and files picked. Failure never blocks the application. */
 function sendFiles(ref,L){var ks=Object.keys(files);if(!UPLOADS_ON||!ks.length||Lead.skipped())return Promise.resolve();
   $('af-btn').textContent=T('Ina-upload ang documents...','Uploading documents...');
-  var body=JSON.stringify({action:'upload',leadId:ref,refNo:ref,name:L.name,docsStatus:L.docsStatus,files:ks.map(function(k){var f=files[k];return {req:f.req,name:f.name,type:f.type,data:f.data}})});
+  var body=JSON.stringify({action:'upload',leadId:ref,refNo:ref,last4:(window.Lead&&Lead.V4)?String(L.mobile||'').replace(/\D/g,'').slice(-4):undefined,name:L.name,docsStatus:L.docsStatus,files:ks.map(function(k){var f=files[k];return {req:f.req,name:f.name,type:f.type,data:f.data}})});
   return Promise.race([fetch(Lead.url,{method:'POST',mode:'no-cors',cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body}).catch(function(){}),new Promise(function(r){setTimeout(r,60000)})])}
 function crispSet(a){crispLoad();var v=a.vehicle,nm=[a.applicant.full_name.first,a.applicant.full_name.last].join(' ');
   cp('set','user:nickname',[nm]);if(a.applicant.mobile)cp('set','user:phone',[a.applicant.mobile]);if(a.applicant.email)cp('set','user:email',[a.applicant.email]);
@@ -162,7 +162,7 @@ function done(a){DONE=a;var m=a.documents.missing,pq=a.assessment&&a.assessment.
    '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(a.vehicle.variant||a.vehicle.model)+'</dd></div><div><dt>Color</dt><dd>'+esc(a.vehicle.color==='undecided'?T('Bahala na','Undecided'):a.vehicle.color)+'</dd></div><div><dt>Down payment</dt><dd>'+peso(a.vehicle.dp_amount)+'</dd></div><div><dt>Term</dt><dd>'+a.vehicle.term_months+T(' buwan',' months')+'</dd></div></dl>'+
    (m.length?'<div class="la-lack"><p><b>'+T('Requirements na kulang pa','Requirements still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents. Ihanda ang malinaw na kopya.','Your documents are complete. Prepare clear copies.')+'</p>')+
    '<p>'+T('Si Fina ang kukuha ng kulang na documents mo sa live chat. I-tap ang button para makausap siya; dala na nito ang reference number mo.','Fina will collect any remaining documents in live chat. Tap the button to chat with her; it already carries your reference number.')+'</p>'+
-   '<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>');
+   (window.Lead&&Lead.V4?'<div class="la-card" style="margin:12px 0"><p><b>'+T('I-track ang application mo','Track your application')+'</b></p><p>'+T('Gamitin ang reference number <b>'+esc(a.ref_no)+'</b> at huling 4 digits ng mobile mo para makita ang status at mag-upload ng kulang na requirements.','Use reference number <b>'+esc(a.ref_no)+'</b> and the last 4 digits of your mobile to check your status and upload missing requirements.')+'</p><p><a class="btn ghost" href="/status/?ref='+encodeURIComponent(a.ref_no)+'">'+T('Track your application','Track your application')+' →</a></p></div>':'')+'<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>');
   $('af-fina').onclick=function(){crispSet(a);cp('do','chat:open');cp('set','message:text',[finaText(a)]);ga('chat_open',{provider:'crisp',form:'official_application'})};
   window.scrollTo(0,0)}
 $('af').addEventListener('submit',function(ev){ev.preventDefault();if(!validate())return;

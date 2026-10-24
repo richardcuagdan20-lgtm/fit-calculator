@@ -75,4 +75,5 @@ def inject(path,img,title,desc,D="https://mitsubishipromos.online"):
     tags=(f'<meta property="og:type" content="website">\n<meta property="og:title" content="{e(title)}">\n<meta property="og:description" content="{e(desc)}">\n'
       f'<meta property="og:image" content="{D}{rel}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:type" content="image/jpeg">\n'
       f'<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="{D}{rel}">\n')
-    s=s.replace('</title>','</title>\n'+tags,1);open(f,'w').write(s)
+    s=re.sub(r'</title>\n+','</title>\n',s)
+    s=s.replace('</title>\n','</title>\n'+tags,1);open(f,'w').write(s)
