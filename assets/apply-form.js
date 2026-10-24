@@ -6,6 +6,7 @@
 var $=function(i){return document.getElementById(i)};
 var CRISP_WEBSITE_ID='ca443e7b-7d1e-4819-87d3-59b97b4fa8c8';
 var REF_ALPHA='ABCDEFGHJKMNPQRSTUVWXYZ23456789';   // rulebook §5: excludes 0,O,1,I,L
+function AGN(){return window.Lead&&Lead.REFCHAT?'Richard':'Fina'}
 var REF_RE=/^MP-[A-HJKMNP-Z2-9]{5}$/i;
 var BANNED=/\b(approved|aprobado|sure na|guaranteed|suzuki)\b/ig;
 function safe(s){return String(s).replace(BANNED,'pre-qualified')}
@@ -73,7 +74,7 @@ function renderDocs(){var ul=$('af-docs');if(!ul)return;var l=reqList();
   ul.querySelectorAll('input[type=file]').forEach(function(b){b.onchange=function(){pick(b)}});cnt()}
 function pick(b){var k=b.dataset.k,f=b.files&&b.files[0],n=b.closest('.af-fl').querySelector('.af-fn');if(!f)return;
   if(!/^image\/|^application\/pdf$/.test(f.type)){n.textContent=T('Photo o PDF lang.','Photo or PDF only.');b.value='';return}
-  if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang '+MAXF+' files lang. Ipadala ang iba kay Fina.','Max '+MAXF+' files. Send the rest to Fina.');b.value='';return}
+  if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang '+MAXF+' files lang. Ipadala ang iba kay '+AGN()+'.','Max '+MAXF+' files. Send the rest to '+AGN()+'.');b.value='';return}
   n.textContent=T('Pinoproseso...','Processing...');
   (/^image\//.test(f.type)?shrink(f):readB64(f)).then(function(o){if(o.data.length*0.75>MAXB){n.textContent=T('Masyadong malaki (max 5MB).','Too large (max 5MB).');b.value='';return}
     o.name=f.name;o.req=lbl(k);files[k]=o;n.textContent='📎 '+f.name;cnt()}).catch(function(){n.textContent=T('Hindi mabasa ang file.','Could not read the file.')})}
@@ -162,10 +163,10 @@ function done(a){DONE=a;try{sessionStorage.removeItem(DKEY)}catch(_){}var m=a.do
    '<p>'+T('Status: <b>'+(pq?'Pre-qualified (initial assessment), ':'')+'under review</b>. Hindi pa ito bank decision; ire-review namin ang application mo bago i-endorse sa bank. I-save ang reference number; kakailanganin din ang huling 4 digits ng mobile mo para sa status check.','Status: <b>'+(pq?'Pre-qualified (initial assessment), ':'')+'under review</b>. This is not yet a bank decision; we will review your application before endorsing it to the bank. Save your reference number; you will also need the last 4 digits of your mobile for status checks.')+'</p>'+
    '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(a.vehicle.variant||a.vehicle.model)+'</dd></div><div><dt>Color</dt><dd>'+esc(a.vehicle.color==='undecided'?T('Bahala na','Undecided'):a.vehicle.color)+'</dd></div><div><dt>Down payment</dt><dd>'+peso(a.vehicle.dp_amount)+'</dd></div><div><dt>Term</dt><dd>'+a.vehicle.term_months+T(' buwan',' months')+'</dd></div></dl>'+
    (m.length?'<div class="la-lack"><p><b>'+T('Requirements na kulang pa','Requirements still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents. Ihanda ang malinaw na kopya.','Your documents are complete. Prepare clear copies.')+'</p>')+
-   '<p>'+T('Si Fina ang kukuha ng kulang na documents mo sa live chat. I-tap ang button para makausap siya; dala na nito ang reference number mo.','Fina will collect any remaining documents in live chat. Tap the button to chat with her; it already carries your reference number.')+'</p>'+
-   (window.Lead&&Lead.V4?'<div class="la-card" style="margin:12px 0"><p><b>'+T('I-track ang application mo','Track your application')+'</b></p><p>'+T('Gamitin ang reference number <b>'+esc(a.ref_no)+'</b> at huling 4 digits ng mobile mo para makita ang status at mag-upload ng kulang na requirements.','Use reference number <b>'+esc(a.ref_no)+'</b> and the last 4 digits of your mobile to check your status and upload missing requirements.')+'</p><p><a class="btn ghost" href="/status/?ref='+encodeURIComponent(a.ref_no)+'">'+T('Track your application','Track your application')+' →</a></p></div>':'')+'<div id="af-rc"></div>'+'<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>');
-  $('af-fina').onclick=function(){crispSet(a);cp('do','chat:open');cp('set','message:text',[finaText(a)]);ga('chat_open',{provider:'crisp',form:'official_application'})};
-  if(window.Lead&&Lead.REFCHAT&&window.RefChat){var l4=String(a.applicant&&a.applicant.mobile||a.contact&&a.contact.mobile||val('mobile')||'').replace(/\D/g,'').slice(-4);RefChat.mount($('af-rc'),{ref:a.ref_no,last4:l4,name:a.applicant.full_name.first})}
+   ((window.Lead&&Lead.REFCHAT)?'':'<p>'+T('Si Fina ang kukuha ng kulang na documents mo sa live chat. I-tap ang button para makausap siya; dala na nito ang reference number mo.','Fina will collect any remaining documents in live chat. Tap the button to chat with her; it already carries your reference number.')+'</p>')+
+   (window.Lead&&Lead.V4?'<div class="la-card" style="margin:12px 0"><p><b>'+T('I-track ang application mo','Track your application')+'</b></p><p>'+T('Gamitin ang reference number <b>'+esc(a.ref_no)+'</b> at huling 4 digits ng mobile mo para makita ang status at mag-upload ng kulang na requirements.','Use reference number <b>'+esc(a.ref_no)+'</b> and the last 4 digits of your mobile to check your status and upload missing requirements.')+'</p><p><a class="btn ghost" href="/status/?ref='+encodeURIComponent(a.ref_no)+'">'+T('Track your application','Track your application')+' →</a></p></div>':'')+'<div id="af-rc"></div>'+((window.Lead&&Lead.REFCHAT)?'':'<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>'));
+  if($('af-fina'))$('af-fina').onclick=function(){crispSet(a);cp('do','chat:open');cp('set','message:text',[finaText(a)]);ga('chat_open',{provider:'crisp',form:'official_application'})};
+  if(window.Lead&&Lead.REFCHAT){var l4=String(a.applicant&&a.applicant.mobile||a.contact&&a.contact.mobile||val('mobile')||'').replace(/\D/g,'').slice(-4);(function w(n){if(window.RefChat)RefChat.mount($('af-rc'),{ref:a.ref_no,last4:l4,name:a.applicant.full_name.first});else if(n<40)setTimeout(function(){w(n+1)},250)})(0)}
   window.scrollTo(0,0)}
 $('af').addEventListener('submit',function(ev){ev.preventDefault();for(var q=1;q<=NST;q++){if(!validate(q)){go(q);validate(q);return}}if(!validate())return;
   var btn=$('af-btn'),ref=newRef(),a=collect(ref);btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');
@@ -227,6 +228,6 @@ $('model').addEventListener('change',fillVariants);$('variant').addEventListener
 document.querySelectorAll('[name=tu]').forEach(function(r){r.addEventListener('change',tu)});
 ['emp','civil','cm','res'].forEach(function(i){$(i).addEventListener('change',function(){vis();renderDocs()})});
 window.__afw=1;prefill();restore();setLang(lang);vis();renderDocs();go(STEP,true);
-if(P)crispLoad();   // consent already given in the assessment; floating chat stays available (no auto-open)
+if(P&&!(window.Lead&&Lead.REFCHAT))crispLoad();   // consent already given in the assessment; floating chat stays available (no auto-open)
 document.addEventListener('DOMContentLoaded',function(){try{AS.init($('af'))}catch(_){}});
 })();
