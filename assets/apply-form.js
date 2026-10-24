@@ -1,5 +1,5 @@
 /* Official Application Form (/apply/). Static: submits via /assets/lead.js (Apps Script -> Google Sheet, honeypot + Turnstile).
-   Spec: Fina audit rulebook v1.0 §1 fields, §5 reference format. No file uploads (no backend yet): Fina collects documents in live chat.
+   Spec: Fina audit rulebook v1.0 §1 fields, §5 reference format. Per-requirement status (Ready / To follow) is sent as text. File uploads are behind UPLOADS_ON (off until the Apps Script handler is deployed).
    Meta Pixel: SubmitApplication custom event only, with NO PII / income / credit / assessment data. */
 (function(){
 'use strict';
@@ -58,13 +58,31 @@ var REQ={common:[['2 valid government IDs (hindi expired)','2 valid government I
  pensioner:[['Pension statement / proof of pension']],other:[['Proof of income (ipapaalam namin kung ano)','Proof of income (we will tell you which)']],
  comaker:[['Co-maker: 2 IDs + sariling income documents','Co-maker: 2 IDs + own income documents']]};
 REQ.seafarer=REQ.ofw;
-var have={};  // key = Tagalog label -> true
+var have={},later={},files={};  // key = Tagalog label -> true / File info
+/* FEATURE FLAG: real uploads need the Apps Script upload handler (see /workspace/loanapp/uploads/apps_script_uploads.gs). Keep false until verified end-to-end. */
+var UPLOADS_ON=false,MAXF=5,MAXB=5*1024*1024;
+function stat(k){return files[k]?'Uploaded':have[k]?'Ready (send in chat)':'To follow'}
 function reqList(){var e=val('emp'),l=REQ.common.concat(REQ[e]||[]);if(val('cm')==='yes'||val('cm')==='spouse')l=l.concat(REQ.comaker);return l}
 function renderDocs(){var ul=$('af-docs');if(!ul)return;var l=reqList();
-  ul.innerHTML=l.map(function(x,i){var k=x[0];return '<li><span>'+esc(lang==='en'&&x[1]?x[1]:x[0])+'</span><label><input type="checkbox" data-k="'+esc(k)+'"'+(have[k]?' checked':'')+'> '+T('Meron na ako','I have this')+'</label></li>'}).join('');
-  ul.querySelectorAll('input').forEach(function(b){b.onchange=function(){have[b.dataset.k]=b.checked;cnt()}});cnt()}
+  document.querySelectorAll('.af-up').forEach(function(e){e.hidden=!UPLOADS_ON});
+  ul.innerHTML=l.map(function(x,i){var k=x[0],f=files[k];return '<li class="af-rq"><span class="af-rn">'+esc(lang==='en'&&x[1]?x[1]:x[0])+'</span><div class="af-st">'+
+   '<label><input type="radio" name="rq'+i+'" value="ready" data-k="'+esc(k)+'"'+(have[k]?' checked':'')+'> ✅ '+T('Meron na ako','I have this')+'</label>'+
+   '<label><input type="radio" name="rq'+i+'" value="later" data-k="'+esc(k)+'"'+(later[k]?' checked':'')+'> ⏳ '+T('Susunod na lang','I\'ll submit later')+'</label></div>'+
+   (UPLOADS_ON&&have[k]?'<div class="af-fl"><input type="file" accept="image/*,application/pdf" data-k="'+esc(k)+'" aria-label="Upload"><p class="af-fn">'+(f?'📎 '+esc(f.name):T('Optional: i-upload ngayon','Optional: upload now'))+'</p></div>':'')+'</li>'}).join('');
+  ul.querySelectorAll('input[type=radio]').forEach(function(b){b.onchange=function(){var k=b.dataset.k;have[k]=b.value==='ready';later[k]=b.value==='later';if(!have[k])delete files[k];renderDocs()}});
+  ul.querySelectorAll('input[type=file]').forEach(function(b){b.onchange=function(){pick(b)}});cnt()}
+function pick(b){var k=b.dataset.k,f=b.files&&b.files[0],n=b.parentNode.querySelector('.af-fn');if(!f)return;
+  if(!/^image\/|^application\/pdf$/.test(f.type)){n.textContent=T('Photo o PDF lang.','Photo or PDF only.');b.value='';return}
+  if(!files[k]&&Object.keys(files).length>=MAXF){n.textContent=T('Hanggang 5 files lang. Ipadala ang iba kay Fina.','Max 5 files. Send the rest to Fina.');b.value='';return}
+  n.textContent=T('Pinoproseso...','Processing...');
+  (/^image\//.test(f.type)?shrink(f):readB64(f)).then(function(o){if(o.data.length*0.75>MAXB){n.textContent=T('Masyadong malaki (max 5MB).','Too large (max 5MB).');b.value='';return}
+    o.name=f.name;o.req=k;files[k]=o;n.textContent='📎 '+f.name;cnt()}).catch(function(){n.textContent=T('Hindi mabasa ang file.','Could not read the file.')})}
+function readB64(f){return new Promise(function(r,j){var fr=new FileReader();fr.onload=function(){r({type:f.type,data:String(fr.result).split(',')[1]})};fr.onerror=j;fr.readAsDataURL(f)})}
+function shrink(f){return new Promise(function(r,j){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){var m=1600,sc=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);
+  c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);r({type:'image/jpeg',data:c.toDataURL('image/jpeg',0.8).split(',')[1]})};im.onerror=function(){readB64(f).then(r,j)};im.src=u})}
+function docStatus(){return reqList().map(function(x){return (x[1]||x[0])+': '+stat(x[0])})}
 function missing(){return reqList().filter(function(x){return !have[x[0]]})}
-function cnt(){var l=reqList(),m=missing();$('af-cnt').textContent=(l.length-m.length)+' ready / '+m.length+T(' kulang',' lacking')}
+function cnt(){var l=reqList(),m=missing(),u=l.filter(function(x){return files[x[0]]}).length;$('af-cnt').textContent=(l.length-m.length)+' ready / '+m.length+T(' to follow',' to follow')+(u?' · '+u+' uploaded':'')}
 
 /* ---------- prefill from the assessment (sessionStorage 'mp_app_prefill', written by loan-assessment.js) ---------- */
 function setV(i,v){var e=$(i);if(e&&v!=null&&v!==''){e.value=String(v);if(e.tagName==='SELECT'&&e.value!==String(v))e.value=''}}
@@ -116,13 +134,18 @@ function collect(ref){var u=unit(),n=term();
    vehicle:{model:val('model'),variant_id:u?u.id:'',variant:u?u.n:'',color:val('color'),price:u?u.price:null,dp_amount:+val('dp')||0,dp_percent:u&&u.price?Math.round((+val('dp')||0)/u.price*1000)/10:null,term_months:n,purpose:val('purpose')},
    preferred_bank:val('bank'),source_of_sale:val('source'),
    references:[1,2].map(function(k){return {name:val('ref'+k+'_name'),relation:val('ref'+k+'_rel'),mobile:val('ref'+k+'_mobile').replace(/[\s()-]/g,''),address:val('ref'+k+'_addr')}}),
-   documents:{total:reqList().length,missing:missing().map(function(x){return x[1]||x[0]})}};
+   documents:{total:reqList().length,missing:missing().map(function(x){return x[1]||x[0]}),status:reqList().map(function(x){return {item:x[1]||x[0],status:stat(x[0])}}),uploads_enabled:UPLOADS_ON}};
   if(val('emp')==='ofw'||val('emp')==='seafarer'){a.ofw={country:val('ofw_country'),agency:val('ofw_agency'),contract_start:val('ofw_start'),contract_end:val('ofw_end'),remittance_proof:val('ofw_remit')};a.aif={name:val('aif_name'),relation:val('aif_rel'),contact:val('aif_mobile').replace(/[\s()-]/g,'')}}
   if(val('civil')==='married')a.spouse={name:val('sp_name'),dob:val('sp_dob'),mobile:val('sp_mobile'),employment_type:val('sp_emp'),employer:val('sp_employer'),gross_monthly_income:+val('sp_inc')||0};
   a.co_borrower=val('cm')==='yes'?{name:val('cm_name'),relation:val('cm_rel'),mobile:val('cm_mobile').replace(/[\s()-]/g,''),dob:val('cm_dob'),employment_type:val('cm_emp'),gross_monthly_income:+val('cm_inc')||0,address:val('cm_addr')}:val('cm')==='spouse'?'spouse':null;
   if(P){a.assessment={lead_id:P.leadId||'',result:P.result||'',plan:P.plan||null}}
   return a}
 var DONE=null;
+/* Uploads: separate non-keepalive POST (keepalive caps bodies at 64KB). Only when UPLOADS_ON and files picked. Failure never blocks the application. */
+function sendFiles(ref,L){var ks=Object.keys(files);if(!UPLOADS_ON||!ks.length||Lead.skipped())return Promise.resolve();
+  $('af-btn').textContent=T('Ina-upload ang documents...','Uploading documents...');
+  var body=JSON.stringify({action:'upload',leadId:ref,refNo:ref,name:L.name,docsStatus:L.docsStatus,files:ks.map(function(k){var f=files[k];return {req:f.req,name:f.name,type:f.type,data:f.data}})});
+  return Promise.race([fetch(Lead.url,{method:'POST',mode:'no-cors',cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body}).catch(function(){}),new Promise(function(r){setTimeout(r,60000)})])}
 function crispSet(a){crispLoad();var v=a.vehicle,nm=[a.applicant.full_name.first,a.applicant.full_name.last].join(' ');
   cp('set','user:nickname',[nm]);if(a.applicant.mobile)cp('set','user:phone',[a.applicant.mobile]);if(a.applicant.email)cp('set','user:email',[a.applicant.email]);
   var d=[['ref_no',a.ref_no],['source','official_application'],['language',a.language],['unit',v.variant],['color',v.color],['plan','DP '+v.dp_amount+' ('+v.dp_percent+'%) | '+v.term_months+' mo'],['employment_type',a.income.employment_type],['docs_missing',a.documents.missing.join('; ').slice(0,500)],['docs_lacking',a.documents.missing.length],['app_status','SUBMITTED / under review']];
@@ -137,7 +160,7 @@ function done(a){DONE=a;var m=a.documents.missing,pq=a.assessment&&a.assessment.
    '<p>'+T('Status: <b>'+(pq?'Pre-qualified (initial assessment), ':'')+'under review</b>. Hindi pa ito bank decision; ire-review namin ang application mo bago i-endorse sa bank. I-save ang reference number; kakailanganin din ang huling 4 digits ng mobile mo para sa status check.','Status: <b>'+(pq?'Pre-qualified (initial assessment), ':'')+'under review</b>. This is not yet a bank decision; we will review your application before endorsing it to the bank. Save your reference number; you will also need the last 4 digits of your mobile for status checks.')+'</p>'+
    '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(a.vehicle.variant||a.vehicle.model)+'</dd></div><div><dt>Color</dt><dd>'+esc(a.vehicle.color==='undecided'?T('Bahala na','Undecided'):a.vehicle.color)+'</dd></div><div><dt>Down payment</dt><dd>'+peso(a.vehicle.dp_amount)+'</dd></div><div><dt>Term</dt><dd>'+a.vehicle.term_months+T(' buwan',' months')+'</dd></div></dl>'+
    (m.length?'<div class="la-lack"><p><b>'+T('Requirements na kulang pa','Requirements still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents. Ihanda ang malinaw na kopya.','Your documents are complete. Prepare clear copies.')+'</p>')+
-   '<p>'+T('Si Fina ang kukuha ng documents mo sa live chat (walang upload sa website). I-tap ang button para makausap siya; dala na nito ang reference number mo.','Fina will collect your documents in live chat (no uploads on the website). Tap the button to chat with her; it already carries your reference number.')+'</p>'+
+   '<p>'+T('Si Fina ang kukuha ng kulang na documents mo sa live chat. I-tap ang button para makausap siya; dala na nito ang reference number mo.','Fina will collect any remaining documents in live chat. Tap the button to chat with her; it already carries your reference number.')+'</p>'+
    '<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>');
   $('af-fina').onclick=function(){crispSet(a);cp('do','chat:open');cp('set','message:text',[finaText(a)]);ga('chat_open',{provider:'crisp',form:'official_application'})};
   window.scrollTo(0,0)}
@@ -149,9 +172,9 @@ $('af').addEventListener('submit',function(ev){ev.preventDefault();if(!validate(
   L.employment=a.income.employment_type;L.seg=(a.income.employment_type==='ofw'||a.income.employment_type==='seafarer')?'ofw_abroad':'local';L.income=a.income.gross_monthly_income;
   L.dpPreference=peso(a.vehicle.dp_amount)+' DP ('+a.vehicle.dp_percent+'%)';L.planDp=a.vehicle.dp_amount;L.planTerm=a.vehicle.term_months;L.timeline='Official application '+ref+' (SUBMITTED)';
   L.docsTotal=a.documents.total;L.docsLacking=a.documents.missing.length;L.docsReady=a.documents.total-a.documents.missing.length;if(P&&P.leadId)L.assessmentLeadId=P.leadId;
-  L.usage=['OFFICIAL APPLICATION '+ref,'Unit: '+a.vehicle.variant+' / '+a.vehicle.color,'DP '+peso(a.vehicle.dp_amount)+', '+a.vehicle.term_months+' mo','Emp: '+a.income.employment_type+' @ '+a.income.employer_name,'Gross '+peso(a.income.gross_monthly_income),'Missing docs: '+(a.documents.missing.join('; ')||'none'),'Lang: '+lang].join(' | ');
-  L.application=JSON.stringify(a);
-  Lead.send(L).then(function(ok){if(ok===false)throw 0;
+  L.usage=['OFFICIAL APPLICATION '+ref,'Unit: '+a.vehicle.variant+' / '+a.vehicle.color,'DP '+peso(a.vehicle.dp_amount)+', '+a.vehicle.term_months+' mo','Emp: '+a.income.employment_type+' @ '+a.income.employer_name,'Gross '+peso(a.income.gross_monthly_income),'Missing docs: '+(a.documents.missing.join('; ')||'none'),'Docs status: '+docStatus().join('; '),'Lang: '+lang].join(' | ');
+  L.docsStatus=docStatus().join(' | ');L.docsToFollow=a.documents.missing.join('; ');L.application=JSON.stringify(a);
+  Lead.send(L).then(function(ok){if(ok===false)throw 0;return sendFiles(ref,L)}).then(function(){
     try{sessionStorage.removeItem('mp_app_prefill')}catch(_){}
     if(!Lead.skipped()){px('SubmitApplication',{});ga('submit_application',{form:'official_application'})}
     done(a)}).catch(function(){btn.disabled=false;btn.textContent=T('I-submit ang application','Submit application');$('af-errsum').hidden=false;$('af-errsum').textContent=T('Hindi na-send. Pakisubukan ulit.','Not sent. Please try again.')})});
