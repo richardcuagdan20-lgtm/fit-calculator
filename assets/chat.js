@@ -25,7 +25,7 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  'html.oc-on .fab{display:none!important}'+
  '.oc-b{position:fixed;right:18px;bottom:18px;z-index:9998;display:flex;align-items:center;gap:10px;background:#0b0b0c;color:#fff;border:0;border-radius:999px;padding:6px 18px 6px 6px;font:700 15px system-ui,-apple-system,sans-serif;box-shadow:0 10px 28px rgba(0,0,0,.28);cursor:pointer}'+
  '.oc-b img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #E60012}.oc-b .oc-dot{position:absolute;left:38px;top:6px;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #0b0b0c}'+
- '.oc-b small{display:block;font-weight:500;font-size:11.5px;color:#a1a1aa;line-height:1.1}.oc-b span{line-height:1.15;text-align:left}'+
+ '.oc-b small{display:block;font-weight:500;font-size:11.5px;color:#a1a1aa;line-height:1.2;margin-top:1px}.oc-b span{line-height:1.2;text-align:left;max-width:360px}.oc-b b{display:block;font-weight:700}.oc-b .oc-short{display:none}'+
  '.oc-p{position:fixed;right:16px;bottom:84px;z-index:9999;width:min(380px,calc(100vw - 24px));height:min(600px,calc(100vh - 110px));background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.32);display:none;flex-direction:column;overflow:hidden;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#26262b}.oc-p.on{display:flex}'+
  '.oc-h{display:flex;align-items:center;gap:11px;padding:13px 14px;background:#0b0b0c;color:#fff}.oc-h img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none}.oc-h b{display:block;font-size:15.5px}.oc-h small{color:#a1a1aa;font-size:12px}'+
  '.oc-x0{margin-left:auto;background:none;border:0;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:4px 6px;width:auto}'+
@@ -41,18 +41,21 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  '.oc-pre{padding:16px;overflow:auto;background:#fff}.oc-pre p{margin:0 0 10px;font-size:14.5px}.oc-pre label{display:block;font-weight:600;font-size:13.5px;margin:10px 0 4px}.oc-pre label small{font-weight:400;color:#6b6b73}'+
  '.oc-pre input{display:block;width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #d4d4d8;border-radius:10px;font:inherit;font-size:16px;margin:0}.oc-pre input:focus,.oc-f input:focus{outline:2px solid rgba(230,0,18,.25);border-color:#E60012}'+
  '.oc-pre .oc-err{color:#b91c1c;font-size:12.5px;margin:3px 0 0}.oc-pre .oc-cons{font-size:12px;color:#6b6b73;margin:12px 0}.oc-pre .oc-cons a{color:#b8000e}.oc-pre button.oc-go{width:100%;margin-top:4px}'+
- '@media(max-width:600px){.oc-b{right:12px;bottom:12px;padding:5px 14px 5px 5px;font-size:14px}.oc-b img{width:36px;height:36px}.oc-p{right:8px;left:8px;width:auto;bottom:70px;height:calc(100vh - 86px);height:calc(100dvh - 86px)}}';
+ '@media(max-width:600px){.oc-b.oc-seen .oc-full{display:none}.oc-b.oc-seen .oc-short{display:block}}'+
+ '@media(max-width:340px){.oc-b .oc-full{display:none}.oc-b .oc-short{display:block}}'+
+ '@media(max-width:600px){.oc-b{right:12px;bottom:12px;padding:5px 14px 5px 5px;font-size:13.5px;max-width:calc(100vw - 24px)}.oc-b span{max-width:215px}.oc-b small{display:none}.oc-b img{width:36px;height:36px}.oc-b .oc-dot{left:34px}.oc-p{right:8px;left:8px;width:auto;bottom:70px;height:calc(100vh - 86px);height:calc(100dvh - 86px)}}';
  document.head.appendChild(st);
  b=el('button','oc-b');b.type='button';b.setAttribute('aria-label','Chat with Richard Cuagdan');b.style.position='fixed';
  b.innerHTML='<img src="/assets/img/richard-300.webp" alt="" width="40" height="40"><i class="oc-dot"></i><span class="oc-bl"></span>';
  p=el('div','oc-p');p.setAttribute('role','dialog');p.setAttribute('aria-label','Chat with Richard Cuagdan');
  p.innerHTML='<div class="oc-h"><img src="/assets/img/richard-300.webp" alt="" width="42" height="42"><div><b>'+AGENT+'</b><small>'+ROLE+'</small></div><button type="button" class="oc-x0" aria-label="Close">×</button></div><div class="oc-bd"></div>';
  document.body.appendChild(b);document.body.appendChild(p);body=p.querySelector('.oc-bd');label();
- b.onclick=function(){if(p.classList.contains('on'))hide();else show({})};p.querySelector('.oc-x0').onclick=hide;
+ try{if(localStorage.getItem('oc_seen'))b.classList.add('oc-seen')}catch(e){}
+ b.onclick=function(){try{localStorage.setItem('oc_seen','1')}catch(e){}if(p.classList.contains('on'))hide();else show({})};p.querySelector('.oc-x0').onclick=hide;
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))hide()});
  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
  if(pend){var o=pend;pend=null;show(o)}}
-function label(){var l=b&&b.querySelector('.oc-bl');if(l)l.innerHTML=T('Chat kay Richard','Chat with Richard')+'<small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
+function label(){var l=b&&b.querySelector('.oc-bl');if(l)l.innerHTML='<b class="oc-full">'+T('May tanong sa application mo? Chat with us','Questions about your application? Chat with us')+'</b><b class="oc-short">Chat with us</b><small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
 function hide(){p.classList.remove('on');clearInterval(timer);timer=null}
 function show(o){var rs=refSess();
  if(rs){var inl=document.querySelector('#af-rc .rc,#st-rc .rc');if(inl){inl.scrollIntoView({behavior:'smooth',block:'center'});var i=inl.querySelector('.rc-f input');if(i)setTimeout(function(){i.focus()},400);return}
