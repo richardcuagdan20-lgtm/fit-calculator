@@ -53,7 +53,7 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  try{if(localStorage.getItem('oc_seen'))b.classList.add('oc-seen')}catch(e){}
  b.onclick=function(){try{localStorage.setItem('oc_seen','1')}catch(e){}if(p.classList.contains('on'))hide();else show({})};p.querySelector('.oc-x0').onclick=hide;
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))hide()});
- new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);var sr=document.getElementById('st-rc');if(sr)new MutationObserver(label).observe(sr,{childList:true});
+ new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);if(/^\/status\//.test(location.pathname)){var lm;new MutationObserver(function(){var m=appMode();if(m!==lm){lm=m;label()}}).observe(document.body,{childList:true,subtree:true})}
  if(pend){var o=pend;pend=null;show(o)}}
 function appMode(){return /^\/status\/?$/.test(location.pathname)&&!!document.querySelector('#st-rc .rc')}
 function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();
