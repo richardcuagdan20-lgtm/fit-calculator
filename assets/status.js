@@ -1,6 +1,7 @@
 /* Application Status (/status/). Verification: MP- ref + last 4 digits of the application mobile (checked server-side, Apps Script action 'status').
    Shown only when Lead.V4 is true (assets/lead.js). No PII, Drive links or other applicants' data ever come back from the server. */
 (function(){'use strict';
+function AGN(){return window.Lead&&Lead.REFCHAT?'Richard':'Fina'}
 var $=function(i){return document.getElementById(i)},MODE='ref',lang='en',S=null,files={},MAXF=10,MAXB=5*1024*1024,REF=/^MP-[A-HJKMNP-Z2-9]{5}$/;
 function T(t,e){return lang==='en'?e:t}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -10,7 +11,7 @@ function api(o){return fetch(Lead.url,{method:'POST',cache:'no-store',headers:{'
 var SL={'Submitted':['Submitted','s-sub'],'Under review':['Under review','s-rev'],'Approved':['Approved','s-ok'],'Declined':['Declined','s-no'],'Needs more documents':[T('Kailangan ng dagdag na documents','Needs more documents'),'s-doc']};
 var OV={'Received – under review':['Natanggap na – under review','Received – under review'],'Submitted to bank':['Na-submit na sa bank','Submitted to bank'],'Under review':['Under review ng bank','Under review by the bank'],'Needs more documents':['Kailangan ng dagdag na documents','Needs more documents'],'Approved by a bank':['Approved ng isang bank','Approved by a bank'],'Declined':['Declined','Declined']};
 function pill(s){var c={'Submitted':'s-sub','Under review':'s-rev','Approved':'s-ok','Declined':'s-no','Needs more documents':'s-doc','Uploaded':'s-ok','Ready':'s-sub','To follow':'s-doc'}[s]||'s-rev';
-  var lbl={'Needs more documents':T('Kailangan ng dagdag na docs','Needs more documents'),'To follow':T('Susunod / to follow','To follow'),'Ready':T('Ready (ipadala kay Fina)','Ready (send to Fina)')}[s]||s;return '<span class="st-pill '+c+'">'+(s==='Approved'?'✓ ':'')+esc(lbl)+'</span>'}
+  var lbl={'Needs more documents':T('Kailangan ng dagdag na docs','Needs more documents'),'To follow':T('Susunod / to follow','To follow'),'Ready':T('Ready (ipadala kay '+AGN()+')','Ready (send to '+AGN()+')')}[s]||s;return '<span class="st-pill '+c+'">'+(s==='Approved'?'✓ ':'')+esc(lbl)+'</span>'}
 /* Step tracker: Submitted -> Under review -> Sent to bank -> Bank decision (current step derived from the per-bank statuses) */
 function stepOf(d){var st=d.banks.map(function(b){return b.status});if(st.some(function(x){return x==='Approved'||x==='Declined'}))return 4;if(st.length)return 3;return 2}
 function tracker(d){var cur=stepOf(d),L=[[T('Submitted','Submitted'),''],[T('Under review','Under review'),T('Nire-review ng team namin','Our team is reviewing')],[T('Na-send sa bank','Sent to bank'),''],[T('Bank decision','Bank decision'),T('Desisyon ng bank','The bank decides')]];
@@ -29,9 +30,11 @@ function render(){var d=S,ov=OV[d.overall]||[d.overall,d.overall],R=$('st-r');
     '<div class="st-pick"><label>📷 '+T('Kumuha ng Photo','Take Photo')+'<input type="file" accept="image/*" capture="environment" data-i="'+i+'"></label><label>📁 '+T('Pumili ng file','Choose file')+'<input type="file" accept="image/*,application/pdf" data-i="'+i+'"></label></div>'+
     '<p class="st-fn" id="fn'+i+'">'+(f?'📎 '+esc(f.name):'')+'</p></li>'}).join('')+'</ul>'+
    '<p class="st-err" id="up-e" hidden></p><p class="st-ok" id="up-ok" hidden></p><button type="button" class="btn af-big" id="up-btn">'+T('I-send ang documents','Send documents')+' (<span id="up-n">'+Object.keys(files).length+'</span>)</button>'+
-   '<p class="muted small">🔒 '+T('Gagamitin lang ang files mo para sa loan processing. Pwede ring ipadala kay Fina sa chat.','Your files are used only for loan processing. You can also send them to Fina in chat.')+'</p></div>'+
+   '<p class="muted small">🔒 '+T('Gagamitin lang ang files mo para sa loan processing. Pwede ring ipadala kay '+AGN()+' sa chat.','Your files are used only for loan processing. You can also send them to '+AGN()+' in chat.')+'</p></div>'+
+   '<div id="st-rc"></div>'+
    '<p><button type="button" class="btn ghost" id="st-again">'+T('Ibang reference number','Different reference number')+'</button></p>';
   R.innerHTML=h;R.hidden=false;$('st-f').hidden=true;
+  if(window.Lead&&Lead.REFCHAT)(function w(n){if(window.RefChat)RefChat.mount($('st-rc'),{ref:d.ref,last4:d.l4,name:d.first_name,title:'Your conversation with Richard'});else if(n<40)setTimeout(function(){w(n+1)},250)})(0);
   R.querySelectorAll('input[type=file]').forEach(function(b){b.onchange=function(){pick(b)}});
   $('up-btn').onclick=send;$('st-again').onclick=function(){S=null;files={};R.hidden=true;$('st-f').hidden=false}}
 function label(i){return i<S.docs.length?S.docs[i].item:'Other document'}
@@ -48,7 +51,7 @@ function send(){var ks=Object.keys(files),e=$('up-e'),ok=$('up-ok'),b=$('up-btn'
   b.disabled=true;b.textContent=T('Ina-upload...','Uploading...');
   api({action:'upload',leadId:S.ref,last4:S.l4,files:ks.map(function(k){var f=files[k];return {req:f.req,name:f.name,type:f.type,data:f.data}})}).then(function(r){
     if(!r||!r.ok)throw r;files={};return api({action:'status',ref:S.ref,last4:S.l4}).then(function(d){if(d&&d.ok){d.l4=S.l4;S=d}render();var o=$('up-ok');o.textContent=T('Salamat! Natanggap namin ang '+r.saved+' document(s).','Thank you! We received '+r.saved+' document(s).');o.hidden=false;o.scrollIntoView({block:'center'})})})
-  .catch(function(r){b.disabled=false;b.textContent=T('I-send ang documents','Send documents');e.textContent=r&&r.error==='rate'?T('Masyadong maraming upload ngayon. Subukan ulit mamaya o ipadala kay Fina.','Too many uploads right now. Try again later or send them to Fina.'):T('Hindi na-upload. Pakisubukan ulit o ipadala kay Fina sa chat.','Upload failed. Please try again or send them to Fina in chat.');e.hidden=false})}
+  .catch(function(r){b.disabled=false;b.textContent=T('I-send ang documents','Send documents');e.textContent=r&&r.error==='rate'?T('Masyadong maraming upload ngayon. Subukan ulit mamaya o ipadala kay '+AGN()+'.','Too many uploads right now. Try again later or send them to '+AGN()+'.'):T('Hindi na-upload. Pakisubukan ulit o ipadala kay '+AGN()+' sa chat.','Upload failed. Please try again or send them to '+AGN()+' in chat.');e.hidden=false})}
 $('st-f').addEventListener('submit',function(ev){ev.preventDefault();var ref=$('st-ref').value.trim().toUpperCase().replace(/^MP(?=[A-Z0-9]{5}$)/,'MP-'),sn=$('st-sn').value.trim(),l4=$('st-l4').value.replace(/\D/g,''),e=$('st-e'),b=$('st-btn');
   if(MODE==='surname'){if(sn.replace(/[^A-Za-zÀ-ž]/g,'').length<2||l4.length!==4){e.textContent=T('Pakilagay ang apelyido at 4 digits.','Please enter your surname and the 4 digits.');e.hidden=false;return}}
   else if(!REF.test(ref)||l4.length!==4){e.textContent=T('Pakicheck ang reference number (MP-XXXXX) at 4 digits.','Please check the reference number (MP-XXXXX) and the 4 digits.');e.hidden=false;return}
