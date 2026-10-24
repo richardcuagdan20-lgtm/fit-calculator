@@ -17,7 +17,7 @@ function post(o){o.thread=id;return fetch(U,{method:'POST',cache:'no-store',head
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
 function refSess(){try{var s=JSON.parse(sessionStorage.getItem('rc_sess')||'null');if(s&&/^MP-[A-Z0-9]{5}$/.test(s.ref)&&/^\d{4}$/.test(s.last4))return s}catch(e){}return null}
 var api={open:function(o){o=o||{};if(!booted){pend=o;return}show(o)},ready:false};window.SiteChat=api;
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-chat]');if(a&&booted){e.preventDefault();api.open({})}},true);
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-chat]');if(a){e.preventDefault();api.open({})}},true);
 fetch(U,{cache:'no-store'}).then(function(r){return r.json()}).then(function(g){if(g&&g.features&&g.features.indexOf('chat')>=0)boot()}).catch(function(){});
 var b,p,m,body;
 function boot(){booted=true;api.ready=true;document.documentElement.classList.add('oc-on');

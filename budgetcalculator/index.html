@@ -354,7 +354,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <div id="mColWrap"><h4>Available colors</h4><div class="sw" id="mCols"></div><div class="illus" id="mColNote" style="text-align:left;margin-top:8px"></div></div>
 <div class="illus" style="margin-top:12px">Source: Mitsubishi Motors Philippines (mitsubishi-motors.com.ph). Specs and colors may change; please confirm with Richard.</div>
 </div></div>
-<a class="fab" id="fab" href="#" role="button" aria-label="Chat with Richard on Messenger" title="Chat with Richard"><span class="lb">Chat with Richard</span><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg></span></a>
+
 
 <script>
 /* Anti-spam guard: honeypot + min fill time + per-form rate limit + optional Cloudflare Turnstile (invisible). Bots get a silent fake success. */
@@ -690,7 +690,7 @@ function route(){if(location.hash==='#leads'){$('hero').classList.add('hide');re
 $('tdBtn').addEventListener('click',()=>px('Contact',{content_name:'book_test_drive'}));
 $('mX').onclick=closeSpecs;$('mdl').addEventListener('click',e=>{if(e.target.id==='mdl')closeSpecs()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSpecs()});
 window.addEventListener('hashchange',route);route();
-$('fab').addEventListener('click',e=>{e.preventDefault();
+$('fab')&&$('fab').addEventListener('click',e=>{e.preventDefault();
   const L=S.lead||null,unit=(L&&L.chosenUnit?(S.chosen||L.chosenUnit):(S.chosen||S.unitPref))||'none',id=(L&&L.leadId)||'none';
   const url=`${MESSENGER}?ref=${encodeURIComponent('calc_float_'+String(unit).toLowerCase().replace(/[^a-z0-9]+/g,'')+'_'+id)}`;
   if(L){try{copySync(summary());toast('Message copied, paste it in Messenger')}catch(_){}}
@@ -698,5 +698,5 @@ $('fab').addEventListener('click',e=>{e.preventDefault();
   window.open(url,'_blank','noopener');
 });
 </script>
-<script>window.SITECHAT_ON=true;window.SITECHAT_V="0350d5f5"</script><script src="/assets/sitechat.js?v=688fe10a" defer></script></body>
+<script>window.SITECHAT_ON=true;window.SITECHAT_V="02ed7a3a"</script><script src="/assets/sitechat.js?v=688fe10a" defer></script></body>
 </html>

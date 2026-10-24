@@ -110,7 +110,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <p class="disc">Richard Dennis Cuagdan is a sales executive of Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
 <p class="cp">© 2026 Richard Dennis Cuagdan · Mitsubishi SJ Legacy Motors, San Jose del Monte, Bulacan · <a class="adm" href="https://script.google.com/macros/s/AKfycbxkJ1e4Z-Sy0vspk2V7mQwYa1X1lBOgWnR8uk61zXJMykX0zx1zVsM4cDLL86rK9CNK/exec" rel="nofollow noopener" target="_blank" style="opacity:.55;font-size:.9em;color:inherit">Admin</a></p>
 </div></footer>
-<a class="fab" href="{MSG}" rel="noopener" aria-label="Chat with Richard on Messenger"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.2 7.1V22l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg><span>Messenger</span></a>
+
 </body>
 </html>
 '''
@@ -431,8 +431,8 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
 
 # ---------- contact
 page("/contact/","Contact | Mitsubishi Motors - SJ Legacy Motors",
- "Message Richard Cuagdan on Messenger or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
-f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
+ "Chat with Richard Cuagdan on this website or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
+f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is the chat on this website.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Live chat</h2><p>Chat with me here on the website any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
@@ -544,7 +544,7 @@ _LBL={'Message Richard':'Chat with Richard','Message me':'Chat with me','message
 def _chatify(m):
     a,txt=m.group(1),m.group(2)
     if 'class="fbl"' in a or 'data-chat' in a: return m.group(0)
-    a=a.replace('<a ','<a data-chat ',1)
+    a=a.replace('<a ','<a data-chat ',1);a=_re.sub(r'href="https://m\.me/[^"]*"','href="#chat"',a)
     return a+_LBL.get(txt,txt)
 for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if '/_src/' in _f: continue
