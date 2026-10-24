@@ -31,10 +31,10 @@ function render(){var d=S,ov=OV[d.overall]||[d.overall,d.overall],R=$('st-r');
     '<p class="st-fn" id="fn'+i+'">'+(f?'📎 '+esc(f.name):'')+'</p></li>'}).join('')+'</ul>'+
    '<p class="st-err" id="up-e" hidden></p><p class="st-ok" id="up-ok" hidden></p><button type="button" class="btn af-big" id="up-btn">'+T('I-send ang documents','Send documents')+' (<span id="up-n">'+Object.keys(files).length+'</span>)</button>'+
    '<p class="muted small">🔒 '+T('Gagamitin lang ang files mo para sa loan processing. Pwede ring ipadala kay '+AGN()+' sa chat.','Your files are used only for loan processing. You can also send them to '+AGN()+' in chat.')+'</p></div>'+
-   '<div id="st-rc"></div>'+
+   
    '<p><button type="button" class="btn ghost" id="st-again">'+T('Ibang reference number','Different reference number')+'</button></p>';
   R.innerHTML=h;R.hidden=false;$('st-f').hidden=true;
-  if(window.Lead&&Lead.REFCHAT)(function w(n){if(window.RefChat)RefChat.mount($('st-rc'),{ref:d.ref,last4:d.l4,name:d.first_name,title:'Your conversation with Richard'});else if(n<40)setTimeout(function(){w(n+1)},250)})(0);
+  if(window.Lead&&Lead.REFCHAT){try{sessionStorage.setItem('rc_sess',JSON.stringify({ref:d.ref,last4:d.l4,name:d.first_name||''}))}catch(e){}window.__stTracked=d.ref;try{document.dispatchEvent(new CustomEvent('st:tracked'))}catch(e){}}  /* application chat = floating pop-up (assets/chat.js), not inline */
   R.querySelectorAll('input[type=file]').forEach(function(b){b.onchange=function(){pick(b)}});
   $('up-btn').onclick=send;$('st-again').onclick=function(){S=null;files={};R.hidden=true;$('st-f').hidden=false}}
 function label(i){return i<S.docs.length?S.docs[i].item:'Other document'}

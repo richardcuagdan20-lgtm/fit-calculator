@@ -41,7 +41,7 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  '.oc-pre{padding:16px;overflow:auto;background:#fff}.oc-pre p{margin:0 0 10px;font-size:14.5px}.oc-pre label{display:block;font-weight:600;font-size:13.5px;margin:10px 0 4px}.oc-pre label small{font-weight:400;color:#6b6b73}'+
  '.oc-pre input{display:block;width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #d4d4d8;border-radius:10px;font:inherit;font-size:16px;margin:0}.oc-pre input:focus,.oc-f input:focus{outline:2px solid rgba(230,0,18,.25);border-color:#E60012}'+
  '.oc-pre .oc-err{color:#b91c1c;font-size:12.5px;margin:3px 0 0}.oc-pre .oc-cons{font-size:12px;color:#6b6b73;margin:12px 0}.oc-pre .oc-cons a{color:#b8000e}.oc-pre button.oc-go{width:100%;margin-top:4px}'+
- '@media(max-width:600px){.oc-b.oc-seen .oc-full{display:none}.oc-b.oc-seen .oc-short{display:block}}'+
+ '@media(max-width:600px){.oc-b.oc-seen .oc-full{display:none}.oc-b.oc-seen .oc-short{display:block}.oc-b.oc-app .oc-full{display:block!important;font-size:12.5px;white-space:normal;max-width:210px;line-height:1.2}.oc-b.oc-app .oc-short{display:none!important}.oc-b.oc-app small{display:none}}'+
  '@media(max-width:340px){.oc-b .oc-full{display:none}.oc-b .oc-short{display:block}}'+
  '@media(max-width:600px){.oc-b{right:12px;bottom:12px;padding:5px 14px 5px 5px;font-size:13.5px;max-width:calc(100vw - 24px)}.oc-b span{max-width:215px}.oc-b small{display:none}.oc-b img{width:36px;height:36px}.oc-b .oc-dot{left:34px}.oc-p{right:8px;left:8px;width:auto;bottom:70px;height:calc(100vh - 86px);height:calc(100dvh - 86px)}}';
  document.head.appendChild(st);
@@ -53,10 +53,10 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  try{if(localStorage.getItem('oc_seen'))b.classList.add('oc-seen')}catch(e){}
  b.onclick=function(){try{localStorage.setItem('oc_seen','1')}catch(e){}if(p.classList.contains('on'))hide();else show({})};p.querySelector('.oc-x0').onclick=hide;
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))hide()});
- new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);if(/^\/status\//.test(location.pathname)){var lm;new MutationObserver(function(){var m=appMode();if(m!==lm){lm=m;label()}}).observe(document.body,{childList:true,subtree:true})}
+ new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);document.addEventListener('st:tracked',label);
  if(pend){var o=pend;pend=null;show(o)}}
-function appMode(){return /^\/status\/?$/.test(location.pathname)&&!!document.querySelector('#st-rc .rc')}
-function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();b.style.setProperty('display',ap?'none':'','important');var pp=document.querySelector('.oc-p');if(pp&&ap)pp.style.setProperty('display','none','important');
+function appMode(){return /^\/status\/?$/.test(location.pathname)&&!!window.__stTracked&&!!refSess()}
+function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();b.classList.toggle('oc-app',ap);
  l.innerHTML='<b class="oc-full">'+(ap?T('May tanong sa application mo? Chat with us','Questions about your application? Chat with us'):T('Mag-inquire kay Richard','Inquire with Richard'))+'</b><b class="oc-short">'+(ap?'Chat with us':T('Mag-inquire kay Richard','Inquire with Richard'))+'</b><small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
 function hide(){p.classList.remove('on');clearInterval(timer);timer=null}
 function show(o){var rs=refSess();
