@@ -54,5 +54,6 @@ function mount(host,o){if(!host||!o||!o.ref||!/^\d{4}$/.test(o.last4||''))return
  hu.onclick=function(){hu.disabled=true;api({action:'refchat_human',ref:ref,last4:l4,page:location.pathname}).then(function(r){
    sys.push(r&&r.ok?AGENT+' has been notified and will reply here shortly.':'Could not reach '+AGENT+' right now. Please try again in a few minutes.');if(!(r&&r.ok))hu.disabled=false;draw()}).catch(function(){hu.disabled=false})};
  draw([]);poll();timer=setInterval(function(){if(!document.body.contains(host)){clearInterval(timer);return}if(!document.hidden)poll()},8000)}
-window.RefChat={mount:mount,AGENT:AGENT};
+function mount2(h,o){mount(h,o);try{document.dispatchEvent(new CustomEvent('rc:mounted'))}catch(e){}}
+window.RefChat={mount:mount2,AGENT:AGENT};
 })();

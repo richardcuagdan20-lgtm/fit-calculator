@@ -53,9 +53,11 @@ function boot(){booted=true;api.ready=true;document.documentElement.classList.ad
  try{if(localStorage.getItem('oc_seen'))b.classList.add('oc-seen')}catch(e){}
  b.onclick=function(){try{localStorage.setItem('oc_seen','1')}catch(e){}if(p.classList.contains('on'))hide();else show({})};p.querySelector('.oc-x0').onclick=hide;
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))hide()});
- new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+ new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});document.addEventListener('rc:mounted',label);
  if(pend){var o=pend;pend=null;show(o)}}
-function label(){var l=b&&b.querySelector('.oc-bl');if(l)l.innerHTML='<b class="oc-full">'+T('May tanong sa application mo? Chat with us','Questions about your application? Chat with us')+'</b><b class="oc-short">Chat with us</b><small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
+function appMode(){return /^\/status\/?$/.test(location.pathname)&&!!document.querySelector('#st-rc .rc')}
+function label(){var l=b&&b.querySelector('.oc-bl');if(!l)return;var ap=appMode();
+ l.innerHTML='<b class="oc-full">'+(ap?T('May tanong sa application mo? Chat with us','Questions about your application? Chat with us'):T('Mag-inquire kay Richard','Inquire with Richard'))+'</b><b class="oc-short">'+(ap?'Chat with us':T('Mag-inquire','Inquire'))+'</b><small>'+T('Karaniwang sumasagot within the day','Usually replies within the day')+'</small>'}
 function hide(){p.classList.remove('on');clearInterval(timer);timer=null}
 function show(o){var rs=refSess();
  if(rs){var inl=document.querySelector('#af-rc .rc,#st-rc .rc');if(inl){inl.scrollIntoView({behavior:'smooth',block:'center'});var i=inl.querySelector('.rc-f input');if(i)setTimeout(function(){i.focus()},400);return}
