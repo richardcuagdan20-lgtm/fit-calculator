@@ -71,7 +71,7 @@ function openFina(){crispLoad();crispSync();cp('do','chat:open');var g=finaGreet
   ga('chat_open',{provider:'crisp'})}
 function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+T('Magtanong pa sa aming live chat','Ask more questions to our live chat')+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
-var A={lang:'tl'},log=$('la-log'),started=false,stepN=1;
+var A={lang:'en'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 /* Meta Pixel: NO credit/income/assessment-result fields in payloads (Meta restricted-data policy). Only unit name / contact method / Phase-2 ref. */
@@ -86,9 +86,9 @@ function me(t){var d=document.createElement('div');d.className='la-b me';d.inner
 function scroll(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'end'})},40)}
 
 /* ---------- Step 1: contact + consent ---------- */
-function setLang(l){A.lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('la_lang',l)}catch(_){}}
-try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')setLang(sl)}catch(_){}
-try{var ql=new URLSearchParams(location.search).get('lang');if(ql==='en'||ql==='tl')setLang(ql)}catch(_){}
+function setLang(l){A.lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('site_lang',l)}catch(_){}}
+function initLang(){var l='en';try{var s=localStorage.getItem('site_lang');if(s==='en'||s==='tl')l=s}catch(_){}try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='tl'){l=q;localStorage.setItem('site_lang',q)}}catch(_){}return l}
+setLang(initLang());
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 document.querySelectorAll('[data-start]').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.dataset.start);
   $('la-intro').hidden=true;$('la-s1').hidden=false;prog(1);

@@ -9,7 +9,7 @@ var REF_ALPHA='ABCDEFGHJKMNPQRSTUVWXYZ23456789';   // rulebook §5: excludes 0,O
 var REF_RE=/^MP-[A-HJKMNP-Z2-9]{5}$/i;
 var BANNED=/\b(approved|aprobado|sure na|guaranteed|suzuki)\b/ig;
 function safe(s){return String(s).replace(BANNED,'pre-qualified')}
-var U=JSON.parse($('af-units').textContent),lang='tl',P=null;
+var U=JSON.parse($('af-units').textContent),lang='en',P=null;
 function T(t,e){return lang==='en'?e:t}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
@@ -23,7 +23,7 @@ function newRef(){var s='',b=new Uint8Array(1),c=window.crypto||window.msCrypto;
 window.ApplyForm={newRef:newRef,REF_RE:REF_RE};
 
 /* ---------- language ---------- */
-function setLang(l){lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('la_lang',l)}catch(_){}
+function setLang(l){lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('site_lang',l)}catch(_){}
   document.querySelectorAll('option[data-tl]').forEach(function(o){o.textContent=l==='en'?o.dataset.en:o.dataset.tl});renderDocs();unitHints();if(window.__afw){stepT();if(STEP===NST)review()}}
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 
@@ -100,7 +100,7 @@ function prefill(){try{P=JSON.parse(sessionStorage.getItem('mp_app_prefill')||'n
     var pl=$('af-plan');pl.hidden=false;pl.textContent=T('Plan mula sa assessment: ','Plan from your assessment: ')+'DP '+peso(P.plan.dp)+' · '+n+T(' buwan',' months')+' · ~'+peso(P.plan.monthly)+'/mo'+(P.plan.type==='promo'?' (promo, all-in)':T(' (estimate)',' (estimate)'))}
   if(P.docs&&P.docs.missing){var miss=P.docs.missing;Object.keys(REQ).forEach(function(k){REQ[k].forEach(function(x){if(miss.indexOf(x[0])<0&&miss.indexOf(x[1]||x[0])<0)have[x[0]]=true})})}
   if(P.consent_ts)$('consent').checked=false;  // consent is re-confirmed on this form (covers the full application)
-  $('af-pre').hidden=false;if(P.lang==='en'||P.lang==='tl')setLang(P.lang)}
+  $('af-pre').hidden=false;if((P.lang==='en'||P.lang==='tl')&&!/[?&]lang=/.test(location.search))setLang(P.lang)}
 function tu(){var m=document.querySelector('[name=tu]:checked').value==='m';$('term_y').hidden=m;$('term_m').hidden=!m;
   if(m)$('term_m').value=$('term_y').value;else{var x=+$('term_m').value;$('term_y').value=String(Math.max(12,Math.min(60,Math.round(x/12)*12)))}}
 
@@ -218,7 +218,8 @@ function review(){var h='';for(var n=1;n<NST-1;n++){var rows='';
   var R=$('af-review');R.innerHTML=h;R.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){go(+b.dataset.go)}})}
 
 /* ---------- init ---------- */
-try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')lang=sl}catch(_){}
+function initLang(){var l='en';try{var s=localStorage.getItem('site_lang');if(s==='en'||s==='tl')l=s}catch(_){}try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='tl'){l=q;localStorage.setItem('site_lang',q)}}catch(_){}return l}
+lang=initLang();
 document.documentElement.setAttribute('data-lang',lang);
 fillModels();
 $('model').addEventListener('change',fillVariants);$('variant').addEventListener('change',fillColors);$('dp').addEventListener('input',unitHints);

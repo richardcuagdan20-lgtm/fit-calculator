@@ -5,7 +5,7 @@ for m in MODELS:
         price=v["srp"] or (v["promo"] or {}).get("srp")
         AFU.append({"id":v["id"],"slug":m["slug"],"model":m["name"],"n":v["n"],"price":price,"colors":_cl(v["id"]),
                     "opts":[{"dp":_dp(l),"mo":mo} for l,mo in (v["promo"] or {}).get("opts",[])]})
-def O(v,tl,en=None): en=en or tl; return f'<option value="{e(v)}" data-tl="{e(tl)}" data-en="{e(en)}">{e(tl)}</option>'
+def O(v,tl,en=None): en=en or tl; return f'<option value="{e(v)}" data-tl="{e(tl)}" data-en="{e(en)}">{e(en)}</option>'
 def SEL(i,lbl,opts,req=True,extra=""):
     return f'<div class="fld"><label for="{i}">{lbl}{" *" if req else ""}</label><select id="{i}" name="{i}"{" required" if req else ""}{extra}><option value="" data-tl="Pumili" data-en="Select">Pumili</option>{"".join(opts)}</select></div>'
 def INP(i,lbl,t="text",req=True,extra=""):
@@ -33,7 +33,7 @@ AF_CSS='''<style>.af-off{display:none!important}.af-prog{position:sticky;top:0;z
 .cta{display:none!important}.af-errsum{background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:10px 12px;color:#991b1b}
 </style>'''
 AF_BODY=f'''<section class="la-hero"><div class="w">
-<div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="tl">Tagalog / Taglish</button><button type="button" data-setlang="en">English</button></div>
+<div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>
 <p class="kick" style="color:#fca5a5">SJ Legacy Motors · Mitsubishi</p>
 <h1>Official Application Form</h1>
 <p class="lead">{B("Car loan application para sa iyong Mitsubishi. Mga 8–10 minuto. Ang final decision ay sa bank; ire-review namin ang application mo at tutulungan ka ni Fina sa documents.","Car loan application for your Mitsubishi. About 8–10 minutes. The final decision is the bank's; we will review your application and Fina will help you with documents.")}</p>

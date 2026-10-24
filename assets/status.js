@@ -1,10 +1,10 @@
 /* Application Status (/status/). Verification: MP- ref + last 4 digits of the application mobile (checked server-side, Apps Script action 'status').
    Shown only when Lead.V4 is true (assets/lead.js). No PII, Drive links or other applicants' data ever come back from the server. */
 (function(){'use strict';
-var $=function(i){return document.getElementById(i)},MODE='ref',lang='tl',S=null,files={},MAXF=10,MAXB=5*1024*1024,REF=/^MP-[A-HJKMNP-Z2-9]{5}$/;
+var $=function(i){return document.getElementById(i)},MODE='ref',lang='en',S=null,files={},MAXF=10,MAXB=5*1024*1024,REF=/^MP-[A-HJKMNP-Z2-9]{5}$/;
 function T(t,e){return lang==='en'?e:t}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function setLang(l){lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('la_lang',l)}catch(_){}if(S)render()}
+function setLang(l){lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('site_lang',l)}catch(_){}if(S)render()}
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 function api(o){return fetch(Lead.url,{method:'POST',cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(o)}).then(function(r){return r.json()})}
 var SL={'Submitted':['Submitted','s-sub'],'Under review':['Under review','s-rev'],'Approved':['Approved','s-ok'],'Declined':['Declined','s-no'],'Needs more documents':[T('Kailangan ng dagdag na documents','Needs more documents'),'s-doc']};
@@ -56,7 +56,8 @@ $('st-f').addEventListener('submit',function(ev){ev.preventDefault();var ref=$('
   api(MODE==='surname'?{action:'status',surname:sn,last4:l4}:{action:'status',ref:ref,last4:l4}).then(function(d){b.disabled=false;b.textContent=T('Tingnan ang status','Check status');
     if(!d||!d.ok){e.textContent=d&&d.error==='rate'?T('Masyadong maraming subok. Subukan ulit pagkalipas ng 1 oras.','Too many attempts. Please try again in an hour.'):(MODE==='surname'?T('Hindi namin mahanap ang application na may ganitong apelyido at mobile digits. Pakicheck at subukan ulit, o gamitin ang reference number.','We could not find an application with that surname and mobile digits. Please check and try again, or use your reference number.'):T('Hindi namin mahanap ang application na may ganitong reference number at mobile digits. Pakicheck at subukan ulit.','We could not find an application with that reference number and mobile digits. Please check and try again.'));e.hidden=false;return}
     d.l4=l4;S=d;if(d.ref)$('st-ref').value=d.ref;files={};render();window.scrollTo(0,0)}).catch(function(){b.disabled=false;b.textContent=T('Tingnan ang status','Check status');e.textContent=T('May problema sa connection. Pakisubukan ulit.','Connection problem. Please try again.');e.hidden=false})});
-try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')lang=sl}catch(_){}
+function initLang(){var l='en';try{var s=localStorage.getItem('site_lang');if(s==='en'||s==='tl')l=s}catch(_){}try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='tl'){l=q;localStorage.setItem('site_lang',q)}}catch(_){}return l}
+lang=initLang();
 document.documentElement.setAttribute('data-lang',lang);
 var on=window.Lead&&Lead.V4;$('st-off').hidden=!!on;$('st-f').hidden=!on;
 function mode(m){MODE=m;document.querySelectorAll('#st-tabs [data-mode]').forEach(function(x){x.setAttribute('aria-selected',x.dataset.mode===m?'true':'false')});$('st-refw').hidden=m!=='ref';$('st-snw').hidden=m!=='surname';$('st-e').hidden=true}

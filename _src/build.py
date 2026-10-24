@@ -140,7 +140,8 @@ FREE_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in FREEBIES)+"</ul>
 def from_txt(m):
     s=srp_from(m); return f'SRP from <b>{f(s)}</b>' if s else 'Ask for price'
 UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}" data-model="{m["slug"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
-LACTA='<aside class="lacta"><h2>Pasok ka ba sa car loan?</h2><p>Alamin sa loob ng 3 minuto gamit ang libreng AI Car Loan Application Assessment. Walang documents na kailangan.</p><a class="btn" href="/loan-assessment/">Simulan ang AI Car Loan Application Assessment</a></aside>'
+LACTA='<aside class="lacta"><h2>Will you qualify for a car loan?</h2><p>Find out in 3 minutes with the free AI Car Loan Application Assessment. No documents needed. Your result is a Pre-qualified estimate; financing is subject to bank approval.</p><a class="btn" href="/loan-assessment/">Start the AI Car Loan Application Assessment</a></aside>'
+LACTA_TL='<aside class="lacta"><h2>Pasok ka ba sa car loan?</h2><p>Alamin sa loob ng 3 minuto gamit ang libreng AI Car Loan Application Assessment. Walang documents na kailangan.</p><a class="btn" href="/loan-assessment/?lang=tl">Simulan ang AI Car Loan Application Assessment</a></aside>'
 CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
 
 # ---------- HOME
@@ -479,11 +480,29 @@ for _l in ("tl","en"):
     _s=_s.replace('with all-in Zero DP and low-DP options.','with all-in down payment and monthly options.')
     _s=_re.sub(r'<li><a href="/(?:blog|tips|guides)/[^"]*zero[^"]*/">[^<]*</a></li>','',_s)
     _s=_re.sub(r'<li><a href="/mitsubishi-zero-down-payment-promo/">[^<]*</a></li>','',_s)
-    if _l=="en": _s=_s.replace(LACTA,'<aside class="lacta"><h2>Will you qualify for a car loan?</h2><p>Find out in 3 minutes with the free AI Car Loan Application Assessment. No documents needed. Your result is a Pre-qualified estimate; financing is subject to bank approval.</p><a class="btn" href="/loan-assessment/?lang=en">Start the AI Car Loan Application Assessment</a></aside>')
+    if _l=="tl": _s=_s.replace(LACTA,LACTA_TL)
     _s=_s.replace('href="/loan-assessment/"',f'href="/loan-assessment/?lang={_l}"')
     open(_zp,'w').write(_s)
 os.makedirs(R+f'/blog/{_ZO}',exist_ok=True)
 open(R+f'/blog/{_ZO}/index.html','w').write(f'<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Paano Ma-approve sa Car Loan</title><link rel="canonical" href="{D}/blog/{_ZS["tl"]}/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/{_ZS["tl"]}/"><script>location.replace("/blog/{_ZS["tl"]}/"+location.search+location.hash)</script></head><body><p>This guide has moved to <a href="/blog/{_ZS["tl"]}/">Paano Ma-approve sa Car Loan</a>.</p></body></html>\n')
+# ---------- English-default: EN twin primary in listings; Taglish-only tips get html lang + EN pointer
+import glob as _gl
+_TLG=_ZS["tl"]
+for _f in _gl.glob(R+"/**/index.html",recursive=True):
+    if f"/blog/{_TLG}/" in _f or f"/blog/{_ZO}/" in _f or "/tips/paano-" in _f: continue
+    _s=open(_f).read();_o=_s
+    _s=_re.sub(r'<li class="card pad"><h2 class="h3"><a href="/blog/'+_TLG+r'/">.*?</li>','',_s,flags=_re.S)
+    _s=_re.sub(r'<li><a href="/blog/'+_TLG+r'/">[^<]*</a></li>','',_s)
+    _s=_s.replace(f'href="/blog/{_TLG}/"',f'href="/blog/{_ZS["en"]}/"')
+    if _s!=_o: open(_f,"w").write(_s)
+TL_ONLY={"tips/paano-mag-car-loan":("/blog/how-to-get-car-loan-approved-philippines/","Read the English car loan guide →"),
+         "tips/paano-bumili-ng-bagong-sasakyan":("/tips/first-time-car-buyer-checklist/","Read the English first-time car buyer checklist →")}
+for _k,(_u,_t) in TL_ONLY.items():
+    _f=R+"/"+_k+"/index.html";_s=open(_f).read()
+    _s=_s.replace('<html lang="en-PH">','<html lang="fil-PH">',1).replace('<meta property="og:locale" content="en_PH">','<meta property="og:locale" content="fil_PH">',1)
+    _s=_s.replace('<article class="art"><div class="w nar"><header>',f'<article class="art"><div class="w nar"><p class="zlang"><a href="{_u}" hreflang="en-PH" lang="en">{_t}</a></p><header>',1)
+    _s=_s.replace(LACTA,LACTA_TL)
+    open(_f,"w").write(_s)
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
