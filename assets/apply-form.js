@@ -24,7 +24,7 @@ window.ApplyForm={newRef:newRef,REF_RE:REF_RE};
 
 /* ---------- language ---------- */
 function setLang(l){lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('la_lang',l)}catch(_){}
-  document.querySelectorAll('option[data-tl]').forEach(function(o){o.textContent=l==='en'?o.dataset.en:o.dataset.tl});renderDocs();unitHints()}
+  document.querySelectorAll('option[data-tl]').forEach(function(o){o.textContent=l==='en'?o.dataset.en:o.dataset.tl});renderDocs();unitHints();if(window.__afw){stepT();if(STEP===NST)review()}}
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 
 /* ---------- conditional sections ---------- */
@@ -108,8 +108,9 @@ function tu(){var m=document.querySelector('[name=tu]:checked').value==='m';$('t
 function age(d){var b=new Date(d+'T00:00'),n=new Date(),a=n.getFullYear()-b.getFullYear(),m=n.getMonth()-b.getMonth();if(m<0||(m===0&&n.getDate()<b.getDate()))a--;return a}
 function mob(v){return /^(09\d{9}|\+639\d{9}|\+\d{8,15})$/.test(v.replace(/[\s()-]/g,''))}
 function flag(el,msg){var er=el.parentNode.querySelector('.er.af-e');if(msg){el.setAttribute('aria-invalid','true');if(!er){er=document.createElement('p');er.className='er af-e';el.parentNode.appendChild(er)}er.textContent=msg;er.hidden=false}else{el.removeAttribute('aria-invalid');if(er)er.hidden=true}return !!msg}
-function validate(){var bad=[];
-  document.querySelectorAll('#af input,#af select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio'||el.classList.contains('as-hp'))return;if(el.closest('[hidden]')){flag(el,'');return}
+function inS(el,st){if(!st)return true;var c=el.closest('[data-step]');return !!c&&+c.dataset.step===st}
+function validate(st){var bad=[],has=function(i){return inS($(i),st)};
+  document.querySelectorAll('#af input,#af select').forEach(function(el){if(!inS(el,st))return;if(el.type==='checkbox'||el.type==='radio'||el.classList.contains('as-hp'))return;if(el.closest('[hidden]')){flag(el,'');return}
     var v=String(el.value).trim(),m='';
     if(el.required&&!v)m=T('Kailangan ito.','This is required.');
     else if(v&&el.dataset.v==='mobile'&&!mob(v))m=T('Pakilagay ang tamang mobile (09XXXXXXXXX o +639XXXXXXXXX).','Enter a valid mobile (09XXXXXXXXX or +639XXXXXXXXX).');
@@ -117,11 +118,11 @@ function validate(){var bad=[];
     else if(v&&el.dataset.v==='num'&&(isNaN(+v)||+v<0))m=T('Pakilagay ang tamang numero.','Enter a valid number.');
     else if(v&&el.dataset.v==='dob'&&(isNaN(new Date(v))||age(v)<18||age(v)>75))m=T('Dapat 18 pataas ang edad.','Applicant must be 18 or older.');
     if(flag(el,m))bad.push(el)});
-  var me=val('mobile').replace(/\D/g,'').slice(-10);['ref1_mobile','ref2_mobile'].forEach(function(i){var x=$(i);if(x.getAttribute('aria-invalid')!=='true'&&me&&val(i).replace(/\D/g,'').slice(-10)===me&&flag(x,T('Dapat iba sa sarili mong number.','Must be different from your own number.')))bad.push(x)});
-  if(val('ref1_mobile')&&val('ref1_mobile').replace(/\D/g,'').slice(-10)===val('ref2_mobile').replace(/\D/g,'').slice(-10)&&flag($('ref2_mobile'),T('Dapat magkaiba ang number ng 2 references.','The 2 references need different numbers.')))bad.push($('ref2_mobile'));
-  var u=unit(),dp=parseFloat(val('dp'));if(u&&u.price&&dp>=u.price&&flag($('dp'),T('Mas mataas sa presyo ang DP.','DP is higher than the price.')))bad.push($('dp'));
-  var c=!$('consent').checked;$('e_consent').hidden=!c;if(c)bad.push($('consent'));
-  $('af-errsum').hidden=!bad.length;if(bad.length){bad[0].scrollIntoView({block:'center'});try{bad[0].focus({preventScroll:true})}catch(_){}}return !bad.length}
+  if(has('ref1_mobile')){var me=val('mobile').replace(/\D/g,'').slice(-10);['ref1_mobile','ref2_mobile'].forEach(function(i){var x=$(i);if(x.getAttribute('aria-invalid')!=='true'&&me&&val(i).replace(/\D/g,'').slice(-10)===me&&flag(x,T('Dapat iba sa sarili mong number.','Must be different from your own number.')))bad.push(x)});
+  if(val('ref1_mobile')&&val('ref1_mobile').replace(/\D/g,'').slice(-10)===val('ref2_mobile').replace(/\D/g,'').slice(-10)&&flag($('ref2_mobile'),T('Dapat magkaiba ang number ng 2 references.','The 2 references need different numbers.')))bad.push($('ref2_mobile'))}
+  var u=unit(),dp=parseFloat(val('dp'));if(has('dp')&&u&&u.price&&dp>=u.price&&flag($('dp'),T('Mas mataas sa presyo ang DP.','DP is higher than the price.')))bad.push($('dp'));
+  if(has('consent')){var c=!$('consent').checked;$('e_consent').hidden=!c;if(c)bad.push($('consent'))}
+  if(st){$('af-serr').hidden=!bad.length}else $('af-errsum').hidden=!bad.length;if(bad.length){bad[0].scrollIntoView({block:'center'});try{bad[0].focus({preventScroll:true})}catch(_){}}return !bad.length}
 
 /* ---------- submit ---------- */
 function ymv(i){return (+val(i+'_y')||0)*12+(+val(i+'_m')||0)}
@@ -153,7 +154,7 @@ function crispSet(a){crispLoad();var v=a.vehicle,nm=[a.applicant.full_name.first
   if(a.assessment){if(a.assessment.result)d.push(['result',a.assessment.result]);if(a.assessment.lead_id)d.push(['lead_id',a.assessment.lead_id]);if(a.assessment.plan)d.push(['monthly_est',String(a.assessment.plan.monthly)])}
   cp('set','session:data',[d]);cp('set','session:segments',[['official_application','loan_assessment']])}
 function finaText(a){var m=a.documents.missing;return T('Hi Fina! Na-submit ko na ang Official Application Form. Ref: '+a.ref_no+'. Unit: '+a.vehicle.variant+'.'+(m.length?' Kulang pa: '+m.join(', ')+'.':' Kumpleto na ang documents ko.')+' Paano ko ipapadala ang documents?','Hi Fina! I submitted the Official Application Form. Ref: '+a.ref_no+'. Unit: '+a.vehicle.variant+'.'+(m.length?' Still missing: '+m.join(', ')+'.':' My documents are complete.')+' How do I send my documents?')}
-function done(a){DONE=a;var m=a.documents.missing,pq=a.assessment&&a.assessment.result==='PRE_QUALIFIED';
+function done(a){DONE=a;try{sessionStorage.removeItem(DKEY)}catch(_){}var m=a.documents.missing,pq=a.assessment&&a.assessment.result==='PRE_QUALIFIED';
   $('af-wrap').hidden=true;var D=$('af-done');D.hidden=false;
   D.innerHTML=safe('<p class="kick">'+T('Natanggap na ang application mo','Your application was received')+'</p><h2 class="h3">'+T('Salamat, ','Thank you, ')+esc(a.applicant.full_name.first)+'!</h2>'+
    '<p>'+T('Reference number mo:','Your reference number:')+'</p><p class="af-ref" id="af-refno">'+esc(a.ref_no)+'</p>'+
@@ -165,7 +166,7 @@ function done(a){DONE=a;var m=a.documents.missing,pq=a.assessment&&a.assessment.
    (window.Lead&&Lead.V4?'<div class="la-card" style="margin:12px 0"><p><b>'+T('I-track ang application mo','Track your application')+'</b></p><p>'+T('Gamitin ang reference number <b>'+esc(a.ref_no)+'</b> at huling 4 digits ng mobile mo para makita ang status at mag-upload ng kulang na requirements.','Use reference number <b>'+esc(a.ref_no)+'</b> and the last 4 digits of your mobile to check your status and upload missing requirements.')+'</p><p><a class="btn ghost" href="/status/?ref='+encodeURIComponent(a.ref_no)+'">'+T('Track your application','Track your application')+' →</a></p></div>':'')+'<button type="button" class="btn la-fina af-big" id="af-fina">💬 '+T('Makipag-chat kay Fina','Chat with Fina')+'</button>');
   $('af-fina').onclick=function(){crispSet(a);cp('do','chat:open');cp('set','message:text',[finaText(a)]);ga('chat_open',{provider:'crisp',form:'official_application'})};
   window.scrollTo(0,0)}
-$('af').addEventListener('submit',function(ev){ev.preventDefault();if(!validate())return;
+$('af').addEventListener('submit',function(ev){ev.preventDefault();for(var q=1;q<=NST;q++){if(!validate(q)){go(q);validate(q);return}}if(!validate())return;
   var btn=$('af-btn'),ref=newRef(),a=collect(ref);btn.disabled=true;btn.textContent=T('Sine-send...','Sending...');
   var L=Lead.base('official_application');L.tag='official_application';L.refNo=ref;L.leadId=ref;L.status='SUBMITTED';
   L.name=[a.applicant.full_name.first,a.applicant.full_name.middle,a.applicant.full_name.last,a.applicant.full_name.suffix].filter(Boolean).join(' ');L.mobile=a.applicant.mobile;L.email=a.applicant.email;
@@ -176,9 +177,45 @@ $('af').addEventListener('submit',function(ev){ev.preventDefault();if(!validate(
   L.usage=['OFFICIAL APPLICATION '+ref,'Unit: '+a.vehicle.variant+' / '+a.vehicle.color,'DP '+peso(a.vehicle.dp_amount)+', '+a.vehicle.term_months+' mo','Emp: '+a.income.employment_type+' @ '+a.income.employer_name,'Gross '+peso(a.income.gross_monthly_income),'Missing docs: '+(a.documents.missing.join('; ')||'none'),'Docs status: '+docStatus().join('; '),'Lang: '+lang].join(' | ');
   L.docsStatus=docStatus().join(' | ');L.docsToFollow=a.documents.missing.join('; ');L.application=JSON.stringify(a);
   Lead.send(L).then(function(ok){if(ok===false)throw 0;return sendFiles(ref,L)}).then(function(){
-    try{sessionStorage.removeItem('mp_app_prefill')}catch(_){}
+    try{sessionStorage.removeItem('mp_app_prefill');sessionStorage.removeItem(DKEY)}catch(_){}
     if(!Lead.skipped()){px('SubmitApplication',{});ga('submit_application',{form:'official_application'})}
     done(a)}).catch(function(){btn.disabled=false;btn.textContent=T('I-submit ang application','Submit application');$('af-errsum').hidden=false;$('af-errsum').textContent=T('Hindi na-send. Pakisubukan ulit.','Not sent. Please try again.')})});
+
+/* ---------- wizard: steps = .la-card[data-step] (1 Unit, 2 Personal, 3 Address, 4 Work, 5 Co-maker/refs, 6 Requirements, 7 Review) ---------- */
+var NST=7,STEP=1,DKEY='mp_app_draft';
+var SN=[['Unit at loan','Unit & loan'],['Personal info','Personal info'],['Address at contact','Address & contact'],['Trabaho / income','Work / income'],['Co-maker at references','Co-maker & references'],['Requirements','Requirements'],['Review at submit','Review & submit']];
+function stepT(){$('af-pn').textContent=T('Step '+STEP+' of '+NST,'Step '+STEP+' of '+NST);$('af-pt').textContent='· '+T(SN[STEP-1][0],SN[STEP-1][1]);$('af-pb').style.width=Math.round(STEP/NST*100)+'%'}
+function go(n,quiet){STEP=Math.max(1,Math.min(NST,n));document.querySelectorAll('#af [data-step]').forEach(function(c){c.classList.toggle('af-off',+c.dataset.step!==STEP)});
+  document.querySelectorAll('#af [data-num]').forEach(function(x){x.textContent=''});
+  $('af-back').hidden=STEP===1;$('af-next').hidden=STEP===NST;$('af-serr').hidden=true;$('af-errsum').hidden=true;stepT();if(STEP===NST)review();save();
+  if(!quiet){var f=$('af-prog');try{f.scrollIntoView({block:'start'})}catch(_){window.scrollTo(0,0)}}
+  ga('apply_step',{step:STEP})}
+$('af-next').addEventListener('click',function(){if(validate(STEP))go(STEP+1)});
+$('af-back').addEventListener('click',function(){go(STEP-1)});
+/* autosave (sessionStorage; files are not saved, only per-requirement choices) */
+function save(){if(DONE){try{sessionStorage.removeItem(DKEY)}catch(_){}return}try{var d={step:STEP,v:{},have:have,later:later};document.querySelectorAll('#af input,#af select').forEach(function(el){if(!el.id||el.type==='file'||el.classList.contains('as-hp'))return;d.v[el.id]=el.type==='checkbox'?el.checked:el.value});
+  var t=document.querySelector('[name=tu]:checked');d.tu=t?t.value:'y';sessionStorage.setItem(DKEY,JSON.stringify(d));$('af-saved').hidden=false}catch(_){}}
+function restore(){var d;try{d=JSON.parse(sessionStorage.getItem(DKEY)||'null')}catch(_){d=null}if(!d||!d.v)return;
+  var V=d.v;if(V.model){setV('model',V.model);fillVariants();setV('variant',V.variant);fillColors();setV('color',V.color)}
+  Object.keys(V).forEach(function(i){if(/^(model|variant|color|consent)$/.test(i))return;var el=$(i);if(!el)return;if(el.type==='checkbox')el.checked=!!V[i];else if(V[i]!=='')el.value=V[i]});
+  if(d.tu==='m'){document.querySelector('[name=tu][value=m]').checked=true;$('term_y').hidden=true;$('term_m').hidden=false}
+  have=d.have||have;later=d.later||later;STEP=+d.step||1}
+window.addEventListener('pagehide',function(){if(!DONE)save()});document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&!DONE)save()});
+var stimer=null;$('af').addEventListener('input',function(){clearTimeout(stimer);stimer=setTimeout(save,400)});$('af').addEventListener('change',function(){clearTimeout(stimer);stimer=setTimeout(save,200)});
+/* review */
+function shown(el){return !el.closest('[hidden]')}
+function review(){var h='';for(var n=1;n<NST-1;n++){var rows='';
+  document.querySelectorAll('#af [data-step="'+n+'"]').forEach(function(card){if(card.hasAttribute('hidden'))return;
+    card.querySelectorAll('input,select').forEach(function(el){if(!el.id||el.type==='file'||el.type==='radio'||el.type==='checkbox'||el.classList.contains('as-hp')||!shown(el))return;
+      var v=el.tagName==='SELECT'?(el.value?el.options[el.selectedIndex].textContent:''):String(el.value).trim();if(!v)return;
+      var lb=card.querySelector('label[for="'+el.id+'"]'),l=lb?(lb.querySelector(lang==='en'?'.en':'.tl')||lb).textContent.replace(/\s*\*$/,''):(el.getAttribute('aria-label')||el.id);
+      if(/_m$/.test(el.id)&&$(el.id.replace(/_m$/,'_y')))return;if(/_y$/.test(el.id)&&$(el.id.replace(/_y$/,'_m'))&&el.id!=='term_y'){v=v+' '+T('taon','yr')+' '+val(el.id.replace(/_y$/,'_m'))+' '+T('buwan','mo')}
+      if(el.id==='term_y'||el.id==='term_m'){if(el.hidden)return;l='Term'}
+      rows+='<dt>'+esc(l)+'</dt><dd>'+esc(v)+'</dd>'})});
+  if(n===1&&rows)rows+='';
+  h+='<div class="af-rv"><h3>'+esc(n+'. '+T(SN[n-1][0],SN[n-1][1]))+'<button type="button" data-go="'+n+'">Edit</button></h3><dl>'+(rows||'<dt>-</dt><dd>'+T('Wala / skipped','None / skipped')+'</dd>')+'</dl></div>'}
+  h+='<div class="af-rv"><h3>6. Requirements<button type="button" data-go="6">Edit</button></h3><dl>'+reqList().map(function(x){var s=stat(x[0]);return '<dt>'+esc(lang==='en'&&x[1]?x[1]:x[0])+'</dt><dd>'+esc(s==='Uploaded'?'📎 Uploaded':s==='To follow'?'⏳ '+T('Susunod / to follow','To follow'):'✅ '+T('Meron na','Ready'))+'</dd>'}).join('')+'</dl></div>';
+  var R=$('af-review');R.innerHTML=h;R.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){go(+b.dataset.go)}})}
 
 /* ---------- init ---------- */
 try{var sl=localStorage.getItem('la_lang');if(sl==='en'||sl==='tl')lang=sl}catch(_){}
@@ -187,7 +224,7 @@ fillModels();
 $('model').addEventListener('change',fillVariants);$('variant').addEventListener('change',fillColors);$('dp').addEventListener('input',unitHints);
 document.querySelectorAll('[name=tu]').forEach(function(r){r.addEventListener('change',tu)});
 ['emp','civil','cm','res'].forEach(function(i){$(i).addEventListener('change',function(){vis();renderDocs()})});
-prefill();setLang(lang);vis();renderDocs();
+window.__afw=1;prefill();restore();setLang(lang);vis();renderDocs();go(STEP,true);
 if(P)crispLoad();   // consent already given in the assessment; floating chat stays available (no auto-open)
 document.addEventListener('DOMContentLoaded',function(){try{AS.init($('af'))}catch(_){}});
 })();
