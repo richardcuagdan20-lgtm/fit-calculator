@@ -411,9 +411,9 @@ body='''<p>"Kaya ko ba talaga?" is the most important question before buying a c
 dict(base="blog",car="triton",slug="triton-for-business-and-farm",date="2026-10-22",by=BY,img="tr_gx_u28",alt="Mitsubishi Triton GX pickup for business and farm use",
 title="Mitsubishi Triton for Business and Farm Use",
 desc="Is the Triton the right pickup for your negosyo, farm or resort? 2WD vs 4WD, cargo bed tips, the October 2026 Triton GX AT promo, and financing.",
-answer="The Mitsubishi Triton is a 2.4L turbo-diesel pickup with a cargo bed, offered in 2WD and 4WD and in manual or automatic by variant. It suits contractors, farms, resorts and businesses that haul supplies on weekdays and carry the family on weekends. In October 2026, the Triton GX AT is ₱1,430,000 SRP, from ₱28,900 a month at Zero DP or ₱25,200 a month with ₱140K DP, plus ₱20K fuel.",
+answer="The Mitsubishi Triton is a 2.4L turbo-diesel pickup with a cargo bed, offered in 2WD and 4WD and in manual or automatic by variant. It suits contractors, farms, resorts and businesses that haul supplies on weekdays and carry the family on weekends. In October 2026, the Triton GX AT is ₱1,430,000 SRP, from ₱28,900 a month at Zero DP or ₱25,200 a month with ₱140K DP, plus 20K fuel.",
 faq=[("Should I get a 2WD or 4WD Triton?","Choose 2WD if your routes are paved or well-maintained provincial roads. Choose 4WD if you regularly drive on mud, steep farm roads, river crossings or unpaved hills."),
-("How much is the Triton GX AT promo in October 2026?","SRP ₱1,430,000. Zero DP at ₱28,900 a month or ₱140K DP at ₱25,200 a month on 60 months, all-in, with ₱20K fuel. Subject to bank approval."),
+("How much is the Triton GX AT promo in October 2026?","SRP ₱1,430,000. Zero DP at ₱28,900 a month or ₱140K DP at ₱25,200 a month on 60 months, all-in, with 20K fuel. Subject to bank approval."),
 ("Can a business finance a Triton?","Yes. Self-employed buyers and businesses commonly submit business registration, ITR or financial statements and bank statements. Approval is subject to bank evaluation."),
 ("Is a pickup comfortable for the family?","The Triton is a double-cab pickup with a rear seat, so it can do family duty on weekends. Bring your family to the test drive to check the rear seat.")],
 body='''<p>Sa probinsya at sa negosyo, a pickup does two jobs. Monday to Saturday it carries sacks of feed, hollow blocks, tools or resort supplies. On Sunday it takes the family to church and lunch. That's the job the <a href="/cars/triton/">Mitsubishi Triton</a> was built for.</p>
@@ -445,7 +445,7 @@ body='''<p>Sa probinsya at sa negosyo, a pickup does two jobs. Monday to Saturda
 
 <h2>The October 2026 Triton GX AT promo</h2>
 '''+T(["Triton GX 2.4D 2WD A/T","Monthly (60 months)"],[("Zero DP","₱28,900"),("₱140K DP","₱25,200")])+'''
-<p>SRP ₱1,430,000, all-in, plus ₱20K fuel. Using the 30–35% income guide, the Zero DP monthly fits a gross monthly income of roughly ₱82,600 to ₱96,300. For other Triton variants, message me for the latest promo.</p>
+<p>SRP ₱1,430,000, all-in, plus 20K fuel. Using the 30–35% income guide, the Zero DP monthly fits a gross monthly income of roughly ₱82,600 to ₱96,300. For other Triton variants, message me for the latest promo.</p>
 '''+PN+'''
 
 <h2>Cargo bed tips for working owners</h2>
@@ -480,9 +480,9 @@ body='''<p>The <a href="/cars/montero-sport/">Montero Sport</a> is the full-size
 <h2>The four variants, side by side</h2>
 '''+T(["Variant","SRP","Promo monthly (60 mos)"],[
 ("GLX 2.4D 2WD M/T","₱1,568,000","Zero DP ₱30,284 · ₱30K DP ₱28,265"),
-("GLS 2.4D 2WD A/T","₱1,927,000","Zero DP ₱39,699 · ₱138K DP ₱37,218 · ₱20K fuel"),
-("Black Series 2.4D 2WD A/T","₱2,190,000","₱88K DP ₱45,117 · ₱218K DP ₱42,297 · ₱20K fuel"),
-("Black Series 2.4D 4WD A/T","₱2,530,000","₱133K DP ₱52,121 · ₱283K DP ₱48,864 · ₱20K fuel")])+PN+'''
+("GLS 2.4D 2WD A/T","₱1,927,000","Zero DP ₱39,699 · ₱138K DP ₱37,218 · 20K fuel"),
+("Black Series 2.4D 2WD A/T","₱2,190,000","₱88K DP ₱45,117 · ₱218K DP ₱42,297 · 20K fuel"),
+("Black Series 2.4D 4WD A/T","₱2,530,000","₱133K DP ₱52,121 · ₱283K DP ₱48,864 · 20K fuel")])+PN+'''
 
 <h2>GLX MT: the value pick</h2>
 <p>The GLX uses a <b>6-speed manual</b> and is the most affordable way into a Montero Sport. It suits buyers who are comfortable with a clutch, drive long highway stretches, or want the diesel SUV body and torque at the lowest monthly. At ₱28,265 a month with just ₱30K down, it's the entry point.</p>
@@ -508,27 +508,27 @@ dict(base="blog",car="xpander",slug="xpander-variants-explained",date="2026-10-2
 title="Xpander GLX MT vs GLX AT vs GLS vs Cross",
 desc="Which Xpander should you get? GLX MT, GLX AT, GLS AT or Xpander Cross compared, with October 2026 promo monthlies, fuel freebies and who each fits.",
 answer="All four seat seven and use the same 1.5L MIVEC gasoline engine (105 PS, 141 Nm). The GLX MT (₱1,099,000) is the lowest monthly at ₱22,641 Zero DP. The GLX AT (₱1,159,000) adds a 4-speed automatic. The GLS AT (₱1,259,000) is the higher trim, and the Xpander Cross (₱1,378,000) adds a rugged crossover look and a more premium cabin.",
-faq=[("Which Xpander variant is cheapest?","The Xpander GLX MT, at ₱1,099,000 SRP. In October 2026 it's ₱22,641 a month at Zero DP or ₱19,811 with ₱148K DP, plus ₱30K fuel."),
+faq=[("Which Xpander variant is cheapest?","The Xpander GLX MT, at ₱1,099,000 SRP. In October 2026 it's ₱22,641 a month at Zero DP or ₱19,811 with ₱148K DP, plus 30K fuel."),
 ("Is the Xpander Cross more powerful than the Xpander?","No. Both use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm and a 4-speed automatic on the AT units. The Cross differs in styling and cabin."),
 ("Manual or automatic Xpander?","Get the manual for the lowest monthly if you're comfortable with a clutch. Get the automatic if you sit in daily traffic or if several family members will drive."),
-("Which Xpander gets the biggest fuel freebie?","In October 2026, the GLX AT, GLS AT and Xpander Cross each come with ₱60K fuel; the GLX MT comes with ₱30K.")],
+("Which Xpander gets the biggest fuel freebie?","In October 2026, the GLX AT, GLS AT and Xpander Cross each come with 60K fuel; the GLX MT comes with 30K.")],
 body='''<p>The <a href="/cars/xpander/">Xpander</a> is the car I'm asked about most on the showroom floor. The question is usually not "Xpander o hindi?" but "Alin sa Xpander?" Here's how the four choices differ, with this month's promo numbers.</p>
 
 <h2>Same engine, different packages</h2>
 <p>Every Xpander and the <a href="/cars/xpander-cross/">Xpander Cross</a> share a 1.5L in-line 4 DOHC 16-valve MIVEC gasoline engine with 105 PS and 141 Nm, and seven seats. What changes is the transmission, the trim and the look.</p>
 
 <h2>October 2026 promos at a glance</h2>
-'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[
-("GLX 1.5G M/T","₱1,099,000","₱22,641","₱148K DP: ₱19,811","₱30K"),
-("GLX 1.5G A/T","₱1,159,000","₱23,877","₱138K DP: ₱20,892","₱60K"),
-("GLS 1.5G A/T","₱1,259,000","₱25,937","₱148K DP: ₱22,695","₱60K"),
-("Xpander Cross A/T","₱1,378,000","₱28,389","₱148K DP: ₱24,840","₱60K")])+PN+'''
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel points"],[
+("GLX 1.5G M/T","₱1,099,000","₱22,641","₱148K DP: ₱19,811","30K"),
+("GLX 1.5G A/T","₱1,159,000","₱23,877","₱138K DP: ₱20,892","60K"),
+("GLS 1.5G A/T","₱1,259,000","₱25,937","₱148K DP: ₱22,695","60K"),
+("Xpander Cross A/T","₱1,378,000","₱28,389","₱148K DP: ₱24,840","60K")])+PN+'''
 
 <h2>GLX MT: lowest monthly</h2>
-<p>A 5-speed manual and the lowest price of the four. Great for buyers who already drive manual, want the most seats for the money, or use the car for a small business like school service or deliveries. Note the fuel freebie is ₱30K, versus ₱60K on the automatics.</p>
+<p>A 5-speed manual and the lowest price of the four. Great for buyers who already drive manual, want the most seats for the money, or use the car for a small business like school service or deliveries. Note the fuel points freebie is 30K, versus 60K on the automatics.</p>
 
 <h2>GLX AT: the practical automatic</h2>
-<p>Only ₱1,236 more a month than the GLX MT at Zero DP, and it comes with the 4-speed automatic and ₱60K fuel. For most families who'll face SJDM to Metro Manila traffic, this is the value automatic.</p>
+<p>Only ₱1,236 more a month than the GLX MT at Zero DP, and it comes with the 4-speed automatic and 60K fuel. For most families who'll face SJDM to Metro Manila traffic, this is the value automatic.</p>
 
 <h2>GLS AT: the higher trim</h2>
 <p>The GLS is the upper Xpander trim, with more comfort and convenience features than the GLX. It suits buyers who want a nicer daily cabin without moving up to an SUV. Ask me for the spec sheet so you can see the exact GLX vs GLS differences.</p>
@@ -548,11 +548,11 @@ body='''<p>The <a href="/cars/xpander/">Xpander</a> is the car I'm asked about m
 dict(base="blog",car="destinator",slug="destinator-glx-vs-gls-vs-gt",date="2026-10-22",by=BY,img="de_d34",alt="Mitsubishi Destinator GLS 7-seater SUV",
 title="Destinator GLX vs GLS vs GT: Which Variant?",
 desc="Destinator GLX, GLS or GT? Same 1.5L turbo and CVT, different trims and monthlies. October 2026 promo figures and a simple way to choose.",
-answer="Every Destinator has the 1.5L turbo (163 PS, 250 Nm), a CVT, seven seats and 214 mm ground clearance. The GLX (₱1,389,000) is the entry, from ₱26,827 a month with ₱93K DP. The GLS (₱1,599,000) is the mid trim with ₱20K fuel. The GT (₱1,929,000 mono, ₱1,939,000 two-tone) is the top trim with ₱40K fuel.",
+answer="Every Destinator has the 1.5L turbo (163 PS, 250 Nm), a CVT, seven seats and 214 mm ground clearance. The GLX (₱1,389,000) is the entry, from ₱26,827 a month with ₱93K DP. The GLS (₱1,599,000) is the mid trim with 20K fuel. The GT (₱1,929,000 mono, ₱1,939,000 two-tone) is the top trim with 40K fuel.",
 faq=[("Do all Destinator variants have the turbo engine?","Yes. GLX, GLS and GT all use the 1.5L turbocharged 4B40 gasoline engine with 163 PS and 250 Nm, paired with a CVT."),
-("How much is the Destinator GT two-tone?","₱1,939,000 SRP, versus ₱1,929,000 for the monotone. Both share the same October 2026 promo: Zero DP ₱39,740 a month or ₱88K DP ₱37,256, with ₱40K fuel."),
+("How much is the Destinator GT two-tone?","₱1,939,000 SRP, versus ₱1,929,000 for the monotone. Both share the same October 2026 promo: Zero DP ₱39,740 a month or ₱88K DP ₱37,256, with 40K fuel."),
 ("Which Destinator has the lowest monthly?","The GLX: ₱28,615 a month at Zero DP or ₱26,827 with ₱93K DP (October 2026, 60 months, all-in)."),
-("Is the GLS worth it over the GLX?","It depends on which features matter to you. Compare the official spec sheets, and note the GLS comes with ₱20K fuel this month while the GLX doesn't.")],
+("Is the GLS worth it over the GLX?","It depends on which features matter to you. Compare the official spec sheets, and note the GLS comes with 20K fuel this month while the GLX doesn't.")],
 body='''<p>Once families decide on the <a href="/cars/destinator/">Destinator</a>, the next question is which variant. Good news: you don't lose the engine by choosing the entry trim. All three share the same turbo, so the choice is about features, look and monthly.</p>
 
 <h2>What all three share</h2>
@@ -563,20 +563,20 @@ body='''<p>Once families decide on the <a href="/cars/destinator/">Destinator</a
 </ul>
 
 <h2>October 2026 promos</h2>
-'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel points"],[
 ("GLX","₱1,389,000","₱28,615","₱93K DP: ₱26,827","Ask"),
-("GLS","₱1,599,000","₱32,942","₱123K DP: ₱30,883","₱20K"),
-("GT (Monotone)","₱1,929,000","₱39,740","₱88K DP: ₱37,256","₱40K"),
-("GT (Two-Tone)","₱1,939,000","₱39,740","₱88K DP: ₱37,256","₱40K")])+PN+'''
+("GLS","₱1,599,000","₱32,942","₱123K DP: ₱30,883","20K"),
+("GT (Monotone)","₱1,929,000","₱39,740","₱88K DP: ₱37,256","40K"),
+("GT (Two-Tone)","₱1,939,000","₱39,740","₱88K DP: ₱37,256","40K")])+PN+'''
 
 <h2>GLX: the turbo SUV at the lowest monthly</h2>
 <p>The GLX gives you the full turbo performance and seven seats for the lowest monthly in the range. It's for families who want an SUV that pulls well with a full car and are happy with an entry-level feature set.</p>
 
 <h2>GLS: the balanced middle</h2>
-<p>The GLS adds more comfort and convenience over the GLX and comes with ₱20K fuel this month. For many families it's the sensible middle: more features, without the GT's monthly.</p>
+<p>The GLS adds more comfort and convenience over the GLX and comes with 20K fuel this month. For many families it's the sensible middle: more features, without the GT's monthly.</p>
 
 <h2>GT: the top of the range</h2>
-<p>The GT is the flagship trim, offered in monotone or two-tone, with the most features in the range and ₱40K fuel this month. Choose it if you want the most complete package and the monthly sits comfortably within your budget.</p>
+<p>The GT is the flagship trim, offered in monotone or two-tone, with the most features in the range and 40K fuel this month. Choose it if you want the most complete package and the monthly sits comfortably within your budget.</p>
 <p>Exact features differ per variant. Ask me for the official spec sheets so we compare the real list side by side.</p>
 
 <h2>How to choose in 3 steps</h2>
@@ -853,7 +853,7 @@ body='''<p>Taga-SJDM ka pero sa Maynila ang trabaho? You're one of many. The com
 <li><b>Carpooling</b>: a 7-seater can share costs with officemates or bring the kids to school on the way</li>
 <li><b>Comfort</b>: good AC, a comfortable seat and phone charging make long drives easier</li>
 </ul>
-<p>For carpools and school runs, the Xpander GLX AT is a popular choice: an automatic 7-seater at ₱1,159,000 SRP, from ₱23,877 a month at Zero DP, with ₱60K fuel (October 2026 promo, 60 months).</p>
+<p>For carpools and school runs, the Xpander GLX AT is a popular choice: an automatic 7-seater at ₱1,159,000 SRP, from ₱23,877 a month at Zero DP, with 60K fuel (October 2026 promo, 60 months).</p>
 
 <h2>Stay fresh on long drives</h2>
 <ul class="ticks">
@@ -1053,7 +1053,7 @@ body='''<p>Pasko na naman! Between Simbang Gabi, Christmas parties, mall runs an
 </ul>
 
 <h2>Thinking of a new car for the holidays?</h2>
-<p>If you're planning to use your 13th month toward a car, read my <a href="/blog/13th-month-pay-car-budget-plan/">13th month car budget plan</a> first. For a family 7-seater, the Xpander GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with ₱60K fuel (October 2026 promo, 60 months). For December promos, message me for the latest.</p>
+<p>If you're planning to use your 13th month toward a car, read my <a href="/blog/13th-month-pay-car-budget-plan/">13th month car budget plan</a> first. For a family 7-seater, the Xpander GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with 60K fuel (October 2026 promo, 60 months). For December promos, message me for the latest.</p>
 '''+SRC(("Lawphil: Republic Act No. 10586, Anti-Drunk and Drugged Driving Act of 2013","https://lawphil.net/statutes/repacts/ra2013/ra_10586_2013.html"))+CTA2("Want a roomier car for the family's Christmas trips? Check your budget, then test drive in SJDM.","xpander")),
 
 dict(base="blog",car="triton",slug="l300-vs-triton-for-negosyo",date="2026-10-22",by=BY,img="tr_glx",alt="Mitsubishi Triton pickup compared with the L300 truck for business",
@@ -1075,9 +1075,9 @@ body='''<p>"Sir, L300 o Triton para sa negosyo?" Both are Mitsubishi workhorses,
 ("SRP","₱1,039,000","₱1,430,000")])+'''
 
 <h2>October 2026 promos</h2>
-'''+T(["Unit","Zero DP","Low DP","Fuel"],[
-("L300 Dual AC","₱21,405/mo","₱123K DP: ₱18,789/mo","₱20K"),
-("Triton GX AT","₱28,900/mo","₱140K DP: ₱25,200/mo","₱20K")])+PN+'''
+'''+T(["Unit","Zero DP","Low DP","Fuel points"],[
+("L300 Dual AC","₱21,405/mo","₱123K DP: ₱18,789/mo","20K"),
+("Triton GX AT","₱28,900/mo","₱140K DP: ₱25,200/mo","20K")])+PN+'''
 
 <h2>Choose the L300 if…</h2>
 <ul class="ticks">
@@ -1440,7 +1440,7 @@ body='''<p>Weekend na! Bulacan is a great starting point for road trips: north t
 </ol>
 
 <h2>The right car for barkada and family trips</h2>
-<p>Seven seats and cargo room make a big difference. The Xpander GLX AT (₱1,159,000 SRP) starts at ₱23,877 a month at Zero DP with ₱60K fuel. For more power on mountain climbs with a full car, the Destinator GLX's 1.5L turbo (163 PS, 250 Nm) starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval.</p>
+<p>Seven seats and cargo room make a big difference. The Xpander GLX AT (₱1,159,000 SRP) starts at ₱23,877 a month at Zero DP with 60K fuel. For more power on mountain climbs with a full car, the Destinator GLX's 1.5L turbo (163 PS, 250 Nm) starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval.</p>
 '''+CTA2("Planning more family trips? Check which 7-seater fits your budget, then test drive in SJDM.","xpander")),
 ]
 BULK4=[
@@ -1476,7 +1476,7 @@ body='''<p>"Bank o in-house?" Both are ways to finance a car, but they're not th
 </ol>
 
 <h2>A sample: what an all-in promo includes</h2>
-<p>For example, the Xpander GLX AT this month is ₱23,877 a month at Zero DP for 60 months, all-in, with ₱60K fuel. The all-in package covers LTO registration, TPL insurance, 1-year comprehensive insurance with the rate locked for 3 years, chattel mortgage, free labor up to 5,000 km and a 3-year warranty. When comparing offers, check that the other one includes the same items, or add their cost. (October 2026 promo, subject to bank approval.)</p>
+<p>For example, the Xpander GLX AT this month is ₱23,877 a month at Zero DP for 60 months, all-in, with 60K fuel. The all-in package covers LTO registration, TPL insurance, 1-year comprehensive insurance with the rate locked for 3 years, chattel mortgage, free labor up to 5,000 km and a 3-year warranty. When comparing offers, check that the other one includes the same items, or add their cost. (October 2026 promo, subject to bank approval.)</p>
 
 <h2>Red flags</h2>
 <ul class="ticks">
@@ -1545,10 +1545,10 @@ body='''<p>Two 7-seat SUVs, two different personalities. The <a href="/cars/mont
 dict(base="blog",car="xpander-cross",slug="xpander-cross-2026-price-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross for provincial roads",
 title="Xpander Cross for Provincial Roads and Probinsya Life",
 desc="Is the Xpander Cross right for provincial roads and frequent uwian? What it shares with the Xpander, what it adds, and the October 2026 promo.",
-answer="The Xpander Cross keeps the Xpander's seven seats and 1.5L MIVEC engine (105 PS, 141 Nm) with a 4-speed automatic, and adds a rugged crossover look and a more premium cabin. It suits families who split time between the city and the province. In October 2026: SRP ₱1,378,000, Zero DP ₱28,389 a month or ₱148K DP ₱24,840, with ₱60K fuel.",
+answer="The Xpander Cross keeps the Xpander's seven seats and 1.5L MIVEC engine (105 PS, 141 Nm) with a 4-speed automatic, and adds a rugged crossover look and a more premium cabin. It suits families who split time between the city and the province. In October 2026: SRP ₱1,378,000, Zero DP ₱28,389 a month or ₱148K DP ₱24,840, with 60K fuel.",
 faq=[("Is the Xpander Cross 4WD?","No. It's a 2WD crossover-styled MPV. For regular off-road use, look at a 4WD Triton or the Montero Sport Black Series 4WD."),
 ("Does the Xpander Cross have a bigger engine than the Xpander?","No. Both use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm."),
-("How much is the Xpander Cross monthly?","₱28,389 at Zero DP or ₱24,840 with ₱148K DP, 60 months, all-in, with ₱60K fuel (October 2026, subject to bank approval)."),
+("How much is the Xpander Cross monthly?","₱28,389 at Zero DP or ₱24,840 with ₱148K DP, 60 months, all-in, with 60K fuel (October 2026, subject to bank approval)."),
 ("Is it good for rough provincial roads?","Like the Xpander, it has high ground clearance for rough patches and flooded streets. Drive carefully on unpaved roads and avoid deep water.")],
 body='''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families live between two places. The <a href="/cars/xpander-cross/">Xpander Cross</a> is built for that life: an MPV's practicality with an SUV-style look.</p>
 
@@ -1570,7 +1570,7 @@ body='''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families l
 
 <h2>The October 2026 promo</h2>
 '''+T(["Xpander Cross 1.5G 2WD A/T","Monthly (60 months)"],[("Zero DP","₱28,389"),("₱148K DP","₱24,840")])+'''
-<p>SRP ₱1,378,000, all-in, with ₱60K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱81,100 to ₱94,600 a month.</p>
+<p>SRP ₱1,378,000, all-in, with 60K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱81,100 to ₱94,600 a month.</p>
 '''+PN+'''
 
 <h2>Provincial road tips</h2>
@@ -1586,7 +1586,7 @@ body='''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families l
 dict(base="blog",car="triton",slug="triton-gx-2wd-at-first-pickup-guide",date="2026-10-22",by=BY,img="tr_gx_u28",alt="Mitsubishi Triton GX automatic pickup",
 title="Triton GX AT: A Guide for First-Time Pickup Owners",
 desc="Buying your first pickup? What's different from a sedan or MPV, how to drive and park a pickup, cargo bed basics, and the Triton GX AT October 2026 promo.",
-answer="A pickup is longer, sits higher and rides firmer when empty than a sedan or MPV, so give yourself time to learn its size, turning and parking. The Triton GX 2.4D 2WD A/T is an automatic, which makes the switch easier. In October 2026: SRP ₱1,430,000, Zero DP ₱28,900 a month or ₱140K DP ₱25,200, with ₱20K fuel.",
+answer="A pickup is longer, sits higher and rides firmer when empty than a sedan or MPV, so give yourself time to learn its size, turning and parking. The Triton GX 2.4D 2WD A/T is an automatic, which makes the switch easier. In October 2026: SRP ₱1,430,000, Zero DP ₱28,900 a month or ₱140K DP ₱25,200, with 20K fuel.",
 faq=[("Is a pickup hard to drive?","Not with an automatic and some practice. The main adjustment is its length and turning circle in tight streets and parking."),
 ("Why does a pickup ride firmer when empty?","Its rear suspension is built to carry loads, so it can feel firmer with an empty bed."),
 ("Can a pickup be a family car?","The Triton is a double cab with a rear seat, so it can carry the family. Try the rear seat during the test drive."),
@@ -1611,7 +1611,7 @@ body='''<p>Unang pickup mo? Congrats, it's one of the most useful vehicles you c
 
 <h2>The October 2026 promo</h2>
 '''+T(["Triton GX 2.4D 2WD A/T","Monthly (60 months)"],[("Zero DP","₱28,900"),("₱140K DP","₱25,200")])+'''
-<p>SRP ₱1,430,000, all-in, with ₱20K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱82,600 to ₱96,300 a month.</p>
+<p>SRP ₱1,430,000, all-in, with 20K fuel. At 30–35% of gross income, the Zero DP monthly fits roughly ₱82,600 to ₱96,300 a month.</p>
 '''+PN+'''
 
 <h2>Driving and parking tips</h2>
@@ -1720,7 +1720,7 @@ body='''<p>Kapag may lolo, lola o family member with a disability, comfort and a
 </ol>
 
 <h2>Units worth trying</h2>
-<p>The <a href="/cars/xpander/">Xpander</a> is a common choice for families with seniors. The GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with ₱60K fuel. The <a href="/cars/destinator/">Destinator</a> GLX starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval. For any senior or PWD-specific offer, message me for the latest promo.</p>
+<p>The <a href="/cars/xpander/">Xpander</a> is a common choice for families with seniors. The GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with 60K fuel. The <a href="/cars/destinator/">Destinator</a> GLX starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval. For any senior or PWD-specific offer, message me for the latest promo.</p>
 '''+CTA2("Bring lolo, lola or your family member to try the seats. Check your budget, then book a test drive in SJDM.","xpander")),
 ]
 ADDRP='<p><b>Mitsubishi SJ Legacy Motors</b><br>Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan</p>'
@@ -1809,7 +1809,7 @@ faq=[("How much is the Xpander monthly amortization?","In October 2026 on 60 mon
 body='''<p>Here's the Xpander monthly amortization for every variant in October 2026, on a 5-year (60-month) all-in term, plus the total you'll pay and the income each one needs.</p>
 
 <h2>Monthly amortization by variant</h2>
-'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[("GLX 1.5G M/T","₱1,099,000","₱22,641","₱148K DP: ₱19,811","₱30K"),("GLX 1.5G A/T","₱1,159,000","₱23,877","₱138K DP: ₱20,892","₱60K"),("GLS 1.5G A/T","₱1,259,000","₱25,937","₱148K DP: ₱22,695","₱60K"),("Xpander Cross A/T","₱1,378,000","₱28,389","₱148K DP: ₱24,840","₱60K")])+PN+'''
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel points"],[("GLX 1.5G M/T","₱1,099,000","₱22,641","₱148K DP: ₱19,811","30K"),("GLX 1.5G A/T","₱1,159,000","₱23,877","₱138K DP: ₱20,892","60K"),("GLS 1.5G A/T","₱1,259,000","₱25,937","₱148K DP: ₱22,695","60K"),("Xpander Cross A/T","₱1,378,000","₱28,389","₱148K DP: ₱24,840","60K")])+PN+'''
 
 <h2>Total of payments over 60 months</h2>
 '''+T(["Variant","Zero DP total","Low DP total"],[("GLX M/T","₱1,358,460","₱1,336,660"),("GLX A/T","₱1,432,620","₱1,391,520"),("GLS A/T","₱1,556,220","₱1,509,700"),("Xpander Cross","₱1,703,340","₱1,638,400")])+TOT+'''
@@ -1828,12 +1828,12 @@ title="Destinator Price Philippines 2026: SRP and Monthly",
 desc="",answer="",
 faq=[("How much is the Mitsubishi Destinator in the Philippines?","SRP: GLX ₱1,389,000, GLS ₱1,599,000, GT ₱1,929,000 (monotone) or ₱1,939,000 (two-tone)."),
 ("What is the Destinator monthly?","From ₱28,615 at Zero DP (GLX) or ₱26,827 with ₱93K DP, 60 months, all-in (October 2026)."),
-("Does the Destinator come with free fuel?","In October 2026, the GLS comes with ₱20K fuel and the GT with ₱40K fuel."),
+("Does the Destinator come with free fuel?","In October 2026, the GLS comes with 20K fuel and the GT with 40K fuel."),
 ("What engine does the Destinator have?","A 1.5L turbocharged gasoline engine (4B40) with 163 PS and 250 Nm, paired with a CVT.")],
 body='''<p>Here's the Destinator price in the Philippines for 2026, with October promo monthlies and the total of payments for each variant. All variants share the 1.5L turbo (163 PS, 250 Nm), CVT, seven seats and 214 mm ground clearance.</p>
 
 <h2>Destinator SRP and promo</h2>
-'''+T(["Variant","SRP","Zero DP","Low DP","Fuel"],[("GLX","₱1,389,000","₱28,615","₱93K DP: ₱26,827","Ask"),("GLS","₱1,599,000","₱32,942","₱123K DP: ₱30,883","₱20K"),("GT (Monotone)","₱1,929,000","₱39,740","₱88K DP: ₱37,256","₱40K"),("GT (Two-Tone)","₱1,939,000","₱39,740","₱88K DP: ₱37,256","₱40K")])+PN+'''
+'''+T(["Variant","SRP","Zero DP","Low DP","Fuel points"],[("GLX","₱1,389,000","₱28,615","₱93K DP: ₱26,827","Ask"),("GLS","₱1,599,000","₱32,942","₱123K DP: ₱30,883","20K"),("GT (Monotone)","₱1,929,000","₱39,740","₱88K DP: ₱37,256","40K"),("GT (Two-Tone)","₱1,939,000","₱39,740","₱88K DP: ₱37,256","40K")])+PN+'''
 
 <h2>Total of payments over 60 months</h2>
 '''+T(["Variant","Zero DP total","Low DP total"],[("GLX","₱1,716,900","₱1,702,620"),("GLS","₱1,976,520","₱1,975,980"),("GT","₱2,384,400","₱2,323,360")])+TOT+'''
@@ -1856,7 +1856,7 @@ body='''<p>Here's the Montero Sport price in the Philippines for 2026, with Octo
 
 <h2>Montero Sport SRP and promo</h2>
 '''+T(["Variant","SRP","Option 1","Option 2"],[("GLX 2WD M/T","₱1,568,000","Zero DP: ₱30,284","₱30K DP: ₱28,265"),("GLS 2WD A/T","₱1,927,000","Zero DP: ₱39,699","₱138K DP: ₱37,218"),("Black Series 2WD A/T","₱2,190,000","₱88K DP: ₱45,117","₱218K DP: ₱42,297"),("Black Series 4WD A/T","₱2,530,000","₱133K DP: ₱52,121","₱283K DP: ₱48,864")])+PN+'''
-<p>Fuel freebie: ₱20K on the GLS and both Black Series variants.</p>
+<p>Fuel points freebie: 20K on the GLS and both Black Series variants.</p>
 
 <h2>Total of payments over 60 months</h2>
 '''+T(["Variant","Option 1 total","Option 2 total"],[("GLX M/T","₱1,817,040","₱1,725,900"),("GLS A/T","₱2,381,940","₱2,371,080"),("Black Series 2WD","₱2,795,020","₱2,755,820"),("Black Series 4WD","₱3,260,260","₱3,214,840")])+TOT+'''
@@ -1870,14 +1870,14 @@ dict(base="blog",car="l300",slug="l300-price-philippines-2026",date="2026-10-22"
 title="L300 Price Philippines 2026: Down Payment and Monthly",
 desc="",answer="",
 faq=[("How much is the L300 in the Philippines in 2026?","The 2026 L300 Dual AC is ₱1,039,000 SRP. For the Cab & Chassis, message Richard for the latest promo."),
-("What is the L300 down payment and monthly?","Zero DP at ₱21,405 a month, or ₱123K DP at ₱18,789 a month, 60 months, all-in, with ₱20K fuel (October 2026)."),
+("What is the L300 down payment and monthly?","Zero DP at ₱21,405 a month, or ₱123K DP at ₱18,789 a month, 60 months, all-in, with 20K fuel (October 2026)."),
 ("What engine does the L300 have?","A 2.2L 16-valve DOHC turbo-intercooled diesel (4N14), Euro 4, with a 5-speed manual."),
 ("Can a business finance an L300?","Yes. Banks typically ask for business registration, ITR or financial statements and bank statements.")],
 body='''<p>Here's the L300 price in the Philippines for 2026, with the down payment and monthly options this October, the total of payments, and the income guide. The L300 runs a 2.2L 4N14 turbo-intercooled diesel with a 5-speed manual.</p>
 
 <h2>L300 Dual AC price and promo</h2>
 '''+T(["2026 L300 Dual AC","Monthly (60 months)","Total of payments"],[("Zero DP","₱21,405","₱1,284,300"),("₱123K DP","₱18,789","₱1,250,340")])+'''
-<p>SRP ₱1,039,000, all-in, with ₱20K fuel. For the Cab &amp; Chassis variant, message me for the latest promo.</p>'''+TOT+'''
+<p>SRP ₱1,039,000, all-in, with 20K fuel. For the Cab &amp; Chassis variant, message me for the latest promo.</p>'''+TOT+'''
 
 <h2>Income guide</h2>
 <p>At 30–35% of gross income, the Zero DP monthly fits about ₱61,200 to ₱71,400 a month; the ₱123K DP option about ₱53,700 to ₱62,600. For businesses, banks look at business income and documents. See <a href="/guides/car-loan-requirements/">car loan requirements</a>.</p>
@@ -2085,7 +2085,7 @@ body='''<p>Paano bumili ng bagong sasakyan sa Pilipinas? Dalawa ang daan: cash o
 </ol>
 
 <h2>Kung financing</h2>
-<p>Sundan ang <a href="/tips/paano-mag-car-loan/">paano mag car loan</a> guide. Halimbawa ng October 2026 promo: Xpander GLS AT, Zero DP sa ₱25,937 kada buwan o ₱148K DP sa ₱22,695, 60 months, all-in, may ₱60K fuel.</p>
+<p>Sundan ang <a href="/tips/paano-mag-car-loan/">paano mag car loan</a> guide. Halimbawa ng October 2026 promo: Xpander GLS AT, Zero DP sa ₱25,937 kada buwan o ₱148K DP sa ₱22,695, 60 months, all-in, may 60K fuel.</p>
 
 <h2>Huwag kalimutan ang ownership costs</h2>
 <ul class="ticks"><li>Gas, parking at toll</li><li>PMS (tingnan ang <a href="/tips/pms-schedule-guide/">PMS schedule guide</a>)</li><li>Insurance renewal</li><li>Gulong at baterya sa paglipas ng panahon</li></ul>
@@ -2130,8 +2130,8 @@ faq=[("Is a manual car cheaper in the Philippines?","Often the manual variant ha
 body='''<p>Manual vs automatic car in the Philippines: the right answer depends on your traffic, budget and who'll drive. Here's a clear comparison using real Xpander promo numbers.</p>
 
 <h2>The price difference, in real numbers</h2>
-'''+T(["Xpander GLX","Manual (M/T)","Automatic (A/T)"],[("SRP","₱1,099,000","₱1,159,000"),("Zero DP monthly","₱22,641","₱23,877"),("Low DP monthly","₱148K DP: ₱19,811","₱138K DP: ₱20,892"),("Fuel freebie","₱30K","₱60K")])+PN+'''
-<p>At Zero DP, the automatic is ₱1,236 more a month, and this month it comes with ₱30K more fuel.</p>
+'''+T(["Xpander GLX","Manual (M/T)","Automatic (A/T)"],[("SRP","₱1,099,000","₱1,159,000"),("Zero DP monthly","₱22,641","₱23,877"),("Low DP monthly","₱148K DP: ₱19,811","₱138K DP: ₱20,892"),("Fuel points freebie","30K","60K")])+PN+'''
+<p>At Zero DP, the automatic is ₱1,236 more a month, and this month it comes with 30K more fuel points.</p>
 
 <h2>Choose manual if…</h2>
 <ul class="ticks"><li>Your budget is tight and every peso of the monthly counts</li><li>You already drive manual comfortably</li><li>It's a work vehicle and your drivers prefer manual</li></ul>

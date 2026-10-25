@@ -11,7 +11,7 @@ def prow(i):
     return dict(id=i,n=v["n"],srp=srp,opts=p["opts"][:SHOW[i]],fuel=(p["fuel"] if i in FUEL_OK else None))
 def inc(mo): return f"₱{mo/0.35/1000:.1f}K–₱{mo/0.30/1000:.1f}K"
 def ptable(ids,caption,extra=""):
-    rows="".join(f'<tr><th scope="row">{e(r["n"])}<br><span class="muted">SRP {f(r["srp"])}</span></th><td>{o[0]}</td><td><b>{f(o[1])}</b>/mo</td><td>{inc(o[1])}</td><td>{f(r["fuel"])+" fuel" if r["fuel"] else "—"}</td></tr>' for r in map(prow,ids) for o in r["opts"])
+    rows="".join(f'<tr><th scope="row">{e(r["n"])}<br><span class="muted">SRP {f(r["srp"])}</span></th><td>{o[0]}</td><td><b>{f(o[1])}</b>/mo</td><td>{inc(o[1])}</td><td>{format(r["fuel"],",")+" fuel points" if r["fuel"] else "—"}</td></tr>' for r in map(prow,ids) for o in r["opts"])
     return f'''<div class="box" id="promo-table" style="margin-top:24px"><h2 class="h3" style="margin-top:0">{PROMO_MONTH} promo table</h2><p class="muted">{caption} Updated {PROMO_UPDATED}. 5-year (60-month) term, all-in, subject to bank approval and change without notice.</p>
 <div style="overflow-x:auto"><table class="spec"><tr><th scope="col">Unit</th><th scope="col">Down payment</th><th scope="col">Monthly</th><th scope="col">Gross income guide (30–35%)</th><th scope="col">Freebie</th></tr>{rows}</table></div>{extra}</div>'''
 ALLIN_E=["LTO registration","TPL insurance","Comprehensive insurance for the first year","Chattel mortgage","Free PMS labor up to 5,000 km","Factory warranty"]
