@@ -189,7 +189,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <link rel="icon" href="/favicon.ico?v=2" sizes="48x48"><link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2"><link rel="manifest" href="/site.webmanifest?v=2"></head>
 <body>
 <header class="sh"><div class="shi">
-<a class="sb" href="/"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#E60012" d="M12 2l3.2 5.5L12 13 8.8 7.5zM5.6 13l3.2-5.5L12 13l-3.2 5.5H2.4zM18.4 13l-3.2-5.5L12 13l3.2 5.5h6.4z"/></svg><span><b>Mitsubishi Motors</b><small>By Richard Dennis Cuagdan</small></span></a>
+<a class="sb" href="/"><svg viewBox="0 -15.465 224.9 224.9" width="26" height="26" aria-hidden="true"><path fill="#e60012" d="m112.45 0 38.42 65.13-38.42 65.12L74.03 65.6Zm0 130.25h74.96l37.49 63.72h-74.97zm0 0H37.48L0 193.97h74.97z"/></svg><span><b>Mitsubishi Motors</b><small>By Richard Dennis Cuagdan</small></span></a>
 <button class="smt" type="button" aria-expanded="false" aria-controls="snav" onclick="var n=document.getElementById('snav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
 <nav id="snav" class="snav" aria-label="Main"><a href="/">Home</a><a href="/cars/">Cars</a><a href="/promos-tips/">Promos &amp; Tips</a><a href="/apply/" class="ap">Apply Now</a><a href="/test-drive/">Book a Test Drive</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
 </div></header>
@@ -302,7 +302,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
       <div id="rcv" style="background:#e6f4ec;color:#0f7b3f;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600;margin-bottom:12px">✓ Details received. Here is your full computation po.</div>
       <h2 id="oTitle"></h2>
       <p class="sub" id="oSub"></p>
-      <table><tbody id="oSrp"></tbody></table>
+      <div class="tw"><table><tbody id="oSrp"></tbody></table></div>
       <div id="oOpts"></div>
       <p class="note">Sample computation only. Final terms subject to bank approval and current promo validity.</p>
     </div>
@@ -331,7 +331,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
   <section id="admin" class="hide adm">
     <div class="card"><h2>Leads (this device)</h2><p class="sub" id="admCount"></p>
       <button class="btn p" id="csvBtn">Download CSV</button>
-      <div class="wrap" style="margin-top:14px"><table><tbody id="admRows"></tbody></table></div>
+      <div class="wrap" style="margin-top:14px"><div class="tw"><table><tbody id="admRows"></tbody></table></div></div>
     </div>
   </section>
 </main>
@@ -349,7 +349,7 @@ fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}
 <button class="x" id="mX" type="button" aria-label="Close">&times;</button>
 <h3 id="mTitle"></h3><div class="sub2" id="mSub"></div>
 <img id="mImg" alt="" decoding="async"><div class="cname" id="mCName"></div><div class="illus">Images for illustration; actual unit may vary.</div>
-<h4>Key specs</h4><table><tbody id="mSpecs"></tbody></table>
+<h4>Key specs</h4><div class="tw"><table><tbody id="mSpecs"></tbody></table></div>
 <h4>Key features</h4><ul id="mFeat"></ul>
 <div id="mColWrap"><h4>Available colors</h4><div class="sw" id="mCols"></div><div class="illus" id="mColNote" style="text-align:left;margin-top:8px"></div></div>
 <div class="illus" style="margin-top:12px">Source: Mitsubishi Motors Philippines (mitsubishi-motors.com.ph). Specs and colors may change; please confirm with Richard.</div>
@@ -464,7 +464,7 @@ function renderResults(){
       <span class="tag ${u.fit.k}">${u.fit.l} · ${(u.r*100).toFixed(1)}%</span>
       <div class="ux">
         <div class="srp">SRP <span class="blur">₱0,000,000</span></div>
-        <table class="ot">${opts.map(([k,m])=>`<tr class="${effDp(u,S.dp)===k?'cur':''}"><td>${optLabel(u,k)}</td><td><b>${peso(m)}</b>/mo</td></tr>`).join('')}</table>
+        <div class="tw"><table class="ot">${opts.map(([k,m])=>`<tr class="${effDp(u,S.dp)===k?'cur':''}"><td>${optLabel(u,k)}</td><td><b>${peso(m)}</b>/mo</td></tr>`).join('')}</table></div>
         ${u.fit.k==='stretch'?`<div class="hint">${S.dp==='zero'&&u.low/S.income<=0.35?'Fits with the Low DP option.':(S.dp==='zero'?'Consider the Low DP option or adding a co-maker.':'Consider adding a co-maker to strengthen approval.')}</div>`:''}
         ${d?`<button type="button" class="specb" data-spec="${u.id}">View specs &amp; colors</button>`:''}
         <div class="selt">Selected</div>
@@ -626,7 +626,7 @@ function renderOffer(){
    if(d)$('oSpecBtn').onclick=()=>openSpecs(u.id);}
   $('oSub').textContent=`60 months, all-in · ${L.fitPercent}% of your income (${fitOf(L.fitPercent/100).l})`;
   $('oSrp').innerHTML=`<tr><td>SRP</td><td>${u.srpTxt||peso(u.srp)}${u.srp2?` mono / ${peso(u.srp2)} two-tone`:''}</td></tr>`;
-  const ek=effDp(u,S.dp);const opt=(k,t,dp,mo)=>`<div class="opt ${ek===k?'pick':''}"><h3>${t}${ek===k?'<em>YOUR CHOICE</em>':''}</h3><table><tr><td>Down payment (all-in)</td><td>${dp?peso(dp):'₱0'}</td></tr><tr><td>Monthly × 60</td><td>${peso(mo)}</td></tr><tr><td>% of income</td><td>${(mo/S.income*100).toFixed(1)}%</td></tr></table></div>`;
+  const ek=effDp(u,S.dp);const opt=(k,t,dp,mo)=>`<div class="opt ${ek===k?'pick':''}"><h3>${t}${ek===k?'<em>YOUR CHOICE</em>':''}</h3><div class="tw"><table><tr><td>Down payment (all-in)</td><td>${dp?peso(dp):'₱0'}</td></tr><tr><td>Monthly × 60</td><td>${peso(mo)}</td></tr><tr><td>% of income</td><td>${(mo/S.income*100).toFixed(1)}%</td></tr></table></div></div>`;
   $('oOpts').innerHTML=(u.zero!=null?opt('zero','Zero DP',0,u.zero):u.m1?opt('zero',optLabel(u,'zero'),u.d1,u.m1):'')+opt('low',optLabel(u,'low'),u.ldp,u.low);
   const fb=['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain'];
   if(u.fuel) fb.push(u.fuelTxt||`FREE ${u.fuel.toLocaleString('en-PH')} fuel points`);

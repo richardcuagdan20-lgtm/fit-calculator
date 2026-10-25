@@ -37,7 +37,7 @@ AF_BODY=f'''<section class="la-hero"><div class="w">
 <p class="kick" style="color:#fca5a5">SJ Legacy Motors · Mitsubishi</p>
 <h1>Official Application Form</h1>
 <p class="lead">{B("Car loan application para sa iyong Mitsubishi. Mga 8–10 minuto. Ang final decision ay sa bank; ire-review namin ang application mo at tutulungan ka ni Fina sa documents.","Car loan application for your Mitsubishi. About 8–10 minutes. The final decision is the bank's; we will review your application and Fina will help you with documents.")}</p>
-<div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><div><p class="rxk">{B("Ang sales executive mo","Your sales executive")}</p><p class="rxn">Richard Cuagdan</p><p class="rxt">Mitsubishi Car Sales Executive · Mitsubishi SJ Legacy Motors</p></div></div>
+<div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
 </div></section>
 <section class="la af"><div class="w" style="padding-top:18px">
 <div id="af-wrap"><p id="af-pre" class="af-pre" hidden>{B("✓ Na-fill na namin ang ilang sagot mula sa assessment mo. Pakicheck at kumpletuhin.","✓ We pre-filled some answers from your assessment. Please check and complete.")}</p>

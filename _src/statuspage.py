@@ -9,7 +9,7 @@ ST_BODY=f'''<section class="la-hero"><div class="w">
 <p class="kick" style="color:#fca5a5">SJ Legacy Motors · Mitsubishi</p>
 <h1>{B("I-track ang application mo","Track your application")}</h1>
 <p class="lead">{B("Tingnan ang status ng car loan application mo at mag-upload ng kulang na requirements.","Check your car loan application status and upload missing requirements.")}</p>
-<div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><div><p class="rxk">{B("Ang sales executive mo","Your sales executive")}</p><p class="rxn">Richard Cuagdan</p><p class="rxt">Mitsubishi Car Sales Executive · Mitsubishi SJ Legacy Motors</p></div></div>
+<div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
 </div></section>
 <section class="la st"><div class="w" style="padding-top:18px">
 <div id="st-off" class="la-card" hidden><p>{B("Malapit na ang online status tracking. Pansamantala, i-message si Fina o si Richard kasama ang reference number mo (MP-XXXXX).","Online status tracking is coming soon. For now, message Fina or Richard with your reference number (MP-XXXXX).")}</p><p><a class="btn" href="/contact/">{B("Makipag-ugnayan","Contact us")}</a></p></div>
