@@ -249,7 +249,8 @@ for a in LANDINGS:
 <p class="lead" style="color:inherit">{e(a["lead"])}</p>
 <p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost dk" href="/test-drive/{"?unit="+a["car"] if a.get("car") else ""}">Book a Test Drive</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p>
 {body}
+{rx_bio(rx_pick(a["slug"]))}
 {LACTA}
 {fq}
-<aside class="box"><h2 class="h3">More guides</h2><ul class="links">{"".join(f'<li><a href="/{b["slug"]}/">{e(b["title"])}</a></li>' for b in LANDINGS if b is not a)}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
+<aside class="box"><h2 class="h3">More guides</h2><ul class="links">{"".join(f'<li><a href="/{b["slug"]}/">{e(b["title"])}</a></li>' for b in LANDINGS if b is not a)}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",og=rx_og(rx_pick(a["slug"])) if rx_pick(a["slug"]) else None,
     crumbs=[("/","Home"),("/promos-tips/","Promos & Tips"),(path,a["kw"])])

@@ -23,7 +23,7 @@ DEALER={"@type":"AutoDealer","@id":D+"/#dealer","name":"Mitsubishi SJ Legacy Mot
  "address":{"@type":"PostalAddress","streetAddress":"Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
-PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Car Sales Executive","telephone":TEL,"image":D+"/assets/img/richard-600.webp","worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[FB,MSG]}
+PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Car Sales Executive","telephone":TEL,"image":[D+"/assets/img/richard-600.webp",D+"/assets/img/richard/xpander-1x1.jpg"],"worksFor":{"@id":D+"/#dealer"},"url":D+"/about/","sameAs":[FB,MSG]}
 PX='''<!-- Meta Pixel -->
 <script>try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}</script>'''
 CL='''<!-- Microsoft Clarity -->
@@ -36,10 +36,10 @@ GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
 from figs import FIGS
 ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill_sizes.json")))
 def e(s): return html.escape(s,quote=True)
-def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None):
+def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None,og=None):
     url=D+path
     import og as _og
-    ogimg=_og.make(path,_og.heading(path,title,crumbs,[SUF0," | Mitsubishi Motors"]),img)
+    ogimg=og or _og.make(path,_og.heading(path,title,crumbs,[SUF0," | Mitsubishi Motors"]),img)
     if title.endswith(SUF0):
         base_=title[:-len(SUF0)]
         title=next(base_+x for x in [" | Mitsubishi Motors by Richard Dennis Cuagdan"," | Mitsubishi Motors by Richard Cuagdan"," | Mitsubishi by Richard Cuagdan",""] if len(base_+x)<=65)
@@ -80,7 +80,10 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <meta property="og:locale" content="en_PH">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0b0c">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/site.webmanifest?v=2">
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">{json.dumps({"@context":"https://schema.org","@graph":graph},ensure_ascii=False)}</script>
 </head>
@@ -120,6 +123,27 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 
 def img(k,alt,eager=False,cls=""):
     return f'<img src="/assets/img/{k}.webp" alt="{e(alt)}" width="640" height="427" {"fetchpriority=\"high\"" if eager else "loading=\"lazy\""} decoding="async"{f" class=\"{cls}\"" if cls else ""}>'
+
+# ---------- Richard photos (assets/img/richard/, made by /workspace/loanapp/photos/make_photos.py)
+RXCAR={"xpander":"Xpander","xforce":"Xforce","mirage":"Mirage G4","destinator":"Destinator"}
+RXMODEL={"xpander":"xpander","xforce":"xforce","mirage-g4":"mirage","destinator":"destinator"}
+def rx_alt(c): return f"Richard Cuagdan, Mitsubishi Car Sales Executive, beside the Mitsubishi {RXCAR[c]}"
+def rx_og(c): return f"/assets/img/richard/og-{c}.jpg"
+def rx_card(c,kick="Meet your sales executive",eager=False,lead=""):
+    b=f"/assets/img/richard/{c}-16x9"
+    ld='loading="eager"' if eager else 'loading="lazy"'
+    return (f'<figure class="rx"><picture><source type="image/webp" srcset="{b}-800.webp 800w, {b}.webp 1600w" sizes="(min-width:900px) 620px, 100vw">'
+            f'<img src="{b}-800.jpg" alt="{e(rx_alt(c))}" width="800" height="450" {ld} decoding="async"></picture>'
+            f'<figcaption><p class="kick">{kick}</p><p class="rxn">Richard Cuagdan</p><p class="rxt">Mitsubishi Car Sales Executive</p><p class="rxd">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>{lead}</figcaption></figure>')
+def rx_pick(slug):
+    s=slug.lower();hits=[(s.find(k),c) for k,c in (("xforce","xforce"),("destinator","destinator"),("mirage","mirage"),("xpander","xpander")) if k in s and not (k=="xpander" and "xpander-cross" in s and s.count("xpander")==1)]
+    return min(hits)[1] if hits else None
+def rx_bio(c=None,tl=False):
+    c=c or "xpander";b=f"/assets/img/richard/{c}-avatar-320"
+    w=("Isinulat ni","Tungkol kay Richard","Mag-chat kay Richard") if tl else ("Written by","About Richard","Chat with Richard")
+    return (f'<aside class="abio"><picture><source type="image/webp" srcset="{b}.webp"><img src="{b}.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture>'
+            f'<div><p class="abn">{w[0]} Richard Cuagdan, Mitsubishi Car Sales Executive</p><p class="abd">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>'
+            f'<p class="abl"><a href="/about/">{w[1]}</a> · <a href="{MSG}" rel="noopener">{w[2]}</a></p></div></aside>')
 
 def vcard(v,m):
     promo=f'<a class="btn sm ghost dk" href="/promos/#{m["slug"]}">See promo</a>' if v["promo"] else f'<a class="btn sm ghost dk" href="{MSG}" rel="noopener">Ask for the latest promo</a>'
@@ -182,7 +206,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
 </div></div></section>
 <section class="sec"><div class="w split">
-<div><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="muted">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div><h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
+<div>{rx_card("xpander")}<h2>Visit the showroom</h2><p><b>Mitsubishi SJ Legacy Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li><li><a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
@@ -206,10 +230,10 @@ for m in MODELS:
      f"Mitsubishi {m['name']} at SJ Legacy Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
     f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/test-drive/?unit={m['slug']}">Book a Test Drive</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
-<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
+{(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],kick=f"Your {e(m['name'])} sales executive")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
 {EVM.get(m['slug'],'')}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
-    ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp",
+    ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp", og=rx_og(RXMODEL[m["slug"]]) if m["slug"] in RXMODEL else None,
     crumbs=[("/","Home"),("/cars/","Cars"),(f"/cars/{m['slug']}/",m['name'])])
 
 # ---------- promos (gated, noindex; figures live only in JS data)
@@ -231,6 +255,7 @@ f'''<section class="ph"><div class="w"><h1>October 2026 Mitsubishi promos</h1><p
 <div id="pv" hidden></div>
 <noscript><p>Please enable JavaScript to view promo figures, or <a href="{MSG}">message Richard</a>.</p></noscript>
 </div></section>
+<section class="sec rxs"><div class="w">{rx_card("xpander",kick="Your promo questions, answered by")}</div></section>
 <section class="sec alt"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>
 <script src="/assets/lead.js" defer></script>
 <script type="application/json" id="pd">{json.dumps(PD,ensure_ascii=False)}</script>
@@ -315,6 +340,7 @@ def articles(base,items,label,title,desc,intro):
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {top}
 {body}
+{rx_bio(rx_pick(a["slug"]),a.get("lang")=="tl")}
 {LACTA}
 {fq}
 <aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
@@ -336,6 +362,7 @@ f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p c
 <section class="sec"><div class="w nar">
 <img class="pphoto" src="/assets/img/richard-600.webp" srcset="/assets/img/richard-300.webp 300w, /assets/img/richard-600.webp 600w" sizes="(min-width:640px) 300px, 240px" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="600" height="600" fetchpriority="high" decoding="async">
 <p>I'm Richard Dennis Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors, an authorized Mitsubishi dealership in San Jose del Monte, Bulacan.</p>
+{rx_card("mirage",kick="At the dealership")}
 <!-- PLACEHOLDER: years of experience goes here (e.g. "I've been helping car buyers for X years.") -->
 <p>Most of the people I work with fall into three groups: employed buyers looking for a monthly that fits their salary, business owners who need a dependable vehicle for work, and OFWs and their families who are buying from abroad or for loved ones at home. Each situation has different paperwork and different priorities, and I take time to understand yours before recommending a unit.</p>
 <h2>How I work</h2>
@@ -344,7 +371,7 @@ f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p c
 <p>This is my personal sales website. It is not the official website of Mitsubishi Motors Philippines Corporation. Promo figures here are dealership offers and are always subject to bank approval.</p>
 <p class="row"><a class="btn" href="{MSG}" rel="noopener">Message me</a> <a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a> <a class="btn ghost dk" href="/contact/">Contact and showroom</a></p>
 <p>Call or text me: <a href="tel:{TEL}">{TELD}</a>. Showroom: {ADDR}.</p>
-</div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")])
+</div></section>''', ld=[{"@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}], crumbs=[("/","Home"),("/about/","About")], og=rx_og("mirage"))
 
 # ---------- apply: Official Application Form, see _src/applyform.py (exec'd after loanapp.py)
 
@@ -432,7 +459,7 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
 # ---------- contact
 page("/contact/","Contact | Mitsubishi Motors - SJ Legacy Motors",
  "Chat with Richard Cuagdan on this website or visit Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
-f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is the chat on this website.</p><div class="se"><img src="/assets/img/richard-300.webp" alt="Richard Cuagdan, Car Sales Executive at Mitsubishi SJ Legacy Motors SJDM" width="300" height="300" loading="lazy" decoding="async"><div><p class="kick">Your sales executive</p><p class="sen">Richard Cuagdan</p><p class="sem">Car Sales Executive, Mitsubishi SJ Legacy Motors</p></div></div></div></section>
+f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is the chat on this website.</p>{rx_card("xforce",eager=True)}</div></section>
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Live chat</h2><p>Chat with me here on the website any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
@@ -441,7 +468,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <div class="card pad"><h2 class="h3">Apply online</h2><p>Send your details and preferred unit, and I'll get back to you with the latest promo.</p><p><a class="btn" href="/apply/">Apply Now</a></p></div>
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
 </div></section>
-<section class="sec"><div class="w"><h2>Find the showroom</h2><p>{ADDR}</p><iframe title="Map to Mitsubishi SJ Legacy Motors, San Jose del Monte" src="https://www.google.com/maps?q={MAPQ}&amp;output=embed" width="100%" height="380" style="border:0;border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")])
+<section class="sec"><div class="w"><h2>Find the showroom</h2><p>{ADDR}</p><iframe title="Map to Mitsubishi SJ Legacy Motors, San Jose del Monte" src="https://www.google.com/maps?q={MAPQ}&amp;output=embed" width="100%" height="380" style="border:0;border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")], og=rx_og("xforce"))
 
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
@@ -502,6 +529,7 @@ for _k,(_u,_t) in TL_ONLY.items():
     _s=_s.replace('<html lang="en-PH">','<html lang="fil-PH">',1).replace('<meta property="og:locale" content="en_PH">','<meta property="og:locale" content="fil_PH">',1)
     _s=_s.replace('<article class="art"><div class="w nar"><header>',f'<article class="art"><div class="w nar"><p class="zlang"><a href="{_u}" hreflang="en-PH" lang="en">{_t}</a></p><header>',1)
     _s=_s.replace(LACTA,LACTA_TL)
+    _s=_s.replace('<p class="abn">Written by ','<p class="abn">Isinulat ni ').replace('<a href="/about/">About Richard</a> · <a href="'+MSG+'" rel="noopener">Chat with Richard</a>','<a href="/about/">Tungkol kay Richard</a> · <a href="'+MSG+'" rel="noopener">Mag-chat kay Richard</a>')
     open(_f,"w").write(_s)
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
@@ -536,6 +564,11 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 import og as _og
 _og.inject("/budgetcalculator/","/assets/img/xpglx_x37.webp","Budget Fit Calculator | Mitsubishi Motors by Richard","Find the Mitsubishi that fits your monthly budget: Mirage G4, Xpander, L300, Triton, Destinator, Montero Sport all-in financing.")
 _og.inject("/privacy/","/assets/img/xpglx_x37.webp","Privacy Policy | Mitsubishi Motors by Richard Dennis Cuagdan","How Richard Dennis Cuagdan (Mitsubishi SJ Legacy Motors) collects and protects your personal information under the Data Privacy Act.")
+# favicon set for the standalone pages (not built by page())
+_ICONS='<link rel="icon" href="/favicon.ico?v=2" sizes="48x48"><link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2"><link rel="manifest" href="/site.webmanifest?v=2">'
+for _p in ("/budgetcalculator/","/privacy/"):
+    _fp=R+_p+"index.html";_s=open(_fp).read()
+    if "favicon.ico?v=2" not in _s: open(_fp,"w").write(_s.replace("</head>",_ICONS+"</head>",1))
 
 # --- Own site chat: every in-content Messenger CTA becomes an own-chat opener ([data-chat]); the footer .fbl link stays Messenger.
 # Without JS / before the own chat boots, the link still falls back to Messenger. ---
