@@ -570,6 +570,7 @@ _OLDMK='<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path
 for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if '/_src/' in _f: continue
     _s=open(_f).read();_o=_s.replace(_OLDMK,_NEWMK)
+    _o=_o.replace('href="/assets/site.css"','href="/assets/site.css?v='+_vh('/assets/site.css')+'"')
     _o=_re.sub(r'(?<!<div class="tw">)(<table\b.*?</table>)',r'<div class="tw">\1</div>',_o,flags=_re.S)
     if _o!=_s: open(_f,'w').write(_o)
 # favicon set for the standalone pages (not built by page())
