@@ -131,18 +131,19 @@ def rx_alt(c): return f"Richard Cuagdan, Mitsubishi Car Sales Executive, beside 
 def rx_og(c): return f"/assets/img/richard/og-{c}.jpg"
 def rx_card(c,cap="",eager=False,ratio="16x9",cls="rx"):
     """clean photo of Richard; optional single short caption line only where nothing nearby introduces him"""
-    b=f"/assets/img/richard/{c}-{ratio}";sm,big,w,h={"16x9":("800","",800,450),"1x1":("640","",640,640)}[ratio]
+    b=f"/assets/img/richard/{c}-{ratio}";sm,w,h,bw={"16x9":("800",800,450,1600),"1x1":("640",640,640,1200),"4x5":("480",480,600,960)}[ratio]
+    sz="(min-width:900px) 420px, min(calc(100vw - 40px), 420px)" if ratio=="4x5" else "(min-width:800px) 720px, calc(100vw - 40px)"
     ld='loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
-    return (f'<figure class="{cls}"><picture><source type="image/webp" srcset="{b}-{sm}.webp {sm}w, {b}.webp {1600 if ratio=="16x9" else 1200}w" sizes="(min-width:900px) 620px, 100vw">'
+    return (f'<figure class="{cls}"><picture><source type="image/webp" srcset="{b}-{sm}.webp {sm}w, {b}.webp {bw}w" sizes="{sz}">'
             f'<img src="{b}-{sm}.jpg" alt="{e(rx_alt(c))}" width="{w}" height="{h}" {ld} decoding="async"></picture>'
             +(f'<figcaption class="rxc">{cap}</figcaption>' if cap else '')+'</figure>')
 def rx_pick(slug):
     s=slug.lower();hits=[(s.find(k),c) for k,c in (("xforce","xforce"),("destinator","destinator"),("mirage","mirage"),("xpander","xpander")) if k in s and not (k=="xpander" and "xpander-cross" in s and s.count("xpander")==1)]
     return min(hits)[1] if hits else None
 def rx_bio(c=None,tl=False):
-    c=c or "xpander";b=f"/assets/img/richard/{c}-avatar-320"
+    c=c or "xpander";b=f"/assets/img/richard/{c}-1x1-240"
     w=("Isinulat ni","Tungkol kay Richard","Mag-chat kay Richard") if tl else ("Written by","About Richard","Chat with Richard")
-    return (f'<aside class="abio"><picture><source type="image/webp" srcset="{b}.webp"><img src="{b}.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture>'
+    return (f'<aside class="abio"><picture><source type="image/webp" srcset="{b}.webp"><img src="{b}.jpg" alt="{e(rx_alt(c))}" width="240" height="240" loading="lazy" decoding="async"></picture>'
             f'<div><p class="abn">{w[0]} Richard Cuagdan, Mitsubishi Car Sales Executive</p><p class="abd">Mitsubishi SJ Legacy Motors · San Jose del Monte, Bulacan</p>'
             f'<p class="abl"><a href="/about/">{w[1]}</a> · <a href="{MSG}" rel="noopener">{w[2]}</a></p></div></aside>')
 
@@ -179,7 +180,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <p class="lead">I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi SJ Legacy Motors. I help employed buyers, business owners and OFWs find a car and a monthly payment that fit their real budget.</p>
 <p class="row"><a class="btn" href="/apply/">Apply for Financing</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
 <p class="tdl"><a href="/test-drive/">Book a test drive →</a></p>
-</div>{rx_card("xpander",eager=True,ratio="1x1",cls="rx himg")}</div></section>
+</div>{rx_card("xpander",eager=True,ratio="4x5",cls="rx himg")}</div></section>
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
