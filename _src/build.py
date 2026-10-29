@@ -265,7 +265,7 @@ def _promo_cards(m):
         if not opts: continue
         rows="".join(f'<li><span>{e(l)}</span><b>{f(mo)}<small>/mo</small></b></li>' for l,mo in sorted(opts,key=lambda x:_dpv(x[0])))
         fuel=f'<p class="fuel">Plus <b>{v["promo"]["fuel"]:,} fuel points</b></p>' if v["promo"]["fuel"] else ""
-        out+=f'<article class="card pad pcard"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{f(srp)}</b></p><ul class="opts">{rows}</ul>{fuel}<p class="muted">60 months, all-in.</p><p class="row"><a class="btn sm" href="/budgetcalculator/?unit={v["id"]}">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/?unit={v["id"]}">Check my chances</a></p></article>'
+        out+=f'<article class="card pad pcard"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{f(srp)}</b></p><ul class="opts">{rows}</ul>{fuel}<p class="muted">60 months, all-in.</p><p class="row"><a class="btn sm" href="/loan-assessment/?unit={v["id"]}">See if you&rsquo;re Pre-Qualified in 2 minutes →</a> <a class="btn sm ghost dk" href="/budgetcalculator/?unit={v["id"]}">Compare with my own DP</a></p></article>'
     return out
 PROMO_SECS="".join(f'<section class="pm" id="{m["slug"]}"><h2>{e(m["name"])}</h2><div class="grid g3">{_promo_cards(m)}</div></section>' for m in MODELS if _promo_cards(m))
 import promosab as _pab
