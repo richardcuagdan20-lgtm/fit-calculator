@@ -96,7 +96,7 @@ html.ab-open .ab-lockonly{display:none}html:not(.ab-open) .ab-openonly{display:n
 <p class="muted ab-s" style="margin-top:10px">Pre-qualified, subject to bank approval. Rates, promos and DP may change without prior notice.</p></form></div>
 <div class="ab-openonly ab-ok" id="ab-ok" aria-live="polite"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b> <span class="en">Richard can send the exact all-in computation for your chosen unit.</span><span class="tl">Puwedeng i-send ni Richard ang eksaktong all-in computation ng unit na gusto mo.</span></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div>
 </div></div></section>'''
-    CARPARTS.update(css=css,form=form,lv=lv,jv=jv)
+    CARPARTS.update(css=css,form=form,lv=lv,jv=jv,f=f)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
 <p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
@@ -113,45 +113,76 @@ html.ab-open .ab-lockonly{display:none}html:not(.ab-open) .ab-openonly{display:n
      body, crumbs=[("/","Home"),("/promos/","Promos")])
     return [r["unit"] for r in rs]
 
-# DRAFT 2026-10-29 (Richard, pending approval): "Promos for this model" module on each /cars/<model>/ page.
-# Same optionAB data, same table/CSS, same unlock form + promos.js (shared localStorage flag: one unlock reveals all, site-wide).
+# DRAFT 2026-10-30 (Richard, branch draft-carpage-pervariant): per-variant "See promo" dropdown inside each variant card on /cars/<model>/.
+# Each card: collapsed button -> Option A (locked/blurred until unlock) + Option B for THAT variant only. One shared unlock form
+# (same ids, promos.js/lead.js, localStorage flag) is moved into whichever dropdown's Unlock button was clicked.
+# Card Apply/Test Drive buttons moved to the hero next to the assessment CTA.
+CARD_ALIAS={"2026 L300 Dual AC":"L300 FB BODY WITHDUAL AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}
+VP_CSS="""<style>.vc{display:flex;flex-direction:column}.vc>.pad{flex:1;display:flex;flex-direction:column}.vp{margin-top:auto;padding-top:12px}
+.vp-tg{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--red);color:#fff;border:0;border-radius:999px;padding:12px 16px;min-height:48px;font:inherit;font-size:16px;font-weight:700;cursor:pointer}.vp-tg:hover{background:var(--redd)}.vp-tg:focus-visible{outline:3px solid #0b0b0c;outline-offset:2px}
+.vp-tg svg{transition:transform .25s ease}.vp-tg[aria-expanded=true] svg{transform:rotate(180deg)}
+.vp-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}.vp-b>div{overflow:hidden;min-height:0}.vp-b.open{grid-template-rows:1fr}.vp-b:not(.open)>div{visibility:hidden;transition:visibility 0s .3s}.vp-b.open>div{padding-top:12px}
+.vp .ab-rng{margin:0 0 10px;font-size:14px}.vp .ab-o{margin:0 0 8px}.vp .ab-k small{text-transform:none;letter-spacing:0;font-weight:400;opacity:.8}.vp .ab-dp,.vp .ab-mo{display:block}.vp .ab-mo b{font-size:20px}.vp .fuel{display:block;font-size:13px;color:#15803d;font-weight:600;margin:0 0 8px}
+.vp .ab-s{margin:4px 0 0}.vp .pm-unl{margin-top:10px;padding:14px;border:1px solid var(--ln);border-left:5px solid var(--red);border-radius:12px}.vp .ab-fg{grid-template-columns:1fr!important}.vp .pm-unl h2{font-size:17px!important}
+.vp-ask{border:1px dashed var(--ln);border-radius:12px;padding:12px 14px;margin:0}
+.hcta2{align-items:center}.hcta2 .btn{text-align:center}@media(max-width:600px){.hcta2{flex-direction:column;align-items:stretch}.hcta2 .btn{width:100%}}
+.hlang{margin:0 0 10px}@media(prefers-reduced-motion:reduce){.vp-b,.vp-tg svg{transition:none}}</style>"""
 def inject_cars(R):
-    import re
+    import re, html as H
+    rs={r["unit"]:r for r in rows()}; f=CARPARTS["f"]
+    def key(n): return re.sub(r"\s+"," ",H.unescape(n).replace("XFORCE","Xforce").lower()).strip()
+    byk={}
+    for u in rs: byk[key(NICE.get(u,u))]=u; byk[key(u)]=u
+    REPORT=[]
     for slug,(name,rl,tbl,arows) in CARSEC.items():
         fp=f"{R}/cars/{slug}/index.html"
         if not os.path.exists(fp): continue
         h=open(fp).read()
-        if 'id="promos-model"' in h: continue
-        k=iter(range(len(arows)))
-        t=re.sub(r'data-a="\d+"',lambda m:f'data-a="{next(k)}"',tbl)
-        t=t.replace('<a class="btn sm ghost dk" href="/budgetcalculator/">','<a class="btn sm ghost dk" href="/promos/">See all promos →</a> <a class="btn sm ghost dk" href="/budgetcalculator/">',1)
-        form=CARPARTS["form"].replace("Option B is shown below for every unit.","Option B is shown above for every variant.").replace("Nakalista sa baba ang Option B ng bawat unit.","Nakalista sa itaas ang Option B ng bawat variant.")
-        blob=base64.b64encode(json.dumps(arows).encode()).decode()
+        if 'class="vp abw"' in h: continue
+        A=[]; N=[0]
+        def card(m):
+            art=m.group(0); vn=re.search(r"<h3>(.*?)</h3>",art,re.S).group(1); vu=H.unescape(vn)
+            u=byk.get(key(CARD_ALIAS.get(vu,vu))); n=N[0]; N[0]+=1
+            if u:
+                r=rs[u]; i=len(A); A.append([r["a_dp"],r["a_mo"]])
+                fu=f'<span class="fuel"><span class="en">+ {FUEL[u]:,} fuel points</span><span class="tl">+ {FUEL[u]:,} fuel points</span></span>' if u in FUEL else ""
+                inner=(f'{rl}<div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></p><span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>\n'
+                 f'<div class="ab-o ab-b"><p class="ab-k">Option B <small class="en">· 30% DP, low monthly</small><small class="tl">· 30% DP, mababang monthly</small></p><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></div>{fu}\n'
+                 '<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p><div class="vp-f"></div>')
+                REPORT.append([slug,vu,u,r["srp"],r["a_dp"] is not None,r["b_dp"]])
+            else:
+                inner='<p class="vp-ask"><span class="en">Promo for this variant: ask Richard for the latest down payment and monthly.</span><span class="tl">Promo ng variant na ito: itanong kay Richard ang latest down payment at monthly.</span> <a href="#" data-vpask><span class="en">Ask for the promo</span><span class="tl">Itanong ang promo</span></a></p>'
+                REPORT.append([slug,vu,None])
+            dd=(f'<div class="vp abw"><button type="button" class="vp-tg" id="vpt-{n}" aria-expanded="false" aria-controls="vpb-{n}"><span class="en">See promo</span><span class="tl">Tingnan ang promo</span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6"/></svg></button>\n'
+                f'<div class="vp-b" id="vpb-{n}" role="region" aria-labelledby="vpt-{n}"><div>{inner}</div></div></div>')
+            art2,c=re.subn(r'<p class="row">.*?</p>(\s*</div>\s*</article>)',lambda k:dd+k.group(1),art,count=1,flags=re.S)
+            assert c==1,(slug,vn); return art2
+        h=re.sub(r'<article class="card vc">.*?</article>',card,h,flags=re.S)
+        mm=re.search(r'href="(https://m\.me/[^"]+)"',h)
+        h=h.replace('href="#" data-vpask',f'href="{mm.group(1) if mm else "/contact/"}" rel="noopener" data-msgr="carpage-askpromo-{slug}"')
+        form=CARPARTS["form"].replace("Option B is shown below for every unit.","Option B is shown for every variant.").replace("Nakalista sa baba ang Option B ng bawat unit.","Nakikita ang Option B ng bawat variant.")
         fin=form.replace('<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">','<div id="unlock" class="ab-box pm-unl">',1)
         assert fin.endswith('</div></div></section>'); fin=fin[:-len('</div></div></section>')]+'</div>'
-        # Accordion (Richard 2026-10-30): closed by default, after the car details/inclusions; #promos-model / #promos-<slug> / #unlock auto-open
-        mod=CARPARTS["css"]+f'''<style>.pm-bar{{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#0b0b0c;color:#fff;border:0;border-radius:14px;padding:16px 18px;min-height:56px;font:inherit;cursor:pointer}}.pm-bar:hover{{background:#18181b}}.pm-bar:focus-visible{{outline:3px solid var(--red);outline-offset:2px}}
-.pm-bt{{flex:1;min-width:0}}.pm-bt b{{display:block;font-size:18px}}.pm-bt small{{display:block;font-size:13px;opacity:.75;margin-top:2px}}.pm-cta{{background:var(--red);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;white-space:nowrap;display:flex;align-items:center;gap:6px}}
-.pm-cta svg{{transition:transform .25s ease}}.pm-bar[aria-expanded=true] .pm-cta svg{{transform:rotate(180deg)}}
-#pm-body{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}}#pm-body>div{{overflow:hidden;min-height:0}}#pm-body.open{{grid-template-rows:1fr}}#pm-body:not(.open)>div{{visibility:hidden;transition:visibility 0s .3s}}#pm-body.open>div{{padding-top:16px}}
-.pm-unl{{margin-top:16px;padding:16px;border:1px solid var(--ln);border-left:5px solid var(--red);border-radius:12px}}@media(max-width:600px){{.pm-bar{{padding:14px;flex-wrap:wrap}}.pm-bt{{flex:1 1 100%}}.pm-cta{{margin-left:0}}}}@media(prefers-reduced-motion:reduce){{#pm-body,.pm-cta svg{{transition:none}}}}</style>
-<div class="abw"><section class="sec" id="promos-model"><div class="w"><div class="card pad ab-m ab-np">
-<button type="button" class="pm-bar" id="pm-tg" aria-expanded="false" aria-controls="pm-body"><span class="pm-bt"><b><span class="en">{name} promos</span><span class="tl">{name} promos</span></b><small><span class="en">October 2026 promos, Option A and Option B</span><span class="tl">Promos ngayong Oktubre 2026, Option A at Option B</span></small></span><span class="pm-cta"><span class="pm-ct"><span class="en">See promo</span><span class="tl">Tingnan ang promo</span></span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6"/></svg></span></button>
-<div id="pm-body" role="region" aria-labelledby="pm-tg"><div>
-<div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
-<h2 class="h3" style="margin:0 0 6px"><span class="en">{name} promos this month</span><span class="tl">{name} promos ngayong buwan</span></h2>{rl}
-<p class="muted ab-s" style="margin-top:-6px"><span class="en">Two all-in options per variant on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Dalawang all-in options bawat variant sa 60 months: <b>Option A</b>, pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
-<div class="ab-mg">{t}</div>{fin}</div></div></div></div></section></div>
-<script type="text/plain" id="ab-a">{blob}</script>
-<script>(function(){{var b=document.getElementById("pm-tg"),p=document.getElementById("pm-body"),s=document.getElementById("promos-model");if(!b||!p)return;
-function set(o,go){{b.setAttribute("aria-expanded",o?"true":"false");p.classList.toggle("open",o);try{{p.inert=!o}}catch(_){{}}if(o&&go)setTimeout(function(){{s.scrollIntoView({{behavior:"smooth",block:"start"}})}},60)}}
-set(false);b.addEventListener("click",function(){{set(b.getAttribute("aria-expanded")!=="true")}});
-document.querySelectorAll("[data-openpromo]").forEach(function(a){{a.addEventListener("click",function(e){{e.preventDefault();set(true,true)}})}});
-function hc(){{var h=location.hash;if(h==="#promos-model"||h==="#promos-{slug}"||h==="#unlock")set(true,true)}}hc();window.addEventListener("hashchange",hc)}})();</script>'''
-        h=re.sub(r'(<section class="sec alt">.*?</section>)',lambda m:m.group(1)+mod,h,count=1,flags=re.S)
-        # hero CTA -> loan pre-qualification (Richard 2026-10-30); promos live in the on-page module
-        h=re.sub(r'<a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a>',lambda m:f'<a class="btn abw" href="/loan-assessment/" data-herocta="{m.group(1)}"><span class="en">See if you&rsquo;re Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a>',h,count=1)
-        h=h.replace(f'href="/promos/#{slug}">See promo','href="#promos-model" data-openpromo>See promo').replace(f'href="/promos/#{slug}"','href="#promos-model"')
-        h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Promo down payment and monthly options are in the <a href="#promos-model">promos section below</a>.')
+        blob=base64.b64encode(json.dumps(A).encode()).decode()
+        js=('<div class="abw" id="vp-hold" hidden>'+fin+'</div><script type="text/plain" id="ab-a">'+blob+'</script>\n<script>(function(){var T=[].slice.call(document.querySelectorAll(".vp-tg"));if(!T.length)return;\n'
+ 'function body(b){return document.getElementById(b.getAttribute("aria-controls"))}\n'
+ 'function set(b,o){b.setAttribute("aria-expanded",o?"true":"false");var p=body(b);p.classList.toggle("open",o);try{p.inert=!o}catch(_){}}\n'
+ 'T.forEach(function(b){set(b,false);b.addEventListener("click",function(){set(b,b.getAttribute("aria-expanded")!=="true")})});\n'
+ 'function placeForm(vp){var f=document.getElementById("unlock"),s=vp&&vp.querySelector(".vp-f");if(f&&s)s.appendChild(f)}\n'
+ 'document.querySelectorAll(".vp [data-unlock]").forEach(function(u){u.addEventListener("click",function(){placeForm(u.closest(".vp"))})});\n'
+ 'function first(){for(var i=0;i<T.length;i++)if(body(T[i]).querySelector(".vp-f"))return T[i];return T[0]}\n'
+ 'function hc(){var h=location.hash,b;if(h==="#unlock"){b=first();set(b,true);placeForm(b.closest(".vp"));setTimeout(function(){var f=document.getElementById("unlock");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})},80)}\n'
+ 'else if(h==="#promos-model"||h==="#promos-'+slug+'"){b=first();set(b,true);setTimeout(function(){b.closest(".vc").scrollIntoView({behavior:"smooth",block:"start"})},80)}}\n'
+ 'hc();window.addEventListener("hashchange",hc)})();</script>')
+        assert "</main>" in h; h=h.replace("</main>",js+"</main>",1)
+        h=h.replace("</head>",CARPARTS["css"]+VP_CSS+"</head>",1)
+        def hero(m):
+            return ('<div class="ab-lang hlang abw" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>'
+             f'<p class="row hcta hcta2 abw"><a class="btn" href="/loan-assessment/" data-herocta="{m.group(1)}"><span class="en">See if you&rsquo;re Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a> '
+             f'<a class="btn ghost" href="/apply/" data-heroact="apply-{slug}"><span class="en">Apply for this unit</span><span class="tl">Mag-apply para sa unit na ito</span></a> '
+             f'<a class="btn ghost" href="/test-drive/" data-heroact="testdrive-{slug}"><span class="en">Book a Test Drive</span><span class="tl">Mag-book ng Test Drive</span></a></p>')
+        h,c=re.subn(r'<p class="row hcta"><a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a></p>',hero,h,count=1); assert c==1,slug
+        h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Tap <b>See promo</b> on a variant for its down payment and monthly options.')
         h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script></body>',1)
         open(fp,"w").write(h)
+    json.dump(REPORT,open("/tmp/carpromo_map.json","w"),indent=1,ensure_ascii=False)
