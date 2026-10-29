@@ -29,8 +29,11 @@ CL='''<!-- Microsoft Clarity -->
 '''
 SUF0=" | Mitsubishi Motors - San Juan Motors"
 V4="V4:true" in open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"assets","lead.js")).read()  # status page flag lives in assets/lead.js
-NAV=[("/","Home"),("/cars/","Cars"),("/promos-tips/","Promos & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]+([("/status/","Track Application")] if V4 else [])
-GROUP=[("/promos/","Promos"),("/guides/","Guides"),("/blog/","Blog")]
+NAV=[("/","Home"),("/cars/","Cars"),("/tips/","Guides & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]+([("/status/","Track Application")] if V4 else [])
+# Guides & Tips (2026-10-29): ONE combined article index at /tips/; /blog/, /guides/, /promos-tips/ are redirect stubs to it.
+GT="/tips/"; GT_EN="Guides & Tips"; GT_TL="Guides at Tips"
+GT_PFX=("/tips/","/blog/","/guides/")
+GT_LAND=set()  # landing-guide paths, filled by landing.py
 from figs import FIGS
 ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill_sizes.json")))
 def e(s): return html.escape(s,quote=True)
@@ -46,16 +49,16 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         graph.append({"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":D+p} for i,(p,n) in enumerate(crumbs)]})
     cur=lambda p:(p==path or (p!="/" and path.startswith(p)))
     def item(p,n):
-        act=cur(p) or (p=="/promos-tips/" and any(cur(q) for q,_ in GROUP))
-        return f'<a href="{p}"{" aria-current=\"page\"" if act else ""}>{e(n)}</a>'
+        act=cur(p) or (p==GT and (path.startswith(GT_PFX) or path in GT_LAND))
+        lbl=f'<span class="nv-en">{e(GT_EN)}</span><span class="nv-tl" lang="fil">{e(GT_TL)}</span>' if p==GT else e(n)
+        return f'<a href="{p}"{" aria-current=\"page\"" if act else ""}>{lbl}</a>'
     def dd(lbl,items,key):
         on=any(cur(p) for p,_ in items)
         return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
                 +"".join(item(p,n) for p,n in items)+'</div></details>')
     nav=(item("/","Home")
         +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive")],"cars")
-        +dd("What's new",[("/promos/","Promos"),("/tips/","Tips")],"new")
-        +dd("News and Blogs",[("/blog/","Blog"),("/guides/","Buying guides"),("/promos-tips/","All promos, tips and articles")],"news")
+        +item(GT,GT_EN)
         +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
     bc=""
@@ -114,7 +117,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <footer class="ft"><div class="w">
 <div class="fg">
 <div><p class="fb">Richard Dennis Cuagdan</p><p>Car Sales Executive, Mitsubishi San Juan Motors</p><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions.</p><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
-<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/guides/">Guides</a> · <a href="/blog/">Blog</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a>{' · <a href="/status/">Track your application</a>' if V4 else ''}</p></div>
+<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/tips/">Guides &amp; Tips</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a>{' · <a href="/status/">Track your application</a>' if V4 else ''}</p></div>
 </div>
 <p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors by Richard Dennis Cuagdan on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a> <a class="fbl" href="{MSG}" target="_blank" rel="noopener" aria-label="Message Mitsubishi Motors by Richard on Messenger"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg><span>Messenger</span></a></p>
 <p class="disc">Richard Dennis Cuagdan is a sales executive of Mitsubishi San Juan Motors, an authorized Mitsubishi dealership. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>
@@ -275,21 +278,7 @@ f'''<section class="ph"><div class="w"><p class="kick">October 2026</p><h1>Mitsu
 <section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and promo option</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a>; it shows the promo side by side.</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>''', crumbs=[("/","Home"),("/promos/","Promos")])
 
-# ---------- promos & tips hub
-EVGL=[("/mitsubishi-zero-down-payment-promo/","Mitsubishi zero down payment promo"),("/mitsubishi-sjdm-bulacan/","Mitsubishi SJDM Bulacan"),("/mitsubishi-casa-bulacan/","Mitsubishi casa Bulacan"),("/mirage-g4-downpayment-and-monthly/","Mirage G4 downpayment and monthly"),("/triton-downpayment-and-monthly/","Triton downpayment and monthly"),("/l300-monthly-installment/","L300 monthly installment")]
-EVG="".join(f'<a class="card pad mc" href="{p}"><p class="kick">Guide</p><h3>{n}</h3></a>' for p,n in EVGL)
-LATEST="".join(f'<a class="card pad mc" href="/{a["base"]}/{a["slug"]}/"><p class="kick">{"Blog" if a["base"]=="blog" else "Tips"}</p><h3>{e(a["title"])}</h3><p class="muted">{e(a["desc"])}</p></a>' for a in sorted(LIVE,key=lambda a:a["date"],reverse=True))
-HUB=[("/promos/","Promos","See this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
-     ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
-     ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]+([("/tips/","Tips","Checklists for road trips, PMS, insurance, LTO and car care","xpglx_x37","Mitsubishi Xpander GLX")] if TIPS else [])
-page("/promos-tips/","Promos & Tips | Mitsubishi Motors - San Juan Motors",
- "Start here for Mitsubishi promos at San Juan Motors SJDM, plain-language car financing guides, and blog updates and model comparisons.",
-f'''<section class="ph"><div class="w"><p class="kick">Promos &amp; Tips</p><h1>What would you like to check?</h1><p class="lead">Pick one to get started.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3 hub">{"".join(f'<a class="card hubc" href="{p}">{img(k,a)}<div class="pad"><h2>{t}</h2><p>{d}</p><span class="more">Open {t} →</span></div></a>' for p,t,d,k,a in HUB)}</div></div></section>
-<section class="sec"><div class="w"><h2>Buying guides</h2><p class="sub">Evergreen guides with this month's promo table.</p><div class="grid g3">{EVG}</div></div></section>
-<section class="sec alt"><div class="w"><h2>Latest articles</h2><p class="sub">New blog posts and tips, newest first.</p><div class="grid g2">{LATEST}</div></div></section>''',
- crumbs=[("/","Home"),("/promos-tips/","Promos & Tips")])
-
+# ---------- /promos-tips/ hub retired (2026-10-29): redirect stub to the combined Guides & Tips index, written at the end of the build
 # ---------- evergreen cross-links into existing articles
 XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
  "l300-vs-triton-for-negosyo":("triton-downpayment-and-monthly","Triton downpayment and monthly guide"),"triton-for-business-and-farm":("triton-downpayment-and-monthly","Triton downpayment and monthly guide"),
@@ -303,14 +292,12 @@ for _a in POSTS+TIPS:
         _u,_t=XL[_a["slug"]];_p=f'<p>See also: the <a href="/{_u}/">{_t}</a>.</p>\n';_i=_a["body"].rfind("<h2>Your next step</h2>")
         _a["body"]=_a["body"][:_i]+_p+_a["body"][_i:] if _i>=0 else _a["body"]+_p
 # ---------- guides / blog
-def xl(base):
-    o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","See this month's down payment and monthly options.")],
-       "tips":[("/blog/","Blog","Longer guides on financing, OFW buying and model comparisons."),("/guides/","Guides","Plain-language guides to financing, documents and OFW buying.")],
-       "blog":[("/guides/","Guides","Plain-language guides to financing, documents and OFW buying."),("/promos/","Promos","See this month's down payment and monthly options.")]}[base]
-    return '<section class="sec alt"><div class="w"><h2>More in Promos &amp; Tips</h2><div class="grid g2">'+"".join(f'<a class="card pad mc" href="{p}"><h3>{n} →</h3><p class="muted">{d}</p></a>' for p,n,d in o)+'</div></div></section>'
-def articles(base,items,label,title,desc,intro):
-    lst="".join(f'<li class="card pad"><h2 class="h3"><a href="/{base}/{a["slug"]}/">{e(a["title"])}</a></h2><p>{e(a["desc"])}</p>{f"<p class=muted>{a['date']}</p>" if base=="blog" else ""}</li>' for a in items)
-    page(f"/{base}/",title,desc,f'<section class="ph"><div class="w"><h1>{label}</h1><p class="lead">{intro}</p></div></section><section class="sec"><div class="w"><ul class="grid g2 plain">{lst}</ul></div></section>'+xl(base),crumbs=[("/","Home"),(f"/{base}/",label)])
+GT_ALL=[]  # (url,title,desc,date) of every article for the combined /tips/ index
+def articles(base,items,label,title=None,desc=None,intro=None):
+    # per-type index pages retired: /tips/ is the single combined index; /blog/ and /guides/ become redirect stubs
+    label=GT_EN
+    for a in items:
+        GT_ALL.append((f"/{base}/{a['slug']}/",a["title"],a["desc"],a["date"]))
     for a in items:
         ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
         if a.get("lang"): ld[0]["inLanguage"]={"tl":"fil-PH","en":"en-PH"}[a["lang"]]
@@ -327,15 +314,15 @@ def articles(base,items,label,title,desc,intro):
             fq='<h2>Frequently asked questions</h2>'+"".join(f'<h3>{e(q)}</h3><p>{e(x)}</p>' for q,x in a["faq"])
         others="".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
         page(f"/{base}/{a['slug']}/",(a["title"]+" | Mitsubishi Motors - San Juan Motors" if len(a["title"])<=27 else a["title"]),a["desc"],
-        f'''<article class="art"><div class="w nar"><header><p class="kick">{label}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, {a.get("by","Car Sales Executive")} · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
+        f'''<article class="art"><div class="w nar"><header><p class="kick">{e(label)}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, {a.get("by","Car Sales Executive")} · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {top}
 {body}
 {rx_bio(rx_pick(a["slug"]),a.get("lang")=="tl")}
 {LACTA}
 {fq}
-<aside class="box"><h2 class="h3">More {label.lower()}</h2><ul class="links">{others}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
-        crumbs=[("/","Home"),(f"/{base}/",label),(f"/{base}/{a['slug']}/",a["title"])])
+<aside class="box"><h2 class="h3">More guides &amp; tips</h2><ul class="links">{others}</ul><p><a class="more" href="{GT}">See all guides &amp; tips →</a></p></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
+        crumbs=[("/","Home"),(GT,GT_EN),(f"/{base}/{a['slug']}/",a["title"])])
 articles("guides",GUIDES,"Guides","Car Buying Guides | Mitsubishi Motors - San Juan Motors",
  "Plain-language guides to buying a car in the Philippines: how financing works, loan documents, Zero DP vs low DP, OFW buying and all-in packages.",
  "Practical, plain-language guides to help you plan your purchase before you visit the showroom.")
@@ -470,6 +457,22 @@ exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py"))
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"statuspage.py")).read())
+# ---------- GUIDES & TIPS: one combined index of every article (blog, guides, tips, evergreen landing guides), newest first. No promos page here.
+for _p,_a in LAND_PATHS: GT_ALL.append((_p,_a["title"],_a["desc"],PROMO_UPDATED))
+import datetime as _dt
+def _gtd(d): return _dt.date.fromisoformat(d).strftime("%B %-d, %Y")
+_GTL=sorted(GT_ALL,key=lambda x:(x[3],x[1]),reverse=True)
+_gtl="".join(f'<li class="card pad"><h2 class="h3"><a href="{u}">{e(t)}</a></h2><p>{e(d)}</p><p class="muted"><time datetime="{dt}">{_gtd(dt)}</time></p></li>' for u,t,d,dt in _GTL)
+page(GT,"Guides & Tips | Mitsubishi Motors - San Juan Motors",
+ "Every car-buying guide, financing explainer, model comparison and driving tip from Richard Cuagdan of Mitsubishi San Juan Motors SJDM, newest first.",
+ f'''<section class="ph"><div class="w"><h1>Guides &amp; Tips</h1><p class="lead">Every guide, blog post and tip in one place, newest first: financing, loan requirements, model comparisons, car care and driving checklists.</p></div></section>
+<section class="sec"><div class="w"><ul class="grid g2 plain gtl">{_gtl}</ul></div></section>''',
+ ld=[{"@type":"CollectionPage","name":"Guides & Tips","url":D+GT,"hasPart":[{"@type":"Article","headline":t,"url":D+u,"datePublished":dt} for u,t,d,dt in _GTL]}],
+ crumbs=[("/","Home"),(GT,GT_EN)])
+# old indexes -> redirect stubs (GitHub Pages has no server redirects): meta refresh + canonical + JS replace
+for _old,_nm in (("/blog/","Blog"),("/guides/","Guides"),("/promos-tips/","Promos & Tips")):
+    os.makedirs(R+_old,exist_ok=True)
+    open(R+_old+"index.html","w").write(f'<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Guides &amp; Tips</title><link rel="canonical" href="{D}{GT}"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url={GT}"><script>location.replace("{GT}"+location.search+location.hash)</script></head><body><p>{e(_nm)} has moved to <a href="{GT}">Guides &amp; Tips</a>.</p></body></html>\n')
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')
@@ -544,6 +547,8 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - [Budget calculator]({D}/budgetcalculator/): match a unit to your income
 - [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
 - [Apply]({D}/apply/): financing or cash application
+- [Promos]({D}/promos/): this month's all-in down payment and monthly promos
+- [Guides & Tips]({D}/tips/): every guide, blog post and tip in one list, newest first
 - [About]({D}/about/) and [Contact]({D}/contact/)
 
 ## Buying guides (evergreen, with dated monthly promo table)
@@ -557,7 +562,7 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - Messenger: {MSG}
 
 ## Models
-"""+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Tips\n"+_ll(TIPS,"tips")+"\n## Blog\n"+_ll(POSTS,"blog")+"\n## Guides\n"+_ll(GUIDES,"guides"))
+"""+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Guides & Tips (all articles, newest first; index: "+D+GT+")\n"+"".join(f"- [{t}]({D}{u}): {d}\n" for u,t,d,dt in _GTL if u not in GT_LAND))
 import og as _og
 _og.inject("/budgetcalculator/","/assets/img/xpglx_x37.webp","Budget Fit Calculator | Mitsubishi Motors by Richard","Find the Mitsubishi that fits your monthly budget: Mirage G4, Xpander, L300, Triton, Destinator, Montero Sport all-in financing.")
 _og.inject("/privacy/","/assets/img/xpglx_x37.webp","Privacy Policy | Mitsubishi Motors by Richard Dennis Cuagdan","How Richard Dennis Cuagdan (Mitsubishi San Juan Motors) collects and protects your personal information under the Data Privacy Act.")

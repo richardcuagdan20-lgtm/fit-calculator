@@ -228,7 +228,7 @@ L(slug="mitsubishi-zero-down-payment-promo",kw="Mitsubishi zero down payment pro
 
 LAND_PATHS=[]
 for a in LANDINGS:
-    path=f"/{a['slug']}/"; LAND_PATHS.append((path,a))
+    path=f"/{a['slug']}/"; LAND_PATHS.append((path,a)); GT_LAND.add(path)
     kw=a["kw"].lower()
     assert all(kw in a[x].lower() for x in ("title","h1","desc","lead")),(a["slug"],[x for x in ("title","h1","desc","lead") if kw not in a[x].lower()])
     assert 140<=len(a["desc"])<=160,(a["slug"],len(a["desc"]))
@@ -253,4 +253,4 @@ for a in LANDINGS:
 {LACTA}
 {fq}
 <aside class="box"><h2 class="h3">More guides</h2><ul class="links">{"".join(f'<li><a href="/{b["slug"]}/">{e(b["title"])}</a></li>' for b in LANDINGS if b is not a)}</ul></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",og=rx_og(rx_pick(a["slug"])) if rx_pick(a["slug"]) else None,
-    crumbs=[("/","Home"),("/promos-tips/","Promos & Tips"),(path,a["kw"])])
+    crumbs=[("/","Home"),(GT,GT_EN),(path,a["kw"])])
