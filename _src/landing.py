@@ -247,7 +247,7 @@ for a in LANDINGS:
     page(path,a["title"],a["desc"],f'''<article class="art"><div class="w nar"><header><p class="kick">{e(a["kick"])}</p><h1>{e(a["h1"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, Car Sales Executive · Updated <time datetime="{PROMO_UPDATED}">{PROMO_UPDATED}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 <p class="lead" style="color:inherit">{e(a["lead"])}</p>
-<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost dk" href="/test-drive/{"?unit="+a["car"] if a.get("car") else ""}">Book a Test Drive</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p>
+{hero_cta(lang=a.get("lang","en"),src="lp-"+a["slug"])}
 {body}
 {rx_bio(rx_pick(a["slug"]))}
 {LACTA}

@@ -144,6 +144,14 @@ def rx_card(c,cap="",eager=False,ratio="16x9",cls="rx"):
     return (f'<figure class="{cls}"><picture><source type="image/webp" srcset="{b}-{sm}.webp {sm}w, {b}.webp {bw}w" sizes="{sz}">'
             f'<img src="{b}-{sm}.jpg" alt="{e(rx_alt(c))}" width="{w}" height="{h}" {ld} decoding="async"></picture>'
             +(f'<figcaption class="rxc">{cap}</figcaption>' if cap else '')+'</figure>')
+# ---------- HERO MODULE: one CTA only ("View Promos" -> /promos/). Messenger/compute/apply live in header + in-page sections.
+HERO_CTA={"en":"View Promos","tl":"Tingnan ang Promos"}
+def hero_cta(href="/promos/",lang="en",src="hero"):
+    return f'<p class="row hcta"><a class="btn" href="{href}" data-herocta="{e(src)}">{HERO_CTA.get(lang,HERO_CTA["en"])}</a></p>'
+def hero(title,sub,media="",kick="",cta_href="/promos/",lang="en",src="hero",cls="hero",extra=""):
+    """reusable hero: kicker, h1, lead, exactly ONE CTA, optional media (e.g. rx_card 4:5 / img himg)"""
+    k=f'<p class="kick">{kick}</p>' if kick else ""
+    return f'<section class="{cls}"><div class="w hgrid"><div>{k}<h1>{title}</h1><p class="lead">{sub}</p>{extra}{hero_cta(cta_href,lang,src)}</div>{media}</div></section>'
 def rx_pick(slug):
     s=slug.lower();hits=[(s.find(k),c) for k,c in (("xforce","xforce"),("destinator","destinator"),("mirage","mirage"),("xpander","xpander")) if k in s and not (k=="xpander" and "xpander-cross" in s and s.count("xpander")==1)]
     return min(hits)[1] if hits else None
@@ -186,13 +194,7 @@ CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/","Mitsubishi Cars & Promos in SJDM, Bulacan | Mitsubishi Motors - San Juan Motors",
  "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in down payment and monthly options.",
-f'''<section class="hero"><div class="w hgrid"><div>
-<p class="kick">Mitsubishi San Juan Motors · San Jose del Monte, Bulacan</p>
-<h1>Your next Mitsubishi, explained clearly and financed sensibly.</h1>
-<p class="lead">I'm Richard Cuagdan, a Car Sales Executive at Mitsubishi San Juan Motors. I help employed buyers, business owners and OFWs find a car and a monthly payment that fit their real budget.</p>
-<p class="row"><a class="btn" href="/apply/">Apply for Financing</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="/promos/">See October promos</a></p>
-<p class="tdl"><a href="/test-drive/">Book a test drive →</a></p>
-</div>{rx_card("xpander",eager=True,ratio="4x5",cls="rx himg")}</div></section>
+hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Mitsubishi San Juan Motors · San Jose del Monte, Bulacan",src="home")+f'''
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
@@ -241,7 +243,7 @@ for m in MODELS:
     haspromo=any(v["promo"] for v in m["variants"])
     page(f"/cars/{m['slug']}/",f"{m['name']} 2026 Price | Mitsubishi Motors - San Juan Motors",
      f"Mitsubishi {m['name']} at San Juan Motors, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p><p class="row"><a class="btn" href="/apply/?unit={m['slug']}">Apply for this unit</a> <a class="btn ghost" href="/test-drive/?unit={m['slug']}">Book a Test Drive</a> <a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a> {f'<a class="btn ghost" href="/promos/#{m["slug"]}">See promo</a>' if haspromo else f'<a class="btn ghost" href="{MSG}" rel="noopener">Ask for the latest promo</a>'}</p></div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 {(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],cap=f"Richard Cuagdan, your sales executive, with the Mitsubishi {e(RXCAR[RXMODEL[m['slug']]])}")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
@@ -266,8 +268,8 @@ PROMO_SECS="".join(f'<section class="pm" id="{m["slug"]}"><h2>{e(m["name"])}</h2
 page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
  "October 2026 Mitsubishi promos from San Juan Motors: all-in down payment and monthly options on 60 months, with freebies and fuel points. Subject to bank approval.",
 f'''<section class="ph"><div class="w"><p class="kick">October 2026</p><h1>Mitsubishi promos this month</h1><p class="lead">All-in down payment and monthly options on 60 months, with freebies. Pick a unit, then estimate your own plan or check how a bank is likely to view your application.</p>
-<p class="row"><a class="btn" href="/budgetcalculator/">Estimate my monthly</a> <a class="btn ghost" href="/loan-assessment/">Take the Loan Application Assessment</a></p></div></section>
-<section class="sec"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(f'<a href="#{m["slug"]}">{e(m["name"])}</a>' for m in MODELS if _promo_cards(m))}</nav>
+{hero_cta("#list",src="promos")}</div></section>
+<section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(f'<a href="#{m["slug"]}">{e(m["name"])}</a>' for m in MODELS if _promo_cards(m))}</nav>
 {PROMO_SECS}
 <p class="note">{NOTE}</p><p class="muted">Other down payment options, and units not listed here (such as the Xforce and Outlander PHEV): <a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
 <section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and promo option</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a>; it shows the promo side by side.</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>

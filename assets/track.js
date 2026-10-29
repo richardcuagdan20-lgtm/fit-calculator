@@ -25,3 +25,5 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
 try{new MutationObserver(function(){wire()}).observe(document.documentElement,{childList:true,subtree:true})}catch(_){}
 })();
+/* HeroCTA: single hero button click -> Pixel ViewContent + custom HeroCTA */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-herocta]');if(!a||!window.rpTrack)return;var p={source:a.getAttribute('data-herocta'),content_name:'hero_view_promos',content_category:'promos'};window.rpTrack('ViewContent',p);window.rpTrack('HeroCTA',p,true)});
