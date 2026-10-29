@@ -14,7 +14,9 @@ RANGE={"mirage-g4":(0,18000),"xpander":(18000,33000),"xforce":(18000,48000),"des
 FUEL={"Xpander GLX 1.5G 2WD M/T":30000,"L300 FB BODY WITHDUAL AC 2.2D M/T":20000}
 NICE={"L300 CAB & CHASIS 2.2D M/T":"L300 Cab & Chassis 2.2D M/T","L300 FB BODY WITH SINGLE AC 2.2D M/T":"L300 FB Body Single AC 2.2D M/T",
  "L300 FB BODY WITHDUAL AC 2.2D M/T":"L300 FB Body Dual AC 2.2D M/T","OUTLANDER PHEV GT 2.4G AWD":"Outlander PHEV GT 2.4G AWD"}
-# card photos (2026-10-29): same image each /cars/ page uses per variant; Mirage hatchback has none -> no photo
+MODELIMG={'mirage-g4':'mg4gls_u17','xpander':'xpglx_x37','xpander-cross':'xc_x3n','xforce':'xf_glx','destinator':'de_x3n','triton':'tr_lineup',
+ 'montero-sport':'ms_white','l300':'l300_fb','versa-van':'vv_glx','outlander-phev':'op_gt'}  # one picture per model module (2026-10-29)
+# (old) card photos (2026-10-29): same image each /cars/ page uses per variant; Mirage hatchback has none -> no photo
 IMG={"Mirage G4 GLX 1.2G M/T":"mg4glx_u17","Mirage G4 GLX 1.2G CVT":"mg4glx_a66","Mirage G4 GLS 1.2G CVT":"mg4gls_u17",
  "Xpander GLX 1.5G 2WD M/T":"xpglx_u33","Xpander GLX 1.5G 2WD A/T":"xpglx_x37","Xpander GLS 1.5G 2WD A/T":"xpgls_c31",
  "Xpander Cross 1.5G 2WD A/T (Two-Tone)":"xc_x3n","XFORCE GLX 1.5G 2WD CVT":"xf_glx","XFORCE GLS 1.5G 2WD CVT (Monotone)":"xf_gls",
@@ -39,30 +41,36 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         nav.append(f'<a href="#{slug}">{e(name)}</a>')
         rg=RANGE.get(slug)
         if rg and rg[0]==0:  # Richard 2026-10-29: show "Zero DP Promo" instead of ₱0 (still subject to approval)
-            rl=f'<p class="ab-rng"><b class="ab-z">Zero DP Promo</b><span class="en">, up to <b>{f(rg[1])}</b> DP</span><span class="tl">, hanggang <b>{f(rg[1])}</b> DP</span> <small class="muted">· <span class="en">Pre-qualified, subject to bank approval</span><span class="tl">Pre-qualified, subject to bank approval</span></small></p>'
+            rl=f'<p class="ab-rng"><b class="ab-z">Zero DP Promo</b><span class="en">, up to <b>{f(rg[1])}</b> DP</span><span class="tl">, hanggang <b>{f(rg[1])}</b> DP</span></p>'
         else:
             rl=f'<p class="ab-rng"><span class="en">Lowest DP range</span><span class="tl">Lowest DP range</span> <b>{f(rg[0])} – {f(rg[1])}</b></p>' if rg else ""
-        cards=""
+        trs=""
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
-            fu=f'<p class="fuel"><span class="en">Plus <b>{FUEL[r["unit"]]:,} fuel points</b></span><span class="tl">May <b>{FUEL[r["unit"]]:,} fuel points</b></span></p>' if r["unit"] in FUEL else ""
-            im=IMG.get(r["unit"]); ph=""
-            if im:
-                EAG[0]+=1
-                w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
-                iv=hashlib.md5(open(f"{R}/assets/img/{im}.webp","rb").read()).hexdigest()[:8]
-                ph=f'<div class="ab-ph"><img src="/assets/img/{im}.webp?v={iv}" width="{w}" height="{h}" alt="Mitsubishi {e(n)}" {'fetchpriority="high"' if EAG[0]<=3 else 'loading="lazy"'} decoding="async"></div>'
-            cards+=f'''<article class="card pad pcard ab">{ph}<h3>{e(n)}</h3><p class="srp">SRP <b>{f(r["srp"])}</b></p>
-<div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <span class="en">· Lowest DP</span><span class="tl">· Pinakamababang DP</span></p><div class="ab-v"><span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b><small>/mo</small></span></div><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></div>
-<div class="ab-o ab-b"><p class="ab-k">Option B <span class="en">· Low monthly</span><span class="tl">· Mababang monthly</span></p><div class="ab-v"><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b><small>/mo</small></span></div></div>
-{fu}<p class="muted ab-s"><span class="en">60 months, all-in. Pre-qualified, subject to bank approval.</span><span class="tl">60 months, all-in. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm" href="/budgetcalculator/">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/">Check my chances</a></p></article>'''
-        secs+=f'<section class="pm" id="{slug}"><h2>{e(name)}</h2>{rl}<div class="grid g3">{cards}</div></section>'
+            fu=f'<span class="fuel"><span class="en">+ {FUEL[r["unit"]]:,} fuel points</span><span class="tl">+ {FUEL[r["unit"]]:,} fuel points</span></span>' if r["unit"] in FUEL else ""
+            trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
+<td class="ab-ca" data-a="{i}"><span class="ab-l">Option A</span><span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
+<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td></tr>'''
+        im=MODELIMG.get(slug); ph=""
+        if im:
+            EAG[0]+=1; w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
+            iv=hashlib.md5(open(f"{R}/assets/img/{im}.webp","rb").read()).hexdigest()[:8]
+            ph=f'<div class="ab-ph"><img src="/assets/img/{im}.webp?v={iv}" width="{w}" height="{h}" alt="Mitsubishi {e(name)}" {'fetchpriority="high"' if EAG[0]==1 else 'loading="lazy"'} decoding="async"></div>'
+        tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></th><th scope="col">Option B <small class="en">· Low monthly</small><small class="tl">· Mababang monthly</small></th></tr></thead><tbody>{trs}</tbody></table>
+<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm" href="/budgetcalculator/">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/">Check my chances</a></p></div>'''
+        secs+=f'<section class="pm card pad ab-m{"" if ph else " ab-np"}" id="{slug}"><h2>{e(name)}</h2>{rl}<div class="ab-mg">{ph}{tbl}</div></section>'
     blob=base64.b64encode(json.dumps(A).encode()).decode()
     lv=hashlib.md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]
     jv=hashlib.md5(open(R+"/assets/promos.js","rb").read()).hexdigest()[:8]
     css='''<style>html[data-lang=tl] .abw .en,html:not([data-lang=tl]) .abw .tl{display:none!important}
 .ab-lang{display:flex;gap:8px;margin:0 0 14px}.ab-lang button{background:none;border:1px solid #52525b;color:inherit;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-size:14px;cursor:pointer}html[data-lang=tl] .ab-lang [data-setlang=tl],html:not([data-lang=tl]) .ab-lang [data-setlang=en]{background:#0b0b0c;color:#fff}
-.ab-ph{margin:-4px -4px 12px;aspect-ratio:3/2;background:#fff;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}.ab-ph img{width:100%;height:100%;object-fit:contain;display:block}
+.ab-m{margin:0 0 22px}.ab-m h2{margin-top:0}.ab-mg{display:grid;gap:16px}@media(min-width:900px){.ab-mg{grid-template-columns:300px 1fr;align-items:start}.ab-np .ab-mg{grid-template-columns:1fr}}.ab-tw{min-width:0}
+.ab-t{width:100%;border-collapse:collapse;font-size:15px}.ab-t th,.ab-t td{padding:10px 8px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}.ab-t thead th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#52525b}.ab-t thead small{text-transform:none;letter-spacing:0;font-weight:400}
+.ab-vn{display:block;font-weight:700}.ab-t .fuel{display:block;font-size:13px;color:#15803d;font-weight:600}.ab-srp{white-space:nowrap}.ab-ca,.ab-cb{white-space:nowrap}.ab-ca .ab-dp,.ab-cb .ab-dp,.ab-ca .ab-mo,.ab-cb .ab-mo{display:block}.ab-mo b{font-size:18px}.ab-ca{background:#18181b;color:#fff}.ab-ca .ab-l,.ab-cb .ab-l,.ab-srp .ab-l{display:none}
+.ab-t .ab-ul{margin-top:6px;padding:6px 10px;min-height:36px;font-size:13px}
+@media(max-width:899px){.ab-t thead{display:none}.ab-t,.ab-t tbody{display:block}.ab-t tr{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 0;border-bottom:1px solid var(--ln)}.ab-t th,.ab-t td{border:0;padding:0}.ab-t th[scope=row]{grid-column:1}.ab-srp{grid-column:2;text-align:right!important}.ab-srp .ab-l{display:inline!important;color:#71717a;font-size:13px}
+.ab-ca,.ab-cb{border-radius:10px;padding:10px!important;white-space:normal}.ab-cb{border:1px solid var(--ln)!important}.ab-ca .ab-l,.ab-cb .ab-l{display:block!important;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--redd);margin-bottom:2px}.ab-ca .ab-l{color:#fca5a5}.ab-t .ab-ul{width:100%}}
+.ab-ph{aspect-ratio:3/2;background:#fff;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}.ab-ph img{width:100%;height:100%;object-fit:contain;display:block}
 .ab-rng{margin:-4px 0 14px;font-size:15px;color:#3f3f46}.ab-rng b{color:var(--redd);white-space:nowrap}
 .ab-o{border:1px solid var(--ln);border-radius:12px;padding:12px 14px;margin:0 0 10px;position:relative}.ab-a{background:linear-gradient(135deg,#0b0b0c,#27272a);color:#fff;border:0}
 .ab-k{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--redd)}.ab-a .ab-k{color:#fca5a5}
