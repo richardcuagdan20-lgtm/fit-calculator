@@ -37,7 +37,7 @@ desc="Compare Zero Down Payment and low down payment car promos: upfront cash, m
 body='''<p>Many promos give you two choices on the same unit: Zero DP, where you pay no down payment, or a low-DP option where you pay a modest amount upfront in exchange for a lower monthly.</p>
 <h2>The trade-off in one sentence</h2>
 <p>Zero DP keeps your cash in your pocket today; a down payment shrinks the loan, so every monthly payment for the next five years is smaller. Because you borrow less, you also pay less in total over the term, often by more than the down payment itself.</p>
-<p>To see the exact Zero DP and low-DP figures for a specific unit this month, <a href="/promos/">unlock the current promos</a> or run the <a href="/budgetcalculator/">budget calculator</a>.</p>
+<p>To see the exact Zero DP and low-DP figures for a specific unit this month, <a href="/promos/">see the current promos</a> or run the <a href="/budgetcalculator/">budget calculator</a>.</p>
 <h2>When Zero DP makes sense</h2>
 <ul class="ticks"><li>You need a car now but want to keep your savings intact as an emergency fund.</li><li>Your monthly income comfortably covers the higher amortization.</li><li>You'd rather put spare cash into your business or other priorities.</li></ul>
 <h2>When low DP makes sense</h2>
@@ -82,7 +82,7 @@ body='''<p>All three seat seven and are popular with families in Bulacan. The ri
 <tr><th scope="row">Transmission</th><td>5MT or 4AT</td><td>4AT</td><td>CVT</td></tr>
 <tr><th scope="row">SRP from</th><td>₱1,099,000</td><td>₱1,378,000</td><td>₱1,389,000</td></tr>
 </tbody></table></div>
-'''+'''<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). <a href="/promos/">Unlock this month's promos</a>.</p>
+'''+'''<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). <a href="/promos/">See this month's promos</a>.</p>
 <h2>Choose the Xpander if…</h2>
 <p>You want the most affordable 7-seater, mostly drive around town and on weekend trips, and value practicality over extras. The GLS AT adds a 10-inch display with wireless smartphone connectivity and a Multi-Around Monitor. <a href="/cars/xpander/">See Xpander promos</a>.</p>
 <h2>Choose the Xpander Cross if…</h2>
@@ -105,12 +105,12 @@ body='''<p>Seven seats is the magic number for many Filipino households: parents
 <p>The <a href="/cars/destinator/">Destinator</a>'s turbocharged engine makes 163 PS, a big step up for families who regularly fill every seat and head north or south on the expressway.</p>
 <h2>For long drives and rough roads: Montero Sport</h2>
 <p>If you travel to the province often or need a diesel with real towing and off-road ability, the <a href="/cars/montero-sport/">Montero Sport</a> and its Black Series variants are built for it.</p>
-<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). For this month's down payment and monthly options, <a href="/promos/">unlock the promos</a>.</p>
+<p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026). For this month's down payment and monthly options, <a href="/promos/">see the promos</a>.</p>
 <h2>How to narrow it down</h2>
 <p>Start with your comfortable monthly using the <a href="/budgetcalculator/">calculator</a>, then compare the models that fit. My <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator guide</a> goes deeper on the three gasoline options.</p>'''),
 dict(slug="mitsubishi-october-2026-promos-bulacan",date="2026-10-21",img="msbs_jh3",alt="Mitsubishi Montero Sport Black Series in Graphite Gray with black roof",
 title="Mitsubishi October 2026 Promos in Bulacan",
-desc="October 2026 at Mitsubishi San Juan Motors, San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to unlock this month's promo figures.",
+desc="October 2026 at Mitsubishi San Juan Motors, San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to see this month's promo figures.",
 body='''<p>October is a good month to shop at Mitsubishi San Juan Motors in San Jose del Monte. Most models come with all-in packages, Zero DP or low-DP financing options and freebies. Here is where each model starts, based on the official SRP.</p>
 <h2>Starting SRP per model</h2>
 <ul class="ticks"><li><a href="/cars/mirage-g4/">Mirage G4</a>: from ₱793,000</li><li><a href="/cars/l300/">L300</a>: from ₱829,000 (cab and chassis)</li><li><a href="/cars/xpander/">Xpander</a>: from ₱1,099,000</li><li><a href="/cars/xforce/">Xforce</a>: from ₱1,119,000</li><li><a href="/cars/triton/">Triton</a>: from ₱1,266,000</li><li><a href="/cars/xpander-cross/">Xpander Cross</a>: ₱1,378,000</li><li><a href="/cars/destinator/">Destinator</a>: from ₱1,389,000</li><li><a href="/cars/montero-sport/">Montero Sport</a>: from ₱1,568,000</li><li><a href="/cars/versa-van/">Versa Van</a>: ₱1,764,000</li><li><a href="/cars/outlander-phev/">Outlander PHEV</a>: ₱2,848,000</li></ul>
@@ -119,6 +119,6 @@ body='''<p>October is a good month to shop at Mitsubishi San Juan Motors in San 
 <p>Promo packages are all-in: three years of LTO registration and TPL, first-year comprehensive insurance with the rate locked for three years, chattel mortgage, free labor up to 5,000 km and a three-year warranty. Freebies include full tint and floor mats, and many variants add a fuel freebie. <a href="/guides/what-all-in-includes/">See the full list</a>.</p>
 <h2>See the exact figures</h2>
 <p>Down payment and monthly options change every month, so I share them on request. Leave your name and mobile number on the <a href="/promos/">promos page</a> to see every October figure right away, or use the <a href="/budgetcalculator/">budget calculator</a> to match a unit to your income.</p>
-<p><a class="btn" href="/promos/">Unlock October promos</a></p>
+<p><a class="btn" href="/promos/">See October promos</a></p>
 '''+NOTE_B),
 ]

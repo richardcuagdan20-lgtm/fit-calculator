@@ -196,7 +196,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
-<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">unlock this month's promo figures</a>.</p>
+<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
 <p><a class="more" href="/cars/">View all current models →</a></p>
@@ -228,7 +228,7 @@ cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"M
 page("/cars/","2026 Models & Prices | Mitsubishi Motors - San Juan Motors",
  "Every current Mitsubishi model at San Juan Motors, San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>2026 Mitsubishi models</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">Unlock October promos</a></p></div></section>''',
+<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">See October promos</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 # ---------- model pages
@@ -252,56 +252,32 @@ for m in MODELS:
 # ---------- promos (gated, noindex; figures live only in JS data)
 PD=[{"slug":m["slug"],"name":m["name"],"v":[{"n":v["n"],"srp":(v["promo"]["srp"] or v["srp"]),"opts":v["promo"]["opts"],"fuel":v["promo"]["fuel"]} for v in m["variants"] if v["promo"]]} for m in MODELS]
 PD=[x for x in PD if x["v"]]
+def _promo_cards(m):
+    out=""
+    for v in m["variants"]:
+        if not v["promo"]: continue
+        srp=v["promo"]["srp"] or v["srp"];opts=[(l,mo) for l,mo in v["promo"]["opts"] if _dpv(l)>0]
+        if not opts: continue
+        rows="".join(f'<li><span>{e(l)}</span><b>{f(mo)}<small>/mo</small></b></li>' for l,mo in sorted(opts,key=lambda x:_dpv(x[0])))
+        fuel=f'<p class="fuel">Plus <b>{v["promo"]["fuel"]:,} fuel points</b></p>' if v["promo"]["fuel"] else ""
+        out+=f'<article class="card pad pcard"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{f(srp)}</b></p><ul class="opts">{rows}</ul>{fuel}<p class="muted">60 months, all-in.</p><p class="row"><a class="btn sm" href="/budgetcalculator/?unit={v["id"]}">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/?unit={v["id"]}">Check my chances</a></p></article>'
+    return out
+PROMO_SECS="".join(f'<section class="pm" id="{m["slug"]}"><h2>{e(m["name"])}</h2><div class="grid g3">{_promo_cards(m)}</div></section>' for m in MODELS if _promo_cards(m))
 page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
- "Unlock this month's Mitsubishi promo figures at San Juan Motors, San Jose del Monte: Zero DP and low-DP all-in options with freebies.",
-f'''<section class="ph"><div class="w"><h1>October 2026 Mitsubishi promos</h1><p class="lead">See every down payment and monthly option this month, all-in on 60 months. Leave your name and mobile once to unlock them.</p></div></section>
-<section class="sec"><div class="w">
-<div id="gate" class="card pad formc nar">
-<h2 class="h3">Unlock the promo figures</h2>
-<form id="gf" novalidate>
-<div class="fld"><label for="name">Full name</label><input id="name" autocomplete="name" required><p class="er" id="e_name" hidden>Please enter your name.</p></div>
-<div class="fld"><label for="mobile">Mobile number</label><input id="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_mobile" hidden>Enter a valid mobile number (09XXXXXXXXX or +country code).</p></div>
-<div class="fld"><label for="unit">Unit of interest</label><select id="unit" required><option value="">Select a unit</option>{UNIT_OPTS}<option value="Not sure yet">Not sure yet</option></select><p class="er" id="e_unit" hidden>Please choose a unit.</p></div>
-{CONSENT}
-<button class="btn" type="submit" id="gb">Show the promos</button>
-</form></div>
-<div id="pv" hidden></div>
-<noscript><p>Please enable JavaScript to view promo figures, or <a href="{MSG}">message Richard</a>.</p></noscript>
-</div></section>
-<section class="sec rxs"><div class="w">{rx_card("xpander",cap="Questions about a promo? Richard Cuagdan, your sales executive, is happy to help.")}</div></section>
-<section class="sec alt"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>
-<script src="/assets/lead.js" defer></script>
-<script type="application/json" id="pd">{json.dumps(PD,ensure_ascii=False)}</script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){{
-var KEY='mp_promo_unlocked',MSG='{MSG}',NOTE={json.dumps(NOTE)};
-function peso(n){{return '₱'+Number(n).toLocaleString('en-PH')}}
-function esc(t){{return String(t).replace(/[&<>"]/g,function(c){{return {{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}}[c]}})}}
-function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='';
- d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
-  m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel points: <b>'+Number(v.fuel).toLocaleString("en-US")+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
-  h+='</div></section>'}});
- h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener" data-msgr="promos">Message Richard on Messenger</a></p>';
- var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
- if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
-var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}
-if(un){{show();return}}
-document.getElementById('gf').addEventListener('submit',function(ev){{ev.preventDefault();
- var n=document.getElementById('name').value.trim(),mo=document.getElementById('mobile').value.trim(),u=document.getElementById('unit').value,c=document.getElementById('consent').checked;
- var bad=[Lead.err('name',n.length<2),Lead.err('mobile',!Lead.okMobile(mo)),Lead.err('unit',!u),Lead.err('consent',!c)];
- if(bad.some(Boolean)){{var x=document.querySelector('.er:not([hidden])');if(x)x.scrollIntoView({{block:'center'}});return}}
- var b=document.getElementById('gb');b.disabled=true;b.textContent='Unlocking...';
- var L=Lead.base('promo_gate');L.name=n;L.mobile=mo.replace(/[\\s()-]/g,'');L.chosenUnit=u;L.seg='';
- Lead.send(L).then(function(){{try{{localStorage.setItem(KEY,'1')}}catch(_){{}}Lead.track(u);show();window.scrollTo(0,document.getElementById('pv').offsetTop-80)}});
-}});
-}});
-</script>''', noindex=True, crumbs=[("/","Home"),("/promos/","Promos")])
+ "October 2026 Mitsubishi promos from San Juan Motors: all-in down payment and monthly options on 60 months, with freebies and fuel points. Subject to bank approval.",
+f'''<section class="ph"><div class="w"><p class="kick">October 2026</p><h1>Mitsubishi promos this month</h1><p class="lead">All-in down payment and monthly options on 60 months, with freebies. Pick a unit, then estimate your own plan or check how a bank is likely to view your application.</p>
+<p class="row"><a class="btn" href="/budgetcalculator/">Estimate my monthly</a> <a class="btn ghost" href="/loan-assessment/">Take the Loan Application Assessment</a></p></div></section>
+<section class="sec"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(f'<a href="#{m["slug"]}">{e(m["name"])}</a>' for m in MODELS if _promo_cards(m))}</nav>
+{PROMO_SECS}
+<p class="note">{NOTE}</p><p class="muted">Other down payment options, and units not listed here (such as the Xforce and Outlander PHEV): <a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
+<section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and promo option</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a>; it shows the promo side by side.</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
+<section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>''', crumbs=[("/","Home"),("/promos/","Promos")])
 
 # ---------- promos & tips hub
 EVGL=[("/mitsubishi-zero-down-payment-promo/","Mitsubishi zero down payment promo"),("/mitsubishi-sjdm-bulacan/","Mitsubishi SJDM Bulacan"),("/mitsubishi-casa-bulacan/","Mitsubishi casa Bulacan"),("/mirage-g4-downpayment-and-monthly/","Mirage G4 downpayment and monthly"),("/triton-downpayment-and-monthly/","Triton downpayment and monthly"),("/l300-monthly-installment/","L300 monthly installment")]
 EVG="".join(f'<a class="card pad mc" href="{p}"><p class="kick">Guide</p><h3>{n}</h3></a>' for p,n in EVGL)
 LATEST="".join(f'<a class="card pad mc" href="/{a["base"]}/{a["slug"]}/"><p class="kick">{"Blog" if a["base"]=="blog" else "Tips"}</p><h3>{e(a["title"])}</h3><p class="muted">{e(a["desc"])}</p></a>' for a in sorted(LIVE,key=lambda a:a["date"],reverse=True))
-HUB=[("/promos/","Promos","Unlock this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
+HUB=[("/promos/","Promos","See this month's promos and freebies","msbs_jh3","Mitsubishi Montero Sport Black Series"),
      ("/guides/","Guides","Financing, requirements and buying tips","xpgls_c31","Mitsubishi Xpander GLS"),
      ("/blog/","Blog","News, model comparisons and updates","de_x3n","Mitsubishi Destinator GT")]+([("/tips/","Tips","Checklists for road trips, PMS, insurance, LTO and car care","xpglx_x37","Mitsubishi Xpander GLX")] if TIPS else [])
 page("/promos-tips/","Promos & Tips | Mitsubishi Motors - San Juan Motors",
@@ -326,9 +302,9 @@ for _a in POSTS+TIPS:
         _a["body"]=_a["body"][:_i]+_p+_a["body"][_i:] if _i>=0 else _a["body"]+_p
 # ---------- guides / blog
 def xl(base):
-    o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","Unlock this month's down payment and monthly options.")],
+    o={"guides":[("/blog/","Blog","Promo roundups, model comparisons and showroom tips."),("/promos/","Promos","See this month's down payment and monthly options.")],
        "tips":[("/blog/","Blog","Longer guides on financing, OFW buying and model comparisons."),("/guides/","Guides","Plain-language guides to financing, documents and OFW buying.")],
-       "blog":[("/guides/","Guides","Plain-language guides to financing, documents and OFW buying."),("/promos/","Promos","Unlock this month's down payment and monthly options.")]}[base]
+       "blog":[("/guides/","Guides","Plain-language guides to financing, documents and OFW buying."),("/promos/","Promos","See this month's down payment and monthly options.")]}[base]
     return '<section class="sec alt"><div class="w"><h2>More in Promos &amp; Tips</h2><div class="grid g2">'+"".join(f'<a class="card pad mc" href="{p}"><h3>{n} →</h3><p class="muted">{d}</p></a>' for p,n,d in o)+'</div></div></section>'
 def articles(base,items,label,title,desc,intro):
     lst="".join(f'<li class="card pad"><h2 class="h3"><a href="/{base}/{a["slug"]}/">{e(a["title"])}</a></h2><p>{e(a["desc"])}</p>{f"<p class=muted>{a['date']}</p>" if base=="blog" else ""}</li>' for a in items)
