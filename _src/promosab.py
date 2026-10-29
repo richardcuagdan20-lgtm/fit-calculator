@@ -33,6 +33,7 @@ def rows():
     d=json.load(open(p))
     if p==SRC: json.dump(d,open(CACHE,"w"),ensure_ascii=False,indent=1)
     return [r for r in d if not any(k in r["unit"] for k in ("Quartz White","White Diamond","(White)"))]  # base colors, like the saved replies
+CARSEC={}; CARPARTS={}
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
     rs=rows(); A=[]; EAG=[0]; secs=""; nav=[]
     for fam,slug,name in FAM:
@@ -59,6 +60,7 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></th><th scope="col">Option B <small class="en">· Low monthly</small><small class="tl">· Mababang monthly</small></th></tr></thead><tbody>{trs}</tbody></table>
 <p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm ab-pq" href="/loan-assessment/"><span class="en">See if you're Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a> <a class="btn sm ghost dk" href="/budgetcalculator/">Compare with my own DP</a></p></div>'''
         secs+=f'<section class="pm card pad ab-m{"" if ph else " ab-np"}" id="{slug}"><h2>{e(name)}</h2>{rl}<div class="ab-mg">{ph}{tbl}</div></section>'
+        CARSEC[slug]=(name,rl,tbl,[A[k] for k in range(len(A)-len(vs),len(A))])
     blob=base64.b64encode(json.dumps(A).encode()).decode()
     lv=hashlib.md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]
     jv=hashlib.md5(open(R+"/assets/promos.js","rb").read()).hexdigest()[:8]
@@ -94,6 +96,7 @@ html.ab-open .ab-lockonly{display:none}html:not(.ab-open) .ab-openonly{display:n
 <p class="muted ab-s" style="margin-top:10px">Pre-qualified, subject to bank approval. Rates, promos and DP may change without prior notice.</p></form></div>
 <div class="ab-openonly ab-ok" id="ab-ok" aria-live="polite"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b> <span class="en">Richard can send the exact all-in computation for your chosen unit.</span><span class="tl">Puwedeng i-send ni Richard ang eksaktong all-in computation ng unit na gusto mo.</span></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div>
 </div></div></section>'''
+    CARPARTS.update(css=css,form=form,lv=lv,jv=jv)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
 <p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
@@ -109,3 +112,29 @@ html.ab-open .ab-lockonly{display:none}html:not(.ab-open) .ab-openonly{display:n
      "October 2026 Mitsubishi promos from San Juan Motors: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
      body, crumbs=[("/","Home"),("/promos/","Promos")])
     return [r["unit"] for r in rs]
+
+# DRAFT 2026-10-29 (Richard, pending approval): "Promos for this model" module on each /cars/<model>/ page.
+# Same optionAB data, same table/CSS, same unlock form + promos.js (shared localStorage flag: one unlock reveals all, site-wide).
+def inject_cars(R):
+    import re
+    for slug,(name,rl,tbl,arows) in CARSEC.items():
+        fp=f"{R}/cars/{slug}/index.html"
+        if not os.path.exists(fp): continue
+        h=open(fp).read()
+        if 'id="promos-model"' in h: continue
+        k=iter(range(len(arows)))
+        t=re.sub(r'data-a="\d+"',lambda m:f'data-a="{next(k)}"',tbl)
+        t=t.replace('<a class="btn sm ghost dk" href="/budgetcalculator/">','<a class="btn sm ghost dk" href="/promos/">See all promos →</a> <a class="btn sm ghost dk" href="/budgetcalculator/">',1)
+        form=CARPARTS["form"].replace("Option B is shown below for every unit.","Option B is shown above for every variant.").replace("Nakalista sa baba ang Option B ng bawat unit.","Nakalista sa itaas ang Option B ng bawat variant.")
+        blob=base64.b64encode(json.dumps(arows).encode()).decode()
+        mod=CARPARTS["css"]+f'''<div class="abw"><section class="sec" id="promos-model" style="padding-bottom:0"><div class="w"><div class="card pad ab-m ab-np">
+<div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
+<p class="kick" style="color:var(--redd)">October 2026</p><h2><span class="en">{name} promos this month</span><span class="tl">{name} promos ngayong buwan</span></h2>{rl}
+<p class="muted ab-s" style="margin-top:-6px"><span class="en">Two all-in options per variant on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Dalawang all-in options bawat variant sa 60 months: <b>Option A</b>, pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
+<div class="ab-mg">{t}</div></div></div></section>{form}</div>
+<script type="text/plain" id="ab-a">{blob}</script>'''
+        h=re.sub(r'(<section class="ph">.*?</section>)',lambda m:m.group(1)+mod,h,count=1,flags=re.S)
+        h=h.replace(f'href="/promos/#{slug}"','href="#promos-model"')
+        h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Promo down payment and monthly options are in the <a href="#promos-model">promos section above</a>.')
+        h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script></body>',1)
+        open(fp,"w").write(h)
