@@ -121,3 +121,22 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 @media(min-width:960px){.hdi{flex-wrap:nowrap;gap:12px}.nav{gap:16px}.brand small{white-space:nowrap}}
 @media(min-width:960px){.nav .xl{display:none}.nav a,.nav .dd>summary{white-space:nowrap}.nav .btn{padding:8px 14px}}
 @media(min-width:960px) and (max-width:1199px){.nav{gap:12px}.nav a,.nav .dd>summary{font-size:14px}.brand small{display:none}}
+/* calculator (assets/calc.js) */
+.cc{background:#fff;border:1px solid var(--ln,#e4e4e7);border-radius:18px;padding:18px;box-shadow:0 8px 28px rgba(0,0,0,.06);max-width:760px}
+.cc-steps{display:flex;list-style:none;margin:0 0 14px;padding:0;gap:6px;counter-reset:s}.cc-steps li{flex:1;font-size:13px;font-weight:600;color:#71717a;border-top:4px solid #e4e4e7;padding-top:6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cc-steps li.on{color:#0b0b0c;border-color:#e60012}.cc-steps li.done{border-color:#f5a3a9;color:#3f3f46}
+.cc-h{margin:0 0 6px;font-size:20px}.cc-sub{margin:0 0 12px;color:#52525b;font-size:15px}.cc-l{font-weight:700;margin:16px 0 8px}
+.cc-chips{display:flex;flex-wrap:wrap;gap:8px}.cc-chip{border:1px solid #d4d4d8;background:#fff;border-radius:12px;padding:10px 14px;font:inherit;font-size:15px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;color:#0b0b0c}
+.cc-chip small{font-size:12px;color:#71717a}.cc-chip:hover{border-color:#e60012}.cc-chip.on{background:#0b0b0c;color:#fff;border-color:#0b0b0c}.cc-chip.on small{color:#d4d4d8}
+.cc-list{display:flex;flex-direction:column;gap:6px}.cc-row{display:flex;justify-content:space-between;gap:10px;border:1px solid #e4e4e7;background:#fafafa;border-radius:12px;padding:11px 14px;font:inherit;font-size:15px;cursor:pointer;text-align:left;color:#0b0b0c}.cc-row b{white-space:nowrap}.cc-row:hover,.cc-row.on{border-color:#e60012;background:#fff}
+.cc-cust{margin-top:14px}.cc-cust label{font-weight:600;font-size:15px}.cc-in{display:flex;gap:8px;align-items:center;margin-top:6px}.cc-in span{font-weight:700}.cc-in input{flex:1;min-width:0;padding:10px 12px;border:1px solid #d4d4d8;border-radius:12px;font:inherit}
+.cc-back{background:none;border:0;color:#52525b;text-decoration:underline;font:inherit;font-size:14px;cursor:pointer;padding:6px 0;margin-top:12px}
+.cc-res{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.cc-res div{background:#f4f4f5;border-radius:12px;padding:9px 12px}.cc-res dt{font-size:12px;color:#71717a}.cc-res dd{margin:0;font-weight:700;font-size:15px}
+.cc-big{background:#0b0b0c;color:#fff;border-radius:14px;padding:14px 16px;margin:10px 0;display:flex;flex-direction:column}.cc-big span{font-size:13px;color:#d4d4d8}.cc-big b{font-size:30px;line-height:1.2}.cc-big small{color:#a1a1aa;font-size:13px}
+.cc-save{background:#ecfdf5;color:#065f46;border-radius:12px;padding:10px 12px;font-size:15px}
+.cc-promo{border:2px solid #e60012;border-radius:14px;padding:12px 14px;margin:12px 0}.cc-promo p{margin:4px 0}.cc-pt{font-weight:800;color:#b8000e;font-size:14px;text-transform:uppercase;letter-spacing:.04em}.cc-rec{font-weight:600}
+.cc-cav{font-size:13px;color:#52525b;margin:10px 0}.cc-act{display:flex;flex-wrap:wrap;gap:4px 16px}
+.cc-lead{border-top:1px solid #e4e4e7;margin-top:16px;padding-top:14px}.cc-lead h4{margin:0 0 10px;font-size:17px}.cc-f{margin-bottom:10px}.cc-f label{display:block;font-weight:600;font-size:14px;margin-bottom:4px}.cc-f input{width:100%;padding:11px 12px;border:1px solid #d4d4d8;border-radius:12px;font:inherit}
+.cc-er{color:#b91c1c;font-size:14px;margin:6px 0}.cc-ok{background:#f0fdf4;border-radius:12px;padding:12px}.cc-next{background:#f4f4f5;border-radius:14px;padding:12px 14px;margin-top:14px}.cc-next p{margin:4px 0}
+@media(max-width:480px){.cc{padding:14px}.cc-res{grid-template-columns:1fr}.cc-big b{font-size:26px}}
+.ccsec{padding:18px 0 0!important;background:#f4f4f6}.ccwrap{background:#fff;border:1px solid #e4e4e7;border-radius:16px;padding:12px 16px;max-width:760px;margin:0 auto}.ccwrap>summary{cursor:pointer;font-size:16px;padding:4px 0}.ccwrap[open]>summary{margin-bottom:12px}.ccwrap .cc{border:0;box-shadow:none;padding:0}

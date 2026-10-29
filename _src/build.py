@@ -56,7 +56,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive")],"cars")
         +dd("What's new",[("/promos/","Promos"),("/tips/","Tips")],"new")
         +dd("News and Blogs",[("/blog/","Blog"),("/guides/","Buying guides"),("/promos-tips/","All promos, tips and articles")],"news")
-        +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/apply/#calc","Compute my monthly")],"apply")
+        +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
     bc=""
     if crumbs:
@@ -106,8 +106,8 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <main id="main">
 {body}
 <section class="cta"><div class="w">
-<h2>Find a monthly that fits your budget</h2>
-<p>Answer a few quick questions and see which Mitsubishi matches your income, with all-in Zero DP and low-DP options.</p>
+<h2>Estimate your monthly in a minute</h2>
+<p>Choose a car, a down payment and a term to see an estimated monthly, compared with the official promo for that unit.</p>
 <p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="{MSG}" rel="noopener" data-msgr="cta-band">Message Richard on Messenger</a></p>
 </div></section>
 </main>
@@ -173,6 +173,11 @@ FREE_HTML="<ul class='ticks'>"+"".join(f"<li>{x}</li>" for x in FREEBIES)+"</ul>
 def from_txt(m):
     s=srp_from(m); return f'SRP from <b>{f(s)}</b>' if s else 'Ask for price'
 UNIT_OPTS="".join(f'<optgroup label="{e(m["name"])}">'+"".join(f'<option value="{e(v["n"])}" data-id="{v["id"]}" data-model="{m["slug"]}">{e(v["n"])}</option>' for v in m["variants"])+'</optgroup>' for m in MODELS)
+import re as _re0
+def _dpv(l):
+    m=_re0.search(r"([\d.]+)K",l); return int(float(m.group(1))*1000) if m else 0
+CALCD=[{"slug":m["slug"],"name":m["name"],"v":[{"id":v["id"],"n":v["n"],"srp":v["srp"] or (v["promo"] or {}).get("srp"),"fuel":(v["promo"] or {}).get("fuel"),"p":[{"dp":_dpv(l),"mo":mo} for l,mo in (v["promo"] or {}).get("opts",[])]} for v in m["variants"] if (v["srp"] or (v["promo"] or {}).get("srp"))]} for m in MODELS]
+def CALC(src): return f'<div data-rpcalc data-src="{src}"></div><script type="application/json" id="calc-data">{json.dumps(CALCD,ensure_ascii=False)}</script><script src="/assets/calc.js" defer></script>'
 LACTA='<aside class="lacta"><h2>Will you qualify for a car loan?</h2><p>Find out in 3 minutes with the free AI Car Loan Application Assessment. No documents needed. Your result is a Pre-qualified estimate; financing is subject to bank approval.</p><a class="btn" href="/loan-assessment/">Start the AI Car Loan Application Assessment</a></aside>'
 LACTA_TL='<aside class="lacta"><h2>Pasok ka ba sa car loan?</h2><p>Alamin sa loob ng 3 minuto gamit ang libreng AI Car Loan Application Assessment. Walang documents na kailangan.</p><a class="btn" href="/loan-assessment/?lang=tl">Simulan ang AI Car Loan Application Assessment</a></aside>'
 CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
@@ -180,7 +185,7 @@ CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>
 # ---------- HOME
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/","Mitsubishi Cars & Promos in SJDM, Bulacan | Mitsubishi Motors - San Juan Motors",
- "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in Zero DP and low-DP options.",
+ "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in down payment and monthly options.",
 f'''<section class="hero"><div class="w hgrid"><div>
 <p class="kick">Mitsubishi San Juan Motors · San Jose del Monte, Bulacan</p>
 <h1>Your next Mitsubishi, explained clearly and financed sensibly.</h1>
@@ -209,14 +214,13 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <section class="sec alt"><div class="w"><h2>Popular guides for SJDM buyers</h2><div class="grid g3">
 <a class="card pad mc" href="/mitsubishi-sjdm-bulacan/"><h3>Mitsubishi SJDM Bulacan</h3><p class="muted">Promos, test drive and directions</p></a>
 <a class="card pad mc" href="/mitsubishi-casa-bulacan/"><h3>Mitsubishi casa Bulacan</h3><p class="muted">Buying at the authorized dealer</p></a>
-<a class="card pad mc" href="/mitsubishi-zero-down-payment-promo/"><h3>Zero down payment promo</h3><p class="muted">How Zero DP works</p></a>
 <a class="card pad mc" href="/mirage-g4-downpayment-and-monthly/"><h3>Mirage G4 downpayment and monthly</h3><p class="muted">First-car financing guide</p></a>
 <a class="card pad mc" href="/triton-downpayment-and-monthly/"><h3>Triton downpayment and monthly</h3><p class="muted">Pickup financing guide</p></a>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
 </div></div></section>
 <section class="sec"><div class="w split">
 <div><h2>Visit the showroom</h2><p><b>Mitsubishi San Juan Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener" data-msgr="home-visit">Message Richard on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
-<div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li><li><a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a></li></ul></div>
+<div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Choosing your down payment</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
 # ---------- CARS index
@@ -478,6 +482,12 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 </div></section>
 <section class="sec"><div class="w"><h2>Visiting the showroom</h2><p>I serve buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call me before you come so I can send directions and have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")], og=rx_og("xforce"))
 
+# ---------- calculator (replaces the old budget-fit page; old copy kept in git history and /workspace/loanapp/budgetcalculator-old-20261029.html)
+page("/budgetcalculator/","Monthly Estimate Calculator | Mitsubishi Motors - San Juan Motors",
+ "Estimate your Mitsubishi monthly: choose a car, a down payment and a term, then compare it with the official promo. Estimate only, subject to bank evaluation.",
+f'''<section class="ph"><div class="w"><h1>Estimate your monthly</h1><p class="lead">Choose a car, a down payment and how many years. You will see an estimated monthly and, when there is one, the official promo for the same unit.</p></div></section>
+<section class="sec"><div class="w">{CALC("budgetcalculator")}</div></section>
+<script src="/assets/lead.js" defer></script>''', crumbs=[("/","Home"),("/budgetcalculator/","Monthly estimate")])
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
@@ -583,7 +593,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if _o!=_s: open(_f,'w').write(_o)
 # favicon set for the standalone pages (not built by page())
 _ICONS='<link rel="icon" href="/favicon.ico?v=2" sizes="48x48"><link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2"><link rel="manifest" href="/site.webmanifest?v=2">'
-for _p in ("/budgetcalculator/","/privacy/"):
+for _p in ("/privacy/",):
     _fp=R+_p+"index.html";_s=open(_fp).read()
     if "favicon.ico?v=2" not in _s: open(_fp,"w").write(_s.replace("</head>",_ICONS+"</head>",1))
 
@@ -611,6 +621,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
     _n=_re.sub(r'<script>window\.SITECHAT_ON=.*?</script><script src="/assets/sitechat\.js[^"]*" defer></script>','',_s)
     _n=_re.sub(r'<script src="/assets/track\.js[^"]*" defer></script>','',_n)
+    _n=_n.replace('src="/assets/calc.js"','src="/assets/calc.js?v='+_vh('/assets/calc.js')+'"')
     _n=_n.replace('</body>',_SCTAG+'<script src="/assets/track.js?v='+_vh('/assets/track.js')+'" defer></script></body>',1)
     if _n!=_s: open(_f,'w').write(_n)
 print(len(PAGES),"pages")

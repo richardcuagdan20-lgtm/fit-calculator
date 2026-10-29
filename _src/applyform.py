@@ -39,6 +39,8 @@ AF_BODY=f'''<section class="la-hero"><div class="w">
 <p class="lead">{B("Car loan application para sa iyong Mitsubishi. Mga 8–10 minuto. Ang final decision ay sa bank; ire-review namin ang application mo at tutulungan ka ni Fina sa documents.","Car loan application for your Mitsubishi. About 8–10 minutes. The final decision is the bank's; we will review your application and Fina will help you with documents.")}</p>
 <div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
 </div></section>
+<section class="sec ccsec"><div class="w"><details class="ccwrap" id="calc"><summary>Not sure about the monthly yet? <b>Estimate it first</b></summary>{CALC("apply")}</details></div></section>
+<script>if(location.hash==="#calc")document.getElementById("calc").open=true;addEventListener("hashchange",function(){{if(location.hash==="#calc")document.getElementById("calc").open=true}})</script>
 <section class="la af"><div class="w" style="padding-top:18px">
 <div id="af-wrap"><p id="af-pre" class="af-pre" hidden>{B("✓ Na-fill na namin ang ilang sagot mula sa assessment mo. Pakicheck at kumpletuhin.","✓ We pre-filled some answers from your assessment. Please check and complete.")}</p>
 <form id="af" novalidate>
