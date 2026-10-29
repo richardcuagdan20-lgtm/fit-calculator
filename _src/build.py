@@ -57,7 +57,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
                 +"".join(item(p,n) for p,n in items)+'</div></details>')
     nav=(item("/","Home")
-        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/lowest-down-payment/","Lowest DP: up to Zero DP"),("/test-drive/","Book a test drive")],"cars")
+        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive")],"cars")
         +item(GT,GT_EN)
         +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
@@ -201,7 +201,7 @@ hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official 
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
-<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>. New: <a href="/lowest-down-payment/">unlock the lowest down payment per unit</a>.</p>
+<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>. Every unit has two promo options on the <a href="/promos/">promos page</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
 <p><a class="more" href="/cars/">View all current models →</a></p>
@@ -268,19 +268,12 @@ def _promo_cards(m):
         out+=f'<article class="card pad pcard"><h3>{e(v["n"])}</h3><p class="srp">SRP <b>{f(srp)}</b></p><ul class="opts">{rows}</ul>{fuel}<p class="muted">60 months, all-in.</p><p class="row"><a class="btn sm" href="/budgetcalculator/?unit={v["id"]}">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/?unit={v["id"]}">Check my chances</a></p></article>'
     return out
 PROMO_SECS="".join(f'<section class="pm" id="{m["slug"]}"><h2>{e(m["name"])}</h2><div class="grid g3">{_promo_cards(m)}</div></section>' for m in MODELS if _promo_cards(m))
-page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
- "October 2026 Mitsubishi promos from San Juan Motors: all-in down payment and monthly options on 60 months, with freebies and fuel points. Subject to bank approval.",
-f'''<section class="ph"><div class="w"><p class="kick">October 2026</p><h1>Mitsubishi promos this month</h1><p class="lead">All-in down payment and monthly options on 60 months, with freebies. Pick a unit, then estimate your own plan or check how a bank is likely to view your application.</p>
-{hero_cta("#list",src="promos")}</div></section>
-<section class="sec" style="padding-bottom:0"><div class="w"><a class="card pad" href="/lowest-down-payment/" style="display:block;text-decoration:none;border-left:5px solid var(--red)"><p class="kick" style="margin:0 0 4px;color:var(--redd)">New campaign</p><h2 class="h3" style="margin:0 0 4px">Unlock Lowest Down up to Zero Downpayment Promos →</h2><p class="muted" style="margin:0">Lowest DP range per unit and a standard monthly estimator. Subject to bank approval.</p></a></div></section>
-<section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(f'<a href="#{m["slug"]}">{e(m["name"])}</a>' for m in MODELS if _promo_cards(m))}</nav>
-{PROMO_SECS}
-<p class="note">{NOTE}</p><p class="muted">Other down payment options, and units not listed here (such as the Xforce and Outlander PHEV): <a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
-<section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and promo option</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a>; it shows the promo side by side.</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
-<section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>''', crumbs=[("/","Home"),("/promos/","Promos")])
-
-import lowdp as _lowdp
-_lowdp.build(page,e,f,img,hero,R)
+import promosab as _pab
+_PAB_UNITS=_pab.build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG)
+# /lowest-down-payment/ retired 2026-10-29: folded into /promos/ (Option A unlock); stub keeps old links/ads alive
+import os as _os
+_os.makedirs(R+"/lowest-down-payment",exist_ok=True)
+open(R+"/lowest-down-payment/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Promos | Mitsubishi Motors - San Juan Motors</title><meta name="robots" content="noindex"><link rel="canonical" href="https://mitsubishipromos.online/promos/"><meta http-equiv="refresh" content="0; url=/promos/"><script>location.replace("/promos/"+location.search+location.hash)</script></head><body><p><a href="/promos/">Go to Promos</a></p></body></html>')
 # ---------- /promos-tips/ hub retired (2026-10-29): redirect stub to the combined Guides & Tips index, written at the end of the build
 # ---------- evergreen cross-links into existing articles
 XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
@@ -550,7 +543,7 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - [Budget calculator]({D}/budgetcalculator/): match a unit to your income
 - [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
 - [Apply]({D}/apply/): financing or cash application
-- [Promos]({D}/promos/): this month's all-in down payment and monthly promos
+- [Promos]({D}/promos/): this month's all-in promos, two options per unit (Option A lowest down payment, unlocked with a short form; Option B 30% down payment with a lower monthly), subject to bank approval
 - [Guides & Tips]({D}/tips/): every guide, blog post and tip in one list, newest first
 - [About]({D}/about/) and [Contact]({D}/contact/)
 
