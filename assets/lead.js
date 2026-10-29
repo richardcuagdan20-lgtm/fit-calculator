@@ -45,8 +45,8 @@ function base(via){var q=new URLSearchParams(location.search);
    utm_source:q.get('utm_source')||'',utm_campaign:q.get('utm_campaign')||'',utm_content:q.get('utm_content')||'',adset:q.get('adset')||q.get('utm_term')||q.get('utm_medium')||''}}
 function err(f,on){var el=$('e_'+f);if(el)el.hidden=!on;var i=$(f);if(i)i.setAttribute('aria-invalid',on?'true':'false');return on}
 document.addEventListener('DOMContentLoaded',function(){['gf','af','tf'].forEach(function(i){var f=$(i);if(f)AS.init(f)})});
-window.Lead={V4:true,CHAT:window.SITECHAT_ON===true,REFCHAT:true,url:URL_,skipped:function(){return skip},send:send,track:track,base:base,okMobile:okMobile,err:err,MSG:MSG};
+window.Lead={V4:true,CHAT:window.SITECHAT_ON===true,REFCHAT:false,LIVECHAT:false,url:URL_,skipped:function(){return skip},send:send,track:track,base:base,okMobile:okMobile,err:err,MSG:MSG};
 })();
 /* Own live chat: loaded site-wide by /assets/sitechat.js when window.SITECHAT_ON (set per page by the build; flag SITECHAT in _src/data.py). */
-/* Ref-linked application chat on /apply/ thank-you + /status/: flag OFF (REFCHAT:true loads /assets/refchat.js). */
+/* Ref-linked application chat on /apply/ thank-you + /status/: SHELVED 2026-10-29 (REFCHAT:true loads /assets/refchat.js). LIVECHAT:false = Crisp/Fina live chat shelved; chat buttons open Messenger instead. */
 (function(){try{if(window.Lead&&window.Lead.REFCHAT===true){var s=document.createElement('script');s.src='/assets/refchat.js';s.defer=true;document.head.appendChild(s)}}catch(e){}})();

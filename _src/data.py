@@ -1,7 +1,7 @@
 D="https://mitsubishipromos.online"
 FB="https://www.facebook.com/504759566043148"
 MSG="https://m.me/504759566043148"
-SITECHAT=True   # own site-wide chat bubble (needs webhook v8). One-line flip: True, then python3 _src/build.py
+SITECHAT=False  # SHELVED 2026-10-29 (Messenger is the main chat route). Own site-wide chat bubble (needs webhook v8). One-line flip: True, then python3 _src/build.py
 WEBHOOK="https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec"
 PIXEL="1820790069172672"
 def f(n): return "₱"+format(n,",")

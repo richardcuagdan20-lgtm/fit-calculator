@@ -108,7 +108,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <section class="cta"><div class="w">
 <h2>Find a monthly that fits your budget</h2>
 <p>Answer a few quick questions and see which Mitsubishi matches your income, with all-in Zero DP and low-DP options.</p>
-<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="{MSG}" rel="noopener">Message Richard</a></p>
+<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="{MSG}" rel="noopener" data-msgr="cta-band">Message Richard on Messenger</a></p>
 </div></section>
 </main>
 <footer class="ft"><div class="w">
@@ -149,7 +149,7 @@ def rx_pick(slug):
     return min(hits)[1] if hits else None
 def rx_bio(c=None,tl=False):
     c=c or "xpander";b=f"/assets/img/richard/{c}-1x1-240"
-    w=("Isinulat ni","Tungkol kay Richard","Mag-chat kay Richard") if tl else ("Written by","About Richard","Chat with Richard")
+    w=("Isinulat ni","Tungkol kay Richard","I-message si Richard sa Messenger") if tl else ("Written by","About Richard","Message Richard on Messenger")
     return (f'<aside class="abio"><picture><source type="image/webp" srcset="{b}.webp"><img src="{b}.jpg" alt="{e(rx_alt(c))}" width="240" height="240" loading="lazy" decoding="async"></picture>'
             f'<div><p class="abn">{w[0]} Richard Cuagdan, Mitsubishi Car Sales Executive</p><p class="abd">Mitsubishi San Juan Motors · San Jose del Monte, Bulacan</p>'
             f'<p class="abl"><a href="/about/">{w[1]}</a> · <a href="{MSG}" rel="noopener">{w[2]}</a></p></div></aside>')
@@ -215,7 +215,7 @@ f'''<section class="hero"><div class="w hgrid"><div>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
 </div></div></section>
 <section class="sec"><div class="w split">
-<div><h2>Visit the showroom</h2><p><b>Mitsubishi San Juan Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
+<div><h2>Visit the showroom</h2><p><b>Mitsubishi San Juan Motors</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener" data-msgr="home-visit">Message Richard on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li><li><a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
@@ -277,7 +277,7 @@ function show(){{var d=JSON.parse(document.getElementById('pd').textContent),h='
  d.forEach(function(m){{h+='<section class="pm" id="'+m.slug+'"><h2>'+esc(m.name)+'</h2><div class="grid g3">';
   m.v.forEach(function(v){{h+='<article class="card pad"><h3>'+esc(v.n)+'</h3><p class="srp">SRP <b>'+peso(v.srp)+'</b></p><ul class="opts">'+v.opts.map(function(o){{return '<li><span>'+esc(o[0])+'</span><b>'+peso(o[1])+'<small>/mo</small></b></li>'}}).join('')+'</ul>'+(v.fuel?'<p class="fuel">Free fuel points: <b>'+Number(v.fuel).toLocaleString("en-US")+'</b></p>':'')+'<p class="muted">60 months, all-in.</p></article>'}});
   h+='</div></section>'}});
- h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener">Chat with Richard</a></p>';
+ h+='<p class="note">'+esc(NOTE)+'</p><p class="muted">Xforce, Outlander PHEV and other variants not listed: <a href="'+MSG+'" rel="noopener">ask for the latest promo</a>.</p><p class="row"><a class="btn" href="/apply/">Apply Now</a> <a class="btn ghost dk" href="'+MSG+'" rel="noopener" data-msgr="promos">Message Richard on Messenger</a></p>';
  var pv=document.getElementById('pv');pv.innerHTML=h;pv.hidden=false;document.getElementById('gate').hidden=true;
  if(location.hash){{var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}}}}
 var un=false;try{{un=localStorage.getItem(KEY)==='1'}}catch(_){{}}
@@ -414,7 +414,7 @@ f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead"
 <p><b id="cwhen"></b><br>Mitsubishi San Juan Motors, San Jose del Monte, Bulacan</p>
 <p>Richard will message you to confirm your schedule. Please bring your valid driver's license.</p>
 <p>Reference: <b id="cref"></b></p>
-<p class="row"><a class="btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a> <a class="btn ghost dk" href="{MSG}" rel="noopener">Chat with Richard</a></p></div></div></div>
+<p class="row"><a class="btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="testdrive-confirmed">Message Richard on Messenger</a></p></div></div></div>
 </div></section>
 <script src="/assets/lead.js" defer></script>
 <script type="application/json" id="tdu">{json.dumps(TDU,ensure_ascii=False)}</script>
@@ -466,10 +466,10 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
 
 # ---------- contact
 page("/contact/","Contact | Mitsubishi Motors - San Juan Motors",
- "Chat with Richard Cuagdan on this website or visit Mitsubishi San Juan Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
-f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is the chat on this website.</p>{rx_card("xforce",eager=True)}</div></section>
+ "Message Richard Cuagdan on Messenger or arrange a showroom visit with Mitsubishi San Juan Motors in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
+f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger. I reply personally.</p>{rx_card("xforce",eager=True)}</div></section>
 <section class="sec"><div class="w grid g3">
-<div class="card pad"><h2 class="h3">Live chat</h2><p>Chat with me here on the website any time. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener">Chat with Richard</a></p></div>
+<div class="card pad"><h2 class="h3">Messenger</h2><p>Send me a message any time about units, promos, your application or a showroom visit. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener" data-msgr="contact-card">Message Richard on Messenger</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
 <div class="card pad"><h2 class="h3">Call or text</h2><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p><a class="btn" href="tel:{TEL}">Call {TELD}</a></p></div>
 <div class="card pad"><h2 class="h3">Showroom visits</h2><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City.</p><p><a href="{MSG}" rel="noopener">Message me for the showroom location and directions</a></p><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
@@ -537,7 +537,7 @@ for _k,(_u,_t) in TL_ONLY.items():
     _s=_s.replace('<html lang="en-PH">','<html lang="fil-PH">',1).replace('<meta property="og:locale" content="en_PH">','<meta property="og:locale" content="fil_PH">',1)
     _s=_s.replace('<article class="art"><div class="w nar"><header>',f'<article class="art"><div class="w nar"><p class="zlang"><a href="{_u}" hreflang="en-PH" lang="en">{_t}</a></p><header>',1)
     _s=_s.replace(LACTA,LACTA_TL)
-    _s=_s.replace('<p class="abn">Written by ','<p class="abn">Isinulat ni ').replace('<a href="/about/">About Richard</a> · <a href="'+MSG+'" rel="noopener">Chat with Richard</a>','<a href="/about/">Tungkol kay Richard</a> · <a href="'+MSG+'" rel="noopener">Mag-chat kay Richard</a>')
+    _s=_s.replace('<p class="abn">Written by ','<p class="abn">Isinulat ni ').replace('<a href="/about/">About Richard</a> · <a href="'+MSG+'" rel="noopener">Message Richard on Messenger</a>','<a href="/about/">Tungkol kay Richard</a> · <a href="'+MSG+'" rel="noopener">I-message si Richard sa Messenger</a>')
     open(_f,"w").write(_s)
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
@@ -596,7 +596,7 @@ def _chatify(m):
     if 'class="fbl"' in a or 'data-chat' in a: return m.group(0)
     a=a.replace('<a ','<a data-chat ',1);a=_re.sub(r'href="https://m\.me/[^"]*"','href="#chat"',a)
     return a+_LBL.get(txt,txt)
-for _f in _gl.glob(R+'/**/*.html',recursive=True):
+for _f in (_gl.glob(R+'/**/*.html',recursive=True) if SITECHAT else []):  # shelved: only when SITECHAT is on
     if '/_src/' in _f: continue
     _s=open(_f).read()
     _n=_re.sub(r'(<a [^>]*href="https://m\.me/[^"]*"[^>]*>)([^<]*)',_chatify,_s)
@@ -610,7 +610,8 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     _s=open(_f).read()
     if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
     _n=_re.sub(r'<script>window\.SITECHAT_ON=.*?</script><script src="/assets/sitechat\.js[^"]*" defer></script>','',_s)
-    _n=_n.replace('</body>',_SCTAG+'</body>',1)
+    _n=_re.sub(r'<script src="/assets/track\.js[^"]*" defer></script>','',_n)
+    _n=_n.replace('</body>',_SCTAG+'<script src="/assets/track.js?v='+_vh('/assets/track.js')+'" defer></script></body>',1)
     if _n!=_s: open(_f,'w').write(_n)
 print(len(PAGES),"pages")
 # --- header dropdowns: close others when one opens; close on outside click (desktop)

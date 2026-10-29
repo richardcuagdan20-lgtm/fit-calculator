@@ -1731,7 +1731,7 @@ title="Mitsubishi Dealer Bulacan: San Juan Motors, SJDM",
 desc="",answer="",
 faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Mitsubishi San Juan Motors serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
 ("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page and Richard will confirm your schedule. Bring your valid driver's license."),
-("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or use the live chat on this website."),
+("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or message him on Messenger."),
 ("Is San Juan Motors near Metro Manila?","It's in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
 body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi San Juan Motors is an authorized Mitsubishi dealership in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
 

@@ -68,10 +68,10 @@ function finaMsg(){var u=A.unit,x=A.assessment,L={PRE_QUALIFIED:'Pre-qualified',
 function finaGreet(){var m=A.docs&&A.docs.missing.length?A.docs.missing.join(', '):'';
   return m?T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kulang pa ang: '+m+'. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and you still need: '+m+'. Any questions before we proceed to the official application?')
    :T('Hi '+A.name+'! Ako si Fina. Nakita ko na ang assessment mo at kumpleto ka na sa documents. May tanong ka ba bago tayo tumuloy sa official application?','Hi '+A.name+'! I\'m Fina. I\'ve seen your assessment and your documents are complete. Any questions before we proceed to the official application?')}
-function openFina(){if(window.Lead&&Lead.CHAT&&window.SiteChat){SiteChat.open({name:A.name,mobile:A.mobile,email:A.email,text:finaMsg().replace(/^Hi Fina! /,'Hi Richard! ')});ga('chat_open',{provider:'own'});return}
+function openFina(){if(window.Lead&&Lead.LIVECHAT===false){window.open(window.rpMsgr?rpMsgr('assessment_result'):MESSENGER_URL,'_blank','noopener');return}if(window.Lead&&Lead.CHAT&&window.SiteChat){SiteChat.open({name:A.name,mobile:A.mobile,email:A.email,text:finaMsg().replace(/^Hi Fina! /,'Hi Richard! ')});ga('chat_open',{provider:'own'});return}
 crispLoad();crispSync();cp('do','chat:open');var g=finaGreet();if(A.finaShown!==g){A.finaShown=g;cp('do','message:show',['text',safe(g)])}
   ga('chat_open',{provider:'crisp'})}
-function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+((window.Lead&&Lead.CHAT)?T('Mag-chat kay Richard','Chat with Richard'):T('Magtanong pa sa aming live chat','Ask more questions to our live chat'))+'</button>'}
+function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+((window.Lead&&Lead.LIVECHAT===false)?T('I-message si Richard sa Messenger','Message Richard on Messenger'):(window.Lead&&Lead.CHAT)?T('Mag-chat kay Richard','Chat with Richard'):T('Magtanong pa sa aming live chat','Ask more questions to our live chat'))+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
 var A={lang:'en'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
