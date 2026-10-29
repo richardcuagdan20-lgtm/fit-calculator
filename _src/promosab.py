@@ -18,7 +18,7 @@ def rows():
     p=SRC if os.path.exists(SRC) else CACHE
     d=json.load(open(p))
     if p==SRC: json.dump(d,open(CACHE,"w"),ensure_ascii=False,indent=1)
-    return [r for r in d if "Quartz White Pearl" not in r["unit"] and "White Diamond" not in r["unit"]]  # base colors, like the saved replies
+    return [r for r in d if not any(k in r["unit"] for k in ("Quartz White","White Diamond","(White)"))]  # base colors, like the saved replies
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
     rs=rows(); A=[]; secs=""; nav=[]
     for fam,slug,name in FAM:
