@@ -38,7 +38,10 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         if not vs: continue
         nav.append(f'<a href="#{slug}">{e(name)}</a>')
         rg=RANGE.get(slug)
-        rl=f'<p class="ab-rng"><span class="en">Lowest DP range</span><span class="tl">Lowest DP range</span> <b>{f(rg[0])} – {f(rg[1])}</b></p>' if rg else ""
+        if rg and rg[0]==0:  # Richard 2026-10-29: show "Zero DP Promo" instead of ₱0 (still subject to approval)
+            rl=f'<p class="ab-rng"><b class="ab-z">Zero DP Promo</b><span class="en">, up to <b>{f(rg[1])}</b> DP</span><span class="tl">, hanggang <b>{f(rg[1])}</b> DP</span> <small class="muted">· <span class="en">Pre-qualified, subject to bank approval</span><span class="tl">Pre-qualified, subject to bank approval</span></small></p>'
+        else:
+            rl=f'<p class="ab-rng"><span class="en">Lowest DP range</span><span class="tl">Lowest DP range</span> <b>{f(rg[0])} – {f(rg[1])}</b></p>' if rg else ""
         cards=""
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
@@ -72,7 +75,7 @@ html.ab-open .ab-lockonly{display:none}html:not(.ab-open) .ab-openonly{display:n
 <script>try{if(localStorage.getItem("promos_optA_unlocked")==="1")document.documentElement.classList.add("ab-open")}catch(_){}</script>'''
     form=f'''<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">
 <div class="ab-lockonly"><h2 class="h3" style="margin:0 0 6px"><span class="en">Unlock Option A: the lowest down payment for every unit</span><span class="tl">I-unlock ang Option A: pinakamababang down payment ng bawat unit</span></h2>
-<p class="muted" style="margin:0 0 12px"><span class="en">Option B is shown below for every unit. Leave your details once to reveal Option A (lowest DP and monthly) on all units.</span><span class="tl">Nakalista sa baba ang Option B ng bawat unit. Iwan ang details mo isang beses para makita ang Option A (lowest DP at monthly) ng lahat ng unit.</span></p>
+<p class="muted" style="margin:0 0 12px"><span class="en">Option B is shown below for every unit. Leave your details once to reveal Option A (lowest DP and monthly, including Zero DP Promo on select units) on all units.</span><span class="tl">Nakalista sa baba ang Option B ng bawat unit. Iwan ang details mo isang beses para makita ang Option A (lowest DP at monthly, kasama ang Zero DP Promo sa piling units) ng lahat ng unit.</span></p>
 <form id="ab-form" novalidate><div class="ab-fg">
 <div class="fld"><label for="ab-name"><span class="en">Full name</span><span class="tl">Buong pangalan</span></label><input id="ab-name" autocomplete="name" required><p class="ferr" id="e_ab-name" hidden><span class="en">Please enter your name.</span><span class="tl">Pakilagay ang pangalan mo.</span></p></div>
 <div class="fld"><label for="ab-mobile">Mobile number</label><input id="ab-mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="ferr" id="e_ab-mobile" hidden><span class="en">Enter a valid mobile number (09XXXXXXXXX).</span><span class="tl">Maglagay ng tamang mobile number (09XXXXXXXXX).</span></p></div>

@@ -201,7 +201,7 @@ hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official 
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
-<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>. Every unit has two promo options on the <a href="/promos/">promos page</a>.</p>
+<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>, including Zero DP Promo on select units (subject to bank approval). Every unit has two promo options on the <a href="/promos/">promos page</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
 <p><a class="more" href="/cars/">View all current models →</a></p>
