@@ -112,21 +112,26 @@ $('la-f1').addEventListener('submit',function(ev){ev.preventDefault();
 function affAdj(a){if(!(a>=0)||a>=9)return -30;var d=(CFG.aff.pass-a)*100;return Math.round(d>=0?Math.min(10,d):Math.max(-30,1.5*d))}
 /* Standard formula: monthly = (SRP - DP) x add-on rate / months */
 var AOR={12:1.22,24:1.24,36:1.32,48:1.48,60:1.55};function stdMo(P,dp,n){return (P-dp)*AOR[n]/n}
-function lighter(S){var u=A.unit,P=u.price,inc=incTot();if(!inc||!(S.affordability_ratio>CFG.aff.pass))return null;
-  var tgt=CFG.aff.pass*inc,cur=S._amort,c=[],r1=function(x){return Math.ceil(x/1000)*1000};
-  var need=r1(P-tgt*60/AOR[60]);if(need>S._dp&&need<=P*0.5)c.push({k:'dp',label:T('Mas mataas na DP','Higher DP')+' ('+peso(need)+', 5 '+T('taon','years')+')',dp:need,n:60,mo:stdMo(P,need,60),unit:u.n});
-  var b=r1(P*0.3);if(b>S._dp)c.push({k:'optB',label:'Option B · 30% DP ('+peso(b)+', 5 '+T('taon','years')+')',dp:b,n:60,mo:stdMo(P,b,60),unit:u.n});
-  if(S._term<60)c.push({k:'term',label:T('Mas mahabang term','Longer term')+' (5 '+T('taon','years')+', DP '+peso(S._dp)+')',dp:S._dp,n:60,mo:stdMo(P,S._dp,60),unit:u.n});
-  var lu=U.filter(function(x){return x.price<P&&stdMo(x.price,r1(x.price*0.3),60)<=tgt}).sort(function(a,b){return b.price-a.price})[0];
-  if(lu){var d=r1(lu.price*0.3);c.push({k:'unit',label:T('Mas abot-kayang unit','Lower-priced unit')+': '+lu.n+' (30% DP '+peso(d)+', 5 '+T('taon','years')+')',dp:d,n:60,mo:stdMo(lu.price,d,60),unit:lu.n})}
-  c=c.filter(function(x){return x.mo<cur});if(!c.length)return null;
+function lighter(S){var u=A.unit,P=u.price,inc=incTot();if(!inc)return null;
+  var heavy=S.affordability_ratio>CFG.aff.pass,tgt=CFG.aff.pass*inc,c=[],r1=function(x){return Math.ceil(x/1000)*1000},Y=', 5 '+T('taon','years');
+  if(u.ab){c.push({k:'optA',label:T('Lowest DP (Option A)','Lowest DP (Option A)'),dp:u.ab.a[0],n:60,mo:u.ab.a[1],unit:u.n});
+    if(u.ab.b[0]!==u.ab.a[0])c.push({k:'optB',label:'Option B · 30% DP',dp:u.ab.b[0],n:60,mo:u.ab.b[1],unit:u.n})}
+  else if(heavy){var b=r1(P*0.3);if(b>S._dp)c.push({k:'optB',label:'Option B · 30% DP',dp:b,n:60,mo:stdMo(P,b,60),unit:u.n})}
+  if(heavy){var bmo=c.length?c[c.length-1].mo:Infinity,need=r1(P-tgt*60/AOR[60]);
+    if(bmo>tgt&&need>S._dp&&need<=P*0.5)c.push({k:'dp',label:T('Mas mataas na DP para sa 30% ng income','Higher DP to reach 30% of income'),dp:need,n:60,mo:stdMo(P,need,60),unit:u.n});
+    if(c.length<4&&S._term<60)c.push({k:'term',label:T('Mas mahabang term','Longer term')+' (DP '+peso(S._dp)+Y+')',dp:S._dp,n:60,mo:stdMo(P,S._dp,60),unit:u.n});
+    var lu=U.filter(function(x){return x.price<P&&(x.ab?x.ab.b[1]:stdMo(x.price,r1(x.price*0.3),60))<=tgt}).sort(function(a,b){return b.price-a.price})[0];
+    if(c.length<4&&lu){var lb=lu.ab?lu.ab.b:[r1(lu.price*0.3),stdMo(lu.price,r1(lu.price*0.3),60)];c.push({k:'unit',label:T('Mas abot-kayang unit','Lower-priced unit')+': '+lu.n+' (Option B)',dp:lb[0],n:60,mo:lb[1],unit:lu.n})}}
+  if(!c.length)return null;c=c.slice(0,4);
   c.forEach(function(x){x.ratio=x.mo/inc;x.fits=x.mo<=tgt});
-  var best=c.filter(function(x){return x.fits&&x.k!=='unit'})[0]||c.filter(function(x){return x.fits})[0]||c.slice().sort(function(a,b){return a.mo-b.mo})[0];
-  return {best:best,list:c.slice(0,3),target:tgt}}
+  /* star = the LOWEST-DP choice that still fits 30% of income (balanced: Option A if it fits, else B, else higher DP / unit) */
+  var fit=c.filter(function(x){return x.fits&&x.unit===u.n}).sort(function(a,b){return a.dp-b.dp})[0]||c.filter(function(x){return x.fits})[0]||null;
+  return {best:fit,list:c,target:tgt,heavy:heavy}}
 function lightHtml(S,Lt){if(!Lt)return '';
-  return '<div class="la-recbox la-light"><h2 class="h3">⬇️ '+T('Mas magaan na monthly, mas mataas na tsansa','A lighter monthly, better chances')+'</h2><p>'+T('Mas mababang amortization = mas mataas ang tsansa ng approval. Ang monthly mo ngayon ay ','A lower monthly amortization generally improves your chances of bank approval. Your current monthly is ')+'<b>'+peso(S._amort)+'</b> ('+(S.affordability_ratio*100).toFixed(1)+'% '+T('ng income','of income')+'). '+T('Mas maganda kung nasa ','Banks prefer about ')+peso(Lt.target)+T(' o mas mababa (30% ng income).',' or less (30% of income).')+'</p>'+
-  Lt.list.map(function(o){return '<div class="la-opt'+(o===Lt.best?' hl':'')+'"><b>'+(o===Lt.best?'⭐ '+T('Rekomendado','Recommended')+': ':'')+esc(o.label)+'</b><span style="font-size:1.2em"><b>'+peso(o.mo)+'</b>/mo × 60 '+T('buwan','months')+'</span><span>'+(o.ratio*100).toFixed(1)+'% '+T('ng income','of income')+(o.fits?' · ✓ '+T('pasok sa 30%','within 30%'):'')+'</span></div>'}).join('')+
-  '<p class="small muted">'+T('Estimate gamit ang standard formula: (SRP − DP) × add-on rate ÷ buwan (5 taon 1.55). Hindi pa kasama ang insurance, LTO at fees. Pre-qualified, subject to bank approval. Walang garantiya.','Estimate using the standard formula: (SRP − DP) × add-on rate ÷ months (5 years 1.55). Excludes insurance, LTO and fees. Pre-qualified, subject to bank approval. No guarantee.')+'</p></div>'}
+  var pc=function(o){return (o.ratio*100).toFixed(1)+'% '+T('ng income','of income')};
+  return '<div class="la-recbox la-light"><h2 class="h3">'+(Lt.heavy?'⬇️ '+T('Mas magaan na monthly, mas mataas na tsansa','A lighter monthly, better chances'):T('Option A o Option B para sa unit mo','Option A or Option B for your unit'))+'</h2><p>'+T('Mas mababang amortization = mas mataas ang tsansa ng approval.','A lower monthly amortization generally improves your chances of bank approval.')+(Lt.heavy?' '+T('Ang monthly mo ngayon ay ','Your current monthly is ')+'<b>'+peso(S._amort)+'</b> ('+(S.affordability_ratio*100).toFixed(1)+'% '+T('ng income','of income')+'). '+T('Mas maganda kung nasa ','Banks prefer about ')+peso(Lt.target)+T(' o mas mababa (30% ng income).',' or less (30% of income).'):'')+'</p>'+
+  Lt.list.map(function(o){return '<div class="la-opt'+(o===Lt.best?' hl':'')+'"><b>'+(o===Lt.best?'⭐ ':'')+esc(o.label)+'</b><span>DP <b>'+(o.dp?peso(o.dp):'₱0')+'</b> · <b style="font-size:1.15em">'+peso(o.mo)+'</b>/mo × '+o.n+' '+T('buwan','months')+' · '+pc(o)+(o.fits?' ✓':'')+'</span>'+(o.k==='optA'?'<span class="small muted">'+T('Mas mababang DP = mas mabigat na monthly, na pwedeng magpababa ng tsansa sa bank approval. Ang Option B o mas mataas na DP ay mas magaan ang monthly.','A lower DP means a heavier monthly, which can lower the chance of bank approval. Option B or a higher DP gives a lighter monthly.')+'</span>':'')+'</div>'}).join('')+
+  '<p class="small muted">'+T('Option A/B: promo figures ngayong buwan (all-in, 60 buwan). Ibang options: estimate gamit ang (SRP − DP) × add-on rate ÷ buwan (5 taon 1.55), hindi pa kasama ang insurance, LTO at fees. ✓ = pasok sa 30% ng income. Pre-qualified, subject to bank approval. Walang garantiya.','Option A/B: this month\'s promo figures (all-in, 60 months). Other options: estimate using (SRP − DP) × add-on rate ÷ months (5 years 1.55), excluding insurance, LTO and fees. ✓ = within 30% of income. Pre-qualified, subject to bank approval. No guarantee.')+'</p></div>'}
 function likelihood(S){var w={'AFF-01':3,'DTI-01':2,'INC-01':1,'TEN-01':2,'TEN-02':2,'TEN-03':2,'TEN-F':2,'AGE-01':1,'DP-01':1,'LOAN-01':.5,'PUR-01':.5},t=0,g=0;
   S.rule_results.forEach(function(r){var k=w[r.rule_id]||1;t+=k;g+=k*(r.outcome==='pass'?1:r.outcome==='review'?.5:0)});
   var p=t?Math.round(25+70*g/t):50;p+=affAdj(S.affordability_ratio);p-=5*S.red_flags.length;if(S.result==='NOT_YET_QUALIFIED')p=Math.min(p,35);if(S.result==='NEEDS_REVIEW')p=Math.min(p,79);return Math.max(10,Math.min(95,p))}

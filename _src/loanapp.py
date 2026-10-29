@@ -19,6 +19,12 @@ _C={"mg4glxat":["Titanium Gray Metallic","Red Metallic","Cool Silver Metallic","
 _C["mg4gls"]=_C["mg4glxat"];_C["xglxat"]=_C["xglxmt"];_C["mgls"]=_C["mglxmt"];_C["mbs4wd"]=_C["mbs2wd"]
 def _cl(i): return [[c,0] if isinstance(c,str) else list(c) for c in _C.get(i,[])]
 LAU=[]
+# Option A / Option B per unit from the same optionAB data as /promos/ (2026-10-29)
+import sys as _sy,os as _o2,re as _re2;_sy.path.insert(0,_o2.path.dirname(__file__));import promosab as _pab2
+def _nk(x):
+    x={"2026 L300 Dual AC":"L300 FB Body Dual AC 2.2D M/T"}.get(x,x).replace("2026 ","")
+    return _re2.sub(r"[^a-z0-9]","",x.lower().replace("withdual","dual").replace("with single","single").replace("chasis","chassis"))
+_ABM={_nk(_pab2.NICE.get(r["unit"],r["unit"])):r for r in _pab2.rows()}
 for m in MODELS:
     for v in m["variants"]:
         if not v["promo"]: continue
@@ -93,7 +99,7 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 <div id="la-res" hidden></div>
 <p id="la-note" hidden>{e(NOTE)}</p>
 </div></section>
-<script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
+{"" if [u.__setitem__("ab",{"a":[_ABM[_nk(u["n"])]["a_dp"],_ABM[_nk(u["n"])]["a_mo"]],"b":[_ABM[_nk(u["n"])]["b_dp"],_ABM[_nk(u["n"])]["b_mo"]]}) for u in LAU if _nk(u["n"]) in _ABM] else ""}<script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/loan-assessment.js" defer></script>''', crumbs=[("/","Home"),("/loan-assessment/","AI Car Loan Application Assessment")])
 # Cache-busting: content hashes on the loan page's JS/CSS (Cloudflare caches /assets for 4h).
