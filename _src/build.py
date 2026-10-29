@@ -57,7 +57,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
                 +"".join(item(p,n) for p,n in items)+'</div></details>')
     nav=(item("/","Home")
-        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive")],"cars")
+        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/lowest-down-payment/","Lowest DP: up to Zero DP"),("/test-drive/","Book a test drive")],"cars")
         +item(GT,GT_EN)
         +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
@@ -201,7 +201,7 @@ hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official 
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
-<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>.</p>
+<p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>. New: <a href="/lowest-down-payment/">unlock the lowest down payment per unit</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
 <p><a class="more" href="/cars/">View all current models →</a></p>
@@ -272,12 +272,15 @@ page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
  "October 2026 Mitsubishi promos from San Juan Motors: all-in down payment and monthly options on 60 months, with freebies and fuel points. Subject to bank approval.",
 f'''<section class="ph"><div class="w"><p class="kick">October 2026</p><h1>Mitsubishi promos this month</h1><p class="lead">All-in down payment and monthly options on 60 months, with freebies. Pick a unit, then estimate your own plan or check how a bank is likely to view your application.</p>
 {hero_cta("#list",src="promos")}</div></section>
+<section class="sec" style="padding-bottom:0"><div class="w"><a class="card pad" href="/lowest-down-payment/" style="display:block;text-decoration:none;border-left:5px solid var(--red)"><p class="kick" style="margin:0 0 4px;color:var(--redd)">New campaign</p><h2 class="h3" style="margin:0 0 4px">Unlock Lowest Down up to Zero Downpayment Promos →</h2><p class="muted" style="margin:0">Lowest DP range per unit and a standard monthly estimator. Subject to bank approval.</p></a></div></section>
 <section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(f'<a href="#{m["slug"]}">{e(m["name"])}</a>' for m in MODELS if _promo_cards(m))}</nav>
 {PROMO_SECS}
 <p class="note">{NOTE}</p><p class="muted">Other down payment options, and units not listed here (such as the Xforce and Outlander PHEV): <a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
 <section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and promo option</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a>; it shows the promo side by side.</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section>''', crumbs=[("/","Home"),("/promos/","Promos")])
 
+import lowdp as _lowdp
+_lowdp.build(page,e,f,img,hero,R)
 # ---------- /promos-tips/ hub retired (2026-10-29): redirect stub to the combined Guides & Tips index, written at the end of the build
 # ---------- evergreen cross-links into existing articles
 XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
