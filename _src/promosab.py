@@ -127,16 +127,31 @@ def inject_cars(R):
         t=t.replace('<a class="btn sm ghost dk" href="/budgetcalculator/">','<a class="btn sm ghost dk" href="/promos/">See all promos →</a> <a class="btn sm ghost dk" href="/budgetcalculator/">',1)
         form=CARPARTS["form"].replace("Option B is shown below for every unit.","Option B is shown above for every variant.").replace("Nakalista sa baba ang Option B ng bawat unit.","Nakalista sa itaas ang Option B ng bawat variant.")
         blob=base64.b64encode(json.dumps(arows).encode()).decode()
-        mod=CARPARTS["css"]+f'''<div class="abw"><section class="sec" id="promos-model" style="padding-bottom:0"><div class="w"><div class="card pad ab-m ab-np">
+        fin=form.replace('<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">','<div id="unlock" class="ab-box pm-unl">',1)
+        assert fin.endswith('</div></div></section>'); fin=fin[:-len('</div></div></section>')]+'</div>'
+        # Accordion (Richard 2026-10-30): closed by default, after the car details/inclusions; #promos-model / #promos-<slug> / #unlock auto-open
+        mod=CARPARTS["css"]+f'''<style>.pm-bar{{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#0b0b0c;color:#fff;border:0;border-radius:14px;padding:16px 18px;min-height:56px;font:inherit;cursor:pointer}}.pm-bar:hover{{background:#18181b}}.pm-bar:focus-visible{{outline:3px solid var(--red);outline-offset:2px}}
+.pm-bt{{flex:1;min-width:0}}.pm-bt b{{display:block;font-size:18px}}.pm-bt small{{display:block;font-size:13px;opacity:.75;margin-top:2px}}.pm-cta{{background:var(--red);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;white-space:nowrap;display:flex;align-items:center;gap:6px}}
+.pm-cta svg{{transition:transform .25s ease}}.pm-bar[aria-expanded=true] .pm-cta svg{{transform:rotate(180deg)}}
+#pm-body{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}}#pm-body>div{{overflow:hidden;min-height:0}}#pm-body.open{{grid-template-rows:1fr}}#pm-body:not(.open)>div{{visibility:hidden;transition:visibility 0s .3s}}#pm-body.open>div{{padding-top:16px}}
+.pm-unl{{margin-top:16px;padding:16px;border:1px solid var(--ln);border-left:5px solid var(--red);border-radius:12px}}@media(max-width:600px){{.pm-bar{{padding:14px;flex-wrap:wrap}}.pm-bt{{flex:1 1 100%}}.pm-cta{{margin-left:0}}}}@media(prefers-reduced-motion:reduce){{#pm-body,.pm-cta svg{{transition:none}}}}</style>
+<div class="abw"><section class="sec" id="promos-model"><div class="w"><div class="card pad ab-m ab-np">
+<button type="button" class="pm-bar" id="pm-tg" aria-expanded="false" aria-controls="pm-body"><span class="pm-bt"><b><span class="en">{name} promos</span><span class="tl">{name} promos</span></b><small><span class="en">October 2026 promos, Option A and Option B</span><span class="tl">Promos ngayong Oktubre 2026, Option A at Option B</span></small></span><span class="pm-cta"><span class="pm-ct"><span class="en">See promo</span><span class="tl">Tingnan ang promo</span></span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6"/></svg></span></button>
+<div id="pm-body" role="region" aria-labelledby="pm-tg"><div>
 <div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
-<p class="kick" style="color:var(--redd)">October 2026</p><h2><span class="en">{name} promos this month</span><span class="tl">{name} promos ngayong buwan</span></h2>{rl}
+<h2 class="h3" style="margin:0 0 6px"><span class="en">{name} promos this month</span><span class="tl">{name} promos ngayong buwan</span></h2>{rl}
 <p class="muted ab-s" style="margin-top:-6px"><span class="en">Two all-in options per variant on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Dalawang all-in options bawat variant sa 60 months: <b>Option A</b>, pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
-<div class="ab-mg">{t}</div></div></div></section>{form}</div>
-<script type="text/plain" id="ab-a">{blob}</script>'''
-        h=re.sub(r'(<section class="ph">.*?</section>)',lambda m:m.group(1)+mod,h,count=1,flags=re.S)
+<div class="ab-mg">{t}</div>{fin}</div></div></div></div></section></div>
+<script type="text/plain" id="ab-a">{blob}</script>
+<script>(function(){{var b=document.getElementById("pm-tg"),p=document.getElementById("pm-body"),s=document.getElementById("promos-model");if(!b||!p)return;
+function set(o,go){{b.setAttribute("aria-expanded",o?"true":"false");p.classList.toggle("open",o);try{{p.inert=!o}}catch(_){{}}if(o&&go)setTimeout(function(){{s.scrollIntoView({{behavior:"smooth",block:"start"}})}},60)}}
+set(false);b.addEventListener("click",function(){{set(b.getAttribute("aria-expanded")!=="true")}});
+document.querySelectorAll("[data-openpromo]").forEach(function(a){{a.addEventListener("click",function(e){{e.preventDefault();set(true,true)}})}});
+function hc(){{var h=location.hash;if(h==="#promos-model"||h==="#promos-{slug}"||h==="#unlock")set(true,true)}}hc();window.addEventListener("hashchange",hc)}})();</script>'''
+        h=re.sub(r'(<section class="sec alt">.*?</section>)',lambda m:m.group(1)+mod,h,count=1,flags=re.S)
         # hero CTA -> loan pre-qualification (Richard 2026-10-30); promos live in the on-page module
         h=re.sub(r'<a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a>',lambda m:f'<a class="btn abw" href="/loan-assessment/" data-herocta="{m.group(1)}"><span class="en">See if you&rsquo;re Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a>',h,count=1)
-        h=h.replace(f'href="/promos/#{slug}"','href="#promos-model"')
-        h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Promo down payment and monthly options are in the <a href="#promos-model">promos section above</a>.')
+        h=h.replace(f'href="/promos/#{slug}">See promo','href="#promos-model" data-openpromo>See promo').replace(f'href="/promos/#{slug}"','href="#promos-model"')
+        h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Promo down payment and monthly options are in the <a href="#promos-model">promos section below</a>.')
         h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script></body>',1)
         open(fp,"w").write(h)
