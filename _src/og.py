@@ -40,7 +40,7 @@ def wrap(d,t,f,mw):
 def make(path,head,img):
     src=os.path.join(R,img.lstrip("/"))
     if not os.path.exists(src):src=os.path.join(R,"assets/img/xpglx_x37.webp")
-    key=hashlib.md5((head+"|"+img+"|v2").encode()).hexdigest()[:8]
+    key=hashlib.md5((head+"|"+img+"|v3").encode()).hexdigest()[:8]
     slug=re.sub(r'[^a-z0-9]+','-',path.strip("/").lower()).strip("-") or "home"
     rel=f"/assets/og/{slug}-{key}.jpg";out=os.path.join(R,rel.lstrip("/"))
     if os.path.exists(out):return rel
@@ -62,7 +62,7 @@ def make(path,head,img):
     for s in ls[:3]:
         d.text((96,y),s,font=f,fill="white");y+=int(sz*1.18)
     d.text((96,H-92),"Mitsubishi Motors by Richard",font=_f(30,"SemiBold"),fill=(235,235,235))
-    d.text((96,H-54),"SJ Legacy Motors · San Jose del Monte, Bulacan",font=_f(22,"Regular"),fill=(190,190,190))
+    d.text((96,H-54),"San Juan Motors · San Jose del Monte, Bulacan",font=_f(22,"Regular"),fill=(190,190,190))
     im.save(out,"JPEG",quality=84,optimize=True,progressive=True)
     return rel
 

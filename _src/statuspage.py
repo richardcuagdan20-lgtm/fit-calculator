@@ -6,7 +6,7 @@ ST_CSS='''<style>.st .fld input{width:100%;padding:12px;border:1px solid var(--l
 .st-pick input,.af-cam input{position:absolute;width:1px;height:1px;opacity:0}.st-fn{font-size:13px;color:#555;margin:4px 0 0}.st-err{color:#b91c1c;font-weight:600}.st-tabs{display:flex;gap:6px;margin:0 0 12px;background:#f4f4f5;border-radius:12px;padding:4px}.st-tabs button{flex:1;border:0;background:none;border-radius:9px;padding:10px 6px;font:inherit;font-weight:700;font-size:15px;color:#52525b;min-height:44px}.st-tabs button[aria-selected=true]{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.15)}.st-save{background:#fef3c7;border-radius:12px;padding:10px 12px;margin:8px 0}.st-trk{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:0}.st-trk li{display:flex;gap:12px;align-items:flex-start;position:relative;padding:0 0 18px;color:#71717a}.st-trk li:not(:last-child):after{content:'';position:absolute;left:15px;top:32px;bottom:0;width:2px;background:#e4e4e7}.st-trk li.done:after{background:#16a34a}.st-dot{flex:0 0 32px;height:32px;border-radius:50%;background:#e4e4e7;color:#52525b;display:flex;align-items:center;justify-content:center;font-weight:700}.st-trk li.done .st-dot{background:#16a34a;color:#fff}.st-trk li.cur .st-dot{background:#E60012;color:#fff;box-shadow:0 0 0 4px #fecaca}.st-trk li.done,.st-trk li.cur{color:#111;font-weight:700}.st-tl{padding-top:5px}.st-tl small{display:block;font-weight:400;color:#52525b;font-size:13px}.st-ok{color:#166534;font-weight:600}</style>'''
 ST_BODY=f'''<section class="la-hero"><div class="w">
 <div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>
-<p class="kick" style="color:#fca5a5">SJ Legacy Motors · Mitsubishi</p>
+<p class="kick" style="color:#fca5a5">San Juan Motors · Mitsubishi</p>
 <h1>{B("I-track ang application mo","Track your application")}</h1>
 <p class="lead">{B("Tingnan ang status ng car loan application mo at mag-upload ng kulang na requirements.","Check your car loan application status and upload missing requirements.")}</p>
 <div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
@@ -28,7 +28,7 @@ ST_BODY=f'''<section class="la-hero"><div class="w">
 </div></section>
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/status.js" defer></script>'''
-page("/status/","Track Your Application | Mitsubishi Motors - SJ Legacy Motors",
+page("/status/","Track Your Application | Mitsubishi Motors - San Juan Motors",
  "Check your Mitsubishi car loan application status with your MP- reference number, and upload missing requirements. Subject to bank approval.",
  LA_CSS+AF_CSS+ST_CSS+ST_BODY, noindex=True, crumbs=[("/","Home"),("/status/","Track Your Application")])
 _sp=R+"/status/index.html"; _s=open(_sp).read()

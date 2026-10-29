@@ -63,8 +63,8 @@ body='''<p>Buying a car while working abroad is very doable. Many of my clients 
 <p><a href="https://m.me/504759566043148" rel="noopener">Chat with me here</a> whenever it's convenient for you. I'll coordinate with your family for viewing, test drive and release.</p>'''),
 dict(slug="what-all-in-includes",date="2026-10-21",img="tr_gx_u28",alt="Mitsubishi Triton GX AT in Graphite Gray Metallic",
 title="What Does 'All-In' Include in a Car Promo?",
-desc="What an all-in Mitsubishi promo covers at SJ Legacy Motors: LTO registration, TPL, comprehensive insurance, chattel mortgage, free labor, warranty and freebies.",
-body='''<p>"All-in" means the usual extra charges of buying a car are already part of the package, so the down payment you see is what you pay upfront. Here is what the current promos at Mitsubishi SJ Legacy Motors include.</p>
+desc="What an all-in Mitsubishi promo covers at San Juan Motors: LTO registration, TPL, comprehensive insurance, chattel mortgage, free labor, warranty and freebies.",
+body='''<p>"All-in" means the usual extra charges of buying a car are already part of the package, so the down payment you see is what you pay upfront. Here is what the current promos at Mitsubishi San Juan Motors include.</p>
 <h2>Included in the all-in package</h2>
 <ul class="ticks"><li><b>3 years LTO registration</b> – your plates and registration are handled for the first three years.</li><li><b>3 years TPL insurance</b> – the compulsory third-party liability insurance required for registration.</li><li><b>1 year comprehensive insurance, rate locked for 3 years</b> – covers damage and theft; the rate is locked for the following renewals within three years.</li><li><b>Chattel mortgage</b> – the fee to register the bank's lien on the car.</li><li><b>Free labor up to 5,000 km</b> – labor for the early periodic maintenance service.</li><li><b>3 years warranty</b> – manufacturer warranty coverage, subject to its terms.</li></ul>
 <h2>Freebies</h2>
@@ -110,8 +110,8 @@ body='''<p>Seven seats is the magic number for many Filipino households: parents
 <p>Start with your comfortable monthly using the <a href="/budgetcalculator/">calculator</a>, then compare the models that fit. My <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator guide</a> goes deeper on the three gasoline options.</p>'''),
 dict(slug="mitsubishi-october-2026-promos-bulacan",date="2026-10-21",img="msbs_jh3",alt="Mitsubishi Montero Sport Black Series in Graphite Gray with black roof",
 title="Mitsubishi October 2026 Promos in Bulacan",
-desc="October 2026 at Mitsubishi SJ Legacy Motors, San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to unlock this month's promo figures.",
-body='''<p>October is a good month to shop at Mitsubishi SJ Legacy Motors in San Jose del Monte. Most models come with all-in packages, Zero DP or low-DP financing options and freebies. Here is where each model starts, based on the official SRP.</p>
+desc="October 2026 at Mitsubishi San Juan Motors, San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to unlock this month's promo figures.",
+body='''<p>October is a good month to shop at Mitsubishi San Juan Motors in San Jose del Monte. Most models come with all-in packages, Zero DP or low-DP financing options and freebies. Here is where each model starts, based on the official SRP.</p>
 <h2>Starting SRP per model</h2>
 <ul class="ticks"><li><a href="/cars/mirage-g4/">Mirage G4</a>: from ₱793,000</li><li><a href="/cars/l300/">L300</a>: from ₱829,000 (cab and chassis)</li><li><a href="/cars/xpander/">Xpander</a>: from ₱1,099,000</li><li><a href="/cars/xforce/">Xforce</a>: from ₱1,119,000</li><li><a href="/cars/triton/">Triton</a>: from ₱1,266,000</li><li><a href="/cars/xpander-cross/">Xpander Cross</a>: ₱1,378,000</li><li><a href="/cars/destinator/">Destinator</a>: from ₱1,389,000</li><li><a href="/cars/montero-sport/">Montero Sport</a>: from ₱1,568,000</li><li><a href="/cars/versa-van/">Versa Van</a>: ₱1,764,000</li><li><a href="/cars/outlander-phev/">Outlander PHEV</a>: ₱2,848,000</li></ul>
 <p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026), subject to change without notice.</p>

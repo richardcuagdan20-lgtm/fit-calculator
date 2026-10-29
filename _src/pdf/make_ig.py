@@ -15,7 +15,7 @@ CSS="""*{box-sizing:border-box;margin:0}body{font-family:'Noto Sans','Helvetica 
 .big{font-size:70px;color:#E60012;font-weight:900}.bar{height:46px;border-radius:23px;background:#ffe3e6;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:#E60012}
 .x li:before{content:"✕"}
 """
-FOOT='<div class="f"><span>Richard Cuagdan · Mitsubishi Sales Executive · SJ Legacy Motors</span><b>Drive your Ambition</b></div>'
+FOOT='<div class="f"><span>Richard Cuagdan · Mitsubishi Sales Executive · San Juan Motors</span><b>Drive your Ambition</b></div>'
 def card(t,items,cls=""):return f'<div class="cd {cls}"><h2>{t}</h2><ul>'+"".join(f"<li>{i}</li>" for i in items)+'</ul></div>'
 def gen(L):
   tl=L=="tl";T=lambda a,b:a if tl else b;G={}

@@ -1,4 +1,4 @@
-# Evergreen landing pages. exec()'d inside build.py (uses page, img, e, MODELS, ILLS, D, MSG, TEL, TELD, ADDR, MAPQ).
+# Evergreen landing pages. exec()'d inside build.py (uses page, img, e, MODELS, ILLS, D, MSG, TEL, TELD, ADDR).
 # ONE data source for promo figures: data.MODELS (promo fields). Update the month there + PROMO_MONTH below.
 PROMO_MONTH="October 2026"; PROMO_UPDATED="2026-10-22"
 # Which verified options to show per variant id (count of options); fuel shown only where verified.
@@ -29,21 +29,21 @@ def CTAX(lead,unit=""):
     q=f"?unit={unit}" if unit else ""
     return f'''<h2>Your next step</h2><p>{lead}</p>
 <p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost dk" href="/test-drive/{q}">Book a Test Drive</a> <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
-<p class="muted">Showroom: {ADDR}. <a href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions on Google Maps</a>.</p>'''
+<p class="muted">{ADDR}. <a href="{MSG}" rel="noopener">Message Richard for showroom visits and directions</a>.</p>'''
 LANDINGS=[]
 def L(**k): LANDINGS.append(k)
 
-L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="Mitsubishi Xpander Cross, available at Mitsubishi SJ Legacy Motors in SJDM, Bulacan",
- title="Mitsubishi SJDM Bulacan: SJ Legacy Motors Sales & Promos",
+L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="Mitsubishi Xpander Cross, available at Mitsubishi San Juan Motors in SJDM, Bulacan",
+ title="Mitsubishi SJDM Bulacan: San Juan Motors Sales & Promos",
  h1="Mitsubishi SJDM Bulacan: buy your Mitsubishi in San Jose del Monte",
- desc="Mitsubishi SJDM Bulacan: Mitsubishi SJ Legacy Motors on Quirino Highway, San Jose del Monte. Promos, test drive, financing help and directions in one place.",
+ desc="Mitsubishi SJDM Bulacan: San Juan Motors serving San Jose del Monte and Quezon City. Promos, test drives, financing help and showroom visits in one place.",
  kick="San Jose del Monte, Bulacan",
- lead="Searching for Mitsubishi SJDM Bulacan? Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer on Quirino Highway in Sto. Cristo, San Jose del Monte, and I'm Richard Cuagdan, one of its sales executives. Here's how to see a unit, test drive it, get the current all-in promo and finance it, kahit first time mo pa lang.",
- figs=[("Where to find us","sj-loc","Mitsubishi SJDM Bulacan: Mitsubishi SJ Legacy Motors on Quirino Highway, Sto. Cristo, San Jose del Monte"),("What you can do","sj-what","What you can do at the Mitsubishi dealership in SJDM: see units, test drive, get the promo, pre-check documents"),("Plan your visit","sj-plan","Three steps to plan a Mitsubishi showroom visit in SJDM"),("Popular units","sj-photo","Mitsubishi Xpander Cross 7-seater")],
- table=["mg4gls","xglxat","xcross","dglx","tritongxat","l300","vvglx","mglxmt"],tcap="Popular units at SJ Legacy Motors.",
+ lead="Searching for Mitsubishi SJDM Bulacan? Mitsubishi San Juan Motors is an authorized Mitsubishi dealer serving San Jose del Monte (SJDM), Bulacan and Quezon City, and I'm Richard Cuagdan, one of its sales executives. Here's how to see a unit, test drive it, get the current all-in promo and finance it, kahit first time mo pa lang.",
+ figs=[("Where to find us","sj-loc","Mitsubishi SJDM Bulacan: Mitsubishi San Juan Motors, San Jose del Monte"),("What you can do","sj-what","What you can do at the Mitsubishi dealership in SJDM: see units, test drive, get the promo, pre-check documents"),("Plan your visit","sj-plan","Three steps to plan a Mitsubishi showroom visit in SJDM"),("Popular units","sj-photo","Mitsubishi Xpander Cross 7-seater")],
+ table=["mg4gls","xglxat","xcross","dglx","tritongxat","l300","vvglx","mglxmt"],tcap="Popular units at San Juan Motors.",
  body=lambda T:f'''<h2>Where to find us</h2>
-<p><b>Mitsubishi SJ Legacy Motors</b>, Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan. It's along the main Quirino Highway corridor, so it's a straightforward drive from the rest of SJDM, Norzagaray, Santa Maria and the northern edge of Metro Manila (Fairview, Novaliches, Caloocan North).</p>
-<p class="row"><a class="btn ghost dk" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Get directions on Google Maps</a> <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
+<p><b>Mitsubishi San Juan Motors</b>, serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions. It's a straightforward drive from the rest of SJDM, Norzagaray, Santa Maria and the northern edge of Metro Manila (Fairview, Novaliches, Caloocan North).</p>
+<p class="row"><a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard for directions</a> <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
 <h2>What you can do</h2>
 <ul class="ticks"><li><b>See the 2026 lineup</b>: <a href="/cars/mirage-g4/">Mirage G4</a>, <a href="/cars/xpander/">Xpander</a>, <a href="/cars/xpander-cross/">Xpander Cross</a>, <a href="/cars/destinator/">Destinator</a>, <a href="/cars/montero-sport/">Montero Sport</a>, <a href="/cars/triton/">Triton</a>, <a href="/cars/l300/">L300</a> and more. Message me first so I can tell you which unit and color are available to view.</li>
 <li><b>Test drive</b>: book a schedule online on the <a href="/test-drive/">test drive page</a>. Bring your driver's license.</li>
@@ -63,8 +63,8 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
 <ol class="steps"><li><h3>Check your budget</h3><p>Use the <a href="/budgetcalculator/">budget calculator</a> to see which units fit.</p></li><li><h3>Book a test drive</h3><p>Pick the unit and time on the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Message or call me</h3><p>Call or text {TELD} so the unit is ready when you arrive. Coming from the city? Read <a href="/blog/mitsubishi-near-fairview-quezon-city/">Mitsubishi near Fairview</a> or <a href="/blog/mitsubishi-near-caloocan-novaliches/">near Caloocan and Novaliches</a>.</p></li></ol>
 <p>Want to know what "casa" means and what to expect at an authorized dealership? See <a href="/mitsubishi-casa-bulacan/">Mitsubishi casa Bulacan</a>. Bulacan buyers can also read <a href="/blog/mitsubishi-dealer-bulacan/">Mitsubishi dealer Bulacan</a>.</p>
 '''+CTAX("Check your budget, then book a test drive in SJDM. I'll have your unit ready."),
- faq=[("Where is Mitsubishi in SJDM, Bulacan?","Mitsubishi SJ Legacy Motors is at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan. Use the Google Maps link on this page for directions."),
- ("Is Mitsubishi SJ Legacy Motors an authorized Mitsubishi dealer?","Yes. Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer."),
+ faq=[("Where is Mitsubishi in SJDM, Bulacan?","Mitsubishi San Juan Motors serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
+ ("Is Mitsubishi San Juan Motors an authorized Mitsubishi dealer?","Yes. Mitsubishi San Juan Motors is an authorized Mitsubishi dealer."),
  ("Can I test drive a Mitsubishi in SJDM?","Yes. Book a schedule on the test drive page and bring a valid driver's license. Richard will confirm your slot."),
  ("Does the SJDM dealership have Zero DP promos?","Yes. This month's Zero DP and low-DP options are in the dated promo table on this page. They're all-in and subject to bank approval."),
  ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or use the live chat on this website."),
@@ -73,9 +73,9 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
 L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",alt="Mitsubishi Xpander GLX at a Mitsubishi casa in Bulacan",
  title="Mitsubishi Casa Bulacan: Buying at the SJDM Dealership",
  h1="Mitsubishi casa Bulacan: what a casa is and how to buy there",
- desc="Mitsubishi casa Bulacan guide: what \"casa\" means, buying at the SJDM dealership, test drives, PMS at an authorized casa, and Google Maps directions.",
+ desc="Mitsubishi casa Bulacan guide: what \"casa\" means, buying at the SJDM dealership, test drives, PMS at an authorized casa, and how to arrange a showroom visit.",
  kick="Authorized Mitsubishi dealer · SJDM",
- lead="Searching \"Mitsubishi casa Bulacan\"? \"Casa\" is what most Filipinos call the brand's authorized dealership, ang mismong Mitsubishi dealer. In San Jose del Monte, that's Mitsubishi SJ Legacy Motors on Quirino Highway, an authorized Mitsubishi dealer. Here's what buying at a casa looks like, step by step.",
+ lead="Searching \"Mitsubishi casa Bulacan\"? \"Casa\" is what most Filipinos call the brand's authorized dealership, ang mismong Mitsubishi dealer. In San Jose del Monte, that's Mitsubishi San Juan Motors in San Jose del Monte, an authorized Mitsubishi dealer. Here's what buying at a casa looks like, step by step.",
  figs=[("What \"casa\" means","cs-what","What is a casa: the authorized dealership for sales, service and genuine parts"),("Buying at the casa","cs-buy","Buying a car at the casa: from inquiry to release day"),("PMS at an authorized casa","cs-pms","Why owners bring their car back to an authorized casa for PMS"),("Directions","cs-photo","Mitsubishi Xpander on the road")],
  table=["mg4gls","xglxmt","dglx","tritongxat","l300"],tcap="Sample units.",
  body=lambda T:f'''<h2>What "casa" means</h2>
@@ -98,12 +98,12 @@ L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",al
 <h2>Will the monthly fit?</h2>
 {INCOME}
 <h2>Directions</h2>
-<p><b>Mitsubishi SJ Legacy Motors</b>, {ADDR.replace("Mitsubishi SJ Legacy Motors, ","")}.</p>
-<p class="row"><a class="btn ghost dk" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPQ}" target="_blank" rel="noopener">Open in Google Maps</a></p>
+<p><b>Mitsubishi San Juan Motors</b>, serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions.</p>
+<p class="row"><a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard for directions</a></p>
 <p>More on the SJDM dealership: <a href="/mitsubishi-sjdm-bulacan/">Mitsubishi SJDM Bulacan</a>.</p>
 '''+CTAX("Message or call me before you go to the casa so I can have your unit ready."),
  faq=[("What does casa mean for cars in the Philippines?","Casa is the common term for a brand's authorized dealership, where you buy brand-new units and bring your car for service and warranty work."),
- ("Where is the Mitsubishi casa in San Jose del Monte?","Mitsubishi SJ Legacy Motors, Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan. Use the Google Maps link for directions."),
+ ("Where is the Mitsubishi casa in San Jose del Monte?","Richard Cuagdan of Mitsubishi San Juan Motors serves San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call him for a showroom visit and directions."),
  ("Is it better to buy a car at the casa?","Buying at an authorized casa gives you a brand-new unit on official SRP, bank financing, an all-in package and warranty coverage."),
  ("Do I need to do PMS at the casa?","Follow the PMS schedule in your owner's manual. Many owners use an authorized casa to keep genuine parts and a service record that supports warranty claims."),
  ("Can I get Zero DP at the casa?","Yes, on selected units. Check the dated promo table on this page and confirm with Richard. Subject to bank approval.")])

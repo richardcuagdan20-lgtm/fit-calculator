@@ -1,6 +1,6 @@
 # mitsubishipromos.online
 
-Static site for Richard Cuagdan, Car Sales Executive, Mitsubishi SJ Legacy Motors (SJDM, Bulacan). Hosted on GitHub Pages.
+Static site for Richard Cuagdan, Car Sales Executive, Mitsubishi San Juan Motors (SJDM, Bulacan). Hosted on GitHub Pages.
 
 - `/budgetcalculator/` – ad landing page (Meta Pixel + lead webhook). Hand-edited; NOT generated. Do not move.
 - `/privacy/` – privacy policy used in Meta lead forms. Hand-edited; do not move.

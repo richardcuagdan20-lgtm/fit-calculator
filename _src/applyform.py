@@ -34,7 +34,7 @@ AF_CSS='''<style>.af-off{display:none!important}.af-prog{position:sticky;top:0;z
 </style>'''
 AF_BODY=f'''<section class="la-hero"><div class="w">
 <div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>
-<p class="kick" style="color:#fca5a5">SJ Legacy Motors · Mitsubishi</p>
+<p class="kick" style="color:#fca5a5">San Juan Motors · Mitsubishi</p>
 <h1>Official Application Form</h1>
 <p class="lead">{B("Car loan application para sa iyong Mitsubishi. Mga 8–10 minuto. Ang final decision ay sa bank; ire-review namin ang application mo at tutulungan ka ni Fina sa documents.","Car loan application for your Mitsubishi. About 8–10 minutes. The final decision is the bank's; we will review your application and Fina will help you with documents.")}</p>
 <div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
@@ -117,8 +117,8 @@ AF_BODY=f'''<section class="la-hero"><div class="w">
 <script type="application/json" id="af-units">{json.dumps(AFU,ensure_ascii=False)}</script>
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/apply-form.js" defer></script>'''
-page("/apply/","Official Application Form | Mitsubishi Motors - SJ Legacy Motors",
- "Official car loan Application Form for Mitsubishi at SJ Legacy Motors, San Jose del Monte: personal, employment, co-maker, references and unit details. Tagalog or English.",
+page("/apply/","Official Application Form | Mitsubishi Motors - San Juan Motors",
+ "Official car loan Application Form for Mitsubishi at San Juan Motors, San Jose del Monte: personal, employment, co-maker, references and unit details. Tagalog or English.",
  LA_CSS+AF_CSS+AF_BODY, crumbs=[("/","Home"),("/apply/","Official Application Form")])
 _ap=R+"/apply/index.html"; _s=open(_ap).read()
 _s=_s.replace('src="/assets/apply-form.js"',f'src="/assets/apply-form.js?v={_vh("/assets/apply-form.js")}"').replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')

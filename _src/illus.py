@@ -343,8 +343,8 @@ def bulk3():
 
 def bulk4():
     M="/workspace/mmpc/final/"
-    tiles("dl-what","At SJ Legacy Motors","What you can do here",[("1","See the lineup",""),("2","Test drive",""),("3","Get the month's promo","Zero DP and low DP"),("4","Pre-check loan documents",""),("5","Release and walkthrough","")],cols=1)
-    stats("dl-loc","Mitsubishi dealer Bulacan","Mitsubishi SJ Legacy Motors",[("Quirino Highway","Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, San Jose del Monte"),("0954 291 1201","Call or text Richard Cuagdan before you visit")])
+    tiles("dl-what","At San Juan Motors","What you can do here",[("1","See the lineup",""),("2","Test drive",""),("3","Get the month's promo","Zero DP and low DP"),("4","Pre-check loan documents",""),("5","Release and walkthrough","")],cols=1)
+    stats("dl-loc","Mitsubishi dealer Bulacan","Mitsubishi San Juan Motors",[("Service area","Serving SJDM, Bulacan and Quezon City"),("0954 291 1201","Call or text Richard Cuagdan before you visit")])
     steps("dl-before","Before your visit","3 steps",[("Check your budget","Budget Fit Calculator"),("Book a test drive","Online"),("Bring license and IDs","Plus income documents")])
     table("mm-promo","October 2026 · 60 months, all-in","Promo highlights",["Unit","Zero DP","Low DP"],[("Xpander GLX MT","₱22,641","₱19,811"),("Xpander GLX AT","₱23,877","₱20,892"),("Xpander Cross","₱28,389","₱24,840"),("Destinator GLX","₱28,615","₱26,827"),("Montero GLX MT","₱30,284","₱28,265")],[0.42,0.27,0.31],"Low DP: ₱148K / ₱138K / ₱148K / ₱93K / ₱30K. Subject to bank approval.")
     steps("mm-steps","From Metro Manila","How buying in SJDM works",[("Check your budget online",""),("Send documents for pre-check",""),("One visit for the test drive",""),("Approval and release in SJDM","")])
@@ -377,7 +377,7 @@ def bulk4():
 def bulk5():
     M="/workspace/mmpc/final/"
     for k,area in [("cn","Caloocan and Novaliches"),("fv","Fairview and Quezon City"),("bt","Bulacan towns")]:
-        stats(k+"-loc","From "+area,"Mitsubishi SJ Legacy Motors, SJDM",[("Quirino Highway","Sto. Cristo, San Jose del Monte, Bulacan"),("0954 291 1201","Call or text Richard before you drive up")])
+        stats(k+"-loc","From "+area,"Mitsubishi San Juan Motors, SJDM",[("Service area","San Jose del Monte (SJDM), Bulacan and Quezon City"),("0954 291 1201","Call or text Richard before you drive up")])
         tiles(k+"-why","Buyers from "+area,"Why some choose SJDM",[("1","One point of contact","Inquiry to release"),("2","Online-first","Budget, documents, booking"),("3","All-in promos","Zero DP and low DP"),("4","OFW family help","Across time zones")],cols=2)
         steps(k+"-plan","Plan your visit","3 steps from "+area,[("Check your budget","Budget Fit Calculator"),("Book a test drive","Online"),("Bring documents","For pre-check")])
     steps("pl-steps","Paano mag car loan","5 steps",[("Alamin ang budget","30–35% ng gross income"),("Pumili at mag test drive",""),("Ihanda ang requirements","Employed, self-employed, OFW"),("Pre-check at bank approval",""),("Release","All-in na")])
@@ -409,7 +409,7 @@ def bulk6():
         im=Image.open(src).convert("RGBA");im=im.crop(im.getbbox());im.thumbnail((1040,560),Image.LANCZOS)
         c=Image.new("RGB",(1200,675),bg);c.paste(im,((1200-im.width)//2,(675-im.height)//2+20),im);save(c,name)
     # 1 SJDM
-    stats("sj-loc","Mitsubishi SJDM Bulacan","Mitsubishi SJ Legacy Motors",[("Quirino Highway","Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, San Jose del Monte"),("0954 291 1201","Call or text Richard before you visit")])
+    stats("sj-loc","Mitsubishi SJDM Bulacan","Mitsubishi San Juan Motors",[("Service area","Serving SJDM, Bulacan and Quezon City"),("0954 291 1201","Call or text Richard before you visit")])
     tiles("sj-what","At the SJDM dealership","What you can do",[("1","See the lineup","Ask which units are on display"),("2","Test drive","Book online first"),("3","Get the promo","All-in Zero DP and low DP"),("4","Pre-check documents","Before the bank")],cols=2)
     steps("sj-plan","Plan your visit","3 steps before you drive over",[("Check your budget","Budget calculator"),("Book a test drive","Pick a unit and time"),("Message or call Richard","So your unit is ready")])
     cut("sj-photo",M+"Xpander Cross/color_xpandercross_26my_rnc_color-x3n_angle4.png")

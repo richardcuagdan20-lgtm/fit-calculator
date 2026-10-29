@@ -127,8 +127,8 @@ LEAD={
 "best-car-for-senior-citizens-philippines":"The best car for senior citizens is the one they can get in and out of easily.",
 }
 SEO.update({
-"mitsubishi-dealer-bulacan":("Mitsubishi dealer Bulacan",["Mitsubishi SJDM Bulacan","Mitsubishi San Jose del Monte","Mitsubishi showroom near me","SJ Legacy Motors"],None,
- "Mitsubishi dealer Bulacan: Mitsubishi SJ Legacy Motors on Quirino Highway, SJDM. Address, what you can do there, popular October 2026 promos and how to visit."),
+"mitsubishi-dealer-bulacan":("Mitsubishi dealer Bulacan",["Mitsubishi SJDM Bulacan","Mitsubishi San Jose del Monte","Mitsubishi showroom near me","San Juan Motors"],None,
+ "Mitsubishi dealer Bulacan: Mitsubishi San Juan Motors, SJDM. Areas served, what you can do there, popular October 2026 promos and how to visit."),
 "mitsubishi-promo-metro-manila-buyers":("Mitsubishi promo Metro Manila",["Mitsubishi promo zero down payment","Mitsubishi promo 2026","Mitsubishi Caloocan Quezon City","Mitsubishi promo Philippines"],"Mitsubishi Promo Metro Manila: Buying from SJDM",
  "Mitsubishi promo Metro Manila buyers can get in SJDM: October 2026 Zero DP highlights, how the process works from Manila, and questions to ask any dealer."),
 "xpander-monthly-amortization":("Xpander monthly amortization",["Xpander GLS monthly amortization","Xpander Cross monthly amortization","Xpander 2026 monthly","Xpander monthly payment"],"Xpander Monthly Amortization 2026: All Variants",
@@ -146,11 +146,11 @@ SEO.update({
 "car-reservation-fee-philippines":("car reservation fee Philippines",["reservation fee car loan","is reservation fee refundable","booking fee car","reserve a car unit"],"Car Reservation Fee Philippines: What to Know",
  "Car reservation fee Philippines guide: what it does, 5 questions to ask before paying, refund terms to get in writing, and when it makes sense to reserve."),
 "mitsubishi-test-drive-sjdm":("Mitsubishi test drive SJDM",["Mitsubishi test drive near me","Destinator test drive","book test drive Bulacan","test drive checklist"],"Mitsubishi Test Drive in SJDM: What to Expect",
- "Mitsubishi test drive in SJDM: how to book online, what to bring, what to check on the drive, and how to compare two models back-to-back at SJ Legacy Motors."),
+ "Mitsubishi test drive in SJDM: how to book online, what to bring, what to check on the drive, and how to compare two models back-to-back at San Juan Motors."),
 })
 ANS={
-"mitsubishi-dealer-bulacan":"Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealer in Bulacan, at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte. You can see the lineup, test drive, get this month's all-in promo and have your loan documents pre-checked. Call or text Richard on 0954 291 1201.",
-"mitsubishi-promo-metro-manila-buyers":"Metro Manila buyers can get the October 2026 Mitsubishi promo at SJ Legacy Motors in SJDM, up Quirino Highway from Fairview. Zero DP examples: Xpander GLX AT ₱23,877 a month and Destinator GLX ₱28,615 a month, 60 months, all-in. Check your budget and send documents online, then make one trip for the test drive.",
+"mitsubishi-dealer-bulacan":"Mitsubishi San Juan Motors is an authorized Mitsubishi dealer in Bulacan, serving San Jose del Monte (SJDM) and Quezon City. You can see the lineup, test drive, get this month's all-in promo and have your loan documents pre-checked. Call or text Richard on 0954 291 1201.",
+"mitsubishi-promo-metro-manila-buyers":"Metro Manila buyers can get the October 2026 Mitsubishi promo at San Juan Motors in SJDM, serving Fairview and Quezon City. Zero DP examples: Xpander GLX AT ₱23,877 a month and Destinator GLX ₱28,615 a month, 60 months, all-in. Check your budget and send documents online, then make one trip for the test drive.",
 "xpander-monthly-amortization":"The Xpander monthly amortization for October 2026 (60 months, all-in) starts at ₱22,641 at Zero DP for the GLX MT, ₱23,877 for the GLX AT, ₱25,937 for the GLS AT and ₱28,389 for the Xpander Cross. With a down payment, the GLX MT goes down to ₱19,811 a month.",
 "destinator-price-philippines":"The Destinator price in the Philippines (SRP) is ₱1,389,000 for the GLX, ₱1,599,000 for the GLS, and ₱1,929,000 (monotone) or ₱1,939,000 (two-tone) for the GT. October 2026 promo monthlies start at ₱28,615 at Zero DP or ₱26,827 with ₱93K DP, 60 months, all-in.",
 "montero-sport-price-philippines-2026":"The Montero Sport price in the Philippines for 2026 (SRP) is ₱1,568,000 for the GLX M/T, ₱1,927,000 for the GLS A/T, ₱2,190,000 for the Black Series 2WD and ₱2,530,000 for the Black Series 4WD. The lowest October 2026 monthly is ₱28,265 with ₱30K DP on the GLX.",
@@ -162,11 +162,11 @@ ANS={
 }
 SEO.update({
 "mitsubishi-near-caloocan-novaliches":("Mitsubishi near Caloocan",["Mitsubishi Novaliches","Mitsubishi Caloocan","Mitsubishi Quirino Highway","car dealer near Novaliches"],None,
- "Mitsubishi near Caloocan and Novaliches: how to reach SJ Legacy Motors on Quirino Highway, SJDM, popular October 2026 promos, and how to plan one visit."),
+ "Mitsubishi near Caloocan and Novaliches: how to reach San Juan Motors, SJDM, popular October 2026 promos, and how to plan one visit."),
 "mitsubishi-near-fairview-quezon-city":("Mitsubishi near Fairview",["Mitsubishi Fairview","Mitsubishi Quezon City","Quirino Highway Fairview to SJDM","Mitsubishi promo QC"],None,
- "Mitsubishi near Fairview and Quezon City: the Quirino Highway route to SJ Legacy Motors in SJDM, October 2026 promo monthlies, and planning your visit."),
+ "Mitsubishi near Fairview and Quezon City: getting to San Juan Motors in SJDM, October 2026 promo monthlies, and planning your visit."),
 "mitsubishi-near-bulacan-towns":("Mitsubishi near Marilao",["Mitsubishi Meycauayan Bulacan","Mitsubishi Malolos","Mitsubishi Sta. Maria","Mitsubishi Norzagaray"],None,
- "Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos: directions to SJ Legacy Motors in SJDM, Bulacan, plus popular units and promos."),
+ "Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos: directions to San Juan Motors in SJDM, Bulacan, plus popular units and promos."),
 "paano-mag-car-loan":("paano mag car loan",["paano mag apply ng car loan sa bangko","car loan requirements","car loan process Philippines","Zero DP"],None,
  "Paano mag car loan? Step-by-step guide sa Taglish: budget, test drive, requirements para sa employed, self-employed at OFW, bank approval at release day."),
 "paano-bumili-ng-bagong-sasakyan":("paano bumili ng bagong sasakyan",["paano bumili ng cash na sasakyan","cash vs car loan","brand new car Philippines","all-in promo"],None,
@@ -183,9 +183,9 @@ SEO.update({
  "Brand new vs second hand car Philippines: warranty, history, registration and financing compared, when each makes sense, and a second-hand car checklist."),
 })
 ANS.update({
-"mitsubishi-near-caloocan-novaliches":"If you're looking for a Mitsubishi near Caloocan or Novaliches, Mitsubishi SJ Legacy Motors is north along Quirino Highway in Sto. Cristo, San Jose del Monte. Check your budget and book a test drive online first, then call or text Richard on 0954 291 1201 so your unit is ready.",
-"mitsubishi-near-fairview-quezon-city":"For a Mitsubishi near Fairview or Quezon City, Mitsubishi SJ Legacy Motors is up Quirino Highway in Sto. Cristo, San Jose del Monte. Book a test drive online, send documents for pre-check, and call or text Richard on 0954 291 1201 before you drive up.",
-"mitsubishi-near-bulacan-towns":"For a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos, Mitsubishi SJ Legacy Motors is on Quirino Highway, Sto. Cristo, San Jose del Monte, Bulacan. Use the directions link, book a test drive online, and call or text Richard on 0954 291 1201.",
+"mitsubishi-near-caloocan-novaliches":"If you're looking for a Mitsubishi near Caloocan or Novaliches, Mitsubishi San Juan Motors serves buyers from San Jose del Monte (SJDM), Bulacan to Quezon City. Check your budget and book a test drive online first, then call or text Richard on 0954 291 1201 so your unit is ready.",
+"mitsubishi-near-fairview-quezon-city":"For a Mitsubishi near Fairview or Quezon City, Mitsubishi San Juan Motors serves San Jose del Monte (SJDM), Bulacan and Quezon City. Book a test drive online, send documents for pre-check, and call or text Richard on 0954 291 1201 before you drive up.",
+"mitsubishi-near-bulacan-towns":"For a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos, Mitsubishi San Juan Motors serves San Jose del Monte (SJDM), Bulacan and nearby towns. Message Richard for directions.",
 "paano-mag-car-loan":"Paano mag car loan: alamin ang budget (monthly na around 30–35% ng gross income), pumili ng unit at mag test drive, ihanda ang requirements, ipa-pre-check sa sales executive, at hintayin ang bank approval bago ang release. Subject to bank approval palagi.",
 "paano-bumili-ng-bagong-sasakyan":"Paano bumili ng bagong sasakyan: pumili muna ng unit at mag test drive, tapos piliin kung cash o financing. Sa cash, itanong ang cash price at inclusions at kumuha ng official receipt. Sa financing, ihanda ang requirements para sa bank approval. Parehong may release day checklist.",
 "co-borrower-car-loan-philippines":"A co-borrower car loan in the Philippines lets two people, usually spouses or immediate family, apply together so the bank can consider combined income. The co-borrower shares responsibility for the loan and submits IDs and income documents. Each bank sets its own rules.",

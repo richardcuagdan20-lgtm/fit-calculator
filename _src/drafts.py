@@ -285,7 +285,7 @@ dict(base="blog",car="l300",slug="l300-negosyo-guide",date="2026-10-21",by=BY,im
 title="Mitsubishi L300 Negosyo Guide for Small Business",
 desc="Is the L300 right for your negosyo? Cab and chassis vs ready-to-work units, load planning, financing for self-employed, maintenance and ROI thinking.",
 answer="The Mitsubishi L300 is a 2.2L turbo-diesel workhorse sold as a cab and chassis (for a custom body) or as a ready-to-work Dual AC unit. It suits deliveries, hauling, catering and retail. Pick the body for your cargo, never overload past the rated capacity, and compare monthly costs against what you now pay for deliveries.",
-faq=[("What L300 variants are available in 2026?","At SJ Legacy Motors: the L300 Cab & Chassis 2.2D M/T (for custom bodies) and the 2026 L300 Dual AC. Ask for the latest body options."),
+faq=[("What L300 variants are available in 2026?","At San Juan Motors: the L300 Cab & Chassis 2.2D M/T (for custom bodies) and the 2026 L300 Dual AC. Ask for the latest body options."),
 ("What engine does the L300 have?","A 2.2L 16-valve DOHC turbo-intercooled diesel (4N14), Euro 4 compliant, paired with a 5-speed manual."),
 ("Can a self-employed person finance an L300?","Yes. Banks typically ask for business registration, ITR or financial statements and business bank statements. Approval is subject to bank evaluation."),
 ("How much can the L300 carry?","It depends on the variant and body. Always follow the rated capacity in the official specifications and on your registration; ask me for the spec sheet of the exact unit.")],
@@ -348,7 +348,7 @@ def CTA2(lead,unit=""):
     return f'''<h2>Your next step</h2>
 <p>{lead}</p>
 <p class="row"><a class="btn" href="/budgetcalculator/">Check what fits my budget</a> <a class="btn ghost dk" href="/test-drive/{q}">Book a Test Drive</a> <a class="btn ghost dk" href="tel:+639542911201">Call or text 0954 291 1201</a></p>
-<p class="muted">Questions muna? Call or text me, Richard, on {TELL}, walang pressure. Showroom: Mitsubishi SJ Legacy Motors, Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan. Promo figures are for October 2026 on a 5-year term, all-in, subject to bank approval and change without notice.</p>'''
+<p class="muted">Questions muna? Call or text me, Richard, on {TELL}, walang pressure. Mitsubishi San Juan Motors, serving SJDM, Bulacan and Quezon City; message me for showroom visits and directions. Promo figures are for October 2026 on a 5-year term, all-in, subject to bank approval and change without notice.</p>'''
 PN='<p class="muted">October 2026 dealer promos, 60 months, all-in. Subject to bank approval and change without notice. Message me for the latest promo.</p>'
 def T(head,rows):
     return '<table class="spec"><tr>'+"".join(f'<th scope="col">{h}</th>' for h in head)+'</tr>'+"".join('<tr>'+f'<th scope="row">{r[0]}</th>'+"".join(f'<td>{c}</td>' for c in r[1:])+'</tr>' for r in rows)+'</table>'
@@ -862,7 +862,7 @@ body='''<p>Taga-SJDM ka pero sa Maynila ang trabaho? You're one of many. The com
 <li>Use podcasts or music, not your phone screen</li>
 <li>Keep up with PMS so the car never adds to your stress. See my <a href="/tips/pms-schedule-guide/">PMS schedule guide</a></li>
 </ul>
-'''+SRC(("MMDA: Official website (number coding advisories)","https://mmda.gov.ph/"))+CTA2("Want an easier daily commute? Check what fits your budget, then test drive an automatic right here on Quirino Highway, SJDM.","xpander")),
+'''+SRC(("MMDA: Official website (number coding advisories)","https://mmda.gov.ph/"))+CTA2("Want an easier daily commute? Check what fits your budget, then test drive an automatic here in SJDM.","xpander")),
 
 dict(base="tips",car="destinator",slug="car-trade-in-tips",date="2026-10-22",by=BY,img="de_xd1",alt="Trading in an old car for a new Mitsubishi Destinator",
 title="Car Trade-In Tips: Get a Fair Value for Your Old Car",
@@ -1581,7 +1581,7 @@ body='''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families l
 <li><h3>Rinse after muddy trips</h3><p>Including the underside.</p></li>
 </ol>
 <p>For more power on mountain climbs, compare with the Destinator in <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
-'''+CTA2("Check if the Xpander Cross fits your budget, then test drive it on Quirino Highway in SJDM.","xpander-cross")),
+'''+CTA2("Check if the Xpander Cross fits your budget, then test drive it in SJDM.","xpander-cross")),
 
 dict(base="blog",car="triton",slug="triton-gx-2wd-at-first-pickup-guide",date="2026-10-22",by=BY,img="tr_gx_u28",alt="Mitsubishi Triton GX automatic pickup",
 title="Triton GX AT: A Guide for First-Time Pickup Owners",
@@ -1723,17 +1723,17 @@ body='''<p>Kapag may lolo, lola o family member with a disability, comfort and a
 <p>The <a href="/cars/xpander/">Xpander</a> is a common choice for families with seniors. The GLS AT is ₱1,259,000 SRP, from ₱25,937 a month at Zero DP or ₱22,695 with ₱148K DP, with 60K fuel. The <a href="/cars/destinator/">Destinator</a> GLX starts at ₱28,615 a month at Zero DP. October 2026 promos, 60 months, all-in, subject to bank approval. For any senior or PWD-specific offer, message me for the latest promo.</p>
 '''+CTA2("Bring lolo, lola or your family member to try the seats. Check your budget, then book a test drive in SJDM.","xpander")),
 ]
-ADDRP='<p><b>Mitsubishi SJ Legacy Motors</b><br>Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan</p>'
+ADDRP='<p><b>Mitsubishi San Juan Motors</b><br>Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for a showroom visit and directions.</p>'
 TOT='<p class="muted">Total of payments = down payment + 60 monthly amortizations, from the October 2026 promo figures. The all-in package (LTO registration, TPL, 1-year comprehensive with rate locked for 3 years, chattel mortgage, free labor up to 5,000 km, 3-year warranty) is included. Subject to bank approval.</p>'
 BULK5=[
-dict(base="blog",car="xpander",slug="mitsubishi-dealer-bulacan",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross at Mitsubishi SJ Legacy Motors, a Mitsubishi dealer in Bulacan",
-title="Mitsubishi Dealer Bulacan: SJ Legacy Motors, SJDM",
+dict(base="blog",car="xpander",slug="mitsubishi-dealer-bulacan",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross at Mitsubishi San Juan Motors, a Mitsubishi dealer in Bulacan",
+title="Mitsubishi Dealer Bulacan: San Juan Motors, SJDM",
 desc="",answer="",
-faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Mitsubishi SJ Legacy Motors is at Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte, Bulacan."),
+faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Mitsubishi San Juan Motors serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
 ("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page and Richard will confirm your schedule. Bring your valid driver's license."),
 ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or use the live chat on this website."),
-("Is SJ Legacy Motors near Metro Manila?","It's on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
-body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi SJ Legacy Motors is an authorized Mitsubishi dealership on Quirino Highway in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
+("Is San Juan Motors near Metro Manila?","It's in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
+body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi San Juan Motors is an authorized Mitsubishi dealership in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
 
 <h2>Where to find us</h2>
 '''+ADDRP+'''
@@ -1764,7 +1764,7 @@ body='''<p>Looking for a Mitsubishi dealer in Bulacan? Mitsubishi SJ Legacy Moto
 <li><h3>Book a test drive</h3><p>Pick a unit and schedule online.</p></li>
 <li><h3>Bring your license and IDs</h3><p>Plus income documents if you want them pre-checked. See <a href="/guides/car-loan-requirements/">requirements</a>.</p></li>
 </ol>
-'''+CTA2("Visit Mitsubishi SJ Legacy Motors in SJDM. Check your budget, book a test drive, or call me first.","xpander")),
+'''+CTA2("Visit Mitsubishi San Juan Motors in SJDM. Check your budget, book a test drive, or call me first.","xpander")),
 
 dict(base="blog",car="destinator",slug="mitsubishi-promo-metro-manila-buyers",date="2026-10-22",by=BY,img="de_x3n",alt="Mitsubishi Destinator for Metro Manila buyers checking promos",
 title="Mitsubishi Promo for Metro Manila Buyers: Buying in SJDM",
@@ -1773,7 +1773,7 @@ faq=[("Can Metro Manila residents buy from a dealer in Bulacan?","Yes. You can b
 ("Where can I do PMS if I buy in SJDM but live in Manila?","Ask your sales executive about service options near you; authorized service centers follow the same warranty schedule."),
 ("What is the Mitsubishi promo this month?","October 2026 promos include Zero DP options such as the Xpander GLX AT at ₱23,877 a month and the Destinator GLX at ₱28,615 a month, 60 months, all-in."),
 ("Can I do the process online?","Much of it. Check your budget online, send documents for pre-check, and come in for the test drive and release.")],
-body='''<p>Shopping for a Mitsubishi promo in Metro Manila? Many of my clients from Caloocan, Quezon City and Fairview come to San Jose del Monte, just up Quirino Highway. Here's how buying from SJ Legacy Motors works if you live in Metro Manila.</p>
+body='''<p>Shopping for a Mitsubishi promo in Metro Manila? Many of my clients from Caloocan, Quezon City and Fairview come to San Jose del Monte, just up Quirino Highway. Here's how buying from San Juan Motors works if you live in Metro Manila.</p>
 
 <h2>October 2026 promo highlights</h2>
 '''+T(["Unit","Zero DP","Low DP"],[("Xpander GLX MT","₱22,641","₱148K DP: ₱19,811"),("Xpander GLX AT","₱23,877","₱138K DP: ₱20,892"),("Xpander Cross","₱28,389","₱148K DP: ₱24,840"),("Destinator GLX","₱28,615","₱93K DP: ₱26,827"),("Montero Sport GLX MT","₱30,284","₱30K DP: ₱28,265")])+PN+'''
@@ -1796,7 +1796,7 @@ body='''<p>Shopping for a Mitsubishi promo in Metro Manila? Many of my clients f
 </ul>
 
 <h2>Driving up from Manila</h2>
-<p>Quirino Highway runs from Fairview to SJDM. Check traffic before you leave; my <a href="/tips/sjdm-to-manila-commute-tips/">SJDM to Manila tips</a> help in reverse too. Showroom: Lot 9 Ebenezer Christian Academy, Sitio Gitna, Sto. Cristo, Quirino Highway, San Jose del Monte.</p>
+<p>Quirino Highway runs from Fairview to SJDM. Check traffic before you leave; my <a href="/tips/sjdm-to-manila-commute-tips/">SJDM to Manila tips</a> help in reverse too.Message me for the showroom location and directions.</p>
 '''+CTA2("From Metro Manila? Check your budget, then book one trip to SJDM for your test drive.","destinator")),
 
 dict(base="blog",car="xpander",slug="xpander-monthly-amortization",date="2026-10-22",by=BY,img="xpglx_x37",alt="Mitsubishi Xpander GLX AT, with monthly amortization options",
@@ -1967,7 +1967,7 @@ faq=[("How do I book a Mitsubishi test drive in SJDM?","Use the online test driv
 ("What do I need to bring?","A valid driver's license. Bring your family if they'll ride often in the car."),
 ("Can I test drive the Destinator?","Yes. Choose the Destinator variant on the booking page, subject to unit availability."),
 ("Can I test drive two models on the same day?","Ask when booking so both units can be prepared.")],
-body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to bring, and what to check, so you get the most out of your drive at SJ Legacy Motors on Quirino Highway.</p>
+body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to bring, and what to check, so you get the most out of your drive at San Juan Motors.</p>
 
 <h2>How to book</h2>
 <ol class="steps"><li><h3>Pick a unit</h3><p>On the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Choose a date and time</h3><p>Then send your details.</p></li><li><h3>I'll confirm</h3><p>By message or call. You can also call or text '''+TELL+'''.</p></li></ol>
@@ -1980,12 +1980,12 @@ body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to
 
 <h2>Compare back-to-back</h2>
 <p>Driving two models on the same day makes the choice easier: Xpander vs Destinator, Montero Sport vs Destinator, or L300 vs Triton. Read <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> before you come.</p>
-'''+CTA2("Book your test drive at Mitsubishi SJ Legacy Motors, SJDM, after checking your budget.","destinator")),
+'''+CTA2("Book your test drive at Mitsubishi San Juan Motors, SJDM, after checking your budget.","destinator")),
 ]
-MAPL='<p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Mitsubishi+SJ+Legacy+Motors+Quirino+Highway+San+Jose+del+Monte+Bulacan" target="_blank" rel="noopener">Get directions in Google Maps</a></p>'
+MAPL='<p><a href="https://m.me/504759566043148" rel="noopener">Message Richard for the showroom location and directions</a></p>'
 def LOCAL(area,slug,img,alt,title,intro,route,near,car):
     return dict(base="blog",car=car,slug=slug,date="2026-10-22",by=BY,img=img,alt=alt,title=title,desc="",answer="",
-faq=[(f"Is there a Mitsubishi dealer near {area}?",f"Mitsubishi SJ Legacy Motors is on Quirino Highway in San Jose del Monte, Bulacan, reachable from {area} by car. There are other Mitsubishi dealers in the region too; choose the one that serves you best."),
+faq=[(f"Is there a Mitsubishi dealer near {area}?",f"Mitsubishi San Juan Motors is in San Jose del Monte, Bulacan, reachable from {area} by car. There are other Mitsubishi dealers in the region too; choose the one that serves you best."),
 ("Can I do part of the process online?","Yes. Check your budget with the calculator, send documents for pre-check, and book your test drive online before you travel."),
 ("Where will I do PMS if I buy in SJDM?","Ask about service options near your home. Authorized service centers follow the same warranty schedule."),
 ("How do I contact the sales executive?","Call or text Richard Cuagdan on 0954 291 1201.")],
@@ -2016,16 +2016,16 @@ body=f'''<p>{intro}</p>
 '''+CTA2(f"From {area}? Check your budget, book a test drive, or call me before you drive up to SJDM.",car))
 BULK6=[
 LOCAL("Caloocan and Novaliches","mitsubishi-near-caloocan-novaliches","xpglx_x37","Mitsubishi Xpander for families in Caloocan and Novaliches","Mitsubishi Near Caloocan and Novaliches: SJDM Showroom",
-"Looking for a Mitsubishi near Caloocan or Novaliches? Mitsubishi SJ Legacy Motors in San Jose del Monte, Bulacan, is a short drive north along Quirino Highway for many North Caloocan and Novaliches residents. Here's how to get there and how to make the trip worth it.",
-"From Novaliches, Quirino Highway runs north into San Jose del Monte. From North Caloocan, head to Quirino Highway and continue north to Sto. Cristo.",
+"Looking for a Mitsubishi near Caloocan or Novaliches? Mitsubishi San Juan Motors in San Jose del Monte, Bulacan, is a short drive for many North Caloocan and Novaliches residents. Here's how to get there and how to make the trip worth it.",
+"From Novaliches, Quirino Highway runs north into San Jose del Monte. Message or call Richard for exact directions to the showroom.",
 "Driving daily into Metro Manila from the north? Read my <a href=\"/tips/sjdm-to-manila-commute-tips/\">SJDM to Manila commute tips</a>.","xpander"),
 LOCAL("Fairview and Quezon City","mitsubishi-near-fairview-quezon-city","de_x3n","Mitsubishi Destinator for Fairview and Quezon City families","Mitsubishi Near Fairview, Quezon City: SJDM Showroom",
-"Looking for a Mitsubishi near Fairview or elsewhere in Quezon City? Quirino Highway runs from Fairview to San Jose del Monte, where Mitsubishi SJ Legacy Motors is located. Here's the route and how to plan a visit.",
-"From Fairview, take Quirino Highway north toward San Jose del Monte and continue to Sto. Cristo. From other parts of Quezon City, navigation apps usually route you to Quirino Highway.",
+"Looking for a Mitsubishi near Fairview or elsewhere in Quezon City? Quirino Highway runs from Fairview to San Jose del Monte, where Mitsubishi San Juan Motors serves buyers. Here's the route and how to plan a visit.",
+"From Fairview, take Quirino Highway north toward San Jose del Monte; message or call Richard for exact directions to the showroom. From other parts of Quezon City, navigation apps usually route you to Quirino Highway.",
 "Comparing family SUVs? See <a href=\"/blog/montero-sport-vs-destinator/\">Montero Sport vs Destinator</a> and <a href=\"/blog/destinator-price-philippines/\">Destinator price Philippines</a>.","destinator"),
 LOCAL("Bulacan towns","mitsubishi-near-bulacan-towns","tr_gx_u28","Mitsubishi Triton for Bulacan business owners","Mitsubishi Near Marilao, Meycauayan, Sta. Maria and Malolos",
-"Looking for a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos? Mitsubishi SJ Legacy Motors is on Quirino Highway in San Jose del Monte, Bulacan. Here's how to plan a visit from other Bulacan towns, and the units Bulacan negosyo owners and families ask about most.",
-"Routes depend on your town and barangay, so use the directions link below. Set your destination to Mitsubishi SJ Legacy Motors, Quirino Highway, Sto. Cristo, San Jose del Monte.",
+"Looking for a Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos? Mitsubishi San Juan Motors is in San Jose del Monte, Bulacan. Here's how to plan a visit from other Bulacan towns, and the units Bulacan negosyo owners and families ask about most.",
+"Routes depend on your town and barangay, so message or call Richard for the showroom location and directions.",
 "Running a negosyo in Bulacan? See <a href=\"/blog/l300-vs-triton-for-negosyo/\">L300 vs Triton</a> and the <a href=\"/blog/l300-price-philippines-2026/\">L300 price 2026</a>.","triton"),
 ]
 BULK6+=[

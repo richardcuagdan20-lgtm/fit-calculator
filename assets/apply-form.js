@@ -130,7 +130,7 @@ function validate(st){var bad=[],has=function(i){return inS($(i),st)};
 function ymv(i){return (+val(i+'_y')||0)*12+(+val(i+'_m')||0)}
 function collect(ref){var u=unit(),n=term();
   var a={ref_no:ref,status:'SUBMITTED',schema:'rulebook-1.0/official-form-static',language:lang,
-   privacy_consent:{accepted:true,timestamp:new Date().toISOString(),version:'dpa-consent-draft-2026-10-22',controller:'SJ Legacy Motors',dpo:'richard.cuagdan20@gmail.com'},
+   privacy_consent:{accepted:true,timestamp:new Date().toISOString(),version:'dpa-consent-draft-2026-10-22',controller:'San Juan Motors',dpo:'richard.cuagdan20@gmail.com'},
    applicant:{full_name:{first:val('first'),middle:val('middle'),last:val('last'),suffix:val('suffix')},dob:val('dob'),gender:val('gender'),civil_status:val('civil'),nationality:val('nationality'),dependents:+val('dependents')||0,tin:val('tin'),
      mobile:val('mobile').replace(/[\s()-]/g,''),email:val('email'),address:{line1:val('addr1'),barangay:val('brgy'),city:val('city'),province:val('prov'),zip:val('zip')},length_of_stay_months:ymv('stay'),residential_status:val('res'),monthly_rent:val('res')==='rented'?+val('rent')||null:null,car_ownership:val('car'),main_bank:val('mainbank')},
    income:{employment_type:val('emp'),employment_status:val('emp')==='employed'?val('estat'):'',employer_name:val('employer'),position:val('position'),nature_of_business:val('nature'),tenure_months:val('emp')==='pensioner'?null:ymv('ten'),business_address:val('oaddr'),business_tel:val('otel'),business_email:val('oemail'),
