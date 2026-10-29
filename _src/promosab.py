@@ -134,6 +134,8 @@ def inject_cars(R):
 <div class="ab-mg">{t}</div></div></div></section>{form}</div>
 <script type="text/plain" id="ab-a">{blob}</script>'''
         h=re.sub(r'(<section class="ph">.*?</section>)',lambda m:m.group(1)+mod,h,count=1,flags=re.S)
+        # hero CTA -> loan pre-qualification (Richard 2026-10-30); promos live in the on-page module
+        h=re.sub(r'<a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a>',lambda m:f'<a class="btn abw" href="/loan-assessment/" data-herocta="{m.group(1)}"><span class="en">See if you&rsquo;re Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a>',h,count=1)
         h=h.replace(f'href="/promos/#{slug}"','href="#promos-model"')
         h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Promo down payment and monthly options are in the <a href="#promos-model">promos section above</a>.')
         h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script></body>',1)
