@@ -609,3 +609,32 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if '/_src/' in _f: continue
     _s=open(_f).read()
     if 'class="dd"' in _s and _DDJS not in _s: open(_f,'w').write(_s.replace('</body>',_DDJS+'</body>',1))
+
+# --- FLOATING MESSENGER (2026-10-29): remove all in-content/header Messenger CTAs; keep footer .fbl link;
+# add ONE floating Messenger button per page (tracked by track.js -> ref=web_floating_<page> + Pixel Contact). ---
+_FM_SVG='<svg viewBox="0 0 36 36" aria-hidden="true" focusable="false"><path fill="#fff" d="M18 2.5C9.3 2.5 2.5 8.9 2.5 17.1c0 4.3 1.8 8 4.6 10.6.2.2.4.6.4.9l.1 2.6c0 .8.9 1.4 1.7 1l2.9-1.3c.2-.1.5-.1.8-.1 1.6.4 3.2.7 5 .7 8.7 0 15.5-6.4 15.5-14.6S26.7 2.5 18 2.5zm9.3 11.6-4.6 7.2c-.7 1.2-2.3 1.4-3.3.7l-3.6-2.7a.9.9 0 0 0-1.1 0l-4.9 3.7c-.7.5-1.5-.3-1.1-1l4.6-7.2c.7-1.2 2.3-1.4 3.3-.7l3.6 2.7c.3.3.8.3 1.1 0l4.9-3.7c.7-.5 1.5.3 1.1 1z"/></svg>'
+_FM_TAG0='<a class="fmsg" id="fmsg" href="'+MSG+'" target="_blank" rel="noopener" data-msgr="floating" aria-label="Chat with Richard on Messenger" title="Chat with Richard on Messenger">'+_FM_SVG+'</a>'
+_FM_JS='<script>(function(){var f=document.getElementById("fmsg");if(!f)return;var q="button[type=submit],input[type=submit],form button.btn,.af-big,.la-fina,.st-err,#st-r .btn";function c(){var r=f.getBoundingClientRect(),h=0;document.querySelectorAll(q).forEach(function(e){if(h||!e.offsetParent)return;var b=e.getBoundingClientRect();if(!(b.right<r.left-8||b.left>r.right+8||b.bottom<r.top-8||b.top>r.bottom+8))h=1});f.classList.toggle("fmsg-off",!!h)}var t;function s(){if(!t)t=requestAnimationFrame(function(){t=0;c()})}addEventListener("scroll",s,{passive:true});addEventListener("resize",s);document.addEventListener("click",function(){setTimeout(c,50)});setTimeout(c,0);addEventListener("load",c);try{new ResizeObserver(s).observe(document.body)}catch(_){}setInterval(c,1000)})()</script>'
+_FM_TAG=_FM_TAG0+_FM_JS
+_FM_CSS='<link rel="stylesheet" href="/assets/fmsg.css?v='+_vh('/assets/fmsg.css')+'">'
+_FM_A=_re.compile(r'(\s*·\s*)?(\s?)<a ([^>]*href="https://m\.me/[^"]*"[^>]*)>(.*?)</a>',_re.S)
+def _fm_strip(s,status):
+    def f(m):
+        attrs,txt=m.group(3),m.group(4)
+        if 'class="fbl"' in attrs or 'class="fmsg"' in attrs: return m.group(0)
+        plain=_re.sub(r'<[^>]+>','',txt).strip()
+        if _re.search(r'class="[^"]*\bbtn\b',attrs) or plain.lower() in ('message richard on messenger','i-message si richard sa messenger'):
+            return ''  # button / standalone CTA -> removed (floating button replaces it)
+        if status: return m.group(0)  # /status/: plain text follow-up links stay
+        return (m.group(1) or '')+m.group(2)+txt  # inline sentence link -> plain text
+    s=_FM_A.sub(f,s)
+    s=_re.sub(r'<p class="row">\s*</p>|<p>\s*</p>','',s)
+    return s
+for _f in _gl.glob(R+'/**/*.html',recursive=True):
+    if '/_src/' in _f: continue
+    _s=open(_f).read()
+    if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
+    _n=_re.sub(r'<a class="fmsg".*?</a>(<script>\(function\(\)\{var f=document\.getElementById\("fmsg"\).*?</script>)?','',_s,flags=_re.S); _n=_re.sub(r'<link rel="stylesheet" href="/assets/fmsg\.css[^"]*">','',_n)
+    _n=_fm_strip(_n,'/status/' in _f.replace(R,''))
+    _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
+    if _n!=_s: open(_f,'w').write(_n)

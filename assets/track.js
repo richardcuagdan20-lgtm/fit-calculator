@@ -15,7 +15,7 @@ function rpTrack(ev,p,custom){var d={};for(var k in U)d[k]=U[k];for(k in (p||{})
  try{if(typeof window.fbq==='function')window.fbq(custom?'trackCustom':'track',ev,d)}catch(_){}
  try{if(typeof window.gtag==='function')window.gtag('event',ev,d)}catch(_){}}
 function base(h){var m=/^https:\/\/m\.me\/[^?#]+/.exec(h||'');return m?m[0]:PAGE}
-function src(a){var s=a.getAttribute('data-msgr');if(s==='header')return pg()+'-header';if(s)return s;var p=pg();if(a.closest&&a.closest('footer'))return p+'-footer';if(a.closest&&a.closest('header'))return p+'-header';return p}
+function src(a){var s=a.getAttribute('data-msgr');if(s==='header')return pg()+'-header';if(s==='floating')return 'floating_'+pg();if(s)return s;var p=pg();if(a.closest&&a.closest('footer'))return p+'-footer';if(a.closest&&a.closest('header'))return p+'-header';return p}
 function msgUrl(source,h){return base(h)+'?ref='+encodeURIComponent(ref(source))}
 window.rpTrack=rpTrack;
 window.rpMsgr=function(source,h){source=clean(source||pg());rpTrack('Contact',{source:source,method:'messenger',content_name:'messenger'});return msgUrl(source,h)};
