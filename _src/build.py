@@ -270,6 +270,7 @@ def _promo_cards(m):
 PROMO_SECS="".join(f'<section class="pm" id="{m["slug"]}"><h2>{e(m["name"])}</h2><div class="grid g3">{_promo_cards(m)}</div></section>' for m in MODELS if _promo_cards(m))
 import promosab as _pab
 _PAB_UNITS=_pab.build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG)
+_pab.inject_cars(R)  # DRAFT: promos module on car pages
 # /lowest-down-payment/ retired 2026-10-29: folded into /promos/ (Option A unlock); stub keeps old links/ads alive
 import os as _os
 _os.makedirs(R+"/lowest-down-payment",exist_ok=True)
