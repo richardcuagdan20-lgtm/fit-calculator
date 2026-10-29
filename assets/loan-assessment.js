@@ -91,12 +91,12 @@ function scroll(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',b
 function setLang(l){A.lang=l;document.documentElement.setAttribute('data-lang',l);try{localStorage.setItem('site_lang',l)}catch(_){}}
 function initLang(){var l='en';try{var s=localStorage.getItem('site_lang');if(s==='en'||s==='tl')l=s}catch(_){}try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='tl'){l=q;localStorage.setItem('site_lang',q)}}catch(_){}return l}
 setLang(initLang());
-document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
-document.querySelectorAll('[data-start]').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.dataset.start);
-  $('la-intro').hidden=true;$('la-chat').hidden=false;prog(1);
+function startLA(){prog(1);
   if(!started){started=true;px('StartAssessment',{});ga('start_assessment',{});rt('AssessmentStart',{})}
-  if(!log.children.length){bot(T('Hi! Ako si Richard. Unahin natin ang unit, tapos ilang maikling tanong tungkol sa income at trabaho mo. Mga 2 minuto lang ito.','Hi! I\'m Richard. We\'ll start with your unit, then a few short questions about your income and work. This takes about 2 minutes.'));next(0)}
-})});
+  if(!log.children.length){bot(T('Hi! Ako si Richard. Unahin natin ang unit, tapos ilang maikling tanong tungkol sa income at trabaho mo. Mga 2 minuto lang ito.','Hi! I\'m Richard. We\'ll start with your unit, then a few short questions about your income and work. This takes about 2 minutes.'));next(0)}}
+document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){var l=b.dataset.setlang;if(l===A.lang)return;setLang(l);
+  if(!log.querySelector('.la-b.me')){log.innerHTML='';startLA()}})});
+setTimeout(startLA,0);
 function rt(ev,p){try{if(window.rpTrack)window.rpTrack(ev,p||{},ev!=='Lead'&&ev!=='ViewContent')}catch(_){}}
 $('la-f1').addEventListener('submit',function(ev){ev.preventDefault();
   var nm=$('la-name').value.trim(),mob=$('la-mobile').value.replace(/[\s()-]/g,''),fb=($('la-fb')?$('la-fb').value.trim():''),em=$('la-email').value.trim();

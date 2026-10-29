@@ -79,11 +79,6 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 </div></section>
 <div class="la-stepbar"><div class="w"><ol class="la-steps" aria-label="Progress"><li class=\"on\" aria-current=\"step\"><span class="n">1</span><span class="t">{B("Unit at tanong","Unit &amp; questions")}</span></li><li><span class="n">2</span><span class="t">{B("I-save","Save")}</span></li><li><span class="n">3</span><span class="t">{B("Resulta","Result")}</span></li><li><span class="n">4</span><span class="t">Docs</span></li></ol></div></div>
 <section class="la"><div class="w" style="padding-top:18px">
-<div id="la-intro" class="la-card"><h2 class="h3">{B("Paano ito gumagana?","How does it work?")}</h2>
-<div class="la-x"><div><b>{B("Sagutin","Answer")}</b><br>{B("Income, trabaho at existing loans.","Income, work and existing loans.")}</div><div><b>{B("Pumili","Choose")}</b><br>{B("Unit, DP at monthly mula sa promo ngayong buwan.","Unit, DP and monthly from this month's promo.")}</div><div><b>{B("Alamin","Find out")}</b><br>{B("Pre-qualified, Needs Review, o mga options para pumasa.","Pre-qualified, Needs Review, or options to qualify.")}</div></div>
-<p class="muted small" style="margin-top:14px">{B("Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito. Sa dulo mo na ilalagay ang contact details mo.","This is a pre-screening only, not a bank approval. No IDs or documents are needed here. You enter your contact details at the end.")}</p>
-<p class="fl"><b>Choose your language / Piliin ang wika:</b></p>
-<div class="la-start"><button class="btn" type="button" id="la-start" data-start="en">Start in English</button><button class="btn ghost dk" type="button" data-start="tl">Simulan sa Tagalog / Taglish</button></div></div>
 <div id="la-s1" class="la-card" hidden><p class="kick" style="color:#b8000e">{B("Handa na ang resulta mo","Your results are ready")}</p><h2 class="h3">{B("I-save ang resulta mo","Save My Results")}</h2>
 <p class="small">{B("Ilagay ang pangalan mo at mobile number o Messenger link para makita ang Likelihood Score at buong resulta, at para mai-save namin ito para sa follow-up ni Richard.","Enter your name and a mobile number or Messenger link to see your Likelihood Score and full results, and so we can keep them for Richard's follow-up.")}</p>
 <form id="la-f1" novalidate>
@@ -94,7 +89,7 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 <p class="fl"><b>Data Privacy Consent</b></p><div class="la-cons" tabindex="0">{LA_CONSENT}</div>
 <label class="chk"><input type="checkbox" id="la-consent"> <span>{B("Sumasang-ayon ako / I agree","I agree / Sumasang-ayon ako")}</span></label><p class="er" id="e_la-consent" hidden>{B("Kailangan ang consent bago namin i-save ang resulta.","Consent is required before we save your results.")}</p>
 <button class="btn" type="submit">{B("I-save at tingnan ang resulta","Save and see my results")}</button></form></div>
-<div id="la-chat" hidden><div id="la-log" class="la-log" aria-live="polite"></div></div>
+<div id="la-chat"><div id="la-log" class="la-log" aria-live="polite"></div></div>
 <div id="la-res" hidden></div>
 <p id="la-note" hidden>{e(NOTE)}</p>
 </div></section>
