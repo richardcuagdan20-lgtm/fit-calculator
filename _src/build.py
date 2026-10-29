@@ -48,7 +48,16 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
     def item(p,n):
         act=cur(p) or (p=="/promos-tips/" and any(cur(q) for q,_ in GROUP))
         return f'<a href="{p}"{" aria-current=\"page\"" if act else ""}>{e(n)}</a>'
-    nav="".join(item(p,n) for p,n in NAV)
+    def dd(lbl,items,key):
+        on=any(cur(p) for p,_ in items)
+        return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
+                +"".join(item(p,n) for p,n in items)+'</div></details>')
+    nav=(item("/","Home")
+        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive")],"cars")
+        +dd("What's new",[("/promos/","Promos"),("/tips/","Tips")],"new")
+        +dd("News and Blogs",[("/blog/","Blog"),("/guides/","Buying guides"),("/promos-tips/","All promos, tips and articles")],"news")
+        +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/apply/#calc","Compute my monthly")],"apply")
+        +item("/about/","About")+item("/contact/","Contact"))
     bc=""
     if crumbs:
         bc='<nav class="bc" aria-label="Breadcrumb"><div class="w">'+" <span>/</span> ".join(f'<a href="{p}">{e(n)}</a>' for p,n in crumbs[:-1])+f' <span>/</span> <span aria-current="page">{e(crumbs[-1][1])}</span></div></nav>'
@@ -89,8 +98,8 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <a class="skip" href="#main">Skip to content</a>
 <header class="hd"><div class="w hdi">
 <a class="brand" href="/"><svg viewBox="0 -15.465 224.9 224.9" width="26" height="26" aria-hidden="true"><path fill="#e60012" d="m112.45 0 38.42 65.13-38.42 65.12L74.03 65.6Zm0 130.25h74.96l37.49 63.72h-74.97zm0 0H37.48L0 193.97h74.97z"/></svg><span class="bt"><b>Mitsubishi Motors</b><small>By Richard Dennis Cuagdan</small></span></a>
-<button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
-<nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="/budgetcalculator/">Compute my monthly</a></nav>
+<a class="pbtn" href="/promos/">Promos</a><button class="mt" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
+<nav id="nav" class="nav" aria-label="Main">{nav}<a class="btn sm" href="{MSG}" rel="noopener" data-msgr="header">Message Richard<span class="xl"> on Messenger</span></a></nav>
 
 </div></header>
 {bc}
@@ -604,3 +613,9 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     _n=_n.replace('</body>',_SCTAG+'</body>',1)
     if _n!=_s: open(_f,'w').write(_n)
 print(len(PAGES),"pages")
+# --- header dropdowns: close others when one opens; close on outside click (desktop)
+_DDJS='<script>document.addEventListener("click",function(e){document.querySelectorAll("details.dd[open]").forEach(function(d){if(!d.contains(e.target))d.removeAttribute("open")})});document.querySelectorAll("details.dd").forEach(function(d){d.addEventListener("toggle",function(){if(d.open)document.querySelectorAll("details.dd[open]").forEach(function(o){if(o!==d)o.removeAttribute("open")})})})</script>'
+for _f in _gl.glob(R+'/**/*.html',recursive=True):
+    if '/_src/' in _f: continue
+    _s=open(_f).read()
+    if 'class="dd"' in _s and _DDJS not in _s: open(_f,'w').write(_s.replace('</body>',_DDJS+'</body>',1))
