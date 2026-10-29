@@ -637,5 +637,9 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
     _n=_re.sub(r'<a class="fmsg".*?</a>(<script>\(function\(\)\{var f=document\.getElementById\("fmsg"\).*?</script>)?','',_s,flags=_re.S); _n=_re.sub(r'<link rel="stylesheet" href="/assets/fmsg\.css[^"]*">','',_n)
     _n=_fm_strip(_n,'/status/' in _f.replace(R,''))
-    _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
+    if _f.replace(R,'').startswith('/loan-assessment/'):  # Richard 2026-10-29: no Messenger/Facebook link anywhere on the assessment
+        _n=_re.sub(r'<p class="fsoc">.*?</p>','',_n,count=1,flags=_re.S)
+        _n=_re.sub(r',?\s*"sameAs": \[[^\]]*\]','',_n)  # no FB/m.me URLs in this page's JSON-LD either
+    else:
+        _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
     if _n!=_s: open(_f,'w').write(_n)
