@@ -14,13 +14,25 @@ RANGE={"mirage-g4":(0,18000),"xpander":(18000,33000),"xforce":(18000,48000),"des
 FUEL={"Xpander GLX 1.5G 2WD M/T":30000,"L300 FB BODY WITHDUAL AC 2.2D M/T":20000}
 NICE={"L300 CAB & CHASIS 2.2D M/T":"L300 Cab & Chassis 2.2D M/T","L300 FB BODY WITH SINGLE AC 2.2D M/T":"L300 FB Body Single AC 2.2D M/T",
  "L300 FB BODY WITHDUAL AC 2.2D M/T":"L300 FB Body Dual AC 2.2D M/T","OUTLANDER PHEV GT 2.4G AWD":"Outlander PHEV GT 2.4G AWD"}
+# card photos (2026-10-29): same image each /cars/ page uses per variant; Mirage hatchback has none -> no photo
+IMG={"Mirage G4 GLX 1.2G M/T":"mg4glx_u17","Mirage G4 GLX 1.2G CVT":"mg4glx_a66","Mirage G4 GLS 1.2G CVT":"mg4gls_u17",
+ "Xpander GLX 1.5G 2WD M/T":"xpglx_u33","Xpander GLX 1.5G 2WD A/T":"xpglx_x37","Xpander GLS 1.5G 2WD A/T":"xpgls_c31",
+ "Xpander Cross 1.5G 2WD A/T (Two-Tone)":"xc_x3n","XFORCE GLX 1.5G 2WD CVT":"xf_glx","XFORCE GLS 1.5G 2WD CVT (Monotone)":"xf_gls",
+ "XFORCE GLS 1.5G 2WD CVT (Two-Tone)":"xf_gls","XFORCE GT 1.5G 2WD CVT":"xf_gt","Destinator GLX 1.5G Turbo 2WD CVT":"de_p26",
+ "Destinator GLS 1.5G Turbo 2WD CVT":"de_d34","Destinator GT 1.5G Turbo 2WD CVT (Monotone)":"de_jh3","Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)":"de_x3n",
+ "Triton GL 2.4D 2WD M/T":"tr_gl","Triton GX 2.4D 2WD A/T":"tr_gx_u28","Triton GLX 2.4D 2WD M/T":"tr_glx","Triton GLX 2.4D 2WD A/T":"tr_glx",
+ "Triton GLS 2.4D 2WD A/T":"tr_gls","Triton GL 2.4D 4WD M/T":"tr_gl","Triton GLX 2.4D 4WD M/T":"tr_glx","Triton Athlete 2.4D 4WD A/T":"tr_lineup",
+ "Montero Sport GLX 2.4D 2WD M/T":"ms_silver","Montero Sport GLS 2.4D 2WD A/T":"ms_white","Montero Sport Black Series 2.4D 2WD A/T":"msbs_jh3",
+ "Montero Sport Black Series 2.4D 4WD A/T":"msbs_x8w","L300 CAB & CHASIS 2.2D M/T":"l300_fb","L300 FB BODY WITH SINGLE AC 2.2D M/T":"l300_fb",
+ "L300 FB BODY WITHDUAL AC 2.2D M/T":"l300_fb","Versa Van GLX 2.5D 2WD M/T":"vv_glx","Versa Van GLX 2.5D 2WD M/T (UPGRADED) 18 SEATER":"vv_glx",
+ "OUTLANDER PHEV GT 2.4G AWD":"op_gt"}
 def rows():
     p=SRC if os.path.exists(SRC) else CACHE
     d=json.load(open(p))
     if p==SRC: json.dump(d,open(CACHE,"w"),ensure_ascii=False,indent=1)
     return [r for r in d if not any(k in r["unit"] for k in ("Quartz White","White Diamond","(White)"))]  # base colors, like the saved replies
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
-    rs=rows(); A=[]; secs=""; nav=[]
+    rs=rows(); A=[]; EAG=[0]; secs=""; nav=[]
     for fam,slug,name in FAM:
         vs=[r for r in rs if r["family"]==fam]
         if not vs: continue
@@ -31,7 +43,13 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
             fu=f'<p class="fuel"><span class="en">Plus <b>{FUEL[r["unit"]]:,} fuel points</b></span><span class="tl">May <b>{FUEL[r["unit"]]:,} fuel points</b></span></p>' if r["unit"] in FUEL else ""
-            cards+=f'''<article class="card pad pcard ab"><h3>{e(n)}</h3><p class="srp">SRP <b>{f(r["srp"])}</b></p>
+            im=IMG.get(r["unit"]); ph=""
+            if im:
+                EAG[0]+=1
+                w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
+                iv=hashlib.md5(open(f"{R}/assets/img/{im}.webp","rb").read()).hexdigest()[:8]
+                ph=f'<div class="ab-ph"><img src="/assets/img/{im}.webp?v={iv}" width="{w}" height="{h}" alt="Mitsubishi {e(n)}" {'fetchpriority="high"' if EAG[0]<=3 else 'loading="lazy"'} decoding="async"></div>'
+            cards+=f'''<article class="card pad pcard ab">{ph}<h3>{e(n)}</h3><p class="srp">SRP <b>{f(r["srp"])}</b></p>
 <div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <span class="en">· Lowest DP</span><span class="tl">· Pinakamababang DP</span></p><div class="ab-v"><span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b><small>/mo</small></span></div><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></div>
 <div class="ab-o ab-b"><p class="ab-k">Option B <span class="en">· Low monthly</span><span class="tl">· Mababang monthly</span></p><div class="ab-v"><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b><small>/mo</small></span></div></div>
 {fu}<p class="muted ab-s"><span class="en">60 months, all-in. Pre-qualified, subject to bank approval.</span><span class="tl">60 months, all-in. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm" href="/budgetcalculator/">Compare with my own DP</a> <a class="btn sm ghost dk" href="/loan-assessment/">Check my chances</a></p></article>'''
@@ -41,6 +59,7 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
     jv=hashlib.md5(open(R+"/assets/promos.js","rb").read()).hexdigest()[:8]
     css='''<style>html[data-lang=tl] .abw .en,html:not([data-lang=tl]) .abw .tl{display:none!important}
 .ab-lang{display:flex;gap:8px;margin:0 0 14px}.ab-lang button{background:none;border:1px solid #52525b;color:inherit;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-size:14px;cursor:pointer}html[data-lang=tl] .ab-lang [data-setlang=tl],html:not([data-lang=tl]) .ab-lang [data-setlang=en]{background:#0b0b0c;color:#fff}
+.ab-ph{margin:-4px -4px 12px;aspect-ratio:3/2;background:#fff;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}.ab-ph img{width:100%;height:100%;object-fit:contain;display:block}
 .ab-rng{margin:-4px 0 14px;font-size:15px;color:#3f3f46}.ab-rng b{color:var(--redd);white-space:nowrap}
 .ab-o{border:1px solid var(--ln);border-radius:12px;padding:12px 14px;margin:0 0 10px;position:relative}.ab-a{background:linear-gradient(135deg,#0b0b0c,#27272a);color:#fff;border:0}
 .ab-k{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--redd)}.ab-a .ab-k{color:#fca5a5}
