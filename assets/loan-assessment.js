@@ -40,7 +40,7 @@ var MESSENGER_URL='https://m.me/MitsubishiRDC';
 var CALL_TEL='tel:09542911201';
 /* Crisp live chat (Fina + Richard). Loaded only after Data Privacy consent. Page-only embed. */
 var CRISP_WEBSITE_ID='ca443e7b-7d1e-4819-87d3-59b97b4fa8c8';
-function crispLoad(){if(window.__crispLoaded||(window.Lead&&Lead.CHAT))return;   /* own site chat replaces Crisp when Lead.CHAT */
+function crispLoad(){if(window.__crispLoaded||(window.Lead&&(Lead.CHAT||Lead.LIVECHAT===false)))return;  /* LIVECHAT:false = Crisp shelved too */   /* own site chat replaces Crisp when Lead.CHAT */
 window.__crispLoaded=true;window.$crisp=window.$crisp||[];window.CRISP_WEBSITE_ID=CRISP_WEBSITE_ID;
   var d=document.createElement('script');d.src='https://client.crisp.chat/l.js';d.async=1;document.head.appendChild(d)}
 function cp(){try{window.$crisp=window.$crisp||[];window.$crisp.push([].slice.call(arguments))}catch(_){}}
@@ -73,7 +73,7 @@ crispLoad();crispSync();cp('do','chat:open');var g=finaGreet();if(A.finaShown!==
   ga('chat_open',{provider:'crisp'})}
 function finaBtn(){return '<button type="button" class="btn la-fina" data-fina="1">💬 '+((window.Lead&&Lead.LIVECHAT===false)?T('I-message si Richard sa Messenger','Message Richard on Messenger'):(window.Lead&&Lead.CHAT)?T('Mag-chat kay Richard','Chat with Richard'):T('Magtanong pa sa aming live chat','Ask more questions to our live chat'))+'</button>'}
 function T(t,e){return A.lang==='en'?e:t}
-var A={lang:'en'},log=$('la-log'),started=false,stepN=1;
+var A={lang:'en',_color:'undecided',preferred_bank:'no_preference',source_of_sale:'website'},log=$('la-log'),started=false,stepN=1;
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 /* Meta Pixel: NO credit/income/assessment-result fields in payloads (Meta restricted-data policy). Only unit name / contact method / Phase-2 ref. */
@@ -93,19 +93,24 @@ function initLang(){var l='en';try{var s=localStorage.getItem('site_lang');if(s=
 setLang(initLang());
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 document.querySelectorAll('[data-start]').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.dataset.start);
-  $('la-intro').hidden=true;$('la-s1').hidden=false;prog(1);
-  if(!started){started=true;px('StartAssessment',{});ga('start_assessment',{})}
-  $('la-name').focus();
+  $('la-intro').hidden=true;$('la-chat').hidden=false;prog(1);
+  if(!started){started=true;px('StartAssessment',{});ga('start_assessment',{});rt('AssessmentStart',{})}
+  if(!log.children.length){bot(T('Hi! Ako si Richard. Unahin natin ang unit, tapos ilang maikling tanong tungkol sa income at trabaho mo. Mga 2 minuto lang ito.','Hi! I\'m Richard. We\'ll start with your unit, then a few short questions about your income and work. This takes about 2 minutes.'));next(0)}
 })});
+function rt(ev,p){try{if(window.rpTrack)window.rpTrack(ev,p||{},ev!=='Lead'&&ev!=='ViewContent')}catch(_){}}
 $('la-f1').addEventListener('submit',function(ev){ev.preventDefault();
-  var nm=$('la-name').value.trim(),mob=$('la-mobile').value.replace(/[\s()-]/g,''),em=$('la-email').value.trim();
-  var bad=[Lead.err('la-name',nm.length<2),Lead.err('la-mobile',!/^(09\d{9}|\+639\d{9})$/.test(mob)),Lead.err('la-email',!!em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)),Lead.err('la-consent',!$('la-consent').checked)];
-  if(bad.some(Boolean))return;
-  A.name=nm;A.mobile=mob;A.email=em;A.privacy_consent={accepted:true,timestamp:new Date().toISOString(),version:CFG.consent_version};
-  $('la-s1').hidden=true;$('la-chat').hidden=false;prog(2);crispLoad();crispSync();
-  bot(T('Salamat, <b>'+esc(nm.split(' ')[0])+'</b>! Ilang tanong lang tungkol sa income at trabaho mo. Mga 2 minuto lang ito.','Thanks, <b>'+esc(nm.split(' ')[0])+'</b>! Just a few questions about your income and work. This takes about 2 minutes.'));
-  next(0);
+  var nm=$('la-name').value.trim(),mob=$('la-mobile').value.replace(/[\s()-]/g,''),fb=($('la-fb')?$('la-fb').value.trim():''),em=$('la-email').value.trim();
+  var okFb=/^(https?:\/\/)?(www\.|m\.)?(m\.me|facebook\.com|fb\.com|messenger\.com)\/\S+/i.test(fb);
+  var bad=[Lead.err('la-name',nm.length<2),Lead.err('la-mobile',!!mob&&!/^(09\d{9}|\+639\d{9})$/.test(mob)),Lead.err('la-fb',(!mob&&!okFb)||(!!fb&&!okFb)),Lead.err('la-email',!!em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)),Lead.err('la-consent',!$('la-consent').checked)];
+  if(bad.some(Boolean)){var x=document.querySelector('#la-s1 .er:not([hidden])');if(x)x.scrollIntoView({block:'center'});return}
+  A.name=nm;A.mobile=mob;A.fb=fb;A.email=em;A.privacy_consent={accepted:true,timestamp:new Date().toISOString(),version:CFG.consent_version};
+  $('la-s1').hidden=true;rt('SaveResults',{});result();
 });
+/* Likelihood Score: transparent heuristic from the rule outcomes (pass=1, review=0.5, fail=0), estimate only */
+function likelihood(S){var w={'AFF-01':3,'DTI-01':2,'INC-01':1,'TEN-01':2,'TEN-02':2,'TEN-03':2,'TEN-F':2,'AGE-01':1,'DP-01':1,'LOAN-01':.5,'PUR-01':.5},t=0,g=0;
+  S.rule_results.forEach(function(r){var k=w[r.rule_id]||1;t+=k;g+=k*(r.outcome==='pass'?1:r.outcome==='review'?.5:0)});
+  var p=t?Math.round(25+70*g/t):50;p-=5*S.red_flags.length;if(S.result==='NOT_YET_QUALIFIED')p=Math.min(p,35);if(S.result==='NEEDS_REVIEW')p=Math.min(p,79);return Math.max(10,Math.min(95,p))}
+function gate(){if(A.unit){A.rec=recPlans();A._opt=A.rec.promoIdx}var S=assess();A.assessment=S;prog(2);$('la-chat').hidden=true;$('la-s1').hidden=false;window.scrollTo(0,0);rt('AssessmentResult',{content_name:A.unit.n,stage:'ready'});setTimeout(function(){try{$('la-name').focus({preventScroll:true})}catch(_){}},80)}
 
 /* ---------- Step 2/3: question engine (rulebook §1 order, scoring subset) ---------- */
 var EMP=[['employed','Employed'],['business_owner','Business owner'],['ofw','OFW'],['seafarer','Seafarer'],['freelancer','Freelancer / VA'],['pensioner','Pensioner'],['other','Iba pa','Other']];
@@ -129,34 +134,31 @@ var Q=[
  {id:'co_borrower',q:['May co-borrower o co-maker ka ba? (hal. spouse o kamag-anak na may income)','Do you have a co-borrower or co-maker? (e.g. spouse or relative with income)'],t:'c',o:[['yes','Oo, meron','Yes'],['no','Wala','No']]},
  {id:'co_income',q:['Magkano ang gross monthly income ng co-maker? (₱)','What is the co-maker\'s gross monthly income? (₱)'],t:'n',min:0,max:100000000,step:500,show:function(){return A.co_borrower==='yes'}},
  {id:'registered_owner',q:['Kanino ipapangalan ang unit?','Whose name will the unit be registered under?'],t:'c',o:[['self','Sa akin','Mine'],['other','Sa ibang tao','Someone else']]},
- {id:'preferred_bank',q:['May preferred bank ka ba?','Do you have a preferred bank?'],t:'c',o:[['no_preference','Wala, kayo na bahala','No preference'],['MMPF','Mitsubishi Motors Finance PH'],['BPI','BPI'],['BDO','BDO'],['Metrobank','Metrobank'],['Security Bank','Security Bank'],['PSBank','PSBank'],['RCBC','RCBC'],['EastWest','EastWest']]},
  {id:'dp_capacity',q:['Magkano ang kaya mong ilabas na DP (down payment)?','How much down payment (DP) can you put up?'],t:'c',o:[['zero','Zero DP','Zero DP'],['upto100k','Hanggang ₱100K','Up to ₱100K'],['100k_250k','₱100K–₱250K','₱100K–₱250K'],['250k_500k','₱250K–₱500K','₱250K–₱500K'],['40pct','40% o higit pa ng presyo','40% or more of the price'],['custom','Ilalagay ko ang eksaktong halaga','I\'ll type the exact amount']]},
  {id:'dp_custom',q:['Magkano ang DP na kaya mo? (₱)','How much DP can you put up? (₱)'],t:'n',min:0,max:100000000,step:1000,show:function(){return A.dp_capacity==='custom'}},
  {id:'preferred_term',q:['Ilang taon mo gustong bayaran?','How many years do you want to pay?'],t:'c',sub:1,o:[[12,'1 taon · 12 buwan','1 yr · 12 mo'],[24,'2 taon · 24 buwan','2 yrs · 24 mo'],[36,'3 taon · 36 buwan','3 yrs · 36 mo'],[48,'4 taon · 48 buwan','4 yrs · 48 mo'],[60,'5 taon · 60 buwan','5 yrs · 60 mo'],['unsure','Hindi pa sigurado','Not sure yet']]},
  {id:'target_monthly',q:['May target ka bang monthly?','Do you have a target monthly payment?'],t:'c',o:[['lt15k','Hanggang ₱15K','Up to ₱15K'],['15k_25k','₱15K–₱25K','₱15K–₱25K'],['25k_35k','₱25K–₱35K','₱25K–₱35K'],['35k_up','₱35K pataas','₱35K and up'],['custom','Ilalagay ko ang halaga','I\'ll type an amount'],['none','Wala','None']]},
  {id:'target_custom',q:['Magkano ang target monthly mo? (₱)','What is your target monthly? (₱)'],t:'n',min:1000,max:10000000,step:500,show:function(){return A.target_monthly==='custom'}},
- {id:'source_of_sale',q:['Last na: paano mo kami nahanap?','Last one: how did you find us?'],t:'c',o:[['facebook','Facebook','Facebook'],['google','Google','Google'],['referral','Referral','Referral'],['walk_in','Walk-in','Walk-in'],['other','Iba pa','Other']]}
 ];
 /* Unit/plan steps join the same linear flow so Back/Edit work everywhere */
 function modelsList(){var m=[];U.forEach(function(u){if(m.indexOf(u.model)<0)m.push(u.model)});return m}
-Q.push(
- {id:'_model',unit:true,q:['Ayos! Ngayon, piliin natin ang unit. Ang DP at monthly ay galing sa promo ngayong buwan. Anong Mitsubishi model ang gusto mo?','Great! Now let\'s pick your unit. DP and monthly figures are from this month\'s promo. Which Mitsubishi model do you want?'],t:'c',o:function(){return modelsList().map(function(m){return [m,m]})}},
- {id:'_variant',unit:true,q:['Anong variant?','Which variant?'],t:'c',o:function(){return U.filter(function(u){return u.model===A._model}).map(function(u){return [u.id,u.n+' · SRP '+peso(u.price)]})}},
- {id:'_color',unit:true,q:['Anong color ang gusto mo? (subject sa availability)','Which color do you prefer? (subject to availability)'],t:'c',o:function(){var u=U.filter(function(x){return x.id===A._variant})[0];return ((u&&u.colors&&u.colors.length)?u.colors:COLORS).map(function(c){return [c[0],c[1]?c[0]+' (+'+peso(c[1])+')':c[0]]}).concat([['undecided','Bahala na / undecided','Undecided']])}}
+Q.unshift(
+ {id:'_model',unit:true,q:['Anong Mitsubishi model ang gusto mo?','Which Mitsubishi model are you interested in?'],t:'c',o:function(){return modelsList().map(function(m){return [m,m]})}},
+ {id:'_variant',unit:true,q:['Anong variant?','Which variant?'],t:'c',o:function(){return U.filter(function(u){return u.model===A._model}).map(function(u){return [u.id,u.n+' · SRP '+peso(u.price)]})}}
 );
 var COLORS=[];
 var hist=[],cur=null;  /* hist: [{i,nodes}] answered steps; cur: open question {i,node} */
 function clearAns(id){delete A[id];delete A['_prev_'+id];if(id==='_variant'){delete A.unit;delete A.rec}}
-function next(i){while(i<Q.length&&Q[i].show&&!Q[i].show())i++;if(i>=Q.length){cur=null;result();return}ask(i)}
+function next(i){while(i<Q.length&&Q[i].show&&!Q[i].show())i++;if(i>=Q.length){cur=null;gate();return}ask(i)}
 function popTo(k){if(cur){cur.node.remove();cur=null}while(hist.length>k){var h=hist.pop();h.nodes.forEach(function(n){n.remove()});clearAns(Q[h.i].id)}}
 function goBack(){if(!hist.length)return;var i=hist[hist.length-1].i;popTo(hist.length-1);ask(i)}
 function editAt(k){var i=hist[k].i;popTo(k);ask(i)}
 function ask(i){
-  var q=Q[i];prog(q.unit?3:2);
+  var q=Q[i];prog(1);
   var qt=typeof q.q==='function'?q.q():Array.isArray(q.q)?T(q.q[0],q.q[1]):q.q,b=bot(esc(qt)),bu=b.querySelector('.la-bu'),w=document.createElement('div');w.className='la-in';cur={i:i,node:b};
   function done(label){w.remove();var bk=bu.querySelector('.la-back');if(bk)bk.remove();var m=me(label);var k=hist.length;hist.push({i:i,nodes:[b,m]});
     m.classList.add('la-edit');m.title=T('Palitan','Edit');m.querySelector('.la-bu').insertAdjacentHTML('beforeend',' <span class="la-pen">✎ '+T('Palitan','Edit')+'</span>');
-    m.onclick=function(){editAt(k)};cur=null;next(i+1)}
+    m.onclick=function(){editAt(k)};cur=null;rt('AssessmentStep_'+(k+1),{});next(i+1)}
   if(q.t==='c'){var opts=typeof q.o==='function'?q.o():q.o;opts.forEach(function(o){var x=document.createElement('button');x.type='button';x.className='chip';var lb=A.lang==='en'&&o[2]?o[2]:o[1];if(q.sub&&lb.indexOf(' · ')>0){var pr=lb.split(' · ');x.innerHTML=esc(pr[0])+' <span class="small" style="opacity:.7">'+esc(pr[1])+'</span>';lb=pr[0]}else x.textContent=lb;
      x.onclick=function(){if(w.dataset.busy)return;w.dataset.busy='1';x.classList.add('sel');w.querySelectorAll('.chip').forEach(function(c){if(c!==x)c.disabled=true});
        setTimeout(function(){A[q.id]=o[0];if(q.id==='_variant'){A.unit=U.filter(function(u){return u.id===o[0]})[0];A.rec=recPlans();A._opt=A.rec.promoIdx}done(lb)},250)};w.appendChild(x)})}
@@ -343,11 +345,14 @@ var LBL={PRE_QUALIFIED:'Pre-qualified',NEEDS_REVIEW:'Needs Review',NOT_YET_QUALI
 function msgr(res){var ref=('loan-assessment-'+res.toLowerCase().replace(/_/g,'-')+'-'+A.unit.id).replace(/[^a-z0-9-]/gi,'').slice(0,240);return MESSENGER_URL+'?ref='+encodeURIComponent(ref)}
 function contactBtns(res){return '<div class="la-cta">'+finaBtn()+((window.Lead&&Lead.CHAT)?'':'<a class="btn la-msg" href="'+msgr(res)+'" rel="noopener" data-c="messenger">💬 '+T('Makipag-usap sa tao sa Messenger','Talk to a person on Messenger')+'</a>')+'<a class="btn ghost dk" href="'+CALL_TEL+'" data-c="call">📞 '+T('Tumawag','Call')+': 0954 291 1201</a></div>'}
 function bindContact(el,res){el.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('[data-fina]');if(f){e.preventDefault();px('Contact',{method:'crisp_chat',content_name:A.unit.n});ga('contact',{method:'crisp_chat',result:res});openFina()}});el.querySelectorAll('[data-c]').forEach(function(a){a.addEventListener('click',function(){px('Contact',{method:a.dataset.c,content_name:A.unit.n});ga('contact',{method:a.dataset.c,result:res})})})}
+function scoreHtml(S,p){var c=p>=70?'ok':p>=45?'mid':'no';
+  return '<div class="la-score '+c+'"><p class="la-sl">'+T('Likelihood Score','Likelihood Score')+'</p><p class="la-sv"><b>'+p+'%</b> <span>'+T('Estimated Bank Match','Estimated Bank Match')+'</span></p><div class="la-sb"><i style="width:'+p+'%"></i></div><p class="la-sc">'+T('Estimate only, subject to bank evaluation. Hindi ito approval o pangako.','Estimate only, subject to bank evaluation. This is not an approval or a promise.')+'</p>'+
+  '<details class="la-sd"><summary>'+T('Paano ito kinompute?','How is this computed?')+'</summary><p class="small">'+T('Simpleng score mula sa sagot mo: monthly kumpara sa income, ibang loans (DTI), tagal sa trabaho o negosyo, edad, down payment at ilang paalala. Pass = buong puntos, review = kalahati.','A simple score from your answers: monthly versus income, other loans (DTI), time at work or in business, age, down payment and a few flags. Pass = full points, review = half.')+'</p><ul class="small">'+S.rule_results.map(function(r){return '<li>'+esc({'AFF-01':T('Monthly vs income','Monthly vs income'),'DTI-01':T('Lahat ng utang vs income','All debts vs income'),'INC-01':'Household income','TEN-01':T('Tagal sa trabaho','Time at work'),'TEN-02':T('Tagal ng negosyo','Time in business'),'TEN-03':'OFW documents','TEN-F':T('Tagal ng income','Income history'),'AGE-01':T('Edad','Age'),'DP-01':'Down payment','LOAN-01':T('Laki ng loan','Loan size'),'PUR-01':T('Gamit','Purpose')}[r.rule_id]||r.rule_id)+': '+({pass:'✓',review:T('i-review','review'),fail:T('mahina','weak')}[r.outcome])+'</li>'}).join('')+'</ul></details></div>'}
 function recHtml(){var r=A.rec,inc=incTot();if(!r)return '';
   function c(o,k,main){var tot=o.dp+o.mo*o.n;return '<div class="la-opt'+(main?' hl':'')+'"><b>'+(main?'⭐ '+T('Rekomendado','Recommended')+': ':T('Alternative','Alternative')+': ')+esc(o.label)+'</b><span style="font-size:1.25em"><b>'+peso(o.mo)+'</b>/mo × '+termTxt(o.n)+'</span><span>DP '+(o.dp?peso(o.dp):'₱0')+' · Total '+peso(tot)+(inc?' · '+(o.mo/inc*100).toFixed(1)+'% '+T('ng income','of income'):'')+'</span>'+(o.kind==='custom'?'<span class="small muted">'+T('Hindi pa kasama ang insurance, LTO at fees.','Excludes insurance, LTO and fees.')+'</span>':'')+'<button type="button" class="btn sm'+(main?'':' ghost dk')+'" data-rec="'+k+'">'+T('Piliin ito','Choose this')+'</button></div>'}
   return '<div class="la-recbox"><h2 class="h3">'+T('Ang rekomendasyon namin','Our recommendation')+'</h2>'+c(r.primary,'p',1)+'<p class="la-why">💡 '+esc(r.why)+'</p>'+(r.alt?c(r.alt,'a',0):'')+'<p class="la-ok" id="la-recok" hidden></p></div>'}
 function result(){
-  var S=assess(),u=A.unit,first=A.name.split(' ')[0],res=S.result;A.assessment=S;prog(4);
+  var S=assess(),u=A.unit,first=A.name.split(' ')[0],res=S.result;A.assessment=S;prog(3);var LS=likelihood(S);A.likelihood=LS;
   first=esc(first);var head=A.lang==='en'?{PRE_QUALIFIED:'Good news, '+first+'! Based on the initial assessment, you are <b>Pre-qualified</b> for the '+esc(u.n)+'. This is not yet a bank approval; the final decision is still the bank\'s. Next step: get your requirements ready.',
    NEEDS_REVIEW:'Hi '+first+', we still need to review a few details of your assessment for the '+esc(u.n)+'. Richard, your sales consultant, will call or message you.',
    NOT_YET_QUALIFIED:'Hi '+first+', thanks for your interest! For now, your profile does not meet the requirements yet. But we have options, see below. Would you like to try one?'}[res]:{PRE_QUALIFIED:'Good news, '+first+'! Base sa initial assessment, <b>Pre-qualified</b> ka para sa '+esc(u.n)+'. Hindi pa ito bank approval. Ang final decision ay sa bank pa rin. Next step: i-ready ang requirements.',
@@ -355,29 +360,29 @@ function result(){
    NOT_YET_QUALIFIED:'Hi '+first+', salamat sa interest! Sa ngayon, hindi pa pasok ang profile sa requirements. Pero may options tayo, tingnan sa baba. Gusto mo bang i-try natin ang isa dito?'}[res];
   var REQ=reqs(),et=A.employment_type,req=REQ.common.concat(REQ[et]||[]).concat(A.co_borrower==='yes'||S.recommendations.join().indexOf('co-maker')>=0?REQ.comaker:[]);
   $('la-chat').hidden=true;var R=$('la-res');R.hidden=false;
-  R.innerHTML=safe('<div class="la-card res-'+res.toLowerCase()+'"><p class="kick">'+T('Resulta ng assessment','Assessment result')+'</p><p class="la-badge">'+LBL[res]+'</p><p>'+head+'</p>'+
+  R.innerHTML=safe('<div class="la-card res-'+res.toLowerCase()+'"><p class="kick">'+T('Resulta ng assessment','Assessment result')+'</p><p class="la-badge">'+LBL[res]+'</p>'+scoreHtml(S,LS)+'<p>'+head+'</p>'+
    recHtml()+'<details class="la-adj"><summary>⚙️ '+T('I-adjust ang computation (optional)','Adjust the computation (optional)')+'</summary><div id="la-calc"></div></details><dl class="la-sum"><div><dt>Documents</dt><dd id="la-docsum">'+T('I-check sa Step 5','Check in Step 5')+'</dd></div><div><dt>Unit</dt><dd>'+esc(u.n)+' · '+esc(A._color==='undecided'?T('Bahala na','Undecided'):A._color)+'</dd></div><div><dt>SRP / promo price</dt><dd>'+peso(u.price)+'</dd></div><div><dt>Down payment</dt><dd>'+(S._dp?peso(S._dp):'Zero DP')+'</dd></div><div><dt>Monthly (promo, '+yrTxt(S._term)+')</dt><dd>'+peso(S._amort)+'</dd></div><div><dt>Monthly vs income</dt><dd>'+(S.affordability_ratio*100).toFixed(1)+'%</dd></div></dl>'+
    (S.recommendations.length?'<h2 class="h3">'+T('Mga options para pumasa','Options to qualify')+'</h2><ol class="la-rec">'+S.recommendations.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol>':'')+
    '<h2 class="h3">'+T('Banks na pwedeng i-try','Banks you can try')+'</h2><p>'+S.eligible_banks.map(esc).join(' · ')+'</p><p class="muted">'+T('Subject to bank evaluation. Hindi kami nagbibigay ng interest rate; ang bank ang magko-compute.','Subject to bank evaluation. We do not quote interest rates; the bank computes them.')+'</p>'+
-   '<div id="la-docbox"><h2 class="h3">Step 5: Requirements checklist</h2><p>'+T('Base sa checklist ni Fina para sa '+esc(EMPL[et]||et)+'. I-tick ang mga documents na <b>meron ka na</b>. Wala pang upload dito.','Based on Fina\'s checklist for '+esc(EMPL[et]||et)+'. Tick the documents you <b>already have</b>. No uploads here yet.')+'</p><ul class="la-docs">'+req.map(function(x,i){return '<li><span>'+esc(x)+'</span><label><input type="checkbox" data-doc="'+i+'"'+(x.indexOf('Data Privacy')===0?' checked':'')+'> '+T('Meron na ako','I have this')+'</label></li>'}).join('')+'</ul><p class="la-cnt" id="la-cnt"></p><button class="btn" type="button" id="la-docsave">'+T('I-save ang checklist','Save checklist')+'</button><p id="la-docerr" class="er" hidden>'+T('Hindi na-save. Pakisubukan ulit.','Not saved. Please try again.')+'</p><div id="la-docres" hidden></div></div>'+
-   '<div class="la-cta la-final"><p class="small">'+T('May tanong pa? Si Fina ng aming live chat ang tutulong sa iyo papunta sa official application form.','Any questions? Fina from our live chat will guide you to the official application form.')+'</p>'+finaBtn()+'</div>'+
+   '<div id="la-docbox"><h2 class="h3">'+T('Requirements checklist','Requirements checklist')+'</h2><p>'+T('Base sa checklist ni Fina para sa '+esc(EMPL[et]||et)+'. I-tick ang mga documents na <b>meron ka na</b>. Wala pang upload dito.','Based on Fina\'s checklist for '+esc(EMPL[et]||et)+'. Tick the documents you <b>already have</b>. No uploads here yet.')+'</p><ul class="la-docs">'+req.map(function(x,i){return '<li><span>'+esc(x)+'</span><label><input type="checkbox" data-doc="'+i+'"'+(x.indexOf('Data Privacy')===0?' checked':'')+'> '+T('Meron na ako','I have this')+'</label></li>'}).join('')+'</ul><p class="la-cnt" id="la-cnt"></p><button class="btn" type="button" id="la-docsave">'+T('I-save ang checklist','Save checklist')+'</button><p id="la-docerr" class="er" hidden>'+T('Hindi na-save. Pakisubukan ulit.','Not saved. Please try again.')+'</p><div id="la-docres" hidden></div></div>'+
+   '<div class="la-cta la-final"><p class="small">'+T('May tanong pa? I-message si Richard sa Messenger at gagabayan ka niya papunta sa official application form.','Any questions? Message Richard on Messenger and he will guide you to the official application form.')+'</p>'+finaBtn()+'</div>'+
    '<p class="muted small">'+T('Initial pre-screening lang ito base sa sagot mo, hindi bank approval. Lahat ng figures ay subject sa bank evaluation at promo validity (','This is an initial pre-screening based on your answers, not a bank approval. All figures are subject to bank evaluation and promo validity (')+esc($('la-note').textContent)+').</p></div>');
   bindContact(R,res);window.scrollTo(0,0);initCalc(S,res);
   R.querySelectorAll('[data-rec]').forEach(function(b){b.onclick=function(){pickPlan(b.dataset.rec==='p'?A.rec.primary:A.rec.alt)}});
   /* lead capture: existing pipeline (Apps Script webhook via /assets/lead.js, honeypot + Turnstile) */
   var L=Lead.base('loan_assessment');L.name=A.name;L.mobile=A.mobile;L.chosenUnit=u.n;L.unitParam=u.id;L.dpPreference=S._dp?peso(S._dp)+' DP':'Zero DP';
   L.employment=et;L.seg=isOFW()?'ofw_abroad':'local';L.income=A.gross_monthly_income;L.timeline='Assessment: '+LBL[res];
-  L.usage=['Result: '+LBL[res],'Monthly '+peso(S._amort)+' ('+(S.affordability_ratio*100).toFixed(1)+'% AFF, '+(S.dti_ratio*100).toFixed(1)+'% DTI)','Color: '+A._color,'Purpose: '+A.purpose,A.email?'Email: '+A.email:'','Rules: '+S.rule_results.map(function(x){return x.rule_id+'='+x.outcome}).join(','),S.red_flags.length?'Flags: '+S.red_flags.join(','):'','Banks: '+S.eligible_banks.join('/'),'Pref bank: '+A.preferred_bank,'Source: '+A.source_of_sale,'Consent: '+A.privacy_consent.version+' '+A.privacy_consent.timestamp].filter(Boolean).join(' | ');
+  L.usage=['Result: '+LBL[res],'Likelihood score (est. bank match): '+LS+'%',A.fb?'Messenger: '+A.fb:'','Monthly '+peso(S._amort)+' ('+(S.affordability_ratio*100).toFixed(1)+'% AFF, '+(S.dti_ratio*100).toFixed(1)+'% DTI)','Color: '+A._color,'Purpose: '+A.purpose,A.email?'Email: '+A.email:'','Rules: '+S.rule_results.map(function(x){return x.rule_id+'='+x.outcome}).join(','),S.red_flags.length?'Flags: '+S.red_flags.join(','):'','Banks: '+S.eligible_banks.join('/'),'Pref bank: '+A.preferred_bank,'Source: '+A.source_of_sale,'Consent: '+A.privacy_consent.version+' '+A.privacy_consent.timestamp].filter(Boolean).join(' | ');
   L.residence_months=A.length_of_stay_months;L.tenure_months=A.years_in_employment!=null?Math.round(A.years_in_employment*12):'';L.language=A.lang;L.dp_capacity=A.dp_capacity==='custom'?A.dp_custom:A.dp_capacity;L.preferred_term=A.preferred_term;L.target_monthly=A.target_monthly==='custom'?A.target_custom:A.target_monthly;L.recommended=A.rec?A.rec.primary.kind+' | DP '+A.rec.primary.dp+' | '+A.rec.primary.n+' mo | '+Math.round(A.rec.primary.mo)+'/mo':'';
   L.usage+=' | DP capacity: '+L.dp_capacity+' | Pref term: '+L.preferred_term+' | Target monthly: '+L.target_monthly+' | Recommended: '+L.recommended+' | Language: '+A.lang;L.docsTotal=req.length;L.docsReady=0;L.docsLacking=req.length;L.assessment=JSON.stringify({result:res,affordability_ratio:S.affordability_ratio,dti_ratio:S.dti_ratio,rule_results:S.rule_results,red_flags:S.red_flags,eligible_banks:S.eligible_banks,recommendations:S.recommendations});
   A.leadId=L.leadId;crispSync();
-  Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
+  Lead.send(L).then(function(){if(!Lead.skipped()){px('Lead',{content_name:u.n});rt('AssessmentResult',{content_name:u.n,stage:'shown'});ga('generate_lead',{form:'loan_assessment',unit:u.n,result:res,value:0,currency:'PHP'})}});
   /* Step 5: documents client already has (no uploads) */
   var boxes=R.querySelectorAll('[data-doc]');function cnt(){var r=0;boxes.forEach(function(b){if(b.checked)r++});$('la-cnt').textContent=r+' ready / '+(req.length-r)+T(' kulang',' lacking');return r}
   boxes.forEach(function(b){b.addEventListener('change',cnt)});cnt();
-  $('la-docsave').addEventListener('click',function(){var btn=this,r=cnt(),lack=[];boxes.forEach(function(b){if(!b.checked)lack.push(req[+b.dataset.doc])});prog(5);
+  $('la-docsave').addEventListener('click',function(){var btn=this,r=cnt(),lack=[];boxes.forEach(function(b){if(!b.checked)lack.push(req[+b.dataset.doc])});prog(4);
     $('la-docsum').textContent=r+' ready / '+lack.length+T(' kulang',' lacking');
-    $('la-docres').innerHTML=safe(lack.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still lacking')+' ('+lack.length+'):</b></p><ul>'+lack.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p>'+T('Okay lang yan! Tutulungan ka nina Fina at Richard kung paano at saan makukuha ang mga ito, at ano ang pwedeng ipalit kung wala ka pa. I-tap lang ang live chat button sa baba.','That\'s okay! Fina and Richard will help you with how and where to get these, and what alternatives you can use. Just tap the live chat button below.')+'</p></div>':'<p class="la-ok">'+T('Wow, kumpleto ka na sa '+r+' documents! Ihanda lang ang malinaw na kopya. Tutulungan ka nina Fina at Richard sa next step.','Great, you have all '+r+' documents! Just prepare clear copies. Fina and Richard will help you with the next step.')+'</p>');
+    $('la-docres').innerHTML=safe(lack.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still lacking')+' ('+lack.length+'):</b></p><ul>'+lack.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p>'+T('Okay lang yan! Tutulungan ka nina Fina at Richard kung paano at saan makukuha ang mga ito, at ano ang pwedeng ipalit kung wala ka pa. I-message lang si Richard sa Messenger.','That\'s okay! Fina and Richard will help you with how and where to get these, and what alternatives you can use. Just message Richard on Messenger.')+'</p></div>':'<p class="la-ok">'+T('Wow, kumpleto ka na sa '+r+' documents! Ihanda lang ang malinaw na kopya. Tutulungan ka nina Fina at Richard sa next step.','Great, you have all '+r+' documents! Just prepare clear copies. Fina and Richard will help you with the next step.')+'</p>');
     $('la-docres').hidden=false;A.docs={ready:r,lacking:lack.length,missing:lack};crispSync();
     var D=Lead.base('loan_docs_checklist');D.leadId=L.leadId;D.name=A.name;D.mobile=A.mobile;D.chosenUnit=u.n;D.employment=et;D.docsReady=r;D.docsLacking=lack.length;D.docsTotal=req.length;D.language=A.lang;
     D.timeline='Docs: '+r+' ready / '+lack.length+' kulang ('+LBL[res]+')';D.usage='Docs ready '+r+'/'+req.length+(lack.length?' | Kulang: '+lack.join('; '):'');
@@ -403,7 +408,7 @@ function showSummary(S,res){var u=A.unit,pl=savePrefill(S,res),R=$('la-res');
    '<p class="la-badge">'+LBL[res]+'</p><p>'+head+'</p>'+
    '<dl class="la-sum"><div><dt>Unit</dt><dd>'+esc(u.model)+'</dd></div><div><dt>Variant</dt><dd>'+esc(u.n)+'</dd></div><div><dt>Color</dt><dd>'+esc(col)+'</dd></div><div><dt>'+T('Rekomendadong plan','Recommended plan')+'</dt><dd>'+(pl.type==='promo'?'Promo (all-in)':T('Bank estimate','Bank estimate'))+'</dd></div>'+
    '<div><dt>Down payment</dt><dd>'+(pl.dp?peso(pl.dp):'Zero DP')+'</dd></div><div><dt>Term</dt><dd>'+termTxt(pl.term_months)+'</dd></div><div><dt>Monthly'+(pl.type==='promo'?'':' (estimate)')+'</dt><dd>'+peso(pl.monthly)+'</dd></div><div><dt>Documents</dt><dd>'+A.docs.ready+' ready / '+A.docs.lacking+T(' kulang',' lacking')+'</dd></div></dl>'+
-   (m.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p class="small">'+T('Okay lang! Si Fina ang tutulong at kukuha ng documents sa live chat pagkatapos mong mag-apply.','That\'s okay! Fina will help and collect documents in live chat after you apply.')+'</p></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents!','Your documents are complete!')+'</p>')+
+   (m.length?'<div class="la-lack"><p><b>'+T('Kulang pa','Still missing')+' ('+m.length+'):</b></p><ul>'+m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p class="small">'+T('Okay lang! Ipadala kay Richard sa Messenger ang documents pagkatapos mong mag-apply.','That\'s okay! You can send the documents to Richard on Messenger after you apply.')+'</p></div>':'<p class="la-ok">'+T('Kumpleto ka na sa documents!','Your documents are complete!')+'</p>')+
    '<div class="la-final"><a class="btn af-apply" id="la-apply" href="/apply/?from=assessment&amp;unit='+encodeURIComponent(u.id)+'" style="font-size:18px;padding:16px;width:100%;justify-content:center">'+T('Mag-apply na sa aming Official Application Form','Apply Now to our Official Application Form')+'</a></div>'+
    '<p class="muted small">'+T('Initial pre-screening lang ito, hindi bank decision. Subject sa bank evaluation at promo validity.','Initial pre-screening only, not a bank decision. Subject to bank evaluation and promo validity.')+'</p></div>');
   $('la-apply').addEventListener('click',function(){savePrefill(S,res);ga('apply_click',{from:'assessment_summary',result:res})});

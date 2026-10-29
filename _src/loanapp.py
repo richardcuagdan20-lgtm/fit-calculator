@@ -66,6 +66,8 @@ LA_CSS='''<style>
 @media(min-width:760px){.la-cta{flex-direction:row}.la-cta .btn{flex:1}}
 @media(max-width:520px){.la-sum,.la-x{grid-template-columns:1fr}}
 .lacta{background:linear-gradient(135deg,#0b0b0c,#2a0a0d);color:#fff;border-radius:18px;padding:20px 22px;margin:24px 0}.lacta h2{color:#fff;margin:0 0 6px;font-size:22px}.lacta p{color:#d4d4d8;margin:0 0 12px}
+.la-score{border-radius:16px;padding:14px 16px;margin:12px 0;background:#f4f4f5}.la-score.ok{background:#ecfdf5}.la-score.mid{background:#fffbeb}.la-score.no{background:#fef2f2}.la-sl{margin:0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#52525b}.la-sv{margin:2px 0 6px}.la-sv b{font-size:34px;line-height:1.1}.la-sv span{font-weight:700;color:#3f3f46}.la-sb{height:10px;background:#e4e4e7;border-radius:99px;overflow:hidden}.la-sb i{display:block;height:100%;background:#16a34a}.la-score.mid .la-sb i{background:#d97706}.la-score.no .la-sb i{background:#dc2626}.la-sc{font-size:13px;color:#52525b;margin:8px 0 0}.la-sd summary{cursor:pointer;font-size:14px;margin-top:6px}.la-sd ul{margin:6px 0 0;padding-left:18px}
+.la-bu{font-size:15px;padding:10px 12px}.la-in .chip{padding:7px 12px;font-size:14px}.la-log{gap:9px}.la-card{padding:18px}
 </style>'''
 page("/loan-assessment/","AI Car Loan Application Assessment | Mitsubishi Motors - San Juan Motors",
  "AI Car Loan Application Assessment for Mitsubishi: answer a few questions, pick your unit and promo, and find out if you are Pre-qualified. Takes 3 minutes.",
@@ -75,21 +77,23 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 <h1>AI Car Loan Application Assessment</h1>
 <p class="lead">{B("Alamin agad kung pasok ka sa car loan bago ka pumunta sa showroom. Sagutin lang ang ilang tanong, piliin ang Mitsubishi mo, at makikita mo ang resulta at mga options.","Find out if you qualify for a car loan before you visit the showroom. Answer a few questions, pick your Mitsubishi, and see your result and options.")}</p>
 </div></section>
-<div class="la-stepbar"><div class="w"><ol class="la-steps" aria-label="Progress"><li class=\"on\" aria-current=\"step\"><span class="n">1</span><span class="t">Contact</span></li><li><span class="n">2</span><span class="t">{B("Tanong","Questions")}</span></li><li><span class="n">3</span><span class="t">Unit</span></li><li><span class="n">4</span><span class="t">{B("Resulta","Result")}</span></li><li><span class="n">5</span><span class="t">Docs</span></li></ol></div></div>
+<div class="la-stepbar"><div class="w"><ol class="la-steps" aria-label="Progress"><li class=\"on\" aria-current=\"step\"><span class="n">1</span><span class="t">{B("Unit at tanong","Unit &amp; questions")}</span></li><li><span class="n">2</span><span class="t">{B("I-save","Save")}</span></li><li><span class="n">3</span><span class="t">{B("Resulta","Result")}</span></li><li><span class="n">4</span><span class="t">Docs</span></li></ol></div></div>
 <section class="la"><div class="w" style="padding-top:18px">
 <div id="la-intro" class="la-card"><h2 class="h3">{B("Paano ito gumagana?","How does it work?")}</h2>
 <div class="la-x"><div><b>{B("Sagutin","Answer")}</b><br>{B("Income, trabaho at existing loans.","Income, work and existing loans.")}</div><div><b>{B("Pumili","Choose")}</b><br>{B("Unit, DP at monthly mula sa promo ngayong buwan.","Unit, DP and monthly from this month's promo.")}</div><div><b>{B("Alamin","Find out")}</b><br>{B("Pre-qualified, Needs Review, o mga options para pumasa.","Pre-qualified, Needs Review, or options to qualify.")}</div></div>
-<p class="muted small" style="margin-top:14px">{B("Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito.","This is a pre-screening only, not a bank approval. No IDs or documents are needed here.")}</p>
+<p class="muted small" style="margin-top:14px">{B("Pre-screening lang ito, hindi bank approval. Walang IDs o documents na hihingin dito. Sa dulo mo na ilalagay ang contact details mo.","This is a pre-screening only, not a bank approval. No IDs or documents are needed here. You enter your contact details at the end.")}</p>
 <p class="fl"><b>Choose your language / Piliin ang wika:</b></p>
 <div class="la-start"><button class="btn" type="button" id="la-start" data-start="en">Start in English</button><button class="btn ghost dk" type="button" data-start="tl">Simulan sa Tagalog / Taglish</button></div></div>
-<div id="la-s1" class="la-card" hidden><h2 class="h3">{B("Hi! Ako si Richard. Unahin natin ang contact details mo.","Hi! I'm Richard. Let's start with your contact details.")}</h2>
+<div id="la-s1" class="la-card" hidden><p class="kick" style="color:#b8000e">{B("Handa na ang resulta mo","Your results are ready")}</p><h2 class="h3">{B("I-save ang resulta mo","Save My Results")}</h2>
+<p class="small">{B("Ilagay ang pangalan mo at mobile number o Messenger link para makita ang Likelihood Score at buong resulta, at para mai-save namin ito para sa follow-up ni Richard.","Enter your name and a mobile number or Messenger link to see your Likelihood Score and full results, and so we can keep them for Richard's follow-up.")}</p>
 <form id="la-f1" novalidate>
 <div class="fld"><label for="la-name">{B("Buong pangalan","Full name")} *</label><input type="text" id="la-name" autocomplete="name" required><p class="er" id="e_la-name" hidden>{B("Pakilagay ang pangalan mo.","Please enter your name.")}</p></div>
-<div class="fld"><label for="la-mobile">Mobile number *</label><input type="tel" id="la-mobile" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="er" id="e_la-mobile" hidden>{B("Pakilagay ang tamang PH mobile (09XXXXXXXXX o +639XXXXXXXXX).","Please enter a valid PH mobile (09XXXXXXXXX or +639XXXXXXXXX).")}</p></div>
+<div class="fld"><label for="la-mobile">Mobile number</label><input type="tel" id="la-mobile" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX"><p class="er" id="e_la-mobile" hidden>{B("Pakilagay ang tamang PH mobile (09XXXXXXXXX o +639XXXXXXXXX).","Please enter a valid PH mobile (09XXXXXXXXX or +639XXXXXXXXX).")}</p></div>
+<div class="fld"><label for="la-fb">{B("o Messenger / Facebook link","or Messenger / Facebook link")}</label><input type="url" id="la-fb" inputmode="url" autocomplete="off" placeholder="m.me/yourname or facebook.com/yourname"><p class="er" id="e_la-fb" hidden>{B("Ilagay ang mobile number o tamang Messenger/Facebook link.","Enter a mobile number or a valid Messenger/Facebook link.")}</p></div>
 <div class="fld"><label for="la-email">Email (optional)</label><input type="email" id="la-email" autocomplete="email"><p class="er" id="e_la-email" hidden>{B("Pakicheck ang email.","Please check your email.")}</p></div>
 <p class="fl"><b>Data Privacy Consent</b></p><div class="la-cons" tabindex="0">{LA_CONSENT}</div>
-<label class="chk"><input type="checkbox" id="la-consent"> <span>{B("Sumasang-ayon ako / I agree","I agree / Sumasang-ayon ako")}</span></label><p class="er" id="e_la-consent" hidden>{B("Kailangan ang consent bago tayo magpatuloy.","Consent is required before we continue.")}</p>
-<button class="btn" type="submit">{B("Tuloy","Continue")}</button></form></div>
+<label class="chk"><input type="checkbox" id="la-consent"> <span>{B("Sumasang-ayon ako / I agree","I agree / Sumasang-ayon ako")}</span></label><p class="er" id="e_la-consent" hidden>{B("Kailangan ang consent bago namin i-save ang resulta.","Consent is required before we save your results.")}</p>
+<button class="btn" type="submit">{B("I-save at tingnan ang resulta","Save and see my results")}</button></form></div>
 <div id="la-chat" hidden><div id="la-log" class="la-log" aria-live="polite"></div></div>
 <div id="la-res" hidden></div>
 <p id="la-note" hidden>{e(NOTE)}</p>
