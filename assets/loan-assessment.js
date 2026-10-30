@@ -111,7 +111,7 @@ function affAdj(a){if(!(a>=0)||a>=9)return -30;var d=(CFG.aff.pass-a)*100;return
 var AOR={12:1.22,24:1.24,36:1.32,48:1.48,60:1.55};function stdMo(P,dp,n){return (P-dp)*AOR[n]/n}
 function lighter(S){var u=A.unit,P=u.price,inc=incTot();if(!inc)return null;
   var heavy=S.affordability_ratio>CFG.aff.pass,tgt=CFG.aff.pass*inc,c=[],r1=function(x){return Math.ceil(x/1000)*1000},Y=', 5 '+T('taon','years');
-  if(u.ab){c.push({k:'optA',label:T('Lowest DP (Option A)','Lowest DP (Option A)'),dp:u.ab.a[0],n:60,mo:u.ab.a[1],unit:u.n});
+  if(u.ab){c.push({k:'optA',label:u.ab.a[0]===0?'Zero DP Promo (Option A)':T('Lowest DP (Option A)','Lowest DP (Option A)'),dp:u.ab.a[0],n:60,mo:u.ab.a[1],unit:u.n});
     if(u.ab.b[0]!==u.ab.a[0])c.push({k:'optB',label:'Option B · 30% DP',dp:u.ab.b[0],n:60,mo:u.ab.b[1],unit:u.n})}
   else if(heavy){var b=r1(P*0.3);if(b>S._dp)c.push({k:'optB',label:'Option B · 30% DP',dp:b,n:60,mo:stdMo(P,b,60),unit:u.n})}
   if(heavy){var bmo=c.length?c[c.length-1].mo:Infinity,need=r1(P-tgt*60/AOR[60]);
