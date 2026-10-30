@@ -17,7 +17,7 @@ function popOk(){if(!P||/^\/(apply|status|loan-assessment)\//.test(location.path
 function dismissed(){try{if(sessionStorage.getItem(DK))return true;var t=+localStorage.getItem(DK)||0;return Date.now()-t<7*864e5}catch(_){return false}}
 function foc(){return [].slice.call(P.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(function(e){return e.offsetParent!==null})}
 function popOpen(src){if(!popOk())return false;var f=$('unlock');if(!f)return false;if(!P.hidden)return true;opener=document.activeElement;
- home=document.createComment('ab-home');f.parentNode.insertBefore(home,f);slot.appendChild(f);P.hidden=false;H.classList.add('ab-popon');
+ if(!P.contains(f)){home=document.createComment('ab-home');f.parentNode.insertBefore(home,f);slot.appendChild(f)}P.hidden=false;H.classList.add('ab-popon');
  setTimeout(function(){try{(H.classList.contains('ab-open')?P.querySelector('.abp-x'):$('ab-name')).focus()}catch(_){}},30);return true}
 function popClose(){if(!P||P.hidden)return;var f=$('unlock');if(home&&f){home.parentNode.insertBefore(f,home);home.parentNode.removeChild(home);home=null}
  P.hidden=true;H.classList.remove('ab-popon');try{sessionStorage.setItem(DK,'1');if(!H.classList.contains('ab-open'))localStorage.setItem(DK,String(Date.now()))}catch(_){}
@@ -29,7 +29,9 @@ if(P){P.addEventListener('click',function(e){if(e.target===P||e.target.closest('
   sc=function(){var d=document.documentElement;if((window.scrollY+innerHeight)/d.scrollHeight>=0.4&&window.scrollY>0)fire()},tm=setTimeout(fire,8000);window.addEventListener('scroll',sc,{passive:true})}}
 window.abPopOpen=popOpen;
 function toForm(){$('unlock').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(function(){try{$('ab-name').focus({preventScroll:true})}catch(_){}},400)}
-document.querySelectorAll('[data-unlock]').forEach(function(b){b.addEventListener('click',function(){if(!popOpen('unlock-button'))toForm()})});
+document.querySelectorAll('[data-unlock]').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();if(!popOpen('unlock-button'))toForm()})});
+/* locked Option A areas open the pop-up too */
+document.querySelectorAll('[data-a]').forEach(function(el){el.addEventListener('click',function(){if(!H.classList.contains('ab-open'))popOpen('locked-area')})});
 function hu(){if(location.hash==='#unlock'&&!open&&!popOpen('hash'))toForm()}hu();window.addEventListener('hashchange',hu);
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-inquire]');if(a)T('InquirePromo',{source:a.getAttribute('data-inquire'),content_name:'inquire-promo',content_category:'promos'},true)},true);
 var f=$('ab-form');if(!f)return;if(window.AS)AS.init(f);

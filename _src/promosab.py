@@ -102,7 +102,7 @@ html.ab-open .ab-lockonly{display:none}
 .abp-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:#f4f4f5;border-radius:999px;font-size:22px;line-height:1;cursor:pointer;color:#0b0b0c}.abp-x:focus-visible{outline:3px solid var(--red)}
 .abp-d h2{margin:0 48px 4px 0;font-size:22px}.abp-sub{margin:0 0 12px;color:#52525b;font-size:15px}#ab-pop .ab-fh{display:none}#ab-pop #unlock{margin:0;padding:0;border:0;box-shadow:none}#ab-pop .ab-fg{grid-template-columns:1fr!important}
 @media(max-width:600px){#ab-pop{align-items:flex-end;padding:0}.abp-d{border-radius:16px 16px 0 0;max-height:92vh;max-height:92dvh;padding:18px 16px 16px}.abp-d h2{font-size:19px}}
-html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) .ab-openonly{display:none}</style>
+html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cursor:pointer}html:not(.ab-open) .ab-openonly{display:none}</style>
 <script>try{if(localStorage.getItem("promos_optA_unlocked")==="1")document.documentElement.classList.add("ab-open")}catch(_){}</script>'''
     form=f'''<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">
 <div class="ab-lockonly"><div class="ab-fh"><h2 class="h3" style="margin:0 0 6px"><span class="en">Unlock the lowest DP</span><span class="tl">I-unlock ang lowest DP</span></h2>
@@ -121,12 +121,17 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) .ab-openonly
      '<button type="button" class="abp-x" data-popclose aria-label="Close">×</button>'
      '<h2 id="abp-h"><span class="en">Unlock the Lowest DP Promo, up to Zero DP</span><span class="tl">I-unlock ang Lowest DP Promo, hanggang Zero DP</span></h2>'
      '<p class="abp-sub" id="abp-s"><span class="en">See Option A (lowest down payment and monthly) on every unit. Subject to bank approval.</span><span class="tl">Makita ang Option A (pinakamababang DP at monthly) ng bawat unit. Subject to bank approval.</span></p>'
-     '<div class="abp-slot"></div></div></div>')
+     '<div class="abp-slot">'+form.replace('<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">','<div id="unlock" class="ab-box pm-unl">',1)[:-len('</div></div></section>')]+'</div></div></div></div>')
+    TEASER=('<section class="sec" id="unlock-cta" style="padding-bottom:0"><div class="w"><div class="card pad ab-box abw">'
+     '<div class="ab-lockonly"><h2 class="h3" style="margin:0 0 6px"><span class="en">Unlock the lowest DP</span><span class="tl">I-unlock ang lowest DP</span></h2>'
+     '<p class="muted" style="margin:0 0 12px"><span class="en">See Option A on every unit, up to Zero DP. Subject to bank approval.</span><span class="tl">Makita ang Option A ng bawat unit, hanggang Zero DP. Subject to bank approval.</span></p>'
+     '<button type="button" class="ab-ul" data-unlock style="max-width:360px"><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>'
+     '<div class="ab-openonly ab-ok"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div></div></div></section>')
     CARPARTS.update(css=css,form=form,lv=lv,jv=jv,f=f,msg=MSG,pop=POP)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
 <p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
-{form}
+{TEASER}
 <section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(nav)}</nav>
 {secs}
 <p class="note">{NOTE}</p><p class="muted"><span class="en">Other down payment options: </span><span class="tl">Ibang DP options: </span><a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
@@ -188,11 +193,8 @@ def inject_cars(R):
         h=re.sub(r'<article class="card vc">.*?</article>',card,h,flags=re.S)
         mm=re.search(r'href="(https://m\.me/[^"]+)"',h)
         h=h.replace('href="#" data-vpask',f'href="{mm.group(1) if mm else "/contact/"}" rel="noopener" data-msgr="carpage-askpromo-{slug}"')
-        form=CARPARTS["form"].replace("Option B is shown below for every unit.","Option B is shown for every variant.").replace("Nakalista sa baba ang Option B ng bawat unit.","Nakikita ang Option B ng bawat variant.")
-        fin=form.replace('<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">','<div id="unlock" class="ab-box pm-unl">',1)
-        assert fin.endswith('</div></div></section>'); fin=fin[:-len('</div></div></section>')]+'</div>'
         blob=base64.b64encode(json.dumps(A).encode()).decode()
-        js=('<div class="abw" id="vp-hold" hidden>'+fin+'</div>'+CARPARTS["pop"]+'<script type="text/plain" id="ab-a">'+blob+'</script>\n<script>(function(){var T=[].slice.call(document.querySelectorAll(".vp-tg"));if(!T.length)return;\n'
+        js=(CARPARTS["pop"]+'<script type="text/plain" id="ab-a">'+blob+'</script>\n<script>(function(){var T=[].slice.call(document.querySelectorAll(".vp-tg"));if(!T.length)return;\n'
  'function body(b){return document.getElementById(b.getAttribute("aria-controls"))}\n'
  'function set(b,o){b.setAttribute("aria-expanded",o?"true":"false");var p=body(b);p.classList.toggle("open",o);try{p.inert=!o}catch(_){}}\n'
  'T.forEach(function(b){set(b,false);b.addEventListener("click",function(){set(b,b.getAttribute("aria-expanded")!=="true")})});\n'
