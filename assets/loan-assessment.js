@@ -228,7 +228,7 @@ function tgtMo(){return {lt15k:15000,'15k_25k':25000,'25k_35k':35000,custom:A.ta
 function incTot(){return (A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0)}
 function recPlans(){var u=A.unit,P=u.price,inc=incTot(),cap=capDP(P),tgt=tgtMo(),n=A.preferred_term==='unsure'||!A.preferred_term?60:+A.preferred_term;
   var lim=Math.min(tgt||Infinity,inc?inc*CFG.fit_max_ratio:Infinity);
-  var pr=u.opts.map(function(o,i){return {kind:'promo',i:i,dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
+  var pr=u.opts.map(function(o,i){return {kind:'promo',i:i,dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(i===0?'Option A · ':'Option B · ')+(o.dp?peso(o.dp)+' DP':'Zero DP Promo')+' (all-in)'}});
   var inCap=pr.filter(function(o){return o.dp<=cap+1});if(!inCap.length)inCap=[pr.slice().sort(function(a,b){return a.dp-b.dp})[0]];
   var ok=inCap.filter(function(o){return o.mo<=lim}).sort(function(a,b){return a.dp-b.dp});
   var promo=ok[0]||inCap.slice().sort(function(a,b){return a.mo-b.mo})[0];
@@ -245,7 +245,7 @@ function recPlans(){var u=A.unit,P=u.price,inc=incTot(),cap=capDP(P),tgt=tgtMo()
 var pickPlan=null;
 function initCalc(S,res){
   var u=A.unit,P=u.price,inc=(A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0),box=$('la-calc'),st={dp:A.rec&&A.rec.alt&&A.rec.alt.kind==='custom'?A.rec.alt.dp:A.rec&&A.rec.primary.kind==='custom'?A.rec.primary.dp:Math.round(P*0.2),n:A.rec?A.rec.term:60};
-  var promos=u.opts.map(function(o){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
+  var promos=u.opts.map(function(o,i){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(i===0?'Option A · ':'Option B · ')+(o.dp?peso(o.dp)+' DP':'Zero DP Promo')+' (all-in)'}});
   function yrs(n){var y=n/12;return y+(A.lang==='en'?(y>1?' years':' year'):' taon')}
   function opt(dp,n){return {kind:'custom',dp:dp,n:n,mo:estMo(P-dp,n),label:Math.round(dp/P*100)+'% DP · '+yrs(n)}}
   function tot(o){return o.dp+o.mo*o.n}

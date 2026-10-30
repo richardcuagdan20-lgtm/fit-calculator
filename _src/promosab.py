@@ -38,10 +38,16 @@ def rows():
 CARSEC={}; CARPARTS={}
 import re as _re
 def uslug(u): return _re.sub(r"[^a-z0-9]+","-",u.lower()).strip("-")
-def inq(msg,ref,cls="ab-iq"):
-    # Inquire this promo -> Messenger (track.js adds ?ref=web_<data-msgr> + Pixel Contact; promos.js adds custom InquirePromo)
-    return (f'<a class="{cls}" href="{msg}?ref={ref}" target="_blank" rel="noopener" data-msgr="{ref}" data-inquire="{ref}">'
-            '<span class="en">💬 Inquire this promo</span><span class="tl">💬 I-inquire ang promo na ito</span></a>')
+IQN=[0]
+def inq(msg,ref,unit,ai,bfig,cls="ab-iq"):
+    # Inquire this promo (Richard 2026-10-30): button BELOW Option A/B; drops down an inquiry form (built by /assets/inquiry.js),
+    # lead source promos-inquiry via lead.js; secondary "or message on Messenger" link (track.js adds ref + Contact).
+    IQN[0]+=1; n=IQN[0]
+    return (f'<div class="iq" data-unit="{unit}" data-ai="{ai}" data-b="{bfig}" data-ref="{ref}">'
+            f'<button type="button" class="{cls}" id="iqb-{n}" aria-expanded="false" aria-controls="iqp-{n}"><span class="en">💬 Inquire this promo</span><span class="tl">💬 I-inquire ang promo na ito</span>'
+            '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6"/></svg></button>'
+            f'<div class="iq-p" id="iqp-{n}" role="region" aria-labelledby="iqb-{n}" hidden></div>'
+            f'<p class="iq-alt"><a href="{msg}?ref={ref}" target="_blank" rel="noopener" data-msgr="{ref}" data-inquire="{ref}-msgr"><span class="en">or message on Messenger</span><span class="tl">o mag-message sa Messenger</span></a></p></div>')
 ZT='<span class="ab-zt">Zero DP Promo</span>'
 
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
@@ -60,10 +66,10 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
             fu=f'<span class="fuel"><span class="en">+ {FUEL[r["unit"]]:,} fuel points</span><span class="tl">+ {FUEL[r["unit"]]:,} fuel points</span></span>' if r["unit"] in FUEL else ""
-            iq=inq(MSG,"inquire-"+uslug(n))
-            trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}{iq}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
+            iq=inq(MSG,"inquire-"+uslug(n),e(n),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo')
+            trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
 <td class="ab-ca" data-a="{i}"><span class="ab-l">Option A</span>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
-<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td></tr>'''
+<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td></tr><tr class="ab-iqr"><td colspan="4">{iq}</td></tr>'''
         im=MODELIMG.get(slug); ph=""
         if im:
             EAG[0]+=1; w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
@@ -76,6 +82,7 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
     blob=base64.b64encode(json.dumps(A).encode()).decode()
     lv=hashlib.md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]
     jv=hashlib.md5(open(R+"/assets/promos.js","rb").read()).hexdigest()[:8]
+    qv=hashlib.md5(open(R+"/assets/inquiry.js","rb").read()).hexdigest()[:8]
     css='''<style>html[data-lang=tl] .abw .en,html:not([data-lang=tl]) .abw .tl{display:none!important}
 .ab-lang{display:flex;gap:8px;margin:0 0 14px}.ab-lang button{background:none;border:1px solid #52525b;color:inherit;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-size:14px;cursor:pointer}html[data-lang=tl] .ab-lang [data-setlang=tl],html:not([data-lang=tl]) .ab-lang [data-setlang=en]{background:#0b0b0c;color:#fff}
 .ab-m{margin:0 0 22px}.ab-m h2{margin-top:0}.ab-mg{display:grid;gap:16px}@media(min-width:900px){.ab-mg{grid-template-columns:300px 1fr;align-items:start}.ab-np .ab-mg{grid-template-columns:1fr}}.ab-tw{min-width:0}
@@ -96,7 +103,14 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
 html.ab-open .ab-lockonly{display:none}
 .ab-zt{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;margin:0 0 4px}
 .ab-iq{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:6px 12px;min-height:40px;border:1.5px solid #0b0b0c;border-radius:999px;color:#0b0b0c;background:#fff;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}.ab-iq:hover{background:#f4f4f5}
-.ab-iq:focus-visible{outline:3px solid var(--red);outline-offset:2px}.ab-t .ab-iq{white-space:normal;text-align:center}@media(max-width:899px){.ab-t tr{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
+.ab-iq:focus-visible{outline:3px solid var(--red);outline-offset:2px}.ab-iq svg{transition:transform .2s}.ab-iq[aria-expanded=true] svg{transform:rotate(180deg)}.ab-t .ab-iq{white-space:normal;text-align:center}
+.ab-t tr.ab-iqr td{padding-top:0}.ab-t tr:has(+tr.ab-iqr) th,.ab-t tr:has(+tr.ab-iqr) td{border-bottom:0}@media(max-width:899px){.ab-t tr.ab-iqr{display:block;padding-top:0}.ab-t tr.ab-iqr td{display:block}}
+.iq{margin:4px 0 6px}.iq-p{margin-top:10px;border:1px solid var(--ln);border-radius:12px;padding:14px;background:#fafafa;max-width:640px}.iq-p label{display:block;font-weight:700;font-size:14px;margin:0 0 4px}
+.iq-p textarea,.iq-p input[type=text],.iq-p input[type=tel],.iq-p input[type=email]{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #a1a1aa;border-radius:10px;background:#fff;margin:0 0 10px}
+.iq-p .chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:4px 0 12px}.iq-p .chk input{width:20px;height:20px;flex:none;margin-top:2px}.iq-p .ferr{color:#b8000e;font-size:13px;margin:-6px 0 8px}
+.iq-who{display:grid;gap:0 12px}@media(min-width:900px){.ab-t .iq-who{grid-template-columns:1fr 1fr 1fr}}.iq-as{font-size:14px;margin:0 0 10px}.iq-as button{background:none;border:0;color:var(--redd);text-decoration:underline;font:inherit;cursor:pointer;padding:4px;min-height:32px}
+.iq-send{width:100%;max-width:320px}.iq-ok{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px;margin:0;font-weight:700}.iq-alt{margin:6px 0 0;font-size:13px}.iq-alt a{color:#52525b}
+.iq-fine{font-size:12px;color:#71717a;margin:8px 0 0}.iq-p [hidden],.iq-p[hidden]{display:none!important}@media(max-width:899px){.ab-t tr{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
 #ab-pop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.6)}#ab-pop[hidden]{display:none}
 .abp-d{position:relative;background:#fff;color:#0b0b0c;border-radius:16px;max-width:560px;width:100%;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:22px 20px 18px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .abp-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:#f4f4f5;border-radius:999px;font-size:22px;line-height:1;cursor:pointer;color:#0b0b0c}.abp-x:focus-visible{outline:3px solid var(--red)}
@@ -127,7 +141,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
      '<p class="muted" style="margin:0 0 12px"><span class="en">See Option A on every unit, up to Zero DP. Subject to bank approval.</span><span class="tl">Makita ang Option A ng bawat unit, hanggang Zero DP. Subject to bank approval.</span></p>'
      '<button type="button" class="ab-ul" data-unlock style="max-width:360px"><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>'
      '<div class="ab-openonly ab-ok"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div></div></div></section>')
-    CARPARTS.update(css=css,form=form,lv=lv,jv=jv,f=f,msg=MSG,pop=POP)
+    CARPARTS.update(css=css,form=form,lv=lv,jv=jv,qv=qv,f=f,msg=MSG,pop=POP)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
 <p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
@@ -138,7 +152,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and Option A or B</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a> (standard formula: (SRP − DP) × add-on rate ÷ months; 5 years at 1.55).</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section></div>
 {POP}<script type="text/plain" id="ab-a">{blob}</script>
-<script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script>'''
+<script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
     page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
      "October 2026 Mitsubishi promos from San Juan Motors: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
      body, crumbs=[("/","Home"),("/promos/","Promos")])
@@ -180,8 +194,8 @@ def inject_cars(R):
                 fu=f'<span class="fuel"><span class="en">+ {FUEL[u]:,} fuel points</span><span class="tl">+ {FUEL[u]:,} fuel points</span></span>' if u in FUEL else ""
                 inner=(f'{rl}<div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></p>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>\n'
                  f'<div class="ab-o ab-b"><p class="ab-k">Option B <small class="en">· 30% DP, low monthly</small><small class="tl">· 30% DP, mababang monthly</small></p><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></div>{fu}\n'
-                 +inq(CARPARTS["msg"],"inquire-"+slug+"-"+uslug(vu),"ab-iq vp-iq")+'\n'
-                 '<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p>')
+                 '<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p>'
+                 +inq(CARPARTS["msg"],"inquire-"+slug+"-"+uslug(vu),H.escape(vu),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo',"ab-iq vp-iq"))
                 REPORT.append([slug,vu,u,r["srp"],r["a_dp"] is not None,r["b_dp"]])
             else:
                 inner='<p class="vp-ask"><span class="en">Promo for this variant: ask Richard for the latest down payment and monthly.</span><span class="tl">Promo ng variant na ito: itanong kay Richard ang latest down payment at monthly.</span> <a href="#" data-vpask><span class="en">Ask for the promo</span><span class="tl">Itanong ang promo</span></a></p>'
@@ -210,6 +224,6 @@ def inject_cars(R):
              f'<a class="btn ghost" href="/test-drive/" data-heroact="testdrive-{slug}"><span class="en">Book a Test Drive</span><span class="tl">Mag-book ng Test Drive</span></a></p>')
         h,c=re.subn(r'<p class="row hcta"><a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a></p>',hero,h,count=1); assert c==1,slug
         h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Tap <b>See promo</b> on a variant for its down payment and monthly options.')
-        h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script></body>',1)
+        h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script><script src="/assets/inquiry.js?v={CARPARTS["qv"]}" defer></script></body>',1)
         open(fp,"w").write(h)
     json.dump(REPORT,open("/tmp/carpromo_map.json","w"),indent=1,ensure_ascii=False)

@@ -90,3 +90,21 @@ def srp_txt(v): return f(v["srp"]) if v["srp"] else "Ask for price"
 def srp_from(m):
     x=[v["srp"] for v in m["variants"] if v["srp"]]; return min(x) if x else None
 UNITS=[v["n"] for m in MODELS for v in m["variants"]]
+# ---- PROMO SOURCE OF TRUTH (Richard 2026-10-30): every variant's promo opts come from _src/optionAB_oct2026.json
+# opts = [Option A (lowest DP; "Zero DP Promo" when DP is 0), Option B (30% DP, low monthly)], 60 months, subject to bank approval.
+# The older hand-entered "Zero DP / ₱XK DP" pairs are replaced. Fuel points kept as entered above.
+import json as _json, os as _os, re as _re
+_AB=_json.load(open(_os.path.join(_os.path.dirname(__file__),"optionAB_oct2026.json")))
+def _abk(x):
+    x={"2026 L300 Dual AC":"L300 FB Body Dual AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}.get(x,x)
+    return _re.sub(r"[^a-z0-9]","",x.lower().replace("withdual","dual").replace("with single","single").replace("chasis","chassis"))
+_ABM={_abk(r["unit"]):r for r in _AB}
+def dplabel(dp): return "Zero DP Promo" if dp==0 else f"₱{dp/1000:g}K DP"
+AB_UNMATCHED=[]
+for _m in MODELS:
+    for _v in _m["variants"]:
+        _r=_ABM.get(_abk(_v["n"]))
+        if not _r: AB_UNMATCHED.append(_v["n"]); continue
+        _old=_v["promo"] or {}
+        _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"]),(dplabel(_r["b_dp"]),_r["b_mo"])],_old.get("fuel"),srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
+        _v["ab"]=dict(a_dp=_r["a_dp"],a_mo=_r["a_mo"],b_dp=_r["b_dp"],b_mo=_r["b_mo"],srp=_r["srp"])
