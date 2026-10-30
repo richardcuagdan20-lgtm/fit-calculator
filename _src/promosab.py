@@ -48,6 +48,11 @@ def inq(msg,ref,unit,ai,bfig,cls="ab-iq"):
             '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6"/></svg></button>'
             f'<div class="iq-p" id="iqp-{n}" role="region" aria-labelledby="iqb-{n}" hidden></div>'
             f'<p class="iq-alt"><a href="{msg}?ref={ref}" target="_blank" rel="noopener" data-msgr="{ref}" data-inquire="{ref}-msgr"><span class="en">or message on Messenger</span><span class="tl">o mag-message sa Messenger</span></a></p></div>')
+def inq_side(msg,ref,unit,ai,bfig):
+    # /promos/ (Richard 2026-10-30): Inquire button in its own rightmost column; the form panel drops down in the next row (full width).
+    h=inq(msg,ref,unit,ai,bfig); n=IQN[0]
+    pn=f'<div class="iq-p" id="iqp-{n}" role="region" aria-labelledby="iqb-{n}" hidden></div>'
+    assert pn in h; return h.replace(pn,''), pn
 ZT='<span class="ab-zt">Zero DP Promo</span>'
 
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
@@ -66,16 +71,16 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
             fu=f'<span class="fuel"><span class="en">+ {FUEL[r["unit"]]:,} fuel points</span><span class="tl">+ {FUEL[r["unit"]]:,} fuel points</span></span>' if r["unit"] in FUEL else ""
-            iq=inq(MSG,"inquire-"+uslug(n),e(n),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo')
+            iq,iqp=inq_side(MSG,"inquire-"+uslug(n),e(n),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo')
             trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
 <td class="ab-ca" data-a="{i}"><span class="ab-l">Option A</span>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
-<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td></tr><tr class="ab-iqr"><td colspan="4">{iq}</td></tr>'''
+<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td><td class="ab-ci">{iq}</td></tr><tr class="ab-iqr"><td colspan="5">{iqp}</td></tr>'''
         im=MODELIMG.get(slug); ph=""
         if im:
             EAG[0]+=1; w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
             iv=hashlib.md5(open(f"{R}/assets/img/{im}.webp","rb").read()).hexdigest()[:8]
             ph=f'<div class="ab-ph"><img src="/assets/img/{im}.webp?v={iv}" width="{w}" height="{h}" alt="Mitsubishi {e(name)}" {'fetchpriority="high"' if EAG[0]==1 else 'loading="lazy"'} decoding="async"></div>'
-        tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></th><th scope="col">Option B <small class="en">· Low monthly</small><small class="tl">· Mababang monthly</small></th></tr></thead><tbody>{trs}</tbody></table>
+        tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></th><th scope="col">Option B <small class="en">· Low monthly</small><small class="tl">· Mababang monthly</small></th><th scope="col" class="ab-cih"><span class="en">Inquire</span><span class="tl">Inquire</span></th></tr></thead><tbody>{trs}</tbody></table>
 <p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm ab-pq" href="/loan-assessment/"><span class="en">See if you're Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a> <a class="btn sm ghost dk" href="/budgetcalculator/">Compare with my own DP</a></p></div>'''
         secs+=f'<section class="pm card pad ab-m{"" if ph else " ab-np"}" id="{slug}"><h2>{e(name)}</h2>{rl}<div class="ab-mg">{ph}{tbl}</div></section>'
         CARSEC[slug]=(name,rl,tbl,[A[k] for k in range(len(A)-len(vs),len(A))])
@@ -104,7 +109,9 @@ html.ab-open .ab-lockonly{display:none}
 .ab-zt{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;margin:0 0 4px}
 .ab-iq{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:6px 12px;min-height:40px;border:1.5px solid #0b0b0c;border-radius:999px;color:#0b0b0c;background:#fff;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}.ab-iq:hover{background:#f4f4f5}
 .ab-iq:focus-visible{outline:3px solid var(--red);outline-offset:2px}.ab-iq svg{transition:transform .2s}.ab-iq[aria-expanded=true] svg{transform:rotate(180deg)}.ab-t .ab-iq{white-space:normal;text-align:center}
-.ab-t tr.ab-iqr td{padding-top:0}.ab-t tr:has(+tr.ab-iqr) th,.ab-t tr:has(+tr.ab-iqr) td{border-bottom:0}@media(max-width:899px){.ab-t tr.ab-iqr{display:block;padding-top:0}.ab-t tr.ab-iqr td{display:block}}
+.ab-t tr.ab-iqr td{padding-top:0}.ab-t tr.ab-iqr:has(.iq-p[hidden]){display:none!important}.ab-t tr:has(+tr.ab-iqr:not(:has(.iq-p[hidden]))) :is(th,td){border-bottom:0}
+.ab-t .ab-ci{width:1%;white-space:nowrap}.ab-ci .iq{margin:0}.ab-ci .ab-iq{margin-top:0}.ab-ci .iq-alt{font-size:12px;margin:4px 0 0;text-align:center}.ab-t tr.ab-iqr .iq-p{margin-top:0;max-width:none}
+@media(max-width:899px){.ab-t .ab-ci{grid-column:1/-1;width:auto}.ab-ci .ab-iq{width:100%}.ab-t tr.ab-iqr{display:block;padding-top:0}.ab-t tr.ab-iqr td{display:block}}
 .iq{margin:4px 0 6px}.iq-p{margin-top:10px;border:1px solid var(--ln);border-radius:12px;padding:14px;background:#fafafa;max-width:640px}.iq-p label{display:block;font-weight:700;font-size:14px;margin:0 0 4px}
 .iq-p textarea,.iq-p input[type=text],.iq-p input[type=tel],.iq-p input[type=email]{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #a1a1aa;border-radius:10px;background:#fff;margin:0 0 10px}
 .iq-p .chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:4px 0 12px}.iq-p .chk input{width:20px;height:20px;flex:none;margin-top:2px}.iq-p .ferr{color:#b8000e;font-size:13px;margin:-6px 0 8px}

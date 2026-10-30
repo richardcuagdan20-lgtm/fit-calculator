@@ -47,6 +47,6 @@ function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=wh
   var q=new URLSearchParams(location.search);L.fbclid=q.get('fbclid')||'';
   L.usage=['Email: '+L.email,'source='+S,'Message: '+t.value.trim().slice(0,1000),fig,'Pre-qualified, subject to bank approval'].join(' | ');
   Lead.send(L).then(ok,ok)})}
-document.querySelectorAll('.iq').forEach(function(box){var b=box.querySelector('.ab-iq'),p=box.querySelector('.iq-p');if(!b||!p)return;
+document.querySelectorAll('.iq').forEach(function(box){var b=box.querySelector('.ab-iq'),p=b&&document.getElementById(b.getAttribute('aria-controls'));if(!b||!p)return;
  b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';if(o&&!p.firstChild)build(box,p);b.setAttribute('aria-expanded',o?'true':'false');p.hidden=!o;if(o){var t=p.querySelector('textarea');if(t)t.focus({preventScroll:true})}})});
 })();
