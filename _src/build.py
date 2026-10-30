@@ -623,7 +623,7 @@ _FM_A=_re.compile(r'(\s*·\s*)?(\s?)<a ([^>]*href="https://m\.me/[^"]*"[^>]*)>(.
 def _fm_strip(s,status):
     def f(m):
         attrs,txt=m.group(3),m.group(4)
-        if 'class="fbl"' in attrs or 'class="fmsg"' in attrs: return m.group(0)
+        if 'class="fbl"' in attrs or 'class="fmsg"' in attrs or 'data-inquire=' in attrs: return m.group(0)  # Richard 2026-10-30: "Inquire this promo" -> Messenger stays
         plain=_re.sub(r'<[^>]+>','',txt).strip()
         if _re.search(r'class="[^"]*\bbtn\b',attrs) or plain.lower() in ('message richard on messenger','i-message si richard sa messenger'):
             return ''  # button / standalone CTA -> removed (floating button replaces it)

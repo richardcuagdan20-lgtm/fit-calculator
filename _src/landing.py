@@ -8,7 +8,7 @@ FUEL_OK={"tritongxat","l300","vvglx","mg4glxat","mg4gls"}
 VBY={v["id"]:(m,v) for m in MODELS for v in m["variants"]}
 def prow(i):
     m,v=VBY[i]; p=v["promo"]; srp=p["srp"] or v["srp"]
-    return dict(id=i,n=v["n"],srp=srp,opts=p["opts"][:SHOW[i]],fuel=(p["fuel"] if i in FUEL_OK else None))
+    return dict(id=i,n=v["n"],srp=srp,opts=p["opts"][:2],fuel=(p["fuel"] if i in FUEL_OK else None))
 def inc(mo): return f"₱{mo/0.35/1000:.1f}K–₱{mo/0.30/1000:.1f}K"
 def ptable(ids,caption,extra=""):
     rows="".join(f'<tr><th scope="row">{e(r["n"])}<br><span class="muted">SRP {f(r["srp"])}</span></th><td>{o[0]}</td><td><b>{f(o[1])}</b>/mo</td><td>{inc(o[1])}</td><td>{format(r["fuel"],",")+" fuel points" if r["fuel"] else "—"}</td></tr>' for r in map(prow,ids) for o in r["opts"])
@@ -132,7 +132,7 @@ L(slug="mirage-g4-downpayment-and-monthly",kw="Mirage G4 downpayment and monthly
 <p>The Mirage G4 comes as the GLX (manual or CVT) and the GLS (CVT), all with the 1.2L gasoline engine. The CVT is easier in SJDM and EDSA traffic; the GLS adds more features. Compare them on the <a href="/cars/mirage-g4/">Mirage G4 page</a>, and read <a href="/tips/manual-vs-automatic-car-philippines/">manual vs automatic</a> if you're torn. First car? Use my <a href="/tips/first-time-car-buyer-checklist/">first-time buyer checklist</a>.</p>
 '''+CTAX("Check what fits your budget, then test drive the Mirage G4 in SJDM.","mirage-g4"),
  faq=[("How much is the Mirage G4 downpayment and monthly?","See the dated promo table on this page for the current all-in options on a 5-year term. For variants or DP amounts not listed, message Richard for the latest Mirage G4 promo."),
- ("Is there a Zero DP Mirage G4?","Zero DP depends on the month's promo and the variant. The current options are in the promo table; message Richard to confirm."),
+ ("Is there a Zero DP Mirage G4?",f"Not this month. In {PROMO_MONTH} every Mirage G4 variant has Option A with a {__import__('promotext').V['mg4glxmt']['promo']['opts'][0][0].replace(' DP','')} down payment, shown in the promo table. Subject to bank approval."),
  ("What salary do I need for a Mirage G4?","As a guide, keep the monthly at about 30–35% of your gross monthly income. Divide the monthly by 0.35 for a minimum income. The bank makes the final assessment."),
  ("What documents do I need for a Mirage G4 car loan?","Two valid IDs and proof of billing, plus income documents: COE and payslips or ITR if employed, business documents if self-employed, and contract and remittance proof if you're an OFW."),
  ("Can I pay the Mirage G4 in less than 5 years?","Yes, shorter terms are available. The monthly will be higher, but you pay less interest overall. Ask Richard for a computation.")])
@@ -201,8 +201,8 @@ L(slug="mitsubishi-zero-down-payment-promo",kw="Mitsubishi zero down payment pro
  kick="Zero DP · All-in",
  lead="A Mitsubishi zero down payment promo lets you drive home a brand-new unit without a down payment, with the main fees bundled in an all-in package. Here's what Zero DP really means, who usually qualifies, the documents, and the income that fits. This month's Zero DP units are in one dated table.",
  figs=[("What zero down payment means","zp-what","Mitsubishi zero down payment promo: Zero DP vs with DP compared"),("How to avail","zp-steps","How to avail a Mitsubishi zero down payment promo in 4 steps"),("Who qualifies","zp-income","What the bank checks for Zero DP approval"),("Approval tips","zp-tips","Tips to strengthen a Zero DP car loan application")],
- table=["mg4gls","l300","xglxmt","xglxat","xglsat","xcross","dglx","tritongxat","mglxmt","dgls","mgls","dgtm"],tcap="Units with a Zero DP option, lowest monthly first. Low-DP alternatives shown too.",
- textra=f'<p class="muted">Montero Sport Black Series is offered with a down payment this month (2WD: ₱88K DP, ₱45,117/mo; 4WD: ₱133K DP, ₱52,121/mo). Mirage G4 GLX and other variants: <a href="{MSG}" rel="noopener">message Richard for the latest promo</a>.</p>',
+ table=__import__("promotext").zero_ids(),tcap="Zero DP Promo units (Option A), lowest monthly first, with Option B (30% DP) shown too.",
+ textra=f'<p class="muted">Other units have Option A with a low down payment this month; see the <a href="/promos/">promos page</a>. Subject to bank approval.</p>',
  body=lambda T:f'''<h2>What zero down payment means</h2>
 <p>Zero DP means you don't pay a down payment on the unit; the bank finances the full amount over the term (5 years on these promos). Because the loan is bigger, the monthly is higher than with a DP. "All-in" means the main fees are bundled:</p>
 {ALLIN_EH}

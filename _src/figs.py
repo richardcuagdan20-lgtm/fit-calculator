@@ -59,15 +59,15 @@ FIGS={
 FIGS.update({
 "how-much-car-can-i-afford-philippines":[
 ("The rule in one line","afford-rule","The 30 to 35 percent income guide: monthly divided by 0.35 for minimum income, by 0.30 for comfortable income"),
-("How a down payment","afford-table","Table of October 2026 Zero DP monthlies for Mitsubishi units and the gross monthly income each needs"),
-("Three ways","afford-dp","Zero DP vs low DP monthly comparison for Xpander, Destinator and Triton, October 2026 promos"),
+("How a down payment","afford-table","Table of October 2026 lowest-DP (Option A) monthlies for Mitsubishi units and the gross monthly income each needs"),
+("Three ways","afford-dp","Option A vs Option B monthly comparison for Xpander, Destinator and Triton, October 2026 promos"),
 ("Don't forget","afford-ways","Three ways to make a car fit your budget: co-borrower, bigger down payment, right variant"),
 ("Your next step","afford-xpander","Mitsubishi Xpander GLX in silver, a family MPV that fits many budgets")],
 "triton-for-business-and-farm":[
 ("Who the Triton","tr-glance","Mitsubishi Triton at a glance: 2.4L 4N16 turbo diesel, manual or automatic, 2WD or 4WD, open cargo bed"),
 ("2WD or 4WD","tr-cargo-photo","Mitsubishi Triton pickup cargo bed loaded for work"),
 ("The October 2026","tr-2wd4wd","Triton 2WD vs 4WD comparison by road type and use"),
-("Cargo bed tips","tr-promo","Triton GX 2.4D 2WD A/T October 2026 promo: SRP 1,430,000 pesos, 28,900 a month Zero DP or 25,200 with 140K DP"),
+("Cargo bed tips","tr-promo","Triton GX 2.4D 2WD A/T October 2026 promo: SRP 1,430,000 pesos, 29,799 a month Zero DP Promo or 25,777 with 193K DP"),
 ("Financing for business","tr-bed","Pickup cargo bed rules: rated payload, tie down loads, bed liner, tarpaulin")],
 "montero-sport-variants-explained":[
 ("The four variants","ms-shared","Every Montero Sport shares the 2.4L 4N15 turbo diesel with 181 PS and 430 Nm and seven seats"),
@@ -76,12 +76,12 @@ FIGS.update({
 ("Which income","ms-pick","Which Montero Sport variant fits: GLX M/T, GLS A/T, Black Series 2WD or 4WD")],
 "xpander-variants-explained":[
 ("October 2026 promos","xv-engine","Every Xpander variant shares the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm and seven seats"),
-("GLX MT:","xv-table","Xpander GLX MT, GLX AT, GLS AT and Xpander Cross October 2026 Zero DP and low DP monthlies with fuel freebies"),
+("GLX MT:","xv-table","Xpander GLX MT, GLX AT, GLS AT and Xpander Cross October 2026 Option A and Option B monthlies with fuel freebies"),
 ("Xpander Cross:","xv-cross-photo","Mitsubishi Xpander Cross dashboard and cabin"),
 ("Your next step","xv-pick","Quick picker: which Xpander variant fits your budget and driving")],
 "destinator-glx-vs-gls-vs-gt":[
 ("October 2026 promos","dv-shared","Every Destinator has the 1.5L turbo with 163 PS and 250 Nm, a CVT and 214 mm ground clearance"),
-("GLX:","dv-table","Destinator GLX, GLS and GT SRPs with October 2026 Zero DP and low DP monthlies"),
+("GLX:","dv-table","Destinator GLX, GLS and GT SRPs with October 2026 Option A and Option B monthlies"),
 ("GT:","dv-cabin","Mitsubishi Destinator interior and dashboard"),
 ("Your next step","dv-steps","Three steps to choose a Destinator variant: income, must-have features, family test drive")],
 "pms-schedule-guide":[
@@ -117,7 +117,7 @@ FIGS.update({
 ("Know your routes","cm-routes","SJDM to Metro Manila routes: Quirino Highway toward Fairview and Commonwealth, or NLEX, with a live traffic check"),
 ("Timing is","cm-timing","Commute timing tips: leave 15 to 30 minutes earlier, avoid school days and paydays peaks, rainy days, shift hours"),
 ("Number coding","cm-coding","Before you go: check MMDA number coding and keep RFID loaded"),
-("Stay fresh","cm-xpander","Xpander GLX A/T October 2026 promo: 23,877 pesos a month Zero DP with 60K fuel")],
+("Stay fresh","cm-xpander","Xpander GLX A/T October 2026 promo: 23,592 pesos a month ₱23K DP with 60K fuel")],
 "car-trade-in-tips":[
 ("How a trade-in","ti-destinator","Mitsubishi Destinator, an upgrade option when trading in an older car"),
 ("Prepare your documents","ti-how","How a car trade-in works: appraisal, offer, paperwork, applied to your new car"),
@@ -137,7 +137,7 @@ FIGS.update({
 ("Simbang Gabi","xm-sg","Simbang Gabi early-morning driving tips"),
 ("Christmas parties","xm-mall","December mall parking tips: weekday mornings, one trip, well-lit spots, bags in the trunk"),
 ("Probinsya trips","xm-party","If you drink, don't drive: designated driver, book a ride, host responsibly"),
-("Thinking of a new","xm-xpander","Xpander GLS A/T October 2026 promo: 25,937 pesos a month Zero DP or 22,695 with 148K DP, 60K fuel")],
+("Thinking of a new","xm-xpander","Xpander GLS A/T October 2026 promo: 26,143 pesos a month ₱8K DP or 22,695 with 173K DP, 60K fuel")],
 "l300-vs-triton-for-negosyo":[
 ("At a glance","lt-glance","Mitsubishi L300 Dual AC truck vs Triton GX AT pickup: engine, gearbox and best use"),
 ("Choose the L300","lt-promo","L300 Dual AC and Triton GX AT October 2026 promo SRP and monthlies"),
@@ -154,19 +154,19 @@ FIGS.update({
 "road-trip-from-bulacan":[("Baguio:","rt-3","Road trip from Bulacan: routes to Baguio, Zambales and Batangas"),("Batangas:","rt-mb","Mountain vs beach road trip driving tips"),("Prep for any","rt-xpander","Mitsubishi Xpander 7-seater for family road trips"),("The right car","rt-prep","Road trip prep checklist: BLOWBAGETS, RFID, rest stops, emergency kit, car seats")],
 "bank-vs-in-house-car-financing-philippines":[("How bank financing","bf-vs","Bank vs in-house car financing in the Philippines compared"),("Compare these five","bf-5","Five things to compare before signing a car loan"),("Red flags","bf-allin","All-in car promo package inclusions to compare"),("Related reading","bf-red","Car financing red flags")],
 "montero-sport-vs-destinator":[("Side by side","md-bars","Montero Sport vs Destinator power and torque: 181 PS and 430 Nm vs 163 PS and 250 Nm"),("Choose the Montero","md-promo","Montero Sport and Destinator October 2026 lowest promo monthlies per variant"),("Test drive both","md-fit","Montero Sport vs Destinator: which fits how you drive")],
-"xpander-cross-2026-price-philippines":[("What it shares","xcp-adds","Xpander Cross vs Xpander: same 7 seats and 1.5L engine, plus crossover look and premium cabin"),("The October 2026","xcp-photo","Xpander Cross skid-plate styling for provincial roads"),("Provincial road tips","xcp-promo","Xpander Cross 2026 price Philippines: SRP 1,378,000, 28,389 Zero DP or 24,840 with 148K DP"),("Related reading","xcp-tips","Provincial road driving tips for the Xpander Cross")],
-"triton-gx-2wd-at-first-pickup-guide":[("What's different","tg-photo","Mitsubishi Triton pickup on the road"),("Why the GX AT","tg-diff","What's different about driving a pickup for first-time owners"),("Driving and parking","tg-promo","Triton GX 2.4D 2WD A/T October 2026 promo: 28,900 Zero DP or 25,200 with 140K DP"),("Cargo bed basics","tg-park","Pickup driving and parking tips")],
-"minimum-salary-for-car-loan-philippines":[("Step 1:","yp-plan","Minimum salary for car loan: a 5-step young professional car budget plan"),("Step 3:","yp-table","Xpander Zero DP monthlies and the gross income each needs"),("Step 4:","yp-costs","Car costs to budget after the monthly amortization")],
+"xpander-cross-2026-price-philippines":[("What it shares","xcp-adds","Xpander Cross vs Xpander: same 7 seats and 1.5L engine, plus crossover look and premium cabin"),("The October 2026","xcp-photo","Xpander Cross skid-plate styling for provincial roads"),("Provincial road tips","xcp-promo","Xpander Cross 2026 price Philippines: SRP 1,378,000, 28,406 Zero DP Promo or 24,840 with 173K DP"),("Related reading","xcp-tips","Provincial road driving tips for the Xpander Cross")],
+"triton-gx-2wd-at-first-pickup-guide":[("What's different","tg-photo","Mitsubishi Triton pickup on the road"),("Why the GX AT","tg-diff","What's different about driving a pickup for first-time owners"),("Driving and parking","tg-promo","Triton GX 2.4D 2WD A/T October 2026 promo: 29,799 Zero DP Promo or 25,777 with 193K DP"),("Cargo bed basics","tg-park","Pickup driving and parking tips")],
+"minimum-salary-for-car-loan-philippines":[("Step 1:","yp-plan","Minimum salary for car loan: a 5-step young professional car budget plan"),("Step 3:","yp-table","Xpander Option A monthlies and the gross income each needs"),("Step 4:","yp-costs","Car costs to budget after the monthly amortization")],
 "best-car-for-senior-citizens-philippines":[("Getting in and out","sp-access","Best car for senior citizens: seat at hip height, wide doors, low step-in, grab handles"),("Test-drive checklist","sp-cabin","Spacious Mitsubishi Destinator cabin for senior passengers"),("Units worth trying","sp-td","Test drive checklist with a senior or PWD family member")],
 })
 FIGS.update({
 "mitsubishi-dealer-bulacan":[("Where to find","dl-loc","Mitsubishi dealer Bulacan: Mitsubishi San Juan Motors, San Jose del Monte"),("What you can do","dl-what","What you can do at Mitsubishi San Juan Motors: lineup, test drive, promo, document pre-check, release"),("Before your visit","dl-before","Three steps before visiting the Mitsubishi showroom in SJDM")],
-"mitsubishi-promo-metro-manila-buyers":[("October 2026 promo","mm-promo","Mitsubishi promo Metro Manila buyers: October 2026 Zero DP and low DP highlights"),("How the process","mm-steps","How Metro Manila buyers can buy a Mitsubishi in SJDM in four steps"),("Driving up","mm-ask","Questions to ask any car dealer before signing")],
-"xpander-monthly-amortization":[("Monthly amortization by","xa-month","Xpander monthly amortization 2026 for GLX MT, GLX AT, GLS AT and Xpander Cross"),("Income you'll need","xa-total","Xpander total of payments over 60 months, Zero DP vs low DP"),("Zero DP or low","xa-photo","Mitsubishi Xpander GLS front with LED headlights")],
+"mitsubishi-promo-metro-manila-buyers":[("October 2026 promo","mm-promo","Mitsubishi promo Metro Manila buyers: October 2026 Option A and Option B highlights"),("How the process","mm-steps","How Metro Manila buyers can buy a Mitsubishi in SJDM in four steps"),("Driving up","mm-ask","Questions to ask any car dealer before signing")],
+"xpander-monthly-amortization":[("Monthly amortization by","xa-month","Xpander monthly amortization 2026 for GLX MT, GLX AT, GLS AT and Xpander Cross"),("Income you'll need","xa-total","Xpander total of payments over 60 months, Option A vs Option B"),("Zero DP or low","xa-photo","Mitsubishi Xpander GLS front with LED headlights")],
 "destinator-price-philippines":[("Destinator SRP","dp-srp","Destinator price Philippines 2026: GLX, GLS, GT SRP and October promo monthlies"),("Income guide","dp-total","Destinator total of payments over 60 months"),("Which variant","dp-photo","Mitsubishi Destinator automatic headlights")],
 "montero-sport-price-philippines-2026":[("Montero Sport SRP","mp-srp","Montero Sport price Philippines 2026: SRP and October promo options for all variants"),("Manual or automatic","mp-total","Montero Sport total of payments over 60 months"),("Your next step","mp-photo","Mitsubishi Montero Sport exterior styling")],
-"l300-price-philippines-2026":[("L300 Dual AC price","lp-promo","L300 price Philippines 2026: Dual AC SRP 1,039,000 with Zero DP 21,405 or 123K DP 18,789 a month"),("Income guide","lp-photo","Mitsubishi L300 side view"),("Is it right","lp-income","L300 income guide at 30 to 35 percent of gross income")],
-"zero-down-payment-car-philippines":[("Zero DP list","zd-list","Zero down payment car Philippines: October 2026 Mitsubishi Zero DP monthlies ranked, with income needed"),('What "zero',"zd-allin","What zero DP all-in includes"),("Pros and cons","zd-pc","Zero down payment pros and cons")],
+"l300-price-philippines-2026":[("L300 Dual AC price","lp-promo","L300 price Philippines 2026: Dual AC SRP 1,039,000 with Zero DP Promo 22,214 or 163K DP 18,729 a month"),("Income guide","lp-photo","Mitsubishi L300 side view"),("Is it right","lp-income","L300 income guide at 30 to 35 percent of gross income")],
+"zero-down-payment-car-philippines":[("Zero DP list","zd-list","Zero down payment car Philippines: October 2026 Mitsubishi Zero DP Promo monthlies ranked, with income needed"),('What "zero',"zd-allin","What zero DP all-in includes"),("Pros and cons","zd-pc","Zero down payment pros and cons")],
 "car-loan-approval-tips":[("10 car loan","la-10","Car loan approval tips: 10 ways to strengthen your application"),("Common reasons","la-decline","Common reasons car loans get declined"),("Related reading","la-photo","Mitsubishi Xpander GLS ready for release after loan approval")],
 "car-reservation-fee-philippines":[("What a reservation","rf-what","What a car reservation fee does"),("Before you pay","rf-ask","Five questions to ask before paying a car reservation fee"),("When to reserve","rf-when","When you're ready to reserve a car")],
 "mitsubishi-test-drive-sjdm":[("How to book","td-book","Mitsubishi test drive SJDM: how to book online"),("What to bring","td-bring","What to bring to a car test drive"),("What to check","td-check","What to check on a test drive")],

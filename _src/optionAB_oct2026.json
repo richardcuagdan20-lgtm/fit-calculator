@@ -25,583 +25,848 @@
   "family": "Mirage G4",
   "unit": "Mirage G4 GLX 1.2G M/T",
   "srp": 793000,
-  "a_dp": 58000,
-  "a_mo": 15316,
+  "a_dp": 3000,
+  "a_mo": 16133,
   "b_dp": 93000,
   "b_mo": 14295,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   58000,
+   15316
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Mirage G4",
   "unit": "Mirage G4 GLX 1.2G CVT",
   "srp": 841000,
-  "a_dp": 33000,
-  "a_mo": 16243,
+  "a_dp": 3000,
+  "a_mo": 16542,
   "b_dp": 73000,
   "b_mo": 15160,
   "fuel": null,
-  "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   33000,
+   16243
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Mirage G4",
   "unit": "Mirage G4 GLS 1.2G CVT",
   "srp": 937000,
-  "a_dp": 53000,
-  "a_mo": 18097,
+  "a_dp": 3000,
+  "a_mo": 18804,
   "b_dp": 98000,
   "b_mo": 16891,
   "fuel": null,
-  "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   53000,
+   18097
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xpander",
   "unit": "Xpander GLX 1.5G 2WD M/T",
   "srp": 1099000,
-  "a_dp": 33000,
-  "a_mo": 23284,
+  "a_dp": 18000,
+  "a_mo": 22401,
   "b_dp": 143000,
   "b_mo": 19811,
   "fuel": 30000,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   33000,
+   23284
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xpander",
   "unit": "Xpander GLX 1.5G 2WD A/T",
   "srp": 1159000,
-  "a_dp": 38000,
-  "a_mo": 24555,
+  "a_dp": 23000,
+  "a_mo": 23592,
   "b_dp": 153000,
   "b_mo": 20892,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   38000,
+   24555
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xpander",
   "unit": "Xpander GLS 1.5G 2WD A/T",
   "srp": 1259000,
-  "a_dp": 23000,
-  "a_mo": 26674,
+  "a_dp": 8000,
+  "a_mo": 26143,
   "b_dp": 173000,
   "b_mo": 22695,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   23000,
+   26674
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xpander",
   "unit": "Xpander GLS 1.5G 2WD A/T (Quartz White Pearl)",
   "srp": 1274000,
-  "a_dp": 23000,
-  "a_mo": 26992,
+  "a_dp": 8000,
+  "a_mo": 26407,
   "b_dp": 173000,
   "b_mo": 22965,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   23000,
+   26992
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander GLS 1.5G 2WD A/T"
  },
  {
   "family": "Xpander Cross",
   "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone)",
   "srp": 1378000,
-  "a_dp": 93000,
-  "a_mo": 26614,
+  "a_dp": 0,
+  "a_mo": 28406,
   "b_dp": 173000,
   "b_mo": 24840,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   93000,
+   26614
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xpander Cross",
   "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone, Quartz White Pearl)",
   "srp": 1393000,
-  "a_dp": 93000,
-  "a_mo": 26904,
+  "a_dp": 0,
+  "a_mo": 28671,
   "b_dp": 173000,
   "b_mo": 25110,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   93000,
+   26904
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander Cross 1.5G 2WD A/T (Two-Tone)"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GLX 1.5G 2WD CVT",
   "srp": 1119000,
-  "a_dp": 63000,
-  "a_mo": 23708,
+  "a_dp": 23000,
+  "a_mo": 23874,
   "b_dp": 193000,
   "b_mo": 20171,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   63000,
+   23708
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GLX 1.5G 2WD CVT (Quartz White Pearl)",
   "srp": 1134000,
-  "a_dp": 58000,
-  "a_mo": 24026,
+  "a_dp": 23000,
+  "a_mo": 24135,
   "b_dp": 193000,
   "b_mo": 20442,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   58000,
+   24026
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLX 1.5G 2WD CVT"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GLS 1.5G 2WD CVT (Monotone)",
   "srp": 1299000,
-  "a_dp": 73000,
-  "a_mo": 27521,
+  "a_dp": 33000,
+  "a_mo": 27679,
   "b_dp": 228000,
   "b_mo": 23416,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   73000,
+   27521
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone)",
   "srp": 1309000,
-  "a_dp": 78000,
-  "a_mo": 27733,
+  "a_dp": 33000,
+  "a_mo": 27852,
   "b_dp": 228000,
   "b_mo": 23596,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   78000,
+   27733
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone, Quartz White Pearl)",
   "srp": 1324000,
-  "a_dp": 73000,
-  "a_mo": 28051,
+  "a_dp": 33000,
+  "a_mo": 28113,
   "b_dp": 228000,
   "b_mo": 23867,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   73000,
+   28051
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLS 1.5G 2WD CVT (Two-Tone)"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GT 1.5G 2WD CVT",
   "srp": 1661000,
-  "a_dp": 103000,
-  "a_mo": 35191,
+  "a_dp": 48000,
+  "a_mo": 35433,
   "b_dp": 298000,
   "b_mo": 29941,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   103000,
+   35191
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Xforce",
   "unit": "XFORCE GT 1.5G 2WD CVT (Quartz White Pearl)",
   "srp": 1676000,
-  "a_dp": 103000,
-  "a_mo": 35509,
+  "a_dp": 48000,
+  "a_mo": 35693,
   "b_dp": 298000,
   "b_mo": 30212,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   103000,
+   35509
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GT 1.5G 2WD CVT"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GLX 1.5G Turbo 2WD CVT",
   "srp": 1389000,
-  "a_dp": 33000,
-  "a_mo": 29428,
+  "a_dp": 8000,
+  "a_mo": 29032,
   "b_dp": 198000,
   "b_mo": 25038,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   33000,
+   29428
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GLX 1.5G Turbo 2WD CVT (Quartz White Pearl)",
   "srp": 1404000,
-  "a_dp": 33000,
-  "a_mo": 29746,
+  "a_dp": 8000,
+  "a_mo": 29296,
   "b_dp": 198000,
   "b_mo": 25309,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   33000,
+   29746
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLX 1.5G Turbo 2WD CVT"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GLS 1.5G Turbo 2WD CVT",
   "srp": 1599000,
-  "a_dp": 78000,
-  "a_mo": 33877,
+  "a_dp": 48000,
+  "a_mo": 33588,
   "b_dp": 268000,
   "b_mo": 28824,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   78000,
+   33877
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GLS 1.5G Turbo 2WD CVT (Quartz White Pearl)",
   "srp": 1614000,
-  "a_dp": 78000,
-  "a_mo": 34195,
+  "a_dp": 48000,
+  "a_mo": 33849,
   "b_dp": 268000,
   "b_mo": 29094,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   78000,
+   34195
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLS 1.5G Turbo 2WD CVT"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GT 1.5G Turbo 2WD CVT (Monotone)",
   "srp": 1929000,
-  "a_dp": 123000,
-  "a_mo": 37256,
+  "a_dp": 0,
+  "a_mo": 39666,
   "b_dp": 238000,
   "b_mo": 34772,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   123000,
+   37256
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)",
   "srp": 1939000,
-  "a_dp": 128000,
-  "a_mo": 37449,
+  "a_dp": 0,
+  "a_mo": 39844,
   "b_dp": 238000,
   "b_mo": 34953,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   128000,
+   37449
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Destinator",
   "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone) (Quartz White",
   "srp": 1954000,
-  "a_dp": 123000,
-  "a_mo": 37739,
+  "a_dp": 0,
+  "a_mo": 40108,
   "b_dp": 238000,
   "b_mo": 35223,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   123000,
+   37739
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)"
  },
  {
   "family": "Triton",
   "unit": "Triton GL 2.4D 2WD M/T",
   "srp": 1266000,
-  "a_dp": 138000,
-  "a_mo": 26822,
+  "a_dp": 93000,
+  "a_mo": 27371,
   "b_dp": 288000,
   "b_mo": 22821,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   138000,
+   26822
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GX 2.4D 2WD A/T",
   "srp": 1430000,
-  "a_dp": 23000,
-  "a_mo": 30297,
+  "a_dp": 0,
+  "a_mo": 29799,
   "b_dp": 193000,
   "b_mo": 25777,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   23000,
+   30297
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GX 2.4D 2WD A/T (White Diamond)",
   "srp": 1445000,
-  "a_dp": 23000,
-  "a_mo": 30615,
+  "a_dp": 0,
+  "a_mo": 30063,
   "b_dp": 193000,
   "b_mo": 26048,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   23000,
+   30615
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GX 2.4D 2WD A/T"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 2WD M/T",
   "srp": 1649000,
-  "a_dp": 103000,
-  "a_mo": 34937,
+  "a_dp": 43000,
+  "a_mo": 35205,
   "b_dp": 293000,
   "b_mo": 29725,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   103000,
+   34937
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 2WD M/T (White Diamond)",
   "srp": 1664000,
-  "a_dp": 98000,
-  "a_mo": 35255,
+  "a_dp": 43000,
+  "a_mo": 35466,
   "b_dp": 293000,
   "b_mo": 29996,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   98000,
+   35255
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 2WD M/T"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 2WD A/T",
   "srp": 1735000,
-  "a_dp": 58000,
-  "a_mo": 36759,
+  "a_dp": 3000,
+  "a_mo": 36675,
   "b_dp": 258000,
   "b_mo": 31275,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   58000,
+   36759
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 2WD A/T (White Diamond)",
   "srp": 1750000,
-  "a_dp": 53000,
-  "a_mo": 37077,
+  "a_dp": 3000,
+  "a_mo": 36938,
   "b_dp": 258000,
   "b_mo": 31546,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   53000,
+   37077
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 2WD A/T"
  },
  {
   "family": "Triton",
   "unit": "Triton GLS 2.4D 2WD A/T",
   "srp": 1999000,
-  "a_dp": 128000,
-  "a_mo": 38608,
+  "a_dp": 3000,
+  "a_mo": 41076,
   "b_dp": 248000,
   "b_mo": 36034,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   128000,
+   38608
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GLS 2.4D 2WD A/T (White Diamond)",
   "srp": 2014000,
-  "a_dp": 128000,
-  "a_mo": 38898,
+  "a_dp": 3000,
+  "a_mo": 41342,
   "b_dp": 248000,
   "b_mo": 36305,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   128000,
+   38898
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLS 2.4D 2WD A/T"
  },
  {
   "family": "Triton",
   "unit": "Triton GL 2.4D 4WD M/T",
   "srp": 1292000,
-  "a_dp": 138000,
-  "a_mo": 27373,
+  "a_dp": 98000,
+  "a_mo": 27836,
   "b_dp": 293000,
   "b_mo": 23290,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   138000,
+   27373
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 4WD M/T",
   "srp": 1949000,
-  "a_dp": 153000,
-  "a_mo": 41293,
+  "a_dp": 88000,
+  "a_mo": 41751,
   "b_dp": 383000,
   "b_mo": 35133,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   153000,
+   41293
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton GLX 2.4D 4WD M/T (White Diamond)",
   "srp": 1964000,
-  "a_dp": 148000,
-  "a_mo": 41611,
+  "a_dp": 88000,
+  "a_mo": 41876,
   "b_dp": 378000,
   "b_mo": 35403,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   148000,
+   41611
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 4WD M/T"
  },
  {
   "family": "Triton",
   "unit": "Triton Athlete 2.4D 4WD A/T",
   "srp": 2359000,
-  "a_dp": 148000,
-  "a_mo": 45561,
+  "a_dp": 0,
+  "a_mo": 48438,
   "b_dp": 288000,
   "b_mo": 42524,
   "fuel": null,
-  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   148000,
+   45561
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Triton",
   "unit": "Triton Athlete 2.4D 4WD A/T (White Diamond)",
   "srp": 2374000,
-  "a_dp": 148000,
-  "a_mo": 45851,
+  "a_dp": 0,
+  "a_mo": 48702,
   "b_dp": 288000,
   "b_mo": 42794,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier"
+  "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier",
+  "a_old": [
+   148000,
+   45851
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton Athlete 2.4D 4WD A/T"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport GLX 2.4D 2WD M/T",
   "srp": 1568000,
-  "a_dp": 80000,
-  "a_mo": 28265,
+  "a_dp": 0,
+  "a_mo": 30284,
   "b_dp": 80000,
   "b_mo": 28265,
   "fuel": null,
-  "flags": "20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)"
+  "flags": "20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)",
+  "a_old": [
+   80000,
+   28265
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from data.py Zero DP monthly (B row inconsistent, CONFIRM)"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport GLX 2.4D 2WD M/T (White Diamond)",
   "srp": 1583000,
-  "a_dp": 80000,
-  "a_mo": 28535,
+  "a_dp": 0,
+  "a_mo": 30574,
   "b_dp": 80000,
   "b_mo": 28535,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)"
+  "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)",
+  "a_old": [
+   80000,
+   28535
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from data.py Zero DP monthly (B row inconsistent, CONFIRM) ; DP from base variant Montero Sport GLX 2.4D 2WD M/T"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport GLS 2.4D 2WD A/T",
   "srp": 1927000,
-  "a_dp": 93000,
-  "a_mo": 40827,
+  "a_dp": 28000,
+  "a_mo": 40997,
   "b_dp": 318000,
   "b_mo": 34736,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   93000,
+   40827
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport GLS 2.4D 2WD A/T (White Diamond)",
   "srp": 1942000,
-  "a_dp": 93000,
-  "a_mo": 41145,
+  "a_dp": 28000,
+  "a_mo": 41386,
   "b_dp": 323000,
   "b_mo": 35007,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   93000,
+   41145
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport GLS 2.4D 2WD A/T"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport Black Series 2.4D 2WD A/T",
   "srp": 2190000,
-  "a_dp": 158000,
-  "a_mo": 46399,
+  "a_dp": 88000,
+  "a_mo": 46829,
   "b_dp": 418000,
   "b_mo": 39477,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   158000,
+   46399
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport Black Series 2.4D 2WD A/T (White Diamond)",
   "srp": 2205000,
-  "a_dp": 158000,
-  "a_mo": 46717,
+  "a_dp": 88000,
+  "a_mo": 46957,
   "b_dp": 413000,
   "b_mo": 39748,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   158000,
+   46717
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport Black Series 2.4D 2WD A/T"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport Black Series 2.4D 4WD A/T",
   "srp": 2530000,
-  "a_dp": 208000,
-  "a_mo": 53602,
+  "a_dp": 133000,
+  "a_mo": 53931,
   "b_dp": 503000,
   "b_mo": 45606,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   208000,
+   53602
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Montero Sport",
   "unit": "Montero Sport Black Series 2.4D 4WD A/T (White Diamond)",
   "srp": 2545000,
-  "a_dp": 203000,
-  "a_mo": 53920,
+  "a_dp": 133000,
+  "a_mo": 54190,
   "b_dp": 503000,
   "b_mo": 45877,
   "fuel": null,
-  "flags": "color variant, SRP differs"
+  "flags": "color variant, SRP differs",
+  "a_old": [
+   203000,
+   53920
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport Black Series 2.4D 4WD A/T"
  },
  {
   "family": "L300",
   "unit": "L300 CAB & CHASIS 2.2D M/T",
   "srp": 829000,
-  "a_dp": 48000,
-  "a_mo": 17564,
+  "a_dp": 0,
+  "a_mo": 17800,
   "b_dp": 133000,
   "b_mo": 14944,
   "fuel": null,
-  "flags": ""
+  "flags": "",
+  "a_old": [
+   48000,
+   17564
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "L300",
   "unit": "L300 FB BODY WITH SINGLE AC 2.2D M/T",
   "srp": 1012000,
-  "a_dp": 53000,
-  "a_mo": 21441,
+  "a_dp": 0,
+  "a_mo": 21617,
   "b_dp": 158000,
   "b_mo": 18242,
   "fuel": null,
-  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)"
+  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)",
+  "a_old": [
+   53000,
+   21441
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "L300",
   "unit": "L300 FB BODY WITHDUAL AC 2.2D M/T",
   "srp": 1039000,
-  "a_dp": 58000,
-  "a_mo": 22013,
+  "a_dp": 0,
+  "a_mo": 22214,
   "b_dp": 163000,
   "b_mo": 18729,
   "fuel": 20000,
-  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱53,000)"
+  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱53,000)",
+  "a_old": [
+   58000,
+   22013
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Versa Van",
   "unit": "Versa Van GLX 2.5D 2WD M/T",
   "srp": 1749000,
-  "a_dp": 68000,
-  "a_mo": 37055,
+  "a_dp": 38000,
+  "a_mo": 36059,
   "b_dp": 253000,
   "b_mo": 31528,
   "fuel": null,
-  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)"
+  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)",
+  "a_old": [
+   68000,
+   37055
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Versa Van",
   "unit": "Versa Van GLX 2.5D 2WD M/T (White Diamond)",
   "srp": 1764000,
-  "a_dp": 63000,
-  "a_mo": 37373,
+  "a_dp": 38000,
+  "a_mo": 36323,
   "b_dp": 253000,
   "b_mo": 31798,
   "fuel": null,
-  "flags": "color variant, SRP differs; p1 promo DP matches PSB not MMFP (MMFP 20% = ₱43,000)"
+  "flags": "color variant, SRP differs; p1 promo DP matches PSB not MMFP (MMFP 20% = ₱43,000)",
+  "a_old": [
+   63000,
+   37373
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Versa Van GLX 2.5D 2WD M/T"
  },
  {
   "family": "Versa Van",
   "unit": "Versa Van GLX 2.5D 2WD M/T (UPGRADED) 18 SEATER",
   "srp": 1764000,
-  "a_dp": 53000,
-  "a_mo": 37373,
+  "a_dp": 23000,
+  "a_mo": 36397,
   "b_dp": 243000,
   "b_mo": 31798,
   "fuel": null,
-  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱33,000)"
+  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱33,000)",
+  "a_old": [
+   53000,
+   37373
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Outlander PHEV",
   "unit": "OUTLANDER PHEV GT 2.4G AWD",
   "srp": 2848000,
-  "a_dp": 123000,
-  "a_mo": 60340,
+  "a_dp": 68000,
+  "a_mo": 59098,
   "b_dp": 433000,
   "b_mo": 51339,
   "fuel": null,
-  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱93,000); Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer"
+  "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱93,000); Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer",
+  "a_old": [
+   123000,
+   60340
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
  },
  {
   "family": "Outlander PHEV",
   "unit": "OUTLANDER PHEV GT 2.4G AWD (White)",
   "srp": 2863000,
-  "a_dp": 288000,
-  "a_mo": 55295,
+  "a_dp": 68000,
+  "a_mo": 59978,
   "b_dp": 458000,
   "b_mo": 51609,
   "fuel": null,
-  "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 25% MMFP tier; Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer"
+  "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 25% MMFP tier; Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer",
+  "a_old": [
+   288000,
+   55295
+  ],
+  "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant OUTLANDER PHEV GT 2.4G AWD"
  }
 ]

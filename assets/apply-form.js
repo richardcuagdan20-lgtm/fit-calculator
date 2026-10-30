@@ -49,7 +49,7 @@ function term(){return document.querySelector('[name=tu]:checked').value==='m'?+
 function unitHints(){var u=unit(),h=$('af-price'),d=$('af-dphint');if(!h)return;if(!u){h.textContent='';d.textContent='';return}
   h.textContent=u.price?'SRP / promo price: '+peso(u.price):T('Presyo: itatanong namin sa dealer.','Price: we will confirm with the dealer.');
   var dp=parseFloat(val('dp'));d.textContent=(u.price&&!isNaN(dp)?Math.round(dp/u.price*1000)/10+'% DP. ':'')+
-    (u.opts.length?T('Promo ngayong buwan: ','This month\'s promo: ')+u.opts.map(function(o){return (o.dp?peso(o.dp)+' DP':'Zero DP')+' → '+peso(o.mo)+'/mo (60 '+T('buwan','mo')+', all-in)'}).join(' · '):'')}
+    (u.opts.length?T('Promo ngayong buwan: ','This month\'s promo: ')+u.opts.map(function(o,i){return (i===0?'Option A: ':'Option B: ')+(o.dp?peso(o.dp)+' DP':'Zero DP Promo')+' → '+peso(o.mo)+'/mo (60 '+T('buwan','mo')+', all-in)'}).join(' · '):'')}
 
 /* ---------- requirements (mirrors the assessment checklist, rulebook §4) ---------- */
 var REQ={common:[['2 valid government IDs (hindi expired)','2 valid government IDs (unexpired)'],['Proof of billing (hindi lalampas ng 3 months)','Proof of billing (not older than 3 months)']],

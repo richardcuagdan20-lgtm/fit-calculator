@@ -111,7 +111,7 @@ function affAdj(a){if(!(a>=0)||a>=9)return -30;var d=(CFG.aff.pass-a)*100;return
 var AOR={12:1.22,24:1.24,36:1.32,48:1.48,60:1.55};function stdMo(P,dp,n){return (P-dp)*AOR[n]/n}
 function lighter(S){var u=A.unit,P=u.price,inc=incTot();if(!inc)return null;
   var heavy=S.affordability_ratio>CFG.aff.pass,tgt=CFG.aff.pass*inc,c=[],r1=function(x){return Math.ceil(x/1000)*1000},Y=', 5 '+T('taon','years');
-  if(u.ab){c.push({k:'optA',label:T('Lowest DP (Option A)','Lowest DP (Option A)'),dp:u.ab.a[0],n:60,mo:u.ab.a[1],unit:u.n});
+  if(u.ab){c.push({k:'optA',label:u.ab.a[0]===0?'Zero DP Promo (Option A)':T('Lowest DP (Option A)','Lowest DP (Option A)'),dp:u.ab.a[0],n:60,mo:u.ab.a[1],unit:u.n});
     if(u.ab.b[0]!==u.ab.a[0])c.push({k:'optB',label:'Option B · 30% DP',dp:u.ab.b[0],n:60,mo:u.ab.b[1],unit:u.n})}
   else if(heavy){var b=r1(P*0.3);if(b>S._dp)c.push({k:'optB',label:'Option B · 30% DP',dp:b,n:60,mo:stdMo(P,b,60),unit:u.n})}
   if(heavy){var bmo=c.length?c[c.length-1].mo:Infinity,need=r1(P-tgt*60/AOR[60]);
@@ -228,7 +228,7 @@ function tgtMo(){return {lt15k:15000,'15k_25k':25000,'25k_35k':35000,custom:A.ta
 function incTot(){return (A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0)}
 function recPlans(){var u=A.unit,P=u.price,inc=incTot(),cap=capDP(P),tgt=tgtMo(),n=A.preferred_term==='unsure'||!A.preferred_term?60:+A.preferred_term;
   var lim=Math.min(tgt||Infinity,inc?inc*CFG.fit_max_ratio:Infinity);
-  var pr=u.opts.map(function(o,i){return {kind:'promo',i:i,dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
+  var pr=u.opts.map(function(o,i){return {kind:'promo',i:i,dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(i===0?'Option A · ':'Option B · ')+(o.dp?peso(o.dp)+' DP':'Zero DP Promo')+' (all-in)'}});
   var inCap=pr.filter(function(o){return o.dp<=cap+1});if(!inCap.length)inCap=[pr.slice().sort(function(a,b){return a.dp-b.dp})[0]];
   var ok=inCap.filter(function(o){return o.mo<=lim}).sort(function(a,b){return a.dp-b.dp});
   var promo=ok[0]||inCap.slice().sort(function(a,b){return a.mo-b.mo})[0];
@@ -245,7 +245,7 @@ function recPlans(){var u=A.unit,P=u.price,inc=incTot(),cap=capDP(P),tgt=tgtMo()
 var pickPlan=null;
 function initCalc(S,res){
   var u=A.unit,P=u.price,inc=(A.gross_monthly_income||0)+(A.co_borrower==='yes'?(A.co_income||0):0),box=$('la-calc'),st={dp:A.rec&&A.rec.alt&&A.rec.alt.kind==='custom'?A.rec.alt.dp:A.rec&&A.rec.primary.kind==='custom'?A.rec.primary.dp:Math.round(P*0.2),n:A.rec?A.rec.term:60};
-  var promos=u.opts.map(function(o){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(o.dp?peso(o.dp)+' DP':'Zero DP')+' promo (all-in)'}});
+  var promos=u.opts.map(function(o,i){return {kind:'promo',dp:o.dp,n:CFG.promo_term_months,mo:o.mo,label:(i===0?'Option A · ':'Option B · ')+(o.dp?peso(o.dp)+' DP':'Zero DP Promo')+' (all-in)'}});
   function yrs(n){var y=n/12;return y+(A.lang==='en'?(y>1?' years':' year'):' taon')}
   function opt(dp,n){return {kind:'custom',dp:dp,n:n,mo:estMo(P-dp,n),label:Math.round(dp/P*100)+'% DP · '+yrs(n)}}
   function tot(o){return o.dp+o.mo*o.n}
