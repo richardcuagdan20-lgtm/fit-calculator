@@ -41,7 +41,7 @@ f.addEventListener('submit',function(ev){ev.preventDefault();
  bad=er('ab-name',n.length<2)||bad;bad=er('ab-mobile',!(window.Lead?Lead.okMobile(mob):/^09\d{9}$/.test(mob)))||bad;bad=er('ab-email',!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))||bad;bad=er('ab-consent',!ok)||bad;
  if(bad){var x=f.querySelector('[aria-invalid=true]');if(x)x.focus();return}
  var b=$('ab-btn');b.disabled=true;var S='promos-unlock-optionA';
- var done=function(){try{localStorage.setItem(K,'1');localStorage.setItem('promos_contact',JSON.stringify({n:n,m:mob,e:em}))}catch(_){}reveal();
+ var done=function(){try{localStorage.setItem(K,'1');localStorage.setItem('promos_contact',JSON.stringify({n:n,m:mob,e:em}))}catch(_){}try{document.dispatchEvent(new CustomEvent('promos:unlock',{detail:{n:n,m:mob,e:em}}))}catch(_){}reveal();
   if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-optionA',content_category:'promos',source:S};T('Lead',p);T('UnlockLowestDP',p,true)}
   $('ab-ok').scrollIntoView({block:'nearest'})};
  if(!window.Lead){done();return}

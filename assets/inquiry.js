@@ -38,7 +38,7 @@ function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=wh
   var ai=+box.getAttribute('data-ai'),a=A[ai],open=H.classList.contains('ab-open');
   var fa=a?(open?'Option A: '+(a[0]===0?'Zero DP Promo':peso(a[0])+' DP')+', '+peso(a[1])+'/mo':'Option A: locked (not unlocked)'):'Option A: n/a';
   var fig=fa+' | Option B: '+box.getAttribute('data-b');
-  var ok=function(){try{localStorage.setItem(CK,JSON.stringify({n:n.value.trim(),m:m.value.trim(),e:e.value.trim()}))}catch(_){}
+  var ok=function(){try{localStorage.setItem(CK,JSON.stringify({n:n.value.trim(),m:m.value.trim(),e:e.value.trim()}))}catch(_){}panel.setAttribute('data-ck',ck());
    f.hidden=true;var o=panel.querySelector('.iq-ok');o.hidden=false;o.setAttribute('tabindex','-1');o.focus();
    if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-inquiry',content_category:'promos',source:S,unit:u};T('Lead',p);T('InquirePromo',p,true)}};
   if(!window.Lead){ok();return}
@@ -47,6 +47,16 @@ function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=wh
   var q=new URLSearchParams(location.search);L.fbclid=q.get('fbclid')||'';
   L.usage=['Email: '+L.email,'source='+S,'Message: '+t.value.trim().slice(0,1000),fig,'Pre-qualified, subject to bank approval'].join(' | ');
   Lead.send(L).then(ok,ok)})}
-document.querySelectorAll('.iq').forEach(function(box){var b=box.querySelector('.ab-iq'),p=b&&document.getElementById(b.getAttribute('aria-controls'));if(!b||!p)return;
- b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';if(o&&!p.firstChild)build(box,p);b.setAttribute('aria-expanded',o?'true':'false');p.hidden=!o;if(o){var t=p.querySelector('textarea');if(t)t.focus({preventScroll:true})}})});
+/* Contact is re-read every time a form opens and on the unlock event (fix 2026-10-30: a form opened before the Option A unlock kept asking for name/mobile/email).
+   An unsent form is rebuilt when the saved contact changed; the typed message is kept. If unlocked with no saved contact, the fields are asked once and saved on send. */
+function ck(){var c=who();return c?c.n+'|'+c.m+'|'+c.e:''}
+function sync(box,p){if(!p.firstChild){build(box,p);p.setAttribute('data-ck',ck());return}
+ var f=p.querySelector('form');if(!f||f.hidden||p.getAttribute('data-ck')===ck())return;
+ var w=f.querySelector('.iq-who');if(w&&!w.hidden&&!who()){return}
+ var t=p.querySelector('textarea'),v=t?t.value:null;build(box,p);p.setAttribute('data-ck',ck());if(v!==null)p.querySelector('textarea').value=v}
+var ALL=[];
+function syncAll(){ALL.forEach(function(x){if(x[1].firstChild)sync(x[0],x[1])})}
+document.addEventListener('promos:unlock',syncAll);window.addEventListener('storage',function(e){if(e.key===CK)syncAll()});
+document.querySelectorAll('.iq').forEach(function(box){var b=box.querySelector('.ab-iq'),p=b&&document.getElementById(b.getAttribute('aria-controls'));if(!b||!p)return;ALL.push([box,p]);
+ b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';if(o)sync(box,p);b.setAttribute('aria-expanded',o?'true':'false');p.hidden=!o;if(o){var t=p.querySelector('textarea');if(t)t.focus({preventScroll:true})}})});
 })();
