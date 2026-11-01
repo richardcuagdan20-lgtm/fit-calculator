@@ -454,6 +454,7 @@ exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py"))
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"statuspage.py")).read())
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"card.py")).read())
 # ---------- GUIDES & TIPS: one combined index of every article (blog, guides, tips, evergreen landing guides), newest first. No promos page here.
 for _p,_a in LAND_PATHS: GT_ALL.append((_p,_a["title"],_a["desc"],PROMO_UPDATED))
 import datetime as _dt
@@ -602,7 +603,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     _n=_re.sub(r'<script>window\.SITECHAT_ON=.*?</script><script src="/assets/sitechat\.js[^"]*" defer></script>','',_s)
     _n=_re.sub(r'<script src="/assets/track\.js[^"]*" defer></script>','',_n)
     _n=_n.replace('src="/assets/calc.js"','src="/assets/calc.js?v='+_vh('/assets/calc.js')+'"')
-    _n=_n.replace('</body>',_SCTAG+'<script src="/assets/track.js?v='+_vh('/assets/track.js')+'" defer></script></body>',1)
+    _n=_n.replace('</body>',('' if _f.replace(R,'').startswith('/card/') else _SCTAG)+'<script src="/assets/track.js?v='+_vh('/assets/track.js')+'" defer></script></body>',1)  # /card/ = NFC business card: no chat widget
     if _n!=_s: open(_f,'w').write(_n)
 print(len(PAGES),"pages")
 # --- header dropdowns: close others when one opens; close on outside click (desktop)
@@ -635,7 +636,7 @@ def _fm_strip(s,status):
 for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if '/_src/' in _f: continue
     _s=open(_f).read()
-    if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
+    if 'http-equiv="refresh"' in _s or '</body>' not in _s or _f.replace(R,'').startswith('/card/'): continue  # /card/ keeps its own Messenger button
     _n=_re.sub(r'<a class="fmsg".*?</a>(<script>\(function\(\)\{var f=document\.getElementById\("fmsg"\).*?</script>)?','',_s,flags=_re.S); _n=_re.sub(r'<link rel="stylesheet" href="/assets/fmsg\.css[^"]*">','',_n)
     _n=_fm_strip(_n,'/status/' in _f.replace(R,''))
     if _f.replace(R,'').startswith('/loan-assessment/'):  # Richard 2026-10-29: no Messenger/Facebook link anywhere on the assessment
