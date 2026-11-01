@@ -50,6 +50,8 @@ h1{{position:relative;margin:0;font-size:26px;letter-spacing:-.01em}}.role{{posi
 h2{{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b73;margin:26px 20px 10px}}
 .nav{{display:grid;gap:8px;padding:0 16px}}.nt{{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e7e7ea;border-radius:14px;padding:12px 14px;min-height:60px}}
 .ni{{flex:none;width:40px;height:40px;border-radius:12px;background:#fdecee;color:#b8000e;display:grid;place-items:center}}.nx{{display:flex;flex-direction:column;flex:1;min-width:0}}.nx b{{font-size:15.5px;color:#0b0b0c}}.nx small{{font-size:13px;color:#6b6b73}}.ch{{font-size:24px;color:#b8000e}}
+.qrb{{display:flex;align-items:center;gap:10px;width:calc(100% - 32px);margin:10px 16px 0;background:#0b0b0c;color:#fff;border:0;border-radius:16px;padding:12px;min-height:60px;font:inherit;text-align:left;cursor:pointer}}.qrb .ai{{background:#ffffff1f;color:#fff}}
+.qrm{{position:fixed;inset:0;background:#000000cc;display:grid;place-items:center;padding:20px;z-index:50}}.qrm[hidden]{{display:none}}.qrc{{background:#fff;border-radius:24px;padding:22px;text-align:center;max-width:360px;width:100%}}.qrc img{{width:100%;max-width:300px;height:auto;margin:8px auto}}.qrc p{{margin:0;color:#0b0b0c}}.qs{{font-size:13px;color:#6b6b73!important}}.qx{{margin-top:14px;background:#e60012;color:#fff;border:0;border-radius:999px;padding:12px 28px;font:inherit;font-weight:700;cursor:pointer}}
 .note{{margin:22px 20px 0;font-size:12px;color:#6b6b73;line-height:1.55}}.note a{{color:#b8000e}}
 a:focus-visible{{outline:3px solid #e60012;outline-offset:2px}}
 @media(min-width:560px){{body{{padding:24px 0}}.wrap{{border-radius:28px;overflow:hidden;background:#f4f4f5;box-shadow:0 10px 40px #0000001f}}}}
@@ -60,9 +62,12 @@ a:focus-visible{{outline:3px solid #e60012;outline-offset:2px}}
 <div class="ph"><img src="/assets/img/richard-300.webp" width="300" height="300" alt="{CARD_NAME}, Mitsubishi Car Sales Executive"></div>
 <h1>{CARD_NAME}</h1><p class="role">Car Sales Executive</p><p class="corp">{CARD_CORP}</p><p class="area">Serving San Jose del Monte (SJDM), Bulacan and Quezon City</p></header>
 <section class="acts" aria-label="Contact">{ab}</section>
+<button class="qrb" id="qrb" type="button" aria-haspopup="dialog"><span class="ai">{_ic("M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z")}</span><span class="al"><b>Show my QR code</b><small>Let a client scan this card from my phone</small></span></button>
+<div class="qrm" id="qrm" role="dialog" aria-modal="true" aria-label="QR code" hidden><div class="qrc"><p><b>Scan to open my card</b></p><img src="/assets/card/card-qr.png" width="320" height="320" alt="QR code for Richard Cuagdan's digital business card"><p class="qs">{CARD_NAME}<br>mitsubishipromos.online/card</p><button type="button" id="qrx" class="qx">Close</button></div></div>
 <h2>Explore my website</h2><nav class="nav" aria-label="Website sections">{tiles}</nav>
 <p class="note">{CARD_NAME} is a sales executive of {CARD_CORP}, an authorized Mitsubishi dealership. This is his personal sales page and not the official website of Mitsubishi Motors Philippines Corporation. All monthly amounts are estimates, pre-qualified and subject to bank approval. <a href="/privacy/">Privacy</a></p>
 </div>
+<script>(function(){{var m=document.getElementById('qrm'),b=document.getElementById('qrb'),x=document.getElementById('qrx');function o(){{m.hidden=false;x.focus();if(window.gtag)gtag('event','card_qr_open')}}function c(){{m.hidden=true;b.focus()}}b.addEventListener('click',o);x.addEventListener('click',c);m.addEventListener('click',function(e){{if(e.target===m)c()}});document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!m.hidden)c()}})}})();</script>
 <script>document.addEventListener('click',function(ev){{var a=ev.target.closest('a[data-ev]');if(a&&window.gtag)gtag('event','card_'+a.dataset.ev,{{transport_type:'beacon'}})}});</script>
 </body></html>'''
 os.makedirs(R+"/card",exist_ok=True); os.makedirs(R+"/assets/card",exist_ok=True)
