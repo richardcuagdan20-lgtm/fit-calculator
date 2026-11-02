@@ -2228,6 +2228,9 @@ body='''<p>Brand new vs second hand car in the Philippines: the second-hand pric
 DRAFT_POSTS=BULK6+BULK5+BULK4+BULK3+BULK2+BULK+DRAFT_POSTS
 from loanguide import POSTS_L as _ZL
 DRAFT_POSTS[0:0]=_ZL
+from seo2026 import P as _NEW
+from seo_local import P as _LOC
+DRAFT_POSTS=_LOC+_NEW+DRAFT_POSTS  # SEO draft-seo2 2026-11-02 (FAQ hub held back)
 from seo import apply as _seo
 DRAFT_POSTS=_seo(DRAFT_POSTS)
 PUBLISH=[a["slug"] for a in DRAFT_POSTS]  # all published Oct 21, 2026
