@@ -556,9 +556,9 @@ open(R+"/sitemap.xml","w").write(sm)
 AI_BOTS=["GPTBot","OAI-SearchBot","ChatGPT-User","PerplexityBot","ClaudeBot","Google-Extended","Bingbot"]
 open(R+"/robots.txt","w").write(f"User-agent: *\nAllow: /\n\n"+"".join(f"User-agent: {b}\nAllow: /\n\n" for b in AI_BOTS)+f"Sitemap: {D}/sitemap.xml\n")
 def _ll(items,base): return "".join(f"- [{a['title']}]({D}/{base}/{a['slug']}/): {a['desc']}\n" for a in items)
-open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
+open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales Executive, San Jose del Monte (SJDM), Bulacan
 
-> Personal sales website of Richard Cuagdan, Mitsubishi Sales Executive in San Jose del Monte (SJDM), Bulacan, Philippines. Not the official Mitsubishi Motors Philippines website. Prices shown are official SRPs; promos are subject to bank approval.
+> Independent personal sales website of Richard Cuagdan, authorized Mitsubishi Sales Executive in San Jose del Monte (SJDM), Bulacan, Philippines. Not the official Mitsubishi Motors Philippines website. Prices shown are official SRPs; promos are subject to bank approval.
 
 ## Key pages
 - [Home]({D}/): Mitsubishi lineup and SRPs
@@ -573,7 +573,7 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 ## Buying guides (evergreen, with dated monthly promo table)
 """+"".join(f"- [{a['title']}]({D}/{a['slug']}/): {a['desc']}\n" for a in LANDINGS)+f"""
 ## Contact
-- Sales executive: Richard Dennis Cuagdan, Car Sales Executive
+- Sales executive: Richard Dennis Cuagdan, authorized Mitsubishi Sales Executive
 - Mobile (call or text): {TELD} ({TEL})
 - Brand: Richard Cuagdan, authorized Mitsubishi sales executive (car agent) in San Jose del Monte, Bulacan. This is his independent personal sales page, not a dealership or Mitsubishi Motors Philippines website.
 - Location: San Jose del Monte (SJDM), Bulacan, Philippines (city only)
@@ -581,6 +581,16 @@ open(R+"/llms.txt","w").write(f"""# Mitsubishi Motors by Richard Cuagdan
 - Hours: Monday to Saturday, 8:00 AM to 5:00 PM
 - Messenger: {MSG}
 
+## Key facts (updated {_dt.date.today().isoformat()}; promo figures valid for {NOTE.split("valid for ")[1].split(",")[0]} only)
+- Who: Richard Dennis Cuagdan, authorized Mitsubishi sales executive (car agent), San Jose del Monte (SJDM), Bulacan. Independent personal sales page; not a dealership website and not the official Mitsubishi Motors Philippines Corporation website.
+- Areas served: San Jose del Monte, Caloocan/Novaliches, Fairview/Quezon City, Marilao, Meycauayan, Bocaue, Santa Maria, Norzagaray, Montalban (Rodriguez) and Malolos. No branches in those towns.
+- SRPs: official Mitsubishi Motors Philippines price list, subject to change.
+- Promos on /promos/: two all-in options per unit on 60 months. Option A = lowest down payment (Zero DP Promo on select units); Option B = 30% down payment with a lower monthly. Always subject to bank approval.
+- All-in includes: {"; ".join(ALLIN)}.
+- Assessment results are worded "Pre-qualified, subject to bank approval"; the bank makes the final decision. Fuel freebies are stated in fuel points.
+
+## Option A (lowest DP) and Option B by variant ({NOTE.split("valid for ")[1].split(",")[0]}, 60 months, all-in, subject to bank approval)
+"""+"".join(f"- Mitsubishi {v['n']}: SRP {f(v['promo']['srp'] or v['srp']) if v['promo'] else srp_txt(v)}; Option A {v['promo']['opts'][0][0]} / {f(v['promo']['opts'][0][1])} per month; Option B {v['promo']['opts'][1][0]} / {f(v['promo']['opts'][1][1])} per month"+(f"; freebie {v['promo']['fuel']:,} fuel points" if v['promo'].get('fuel') else "")+"\n" for m in MODELS for v in m["variants"] if v['promo'] and len(v['promo']['opts'])>1)+f"""
 ## Models
 """+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Guides & Tips (all articles, newest first; index: "+D+GT+")\n"+"".join(f"- [{t}]({D}{u}): {d}\n" for u,t,d,dt in _GTL if u not in GT_LAND))
 import og as _og
@@ -667,3 +677,17 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     else:
         _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
     if _n!=_s: open(_f,'w').write(_n)
+
+# --- sitemap lastmod = date the page's main content last changed (content hash; state in _src/lastmod.json). Computed after all post-processing.
+import json as _js, hashlib as _hl, datetime as _dt2
+_LMF=os.path.join(os.path.dirname(os.path.abspath(__file__)),"lastmod.json")
+_LM=_js.load(open(_LMF)) if os.path.exists(_LMF) else {}
+def _lastmod(p):
+    try: h=open(R+p+"index.html").read()
+    except Exception: return _dt2.date.today().isoformat()
+    mm=_re.search(r"<main.*?</main>",h,_re.S); h=_re.sub(r'<ul class="links">.*?</ul>|<aside.*?</aside>|<script.*?</script>',"",mm.group(0) if mm else h,flags=_re.S); h=_hl.md5(h.encode()).hexdigest()
+    o=_LM.get(p)
+    if not o or o[0]!=h: _LM[p]=[h,_dt2.date.today().isoformat()]
+    return _LM[p][1]
+sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>{_lastmod(p)}</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
+open(R+"/sitemap.xml","w").write(sm); _js.dump(_LM,open(_LMF,"w"),indent=0,sort_keys=True)
