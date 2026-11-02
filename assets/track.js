@@ -27,3 +27,5 @@ try{new MutationObserver(function(){wire()}).observe(document.documentElement,{c
 })();
 /* HeroCTA: single hero button click -> Pixel ViewContent + custom HeroCTA */
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-herocta]');if(!a||!window.rpTrack)return;var p={source:a.getAttribute('data-herocta'),content_name:'hero_view_promos',content_category:'promos'};window.rpTrack('ViewContent',p);window.rpTrack('HeroCTA',p,true)});
+
+document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[data-brochure]');if(!a)return;try{if(typeof window.gtag==='function')window.gtag('event','brochure_download',{model:a.getAttribute('data-brochure'),link_url:a.href})}catch(_){}},true);

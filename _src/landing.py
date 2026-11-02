@@ -62,6 +62,7 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
 <h2>Plan your visit</h2>
 <ol class="steps"><li><h3>Check your budget</h3><p>Use the <a href="/budgetcalculator/">budget calculator</a> to see which units fit.</p></li><li><h3>Book a test drive</h3><p>Pick the unit and time on the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Message or call me</h3><p>Call or text {TELD} so the unit is ready when you arrive. Coming from the city? Read <a href="/blog/mitsubishi-near-fairview-quezon-city/">Mitsubishi near Fairview</a> or <a href="/blog/mitsubishi-near-caloocan-novaliches/">near Caloocan and Novaliches</a>.</p></li></ol>
 <p>Planning your purchase? Read the <a href="/tips/mitsubishi-buying-guide-sjdm-bulacan/">step-by-step SJDM buying guide</a>, <a href="/tips/car-financing-bulacan/">low down payment financing in Bulacan</a>, <a href="/tips/best-mitsubishi-for-sjdm-manila-commute/">which unit fits the SJDM to Manila commute</a> and the <a href="/tips/mitsubishi-bulacan-areas-served/">areas I serve</a>.</p>
+<p>Comparing units? <a href="/brochures/">Download official Mitsubishi brochures (PDF)</a> for every model.</p>
 <p>Want to know what "casa" means and what to expect at an authorized dealership? See <a href="/mitsubishi-casa-bulacan/">Mitsubishi casa Bulacan</a>. Bulacan buyers can also read <a href="/blog/mitsubishi-dealer-bulacan/">Mitsubishi dealer Bulacan</a>.</p>
 '''+CTAX("Check your budget, then book a test drive in SJDM. I'll have your unit ready."),
  faq=[("Where is Mitsubishi in SJDM, Bulacan?","Richard Cuagdan serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
@@ -101,7 +102,7 @@ L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",al
 <h2>Directions</h2>
 <p><b>Richard Cuagdan, Mitsubishi SJDM</b>, serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions.</p>
 <p class="row"><a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard for directions</a></p>
-<p>More for SJDM buyers: <a href="/mitsubishi-sjdm-bulacan/">Mitsubishi SJDM Bulacan</a>.</p>
+<p>More for SJDM buyers: <a href="/mitsubishi-sjdm-bulacan/">Mitsubishi SJDM Bulacan</a> and <a href="/brochures/">official Mitsubishi brochures (PDF)</a>.</p>
 '''+CTAX("Message or call me before you go to the casa so I can have your unit ready."),
  faq=[("What does casa mean for cars in the Philippines?","Casa is the common term for a brand's authorized dealership, where you buy brand-new units and bring your car for service and warranty work."),
  ("Where is the Mitsubishi casa in San Jose del Monte?","Richard Cuagdan, authorized Mitsubishi sales executive, serves San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call him for a showroom visit and directions."),
