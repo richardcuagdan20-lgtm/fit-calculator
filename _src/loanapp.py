@@ -32,12 +32,12 @@ for m in MODELS:
         if not price: continue
         LAU.append({"id":v["id"],"model":m["name"],"n":v["n"],"price":price,"colors":_cl(v["id"]),"opts":[{"dp":_dp(l),"mo":mo} for l,mo in v["promo"]["opts"]]})
 def B(tl,en): return f'<span class="tl">{tl}</span><span class="en">{en}</span>'
-LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>San Juan Motors</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
+LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>Mitsubishi SJDM</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
  '(kasama ang IDs, income, at financial documents) para lamang sa pag-assess ng aking car loan application, at i-share ito sa piling partner banks at financing companies '
  '(hal. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) para sa credit evaluation, alinsunod sa Republic Act No. 10173 (Data Privacy Act of 2012). '
  'Alam ko ang aking karapatan na ma-access, maitama, ma-withdraw ang consent, at ipabura ang aking data, at maaari akong makipag-ugnayan sa aming Data Protection Officer (contact para sa privacy concerns) sa <b>richard.cuagdan20@gmail.com</b>. '
  'Kung mag-message ka kay Richard sa Facebook Messenger, gagamitin lang ang messages para sagutin ang inquiry mo. Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.',
- 'By checking this box, I allow <b>San Juan Motors</b> / mitsubishipromos.online to collect, process, and store my personal and sensitive personal information '
+ 'By checking this box, I allow <b>Mitsubishi SJDM</b> / mitsubishipromos.online to collect, process, and store my personal and sensitive personal information '
  '(including IDs, income, and financial documents) solely to assess my car loan application, and to share it with selected partner banks and financing companies '
  '(e.g. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) for credit evaluation, in accordance with Republic Act No. 10173 (Data Privacy Act of 2012). '
  'I know my rights to access, correct, withdraw consent, and have my data erased, and I may contact the Data Protection Officer (contact for privacy concerns) at <b>richard.cuagdan20@gmail.com</b>. '
@@ -75,7 +75,7 @@ LA_CSS='''<style>
 .la-score{border-radius:16px;padding:14px 16px;margin:12px 0;background:#f4f4f5}.la-score.ok{background:#ecfdf5}.la-score.mid{background:#fffbeb}.la-score.no{background:#fef2f2}.la-sl{margin:0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#52525b}.la-sv{margin:2px 0 6px}.la-sv b{font-size:34px;line-height:1.1}.la-sv span{font-weight:700;color:#3f3f46}.la-sb{height:10px;background:#e4e4e7;border-radius:99px;overflow:hidden}.la-sb i{display:block;height:100%;background:#16a34a}.la-score.mid .la-sb i{background:#d97706}.la-score.no .la-sb i{background:#dc2626}.la-sc{font-size:13px;color:#52525b;margin:8px 0 0}.la-sd summary{cursor:pointer;font-size:14px;margin-top:6px}.la-sd ul{margin:6px 0 0;padding-left:18px}
 .la-bu{font-size:15px;padding:10px 12px}.la-in .chip{padding:7px 12px;font-size:14px}.la-log{gap:9px}.la-card{padding:18px}
 </style>'''
-page("/loan-assessment/","AI Car Loan Application Assessment | Mitsubishi Motors - San Juan Motors",
+page("/loan-assessment/","AI Car Loan Application Assessment | Richard Cuagdan, Mitsubishi SJDM Bulacan",
  "AI Car Loan Application Assessment for Mitsubishi: answer a few questions, pick your unit and promo, and find out if you are Pre-qualified. Takes 3 minutes.",
 LA_CSS+f'''<section class="la-hero"><div class="w">
 <div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>

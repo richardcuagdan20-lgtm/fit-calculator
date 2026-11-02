@@ -62,7 +62,7 @@ def make(path,head,img):
     for s in ls[:3]:
         d.text((96,y),s,font=f,fill="white");y+=int(sz*1.18)
     d.text((96,H-92),"Mitsubishi Motors by Richard",font=_f(30,"SemiBold"),fill=(235,235,235))
-    d.text((96,H-54),"San Juan Motors · San Jose del Monte, Bulacan",font=_f(22,"Regular"),fill=(190,190,190))
+    d.text((96,H-54),"Mitsubishi SJDM · San Jose del Monte, Bulacan",font=_f(22,"Regular"),fill=(190,190,190))
     im.save(out,"JPEG",quality=84,optimize=True,progressive=True)
     return rel
 

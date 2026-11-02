@@ -1,7 +1,7 @@
 # Digital business card for NFC / QR: /card/ (standalone mobile page) + downloadable contact file.
 # Built from build.py (exec). Not in the sitemap (noindex).
 CARD_NAME="Richard Dennis Cuagdan"
-CARD_CORP="Mitsubishi San Juan Motors Corporation"
+CARD_CORP="Authorized Mitsubishi Sales Executive · SJDM Bulacan"
 _U="?utm_source=nfc&utm_medium=card&utm_campaign=business-card"
 _NAVC=[("/promos/","Promos","Option A and Option B for every unit","M4 7h16v3H4zm2 5h12v7H6z"),
  ("/cars/","Cars and prices","All models, variants and inclusions","M5 16l1.5-5h11L19 16M5 16v3h2v-1h10v1h2v-3M7.5 14h.01M16.5 14h.01"),
@@ -27,7 +27,7 @@ def _card_html():
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {GA}
 {CL}<title>Richard Cuagdan | Mitsubishi Car Sales Executive, SJDM Bulacan</title>
-<meta name="description" content="Digital business card of Richard Dennis Cuagdan, Car Sales Executive at {CARD_CORP}. Call, text, Messenger, promos, loan pre-qualification and test drive.">
+<meta name="description" content="Digital business card of Richard Dennis Cuagdan, authorized Mitsubishi Sales Executive in San Jose del Monte, Bulacan. Call, text, Messenger, promos, loan pre-qualification and test drive.">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="{D}/card/">
 <meta property="og:type" content="profile"><meta property="og:title" content="Richard Cuagdan | Mitsubishi Car Sales Executive">
@@ -65,7 +65,7 @@ a:focus-visible{{outline:3px solid #e60012;outline-offset:2px}}
 <button class="qrb" id="qrb" type="button" aria-haspopup="dialog"><span class="ai">{_ic("M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z")}</span><span class="al"><b>Show my QR code</b><small>Let a client scan this card from my phone</small></span></button>
 <div class="qrm" id="qrm" role="dialog" aria-modal="true" aria-label="QR code" hidden><div class="qrc"><p><b>Scan to open my card</b></p><img src="/assets/card/card-qr.png" width="320" height="320" alt="QR code for Richard Cuagdan's digital business card"><p class="qs">{CARD_NAME}<br>mitsubishipromos.online/card</p><button type="button" id="qrx" class="qx">Close</button></div></div>
 <h2>Explore my website</h2><nav class="nav" aria-label="Website sections">{tiles}</nav>
-<p class="note">{CARD_NAME} is a sales executive of {CARD_CORP}, an authorized Mitsubishi dealership. This is his personal sales page and not the official website of Mitsubishi Motors Philippines Corporation. All monthly amounts are estimates, pre-qualified and subject to bank approval. <a href="/privacy/">Privacy</a></p>
+<p class="note">{CARD_NAME} is an authorized Mitsubishi sales executive in San Jose del Monte, Bulacan. This is his independent personal sales page and not the official website of Mitsubishi Motors Philippines Corporation. All monthly amounts are estimates, pre-qualified and subject to bank approval. <a href="/privacy/">Privacy</a></p>
 </div>
 <script>(function(){{var m=document.getElementById('qrm'),b=document.getElementById('qrb'),x=document.getElementById('qrx');function o(){{m.hidden=false;x.focus();if(window.gtag)gtag('event','card_qr_open')}}function c(){{m.hidden=true;b.focus()}}b.addEventListener('click',o);x.addEventListener('click',c);m.addEventListener('click',function(e){{if(e.target===m)c()}});document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!m.hidden)c()}})}})();</script>
 <script>document.addEventListener('click',function(ev){{var a=ev.target.closest('a[data-ev]');if(a&&window.gtag)gtag('event','card_'+a.dataset.ev,{{transport_type:'beacon'}})}});</script>

@@ -132,7 +132,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <div class="fld"><label for="ab-name"><span class="en">Full name</span><span class="tl">Buong pangalan</span></label><input id="ab-name" autocomplete="name" required><p class="ferr" id="e_ab-name" hidden><span class="en">Please enter your name.</span><span class="tl">Pakilagay ang pangalan mo.</span></p></div>
 <div class="fld"><label for="ab-mobile">Mobile number</label><input id="ab-mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="ferr" id="e_ab-mobile" hidden><span class="en">Enter a valid mobile number (09XXXXXXXXX).</span><span class="tl">Maglagay ng tamang mobile number (09XXXXXXXXX).</span></p></div>
 <div class="fld"><label for="ab-email">Email</label><input id="ab-email" type="email" autocomplete="email" required><p class="ferr" id="e_ab-email" hidden><span class="en">Enter a valid email.</span><span class="tl">Maglagay ng tamang email.</span></p></div></div>
-<label class="chk"><input type="checkbox" id="ab-consent"><span><span class="en">I agree to be contacted by Richard Cuagdan of Mitsubishi San Juan Motors about these promos, and to the <a href="/privacy/">privacy policy</a>.</span><span class="tl">Pumapayag akong i-contact ni Richard Cuagdan ng Mitsubishi San Juan Motors tungkol sa promos na ito, at sa <a href="/privacy/">privacy policy</a>.</span></span></label>
+<label class="chk"><input type="checkbox" id="ab-consent"><span><span class="en">I agree to be contacted by Richard Cuagdan, authorized Mitsubishi sales executive, about these promos, and to the <a href="/privacy/">privacy policy</a>.</span><span class="tl">Pumapayag akong i-contact ni Richard Cuagdan, authorized Mitsubishi sales executive, tungkol sa promos na ito, at sa <a href="/privacy/">privacy policy</a>.</span></span></label>
 <p class="ferr" id="e_ab-consent" hidden><span class="en">Please tick the consent box.</span><span class="tl">Paki-check ang consent box.</span></p>
 <button class="btn ab-btn" id="ab-btn" type="submit"><span class="en">Unlock Option A</span><span class="tl">I-unlock ang Option A</span></button>
 <p class="muted ab-s" style="margin-top:10px">Pre-qualified, subject to bank approval.</p></form></div>
@@ -160,8 +160,8 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section></div>
 {POP}<script type="text/plain" id="ab-a">{blob}</script>
 <script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
-    page("/promos/","October 2026 Promos | Mitsubishi Motors - San Juan Motors",
-     "October 2026 Mitsubishi promos from San Juan Motors: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
+    page("/promos/","October 2026 Promos | Richard Cuagdan, Mitsubishi SJDM Bulacan",
+     "October 2026 Mitsubishi promos from Mitsubishi SJDM: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
      body, crumbs=[("/","Home"),("/promos/","Promos")])
     return [r["unit"] for r in rs]
 
