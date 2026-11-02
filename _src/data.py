@@ -10,6 +10,12 @@ def f(n): return "₱"+format(n,",")
 def V(id,n,srp,img,promo=None,srpnote=None): return dict(id=id,n=n,srp=srp,img=img,promo=promo,srpnote=srpnote)
 def P(opts,fuel=None,srp=None): return dict(opts=opts,fuel=fuel,srp=srp)
 MODELS=[
+ dict(slug="mirage",name="Mirage",cat="Hatchback",img="mir_glx_red",
+  blurb="A compact five-door hatchback with a 1.2L MIVEC engine and a 4.6-meter turning radius, made for narrow streets, tight parking and an easy first-car budget.",
+  who="first-time owners, solo commuters and young professionals who mostly drive in the city",
+  specs=[("Engine","1.2L (1,193 cc) 3-cylinder DOHC MIVEC gasoline (3A92), Euro 4"),("Max power / torque","77.52 PS / 100 Nm"),("Transmission","5-speed manual or INVECS-III CVT"),("Minimum turning radius","4.6 m"),("Fuel tank","35 L"),("Seating","5")],
+  variants=[V("mirglxmt","Mirage GLX 1.2G M/T",720000,"mir_glx_red"),
+            V("mirglxcvt","Mirage GLX 1.2G CVT",781000,"mir_glx_red")]),
  dict(slug="mirage-g4",name="Mirage G4",cat="Sedan",img="mg4gls_u17",
   blurb="A compact, fuel-sipping sedan that is easy to park around SJDM and Metro Manila and gentle on a first-car budget.",
   who="first-time buyers, daily commuters and young professionals",
@@ -99,6 +105,11 @@ def _abk(x):
     x={"2026 L300 Dual AC":"L300 FB Body Dual AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}.get(x,x)
     return _re.sub(r"[^a-z0-9]","",x.lower().replace("withdual","dual").replace("with single","single").replace("chasis","chassis"))
 _ABM={_abk(r["unit"]):r for r in _AB}
+# Unconfirmed Option B (Richard 2026-11-03): a row whose flags say the 30% tab monthly is a suspected copy error and needs
+# confirmation is never published; every surface shows "Ask for latest" instead (see promosab.BASK).
+BASK="Ask for latest"
+def b_ok(r):
+    fl=(r.get("flags") or "").lower(); return not ("30% tab" in fl and "confirm" in fl)
 def dplabel(dp): return "Zero DP Promo" if dp==0 else f"₱{dp/1000:g}K DP"
 AB_UNMATCHED=[]
 for _m in MODELS:
@@ -106,5 +117,6 @@ for _m in MODELS:
         _r=_ABM.get(_abk(_v["n"]))
         if not _r: AB_UNMATCHED.append(_v["n"]); continue
         _old=_v["promo"] or {}
-        _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"]),(dplabel(_r["b_dp"]),_r["b_mo"])],_old.get("fuel"),srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
-        _v["ab"]=dict(a_dp=_r["a_dp"],a_mo=_r["a_mo"],b_dp=_r["b_dp"],b_mo=_r["b_mo"],srp=_r["srp"])
+        _bok=b_ok(_r)  # flagged "confirm" Option B (sheet copy error) -> not published; shown as "Ask for latest"
+        _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"])]+([(dplabel(_r["b_dp"]),_r["b_mo"])] if _bok else []),_old.get("fuel"),srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
+        _v["ab"]=dict(a_dp=_r["a_dp"],a_mo=_r["a_mo"],b_dp=_r["b_dp"] if _bok else None,b_mo=_r["b_mo"] if _bok else None,srp=_r["srp"])

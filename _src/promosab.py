@@ -2,6 +2,7 @@
 # Option A = lowest DP + monthly (LOCKED until the visitor unlocks with name/mobile/email+consent; one unlock reveals all units).
 # Option B = 30% DP + low monthly, public (same figures as the saved replies). Source: /workspace/loanapp/pricelist/optionAB.json (Oct 2026).
 import json, hashlib, base64, os
+from data import b_ok, BASK
 SRC="/workspace/loanapp/pricelist/optionAB.json"
 CACHE=os.path.join(os.path.dirname(__file__),"optionAB_oct2026.json")
 FAM=[("Mirage Hatchback","mirage","Mirage"),("Mirage G4","mirage-g4","Mirage G4"),("Xpander","xpander","Xpander"),("Xpander Cross","xpander-cross","Xpander Cross"),
@@ -14,10 +15,10 @@ RANGE={"mirage-g4":(0,18000),"xpander":(18000,33000),"xforce":(18000,48000),"des
 FUEL={"Xpander GLX 1.5G 2WD M/T":30000,"L300 FB BODY WITHDUAL AC 2.2D M/T":20000}
 NICE={"L300 CAB & CHASIS 2.2D M/T":"L300 Cab & Chassis 2.2D M/T","L300 FB BODY WITH SINGLE AC 2.2D M/T":"L300 FB Body Single AC 2.2D M/T",
  "L300 FB BODY WITHDUAL AC 2.2D M/T":"L300 FB Body Dual AC 2.2D M/T","OUTLANDER PHEV GT 2.4G AWD":"Outlander PHEV GT 2.4G AWD"}
-MODELIMG={'mirage-g4':'mg4gls_u17','xpander':'xpglx_x37','xpander-cross':'xc_x3n','xforce':'xf_glx','destinator':'de_x3n','triton':'tr_lineup',
+MODELIMG={'mirage':'mir_glx_red','mirage-g4':'mg4gls_u17','xpander':'xpglx_x37','xpander-cross':'xc_x3n','xforce':'xf_glx','destinator':'de_x3n','triton':'tr_lineup',
  'montero-sport':'ms_white','l300':'l300_fb','versa-van':'vv_glx','outlander-phev':'op_gt'}  # one picture per model module (2026-10-29)
 # (old) card photos (2026-10-29): same image each /cars/ page uses per variant; Mirage hatchback has none -> no photo
-IMG={"Mirage G4 GLX 1.2G M/T":"mg4glx_u17","Mirage G4 GLX 1.2G CVT":"mg4glx_a66","Mirage G4 GLS 1.2G CVT":"mg4gls_u17",
+IMG={"Mirage GLX 1.2G MT":"mir_glx_red","Mirage GLX 1.2G CVT":"mir_glx_red","Mirage G4 GLX 1.2G M/T":"mg4glx_u17","Mirage G4 GLX 1.2G CVT":"mg4glx_a66","Mirage G4 GLS 1.2G CVT":"mg4gls_u17",
  "Xpander GLX 1.5G 2WD M/T":"xpglx_u33","Xpander GLX 1.5G 2WD A/T":"xpglx_x37","Xpander GLS 1.5G 2WD A/T":"xpgls_c31",
  "Xpander Cross 1.5G 2WD A/T (Two-Tone)":"xc_x3n","XFORCE GLX 1.5G 2WD CVT":"xf_glx","XFORCE GLS 1.5G 2WD CVT (Monotone)":"xf_gls",
  "XFORCE GLS 1.5G 2WD CVT (Two-Tone)":"xf_gls","XFORCE GT 1.5G 2WD CVT":"xf_gt","Destinator GLX 1.5G Turbo 2WD CVT":"de_p26",
@@ -54,6 +55,11 @@ def inq_side(msg,ref,unit,ai,bfig):
     pn=f'<div class="iq-p" id="iqp-{n}" role="region" aria-labelledby="iqb-{n}" hidden></div>'
     assert pn in h; return h.replace(pn,''), pn
 ZT='<span class="ab-zt">Zero DP Promo</span>'
+def bfig(r): return f'{f_(r["b_dp"])} DP, {f_(r["b_mo"])}/mo' if b_ok(r) else BASK
+def f_(n): return "₱"+format(n,",")
+def bcell(r):
+    if b_ok(r): return f'<span class="ab-dp">DP <b>{f_(r["b_dp"])}</b></span><span class="ab-mo"><b>{f_(r["b_mo"])}</b>/mo</span>'
+    return f'<span class="ab-dp ab-ask"><b>{BASK}</b></span><span class="ab-mo ab-askn"><span class="en">Being confirmed, message me</span><span class="tl">Kinukumpirma pa, mag-message</span></span>'
 
 def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
     rs=rows(); A=[]; EAG=[0]; secs=""; nav=[]
@@ -71,10 +77,10 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
             fu=f'<span class="fuel"><span class="en">+ {FUEL[r["unit"]]:,} fuel points</span><span class="tl">+ {FUEL[r["unit"]]:,} fuel points</span></span>' if r["unit"] in FUEL else ""
-            iq,iqp=inq_side(MSG,"inquire-"+uslug(n),e(n),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo')
+            iq,iqp=inq_side(MSG,"inquire-"+uslug(n),e(n),i,bfig(r))
             trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
 <td class="ab-ca" data-a="{i}"><span class="ab-l">Option A</span>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
-<td class="ab-cb"><span class="ab-l">Option B</span><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></td><td class="ab-ci">{iq}</td></tr><tr class="ab-iqr"><td colspan="5">{iqp}</td></tr>'''
+<td class="ab-cb"><span class="ab-l">Option B</span>{bcell(r)}</td><td class="ab-ci">{iq}</td></tr><tr class="ab-iqr"><td colspan="5">{iqp}</td></tr>'''
         im=MODELIMG.get(slug); ph=""
         if im:
             EAG[0]+=1; w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
@@ -100,7 +106,7 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
 .ab-rng{margin:-4px 0 14px;font-size:15px;color:#3f3f46}.ab-rng b{color:var(--redd);white-space:nowrap}
 .ab-o{border:1px solid var(--ln);border-radius:12px;padding:12px 14px;margin:0 0 10px;position:relative}.ab-a{background:linear-gradient(135deg,#0b0b0c,#27272a);color:#fff;border:0}
 .ab-k{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--redd)}.ab-a .ab-k{color:#fca5a5}
-.ab-v{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.ab-dp{font-size:15px}.ab-mo b{font-size:22px}.ab-mo small{font-weight:400;opacity:.7}
+.ab-v{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.ab-dp{font-size:15px}.ab-mo b{font-size:22px}.ab-mo small{font-weight:400;opacity:.7}.ab-ask b{font-size:16px}.ab-askn{font-size:13px;opacity:.8}
 .ab-x{filter:blur(6px);user-select:none}html.ab-open .ab-x{filter:none}html.ab-open .ab-ul{display:none}
 .ab-ul{margin-top:10px;width:100%;background:var(--red);color:#fff;border:0;border-radius:999px;padding:10px 14px;min-height:44px;font:inherit;font-size:15px;font-weight:700;cursor:pointer}.ab-ul:hover{background:var(--redd)}
 .ab-s{font-size:13px}.ab-box{border-left:5px solid var(--red)}.ab-box .chk{font-size:14px;display:flex;gap:10px;align-items:flex-start;margin:6px 0 14px}.ab-box .chk input{width:20px;height:20px;flex:none;margin-top:2px}.ab-box .ferr{color:#b8000e;font-size:13px;margin:4px 0 0}
@@ -169,7 +175,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 # Each card: collapsed button -> Option A (locked/blurred until unlock) + Option B for THAT variant only. One shared unlock form
 # (same ids, promos.js/lead.js, localStorage flag) is moved into whichever dropdown's Unlock button was clicked.
 # Card Apply/Test Drive buttons moved to the hero next to the assessment CTA.
-CARD_ALIAS={"2026 L300 Dual AC":"L300 FB BODY WITHDUAL AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}
+CARD_ALIAS={"Mirage GLX 1.2G M/T":"Mirage GLX 1.2G MT","2026 L300 Dual AC":"L300 FB BODY WITHDUAL AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}
 VP_CSS="""<style>.vc{display:flex;flex-direction:column}.vc>.pad{flex:1;display:flex;flex-direction:column}.vp{margin-top:auto;padding-top:12px}
 .vp-tg{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--red);color:#fff;border:0;border-radius:999px;padding:12px 16px;min-height:48px;font:inherit;font-size:16px;font-weight:700;cursor:pointer}.vp-tg:hover{background:var(--redd)}.vp-tg:focus-visible{outline:3px solid #0b0b0c;outline-offset:2px}
 .vp-tg svg{transition:transform .25s ease}.vp-tg[aria-expanded=true] svg{transform:rotate(180deg)}
@@ -200,9 +206,9 @@ def inject_cars(R):
                 r=rs[u]; i=len(A); A.append([r["a_dp"],r["a_mo"]])
                 fu=f'<span class="fuel"><span class="en">+ {FUEL[u]:,} fuel points</span><span class="tl">+ {FUEL[u]:,} fuel points</span></span>' if u in FUEL else ""
                 inner=(f'{rl}<div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></p>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>\n'
-                 f'<div class="ab-o ab-b"><p class="ab-k">Option B <small class="en">· 30% DP, low monthly</small><small class="tl">· 30% DP, mababang monthly</small></p><span class="ab-dp">DP <b>{f(r["b_dp"])}</b></span><span class="ab-mo"><b>{f(r["b_mo"])}</b>/mo</span></div>{fu}\n'
+                 f'<div class="ab-o ab-b"><p class="ab-k">Option B <small class="en">· 30% DP, low monthly</small><small class="tl">· 30% DP, mababang monthly</small></p>{bcell(r)}</div>{fu}\n'
                  '<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p>'
-                 +inq(CARPARTS["msg"],"inquire-"+slug+"-"+uslug(vu),H.escape(vu),i,f'{f(r["b_dp"])} DP, {f(r["b_mo"])}/mo',"ab-iq vp-iq"))
+                 +inq(CARPARTS["msg"],"inquire-"+slug+"-"+uslug(vu),H.escape(vu),i,bfig(r),"ab-iq vp-iq"))
                 REPORT.append([slug,vu,u,r["srp"],r["a_dp"] is not None,r["b_dp"]])
             else:
                 inner='<p class="vp-ask"><span class="en">Promo for this variant: ask Richard for the latest down payment and monthly.</span><span class="tl">Promo ng variant na ito: itanong kay Richard ang latest down payment at monthly.</span> <a href="#" data-vpask><span class="en">Ask for the promo</span><span class="tl">Itanong ang promo</span></a></p>'

@@ -7,7 +7,7 @@ VALID="Promo figures are for "+MON+" only, 60 months, all-in, subject to bank ap
 DISC='<p class="muted">This is Richard Cuagdan\'s personal sales website, not the official Mitsubishi Motors Philippines website. Results of any assessment are Pre-qualified, subject to bank approval.</p>'
 _B={r["unit"].replace("XFORCE","Xforce").upper():r for r in _pab.rows()}
 def B(n):
-    r=_B.get(n.upper()); return (r["b_dp"],r["b_mo"]) if r else None
+    r=_B.get(n.upper()); return (r["b_dp"],r["b_mo"]) if r and _pab.b_ok(r) else None
 def ZDP(v):
     # Option A (lowest DP) monthly from data.py (mirrors optionAB_oct2026.json)
     return v["promo"]["opts"][0][1] if v["promo"] else None

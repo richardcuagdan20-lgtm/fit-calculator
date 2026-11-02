@@ -225,6 +225,7 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 <a class="card pad mc" href="/tips/car-financing-bulacan/"><h3>Car financing in Bulacan</h3><p class="muted">Low down payment options explained</p></a>
 <a class="card pad mc" href="/tips/best-mitsubishi-for-sjdm-manila-commute/"><h3>SJDM to Manila commute</h3><p class="muted">Which unit fits your daily drive</p></a>
 <a class="card pad mc" href="/tips/mitsubishi-bulacan-areas-served/"><h3>Areas I serve</h3><p class="muted">Bulacan and north Metro Manila</p></a>
+<a class="card pad mc" href="/tips/mirage-hatchback-down-payment-monthly-sjdm/"><h3>Mirage hatchback down payment and monthly</h3><p class="muted">Entry hatchback financing guide</p></a>
 <a class="card pad mc" href="/mirage-g4-downpayment-and-monthly/"><h3>Mirage G4 downpayment and monthly</h3><p class="muted">First-car financing guide</p></a>
 <a class="card pad mc" href="/triton-downpayment-and-monthly/"><h3>Triton downpayment and monthly</h3><p class="muted">Pickup financing guide</p></a>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
@@ -236,7 +237,7 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 
 # ---------- BROCHURES (links to official MMPC PDFs; not re-hosted). Verified 200 application/pdf 2026-11-02.
 _BU="https://www.mitsubishi-motors.com.ph/content/dam/mitsubishi-motors-ph/images/brochures/current-brochures/"
-BRO=[("mirage","Mirage","Hatchback","Compact, frugal hatchback built for easy city parking and low running costs.","0.9 MB","mirage-g4","Mirage"),
+BRO=[("mirage","Mirage","Hatchback","Compact, frugal hatchback built for easy city parking and low running costs.","0.9 MB","mirage","Mirage"),
  ("mirage-g4","Mirage G4","Sedan","An efficient first sedan with a usable trunk for daily commutes and weekend trips.","2.2 MB","mirage-g4","Mirage G4"),
  ("xforce","XFORCE","Compact SUV","A stylish compact SUV with high ground clearance and a tech-forward cabin.","4.7 MB","xforce","XFORCE"),
  ("xpander","Xpander","7-seater MPV","A roomy seven-seat family MPV with flexible seating and a comfortable ride.","2.6 MB","xpander","Xpander"),
@@ -257,7 +258,7 @@ def bro_link(slug):
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
- "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
+ "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">See October promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
@@ -289,13 +290,14 @@ _MG={"xpander":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubish
  "destinator":[("/tips/option-a-vs-option-b-mitsubishi-promo/","Option A vs Option B promo"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
  "xforce":[("/tips/xforce-2026-price-philippines/","Xforce 2026 price: GLX vs GLS vs GT"),("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],
  "montero-sport":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],"triton":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],
- "mirage-g4":[("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],"l300":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table")],
+ "mirage":[("/tips/mirage-hatchback-vs-mirage-g4/","Mirage hatchback vs Mirage G4: which should you buy"),("/tips/mirage-hatchback-down-payment-monthly-sjdm/","Mirage hatchback down payment and monthly guide (SJDM)"),("/tips/mirage-hatchback-first-car-bulacan-manila-commute/","Is the Mirage a good first car for the Bulacan to Manila commute?")],
+ "mirage-g4":[("/tips/mirage-hatchback-vs-mirage-g4/","Mirage hatchback vs Mirage G4: which should you buy"),("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],"l300":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table")],
  "versa-van":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table")],"outlander-phev":[("/tips/option-a-vs-option-b-mitsubishi-promo/","Option A vs Option B promo")]}
 _MGC=[("/tips/mitsubishi-buying-guide-sjdm-bulacan/","Buying a Mitsubishi in SJDM, Bulacan"),("/tips/car-financing-bulacan/","Low down payment car financing in Bulacan")]
 def MGUIDE(slug):
     l=_MG.get(slug,[])+_MGC
     return '<section class="sec"><div class="w"><h2>Helpful guides for Bulacan buyers</h2><ul class="links">'+"".join(f'<li><a href="{u}">{t}</a></li>' for u,t in l)+'</ul></div></section>'
-EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
+EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage","tips/mirage-hatchback-down-payment-monthly-sjdm","Mirage hatchback down payment and monthly"),("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
 for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
     sp="".join(f"<tr><th scope='row'>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in m["specs"])
@@ -628,7 +630,7 @@ open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales
 - Assessment results are worded "Pre-qualified, subject to bank approval"; the bank makes the final decision. Fuel freebies are stated in fuel points.
 
 ## Option A (lowest DP) and Option B by variant ({NOTE.split("valid for ")[1].split(",")[0]}, 60 months, all-in, subject to bank approval)
-"""+"".join(f"- Mitsubishi {v['n']}: SRP {f(v['promo']['srp'] or v['srp']) if v['promo'] else srp_txt(v)}; Option A {v['promo']['opts'][0][0]} / {f(v['promo']['opts'][0][1])} per month; Option B {v['promo']['opts'][1][0]} / {f(v['promo']['opts'][1][1])} per month"+(f"; freebie {v['promo']['fuel']:,} fuel points" if v['promo'].get('fuel') else "")+"\n" for m in MODELS for v in m["variants"] if v['promo'] and len(v['promo']['opts'])>1)+f"""
+"""+"".join(f"- Mitsubishi {v['n']}: SRP {f(v['promo']['srp'] or v['srp']) if v['promo'] else srp_txt(v)}; Option A {v['promo']['opts'][0][0]} / {f(v['promo']['opts'][0][1])} per month; "+(f"Option B {v['promo']['opts'][1][0]} / {f(v['promo']['opts'][1][1])} per month" if len(v['promo']['opts'])>1 else "Option B: ask for latest (being confirmed)")+(f"; freebie {v['promo']['fuel']:,} fuel points" if v['promo'].get('fuel') else "")+"\n" for m in MODELS for v in m["variants"] if v['promo'] and (len(v['promo']['opts'])>1 or v.get('ab')))+f"""
 ## Models
 """+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Guides & Tips (all articles, newest first; index: "+D+GT+")\n"+"".join(f"- [{t}]({D}{u}): {d}\n" for u,t,d,dt in _GTL if u not in GT_LAND))
 import og as _og
