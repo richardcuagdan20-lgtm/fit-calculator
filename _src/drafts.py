@@ -1727,14 +1727,14 @@ body='''<p>Kapag may lolo, lola o family member with a disability, comfort and a
 ADDRP='<p><b>Richard Cuagdan, Mitsubishi SJDM</b><br>Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for a showroom visit and directions.</p>'
 TOT='<p class="muted">Total of payments = down payment + 60 monthly amortizations, from the October 2026 promo figures. The all-in package (LTO registration, TPL, 1-year comprehensive with rate locked for 3 years, chattel mortgage, free labor up to 5,000 km, 3-year warranty) is included. Subject to bank approval.</p>'
 BULK5=[
-dict(base="blog",car="xpander",slug="mitsubishi-dealer-bulacan",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross at Mitsubishi SJDM with Richard Cuagdan, a Mitsubishi dealer in Bulacan",
+dict(base="blog",car="xpander",slug="mitsubishi-dealer-bulacan",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross with Richard Cuagdan, authorized Mitsubishi sales executive, an authorized Mitsubishi sales executive in Bulacan",
 title="Mitsubishi Dealer Bulacan: Richard Cuagdan, SJDM Sales Executive",
 desc="",answer="",
 faq=[("Where is the Mitsubishi dealer in San Jose del Monte, Bulacan?","Richard Cuagdan serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
 ("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page and Richard will confirm your schedule. Bring your valid driver's license."),
 ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or message him on Messenger."),
 ("Is Mitsubishi SJDM near Metro Manila?","It's in San Jose del Monte, close to Caloocan, Quezon City, Norzagaray and Santa Maria.")],
-body='''<p>Looking for a Mitsubishi dealer in Bulacan? Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte, Bulacan, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
+body='''<p>Looking for an authorized Mitsubishi sales executive in Bulacan? Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte, Bulacan, close to Caloocan, Quezon City, Norzagaray and Santa Maria. I'm Richard Cuagdan, one of its car sales executives.</p>
 
 <h2>Where to find us</h2>
 '''+ADDRP+'''
@@ -1968,7 +1968,7 @@ faq=[("How do I book a Mitsubishi test drive in SJDM?","Use the online test driv
 ("What do I need to bring?","A valid driver's license. Bring your family if they'll ride often in the car."),
 ("Can I test drive the Destinator?","Yes. Choose the Destinator variant on the booking page, subject to unit availability."),
 ("Can I test drive two models on the same day?","Ask when booking so both units can be prepared.")],
-body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to bring, and what to check, so you get the most out of your drive at Mitsubishi SJDM with Richard Cuagdan.</p>
+body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to bring, and what to check, so you get the most out of your drive with Richard Cuagdan, authorized Mitsubishi sales executive.</p>
 
 <h2>How to book</h2>
 <ol class="steps"><li><h3>Pick a unit</h3><p>On the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Choose a date and time</h3><p>Then send your details.</p></li><li><h3>I'll confirm</h3><p>By message or call. You can also call or text '''+TELL+'''.</p></li></ol>
@@ -1981,7 +1981,7 @@ body='''<p>Planning a Mitsubishi test drive in SJDM? Here's how to book, what to
 
 <h2>Compare back-to-back</h2>
 <p>Driving two models on the same day makes the choice easier: Xpander vs Destinator, Montero Sport vs Destinator, or L300 vs Triton. Read <a href="/blog/xpander-vs-destinator-family-car/">Xpander vs Destinator</a> before you come.</p>
-'''+CTA2("Book your test drive at Mitsubishi SJDM with Richard Cuagdan, SJDM, after checking your budget.","destinator")),
+'''+CTA2("Book your test drive with Richard Cuagdan in SJDM, after checking your budget.","destinator")),
 ]
 MAPL='<p><a href="https://m.me/504759566043148" rel="noopener">Message Richard for the showroom location and directions</a></p>'
 def LOCAL(area,slug,img,alt,title,intro,route,near,car):

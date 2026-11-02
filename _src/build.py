@@ -175,9 +175,9 @@ def vcard(v,m):
 def offers_ld(m):
     out=[]
     for v in m["variants"]:
-        p={"@type":"Product","name":"Mitsubishi "+v["n"],"brand":{"@type":"Brand","name":"Mitsubishi"},"image":D+"/assets/img/"+v["img"]+".webp","category":m["cat"]}
+        p={"@type":["Product","Car"],"name":"Mitsubishi "+v["n"],"model":m["name"],"bodyType":m["cat"],"manufacturer":{"@type":"Organization","name":"Mitsubishi Motors"},"url":D+f"/cars/{m['slug']}/","brand":{"@type":"Brand","name":"Mitsubishi"},"image":D+"/assets/img/"+v["img"]+".webp","category":m["cat"]}
         if v["srp"]:
-            p["offers"]={"@type":"Offer","price":v["srp"],"priceCurrency":"PHP","priceValidUntil":"2026-10-31","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":D+"/#dealer"},"url":D+f"/cars/{m['slug']}/"}
+            p["offers"]={"@type":"Offer","price":v["srp"],"priceCurrency":"PHP","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":D+"/#dealer"},"url":D+f"/cars/{m['slug']}/"}
         out.append(p)
     return out
 
@@ -197,9 +197,9 @@ CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>
 
 # ---------- HOME
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/","Mitsubishi Cars & Promos in SJDM, Bulacan | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Mitsubishi cars in San Jose del Monte, Bulacan: official SRPs for Xpander, Xforce, Destinator, Montero Sport, Triton, L300 and more, with all-in down payment and monthly options.",
-hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Mitsubishi SJDM · San Jose del Monte, Bulacan",src="home")+f'''
+page("/","Mitsubishi San Jose del Monte (SJDM) Bulacan: Promos & Prices",
+ "Mitsubishi in San Jose del Monte, Bulacan with Richard Cuagdan, authorized sales executive: 2026 price list, low down payment promos, test drives and loan help.",
+hero("Mitsubishi in San Jose del Monte, Bulacan: explained clearly, financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM, Bulacan",src="home")+f'''
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
@@ -220,7 +220,11 @@ hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official 
 </div></div></section>
 <section class="sec alt"><div class="w"><h2>Popular guides for SJDM buyers</h2><div class="grid g3">
 <a class="card pad mc" href="/mitsubishi-sjdm-bulacan/"><h3>Mitsubishi SJDM Bulacan</h3><p class="muted">Promos, test drive and directions</p></a>
-<a class="card pad mc" href="/mitsubishi-casa-bulacan/"><h3>Mitsubishi casa Bulacan</h3><p class="muted">Buying at the authorized dealer</p></a>
+<a class="card pad mc" href="/mitsubishi-casa-bulacan/"><h3>Mitsubishi casa Bulacan</h3><p class="muted">What "casa" means and how buying works</p></a>
+<a class="card pad mc" href="/tips/mitsubishi-buying-guide-sjdm-bulacan/"><h3>Buying a Mitsubishi in SJDM</h3><p class="muted">Step-by-step for Bulacan buyers</p></a>
+<a class="card pad mc" href="/tips/car-financing-bulacan/"><h3>Car financing in Bulacan</h3><p class="muted">Low down payment options explained</p></a>
+<a class="card pad mc" href="/tips/best-mitsubishi-for-sjdm-manila-commute/"><h3>SJDM to Manila commute</h3><p class="muted">Which unit fits your daily drive</p></a>
+<a class="card pad mc" href="/tips/mitsubishi-bulacan-areas-served/"><h3>Areas I serve</h3><p class="muted">Bulacan and north Metro Manila</p></a>
 <a class="card pad mc" href="/mirage-g4-downpayment-and-monthly/"><h3>Mirage G4 downpayment and monthly</h3><p class="muted">First-car financing guide</p></a>
 <a class="card pad mc" href="/triton-downpayment-and-monthly/"><h3>Triton downpayment and monthly</h3><p class="muted">Pickup financing guide</p></a>
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
@@ -232,13 +236,28 @@ hero("Your next Mitsubishi, explained clearly and financed sensibly.","Official 
 
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/cars/","2026 Models & Prices | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Every current Mitsubishi model at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
-f'''<section class="ph"><div class="w"><h1>2026 Mitsubishi models</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
+page("/cars/","Mitsubishi Price List 2026 Bulacan: All Models & SRPs | SJDM",
+ "Mitsubishi Bulacan price list 2026 with Richard Cuagdan in San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
+f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">See October promos</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 # ---------- model pages
+def MTITLE(m):
+    for t in (f"Mitsubishi {m['name']} Promo Bulacan 2026: Price & Monthly",f"{m['name']} Promo Bulacan 2026: Price & Monthly | SJDM",f"{m['name']} 2026 Price & Promo | SJDM Bulacan",f"{m['name']} 2026 Price | SJDM"):
+        if len(t)<=62: return t
+    return t
+_MG={"xpander":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
+ "xpander-cross":[("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
+ "destinator":[("/tips/option-a-vs-option-b-mitsubishi-promo/","Option A vs Option B promo"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
+ "xforce":[("/tips/xforce-2026-price-philippines/","Xforce 2026 price: GLX vs GLS vs GT"),("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],
+ "montero-sport":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],"triton":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],
+ "mirage-g4":[("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],"l300":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table")],
+ "versa-van":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table")],"outlander-phev":[("/tips/option-a-vs-option-b-mitsubishi-promo/","Option A vs Option B promo")]}
+_MGC=[("/tips/mitsubishi-buying-guide-sjdm-bulacan/","Buying a Mitsubishi in SJDM, Bulacan"),("/tips/car-financing-bulacan/","Low down payment car financing in Bulacan")]
+def MGUIDE(slug):
+    l=_MG.get(slug,[])+_MGC
+    return '<section class="sec"><div class="w"><h2>Helpful guides for Bulacan buyers</h2><ul class="links">'+"".join(f'<li><a href="{u}">{t}</a></li>' for u,t in l)+'</ul></div></section>'
 EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
 for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
@@ -246,13 +265,13 @@ for m in MODELS:
     rel=" · ".join(f'<a href="/cars/{x["slug"]}/">{x["name"]}</a>' for x in MODELS if x is not m)
     s0=srp_from(m)
     haspromo=any(v["promo"] for v in m["variants"])
-    page(f"/cars/{m['slug']}/",f"{m['name']} 2026 Price | Richard Cuagdan, Mitsubishi SJDM Bulacan",
-     f"Mitsubishi {m['name']} at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+    page(f"/cars/{m['slug']}/",MTITLE(m),
+     f"Mitsubishi {m['name']} with Richard Cuagdan in San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']} 2026: price and promo in SJDM, Bulacan</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 {(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],cap=f"Richard Cuagdan, your sales executive, with the Mitsubishi {e(RXCAR[RXMODEL[m['slug']]])}")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
-{EVM.get(m['slug'],'')}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
+{EVM.get(m['slug'],'')}{MGUIDE(m['slug'])}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
     ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp", og=rx_og(RXMODEL[m["slug"]]) if m["slug"] in RXMODEL else None,
     crumbs=[("/","Home"),("/cars/","Cars"),(f"/cars/{m['slug']}/",m['name'])])
 
@@ -329,12 +348,12 @@ if TIPS: articles("tips",TIPS,"Tips","Car Tips & Checklists | Mitsubishi by Rich
  "Quick, save-worthy checklists for Filipino drivers: road trips, fuel saving, LTO rules, weather car care and first-car buying.",
  "Short, practical checklists you can save before your next drive or car purchase.")
 articles("blog",POSTS,"Blog","Blog | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Notes from the showroom floor at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte: monthly promo roundups, model comparisons and buying tips.",
+ "Notes from the showroom floor with Richard Cuagdan in San Jose del Monte: monthly promo roundups, model comparisons and buying tips.",
  "Promo roundups, model comparisons and buying tips from the showroom floor.")
 
 # ---------- about
-page("/about/","About Richard Dennis Cuagdan | Mitsubishi Motors",
- "Richard Dennis Cuagdan is a Car Sales Executive at Mitsubishi SJDM with Richard Cuagdan in San Jose del Monte, Bulacan, helping employed buyers, business owners and OFW families.",
+page("/about/","Richard Cuagdan, Mitsubishi Sales Executive in SJDM, Bulacan",
+ "Richard Dennis Cuagdan is a an authorized Mitsubishi Sales Executive in San Jose del Monte, Bulacan, helping employed buyers, business owners and OFW families.",
 f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p class="lead">Authorized Mitsubishi Sales Executive, San Jose del Monte, Bulacan</p></div></section>
 <section class="sec"><div class="w nar">
 {rx_card("destinator",eager=True)}
@@ -355,9 +374,9 @@ f'''<section class="ph"><div class="w"><h1>About Richard Dennis Cuagdan</h1><p c
 TDU=[{"id":v["id"],"m":m["slug"],"model":m["name"],"n":v["n"],"srp":srp_txt(v),"img":v["img"]} for m in MODELS for v in m["variants"]]
 rows_td="".join(f'''<div class="tdrow"><h3>{e(m["name"])}</h3><div class="tdtrack" role="radiogroup" aria-label="{e(m["name"])} variants">'''+"".join(f'''<button type="button" class="tdc" role="radio" aria-checked="false" data-id="{v["id"]}">{img(v["img"],"Mitsubishi "+v["n"])}<span class="tdn">{e(v["n"])}</span><span class="tds">SRP {srp_txt(v)}</span></button>''' for v in m["variants"])+'</div></div>' for m in MODELS)
 TIMES=[("08:00","8:00 AM"),("09:00","9:00 AM"),("10:00","10:00 AM"),("11:00","11:00 AM"),("13:00","1:00 PM"),("14:00","2:00 PM"),("15:00","3:00 PM"),("16:00","4:00 PM")]
-page("/test-drive/","Book a Test Drive | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Book a Mitsubishi test drive at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte, Bulacan. Pick your unit, choose a date and time from Monday to Saturday, and Richard will confirm.",
-f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead">Choose a unit, pick a schedule, and I'll have it ready for you at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte.</p></div></section>
+page("/test-drive/","Book a Mitsubishi Test Drive in SJDM, Bulacan | Richard",
+ "Book a Mitsubishi test drive with Richard Cuagdan in San Jose del Monte, Bulacan. Pick your unit, choose a date and time from Monday to Saturday, and Richard will confirm.",
+f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead">Choose a unit, pick a schedule, and I'll have it ready for you with Richard Cuagdan in San Jose del Monte.</p></div></section>
 <section class="sec"><div class="w">
 <ol class="tdsteps" aria-label="Progress"><li id="st1" class="on">1. Choose a unit</li><li id="st2">2. Your schedule</li><li id="st3">3. Confirmed</li></ol>
 <div id="s1"><h2>Which Mitsubishi would you like to drive?</h2><p class="sub">Swipe each row to see every variant. SRP shown; ask me for this month's promo.</p>{rows_td}
@@ -433,8 +452,8 @@ $('tf').addEventListener('submit',function(ev){{ev.preventDefault();
 </script>''', crumbs=[("/","Home"),("/test-drive/","Book a Test Drive")])
 
 # ---------- contact
-page("/contact/","Contact | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Message Richard Cuagdan on Messenger or arrange a showroom visit with Mitsubishi SJDM with Richard Cuagdan in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
+page("/contact/","Contact Richard Cuagdan, Mitsubishi Sales Executive SJDM",
+ "Message Richard Cuagdan on Messenger or arrange a showroom visit with Richard Cuagdan in San Jose del Monte, Bulacan, Monday to Saturday, 8 AM to 5 PM.",
 f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quickest way to reach me is Messenger. I reply personally.</p>{rx_card("xforce",eager=True)}</div></section>
 <section class="sec"><div class="w grid g3">
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send me a message any time about units, promos, your application or a showroom visit. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener" data-msgr="contact-card">Message Richard on Messenger</a></p></div>
@@ -447,7 +466,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <section class="sec"><div class="w"><h2>Visiting the showroom</h2><p>I serve buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call me before you come so I can send directions and have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")], og=rx_og("xforce"))
 
 # ---------- calculator (replaces the old budget-fit page; old copy kept in git history and /workspace/loanapp/budgetcalculator-old-20261029.html)
-page("/budgetcalculator/","Monthly Estimate Calculator | Richard Cuagdan, Mitsubishi SJDM Bulacan",
+page("/budgetcalculator/","Mitsubishi Monthly Calculator: DP, Term & Amortization",
  "Estimate your Mitsubishi monthly: choose a car, a down payment and a term, then compare it with the official promo. Estimate only, subject to bank evaluation.",
 f'''<section class="ph"><div class="w"><h1>Estimate your monthly</h1><p class="lead">Choose a car, a down payment and how many years. You will see an estimated monthly and, when there is one, the official promo for the same unit.</p></div></section>
 <section class="sec"><div class="w">{CALC("budgetcalculator")}</div></section>
@@ -463,7 +482,7 @@ import datetime as _dt
 def _gtd(d): return _dt.date.fromisoformat(d).strftime("%B %-d, %Y")
 _GTL=sorted(GT_ALL,key=lambda x:(x[3],x[1]),reverse=True)
 _gtl="".join(f'<li class="card pad"><h2 class="h3"><a href="{u}">{e(t)}</a></h2><p>{e(d)}</p><p class="muted"><time datetime="{dt}">{_gtd(dt)}</time></p></li>' for u,t,d,dt in _GTL)
-page(GT,"Guides & Tips | Richard Cuagdan, Mitsubishi SJDM Bulacan",
+page(GT,"Mitsubishi Car Buying Guides & Tips for SJDM, Bulacan",
  "Every car-buying guide, financing explainer, model comparison and driving tip from Richard Cuagdan, authorized Mitsubishi sales executive, SJDM, newest first.",
  f'''<section class="ph"><div class="w"><h1>Guides &amp; Tips</h1><p class="lead">Every guide, blog post and tip in one place, newest first: financing, loan requirements, model comparisons, car care and driving checklists.</p></div></section>
 <section class="sec"><div class="w"><ul class="grid g2 plain gtl">{_gtl}</ul></div></section>''',

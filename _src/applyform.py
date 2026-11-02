@@ -120,7 +120,7 @@ AF_BODY=f'''<section class="la-hero"><div class="w">
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/apply-form.js" defer></script>'''
 page("/apply/","Official Application Form | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Official car loan Application Form for Mitsubishi at Mitsubishi SJDM with Richard Cuagdan, San Jose del Monte: personal, employment, co-maker, references and unit details. Tagalog or English.",
+ "Official car loan Application Form for Mitsubishi with Richard Cuagdan in San Jose del Monte: personal, employment, co-maker, references and unit details. Tagalog or English.",
  LA_CSS+AF_CSS+AF_BODY, crumbs=[("/","Home"),("/apply/","Official Application Form")])
 _ap=R+"/apply/index.html"; _s=open(_ap).read()
 _s=_s.replace('src="/assets/apply-form.js"',f'src="/assets/apply-form.js?v={_vh("/assets/apply-form.js")}"').replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')

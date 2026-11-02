@@ -146,11 +146,11 @@ SEO.update({
 "car-reservation-fee-philippines":("car reservation fee Philippines",["reservation fee car loan","is reservation fee refundable","booking fee car","reserve a car unit"],"Car Reservation Fee Philippines: What to Know",
  "Car reservation fee Philippines guide: what it does, 5 questions to ask before paying, refund terms to get in writing, and when it makes sense to reserve."),
 "mitsubishi-test-drive-sjdm":("Mitsubishi test drive SJDM",["Mitsubishi test drive near me","Destinator test drive","book test drive Bulacan","test drive checklist"],"Mitsubishi Test Drive in SJDM: What to Expect",
- "Mitsubishi test drive in SJDM: how to book online, what to bring, what to check on the drive, and how to compare two models back-to-back at Mitsubishi SJDM with Richard Cuagdan."),
+ "Mitsubishi test drive in SJDM: how to book online, what to bring, what to check on the drive, and how to compare two models back-to-back with Richard Cuagdan, authorized Mitsubishi sales executive."),
 })
 ANS={
 "mitsubishi-dealer-bulacan":"Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte (SJDM), Bulacan and Quezon City. You can see the lineup, test drive, get this month's all-in promo and have your loan documents pre-checked. Call or text Richard on 0954 291 1201.",
-"mitsubishi-promo-metro-manila-buyers":"Metro Manila buyers can get the October 2026 Mitsubishi promo at Mitsubishi SJDM with Richard Cuagdan in SJDM, serving Fairview and Quezon City. Lowest-DP (Option A) examples: Xpander GLX AT ₱23,592 a month and Destinator GLX ₱29,032 a month, 60 months, all-in. Check your budget and send documents online, then make one trip for the test drive.",
+"mitsubishi-promo-metro-manila-buyers":"Metro Manila buyers can get the October 2026 Mitsubishi promo with Richard Cuagdan in SJDM, serving Fairview and Quezon City. Lowest-DP (Option A) examples: Xpander GLX AT ₱23,592 a month and Destinator GLX ₱29,032 a month, 60 months, all-in. Check your budget and send documents online, then make one trip for the test drive.",
 "xpander-monthly-amortization":"The Xpander monthly amortization for October 2026 (60 months, all-in) starts at ₱22,401 at ₱18K DP for the GLX MT, ₱23,592 for the GLX AT, ₱26,143 for the GLS AT and ₱28,406 for the Xpander Cross. With a down payment, the GLX MT goes down to ₱19,811 a month.",
 "destinator-price-philippines":"The Destinator price in the Philippines (SRP) is ₱1,389,000 for the GLX, ₱1,599,000 for the GLS, and ₱1,929,000 (monotone) or ₱1,939,000 (two-tone) for the GT. October 2026 promo monthlies start at ₱29,032 at ₱8K DP or ₱25,038 with ₱198K DP, 60 months, all-in.",
 "montero-sport-price-philippines-2026":"The Montero Sport price in the Philippines for 2026 (SRP) is ₱1,568,000 for the GLX M/T, ₱1,927,000 for the GLS A/T, ₱2,190,000 for the Black Series 2WD and ₱2,530,000 for the Black Series 4WD. The lowest October 2026 monthly is ₱28,265 with ₱80K DP on the GLX.",
@@ -162,11 +162,11 @@ ANS={
 }
 SEO.update({
 "mitsubishi-near-caloocan-novaliches":("Mitsubishi near Caloocan",["Mitsubishi Novaliches","Mitsubishi Caloocan","Mitsubishi Quirino Highway","car dealer near Novaliches"],None,
- "Mitsubishi near Caloocan and Novaliches: how to reach Mitsubishi SJDM with Richard Cuagdan, SJDM, popular October 2026 promos, and how to plan one visit."),
+ "Mitsubishi near Caloocan and Novaliches: how to reach Richard Cuagdan in SJDM,, SJDM, popular October 2026 promos, and how to plan one visit."),
 "mitsubishi-near-fairview-quezon-city":("Mitsubishi near Fairview",["Mitsubishi Fairview","Mitsubishi Quezon City","Quirino Highway Fairview to SJDM","Mitsubishi promo QC"],None,
- "Mitsubishi near Fairview and Quezon City: getting to Mitsubishi SJDM with Richard Cuagdan in SJDM, October 2026 promo monthlies, and planning your visit."),
+ "Mitsubishi near Fairview and Quezon City: getting to Richard Cuagdan in SJDM, October 2026 promo monthlies, and planning your visit."),
 "mitsubishi-near-bulacan-towns":("Mitsubishi near Marilao",["Mitsubishi Meycauayan Bulacan","Mitsubishi Malolos","Mitsubishi Sta. Maria","Mitsubishi Norzagaray"],None,
- "Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos: directions to Mitsubishi SJDM with Richard Cuagdan in SJDM, Bulacan, plus popular units and promos."),
+ "Mitsubishi near Marilao, Meycauayan, Sta. Maria, Norzagaray or Malolos: directions to Richard Cuagdan in SJDM, Bulacan, plus popular units and promos."),
 "paano-mag-car-loan":("paano mag car loan",["paano mag apply ng car loan sa bangko","car loan requirements","car loan process Philippines","Zero DP"],None,
  "Paano mag car loan? Step-by-step guide sa Taglish: budget, test drive, requirements para sa employed, self-employed at OFW, bank approval at release day."),
 "paano-bumili-ng-bagong-sasakyan":("paano bumili ng bagong sasakyan",["paano bumili ng cash na sasakyan","cash vs car loan","brand new car Philippines","all-in promo"],None,
