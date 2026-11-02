@@ -39,8 +39,8 @@
 - Assessment results are worded "Pre-qualified, subject to bank approval"; the bank makes the final decision. Fuel freebies are stated in fuel points.
 
 ## Option A (lowest DP) and Option B by variant (October 2026, 60 months, all-in, subject to bank approval)
-- Mitsubishi Mirage GLX 1.2G M/T: SRP ₱720,000; Option A ₱48K DP / ₱15,254 per month; Option B ₱133K DP / ₱14,078 per month
-- Mitsubishi Mirage GLX 1.2G CVT: SRP ₱781,000; Option A ₱53K DP / ₱16,547 per month; Option B: ask for latest (being confirmed)
+- Mitsubishi Mirage GLX 1.2G M/T: SRP ₱720,000; Option A ₱18K DP / ₱14,833 per month; Option B ₱108K DP / ₱14,079 per month
+- Mitsubishi Mirage GLX 1.2G CVT: SRP ₱781,000; Option A ₱23K DP / ₱16,090 per month; Option B ₱118K DP / ₱14,079 per month
 - Mitsubishi Mirage G4 GLX 1.2G M/T: SRP ₱793,000; Option A ₱3K DP / ₱16,133 per month; Option B ₱93K DP / ₱14,295 per month
 - Mitsubishi Mirage G4 GLX 1.2G CVT: SRP ₱841,000; Option A ₱3K DP / ₱16,542 per month; Option B ₱73K DP / ₱15,160 per month; freebie 20,000 fuel points
 - Mitsubishi Mirage G4 GLS 1.2G CVT: SRP ₱937,000; Option A ₱3K DP / ₱18,804 per month; Option B ₱98K DP / ₱16,891 per month; freebie 20,000 fuel points

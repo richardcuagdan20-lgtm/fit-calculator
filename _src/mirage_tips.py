@@ -1,19 +1,18 @@
 # Mirage hatchback guides (branch draft-mirage, 2026-11-03). Facts ONLY from the official Mitsubishi Motors Philippines
 # Mirage and Mirage G4 brochures (PDF linked on /brochures/) and the official price list (as of August 2026).
-# Promo figures ONLY from data.py (optionAB_oct2026.json). Unconfirmed Option B (flags) -> "Ask for latest", never a number.
+# Promo figures ONLY from data.py (optionAB_oct2026.json). Mirage hatchback figures confirmed by Richard 2026-11-03.
 from seo2026 import MODELS, f, CTA, VALID, MON, ALLIN_UL
-from data import BASK
 BY="Mitsubishi Sales Executive"; DT="2026-11-03"
 V={v["id"]:v for m in MODELS for v in m["variants"]}
 def srp(i): return f(V[i]["srp"])
 def a(i): x=V[i]["ab"]; return (f(x["a_dp"]),f(x["a_mo"]))
 def b(i): x=V[i]["ab"]; return (f(x["b_dp"]),f(x["b_mo"])) if x["b_mo"] else None
 def bt(i):
-    x=b(i); return f"{x[0]} DP / {x[1]}/mo" if x else f"<b>{BASK}</b> (being confirmed)"
+    x=b(i); return f"{x[0]} DP / {x[1]}/mo" if x else "message me"
 def at(i): x=a(i); return f"{x[0]} DP / {x[1]}/mo"
 def row(i,label=None): return f"<tr><th scope='row'>{label or V[i]['n']}</th><td>{srp(i)}</td><td>{at(i)}</td><td>{bt(i)}</td></tr>"
 def ptable(ids):
-    return ('<table class="spec"><thead><tr><th scope="col">Variant</th><th scope="col">SRP</th><th scope="col">Option A (lowest DP)</th><th scope="col">Option B (30% DP)</th></tr></thead><tbody>'
+    return ('<table class="spec"><thead><tr><th scope="col">Variant</th><th scope="col">SRP</th><th scope="col">Option A (lowest DP)</th><th scope="col">Option B (low monthly)</th></tr></thead><tbody>'
             +"".join(row(i) for i in ids)+f'</tbody></table><p class="note">Updated {DT}. {VALID} Pre-qualified, subject to bank approval.</p>')
 BRO='<a href="/brochures/#mirage">official Mirage brochure (PDF)</a>'
 CHK=f'<p class="muted">Specs are taken from the {BRO} and the Mirage G4 brochure from Mitsubishi Motors Philippines. Mitsubishi may change specifications without prior notice, so check the brochure for latest specs.</p>'
@@ -52,7 +51,7 @@ body=f'''<p>The Mirage name covers two body styles: the <a href="/cars/mirage/">
 <h2>Price and this month's promo</h2>
 <p>Official SRPs (price list as of August 2026) and the {MON} all-in promo on 60 months:</p>
 {ptable(["mirglxmt","mirglxcvt","mg4glxmt","mg4glxat","mg4gls"])}
-<p>Option A is the lowest down payment for each unit; Option B is a 30% down payment with a lower monthly. For the Mirage GLX CVT, the Option B monthly is still being confirmed, so I show it as "{BASK}" rather than publish a figure I cannot stand behind. Message me and I will send the confirmed computation.</p>
+<p>Option A is the lowest down payment for each unit; Option B is a bigger down payment with a lower monthly.</p>
 <h2>Who should pick which</h2>
 <ul class="ticks"><li><b>Mirage hatchback</b>: solo commuters, first-time owners, city driving, easy parking, the lowest SRP in the lineup.</li><li><b>Mirage G4</b>: small families, frequent rear passengers, people who want a separate locked trunk, more highway driving.</li></ul>
 <p>Still torn? Drive both. See the <a href="/tips/mirage-hatchback-down-payment-monthly-sjdm/">Mirage hatchback down payment and monthly guide</a> and the <a href="/mirage-g4-downpayment-and-monthly/">Mirage G4 downpayment and monthly guide</a> before you decide.</p>
@@ -64,9 +63,9 @@ alt="Mitsubishi Mirage GLX hatchback, the most affordable Mitsubishi in the 2026
 title="Mirage Hatchback Down Payment & Monthly Guide (SJDM)",
 kw=("Mirage hatchback down payment and monthly",["Mitsubishi Mirage monthly amortization","Mirage GLX price Philippines","Mirage hatchback SJDM","Mirage CVT monthly"]),
 desc=f"Mitsubishi Mirage hatchback down payment and monthly amortization in SJDM, San Jose del Monte, Bulacan: official SRP, {MON} Option A and Option B, income guide and documents.",
-answer=f"For {MON}, the Mirage GLX 1.2G M/T (SRP {srp('mirglxmt')}) is {a('mirglxmt')[0]} DP and {a('mirglxmt')[1]}/mo on Option A, or {b('mirglxmt')[0]} DP and {b('mirglxmt')[1]}/mo on Option B, 60 months all-in. The GLX CVT (SRP {srp('mirglxcvt')}) is {a('mirglxcvt')[0]} DP and {a('mirglxcvt')[1]}/mo on Option A; its Option B is being confirmed, so ask for the latest. Pre-qualified, subject to bank approval.",
+answer=f"For {MON}, the Mirage GLX 1.2G M/T (SRP {srp('mirglxmt')}) is {a('mirglxmt')[0]} DP and {a('mirglxmt')[1]}/mo on Option A, or {b('mirglxmt')[0]} DP and {b('mirglxmt')[1]}/mo on Option B. The GLX CVT (SRP {srp('mirglxcvt')}) is {a('mirglxcvt')[0]} DP and {a('mirglxcvt')[1]}/mo on Option A, or {b('mirglxcvt')[0]} DP and {b('mirglxcvt')[1]}/mo on Option B. All 60 months (5 years), all-in. Pre-qualified, subject to bank approval.",
 faq=[("What is the lowest down payment for the Mirage hatchback?",f"For {MON}, Option A is {a('mirglxmt')[0]} for the GLX M/T and {a('mirglxcvt')[0]} for the GLX CVT, on 60 months, all-in, subject to bank approval."),
-("Why is the CVT Option B shown as 'Ask for latest'?","The Option B monthly for the CVT is being re-checked against the official computation. Rather than publish a number that may change, I send the confirmed figure directly when you message me."),
+("Why is the Option B monthly the same for the M/T and CVT?",f"By design, this month's Option B lands both variants on {b('mirglxmt')[1]}/mo: the CVT simply takes a bigger down payment ({b('mirglxcvt')[0]} vs {b('mirglxmt')[0]})."),
 ("What income do I need?",f"Banks usually like the monthly to stay around 30–35% of gross monthly income. At {a('mirglxmt')[1]}/mo that is roughly {f(round(V['mirglxmt']['ab']['a_mo']/0.35/100)*100)}–{f(round(V['mirglxmt']['ab']['a_mo']/0.30/100)*100)} gross a month. The bank makes the final decision."),
 ("What does all-in include?","LTO registration, TPL and comprehensive insurance, chattel mortgage and more. See the list on this page.")],
 body=f'''<p>The <a href="/cars/mirage/">Mitsubishi Mirage hatchback</a> is the most affordable way into a brand-new Mitsubishi. This guide covers the official SRP, this month's two promo options, how much income banks usually look for and what to prepare if you are buying in San Jose del Monte (SJDM) or nearby Bulacan and Quezon City.</p>
@@ -74,9 +73,9 @@ body=f'''<p>The <a href="/cars/mirage/">Mitsubishi Mirage hatchback</a> is the m
 <ul class="ticks"><li><b>Mirage GLX 1.2G M/T</b>: {srp('mirglxmt')}</li><li><b>Mirage GLX 1.2G CVT</b>: {srp('mirglxcvt')}</li></ul>
 <p>SRPs are from the official Mitsubishi Motors Philippines price list (as of August 2026). Freight and handling are not included, and prices can change without notice.</p>
 <h2>{MON} promo: Option A and Option B</h2>
-<p>Every unit has two all-in options on 60 months. <b>Option A</b> is the lowest down payment. <b>Option B</b> is a 30% down payment with a lower monthly.</p>
+<p>Every unit has two all-in options on 60 months. <b>Option A</b> is the lowest down payment. <b>Option B</b> is a bigger down payment with a lower monthly.</p>
 {ptable(["mirglxmt","mirglxcvt"])}
-<div class="box"><p><b>About the CVT Option B:</b> the Option B monthly for the Mirage GLX CVT is still being confirmed, so it is shown as "{BASK}". I will send you the confirmed down payment and monthly on request. The GLX M/T figures above are confirmed for {MON}.</p></div>
+<div class="box"><p><b>Good to know:</b> Option B is {b('mirglxmt')[1]}/mo on both variants by design; the CVT takes a bigger down payment ({b('mirglxcvt')[0]} vs {b('mirglxmt')[0]}). All figures are for {MON}, 60 months (5 years).</p></div>
 <h2>How the monthly works</h2>
 <ol class="steps"><li><h3>SRP</h3><p>The official price of the variant you choose.</p></li><li><h3>Down payment</h3><p>A smaller DP keeps more cash in your pocket; a bigger DP lowers the monthly.</p></li><li><h3>Term</h3><p>These promos are on 60 months (5 years).</p></li><li><h3>Monthly</h3><p>A fixed amortization to the bank for the whole term.</p></li></ol>
 <p>Want to try your own down payment? Use the <a href="/budgetcalculator/">monthly calculator</a>. It shows an estimate next to the official promo for the same unit.</p>
@@ -116,6 +115,6 @@ body=f'''<p>Many of my first-time buyers in San Jose del Monte (SJDM) ask the sa
 <h2>Where it is not the best fit</h2>
 <ul class="ticks"><li>You carry five adults every day or often load heavy cargo: consider the <a href="/cars/xpander/">Xpander</a>.</li><li>Your street floods often: a higher unit like the <a href="/cars/xforce/">Xforce</a> gives more clearance than the Mirage's 160 mm.</li><li>You want a separate trunk: the <a href="/cars/mirage-g4/">Mirage G4 sedan</a> is the sister model.</li></ul>
 <h2>What it costs each month</h2>
-<p>For {MON}, the Mirage GLX M/T is {at('mirglxmt')} on Option A, 60 months all-in; the GLX CVT is {at('mirglxcvt')} on Option A, with its Option B shown as "{BASK}" while it is being confirmed. Full details are in the <a href="/tips/mirage-hatchback-down-payment-monthly-sjdm/">Mirage hatchback down payment and monthly guide</a>. Pre-qualified, subject to bank approval.</p>
+<p>For {MON}, the Mirage GLX M/T is {at('mirglxmt')} on Option A, 60 months all-in; the GLX CVT is {at('mirglxcvt')} on Option A. On Option B, both are {b('mirglxmt')[1]}/mo. Full details are in the <a href="/tips/mirage-hatchback-down-payment-monthly-sjdm/">Mirage hatchback down payment and monthly guide</a>. Pre-qualified, subject to bank approval.</p>
 {CHK}
 '''+CTA("Want to feel how the Mirage handles your actual route? Book a test drive in SJDM and bring your usual passengers.","mirage")))
