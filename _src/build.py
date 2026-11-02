@@ -678,6 +678,19 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
         _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
     if _n!=_s: open(_f,'w').write(_n)
 
+# --- WEB PUSH (OneSignal v16) soft-prompt: inert until _src/push_config.json "app_id" is set ---
+_PUSH_ID=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"push_config.json"))).get("app_id","").strip()
+_PUSH_TAG=(f'<link rel="stylesheet" href="/assets/push.css?v={_vh("/assets/push.css")}" media="print" onload="this.media=\'all\'"><script>window.PUSH_APP_ID="{_PUSH_ID}"</script><script src="/assets/push.js?v={_vh("/assets/push.js")}" defer></script>') if _PUSH_ID else ''
+_PUSH_PRIV='<h2 id="notifications">Push notifications</h2><p>If you click &ldquo;Notify me&rdquo; and allow notifications in your browser, our notification provider OneSignal stores a browser subscription ID, your browser and device type, approximate location from your IP address, and the page and car model you were viewing, so I, Richard Cuagdan, can send you new promos, blog posts and Mitsubishi updates. We never collect your name or contact details this way. To unsubscribe, block notifications for mitsubishipromos.online in your browser&rsquo;s site settings.</p>'
+for _f in _gl.glob(R+'/**/*.html',recursive=True):
+    if '/_src/' in _f: continue
+    _s=open(_f).read()
+    if 'http-equiv="refresh"' in _s or '</body>' not in _s: continue
+    _n=_re.sub(r'<link rel="stylesheet" href="/assets/push\.css[^>]*><script>window\.PUSH_APP_ID=[^<]*</script><script src="/assets/push\.js[^"]*" defer></script>','',_s)
+    _n=_n.replace(_PUSH_PRIV,'')
+    if _PUSH_TAG and not _re.match(r'/(card|apply|status)/',_f.replace(R,'')): _n=_n.replace('</body>',_PUSH_TAG+'</body>',1)
+    if _PUSH_ID and _f.replace(R,'')=='/privacy/index.html': _n=_n.replace('<h2>How we keep it</h2>',_PUSH_PRIV+'<h2>How we keep it</h2>',1)
+    if _n!=_s: open(_f,'w').write(_n)
 # --- sitemap lastmod = date the page's main content last changed (content hash; state in _src/lastmod.json). Computed after all post-processing.
 import json as _js, hashlib as _hl, datetime as _dt2
 _LMF=os.path.join(os.path.dirname(os.path.abspath(__file__)),"lastmod.json")
