@@ -72,9 +72,9 @@ L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="
  ("Can OFWs buy a Mitsubishi through you?","Yes. OFWs can apply from abroad with an SPA or a co-borrower in the Philippines. See the OFW car loan guide.")])
 
 L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",alt="Mitsubishi Xpander GLX at a Mitsubishi casa in Bulacan",
- title="Mitsubishi Casa Bulacan: How Buying a Brand-New Unit Works",
- h1="Mitsubishi casa Bulacan: what a casa is and how to buy there",
- desc="Mitsubishi casa Bulacan guide: what \"casa\" means, buying brand-new in SJDM, test drives, PMS at an authorized casa, and how to arrange a showroom visit.",
+ title="Mitsubishi Casa Bulacan: SJDM, San Jose del Monte Guide",
+ h1="Mitsubishi casa Bulacan: what a casa is and how to buy in SJDM (San Jose del Monte)",
+ desc="Mitsubishi casa Bulacan guide: what \"casa\" means, buying brand-new in San Jose del Monte (SJDM), test drives, PMS and arranging a showroom visit.",
  kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM",
  lead="Searching \"Mitsubishi casa Bulacan\"? \"Casa\" is what most Filipinos call the brand's authorized dealership, ang mismong Mitsubishi dealer. In San Jose del Monte, that's Richard Cuagdan, an authorized Mitsubishi sales executive in San Jose del Monte. Here's what buying at a casa looks like, step by step.",
  figs=[("What \"casa\" means","cs-what","What is a casa: the authorized dealership for sales, service and genuine parts"),("Buying at the casa","cs-buy","Buying a car at the casa: from inquiry to release day"),("PMS at an authorized casa","cs-pms","Why owners bring their car back to an authorized casa for PMS"),("Directions","cs-photo","Mitsubishi Xpander on the road")],

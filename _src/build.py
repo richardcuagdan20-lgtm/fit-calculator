@@ -15,15 +15,15 @@ GA='''<!-- Google tag (gtag.js) GA4 -->
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');</script>'''
 TEL="+639542911201"; TELD="0954 291 1201"
 ADDR="Richard Cuagdan, authorized Mitsubishi sales executive, serving San Jose del Monte (SJDM), Bulacan and Quezon City"
-AREAS=[{"@type":"City","name":"San Jose del Monte","containedInPlace":{"@type":"AdministrativeArea","name":"Bulacan"}},{"@type":"City","name":"Quezon City"}]
+AREAS=[{"@type":"City","name":"San Jose del Monte","alternateName":"SJDM","containedInPlace":{"@type":"AdministrativeArea","name":"Bulacan"}},{"@type":"City","name":"Quezon City"}]
 import urllib.parse as _up
 AREAS=AREAS+[{"@type":"AdministrativeArea","name":"Bulacan"}]
 # Not the dealership entity: a ProfessionalService named after Richard (independent personal sales page). City only, no street address.
-DEALER={"@type":"ProfessionalService","@id":D+"/#dealer","name":"Richard Cuagdan, Mitsubishi Sales Executive SJDM Bulacan","alternateName":["Mitsubishi SJDM Bulacan by Richard Cuagdan","Richard Cuagdan Mitsubishi San Jose del Monte"],"description":"Independent personal sales page of Richard Dennis Cuagdan, an authorized Mitsubishi sales executive serving San Jose del Monte (SJDM), Bulacan. Not the website of Mitsubishi Motors Philippines Corporation.","founder":{"@id":D+"/#richard"},"sameAs":[FB],"brand":{"@type":"Brand","name":"Mitsubishi"},"address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
+DEALER={"@type":"ProfessionalService","@id":D+"/#dealer","name":"Richard Cuagdan, Mitsubishi Sales Executive SJDM Bulacan","alternateName":["Mitsubishi SJDM Bulacan by Richard Cuagdan","Mitsubishi San Jose del Monte (SJDM) Bulacan","Richard Cuagdan Mitsubishi San Jose del Monte"],"description":"Independent personal sales page of Richard Dennis Cuagdan, an authorized Mitsubishi sales executive serving San Jose del Monte (SJDM), Bulacan. Not the website of Mitsubishi Motors Philippines Corporation.","founder":{"@id":D+"/#richard"},"sameAs":[FB],"brand":{"@type":"Brand","name":"Mitsubishi"},"address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "telephone":TEL,"areaServed":AREAS,
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
  "url":D+"/"}
-PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Sales Executive","description":"Authorized Mitsubishi sales executive in San Jose del Monte, Bulacan","knowsAbout":["Mitsubishi vehicles","Car financing in the Philippines","Bank auto loans"],"telephone":TEL,"image":[D+"/assets/img/richard-600.webp",D+"/assets/img/richard/xpander-1x1.jpg"],"worksFor":{"@id":D+"/#dealer"},"areaServed":AREAS,"url":D+"/about/","sameAs":[FB,MSG]}
+PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Sales Executive","description":"Authorized Mitsubishi sales executive in San Jose del Monte (SJDM), Bulacan","knowsAbout":["Mitsubishi vehicles","Car financing in the Philippines","Bank auto loans"],"telephone":TEL,"image":[D+"/assets/img/richard-600.webp",D+"/assets/img/richard/xpander-1x1.jpg"],"worksFor":{"@id":D+"/#dealer"},"areaServed":AREAS,"url":D+"/about/","sameAs":[FB,MSG]}
 PX='''<!-- Meta Pixel -->
 <script>try{!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1820790069172672');fbq('track','PageView');}catch(_){}</script>'''
 CL='''<!-- Microsoft Clarity -->
@@ -197,9 +197,9 @@ CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>
 
 # ---------- HOME
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/","Mitsubishi San Jose del Monte (SJDM) Bulacan: Promos & Prices",
+page("/","Mitsubishi SJDM, San Jose del Monte Bulacan: Promos & Prices",
  "Mitsubishi in San Jose del Monte, Bulacan with Richard Cuagdan, authorized sales executive: 2026 price list, low down payment promos, test drives and loan help.",
-hero("Mitsubishi in San Jose del Monte, Bulacan: explained clearly, financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM, Bulacan",src="home")+f'''
+hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM, Bulacan",src="home")+f'''
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
@@ -236,15 +236,15 @@ hero("Mitsubishi in San Jose del Monte, Bulacan: explained clearly, financed sen
 
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
-page("/cars/","Mitsubishi Price List 2026 Bulacan: All Models & SRPs | SJDM",
- "Mitsubishi Bulacan price list 2026 with Richard Cuagdan in San Jose del Monte: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
-f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
+page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
+ "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
+f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">See October promos</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 # ---------- model pages
 def MTITLE(m):
-    for t in (f"Mitsubishi {m['name']} Promo Bulacan 2026: Price & Monthly",f"{m['name']} Promo Bulacan 2026: Price & Monthly | SJDM",f"{m['name']} 2026 Price & Promo | SJDM Bulacan",f"{m['name']} 2026 Price | SJDM"):
+    for t in (f"Mitsubishi {m['name']} SJDM, San Jose del Monte: 2026 Promo",f"{m['name']} 2026 Promo SJDM, San Jose del Monte Bulacan",f"{m['name']} 2026 Promo | SJDM, San Jose del Monte",f"Mitsubishi {m['name']} Promo Bulacan 2026: Price & Monthly",f"{m['name']} Promo Bulacan 2026: Price & Monthly | SJDM",f"{m['name']} 2026 Price & Promo | SJDM Bulacan",f"{m['name']} 2026 Price | SJDM"):
         if len(t)<=62: return t
     return t
 _MG={"xpander":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
@@ -266,8 +266,8 @@ for m in MODELS:
     s0=srp_from(m)
     haspromo=any(v["promo"] for v in m["variants"])
     page(f"/cars/{m['slug']}/",MTITLE(m),
-     f"Mitsubishi {m['name']} with Richard Cuagdan in San Jose del Monte: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']} 2026: price and promo in SJDM, Bulacan</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+     f"Mitsubishi {m['name']} in SJDM, San Jose del Monte, Bulacan: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']} 2026: price and promo in SJDM (San Jose del Monte), Bulacan</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
 <section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
 {(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],cap=f"Richard Cuagdan, your sales executive, with the Mitsubishi {e(RXCAR[RXMODEL[m['slug']]])}")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>

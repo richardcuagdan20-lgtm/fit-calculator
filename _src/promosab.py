@@ -150,7 +150,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
      '<div class="ab-openonly ab-ok"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div></div></div></section>')
     CARPARTS.update(css=css,form=form,lv=lv,jv=jv,qv=qv,f=f,msg=MSG,pop=POP)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
-<p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month in SJDM, Bulacan</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
+<p class="kick">October 2026</p><h1><span class="en">Mitsubishi promos this month in SJDM (San Jose del Monte), Bulacan</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
 {TEASER}
 <section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(nav)}</nav>
@@ -160,8 +160,8 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section></div>
 {POP}<script type="text/plain" id="ab-a">{blob}</script>
 <script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
-    page("/promos/","Mitsubishi SJDM Bulacan Promo October 2026: Low DP & Monthly",
-     "October 2026 Mitsubishi promos from Mitsubishi SJDM: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
+    page("/promos/","Mitsubishi Promo Oct 2026 SJDM, San Jose del Monte Bulacan",
+     "October 2026 Mitsubishi promos in SJDM, San Jose del Monte, Bulacan: two all-in options per unit on 60 months, lowest down payment or a lower monthly, with freebies. Subject to bank approval.",
      body, crumbs=[("/","Home"),("/promos/","Promos")])
     return [r["unit"] for r in rs]
 
