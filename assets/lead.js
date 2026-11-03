@@ -36,16 +36,32 @@ var skip=false;
 function send(lead){var c=AS.check(lead&&lead.via||'form');skip=c!=='ok';if(skip)return new Promise(function(r){setTimeout(function(){r(true)},600)});return AS.getToken(5000).then(function(t){AS.stamp(lead,t);return Promise.race([send0(lead),new Promise(function(r){setTimeout(function(){r(true)},2500)})])})}
 function send0(lead){var b;try{b=JSON.stringify(lead)}catch(e){return Promise.resolve(false)}
   try{return fetch(URL_,{method:'POST',mode:'no-cors',keepalive:true,cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:b}).then(function(){return true}).catch(function(){return beacon(b)})}catch(e){return Promise.resolve(beacon(b))}}
-function track(unit){if(skip)return;
+function track(unit){if(skip)return;   /* legacy helper (kept for old callers): value-less Lead */
   try{if(typeof window.fbq==='function')window.fbq('track','Lead',{content_name:unit})}catch(_){}
   try{if(typeof window.gtag==='function')window.gtag('event','generate_lead',{unit:unit,value:0,currency:'PHP'})}catch(_){}
 }
-function base(via){var q=new URLSearchParams(location.search);
+/* Lead values in PHP per form. PLACEHOLDERS: Richard can change these numbers here. */
+var LEAD_VALUES={loan_assessment:100,official_application:300,'promos-unlock-optionA':50,'promos-inquiry':100,calculator:50,guide:30};
+var fired={};
+function eid(){return 'ld_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10)}
+/* fire(form, lead, extra): Pixel Lead + GA4 generate_lead with the same value and event id. Once per submit (event_id); never when anti-spam skipped the send. */
+function fire(form,L,extra){if(skip)return false;var id=(L&&L.event_id)||eid();if(fired[id])return false;fired[id]=1;
+  var key=/^car-loan-guide|^guide/.test(form)?'guide':form,val=LEAD_VALUES[key]!==undefined?LEAD_VALUES[key]:0,p={value:val,currency:'PHP',content_name:form},k;
+  for(k in (extra||{}))if(p[k]===undefined)p[k]=extra[k];
+  try{if(typeof window.fbq==='function')window.fbq('track','Lead',p,{eventID:id})}catch(_){}
+  var g={value:val,currency:'PHP',form:form,event_id:id};for(k in (extra||{}))if(g[k]===undefined)g[k]=extra[k];
+  try{if(typeof window.gtag==='function')window.gtag('event','generate_lead',g)}catch(_){}
+  return true}
+function attr(){try{if(window.MPTrack&&MPTrack.getAttribution)return MPTrack.getAttribution()}catch(_){}
+  var q=new URLSearchParams(location.search),o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id','fbclid','gclid'].forEach(function(k){o[k]=q.get(k)||''});o.ad_id=o.utm_content;o.ft_landing='';o.ft_time='';o.lt_utm='';return o}
+function base(via){var q=new URLSearchParams(location.search),a=attr();
   return {timestamp:stamp(),leadId:lid(),tier:via,via:via,consent:true,source:location.origin+location.pathname,
-   utm_source:q.get('utm_source')||'',utm_campaign:q.get('utm_campaign')||'',utm_content:q.get('utm_content')||'',adset:q.get('adset')||q.get('utm_term')||q.get('utm_medium')||''}}
+   utm_source:a.utm_source,utm_campaign:a.utm_campaign,utm_content:a.utm_content,adset:q.get('adset')||a.utm_term||a.utm_medium||'',
+   utm_medium:a.utm_medium,utm_term:a.utm_term,utm_id:a.utm_id,ad_id:a.ad_id,fbclid:a.fbclid,gclid:a.gclid,
+   ft_landing:a.ft_landing,ft_time:a.ft_time,lt_utm:a.lt_utm,event_id:eid()}}
 function err(f,on){var el=$('e_'+f);if(el)el.hidden=!on;var i=$(f);if(i)i.setAttribute('aria-invalid',on?'true':'false');return on}
 document.addEventListener('DOMContentLoaded',function(){['gf','af','tf'].forEach(function(i){var f=$(i);if(f)AS.init(f)})});
-window.Lead={V4:true,CHAT:window.SITECHAT_ON===true,REFCHAT:false,LIVECHAT:false,url:URL_,skipped:function(){return skip},send:send,track:track,base:base,okMobile:okMobile,err:err,MSG:MSG};
+window.Lead={V4:true,CHAT:window.SITECHAT_ON===true,REFCHAT:false,LIVECHAT:false,url:URL_,skipped:function(){return skip},send:send,track:track,fire:fire,LEAD_VALUES:LEAD_VALUES,attribution:attr,base:base,okMobile:okMobile,err:err,MSG:MSG};
 })();
 /* Own live chat: loaded site-wide by /assets/sitechat.js when window.SITECHAT_ON (set per page by the build; flag SITECHAT in _src/data.py). */
 /* Ref-linked application chat on /apply/ thank-you + /status/: SHELVED 2026-10-29 (REFCHAT:true loads /assets/refchat.js). LIVECHAT:false = Crisp/Fina live chat shelved; chat buttons open Messenger instead. */

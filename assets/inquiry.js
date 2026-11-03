@@ -40,11 +40,10 @@ function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=wh
   var fig=fa+' | Option B: '+box.getAttribute('data-b');
   var ok=function(){try{localStorage.setItem(CK,JSON.stringify({n:n.value.trim(),m:m.value.trim(),e:e.value.trim()}))}catch(_){}panel.setAttribute('data-ck',ck());
    f.hidden=true;var o=panel.querySelector('.iq-ok');o.hidden=false;o.setAttribute('tabindex','-1');o.focus();
-   if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-inquiry',content_category:'promos',source:S,unit:u};T('Lead',p);T('InquirePromo',p,true)}};
-  if(!window.Lead){ok();return}
-  var L=Lead.base(S);L.leadSource=S;L.campaign=S;L.name=n.value.trim();L.mobile=m.value.trim();L.email=e.value.trim();L.chosenUnit=u;L.unitParam=box.getAttribute('data-ref');
+   if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-inquiry',content_category:'promos',source:S,unit:u};if(window.Lead&&Lead.fire&&L)Lead.fire('promos-inquiry',L,{content_category:'promos',source:S,unit:u});else T('Lead',p);T('InquirePromo',p,true)}};
+  var L=null;if(!window.Lead){ok();return}
+  L=Lead.base(S);L.leadSource=S;L.campaign=S;L.name=n.value.trim();L.mobile=m.value.trim();L.email=e.value.trim();L.chosenUnit=u;L.unitParam=box.getAttribute('data-ref');
   L.dpPreference=fig;L.timeline='Promos: inquiry about '+u;L.lang=tl()?'tl':'en';
-  var q=new URLSearchParams(location.search);L.fbclid=q.get('fbclid')||'';
   L.usage=['Email: '+L.email,'source='+S,'Message: '+t.value.trim().slice(0,1000),fig,'Pre-qualified, subject to bank approval'].join(' | ');
   Lead.send(L).then(ok,ok)})}
 /* Contact is re-read every time a form opens and on the unlock event (fix 2026-10-30: a form opened before the Option A unlock kept asking for name/mobile/email).

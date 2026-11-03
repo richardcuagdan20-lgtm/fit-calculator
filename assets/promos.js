@@ -40,13 +40,13 @@ f.addEventListener('submit',function(ev){ev.preventDefault();
  var n=$('ab-name').value.trim(),mob=$('ab-mobile').value.trim(),em=$('ab-email').value.trim(),ok=$('ab-consent').checked,bad=false;
  bad=er('ab-name',n.length<2)||bad;bad=er('ab-mobile',!(window.Lead?Lead.okMobile(mob):/^09\d{9}$/.test(mob)))||bad;bad=er('ab-email',!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))||bad;bad=er('ab-consent',!ok)||bad;
  if(bad){var x=f.querySelector('[aria-invalid=true]');if(x)x.focus();return}
- var b=$('ab-btn');b.disabled=true;var S='promos-unlock-optionA';
+ var b=$('ab-btn');b.disabled=true;var S='promos-unlock-optionA',L=null;
  var done=function(){try{localStorage.setItem(K,'1');localStorage.setItem('promos_contact',JSON.stringify({n:n,m:mob,e:em}))}catch(_){}try{document.dispatchEvent(new CustomEvent('promos:unlock',{detail:{n:n,m:mob,e:em}}))}catch(_){}reveal();
-  if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-optionA',content_category:'promos',source:S};T('Lead',p);T('UnlockLowestDP',p,true)}
+  if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-optionA',content_category:'promos',source:S};if(window.Lead&&Lead.fire&&L)Lead.fire(S,L,{content_category:'promos'});else T('Lead',p);T('UnlockLowestDP',p,true)}
   $('ab-ok').scrollIntoView({block:'nearest'})};
  if(!window.Lead){done();return}
- var L=Lead.base(S);L.leadSource=S;L.campaign=S;L.name=n;L.mobile=mob;L.email=em;L.chosenUnit='All units (Option A unlock)';
- var q=new URLSearchParams(location.search);L.utm_medium=q.get('utm_medium')||'';L.utm_term=q.get('utm_term')||'';L.fbclid=q.get('fbclid')||'';L.lang=lang;
+ L=Lead.base(S);L.leadSource=S;L.campaign=S;L.name=n;L.mobile=mob;L.email=em;L.chosenUnit='All units (Option A unlock)';
+ L.lang=lang;  /* utm_medium/utm_term/fbclid now come from Lead.base() (first-touch attribution) */
  L.timeline='Promos: unlocked Option A (lowest DP) for all units';
  L.usage=['Email: '+em,'source='+S,'Pre-qualified, subject to bank approval'].join(' | ');
  Lead.send(L).then(done,done)});

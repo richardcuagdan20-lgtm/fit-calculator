@@ -46,14 +46,14 @@ function init(root){
   h+='<form class="cc-lead" novalidate><h4>Get this estimate and the latest promo from Richard</h4><div class="cc-f"><label for="cc-n">Full name</label><input id="cc-n" autocomplete="name"></div><div class="cc-f"><label for="cc-mo">Mobile number</label><input id="cc-mo" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX"></div><div class="cc-f"><label for="cc-em">or Email</label><input id="cc-em" type="email" autocomplete="email"></div>'+
    '<label class="chk"><input type="checkbox" id="cc-c"> <span>I agree to the processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="cc-er" hidden></p><button class="btn" type="submit">Send me this estimate</button></form>'+
    '<div class="cc-next"><p><b>Next step:</b> see how a bank is likely to view your application.</p><p class="row"><a class="btn" href="/loan-assessment/?unit='+encodeURIComponent(v.id)+'">Take the Loan Application Assessment</a></p></div>';
-  B.innerHTML=h;T('CalcResult',{content_name:v.n,source:src,term_years:y},true);}
+  B.innerHTML=h;try{var lf=B.querySelector('.cc-lead');if(lf&&window.AS)AS.init(lf)}catch(_){}T('CalcResult',{content_name:v.n,source:src,term_years:y},true);}
  function lead(f){var v=D[S.m].v[S.v],n=$('#cc-n',f).value.trim(),mob=$('#cc-mo',f).value.replace(/[\s()-]/g,''),em=$('#cc-em',f).value.trim(),c=$('#cc-c',f).checked,er=$('.cc-er',f),msg='';
   if(n.length<2)msg='Please enter your name.';else if(!mob&&!em)msg='Please enter your mobile number or email.';else if(mob&&!(window.Lead?Lead.okMobile(mob):/^(09\d{9}|\+\d{8,15})$/.test(mob)))msg='Please check your mobile number.';else if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))msg='Please check your email.';else if(!c)msg='Please tick the consent box.';
   er.textContent=msg;er.hidden=!msg;if(msg)return;
   var b=$('button[type=submit]',f);b.disabled=true;b.textContent='Sending...';var M=Math.round(mo(v.srp,S.dp,S.y));
-  var done=function(){f.innerHTML='<p class="cc-ok"><b>Thank you, '+esc(n.split(' ')[0])+'!</b> Richard will send you this estimate and the current promo for the '+esc(v.n)+'. For a clearer picture of your chances, take the Loan Application Assessment below.</p>';T('Lead',{content_name:v.n,source:'calculator-'+src})};
-  if(!window.Lead){done();return}
-  var L=Lead.base('calculator');L.name=n;L.mobile=mob;L.chosenUnit=v.n;L.unitParam=v.id;L.monthly=M;L.seg='';
+  var done=function(){f.innerHTML='<p class="cc-ok"><b>Thank you, '+esc(n.split(' ')[0])+'!</b> Richard will send you this estimate and the current promo for the '+esc(v.n)+'. For a clearer picture of your chances, take the Loan Application Assessment below.</p>';if(window.Lead&&Lead.fire&&L)Lead.fire('calculator',L,{unit:v.n,source:'calculator-'+src})};
+  var L=null;if(!window.Lead){done();return}
+  L=Lead.base('calculator');L.name=n;L.mobile=mob;L.chosenUnit=v.n;L.unitParam=v.id;L.monthly=M;L.seg='';
   L.timeline='Calc: DP '+S.dp+', '+S.y+' yrs, ~'+M+'/mo (SRP '+v.srp+')';L.usage=[em?'Email: '+em:'','Calculator estimate, subject to bank evaluation'].filter(Boolean).join(' | ');
   Lead.send(L).then(done);}
  root.addEventListener('click',function(e){var t=e.target.closest('button');if(!t||!root.contains(t))return;start();

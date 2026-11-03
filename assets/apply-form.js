@@ -181,7 +181,7 @@ $('af').addEventListener('submit',function(ev){ev.preventDefault();for(var q=1;q
   L.docsStatus=docStatus().join(' | ');L.docsToFollow=a.documents.missing.join('; ');L.application=JSON.stringify(a);
   Lead.send(L).then(function(ok){if(ok===false)throw 0;return sendFiles(ref,L)}).then(function(){
     try{sessionStorage.removeItem('mp_app_prefill');sessionStorage.removeItem(DKEY)}catch(_){}
-    if(!Lead.skipped()){px('SubmitApplication',{});ga('submit_application',{form:'official_application'})}
+    if(!Lead.skipped()){Lead.fire('official_application',L,{});px('SubmitApplication',{});ga('submit_application',{form:'official_application'})}
     done(a)}).catch(function(){btn.disabled=false;btn.textContent=T('I-submit ang application','Submit application');$('af-errsum').hidden=false;$('af-errsum').textContent=T('Hindi na-send. Pakisubukan ulit.','Not sent. Please try again.')})});
 
 /* ---------- wizard: steps = .la-card[data-step] (1 Unit, 2 Personal, 3 Address, 4 Work, 5 Co-maker/refs, 6 Requirements, 7 Review) ---------- */

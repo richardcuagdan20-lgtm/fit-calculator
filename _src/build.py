@@ -509,7 +509,7 @@ page("/budgetcalculator/","Mitsubishi Monthly Calculator: DP, Term & Amortizatio
  "Estimate your Mitsubishi monthly: choose a car, a down payment and a term, then compare it with the official promo. Estimate only, subject to bank evaluation.",
 f'''<section class="ph"><div class="w"><h1>Estimate your monthly</h1><p class="lead">Choose a car, a down payment and how many years. You will see an estimated monthly and, when there is one, the official promo for the same unit.</p></div></section>
 <section class="sec"><div class="w">{CALC("budgetcalculator")}</div></section>
-<script src="/assets/lead.js" defer></script>''', crumbs=[("/","Home"),("/budgetcalculator/","Monthly estimate")])
+<script src="/assets/lead.js?v={__import__("hashlib").md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]}" defer></script>''', crumbs=[("/","Home"),("/budgetcalculator/","Monthly estimate")])
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())

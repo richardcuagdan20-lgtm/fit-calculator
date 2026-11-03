@@ -41,8 +41,7 @@ try{{if(localStorage.getItem(K))done()}}catch(_){{}}
   var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='{T("Sine-send...","Sending...")}';
   var L=Lead.base('{LANG_TAG}');L.name=n;L.mobile='';L.email=em;L.chosenUnit='Car Loan Guide PDF ({L.upper()})';L.usage='Lead magnet: {LANG_TAG} | Language: {L} | Email: '+em;
   Lead.send(L).then(function(){{try{{localStorage.setItem(K,'1')}}catch(_){{}}
-   if(!Lead.skipped()){{try{{if(typeof window.fbq==='function')window.fbq('track','Lead',{{content_name:'car-loan-guide-pdf-{L}'}})}}catch(_){{}}
-    try{{if(typeof window.gtag==='function')window.gtag('event','generate_lead',{{unit:'car-loan-guide-pdf-{L}',language:'{L}',value:0,currency:'PHP'}})}}catch(_){{}}}}
+   Lead.fire('car-loan-guide-pdf-{L}',L,{{language:'{L}'}});
    done()}});
  }});
 }});
