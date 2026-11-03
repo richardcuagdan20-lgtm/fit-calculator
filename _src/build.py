@@ -334,7 +334,7 @@ _pab.inject_cars(R)  # DRAFT: promos module on car pages
 # /lowest-down-payment/ retired 2026-10-29: folded into /promos/ (Option A unlock); stub keeps old links/ads alive
 import os as _os
 _os.makedirs(R+"/lowest-down-payment",exist_ok=True)
-open(R+"/lowest-down-payment/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Promos | Richard Cuagdan, Mitsubishi SJDM Bulacan</title><meta name="robots" content="noindex"><link rel="canonical" href="https://mitsubishi-sjdm.com/promos/"><meta http-equiv="refresh" content="0; url=/promos/"><script>location.replace("/promos/"+location.search+location.hash)</script></head><body><p><a href="/promos/">Go to Promos</a></p></body></html>')
+open(R+"/lowest-down-payment/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Promos | Richard Cuagdan, Mitsubishi SJDM Bulacan</title><meta name="robots" content="noindex"><link rel="canonical" href="https://www.mitsubishi-sjdm.com/promos/"><meta http-equiv="refresh" content="0; url=/promos/"><script>location.replace("/promos/"+location.search+location.hash)</script></head><body><p><a href="/promos/">Go to Promos</a></p></body></html>')
 # ---------- /promos-tips/ hub retired (2026-10-29): redirect stub to the combined Guides & Tips index, written at the end of the build
 # ---------- evergreen cross-links into existing articles
 XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
@@ -540,7 +540,7 @@ open(R+"/preview-loan/index.html","w").write('<!doctype html><html lang="en-PH">
 # ---------- 404
 page("/__404/","Page not found | Richard Cuagdan, Mitsubishi SJDM Bulacan","The page you were looking for could not be found.",
  '<section class="ph"><div class="w"><h1>Page not found</h1><p class="lead">That page doesn\'t exist or has moved.</p><p class="row"><a class="btn" href="/">Go to Home</a> <a class="btn ghost" href="/cars/">Browse cars</a></p></div></section>',noindex=True)
-s=open(R+"/__404/index.html").read().replace('<link rel="canonical" href="https://mitsubishi-sjdm.com/__404/">\n','').replace('<meta property="og:url" content="https://mitsubishi-sjdm.com/__404/">\n','')
+s=open(R+"/__404/index.html").read().replace('<link rel="canonical" href="https://www.mitsubishi-sjdm.com/__404/">\n','').replace('<meta property="og:url" content="https://www.mitsubishi-sjdm.com/__404/">\n','')
 open(R+"/404.html","w").write(s); os.remove(R+"/__404/index.html"); os.rmdir(R+"/__404")
 
 # ---------- root redirect injection

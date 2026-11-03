@@ -3,7 +3,7 @@
 ## 1. One-time setup (free)
 1. Sign up at https://onesignal.com (free plan).
 2. New App/Website → name "Mitsubishi Promos" → platform **Web**.
-3. Choose **Typical Site**. Site URL: `https://mitsubishi-sjdm.com`. Upload the site icon (assets/android-chrome-192x192.png).
+3. Choose **Typical Site**. Site URL: `https://www.mitsubishi-sjdm.com`. Upload the site icon (assets/android-chrome-192x192.png).
 4. **Permission prompt setup: remove / turn off all OneSignal prompts** (no slide prompt, no bell, no auto-prompt). The site has its own branded "Notify me" bar.
 5. Service worker: leave defaults (`/OneSignalSDKWorker.js`, scope `/`). The file is already at the site root.
 6. Save. Copy the **App ID** (Settings → Keys & IDs) and create/copy a **REST API key**.
@@ -15,7 +15,7 @@ export ONESIGNAL_APP_ID=your-app-id
 export ONESIGNAL_REST_API_KEY=your-rest-key      # keep private
 python3 _src/tools/notify.py --title "Xpander November promo" \
   --message "Low DP and freebies this month. See the details." \
-  --url https://mitsubishi-sjdm.com/promos/ --image https://mitsubishi-sjdm.com/assets/og/... --dry-run
+  --url https://www.mitsubishi-sjdm.com/promos/ --image https://www.mitsubishi-sjdm.com/assets/og/... --dry-run
 ```
 Check the preview, then run again without `--dry-run` and type YES.
 - Only people who viewed a model: `--interest xpander` (tags: interest = model slug, `promos`, `blog` or `general`; plus source_page).

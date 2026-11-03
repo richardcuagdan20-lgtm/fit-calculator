@@ -19,7 +19,7 @@ _IC={"call":"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 
  "web":"M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18","save":"M12 4v11m0 0l-4-4m4 4l4-4M5 20h14","fb":"M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8z"}
 def _card_html():
     tiles="".join(f'<a class="nt" href="{p}{_U}"><span class="ni">{_ic(i)}</span><span class="nx"><b>{e(t)}</b><small>{e(s)}</small></span><span class="ch" aria-hidden="true">›</span></a>' for p,t,s,i in _NAVC)
-    acts=[("call",f"tel:{TEL}","Call",TELD,"pri"),("sms",f"sms:{TEL}","Text","SMS",""),("msgr",MSG,"Messenger","Message me",""),("web",D+"/"+_U,"Website","mitsubishi-sjdm.com",""),("fb",FB,"Facebook","My page",""),("save","/card/richard-cuagdan.vcf","Save contact","Add to phone","")]
+    acts=[("call",f"tel:{TEL}","Call",TELD,"pri"),("sms",f"sms:{TEL}","Text","SMS",""),("msgr",MSG,"Messenger","Message me",""),("web",D+"/"+_U,"Website","www.mitsubishi-sjdm.com",""),("fb",FB,"Facebook","My page",""),("save","/card/richard-cuagdan.vcf","Save contact","Add to phone","")]
     ab="".join(f'<a class="ab {c}" href="{h}"{" rel=\"noopener\" target=\"_blank\"" if h.startswith("http") and "m.me" in h or h==FB else ""} data-ev="{k}"><span class="ai">{_ic(_IC[k])}</span><span class="al"><b>{l}</b><small>{s}</small></span></a>' for k,h,l,s,c in acts)
     ld={"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@id":D+"/#richard"}}
     return f'''<!doctype html>

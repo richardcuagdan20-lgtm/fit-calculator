@@ -1,7 +1,7 @@
 # Build car-loan-approval-guide-{tl,en}.pdf from car_loan_guide.html (base = English body). Run from repo root after make_ig.py.
 import subprocess,os,re,shutil
 R=os.path.abspath(".");base=open(R+"/_src/pdf/car_loan_guide.html").read()
-COMMON=[(f'cl-{k}.webp',f'cl-{k}-@L.webp') for k in ["what-banks-check","income-rule","requirements","timeline","denial-fixes","bank-vs-inhouse"]]+[('href="https://mitsubishi-sjdm.com/loan-assessment/"','href="https://mitsubishi-sjdm.com/loan-assessment/?lang=@L"')]
+COMMON=[(f'cl-{k}.webp',f'cl-{k}-@L.webp') for k in ["what-banks-check","income-rule","requirements","timeline","denial-fixes","bank-vs-inhouse"]]+[('href="https://www.mitsubishi-sjdm.com/loan-assessment/"','href="https://www.mitsubishi-sjdm.com/loan-assessment/?lang=@L"')]
 EN=[('<h1>Paano Ma-approve<br>sa Car Loan</h1>','<h1>How to Get Your<br>Car Loan Approved</h1>'),('– para handa ka bago mag-apply sa bank.','– so you are ready before you apply at the bank.')]
 TL=[('<html>','<html lang="fil">'),('font-size:10.5pt;line-height:1.45','font-size:9.8pt;line-height:1.4'),('style="width:42%','style="width:34%'),('style="width:58%','style="width:46%'),('Requirements, documents, budget worksheet &amp; timeline – para handa ka bago mag-apply sa bank.','Requirements, documents, budget worksheet at timeline – para handa ka bago mag-apply sa bank.'),
 ('(also serving Quezon City &amp; Metro Manila)','(nagse-serve din sa Quezon City at Metro Manila)'),

@@ -1,4 +1,4 @@
-D="https://mitsubishi-sjdm.com"
+D="https://www.mitsubishi-sjdm.com"
 FB="https://www.facebook.com/504759566043148"
 MSG="https://m.me/504759566043148"
 SITECHAT=False  # SHELVED 2026-10-29 (Messenger is the main chat route). Own site-wide chat bubble (needs webhook v8). One-line flip: True, then python3 _src/build.py

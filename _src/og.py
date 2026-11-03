@@ -66,7 +66,7 @@ def make(path,head,img):
     im.save(out,"JPEG",quality=84,optimize=True,progressive=True)
     return rel
 
-def inject(path,img,title,desc,D="https://mitsubishi-sjdm.com"):
+def inject(path,img,title,desc,D="https://www.mitsubishi-sjdm.com"):
     """Add og/twitter tags to a hand-written static page (idempotent: strips old og:image/twitter tags first)."""
     import html as H
     f=os.path.join(R,path.strip("/"),"index.html");s=open(f).read()
