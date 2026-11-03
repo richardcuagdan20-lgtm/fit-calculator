@@ -32,12 +32,12 @@ for m in MODELS:
         if not price: continue
         LAU.append({"id":v["id"],"model":m["name"],"n":v["n"],"price":price,"colors":_cl(v["id"]),"opts":[{"dp":_dp(l),"mo":mo} for l,mo in v["promo"]["opts"]]})
 def B(tl,en): return f'<span class="tl">{tl}</span><span class="en">{en}</span>'
-LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>Mitsubishi SJDM</b> / mitsubishipromos.online na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
+LA_CONSENT=B('Sa pag-check ng box na ito, pinapayagan ko ang <b>Mitsubishi SJDM</b> / mitsubishi-sjdm.com na kolektahin, i-process, at i-store ang aking personal at sensitive personal information '
  '(kasama ang IDs, income, at financial documents) para lamang sa pag-assess ng aking car loan application, at i-share ito sa piling partner banks at financing companies '
  '(hal. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) para sa credit evaluation, alinsunod sa Republic Act No. 10173 (Data Privacy Act of 2012). '
  'Alam ko ang aking karapatan na ma-access, maitama, ma-withdraw ang consent, at ipabura ang aking data, at maaari akong makipag-ugnayan sa aming Data Protection Officer (contact para sa privacy concerns) sa <b>richard.cuagdan20@gmail.com</b>. '
  'Kung mag-message ka kay Richard sa Facebook Messenger, gagamitin lang ang messages para sagutin ang inquiry mo. Nabasa ko ang <a href="/privacy/">Privacy Notice</a>.',
- 'By checking this box, I allow <b>Mitsubishi SJDM</b> / mitsubishipromos.online to collect, process, and store my personal and sensitive personal information '
+ 'By checking this box, I allow <b>Mitsubishi SJDM</b> / mitsubishi-sjdm.com to collect, process, and store my personal and sensitive personal information '
  '(including IDs, income, and financial documents) solely to assess my car loan application, and to share it with selected partner banks and financing companies '
  '(e.g. Mitsubishi Motors Finance PH, BPI, BDO, Metrobank, Security Bank, PSBank, RCBC, EastWest) for credit evaluation, in accordance with Republic Act No. 10173 (Data Privacy Act of 2012). '
  'I know my rights to access, correct, withdraw consent, and have my data erased, and I may contact the Data Protection Officer (contact for privacy concerns) at <b>richard.cuagdan20@gmail.com</b>. '

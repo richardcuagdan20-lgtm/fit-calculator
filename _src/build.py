@@ -334,7 +334,7 @@ _pab.inject_cars(R)  # DRAFT: promos module on car pages
 # /lowest-down-payment/ retired 2026-10-29: folded into /promos/ (Option A unlock); stub keeps old links/ads alive
 import os as _os
 _os.makedirs(R+"/lowest-down-payment",exist_ok=True)
-open(R+"/lowest-down-payment/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Promos | Richard Cuagdan, Mitsubishi SJDM Bulacan</title><meta name="robots" content="noindex"><link rel="canonical" href="https://mitsubishipromos.online/promos/"><meta http-equiv="refresh" content="0; url=/promos/"><script>location.replace("/promos/"+location.search+location.hash)</script></head><body><p><a href="/promos/">Go to Promos</a></p></body></html>')
+open(R+"/lowest-down-payment/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Promos | Richard Cuagdan, Mitsubishi SJDM Bulacan</title><meta name="robots" content="noindex"><link rel="canonical" href="https://mitsubishi-sjdm.com/promos/"><meta http-equiv="refresh" content="0; url=/promos/"><script>location.replace("/promos/"+location.search+location.hash)</script></head><body><p><a href="/promos/">Go to Promos</a></p></body></html>')
 # ---------- /promos-tips/ hub retired (2026-10-29): redirect stub to the combined Guides & Tips index, written at the end of the build
 # ---------- evergreen cross-links into existing articles
 XL={"l300-price-philippines-2026":("l300-monthly-installment","L300 monthly installment guide"),"l300-negosyo-guide":("l300-monthly-installment","L300 monthly installment guide"),
@@ -540,7 +540,7 @@ open(R+"/preview-loan/index.html","w").write('<!doctype html><html lang="en-PH">
 # ---------- 404
 page("/__404/","Page not found | Richard Cuagdan, Mitsubishi SJDM Bulacan","The page you were looking for could not be found.",
  '<section class="ph"><div class="w"><h1>Page not found</h1><p class="lead">That page doesn\'t exist or has moved.</p><p class="row"><a class="btn" href="/">Go to Home</a> <a class="btn ghost" href="/cars/">Browse cars</a></p></div></section>',noindex=True)
-s=open(R+"/__404/index.html").read().replace('<link rel="canonical" href="https://mitsubishipromos.online/__404/">\n','').replace('<meta property="og:url" content="https://mitsubishipromos.online/__404/">\n','')
+s=open(R+"/__404/index.html").read().replace('<link rel="canonical" href="https://mitsubishi-sjdm.com/__404/">\n','').replace('<meta property="og:url" content="https://mitsubishi-sjdm.com/__404/">\n','')
 open(R+"/404.html","w").write(s); os.remove(R+"/__404/index.html"); os.rmdir(R+"/__404")
 
 # ---------- root redirect injection
@@ -721,7 +721,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
 # --- WEB PUSH (OneSignal v16) soft-prompt: inert until _src/push_config.json "app_id" is set ---
 _PUSH_ID=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"push_config.json"))).get("app_id","").strip()
 _PUSH_TAG=(f'<link rel="stylesheet" href="/assets/push.css?v={_vh("/assets/push.css")}" media="print" onload="this.media=\'all\'"><script>window.PUSH_APP_ID="{_PUSH_ID}"</script><script src="/assets/push.js?v={_vh("/assets/push.js")}" defer></script>') if _PUSH_ID else ''
-_PUSH_PRIV='<h2 id="notifications">Push notifications</h2><p>If you click &ldquo;Notify me&rdquo; and allow notifications in your browser, our notification provider OneSignal stores a browser subscription ID, your browser and device type, approximate location from your IP address, and the page and car model you were viewing, so I, Richard Cuagdan, can send you new promos, blog posts and Mitsubishi updates. We never collect your name or contact details this way. To unsubscribe, block notifications for mitsubishipromos.online in your browser&rsquo;s site settings.</p>'
+_PUSH_PRIV='<h2 id="notifications">Push notifications</h2><p>If you click &ldquo;Notify me&rdquo; and allow notifications in your browser, our notification provider OneSignal stores a browser subscription ID, your browser and device type, approximate location from your IP address, and the page and car model you were viewing, so I, Richard Cuagdan, can send you new promos, blog posts and Mitsubishi updates. We never collect your name or contact details this way. To unsubscribe, block notifications for mitsubishi-sjdm.com in your browser&rsquo;s site settings.</p>'
 for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if '/_src/' in _f: continue
     _s=open(_f).read()

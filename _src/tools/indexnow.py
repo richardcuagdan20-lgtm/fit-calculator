@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Submit sitemap URLs to IndexNow (Bing, Yandex, Seznam, Naver...; shared via api.indexnow.org).
 Run ONLY after the pages are live on main:  python3 _src/tools/indexnow.py [--dry-run] [url ...]
-The key file /<key>.txt at the site root must be live (https://mitsubishipromos.online/<key>.txt)."""
+The key file /<key>.txt at the site root must be live (https://mitsubishi-sjdm.com/<key>.txt)."""
 import glob, json, os, re, sys, urllib.request
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-HOST="mitsubishipromos.online"; ENDPOINT="https://api.indexnow.org/indexnow"
+HOST="mitsubishi-sjdm.com"; ENDPOINT="https://api.indexnow.org/indexnow"
 def key():
     ks=[os.path.basename(p)[:-4] for p in glob.glob(os.path.join(ROOT,"*.txt")) if re.fullmatch(r"[0-9a-f]{32}\.txt",os.path.basename(p))]
     if len(ks)!=1: sys.exit(f"expected exactly one IndexNow key file at site root, found {len(ks)}")

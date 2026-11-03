@@ -33,7 +33,7 @@ def head(d,kick,title,dark=False):
         d.text((P,y),ln,font=F(54),fill=BG if dark else INK);y+=66
     return y+24
 def foot(d,h,dark=False):
-    d.text((P,h-P+8),"mitsubishipromos.online",font=F(22,'Medium'),fill=(161,161,170) if dark else MU)
+    d.text((P,h-P+8),"mitsubishi-sjdm.com",font=F(22,'Medium'),fill=(161,161,170) if dark else MU)
 def measure(fn):
     tmp=Image.new("RGB",(W,4000));return fn(ImageDraw.Draw(tmp),True)
 def canvas(fn,name,dark=False):

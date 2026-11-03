@@ -6,7 +6,7 @@ SLUGS={"tl":"paano-ma-approve-sa-car-loan","en":"how-to-get-car-loan-approved-ph
 SLUG=SLUGS["tl"]
 OLD_SLUG="zero-down-payment-car-loan-requirements"
 PDFS={"tl":"/assets/car-loan-approval-guide-tl.pdf","en":"/assets/car-loan-approval-guide-en.pdf"}
-LA0="https://mitsubishipromos.online/loan-assessment/"
+LA0="https://mitsubishi-sjdm.com/loan-assessment/"
 _SZ=_j.load(open(_o.path.join(_o.path.dirname(_o.path.abspath(__file__)),"pdf","ig_sizes.json")))
 SRC='''<h2>Sources</h2><ul class="links"><li><a href="https://www.rcbc.com/Content/Forms/FAQs_auto.pdf" target="_blank" rel="noopener">RCBC Auto Loan FAQ (amortization not exceeding 30% of gross monthly income)</a></li><li><a href="https://www.ucpbsavings.com/auto-loan/" target="_blank" rel="noopener">UCPB Savings Auto Loan (30% credit ratio)</a></li><li><a href="https://www.metrobank.com.ph/help/loans/car-loan/loan-application-car-loan" target="_blank" rel="noopener">Metrobank Car Loan application requirements</a></li><li><a href="https://www.bdo.com.ph/personal/loans/auto-loan" target="_blank" rel="noopener">BDO Auto Loan requirements</a></li><li><a href="https://cic.gov.ph/about-your-cic-credit-report/" target="_blank" rel="noopener">CIC: About your credit report</a></li></ul>\n'''
 

@@ -1,4 +1,4 @@
-# mitsubishipromos.online
+# mitsubishi-sjdm.com
 
 Static site for Richard Cuagdan, Authorized Mitsubishi Sales Executive (SJDM, Bulacan). Hosted on GitHub Pages.
 
