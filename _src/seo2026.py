@@ -1,8 +1,9 @@
+from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
 # SEO/GenAI draft posts (2026-10-30, branch draft-seo). Figures come ONLY from data.py (SRP, Option A/B, fuel points)
 # and promosab rows (Option B, as shown on /promos/) + promosab.RANGE (Option A range). Nothing here is live until merged.
 from data import MODELS, f, ALLIN, FREEBIES
 import promosab as _pab
-BY="Mitsubishi Sales Executive"; DT="2026-10-30"; MON="October 2026"
+BY="Mitsubishi Sales Executive"; DT="2026-10-30"; MON=(""+_PL+"")
 VALID="Promo figures are for "+MON+" only, 60 months, all-in, subject to bank approval and change without notice. SRPs are from the official Mitsubishi Motors Philippines price list (as of August 2026)."
 DISC='<p class="muted">This is Richard Cuagdan\'s personal sales website, not the official Mitsubishi Motors Philippines website. Results of any assessment are Pre-qualified, subject to bank approval.</p>'
 _B={r["unit"].replace("XFORCE","Xforce").upper():r for r in _pab.rows()}
@@ -56,9 +57,9 @@ LOW4=", ".join(f"{v['n']} ({f(ZDP(v))}/mo)" for v in sorted([v for m in MODELS f
 _ALLS=["mirage-g4","xpander","xpander-cross","xforce","destinator","triton","montero-sport","l300","versa-van","outlander-phev"]
 P.append(dict(base="tips",car="xpander",slug="mitsubishi-monthly-amortization-philippines",date=DT,by=BY,img="xpglx_x37",
 alt="Mitsubishi Xpander GLX, one of the most-asked monthly amortization questions in SJDM",
-title="Mitsubishi Monthly Amortization Philippines (October 2026)",
+title=("Mitsubishi Monthly Amortization Philippines ("+_PL+")"),
 kw=("Mitsubishi monthly amortization",["magkano monthly ng Mitsubishi","Mitsubishi monthly payment","Xpander monthly","Mitsubishi promo monthly 2026"]),
-desc="Mitsubishi monthly amortization for October 2026: every model's SRP, Option A lowest-DP monthly, Option B 30% DP monthly and income guide in one dated table.",
+desc=("Mitsubishi monthly amortization for "+_PL+": every model's SRP, Option A lowest-DP monthly, Option B 30% DP monthly and income guide in one dated table."),
 answer=f"For {MON}, the lowest Mitsubishi monthly amortization on a 60-month all-in promo is {f(zl('mirage-g4'))}/mo for the Mirage G4 GLX M/T (Option A, lowest DP), {f(zl('l300'))}/mo for the L300 and {f(zl('xpander'))}/mo for the Xpander (Option A). Your actual monthly depends on the unit, your down payment, the term and the bank. Promos are subject to bank approval.",
 faq=[("Magkano ang monthly ng Mitsubishi?",f"For {MON}, Option A (lowest DP) monthlies on 60 months start at {f(zl('mirage-g4'))} (Mirage G4) and go up to {f(max(ZDP(v) or 0 for m in MODELS for v in m["variants"]))} for the Outlander PHEV. Option B with a bigger down payment lowers the monthly. All subject to bank approval."),
 ("What is the difference between Option A and Option B?","Option A is the lowest down payment for a unit (shown on /promos/ after a short unlock form). Option B is a 30% down payment with a lower monthly. Both are all-in and subject to bank approval."),
@@ -164,7 +165,7 @@ P.append(dict(base="tips",car="montero-sport",slug="montero-sport-vs-triton",dat
 alt="Mitsubishi Montero Sport GLS, compared with the Triton pickup for work and family use",
 title="Montero Sport vs Triton: Which Fits Work vs Family?",
 kw=("Montero Sport vs Triton",["Triton vs Montero Sport","SUV or pickup Philippines","Triton for family","Montero Sport monthly"]),
-desc="Montero Sport vs Triton: diesel SUV or pickup? Seats, cargo, engines, October 2026 SRPs and monthlies, and who each one fits, from an SJDM sales executive.",
+desc=("Montero Sport vs Triton: diesel SUV or pickup? Seats, cargo, engines, "+_PL+" SRPs and monthlies, and who each one fits, from an SJDM sales executive."),
 answer=f"Choose the Montero Sport if you mainly carry people: it seats 7, has a closed, quieter cabin and an 8-speed automatic on most variants. Choose the Triton if you carry cargo for work: it has an open bed and more variants for business, with SRPs from {f(1266000)}. Both are diesel and built for rough roads.",
 faq=[("Can the Triton be a family car?","Yes, the double-cab Triton seats 5 and many families use it. But cargo in the open bed is exposed to rain, and it seats fewer than the 7-seat Montero Sport."),
 ("Which is cheaper, Montero Sport or Triton?",f"The Triton starts lower: {f(1266000)} SRP for the GL 2WD M/T vs {f(1568000)} for the Montero Sport GLX M/T (August 2026 price list)."),

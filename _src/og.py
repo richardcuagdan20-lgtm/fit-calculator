@@ -1,3 +1,4 @@
+from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
 """Branded 1200x630 link-preview (og:image) generator: real unit photo + dark gradient + short white heading."""
 import os,re,hashlib
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
@@ -5,7 +6,7 @@ R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONT="/usr/share/fonts/truetype/sand-box/google/Inter/Inter-VariableFont_opsz,wght.ttf"
 W,H=1200,630
 OVR={"/":"Mitsubishi Cars & Promos in SJDM","/loan-assessment/":"AI Car Loan Assessment","/apply/":"Official Application Form",
- "/promos/":"October 2026 Promos","/cars/":"2026 Mitsubishi Models & Prices","/__404/":"Mitsubishi Motors","/about/":"About Richard Dennis Cuagdan","/guides/zero-dp-vs-low-dp/":"Down Payment Options Compared",
+ "/promos/":(""+_PL+" Promos"),"/cars/":"2026 Mitsubishi Models & Prices","/__404/":"Mitsubishi Motors","/about/":"About Richard Dennis Cuagdan","/guides/zero-dp-vs-low-dp/":"Down Payment Options Compared",
  "/budgetcalculator/":"Budget Fit Calculator","/privacy/":"Privacy Policy","/mitsubishi-zero-down-payment-promo/":"Mitsubishi Low DP Promos"}
 def _f(sz,wt="Bold"):
     f=ImageFont.truetype(FONT,sz)

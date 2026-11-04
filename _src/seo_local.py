@@ -1,3 +1,4 @@
+from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
 # SJDM / Bulacan local guides (branch draft-seo2, 2026-11-02). Brand = Richard Cuagdan, authorized Mitsubishi sales executive.
 # Figures come ONLY from data.py / promosab (via seo2026 helpers). No street address, no fake branches, no travel-time claims.
 from seo2026 import MODELS, f, ALLIN, M, ZDP, B, zl, rng, table, CTA, DISC, VALID, MON, ALLIN_UL
@@ -22,7 +23,7 @@ P.append(dict(base="tips",car="xpander",slug="mitsubishi-buying-guide-sjdm-bulac
 alt="Mitsubishi Xpander, a popular choice for SJDM and Bulacan families",
 title="Buying a Mitsubishi in SJDM, San Jose del Monte: 2026 Guide",
 kw=("Mitsubishi San Jose del Monte",["Mitsubishi SJDM Bulacan","Mitsubishi Bulacan price list","Mitsubishi SJDM promo","buy Mitsubishi Bulacan"]),
-desc="How to buy a Mitsubishi in San Jose del Monte (SJDM), Bulacan: price list, October 2026 promos, financing, test drive, documents and release, step by step.",
+desc=("How to buy a Mitsubishi in San Jose del Monte (SJDM), Bulacan: price list, "+_PL+" promos, financing, test drive, documents and release, step by step."),
 answer=f"To buy a Mitsubishi in San Jose del Monte, Bulacan: pick a unit from the 2026 price list (SRPs from {srp0('mirage-g4')} for the Mirage G4), compare this month's two all-in promo options, check if you're Pre-qualified, book a test drive, submit documents for bank evaluation, then schedule release. Financing is subject to bank approval.",
 faq=[("Where can I buy a Mitsubishi in San Jose del Monte?","I'm Richard Cuagdan, an authorized Mitsubishi sales executive in San Jose del Monte (SJDM), Bulacan. Message or call me and I'll guide you from quote to release."),
 ("What is the cheapest Mitsubishi in Bulacan?",f"By SRP, the Mirage G4 starts at {srp0('mirage-g4')}. On {MON} promos its Zero DP monthly starts at {low('mirage-g4')}, 60 months, all-in, subject to bank approval."),
@@ -55,7 +56,7 @@ P.append(dict(base="tips",car="xpander",slug="car-financing-bulacan",date=DT,by=
 alt="Mitsubishi Xpander, often financed by Bulacan buyers on 60 months",
 title="Car Financing SJDM, San Jose del Monte Bulacan: Low DP Guide",
 kw=("low down payment Mitsubishi Bulacan",["car loan Bulacan","Mitsubishi financing SJDM","Mitsubishi promo Bulacan","car financing San Jose del Monte"]),
-desc="Car financing in SJDM, San Jose del Monte and Bulacan for Mitsubishi buyers: low down payment and Zero DP Promo options, income guide, documents and how bank approval works. October 2026.",
+desc=("Car financing in SJDM, San Jose del Monte and Bulacan for Mitsubishi buyers: low down payment and Zero DP Promo options, income guide, documents and how bank approval works. "+_PL+"."),
 answer=f"For Bulacan buyers, most Mitsubishi units are financed through a bank auto loan on up to 60 months. {MON} promos give two all-in options per unit: the lowest down payment (Zero DP Promo on select units) or 30% down for a lower monthly. Everything is subject to bank approval.",
 faq=[("What is the lowest down payment for a Mitsubishi in Bulacan?",f"It depends on the unit. Option A ranges this month: Mirage G4 {rng('mirage-g4')}, Xpander {rng('xpander')}, Triton {rng('triton')}. Subject to bank approval."),
 ("Do I need to go to a bank branch in Bulacan?","Usually not. I submit your application to partner banks and coordinate the verification. The bank may call you or your employer."),
@@ -81,7 +82,7 @@ P.append(dict(base="tips",car="xforce",slug="best-mitsubishi-for-sjdm-manila-com
 alt="Mitsubishi Xforce, a compact SUV option for the SJDM to Manila commute",
 title="Best Mitsubishi for the SJDM (San Jose del Monte)–Manila Commute",
 kw=("best car for SJDM to Manila commute",["Mitsubishi for daily commute","fuel efficient Mitsubishi","Mirage G4 commute","Xforce Bulacan"]),
-desc="Which Mitsubishi fits the daily San Jose del Monte (SJDM) to Manila commute: Mirage G4, Xforce, Xpander or Triton, compared on size, transmission, use and October 2026 monthly.",
+desc=("Which Mitsubishi fits the daily San Jose del Monte (SJDM) to Manila commute: Mirage G4, Xforce, Xpander or Triton, compared on size, transmission, use and "+_PL+" monthly."),
 answer=f"For a solo or couple commute from SJDM to Quezon City or Manila, the Mirage G4 CVT is the easiest on budget ({low('mirage-g4')}). If you want SUV height for flooded roads, the Xforce fits. Families who also commute pick the Xpander A/T. Promo figures are for {MON}, subject to bank approval.",
 faq=[("Manual or automatic for the SJDM to Manila drive?","Stop-and-go traffic on Quirino Highway, Commonwealth or NLEX approaches makes an automatic or CVT far less tiring for daily use."),
 ("Is a diesel worth it for commuting?","Diesel pickups and SUVs suit heavy loads and long drives. For pure city commuting, a smaller gasoline car is usually cheaper to run."),

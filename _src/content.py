@@ -1,4 +1,5 @@
-NOTE_B='<p class="note">Promo valid for October 2026, subject to bank approval and change without notice.</p>'
+from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
+NOTE_B=('<p class="note">Promo valid for '+_PL+', subject to bank approval and change without notice.</p>')
 GUIDES=[
 dict(slug="how-car-financing-works-philippines",date="2026-10-21",img="xpglx_x37",alt="Mitsubishi Xpander GLX in Jet Black Mica",
 title="How Car Financing Works in the Philippines",
@@ -74,7 +75,7 @@ body='''<p>"All-in" means the usual extra charges of buying a car are already pa
 '''+NOTE_B),
 dict(slug="xpander-vs-xpander-cross-vs-destinator",date="2026-10-21",img="de_x3n",alt="Mitsubishi Destinator GT two-tone with black roof",
 title="Xpander vs Xpander Cross vs Destinator: Which 7-Seater?",
-desc="Compare the Mitsubishi Xpander, Xpander Cross and Destinator for Filipino families: engine, transmission, features and October 2026 monthly promos.",
+desc=("Compare the Mitsubishi Xpander, Xpander Cross and Destinator for Filipino families: engine, transmission, features and "+_PL+" monthly promos."),
 body='''<p>All three seat seven and are popular with families in Bulacan. The right choice depends on your budget, how often you travel far, and how much power and tech you want.</p>
 <div class="tw"><table class="pt"><thead><tr><th scope="col"></th><th scope="col">Xpander</th><th scope="col">Xpander Cross</th><th scope="col">Destinator</th></tr></thead><tbody>
 <tr><th scope="row">Engine</th><td>1.5L MIVEC gasoline</td><td>1.5L MIVEC gasoline</td><td>1.5L turbo gasoline</td></tr>

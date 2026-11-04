@@ -2,6 +2,15 @@ D="https://www.mitsubishi-sjdm.com"
 FB="https://www.facebook.com/504759566043148"
 MSG="https://m.me/504759566043148"
 SITECHAT=False  # SHELVED 2026-10-29 (Messenger is the main chat route). Own site-wide chat bubble (needs webhook v8). One-line flip: True, then python3 _src/build.py
+# ==== PROMO MONTH (single source of truth) ====
+# Monthly update = change PROMO_YM (and PROMO_UPDATED). Every promo label, title, H1, JSON-LD validity,
+# og image, illustration and PDF reads these. Peso figures live separately in _src/optionAB_oct2026.json.
+import calendar as _cal
+PROMO_YM=(2026,11); PROMO_UPDATED="2026-11-04"
+PROMO_MONTH=_cal.month_name[PROMO_YM[1]]; PROMO_YEAR=str(PROMO_YM[0])
+PROMO_LABEL=f"{PROMO_MONTH} {PROMO_YEAR}"                      # "November 2026"
+PROMO_SHORT=f"{_cal.month_abbr[PROMO_YM[1]]} {PROMO_YEAR}"       # "Nov 2026"
+PROMO_END=f"{PROMO_YEAR}-{PROMO_YM[1]:02d}-{_cal.monthrange(*PROMO_YM)[1]:02d}"  # "2026-11-30"
 WEBHOOK="https://script.google.com/macros/s/AKfycbzP4moZ9QL3YB_liQsoqM80o9IfTBa-GMapQg1uLJF1xAOPLyvJ6PVhHb-nQ7A__hWsTA/exec"
 PIXEL="1820790069172672"
 def f(n): return "₱"+format(n,",")
@@ -90,7 +99,7 @@ MODELS=[
 ]
 ALLIN=["3 years LTO registration","3 years TPL insurance","1 year comprehensive insurance, rate locked for 3 years","Chattel mortgage","Free labor up to 5,000 km","3 years warranty"]
 FREEBIES=['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain']
-NOTE="Promo valid for October 2026, subject to bank approval and change without notice."
+NOTE=f"Promo valid for {PROMO_LABEL}, subject to bank approval and change without notice."
 SRPNOTE="SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026), subject to change without notice; freight and handling not included."
 def srp_txt(v): return f(v["srp"]) if v["srp"] else "Ask for price"
 def srp_from(m):

@@ -1,6 +1,7 @@
 import json, os, html, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from data import *
+from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
 from content import GUIDES, POSTS
 GUIDES=[g for g in GUIDES if g["slug"]!="ofw-car-buying-guide"]  # merged into /blog/ofw-car-buying-guide/
 from drafts import DRAFT_POSTS, PUBLISH
@@ -260,7 +261,7 @@ cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"M
 page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
  "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See October promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
+<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See {_PM} promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 from PIL import Image as _PI
@@ -360,7 +361,7 @@ def articles(base,items,label,title=None,desc=None,intro=None):
     for a in items:
         GT_ALL.append((f"/{base}/{a['slug']}/",a["title"],a["desc"],a["date"]))
     for a in items:
-        ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":a["date"],"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
+        ld=[{"@type":"Article","headline":a["title"],"description":a["desc"],"datePublished":a["date"],"dateModified":(max(a["date"],PROMO_UPDATED) if PROMO_LABEL in str(a.get("body",""))+str(a.get("desc",""))+str(a.get("title",""))+str(a.get("faq","")) else a["date"]),"author":{"@id":D+"/#richard"},"publisher":{"@id":D+"/#dealer"},"mainEntityOfPage":D+f"/{base}/{a['slug']}/","image":D+f"/assets/img/{a['img']}.webp"}]
         if a.get("lang"): ld[0]["inLanguage"]={"tl":"fil-PH","en":"en-PH"}[a["lang"]]
         if a.get("by"):
             ld[0]["author"]={"@type":"Person","@id":D+"/#richard","name":"Richard Cuagdan","jobTitle":a["by"],"url":D+"/about/"}

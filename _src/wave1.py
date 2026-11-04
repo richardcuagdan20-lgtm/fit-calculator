@@ -1,3 +1,4 @@
+from data import PROMO_LABEL as _PL  # promo month (data.py)
 # Wave 1-4 (DRAFT, branch draft-wave1, Nov 2026): hubs, model page upgrades, new and refreshed articles, site-wide design helpers.
 # exec()'d inside build.py right before the model pages (uses page, img, e, f, MODELS, MSG, D, POSTS, FIGS, CALC, offers_ld, rx_alt ...).
 # House rules: English only; low DP wording only; "Pre-qualified, subject to bank approval"; fuel points without a peso sign;
@@ -492,7 +493,7 @@ for _a in POSTS:
           desc="Triton GX 2026 2WD AT for first-time pickup owners: features, Oct 2026 price and monthly. Test drive in San Jose del Monte (SJDM).",
           answer=f"The Triton GX 2.4D 2WD A/T is an automatic double-cab pickup with an SRP of {f(1430000)} ({FRESH}). The automatic makes the switch from a sedan or MPV easier.",
           w1=True,mod=W_MOD,crumbs=CR_TR,more=[("/cars/triton/","Triton 2026 variants"),("/blog/triton-price-philippines/","Triton price Philippines"),("/triton-downpayment-and-monthly/","Triton monthly installment")])
-        _b=_a["body"];_i=_b.find("<h2>The October 2026 promo</h2>");_j=_b.find("<h2>Driving and parking tips</h2>")
+        _b=_a["body"];_i=_b.find("<h2>The "+_PL+" promo</h2>");_j=_b.find("<h2>Driving and parking tips</h2>")
         assert _i>0 and _j>_i
         _b=_b[:_i]+f'<h2>Triton GX 2026 price and monthly</h2>\n<p>SRP {f(1430000)}. Low DP from {f(_gx[0])} with a sample monthly of {f(_gx[1])} (60 months, all-in). {MSQ}.</p>{W_badge()}\n'+_b[_j:]
         _b=_w_re.sub(r"<h2>Related reading</h2>.*$","",_b,flags=_w_re.S);_b=_w_re.sub(r"<p>See also:.*$","",_b,flags=_w_re.S);_b=_w_re.sub(r"<h2>Your next step</h2>.*$","",_b,flags=_w_re.S)

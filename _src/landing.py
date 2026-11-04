@@ -1,6 +1,6 @@
 # Evergreen landing pages. exec()'d inside build.py (uses page, img, e, MODELS, ILLS, D, MSG, TEL, TELD, ADDR).
-# ONE data source for promo figures: data.MODELS (promo fields). Update the month there + PROMO_MONTH below.
-PROMO_MONTH="October 2026"; PROMO_UPDATED="2026-10-22"
+# ONE data source for promo figures: data.MODELS (promo fields). Promo month: data.PROMO_YM / PROMO_UPDATED.
+PROMO_MONTH=PROMO_LABEL  # local alias (label, e.g. "November 2026") from data.py
 # Which verified options to show per variant id (count of options); fuel shown only where verified.
 SHOW={"mg4glxat":1,"mg4gls":2,"tritongxat":2,"l300":2,"xglxmt":2,"xglxat":2,"xglsat":2,"xcross":2,
       "dglx":2,"dgls":2,"dgtm":2,"mglxmt":2,"mgls":2,"mbs2wd":1,"mbs4wd":1,"vvglx":2}
@@ -138,7 +138,7 @@ L(slug="triton-downpayment-and-monthly",kw="Triton down payment",img="tr_gx_u28"
  h1="Triton Down Payment and Monthly Installment",
  desc="Triton down payment and monthly installment per variant, Pre-qualified, subject to bank approval. Compute yours in San Jose del Monte (SJDM).",
  kick="Mitsubishi Triton · Pickup financing · SJDM",
- lead="Here is how the Triton down payment and monthly installment work for every 2026 variant, whether the pickup is for the family, the farm or your business. Prices use the Oct 2026 list, November update pending.",
+ lead=("Here is how the Triton down payment and monthly installment work for every 2026 variant, whether the pickup is for the family, the farm or your business. Prices use the "+_PLS+" list, November update pending."),
  figs=[],table=[],tcap="",
  body=lambda T:f'''<h2>Triton monthly installment per variant</h2>
 {W_vtable("triton","lp-row")}
@@ -154,7 +154,7 @@ L(slug="triton-downpayment-and-monthly",kw="Triton down payment",img="tr_gx_u28"
 <h2>Which Triton</h2>
 <p>See the <a href="/cars/triton/">Triton 2026 variants</a>, the <a href="/blog/triton-price-philippines/">Triton price Philippines</a> guide, <a href="/blog/triton-gx-2wd-at-first-pickup-guide/">Triton GX 2026</a>, and <a href="/blog/triton-for-business-and-farm/">Triton for business and farm</a>.</p>
 '''+W_cta("triton","Triton","triton"),
- faq=[("How much is the Triton down payment?","The variant table shows the lowest published down payment for each Triton variant (Oct 2026 list, November update pending). Richard can compute any other amount."),
+ faq=[("How much is the Triton down payment?",("The variant table shows the lowest published down payment for each Triton variant ("+_PLS+" list, November update pending). Richard can compute any other amount.")),
  ("What is the Triton monthly installment?","See the sample monthly per variant in the table: 60 months, all-in. Pre-qualified, subject to bank approval."),
  ("Can a business owner finance a Triton?","Yes. Banks typically ask for DTI or SEC registration, permits, ITR or financial statements and bank statements."),
  ("What income do I need for a Triton?","As a guide, keep the monthly at about 30 to 35% of gross monthly income."),
@@ -237,7 +237,7 @@ for a in LANDINGS:
         {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":x}} for q,x in a["faq"]]}]
     if a.get("car"):
         for i in a["table"]:
-            r=prow(i);ld.append({"@type":"Product","name":"Mitsubishi "+r["n"],"brand":{"@type":"Brand","name":"Mitsubishi"},"offers":{"@type":"Offer","price":r["srp"],"priceCurrency":"PHP","priceValidUntil":"2026-10-31","itemCondition":"https://schema.org/NewCondition","availability":"https://schema.org/InStock","seller":{"@id":D+"/#dealer"},"url":D+path}})
+            r=prow(i);ld.append({"@type":"Product","name":"Mitsubishi "+r["n"],"brand":{"@type":"Brand","name":"Mitsubishi"},"offers":{"@type":"Offer","price":r["srp"],"priceCurrency":"PHP","priceValidUntil":PROMO_END,"itemCondition":"https://schema.org/NewCondition","availability":"https://schema.org/InStock","seller":{"@id":D+"/#dealer"},"url":D+path}})
     page(path,a["title"],a["desc"],f'''<article class="art"><div class="w nar"><header><p class="kick">{e(a["kick"])}</p><h1>{e(a["h1"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, Car Sales Executive · Updated <time datetime="{PROMO_UPDATED}">{PROMO_UPDATED}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 <p class="lead" style="color:inherit">{e(a["lead"])}</p>
