@@ -33,44 +33,38 @@ def CTAX(lead,unit=""):
 LANDINGS=[]
 def L(**k): LANDINGS.append(k)
 
-L(slug="mitsubishi-sjdm-bulacan",kw="Mitsubishi SJDM Bulacan",img="xc_x3n",alt="Mitsubishi Xpander Cross, available with Richard Cuagdan in SJDM, Bulacan",
- title="Mitsubishi SJDM Bulacan: San Jose del Monte Promos & Prices",
- h1="Mitsubishi SJDM Bulacan: your Mitsubishi sales executive in San Jose del Monte",
- desc="Mitsubishi SJDM Bulacan: Richard Cuagdan, authorized sales executive in San Jose del Monte. October 2026 promos, price list, test drives and loan help.",
- kick="San Jose del Monte, Bulacan",
- lead="Searching for Mitsubishi SJDM Bulacan? Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte, Bulacan serving San Jose del Monte (SJDM), Bulacan and Quezon City, and I'm Richard Cuagdan, one of its sales executives. Here's how to see a unit, test drive it, get the current all-in promo and finance it, kahit first time mo pa lang.",
- figs=[("Where to find us","sj-loc","Mitsubishi SJDM Bulacan: Mitsubishi SJDM, San Jose del Monte"),("What you can do","sj-what","What you can do at Mitsubishi SJDM with Richard: see units, test drive, get the promo, pre-check documents"),("Plan your visit","sj-plan","Three steps to plan a Mitsubishi showroom visit in SJDM"),("Popular units","sj-photo","Mitsubishi Xpander Cross 7-seater")],
- table=["mg4gls","xglxat","xcross","dglx","tritongxat","l300","vvglx","mglxmt"],tcap="Popular units with Richard Cuagdan, authorized Mitsubishi sales executive.",
- body=lambda T:f'''<h2>Where to find us</h2>
-<p><b>Richard Cuagdan, Mitsubishi SJDM</b>, serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions. It's a straightforward drive from the rest of SJDM, Norzagaray, Santa Maria and the northern edge of Metro Manila (Fairview, Novaliches, Caloocan North).</p>
-<p class="row"><a class="btn ghost dk" href="{MSG}" rel="noopener">Message Richard for directions</a> <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
+L(slug="mitsubishi-sjdm-bulacan",kw="San Jose del Monte",img="xc_x3n",alt="Mitsubishi Xpander Cross, available with Richard Cuagdan in San Jose del Monte (SJDM), Bulacan",
+ title="Mitsubishi SJDM: San Jose del Monte, Bulacan",
+ h1="Mitsubishi in San Jose del Monte (SJDM), Bulacan",
+ desc="Mitsubishi SJDM sales executive in San Jose del Monte, Bulacan: price list, low DP, test drive and Pre-qualify online, subject to bank approval.",
+ kick="Mitsubishi SJDM · San Jose del Monte, Bulacan",
+ lead="Richard Cuagdan is an authorized Mitsubishi sales executive and car agent in San Jose del Monte (SJDM), Bulacan. See a unit, book a test drive, get the current all-in promo and Pre-qualify online, subject to bank approval.",
+ figs=[],table=[],tcap="",
+ body=lambda T:f'''<p class="row">{W_msg("sjdm","local-hero",cls="btn",label="Message Richard")} {W_pq("sjdm","local-hero",cls="btn ghost dk",label="Pre-qualify")}</p>
+<h2>Areas served</h2>
+<p class="chips">SJDM barangays · Norzagaray · Santa Maria · Marilao · Meycauayan · Bocaue · Malolos · Caloocan / Novaliches · Fairview, Quezon City · Montalban (Rodriguez)</p>
+<p>No branches in those towns: Richard serves them from San Jose del Monte. See <a href="/tips/mitsubishi-bulacan-areas-served/">areas served</a> and the <a href="/blog/mitsubishi-dealer-bulacan/">Mitsubishi Bulacan buyer guide</a>.</p>
+<h2>Featured higher models</h2>
+<div class="grid g2">
+<a class="card pad mc" href="/destinator/"><h3>Destinator</h3><p class="muted">7-seater SUV, SRP from {W_from("destinator")}</p></a>
+<a class="card pad mc" href="/cars/montero-sport/"><h3>Montero Sport</h3><p class="muted">7-seat diesel SUV, SRP from {W_from("montero-sport")}</p></a>
+<a class="card pad mc" href="/cars/triton/"><h3>Triton</h3><p class="muted">Pickup, SRP from {W_from("triton")}</p></a>
+<a class="card pad mc" href="/mitsubishi-hybrid-phev/"><h3>Outlander PHEV</h3><p class="muted">Plug-in hybrid SUV, SRP {W_from("outlander-phev")}</p></a></div>
+{W_badge()}
+<p>Every model and price: <a href="/cars/">Mitsubishi price list 2026</a>.</p>
 <h2>What you can do</h2>
-<ul class="ticks"><li><b>See the 2026 lineup</b>: <a href="/cars/mirage/">Mirage</a>, <a href="/cars/mirage-g4/">Mirage G4</a>, <a href="/cars/xpander/">Xpander</a>, <a href="/cars/xpander-cross/">Xpander Cross</a>, <a href="/cars/destinator/">Destinator</a>, <a href="/cars/montero-sport/">Montero Sport</a>, <a href="/cars/triton/">Triton</a>, <a href="/cars/l300/">L300</a> and more. Message me first so I can tell you which unit and color are available to view.</li>
-<li><b>Test drive</b>: book a schedule online on the <a href="/test-drive/">test drive page</a>. Bring your driver's license.</li>
-<li><b>Get the all-in promo</b>: Zero DP and low-DP options with freebies, explained side by side.</li>
-<li><b>Pre-check your documents</b>: I review your requirements before they go to the bank, so there are fewer back-and-forths.</li></ul>
-<h2>Popular units</h2>
-<p>These are the units SJDM families and negosyo owners ask about most. The figures live in one dated table so they're easy to check against the latest promo.</p>
-{T}
-<p>For variants not shown (Mirage G4 GLX MT, other Triton variants, L300 Cab &amp; Chassis, Xforce, Outlander PHEV), <a href="{MSG}" rel="noopener">message Richard for the latest promo</a>.</p>
-<h2>How financing works here</h2>
-{HOW}
+<ul class="ticks"><li><b>See the 2026 lineup</b>: message first so Richard can tell you which unit and color are available to view.</li>
+<li><b>Test drive</b>: book a schedule on the <a href="/test-drive/">test drive page</a>, Monday to Saturday. Bring your driver's license.</li>
+<li><b>Get the all-in promo</b>: low DP options with freebies, explained side by side.</li>
+<li><b>Pre-check your documents</b>: Richard reviews your requirements before they go to the bank.</li></ul>
 <h2>Documents to prepare</h2>
 {DOCS}
-<h2>Will the monthly fit?</h2>
-{INCOME}
-<h2>Plan your visit</h2>
-<ol class="steps"><li><h3>Check your budget</h3><p>Use the <a href="/budgetcalculator/">budget calculator</a> to see which units fit.</p></li><li><h3>Book a test drive</h3><p>Pick the unit and time on the <a href="/test-drive/">test drive page</a>.</p></li><li><h3>Message or call me</h3><p>Call or text {TELD} so the unit is ready when you arrive. Coming from the city? Read <a href="/blog/mitsubishi-near-fairview-quezon-city/">Mitsubishi near Fairview</a> or <a href="/blog/mitsubishi-near-caloocan-novaliches/">near Caloocan and Novaliches</a>.</p></li></ol>
-<p>Planning your purchase? Read the <a href="/tips/mitsubishi-buying-guide-sjdm-bulacan/">step-by-step SJDM buying guide</a>, <a href="/tips/car-financing-bulacan/">low down payment financing in Bulacan</a>, <a href="/tips/best-mitsubishi-for-sjdm-manila-commute/">which unit fits the SJDM to Manila commute</a> and the <a href="/tips/mitsubishi-bulacan-areas-served/">areas I serve</a>.</p>
-<p>Comparing units? <a href="/brochures/">Download official Mitsubishi brochures (PDF)</a> for every model.</p>
-<p>Want to know what "casa" means and what to expect at an authorized dealership? See <a href="/mitsubishi-casa-bulacan/">Mitsubishi casa Bulacan</a>. Bulacan buyers can also read <a href="/blog/mitsubishi-dealer-bulacan/">Mitsubishi dealer Bulacan</a>.</p>
-'''+CTAX("Check your budget, then book a test drive in SJDM. I'll have your unit ready."),
- faq=[("Where is Mitsubishi in SJDM, Bulacan?","Richard Cuagdan serves buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call Richard for a showroom visit and directions."),
- ("Is Richard Cuagdan an authorized Mitsubishi seller?","Yes. Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte, Bulacan."),
- ("Can I test drive a Mitsubishi in SJDM?","Yes. Book a schedule on the test drive page and bring a valid driver's license. Richard will confirm your slot."),
- ("Are there Zero DP promos in SJDM this month?","Yes. This month's Zero DP and low-DP options are in the dated promo table on this page. They're all-in and subject to bank approval."),
- ("How do I contact a Mitsubishi sales executive in SJDM?","Call or text Richard Cuagdan on 0954 291 1201, or message him on Messenger."),
- ("Can OFWs buy a Mitsubishi through you?","Yes. OFWs can apply from abroad with an SPA or a co-borrower in the Philippines. See the OFW car loan guide.")])
+'''+W_cta("sjdm","Mitsubishi lineup"),
+ faq=[("Is there a Mitsubishi sales executive in San Jose del Monte?","Yes. Richard Cuagdan is an authorized Mitsubishi sales executive serving San Jose del Monte (SJDM), Bulacan and Quezon City."),
+ ("Can I test drive a Mitsubishi in SJDM?","Yes. Book online on the test drive page, Monday to Saturday, 8:00 AM to 5:00 PM."),
+ ("Can I get a low down payment in SJDM?","Yes. Every unit has low DP options in the current all-in promo. Pre-qualified, subject to bank approval."),
+ ("Which towns do you serve?","San Jose del Monte, Norzagaray, Santa Maria, Marilao, Meycauayan, Bocaue, Malolos, Caloocan and Novaliches, Fairview and Montalban."),
+ ("How do I get directions?","Message Richard on Messenger or call 0954 291 1201 for showroom visits and directions.")])
 
 L(slug="mitsubishi-casa-bulacan",kw="Mitsubishi casa Bulacan",img="xpglx_x37",alt="Mitsubishi Xpander GLX at a Mitsubishi casa in Bulacan",
  title="Mitsubishi Casa Bulacan: SJDM, San Jose del Monte Guide",
@@ -139,34 +133,32 @@ L(slug="mirage-g4-downpayment-and-monthly",kw="Mirage G4 downpayment and monthly
  ("What documents do I need for a Mirage G4 car loan?","Two valid IDs and proof of billing, plus income documents: COE and payslips or ITR if employed, business documents if self-employed, and contract and remittance proof if you're an OFW."),
  ("Can I pay the Mirage G4 in less than 5 years?","Yes, shorter terms are available. The monthly will be higher, but you pay less interest overall. Ask Richard for a computation.")])
 
-L(slug="triton-downpayment-and-monthly",kw="Triton downpayment and monthly",img="tr_gx_u28",alt="Mitsubishi Triton GX pickup, with downpayment and monthly options",car="triton",
- title="Triton Downpayment and Monthly: Pickup Financing Guide",
- h1="Triton downpayment and monthly: how pickup financing works",
- desc="Triton downpayment and monthly guide: Zero DP vs low DP, documents for business owners, all-in inclusions, income guide and a dated Triton GX promo table.",
- kick="Mitsubishi Triton · Pickup",
- lead="Here's how Triton downpayment and monthly options work, whether the pickup is for the family, the farm or your negosyo. I cover Zero DP vs low DP, the documents business owners usually need, the all-in package, and the income that fits. Ang current figures ay nasa isang dated promo table.",
- figs=[("Zero DP or low DP","tr-how","Triton downpayment and monthly: Zero DP vs low DP compared"),("Documents","tr-docs","Business owner documents for a Triton car loan"),("Income guide","tr-income","Triton income guide: monthly at 30 to 35 percent of gross income"),("Which Triton","tr-photo","Mitsubishi Triton pickup")],
- table=["tritongxat"],tcap="Triton promos.",textra=f'<p class="muted">Triton GL, GLX, GLS, 4x4 and Athlete variants: <a href="{MSG}" rel="noopener">message Richard for the latest promo</a>.</p>',
- body=lambda T:f'''<h2>How it works</h2>
-{HOW}
-<h2>Zero DP or low DP</h2>
-<p>For business buyers, Zero DP keeps cash in the business for stock, payroll or equipment, at the cost of a higher monthly. A down payment lowers the monthly so the pickup is lighter on monthly cash flow. Pick based on which is tighter for you: cash today or cash every month. See <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a>.</p>
-{T}
+L(slug="triton-downpayment-and-monthly",kw="Triton down payment",img="tr_gx_u28",alt="Mitsubishi Triton GX pickup, with down payment and monthly installment options",car="triton",
+ title="Triton Down Payment & Monthly Installment | SJDM",
+ h1="Triton Down Payment and Monthly Installment",
+ desc="Triton down payment and monthly installment per variant, Pre-qualified, subject to bank approval. Compute yours in San Jose del Monte (SJDM).",
+ kick="Mitsubishi Triton · Pickup financing · SJDM",
+ lead="Here is how the Triton down payment and monthly installment work for every 2026 variant, whether the pickup is for the family, the farm or your business. Prices use the Oct 2026 list, November update pending.",
+ figs=[],table=[],tcap="",
+ body=lambda T:f'''<h2>Triton monthly installment per variant</h2>
+{W_vtable("triton","lp-row")}
+<p class="row">{W_pq("triton","lp-table",label="Get my Pre-qualification (2 min)")} <a class="btn sm ghost dk" href="/budgetcalculator/">Compute my monthly</a></p>
+<h2>How the down payment changes the monthly</h2>
+<p>Every financed pickup comes down to four numbers: the SRP, the down payment, the term and the monthly. A bigger down payment means a smaller loan, a lower monthly and less interest overall. For business buyers, a lower DP keeps cash in the business for stock or payroll, while a bigger DP keeps the monthly light on cash flow. See <a href="/guides/how-car-financing-works-philippines/">how car financing works</a>.</p>
 <h2>What all-in covers</h2>
 {ALLIN_EH}
 <h2>Documents</h2>
 {DOCS}
 <h2>Income guide</h2>
-{INCOME}
-<p>For self-employed buyers, banks look at business records rather than payslips, so keep your ITR, financial statements and bank statements consistent.</p>
+<p>A sensible guide: keep the monthly at about 30 to 35% of gross monthly income. For self-employed buyers, banks look at business records, so keep your ITR, financial statements and bank statements consistent. The bank always makes the final decision.</p>
 <h2>Which Triton</h2>
-<p>The <a href="/cars/triton/">Triton</a> comes in 2WD and 4WD, manual and automatic, from the GL up to the Athlete. The GX 2WD A/T is a popular first pickup for its automatic gearbox. Read the <a href="/blog/triton-gx-2wd-at-first-pickup-guide/">Triton GX first-pickup guide</a>, <a href="/blog/triton-for-business-and-farm/">Triton for business and farm</a>, and <a href="/blog/l300-vs-triton-for-negosyo/">L300 vs Triton</a>.</p>
-'''+CTAX("Check if a Triton fits your budget, then test drive it in SJDM.","triton"),
- faq=[("How much is the Triton downpayment and monthly?","The current all-in options on a 5-year term are in the dated promo table on this page. For other variants, message Richard for the latest promo."),
- ("Is there a Zero DP Triton?","Yes, on the variant shown in the promo table this month. Zero DP is subject to bank approval."),
+<p>See the <a href="/cars/triton/">Triton 2026 variants</a>, the <a href="/blog/triton-price-philippines/">Triton price Philippines</a> guide, <a href="/blog/triton-gx-2wd-at-first-pickup-guide/">Triton GX 2026</a>, and <a href="/blog/triton-for-business-and-farm/">Triton for business and farm</a>.</p>
+'''+W_cta("triton","Triton","triton"),
+ faq=[("How much is the Triton down payment?","The variant table shows the lowest published down payment for each Triton variant (Oct 2026 list, November update pending). Richard can compute any other amount."),
+ ("What is the Triton monthly installment?","See the sample monthly per variant in the table: 60 months, all-in. Pre-qualified, subject to bank approval."),
  ("Can a business owner finance a Triton?","Yes. Banks typically ask for DTI or SEC registration, permits, ITR or financial statements and bank statements."),
- ("What income do I need for a Triton?","As a guide, keep the monthly at about 30–35% of gross monthly income. The table shows the income range for each option."),
- ("Is the Triton 4x4 on promo?","Message Richard for the latest promo on 4WD and other Triton variants.")])
+ ("What income do I need for a Triton?","As a guide, keep the monthly at about 30 to 35% of gross monthly income."),
+ ("Is the Triton 4x4 available on financing?","Yes. The GL 4WD, GLX 4WD and Athlete 4WD are in the table with their sample monthly.")])
 
 L(slug="l300-monthly-installment",kw="L300 monthly installment",img="l300_fb",alt="Mitsubishi L300 Dual AC, with monthly installment options",car="l300",
  title="L300 Monthly Installment: Financing Guide for Negosyo",

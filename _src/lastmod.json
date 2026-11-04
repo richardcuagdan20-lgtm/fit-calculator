@@ -1,7 +1,7 @@
 {
 "/": [
-"a11f4e213603e5c5f8939bfd40564838",
-"2026-11-03"
+"4d3680ec732a206977299095f0d7f43f",
+"2026-11-04"
 ],
 "/about/": [
 "d0bba9dc862a0c54f3af53f552d5d0e3",
@@ -31,13 +31,21 @@
 "467d7b1bfac9e41cbe984a585acfb8a3",
 "2026-11-02"
 ],
+"/blog/destinator-fuel-consumption/": [
+"36d009a01440fa28a0fe903f0784ca79",
+"2026-11-04"
+],
 "/blog/destinator-glx-vs-gls-vs-gt/": [
 "de5d242d9a94adb3994a1f069cf2463d",
 "2026-11-02"
 ],
 "/blog/destinator-price-philippines/": [
-"db6171e141d35f1634f09ec85c6b3898",
-"2026-11-02"
+"20317e67ae929c957a85fa3e71063d33",
+"2026-11-04"
+],
+"/blog/destinator-vs-xforce/": [
+"c0e4180622b74a63e72cf5796e29008e",
+"2026-11-04"
 ],
 "/blog/how-much-car-can-i-afford-philippines/": [
 "7240fcee6b92dd1fdf8e02e4b184c54a",
@@ -87,9 +95,17 @@
 "a9a9cb4c599f49a9eee7767c0a14ca91",
 "2026-11-02"
 ],
+"/blog/montero-sport-black-series/": [
+"40497b5497b66eb473ad9c7fe6f3da99",
+"2026-11-04"
+],
+"/blog/montero-sport-fuel-consumption/": [
+"5348a74a8374ef1057410474b619e023",
+"2026-11-04"
+],
 "/blog/montero-sport-price-philippines-2026/": [
-"ef22534e3189ec63b9f0f62a5e1bd744",
-"2026-11-02"
+"46b5c31f2ac42a3b1825d157c59645e0",
+"2026-11-04"
 ],
 "/blog/montero-sport-variants-explained/": [
 "74478df353630de5c771e09929bfe213",
@@ -99,9 +115,25 @@
 "ca8f9aba504fc80481050014ad62639d",
 "2026-11-02"
 ],
+"/blog/montero-sport-vs-fortuner/": [
+"e5dbd26535811517581907c3a62de7f5",
+"2026-11-04"
+],
 "/blog/ofw-car-buying-guide/": [
 "363c145a7970db923943abd433bc3ef1",
 "2026-11-02"
+],
+"/blog/outlander-phev-price-philippines/": [
+"697369fd239a35257374a577e69b09d2",
+"2026-11-04"
+],
+"/blog/outlander-phev-range-and-charging/": [
+"5e02240e09cbc2a3f945c61302750ee2",
+"2026-11-04"
+],
+"/blog/outlander-phev-vs-montero-sport/": [
+"f0f8c15c334dd7e268b2cb20660c065f",
+"2026-11-04"
 ],
 "/blog/paano-ma-approve-sa-car-loan/": [
 "bcf6ddbcf7bf4c61b55ff89c3b89b379",
@@ -112,8 +144,16 @@
 "2026-11-02"
 ],
 "/blog/triton-gx-2wd-at-first-pickup-guide/": [
-"8309d560e37c0e0da458d1ad6545bf65",
-"2026-11-02"
+"15160068010ade0e1318253bb0c1aadd",
+"2026-11-04"
+],
+"/blog/triton-price-philippines/": [
+"5106acbe1d2776a82bafc4ac2e9e8b83",
+"2026-11-04"
+],
+"/blog/triton-vs-hilux/": [
+"fdd77273d5a161d66dceeabc074ed6cd",
+"2026-11-04"
 ],
 "/blog/xpander-cross-2026-price-philippines/": [
 "6fb635ec496dbfdd18c1124479a7a6cb",
@@ -144,12 +184,12 @@
 "2026-11-02"
 ],
 "/cars/": [
-"7bae469dd59c9e0ad8f2e588cfa87aab",
-"2026-11-03"
+"50f3e5fefdc048eadc4630f2e6be70e7",
+"2026-11-04"
 ],
 "/cars/destinator/": [
-"6b4eb49b6dffea46827814168b6a8d29",
-"2026-11-03"
+"661dd2af644d2823fef6747d5120f65b",
+"2026-11-04"
 ],
 "/cars/l300/": [
 "171275cf88dd799c192d498ec36634d2",
@@ -164,16 +204,16 @@
 "2026-11-03"
 ],
 "/cars/montero-sport/": [
-"6d5df0bd018923cc7ccaac85373d4959",
-"2026-11-03"
+"3aa2099fb16739506b8b455984e96806",
+"2026-11-04"
 ],
 "/cars/outlander-phev/": [
-"89039ef5288d2a9c1ce8dd8fd5b5abe5",
-"2026-11-03"
+"9b3ef2f852ae75fec159c1eac1483256",
+"2026-11-04"
 ],
 "/cars/triton/": [
-"a9cfd1ec269879b5b6609dda25c8a430",
-"2026-11-03"
+"6182c190410de407c774dfae0550fa47",
+"2026-11-04"
 ],
 "/cars/versa-van/": [
 "bb4aa3904756960b50493aab2f7fc9a5",
@@ -194,6 +234,10 @@
 "/contact/": [
 "93d13ed296dccca12e289120c2e39655",
 "2026-11-02"
+],
+"/destinator/": [
+"faa5405dcb2d9950001955d3cb59c853",
+"2026-11-04"
 ],
 "/guides/car-loan-requirements/": [
 "3045cdcae688a0db65926f3c7c043788",
@@ -231,9 +275,13 @@
 "579c2ab8177d731d1caa9ecc5ba45a20",
 "2026-11-02"
 ],
+"/mitsubishi-hybrid-phev/": [
+"c5bedbd2ecee3046e761a50b9068ef69",
+"2026-11-04"
+],
 "/mitsubishi-sjdm-bulacan/": [
-"ef25f5d467fabd3e5049eacac28f3c39",
-"2026-11-03"
+"6c234a03aa3d5518a22153ca58096767",
+"2026-11-04"
 ],
 "/mitsubishi-zero-down-payment-promo/": [
 "11ccd531afdb873cd9ee6c5a6068516a",
@@ -252,8 +300,8 @@
 "2026-11-03"
 ],
 "/tips/": [
-"acb9538300d0c82e8687eab78dbcbba1",
-"2026-11-03"
+"26d6a92dc8065e745e4b133d60a937e2",
+"2026-11-04"
 ],
 "/tips/best-car-color-philippines/": [
 "29f1a57a3988c8389428b1a0ff7f7727",
@@ -436,7 +484,7 @@
 "2026-11-02"
 ],
 "/triton-downpayment-and-monthly/": [
-"7c12a3812ed803a1b7857aaeb7204e92",
-"2026-11-02"
+"6c1883e9670e3812cc2922683a1d941f",
+"2026-11-04"
 ]
 }

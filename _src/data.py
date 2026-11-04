@@ -120,3 +120,6 @@ for _m in MODELS:
         _bok=b_ok(_r)  # flagged "confirm" Option B (sheet copy error) -> not published; shown as "Ask for latest"
         _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"])]+([(dplabel(_r["b_dp"]),_r["b_mo"])] if _bok else []),_old.get("fuel"),srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
         _v["ab"]=dict(a_dp=_r["a_dp"],a_mo=_r["a_mo"],b_dp=_r["b_dp"] if _bok else None,b_mo=_r["b_mo"] if _bok else None,srp=_r["srp"])
+# ---- PRICE FRESHNESS (Wave 1, draft): ONE setting for every price badge on hub/model/price pages. Edit here when the November list lands.
+FRESH="Oct 2026 list, November update pending"
+FRESH_SHORT="Oct 2026 list"

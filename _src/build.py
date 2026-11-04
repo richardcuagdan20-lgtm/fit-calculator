@@ -59,7 +59,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
                 +"".join(item(p,n) for p,n in items)+'</div></details>')
     nav=(item("/","Home")
-        +dd("Cars",[("/cars/","All models and prices"),("/promos/","Promos"),("/test-drive/","Book a test drive"),("/brochures/","Brochures (PDF)")],"cars")
+        +dd("Cars",[("/cars/","All models and prices"),("/mitsubishi-hybrid-phev/","Mitsubishi PHEV / hybrid"),("/promos/","Promos"),("/test-drive/","Book a test drive"),("/brochures/","Brochures (PDF)")],"cars")
         +item(GT,GT_EN)
         +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
@@ -206,7 +206,7 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 <p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>, including Zero DP Promo on select units (subject to bank approval). Every unit has two promo options on the <a href="/promos/">promos page</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
-<p><a class="more" href="/cars/">View all current models →</a> <a class="more" href="/brochures/">Download brochures (PDF) →</a></p>
+<p><a class="more" href="/cars/">View all current models →</a> <a class="more" href="/brochures/">Download brochures (PDF) →</a> <a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p>
 </div></section>
 <section class="sec alt"><div class="w">
 <h2>Why buy from Richard</h2>
@@ -260,7 +260,7 @@ cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"M
 page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
  "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p class="row"><a class="btn" href="/promos/">See October promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
+<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See October promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 from PIL import Image as _PI
@@ -298,20 +298,24 @@ def MGUIDE(slug):
     l=_MG.get(slug,[])+_MGC
     return '<section class="sec"><div class="w"><h2>Helpful guides for Bulacan buyers</h2><ul class="links">'+"".join(f'<li><a href="{u}">{t}</a></li>' for u,t in l)+'</ul></div></section>'
 EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage","tips/mirage-hatchback-down-payment-monthly-sjdm","Mirage hatchback down payment and monthly"),("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"wave1.py")).read())  # Wave 1-4 draft: helpers, hubs, model upgrades (WUP), new/refreshed articles
 for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
-    sp="".join(f"<tr><th scope='row'>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in m["specs"])
+    U=WUP.get(m["slug"])
+    sp="".join(f"<tr><th scope='row'>{e(a)}</th><td>{e(b)}</td></tr>" for a,b in (U["specs"] if U else m["specs"]))
     rel=" · ".join(f'<a href="/cars/{x["slug"]}/">{x["name"]}</a>' for x in MODELS if x is not m)
     s0=srp_from(m)
     haspromo=any(v["promo"] for v in m["variants"])
-    page(f"/cars/{m['slug']}/",MTITLE(m),
-     f"Mitsubishi {m['name']} in SJDM, San Jose del Monte, Bulacan: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
-    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>Mitsubishi {m['name']} 2026: price and promo in SJDM (San Jose del Monte), Bulacan</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
-<section class="sec"><div class="w"><h2>{m['name']} variants and prices</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}</p></div></section>
-{(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],cap=f"Richard Cuagdan, your sales executive, with the Mitsubishi {e(RXCAR[RXMODEL[m['slug']]])}")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">Specs summarized from Mitsubishi Motors Philippines. Ask me for the full spec sheet of a specific variant.</p></div>
+    h1=U["h1"] if U else f"Mitsubishi {m['name']} 2026: price and promo in SJDM (San Jose del Monte), Bulacan"
+    hx=U["hero_extra"] if U else ""
+    page(f"/cars/{m['slug']}/",U["title"] if U else MTITLE(m),
+     U["desc"] if U else f"Mitsubishi {m['name']} in SJDM, San Jose del Monte, Bulacan: {len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}"+(f", official SRP from {f(s0)}" if s0 else "")+", all-in packages with freebies.",
+    f'''<section class="ph"><div class="w hgrid"><div><p class="kick">{e(m['cat'])}</p><h1>{e(h1)}</h1><p class="lead">{e(m['blurb'])}</p><p>A good fit for {e(m['who'])}.</p>{hx}{hero_cta(f"/promos/#{m['slug']}" if haspromo else "/promos/",src="model-"+m['slug'])}</div>{img(m['img'],f"Mitsubishi {m['name']}",eager=True,cls="himg")}</div></section>
+{U["top"] if U else ""}<section class="sec"><div class="w"><h2>{m['name']} {"promo options per variant" if U else "variants and prices"}</h2><p class="sub">Official SRP per variant. Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.</p><div class="grid g3">{vs}</div><p class="note">{SRPNOTE}{(" "+FRESH+".") if U else ""}</p></div></section>
+{(f'<section class="sec rxs"><div class="w">'+rx_card(RXMODEL[m["slug"]],cap=f"Richard Cuagdan, your sales executive, with the Mitsubishi {e(RXCAR[RXMODEL[m['slug']]])}")+'</div></section>') if m["slug"] in RXMODEL else ""}<section class="sec alt"><div class="w split"><div><h2>Key specs</h2><table class="spec">{sp}</table><p class="muted">{"Specs according to Mitsubishi Motors Philippines." if U else "Specs summarized from Mitsubishi Motors Philippines."} Ask me for the full spec sheet of a specific variant.</p></div>
 <div><h2>All-in includes</h2>{ALLIN_HTML}<h2>Freebies</h2>{FREE_HTML}<p class="muted">Freebies vary by variant; ask for details.</p></div></div></section>
-{bro_link(m['slug'])}{EVM.get(m['slug'],'')}{MGUIDE(m['slug'])}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>''',
-    ld=offers_ld(m), ogtype="product", img=f"/assets/img/{m['img']}.webp", og=rx_og(RXMODEL[m["slug"]]) if m["slug"] in RXMODEL else None,
+{U["tail"] if U else ""}{bro_link(m['slug'])}{"" if U else EVM.get(m['slug'],'')}{MGUIDE(m['slug'])}<section class="sec"><div class="w"><h2>Compare other models</h2><p>{rel}</p></div></section>{U["after"] if U else ""}''',
+    ld=offers_ld(m)+(U["ld"] if U else []), ogtype="product", img=f"/assets/img/{m['img']}.webp", og=rx_og(RXMODEL[m["slug"]]) if m["slug"] in RXMODEL else None,
     crumbs=[("/","Home"),("/cars/","Cars"),(f"/cars/{m['slug']}/",m['name'])])
 
 # ---------- promos (gated, noindex; figures live only in JS data)
@@ -368,18 +372,19 @@ def articles(base,items,label,title=None,desc=None,intro=None):
         fq=""
         if a.get("faq"):
             ld.append({"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":x}} for q,x in a["faq"]]})
-            fq='<h2>Frequently asked questions</h2>'+"".join(f'<h3>{e(q)}</h3><p>{e(x)}</p>' for q,x in a["faq"])
-        others="".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
-        page(f"/{base}/{a['slug']}/",(a["title"]+" | Richard Cuagdan, Mitsubishi SJDM Bulacan" if len(a["title"])<=27 else a["title"]),a["desc"],
+            fq=(W_FAQH(a["faq"]) if a.get("w1") else '<h2>Frequently asked questions</h2>'+"".join(f'<h3>{e(q)}</h3><p>{e(x)}</p>' for q,x in a["faq"]))
+        others="".join(f'<li><a href="{u}">{e(t)}</a></li>' for u,t in a["more"]) if a.get("more") else "".join(f'<li><a href="/{base}/{b["slug"]}/">{e(b["title"])}</a></li>' for b in items if b is not a)
+        if a.get("w1"): ld[0]["dateModified"]=a.get("mod",a["date"])
+        page(f"/{base}/{a['slug']}/",a.get("seo") or (a["title"]+" | Richard Cuagdan, Mitsubishi SJDM Bulacan" if len(a["title"])<=27 else a["title"]),a["desc"],
         f'''<article class="art"><div class="w nar"><header><p class="kick">{e(label)}</p><h1>{e(a["title"])}</h1><p class="muted">By <a href="/about/">Richard Cuagdan</a>, {a.get("by","Car Sales Executive")} · <time datetime="{a["date"]}">{a["date"]}</time></p></header>
 {img(a["img"],a["alt"],eager=True,cls="aimg")}
 {top}
 {body}
 {rx_bio(rx_pick(a["slug"]),a.get("lang")=="tl")}
 {LACTA}
-{fq}
+{fq}{a.get("after","")}
 <aside class="box"><h2 class="h3">More guides &amp; tips</h2><ul class="links">{others}</ul><p><a class="more" href="{GT}">See all guides &amp; tips →</a></p></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
-        crumbs=[("/","Home"),(GT,GT_EN),(f"/{base}/{a['slug']}/",a["title"])])
+        crumbs=(a["crumbs"]+[(f"/{base}/{a['slug']}/",a["title"])]) if a.get("crumbs") else [("/","Home"),(GT,GT_EN),(f"/{base}/{a['slug']}/",a["title"])])
 articles("guides",GUIDES,"Guides","Car Buying Guides | Richard Cuagdan, Mitsubishi SJDM Bulacan",
  "Plain-language guides to buying a car in the Philippines: how financing works, loan documents, Zero DP vs low DP, OFW buying and all-in packages.",
  "Practical, plain-language guides to help you plan your purchase before you visit the showroom.")
@@ -715,7 +720,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
         _n=_re.sub(r'<p class="fsoc">.*?</p>','',_n,count=1,flags=_re.S)
         _n=_re.sub(r',?\s*"sameAs": \[[^\]]*\]','',_n)  # no FB/m.me URLs in this page's JSON-LD either
     else:
-        _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
+        if 'id="sbar"' not in _n: _n=_n.replace('</head>',_FM_CSS+'</head>',1).replace('</body>',_FM_TAG+'</body>',1)
     if _n!=_s: open(_f,'w').write(_n)
 
 # --- WEB PUSH (OneSignal v16) soft-prompt: inert until _src/push_config.json "app_id" is set ---
@@ -731,6 +736,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if _PUSH_TAG and not _re.match(r'/(card|apply|status)/',_f.replace(R,'')): _n=_n.replace('</body>',_PUSH_TAG+'</body>',1)
     if _PUSH_ID and _f.replace(R,'')=='/privacy/index.html': _n=_n.replace('<h2>How we keep it</h2>',_PUSH_PRIV+'<h2>How we keep it</h2>',1)
     if _n!=_s: open(_f,'w').write(_n)
+W_SCRUB(R)
 # --- sitemap lastmod = date the page's main content last changed (content hash; state in _src/lastmod.json). Computed after all post-processing.
 import json as _js, hashlib as _hl, datetime as _dt2
 _LMF=os.path.join(os.path.dirname(os.path.abspath(__file__)),"lastmod.json")
