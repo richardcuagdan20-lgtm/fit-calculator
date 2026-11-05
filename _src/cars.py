@@ -474,3 +474,23 @@ def C_SCRUB(R):
         s=_r.sub(r'<li><a href="/(?:mitsubishi-zero-down-payment-promo|guides/zero-dp-vs-low-dp|blog/zero-down-payment-car-philippines|[a-z]+/[a-z0-9-]*zero[a-z0-9-]*)/">[^<]*</a></li>','',s)
         s=_r.sub(r'<p>See also: the <a href="/mitsubishi-zero-down-payment-promo/">[^<]*</a>\.</p>\n?','',s)
         if s!=o: open(fp,"w").write(s)
+# ---- Zero DP removal on changed articles (lowest option WITH a down payment only)
+def C_nozero(s):
+    import re as _r
+    s=_r.sub(r"<li>(?:(?!</li>).)*Zero DP(?:(?!</li>).)*</li>","",s,flags=_r.S)
+    s=_r.sub(r"<td>Zero DP Promo / [^<]*</td>","<td>Ask Richard</td>",s)
+    s=_r.sub(r"\s*\(Zero DP Promo on select units\)","",s)
+    s=_r.sub(r"\s*\(or none, on Zero DP promos\)","",s)
+    s=_r.sub(r"\s*Zero DP is explained in <a [^>]*>[^<]*</a>\.","",s)
+    s=_r.sub(r",? ?Triton Zero DP Promo to ₱[\d,]+ DP","",s)
+    return s
+for _sl in ("car-financing-bulacan","how-car-financing-works-philippines"):
+    _a=C_find(_sl);_a["body"]=C_nozero(_a["body"]);_a["answer"]=C_nozero(_a.get("answer",""));_a["faq"]=[(q,C_nozero(x)) for q,x in _a.get("faq") or []]
+_a=C_find("car-financing-bulacan");_a.update(seo="Car Financing SJDM, San Jose del Monte: Low DP Guide",desc="Car financing in SJDM, San Jose del Monte and Bulacan: low DP options, income guide and documents. Pre-qualified, subject to bank approval.",
+ more=[("/budgetcalculator/","Car loan calculator Philippines"),("/guides/car-loan-requirements/","Car loan requirements"),("/mitsubishi-price-list-philippines/","Mitsubishi price list")])
+_a=C_find("mitsubishi-test-drive-sjdm");_a.update(desc="Book a Mitsubishi test drive in SJDM, San Jose del Monte: how to book, what to bring and what to check. With Richard, authorized sales executive.",
+ more=[("/test-drive/","Book a test drive"),("/mitsubishi-sjdm-bulacan/","Mitsubishi San Jose del Monte (SJDM)"),("/mitsubishi-price-list-philippines/","Mitsubishi price list")])
+_a=C_find("mitsubishi-dealer-bulacan");_a.update(seo="Mitsubishi Bulacan: Richard Cuagdan, SJDM Sales Executive",desc="Mitsubishi in Bulacan: Richard Cuagdan, authorized sales executive in SJDM, San Jose del Monte. Prices, low DP, test drive. Subject to bank approval.",
+ more=[("/mitsubishi-sjdm-bulacan/","Mitsubishi San Jose del Monte (SJDM)"),("/mitsubishi-malolos/","Mitsubishi for Malolos buyers"),("/mitsubishi-marilao/","Mitsubishi for Marilao buyers")])
+for _sl in ("car-financing-bulacan","mitsubishi-test-drive-sjdm","mitsubishi-dealer-bulacan"):
+    _a=C_find(_sl);C_chk(_a.get("seo") or _a["title"],_a["desc"],_sl)

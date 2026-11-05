@@ -76,7 +76,7 @@ LA_CSS='''<style>
 .la-bu{font-size:15px;padding:10px 12px}.la-in .chip{padding:7px 12px;font-size:14px}.la-log{gap:9px}.la-card{padding:18px}
 </style>'''
 page("/loan-assessment/","AI Car Loan Application Assessment | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "AI Car Loan Application Assessment for Mitsubishi: answer a few questions, pick your unit and promo, and find out if you are Pre-qualified. Takes 3 minutes.",
+ "Mitsubishi car loan assessment: answer a few questions, pick your unit and promo, and see if you are Pre-qualified, subject to bank approval. 3 minutes.",
 LA_CSS+f'''<section class="la-hero"><div class="w">
 <div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>
 <p class="kick" style="color:#fca5a5">{B("Libreng pre-assessment · 3 minuto","Free pre-assessment · 3 minutes")}</p>
