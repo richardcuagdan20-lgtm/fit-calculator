@@ -220,6 +220,7 @@ L(slug="mitsubishi-zero-down-payment-promo",kw="Mitsubishi zero down payment pro
  ("What's the cheapest Mitsubishi on Zero DP?","See the promo table, sorted by Zero DP monthly, lowest first."),
  ("Can OFWs get Zero DP?","Yes, OFWs can apply. Banks usually ask for a contract, proof of remittance and an SPA or co-borrower in the Philippines.")])
 
+for _k in LANDINGS: _k["faq"]=list(_k["faq"])+C_LFAQ.get(_k["slug"],[])  # draft-cars A17
 LAND_PATHS=[]
 for a in LANDINGS:
     path=f"/{a['slug']}/"; LAND_PATHS.append((path,a)); GT_LAND.add(path)

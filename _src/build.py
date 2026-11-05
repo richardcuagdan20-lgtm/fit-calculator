@@ -60,7 +60,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
         return (f'<details class="dd"{" data-on" if on else ""}><summary>{e(lbl)}</summary><div class="ddp">'
                 +"".join(item(p,n) for p,n in items)+'</div></details>')
     nav=(item("/","Home")
-        +dd("Cars",[("/cars/","All models and prices"),("/mitsubishi-hybrid-phev/","Mitsubishi PHEV / hybrid"),("/promos/","Promos"),("/test-drive/","Book a test drive"),("/brochures/","Brochures (PDF)")],"cars")
+        +dd("Cars",[("/cars/","All models and prices"),("/mitsubishi-price-list-philippines/","Price list"),("/mitsubishi-hybrid-phev/","Mitsubishi PHEV / hybrid"),("/promos/","Promos"),("/test-drive/","Book a test drive"),("/brochures/","Brochures (PDF)")],"cars")
         +item(GT,GT_EN)
         +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
@@ -273,7 +273,7 @@ def _bcov(k,n):
     w,h=_bsz(k)
     return f'''<a class="bcov" href="{_BU}{n.replace(' ','%20')}%20Brochure.pdf" target="_blank" rel="noopener" data-brochure="{e(n)}"><img src="/assets/brochures/{k}.webp" width="{w}" height="{h}" loading="lazy" decoding="async" alt="Mitsubishi {e(n)} official brochure cover"></a>'''
 cards="".join(f'''<div class="card pad bro" id="{k}">{_bcov(k,n)}<p class="bcap">Cover © Mitsubishi Motors Philippines Corporation</p><p class="kick">{e(c)}</p><h3>Mitsubishi {e(n)}</h3><p class="muted">{e(d)}</p><p class="muted small">PDF, {sz}. Official brochure from Mitsubishi Motors Philippines.</p><p class="row"><a class="btn sm" href="{_BU}{n.replace(' ','%20')}%20Brochure.pdf" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official brochure (PDF)</a></p><p class="row"><a class="more" href="/cars/{ms}/">See current promo →</a> <a class="more" href="/budgetcalculator/">Check my monthly →</a> <a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p></div>''' for k,n,c,d,sz,ms,_ in BRO)
-page("/brochures/","Mitsubishi Brochures Philippines 2026: Download PDF | SJDM, San Jose del Monte",
+page("/brochures/","Mitsubishi Brochure Download 2026 | SJDM, San Jose del Monte",
  "Download official Mitsubishi brochures (PDF) for every 2026 model in the Philippines, then get the current SJDM, San Jose del Monte promo with Richard Cuagdan.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi brochures Philippines 2026: download the PDF, get the SJDM (San Jose del Monte) promo</h1><p class="lead">Every current Mitsubishi brochure in one place, linked directly to the official PDF files, with the latest all-in promo for each unit one tap away.</p></div></section>
 <section class="sec"><div class="w"><h2>Brochure vs. current promo</h2><p>Brochures cover features, specs, colors and variants. They do not reflect this month\'s promos, so any SRP printed in a brochure may differ from the current price and promo package. For today\'s figures, ask for the latest <b>Option A</b> (lowest down payment) or <b>Option B</b> (30% down payment, lower monthly) for your unit. Pre-qualified, subject to bank approval.</p><p class="row"><a class="btn" href="/promos/">Get the latest Option A / Option B promo</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="brochures-intro">Message Richard on Messenger</a></p></div></section>
@@ -300,6 +300,7 @@ def MGUIDE(slug):
     return '<section class="sec"><div class="w"><h2>Helpful guides for Bulacan buyers</h2><ul class="links">'+"".join(f'<li><a href="{u}">{t}</a></li>' for u,t in l)+'</ul></div></section>'
 EVM={k:f'<section class="sec"><div class="w"><h2>Financing guide</h2><p><a class="more" href="/{u}/">{t} →</a></p><p class="muted">How DP, term and monthly work, documents, income guide and this month\'s promo table. Also see the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p></div></section>' for k,u,t in [("mirage","tips/mirage-hatchback-down-payment-monthly-sjdm","Mirage hatchback down payment and monthly"),("mirage-g4","mirage-g4-downpayment-and-monthly","Mirage G4 downpayment and monthly"),("triton","triton-downpayment-and-monthly","Triton downpayment and monthly"),("l300","l300-monthly-installment","L300 monthly installment")]}
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"wave1.py")).read())  # Wave 1-4 draft: helpers, hubs, model upgrades (WUP), new/refreshed articles
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"cars.py")).read())  # other-models plan (draft-cars)
 for m in MODELS:
     vs="".join(vcard(v,m) for v in m["variants"])
     U=WUP.get(m["slug"])
@@ -511,11 +512,22 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <section class="sec"><div class="w"><h2>Visiting the showroom</h2><p>I serve buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call me before you come so I can send directions and have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")], og=rx_og("xforce"))
 
 # ---------- calculator (replaces the old budget-fit page; old copy kept in git history and /workspace/loanapp/budgetcalculator-old-20261029.html)
-page("/budgetcalculator/","Mitsubishi Monthly Calculator: DP, Term & Amortization",
- "Estimate your Mitsubishi monthly: choose a car, a down payment and a term, then compare it with the official promo. Estimate only, subject to bank evaluation.",
-f'''<section class="ph"><div class="w"><h1>Estimate your monthly</h1><p class="lead">Choose a car, a down payment and how many years. You will see an estimated monthly and, when there is one, the official promo for the same unit.</p></div></section>
-<section class="sec"><div class="w">{CALC("budgetcalculator")}</div></section>
-<script src="/assets/lead.js?v={__import__("hashlib").md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]}" defer></script>''', crumbs=[("/","Home"),("/budgetcalculator/","Monthly estimate")])
+CALC_FAQ=[("How do I compute a brand new car installment in the Philippines?","Subtract the down payment from the SRP, apply the bank's add-on rate for your term, then divide by the number of months. The calculator does this for you; figures are estimates."),
+ ("What is a typical car loan term?","Common terms run from 1 to 5 years. A longer term lowers the monthly but raises the total you pay."),
+ ("Is the monthly from the calculator final?","No. It is an estimate. Your bank sets the final rate and terms; results are Pre-qualified, subject to bank approval."),
+ ("What do I need to apply for a car loan?","Valid IDs, proof of billing and proof of income. See the car loan requirements guide for the full list per employment type."),
+ ("How do I send my computation to Richard?","After computing, fill in the short form under your result, or message Richard on Messenger with your model, down payment and term.")]
+_ct="Car Loan Calculator Philippines: Mitsubishi Monthly";_cd="Compute your Mitsubishi monthly by model, down payment and term. Figures are estimates; pre-qualified, subject to bank approval. From San Jose del Monte."
+C_chk(_ct,_cd,"calc")
+page("/budgetcalculator/",_ct,_cd,
+f'''<section class="ph calcph"><div class="w"><h1>Car Loan Calculator Philippines (Mitsubishi, SJDM)</h1><p class="lead">Choose a Mitsubishi, a down payment and a term to see an estimated monthly, plus the official promo for the same unit when there is one.</p></div></section>
+<section class="sec" id="calc"><div class="w">{CALC("budgetcalculator")}<div class="box calres"><p><b>{MSQ}.</b> Estimates only; the bank confirms the final rate and monthly.</p><p class="row">{W_msg("calculator","result",cls="btn sm",label="Send my computation to Richard")} {W_pq("calculator","result",cls="btn sm ghost dk",label="Pre-qualify")}</p></div></div></section>
+<section class="sec alt"><div class="w nar"><h2>How the computation works</h2><ol class="steps"><li><h3>Amount financed</h3><p>SRP minus your down payment (DP).</p></li><li><h3>Add-on interest</h3><p>The bank applies an add-on rate that depends on the term; longer terms carry a higher total rate.</p></li><li><h3>Monthly</h3><p>Amount financed plus interest, divided by the number of months. Promo packages may bundle registration and insurance (all-in).</p></li></ol>
+<p>Next: check the <a href="/guides/car-loan-requirements/">car loan requirements</a>, read <a href="/guides/how-car-financing-works-philippines/">how car financing works</a>, see the <a href="/mitsubishi-price-list-philippines/">Mitsubishi price list</a>, or <a href="/loan-assessment/?src=calculator-howto">pre-qualify in 2 minutes</a>.</p></div></section>
+<section class="sec"><div class="w nar">{W_FAQH(CALC_FAQ)}{W_LOCAL}</div></section>
+<script>(function(){{var q=new URLSearchParams(location.search);if(q.get("m")&&!q.get("unit")){{q.set("unit",q.get("m"));history.replaceState(null,"","?"+q.toString()+location.hash)}}}})();</script>
+<script src="/assets/lead.js?v={__import__("hashlib").md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]}" defer></script>{W_vc("calculator","calculator")}{W_sbar("calculator","Car loan calculator")}''', ld=[{"@type":"WebApplication","name":"Car Loan Calculator Philippines (Mitsubishi)","url":D+"/budgetcalculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":0,"priceCurrency":"PHP"}},W_FAQLD(CALC_FAQ)], crumbs=[("/","Home"),("/budgetcalculator/","Car loan calculator")])
+C_PATHS.append("/budgetcalculator/")
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"landing.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"loanapp.py")).read())
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"applyform.py")).read())
@@ -738,6 +750,7 @@ for _f in _gl.glob(R+'/**/*.html',recursive=True):
     if _PUSH_ID and _f.replace(R,'')=='/privacy/index.html': _n=_n.replace('<h2>How we keep it</h2>',_PUSH_PRIV+'<h2>How we keep it</h2>',1)
     if _n!=_s: open(_f,'w').write(_n)
 W_SCRUB(R)
+C_SCRUB(R)
 # --- sitemap lastmod = date the page's main content last changed (content hash; state in _src/lastmod.json). Computed after all post-processing.
 import json as _js, hashlib as _hl, datetime as _dt2
 _LMF=os.path.join(os.path.dirname(os.path.abspath(__file__)),"lastmod.json")
