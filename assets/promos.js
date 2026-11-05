@@ -7,7 +7,7 @@ function setLang(l){lang=l==='tl'?'tl':'en';H.setAttribute('data-lang',lang);try
 (function(){var q=(new URLSearchParams(location.search).get('lang')||'').toLowerCase(),s='';try{s=localStorage.getItem('site_lang')||''}catch(_){}setLang(q==='tl'||q==='en'?q:(s||'en'))})();
 document.querySelectorAll('[data-setlang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setlang)})});
 function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
-function reveal(){document.querySelectorAll('[data-a]').forEach(function(el){var a=A[+el.getAttribute('data-a')];if(!a)return;var x=el.querySelectorAll('.ab-x');if(x[0])x[0].textContent=a[0]===0?'Zero DP Promo':peso(a[0]);if(x[1])x[1].textContent=peso(a[1])});H.classList.add('ab-open')}
+function reveal(){document.querySelectorAll('[data-a]').forEach(function(el){var a=A[+el.getAttribute('data-a')];if(!a)return;var x=el.querySelectorAll('.ab-x');if(x[0])x[0].textContent=a[0]===0?'Ask Richard':peso(a[0]);if(x[1])x[1].textContent=peso(a[1])});H.classList.add('ab-open')}
 var open=false;try{open=localStorage.getItem(K)==='1'}catch(_){}
 if(open)reveal();
 function T(ev,p,c){try{if(window.rpTrack){window.rpTrack(ev,p,c);return}if(typeof window.fbq==='function')window.fbq(c?'trackCustom':'track',ev,p)}catch(_){}}
