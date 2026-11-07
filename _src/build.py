@@ -219,6 +219,16 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 <div class="feat"><h3>All-in packages</h3><p>Promos include LTO registration, insurance, chattel mortgage and more. <a href="/guides/what-all-in-includes/">Here's what "all-in" covers</a>.</p></div>
 <div class="feat"><h3>Local to SJDM</h3><p>The showroom is in San Jose del Monte, Bulacan, close to Caloocan, Quezon City, Norzagaray and Santa Maria.</p></div>
 </div></div></section>
+<section class="sec"><div class="w rel">
+<figure class="relfig"><picture><source type="image/webp" srcset="/assets/img/releases/handover-1.webp"><img src="/assets/img/releases/handover-1.jpg" alt="Release day handover of a new Mitsubishi in San Jose del Monte (SJDM)" width="1600" height="2133" loading="lazy" decoding="async"></picture><figcaption class="rxc">Release day in San Jose del Monte (SJDM).</figcaption></figure>
+<div>
+<p class="kick">Recent releases</p>
+<h2>Handover day in SJDM, San Jose del Monte</h2>
+<p>A written review is not required to see what release day looks like. This is a recent unit I handed over in San Jose del Monte (SJDM): inspected, documented, and ready to drive home.</p>
+<p>I stay with you from the first viewing through the paperwork, so handover feels clear instead of rushed. You inspect the unit, we check the documents and freebies, and you leave with the keys.</p>
+<p class="row"><a class="btn" href="/contact/">Ask about your release day</a> <a class="btn ghost dk" href="/tips/new-car-release-day-checklist/">Release day checklist</a></p>
+</div>
+</div></section>
 <section class="sec alt"><div class="w"><h2>Popular guides for SJDM buyers</h2><div class="grid g3">
 <a class="card pad mc" href="/mitsubishi-sjdm-bulacan/"><h3>Mitsubishi SJDM Bulacan</h3><p class="muted">Promos, test drive and directions</p></a>
 <a class="card pad mc" href="/mitsubishi-casa-bulacan/"><h3>Mitsubishi casa Bulacan</h3><p class="muted">What "casa" means and how buying works</p></a>

@@ -159,3 +159,7 @@ form .btn{margin-top:18px;width:100%;font-size:17px;cursor:pointer}form .btn:dis
 @media(min-width:769px){.sbar{bottom:auto;top:0;border-top:0;border-bottom:1px solid var(--ln);box-shadow:0 4px 16px rgba(0,0,0,.08);padding:6px 0;transform:translateY(-120%);z-index:15}.sbar.on{transform:none}.sbar.on.off{transform:none}.sbm{display:block;flex:1;min-width:0}.sbm b{color:var(--ink);margin-right:10px}.sbm small{color:var(--mu)}.sbar .btn{flex:0 0 auto;padding:8px 18px}body.has-sbar{padding-bottom:0}}
 .pltab thead th{position:sticky;top:0;background:#fff;z-index:2}.pltab th[scope=row]{position:sticky;left:0;background:#fff;z-index:1;min-width:150px}.pltab .plg th{background:#f4f4f5}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chips .chip{padding:6px 12px;border:1px solid #d4d4d8;border-radius:999px;font-size:14px;text-decoration:none;background:#fff;color:#18181b}.chips a.chip:hover,.chips a.chip:focus-visible{border-color:var(--red);background:#fff1f2;color:var(--redd)}
 .ph .btn.ghost.dk,.ph .btn.ghost.dk:hover{color:#fff;border-color:#fff}
+.rel{display:grid;gap:28px;align-items:center}@media(min-width:800px){.rel{grid-template-columns:minmax(280px,1.15fr) minmax(0,0.9fr);gap:48px}}
+.relfig{margin:0}
+.relfig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center 72%;border-radius:var(--r);background:#0b0b0c}
+.relfig .rxc{margin:10px 2px 0}
