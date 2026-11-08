@@ -330,7 +330,6 @@ for k,n,c,d,sz,ms,_ in BRO:
         f'<p class="row"><a class="btn sm" href="/promos/#{ms}">See {e(n)} promo</a></p>'
         f'<p><a class="more" href="/cars/{ms}/">See model and SRP →</a></p>'
         f'<p><a class="more" href="/budgetcalculator/">Compute my monthly →</a></p>'
-        f'<p><a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p>'
         f'<p><a class="more" href="/test-drive/">Book a test drive →</a></p>'
         f'<p><a class="more" href="/loan-assessment/">Loan Application Assessment →</a></p>'
         f'<p><a class="more" href="/brochures/">All brochures →</a></p>'
