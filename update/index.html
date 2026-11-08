@@ -57,7 +57,7 @@ td input{padding:8px 10px}
 <div id="gate" class="gate">
   <div class="card">
     <h2>Sign in to continue</h2>
-    <p>This editor is only for richard.cuagdan20@gmail.com. Sign in with that Google account to open it. Publishing still needs your publish key too.</p>
+    <p>This editor is private. Sign in with Google to open it. Publishing still needs your publish key too.</p>
     <div id="google_btn"></div>
     <p id="gate_err" class="note" hidden></p>
   </div>
@@ -362,7 +362,7 @@ function startGoogle(){
       client_id: GOOGLE_CLIENT_ID,
       callback: function(resp){
         if(acceptToken(resp.credential)){ showApp(); initEditor(); }
-        else showGate("Sign in with richard.cuagdan20@gmail.com to open the editor.");
+        else showGate("This Google account isn't allowed to open the editor.");
       },
       auto_select: false
     });
