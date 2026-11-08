@@ -14,7 +14,6 @@ PAGES=[]
 GA='''<!-- Google tag (gtag.js) GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');</script>'''
-TEL="+639542911201"; TELD="0954 291 1201"
 ADDR="Richard Cuagdan, authorized Mitsubishi sales executive, serving San Jose del Monte (SJDM), Bulacan and Quezon City"
 AREAS=[{"@type":"City","name":"San Jose del Monte","alternateName":"SJDM","containedInPlace":{"@type":"AdministrativeArea","name":"Bulacan"}},{"@type":"City","name":"Quezon City"}]
 import urllib.parse as _up
@@ -22,7 +21,7 @@ AREAS=AREAS+[{"@type":"AdministrativeArea","name":"Bulacan"}]
 # Not the dealership entity: a ProfessionalService named after Richard (independent personal sales page). City only, no street address.
 DEALER={"@type":"ProfessionalService","@id":D+"/#dealer","name":"Richard Cuagdan, Mitsubishi Sales Executive SJDM Bulacan","alternateName":["Mitsubishi SJDM Bulacan by Richard Cuagdan","Mitsubishi San Jose del Monte (SJDM) Bulacan","Richard Cuagdan Mitsubishi San Jose del Monte"],"description":"Independent personal sales page of Richard Dennis Cuagdan, an authorized Mitsubishi sales executive serving San Jose del Monte (SJDM), Bulacan. Not the website of Mitsubishi Motors Philippines Corporation.","founder":{"@id":D+"/#richard"},"sameAs":[FB],"brand":{"@type":"Brand","name":"Mitsubishi"},"address":{"@type":"PostalAddress","addressLocality":"San Jose del Monte","addressRegion":"Bulacan","addressCountry":"PH"},
  "telephone":TEL,"areaServed":AREAS,
- "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}],
+ "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":HOURS_OPEN,"closes":HOURS_CLOSE}],
  "url":D+"/"}
 PERSON={"@type":"Person","@id":D+"/#richard","name":"Richard Dennis Cuagdan","alternateName":"Richard Cuagdan","jobTitle":"Sales Executive","description":"Authorized Mitsubishi sales executive in San Jose del Monte (SJDM), Bulacan","knowsAbout":["Mitsubishi vehicles","Car financing in the Philippines","Bank auto loans"],"telephone":TEL,"image":[D+"/assets/img/richard-600.webp",D+"/assets/img/richard/xpander-1x1.jpg"],"worksFor":{"@id":D+"/#dealer"},"areaServed":AREAS,"url":D+"/about/","sameAs":[FB,MSG]}
 PX='''<!-- Meta Pixel -->
@@ -119,7 +118,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 </main>
 <footer class="ft"><div class="w">
 <div class="fg">
-<div><p class="fb">Richard Dennis Cuagdan</p><p>Authorized Mitsubishi Sales Executive</p><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions.</p><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
+<div><p class="fb">Richard Dennis Cuagdan</p><p>Authorized Mitsubishi Sales Executive</p><p>{SERVICE_AREA}</p><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: {HOURS}</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
 <div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/brochures/">Brochures</a> · <a href="/tips/">Guides &amp; Tips</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
 <p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors by Richard Dennis Cuagdan on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a> <a class="fbl" href="{MSG}" target="_blank" rel="noopener" aria-label="Message Mitsubishi Motors by Richard on Messenger"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg><span>Messenger</span></a></p>
@@ -242,7 +241,7 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 <a class="card pad mc" href="/l300-monthly-installment/"><h3>L300 monthly installment</h3><p class="muted">For negosyo buyers</p></a>
 </div></div></section>
 <section class="sec"><div class="w split">
-<div><h2>Visit the showroom</h2><p><b>Richard Cuagdan, Mitsubishi SJDM</b><br>San Jose del Monte, Bulacan</p><p>Monday to Saturday, 8:00 AM to 5:00 PM</p><p>Message me before you visit so I can have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener" data-msgr="home-visit">Message Richard on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
+<div><h2>Visit the showroom</h2><p><b>Richard Cuagdan, Mitsubishi SJDM</b><br>San Jose del Monte, Bulacan</p><p>{HOURS}</p><p>{OFFICE_NOTE}</p><p class="row"><a class="btn" href="{MSG}" rel="noopener" data-msgr="home-visit">Message Richard on Messenger</a> <a class="btn ghost" href="/contact/">Contact details</a></p></div>
 <div><h2>New to car financing?</h2><ul class="links"><li><a href="/guides/how-car-financing-works-philippines/">How car financing works in the Philippines</a></li><li><a href="/guides/car-loan-requirements/">Documents you need for a car loan</a></li><li><a href="/guides/zero-dp-vs-low-dp/">Choosing your down payment</a></li><li><a href="/blog/ofw-car-buying-guide/">OFW car-buying guide</a></li></ul></div>
 </div></section>''', ld=[{"@type":"WebSite","@id":D+"/#site","name":"Mitsubishi Motors by Richard Dennis Cuagdan","url":D+"/"}])
 
@@ -495,7 +494,7 @@ f'''<section class="ph"><div class="w"><h1>Book a test drive</h1><p class="lead"
 <div class="fld"><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"><p class="er" id="e_email" hidden>Please check your email address.</p></div>
 <div class="fld"><label for="date">Preferred date *</label><input id="date" type="date" required><p class="muted" style="margin:6px 0 0">Monday to Saturday only, from tomorrow up to 60 days ahead.</p><p class="er" id="e_date" hidden>Please choose a Monday to Saturday date within the next 60 days (no Sundays).</p></div>
 <div class="fld"><label for="time">Preferred time *</label><select id="time" required><option value="">Select a time</option>{"".join(f'<option value="{a}">{b}</option>' for a,b in TIMES)}</select><p class="er" id="e_time" hidden>Please choose a time slot.</p></div>
-<div class="fld"><p class="fl">Location</p><p><b>Richard Cuagdan, Mitsubishi SJDM</b><br>San Jose del Monte, Bulacan<br><span class="muted">Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</span></p></div>
+<div class="fld"><p class="fl">Location</p><p><b>Richard Cuagdan, Mitsubishi SJDM</b><br>San Jose del Monte, Bulacan<br><span class="muted">Showroom hours: {HOURS}</span></p></div>
 <div class="fld"><label for="notes">Notes (optional)</label><textarea id="notes" rows="3" maxlength="1000" placeholder="e.g. preferred color, number of passengers joining"></textarea></div>
 <label class="chk"><input type="checkbox" id="lic" required> <span>I have a valid driver's license and will bring it to the test drive.</span></label><p class="er" id="e_lic" hidden>A valid driver's license is required for the test drive.</p>
 {CONSENT}
@@ -564,7 +563,7 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <div class="card pad"><h2 class="h3">Messenger</h2><p>Send me a message any time about units, promos, your application or a showroom visit. I'll reply as soon as I can.</p><p><a class="btn" href="{MSG}" rel="noopener" data-msgr="contact-card">Message Richard on Messenger</a></p></div>
 <div class="card pad"><h2 class="h3">Facebook</h2><p>Follow the page for new arrivals, promos and updates.</p><p><a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">Follow us on Facebook</a></p></div>
 <div class="card pad"><h2 class="h3">Call or text</h2><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p><a class="btn" href="tel:{TEL}">Call {TELD}</a></p></div>
-<div class="card pad"><h2 class="h3">Showroom visits</h2><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City.</p><p><a href="{MSG}" rel="noopener">Message me for the showroom location and directions</a></p><p>Monday to Saturday<br>8:00 AM to 5:00 PM</p></div>
+<div class="card pad"><h2 class="h3">Showroom visits</h2><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City.</p><p><a href="{MSG}" rel="noopener">Message me for the showroom location and directions</a></p><p>{HOURS}</p></div>
 <div class="card pad"><h2 class="h3">Apply online</h2><p>Send your details and preferred unit, and I'll get back to you with the latest promo.</p><p><a class="btn" href="/apply/">Apply Now</a></p></div>
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
 </div></section>
@@ -665,12 +664,13 @@ for _k,(_u,_t) in TL_ONLY.items():
     _s=_s.replace(LACTA,LACTA_TL)
     _s=_s.replace('<p class="abn">Written by ','<p class="abn">Isinulat ni ').replace('<a href="/about/">About Richard</a> · <a href="'+MSG+'" rel="noopener">Message Richard on Messenger</a>','<a href="/about/">Tungkol kay Richard</a> · <a href="'+MSG+'" rel="noopener">I-message si Richard sa Messenger</a>')
     open(_f,"w").write(_s)
+import update as _upd; _upd.write(R)
 # ---------- sitemap/robots
 PAGES.append("/privacy/")
 sm='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{D}{p}</loc><lastmod>2026-10-21</lastmod></url>\n" for p in PAGES)+"</urlset>\n"
 open(R+"/sitemap.xml","w").write(sm)
 AI_BOTS=["GPTBot","OAI-SearchBot","ChatGPT-User","PerplexityBot","ClaudeBot","Google-Extended","Bingbot"]
-open(R+"/robots.txt","w").write(f"User-agent: *\nAllow: /\n\n"+"".join(f"User-agent: {b}\nAllow: /\n\n" for b in AI_BOTS)+f"Sitemap: {D}/sitemap.xml\n")
+open(R+"/robots.txt","w").write(f"User-agent: *\nAllow: /\nDisallow: /update/\n\n"+"".join(f"User-agent: {b}\nAllow: /\nDisallow: /update/\n\n" for b in AI_BOTS)+f"Sitemap: {D}/sitemap.xml\n")
 def _ll(items,base): return "".join(f"- [{a['title']}]({D}/{base}/{a['slug']}/): {a['desc']}\n" for a in items)
 open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales Executive, San Jose del Monte (SJDM), Bulacan
 
@@ -695,14 +695,14 @@ open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales
 - Brand: Richard Cuagdan, authorized Mitsubishi sales executive (car agent) in San Jose del Monte, Bulacan. This is his independent personal sales page, not a dealership or Mitsubishi Motors Philippines website.
 - Location: San Jose del Monte (SJDM), Bulacan, Philippines (city only)
 - Areas served: San Jose del Monte (SJDM), Bulacan and Quezon City; message or call for showroom visits and directions
-- Hours: Monday to Saturday, 8:00 AM to 5:00 PM
+- Hours: {HOURS}
 - Messenger: {MSG}
 
 ## Key facts (updated {_dt.date.today().isoformat()}; promo figures valid for {NOTE.split("valid for ")[1].split(",")[0]} only)
 - Who: Richard Dennis Cuagdan, authorized Mitsubishi sales executive (car agent), San Jose del Monte (SJDM), Bulacan. Independent personal sales page; not a dealership website and not the official Mitsubishi Motors Philippines Corporation website.
 - Areas served: San Jose del Monte, Caloocan/Novaliches, Fairview/Quezon City, Marilao, Meycauayan, Bocaue, Santa Maria, Norzagaray, Montalban (Rodriguez) and Malolos. No branches in those towns.
 - SRPs: official Mitsubishi Motors Philippines price list, subject to change.
-- Promos on /promos/: two all-in options per unit on 60 months. Option A = lowest down payment (Zero DP Promo on select units); Option B = 30% down payment with a lower monthly. Always subject to bank approval.
+- Promos on /promos/: two all-in options per unit on 60 months. Lowest DP = lowest down payment (Zero DP Promo on select units); Lowest Monthly = 30% down payment with a lower monthly. Always subject to bank approval.
 - All-in includes: {"; ".join(ALLIN)}.
 - Assessment results are worded "Pre-qualified, subject to bank approval"; the bank makes the final decision. Fuel freebies are stated in fuel points.
 

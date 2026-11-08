@@ -1,25 +1,33 @@
 User-agent: *
 Allow: /
+Disallow: /update/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /update/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /update/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /update/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /update/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /update/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /update/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /update/
 
 Sitemap: https://www.mitsubishi-sjdm.com/sitemap.xml

@@ -75,6 +75,8 @@ LA_CSS='''<style>
 .la-score{border-radius:16px;padding:14px 16px;margin:12px 0;background:#f4f4f5}.la-score.ok{background:#ecfdf5}.la-score.mid{background:#fffbeb}.la-score.no{background:#fef2f2}.la-sl{margin:0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#52525b}.la-sv{margin:2px 0 6px}.la-sv b{font-size:34px;line-height:1.1}.la-sv span{font-weight:700;color:#3f3f46}.la-sb{height:10px;background:#e4e4e7;border-radius:99px;overflow:hidden}.la-sb i{display:block;height:100%;background:#16a34a}.la-score.mid .la-sb i{background:#d97706}.la-score.no .la-sb i{background:#dc2626}.la-sc{font-size:13px;color:#52525b;margin:8px 0 0}.la-sd summary{cursor:pointer;font-size:14px;margin-top:6px}.la-sd ul{margin:6px 0 0;padding-left:18px}
 .la-bu{font-size:15px;padding:10px 12px}.la-in .chip{padding:7px 12px;font-size:14px}.la-log{gap:9px}.la-card{padding:18px}
 </style>'''
+_lbl=SITE.get("promo_labels") or {}
+_LA_LABELS={"lowest_dp":_lbl.get("lowest_dp") or "Lowest DP","lowest_monthly":_lbl.get("lowest_monthly") or "Lowest Monthly","lowest_dp_tl":_lbl.get("lowest_dp_tl") or "Pinakamababang DP","lowest_monthly_tl":_lbl.get("lowest_monthly_tl") or "Pinakamababang monthly"}
 page("/loan-assessment/","AI Car Loan Application Assessment | Richard Cuagdan, Mitsubishi SJDM Bulacan",
  "Mitsubishi car loan assessment: answer a few questions, pick your unit and promo, and see if you are Pre-qualified, subject to bank approval. 3 minutes.",
 LA_CSS+f'''<section class="la-hero"><div class="w">
@@ -98,7 +100,8 @@ LA_CSS+f'''<section class="la-hero"><div class="w">
 <div id="la-res" hidden></div>
 <p id="la-note" hidden>{e(NOTE)}</p>
 </div></section>
-{"" if [u.__setitem__("ab",{"a":[_ABM[_nk(u["n"])]["a_dp"],_ABM[_nk(u["n"])]["a_mo"]],"b":[_ABM[_nk(u["n"])]["b_dp"],_ABM[_nk(u["n"])]["b_mo"]]}) for u in LAU if _nk(u["n"]) in _ABM] else ""}<script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
+{"" if [u.__setitem__("ab",{"a":[_ABM[_nk(u["n"])]["a_dp"],_ABM[_nk(u["n"])]["a_mo"]],"b":[_ABM[_nk(u["n"])]["b_dp"],_ABM[_nk(u["n"])]["b_mo"]]}) for u in LAU if _nk(u["n"]) in _ABM] else ""}<script type="application/json" id="la-labels">{json.dumps(_LA_LABELS,ensure_ascii=False)}</script>
+<script type="application/json" id="la-units">{json.dumps(LAU,ensure_ascii=False)}</script>
 <script src="/assets/lead.js" defer></script>
 <script src="/assets/loan-assessment.js" defer></script>''', crumbs=[("/","Home"),("/loan-assessment/","AI Car Loan Application Assessment")])
 # Cache-busting: content hashes on the loan page's JS/CSS (Cloudflare caches /assets for 4h).

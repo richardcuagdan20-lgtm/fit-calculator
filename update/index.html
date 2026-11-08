@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-PH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Website editor · Mitsubishi SJDM</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--line:#262a33;--tx:#e8eaf0;--mut:#8b92a3;--red:#e60012;--ok:#22c55e;--warn:#f59e0b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,Segoe UI,Roboto,Inter,sans-serif}
+header{position:sticky;top:0;z-index:8;background:rgba(15,17,21,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 18px}
+header h1{margin:0;font-size:17px}
+header p{margin:4px 0 0;color:var(--mut);font-size:13px}
+main{max-width:1100px;margin:0 auto;padding:18px 18px 120px}
+h2{font-size:18px;margin:28px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:block;color:var(--mut);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+input,textarea,select{width:100%;background:#0c0e12;color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+textarea{min-height:110px;resize:vertical}
+.hint{color:var(--mut);font-size:13px;margin:8px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--red);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.btn.g{background:#2a2f3a}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td input{padding:8px 10px}
+.spec{display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;margin:0 0 8px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:rgba(15,17,21,.96);border-top:1px solid var(--line);padding:12px 18px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;z-index:9}
+.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:#232836;border:1px solid var(--line);padding:10px 16px;border-radius:10px;display:none;z-index:20;max-width:min(520px,92vw)}
+.toast.on{display:block}
+.diff{background:#0c0e12;border-radius:10px;padding:12px;max-height:280px;overflow:auto;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap}
+.ok{color:#4ade80}.warn{color:#fbbf24}
+.note{border-left:3px solid var(--warn);padding:8px 12px;background:rgba(245,158,11,.07);border-radius:6px;color:#fcd34d;font-size:13px;margin:0 0 14px}
+@media(max-width:760px){
+  .wide{overflow:auto}
+  table{min-width:720px}
+  .spec{grid-template-columns:1fr}
+}
+</style>
+<link rel="stylesheet" href="/assets/fmsg.css?v=15417f02"></head>
+<body>
+<header>
+  <h1>Website editor</h1>
+  <p>Private page for Richard. Change the details, review them, then publish. The live website updates even if I cannot help that day.</p>
+</header>
+<main>
+  <p class="note">This page is not in the public menu. Bookmark it. Nothing goes live until you press Publish and confirm. Publishing is private: enter your publish key below. It is saved in your vault as “Mitsubishi SJDM publish key”.</p>
+
+  <h2>Publish key</h2>
+  <div class="card">
+    <label for="publish_key">Private publish key</label>
+    <input id="publish_key" type="password" autocomplete="current-password" spellcheck="false">
+    <p class="hint">Only you should have this key. It stays on this device after you type it, so you do not have to re-enter it every time on the same phone or computer.</p>
+  </div>
+
+  <h2>Business details</h2>
+  <div class="card grid">
+    <div><label for="phone_display">Phone (how it appears)</label><input id="phone_display"></div>
+    <div><label for="phone_e164">Phone (tap-to-call)</label><input id="phone_e164" placeholder="+639xxxxxxxxx"></div>
+    <div><label for="email">Email</label><input id="email" type="email"></div>
+    <div><label for="hours_open">Opens (24-hour)</label><input id="hours_open" placeholder="08:00"></div>
+    <div><label for="hours_close">Closes (24-hour)</label><input id="hours_close" placeholder="17:00"></div>
+    <div style="grid-column:1/-1"><label for="hours">Showroom hours</label><input id="hours"></div>
+    <div style="grid-column:1/-1"><label for="facebook">Facebook page</label><input id="facebook"></div>
+    <div style="grid-column:1/-1"><label for="messenger">Messenger link</label><input id="messenger"></div>
+    <div style="grid-column:1/-1"><label for="service_area">Service area / office note in the footer</label><textarea id="service_area"></textarea></div>
+    <div style="grid-column:1/-1"><label for="office_note">Visit note</label><textarea id="office_note"></textarea></div>
+    <div style="grid-column:1/-1"><label for="application_form_app">Application form app</label><input id="application_form_app"></div>
+  </div>
+
+  <h2>Promo month and option names</h2>
+  <div class="card grid">
+    <div><label for="promo_year">Year</label><input id="promo_year" inputmode="numeric"></div>
+    <div><label for="promo_month">Month (1-12)</label><input id="promo_month" inputmode="numeric"></div>
+    <div><label for="promo_updated">Figures updated on</label><input id="promo_updated" placeholder="2026-11-04"></div>
+    <div><label for="label_a">First option name</label><input id="label_a"></div>
+    <div><label for="label_b">Second option name</label><input id="label_b"></div>
+    <div><label for="label_a_tl">First option (Taglish)</label><input id="label_a_tl"></div>
+    <div><label for="label_b_tl">Second option (Taglish)</label><input id="label_b_tl"></div>
+  </div>
+  <p class="hint">These names appear on the Promos page and on each car page. Current names: Lowest DP and Lowest Monthly.</p>
+
+  <h2>Inclusions and freebies</h2>
+  <div class="card grid">
+    <div><label for="inclusions">All-in includes (one per line)</label><textarea id="inclusions"></textarea></div>
+    <div><label for="freebies">Freebies (one per line)</label><textarea id="freebies"></textarea></div>
+  </div>
+
+  <h2>Cars, SRP, and promo figures</h2>
+  <div class="card">
+    <label for="model">Model</label>
+    <select id="model"></select>
+    <div id="modelbox" style="margin-top:14px"></div>
+    <p class="hint">Changing an SRP here also updates that unit on the Promos page. Lowest DP range is computed from the Lowest DP figures you enter.</p>
+  </div>
+
+  <h2>Review changes</h2>
+  <div class="card">
+    <div id="diff" class="diff">No changes yet.</div>
+  </div>
+</main>
+<div class="foot">
+  <button class="btn g" type="button" id="review">Review changes</button>
+  <button class="btn" type="button" id="publish">Publish to website</button>
+</div>
+<div class="toast" id="toast"></div>
+<script id="data" type="application/json">{"site": {"phone_e164": "+639542911201", "phone_display": "0954 291 1201", "email": "richard.cuagdan20@gmail.com", "facebook": "https://www.facebook.com/504759566043148", "messenger": "https://m.me/504759566043148", "hours": "Monday to Saturday, 8:00 AM to 5:00 PM", "hours_open": "08:00", "hours_close": "17:00", "office_note": "Message me before you visit so I can have your preferred unit ready for viewing or a test drive.", "service_area": "Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions.", "application_form_app": "https://richard-mitsu-application-form.grok.me", "promo": {"year": 2026, "month": 11, "updated": "2026-11-04"}, "promo_labels": {"lowest_dp": "Lowest DP", "lowest_monthly": "Lowest Monthly", "lowest_dp_tl": "Pinakamababang DP", "lowest_monthly_tl": "Pinakamababang monthly"}, "inclusions": ["3 years LTO registration", "3 years TPL insurance", "1 year comprehensive insurance, rate locked for 3 years", "Chattel mortgage", "Free labor up to 5,000 km", "3 years warranty"], "freebies": ["Full tint", "Floor mats", "Seat cover (fabric seats)", "Reverse camera", "Early warning device", "Basic tools", "Umbrella", "Microfiber cloth", "Keychain"], "models": {"mirage": {"name": "Mirage", "cat": "Hatchback", "blurb": "A compact five-door hatchback with a 1.2L MIVEC engine and a 4.6-meter turning radius, made for narrow streets, tight parking and an easy first-car budget.", "who": "first-time owners, solo commuters and young professionals who mostly drive in the city", "specs": [["Engine", "1.2L (1,193 cc) 3-cylinder DOHC MIVEC gasoline (3A92), Euro 4"], ["Max power / torque", "77.52 PS / 100 Nm"], ["Transmission", "5-speed manual or INVECS-III CVT"], ["Minimum turning radius", "4.6 m"], ["Fuel tank", "35 L"], ["Seating", "5"]]}, "mirage-g4": {"name": "Mirage G4", "cat": "Sedan", "blurb": "A compact, fuel-sipping sedan that is easy to park around SJDM and Metro Manila and gentle on a first-car budget.", "who": "first-time buyers, daily commuters and young professionals", "specs": [["Engine", "1.2L (1,193 cc) D4 MPI VVT gasoline"], ["Max power / torque", "78 PS / 100 Nm"], ["Transmission", "5-speed manual or CVT"], ["Seating", "5"]]}, "xpander": {"name": "Xpander", "cat": "7-seater MPV", "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips.", "who": "growing families, carpool parents, and OFW families who want one car for school runs and weekend trips", "specs": [["Engine", "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"], ["Max power / torque", "105 PS / 141 Nm"], ["Transmission", "5-speed manual or 4-speed automatic"], ["Seating", "7"]]}, "xpander-cross": {"name": "Xpander Cross", "cat": "7-seater crossover MPV", "blurb": "Everything families like about the Xpander, with a rugged crossover look and a more premium cabin.", "who": "families who want MPV practicality with SUV styling", "specs": [["Engine", "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"], ["Max power / torque", "105 PS / 141 Nm"], ["Transmission", "4-speed automatic"], ["Seating", "7"]]}, "xforce": {"name": "Xforce", "cat": "Compact SUV", "blurb": "A compact SUV with bold styling and a raised driving position, sized for city streets but ready for out-of-town weekends.", "who": "young families and professionals moving up from a sedan or hatchback", "specs": [["Engine", "1.5L gasoline"], ["Transmission", "CVT"], ["Drivetrain", "2WD"]]}, "destinator": {"name": "Destinator", "cat": "7-seater SUV", "blurb": "Mitsubishi's newest 7-seat SUV, with a turbocharged 1.5L engine and a roomy, tech-forward cabin.", "who": "families stepping up from an MPV who want more power, comfort and safety tech", "specs": [["Engine", "1.5L turbocharged gasoline (4B40), Euro 4"], ["Max power / torque", "163 PS / 250 Nm"], ["Transmission", "CVT"], ["Seating", "7"]]}, "outlander-phev": {"name": "Outlander PHEV", "cat": "Plug-in hybrid SUV", "blurb": "Mitsubishi's plug-in hybrid SUV: drive on electricity for everyday trips and let the gasoline engine take over for long ones.", "who": "buyers who want electrified driving without range worries", "specs": [["Powertrain", "2.4L gasoline plug-in hybrid"], ["Drivetrain", "AWD"]]}, "montero-sport": {"name": "Montero Sport", "cat": "7-seater diesel SUV", "blurb": "The full-size diesel SUV, including the Black Series. Built on a ladder frame for long drives, rough roads and heavy loads.", "who": "executives, large families and anyone who drives far from the city often", "specs": [["Engine", "2.4L (2,442 cc) 4N15 MIVEC intercooled turbo diesel, Euro 4"], ["Max power / torque", "181 PS / 430 Nm"], ["Transmission", "6-speed manual or 8-speed automatic"], ["Seating", "7"]]}, "triton": {"name": "Triton", "cat": "Pickup", "blurb": "A tough diesel pickup that works hard on weekdays and still feels comfortable for the family on weekends.", "who": "contractors, farm and resort owners, and anyone who needs a cargo bed", "specs": [["Engine", "2.4L 4N16 intercooled turbo diesel"], ["Transmission", "6-speed manual or automatic (by variant)"], ["Drivetrain", "2WD or 4WD (by variant)"]]}, "l300": {"name": "L300", "cat": "Commercial", "blurb": "The workhorse of Philippine small businesses, available as a cab and chassis for custom bodies or as a ready-to-work dual-AC unit.", "who": "business owners in delivery, hauling, catering, hardware and retail", "specs": [["Engine", "2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4"], ["Transmission", "5-speed manual"], ["Fuel", "Diesel"]]}, "versa-van": {"name": "Versa Van", "cat": "15-seater diesel van", "blurb": "A full-size diesel van for shuttle services, company transport and big families who travel together.", "who": "shuttle and tour operators, companies and large families", "specs": [["Engine", "2.5L (2,488 cc) DOHC 16-valve VGS turbo diesel"], ["Max power / torque", "129 PS / 356 Nm"], ["Transmission", "5-speed manual"], ["Drivetrain", "2WD"], ["Seating", "15 (including driver)"], ["Colors", "Silver Metallic, White Solid"]]}}}, "models": [{"slug": "mirage", "name": "Mirage", "cat": "Hatchback", "blurb": "A compact five-door hatchback with a 1.2L MIVEC engine and a 4.6-meter turning radius, made for narrow streets, tight parking and an easy first-car budget.", "who": "first-time owners, solo commuters and young professionals who mostly drive in the city", "specs": [["Engine", "1.2L (1,193 cc) 3-cylinder DOHC MIVEC gasoline (3A92), Euro 4"], ["Max power / torque", "77.52 PS / 100 Nm"], ["Transmission", "5-speed manual or INVECS-III CVT"], ["Minimum turning radius", "4.6 m"], ["Fuel tank", "35 L"], ["Seating", "5"]]}, {"slug": "mirage-g4", "name": "Mirage G4", "cat": "Sedan", "blurb": "A compact, fuel-sipping sedan that is easy to park around SJDM and Metro Manila and gentle on a first-car budget.", "who": "first-time buyers, daily commuters and young professionals", "specs": [["Engine", "1.2L (1,193 cc) D4 MPI VVT gasoline"], ["Max power / torque", "78 PS / 100 Nm"], ["Transmission", "5-speed manual or CVT"], ["Seating", "5"]]}, {"slug": "xpander", "name": "Xpander", "cat": "7-seater MPV", "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips.", "who": "growing families, carpool parents, and OFW families who want one car for school runs and weekend trips", "specs": [["Engine", "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"], ["Max power / torque", "105 PS / 141 Nm"], ["Transmission", "5-speed manual or 4-speed automatic"], ["Seating", "7"]]}, {"slug": "xpander-cross", "name": "Xpander Cross", "cat": "7-seater crossover MPV", "blurb": "Everything families like about the Xpander, with a rugged crossover look and a more premium cabin.", "who": "families who want MPV practicality with SUV styling", "specs": [["Engine", "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"], ["Max power / torque", "105 PS / 141 Nm"], ["Transmission", "4-speed automatic"], ["Seating", "7"]]}, {"slug": "xforce", "name": "Xforce", "cat": "Compact SUV", "blurb": "A compact SUV with bold styling and a raised driving position, sized for city streets but ready for out-of-town weekends.", "who": "young families and professionals moving up from a sedan or hatchback", "specs": [["Engine", "1.5L gasoline"], ["Transmission", "CVT"], ["Drivetrain", "2WD"]]}, {"slug": "destinator", "name": "Destinator", "cat": "7-seater SUV", "blurb": "Mitsubishi's newest 7-seat SUV, with a turbocharged 1.5L engine and a roomy, tech-forward cabin.", "who": "families stepping up from an MPV who want more power, comfort and safety tech", "specs": [["Engine", "1.5L turbocharged gasoline (4B40), Euro 4"], ["Max power / torque", "163 PS / 250 Nm"], ["Transmission", "CVT"], ["Seating", "7"]]}, {"slug": "outlander-phev", "name": "Outlander PHEV", "cat": "Plug-in hybrid SUV", "blurb": "Mitsubishi's plug-in hybrid SUV: drive on electricity for everyday trips and let the gasoline engine take over for long ones.", "who": "buyers who want electrified driving without range worries", "specs": [["Powertrain", "2.4L gasoline plug-in hybrid"], ["Drivetrain", "AWD"]]}, {"slug": "montero-sport", "name": "Montero Sport", "cat": "7-seater diesel SUV", "blurb": "The full-size diesel SUV, including the Black Series. Built on a ladder frame for long drives, rough roads and heavy loads.", "who": "executives, large families and anyone who drives far from the city often", "specs": [["Engine", "2.4L (2,442 cc) 4N15 MIVEC intercooled turbo diesel, Euro 4"], ["Max power / torque", "181 PS / 430 Nm"], ["Transmission", "6-speed manual or 8-speed automatic"], ["Seating", "7"]]}, {"slug": "triton", "name": "Triton", "cat": "Pickup", "blurb": "A tough diesel pickup that works hard on weekdays and still feels comfortable for the family on weekends.", "who": "contractors, farm and resort owners, and anyone who needs a cargo bed", "specs": [["Engine", "2.4L 4N16 intercooled turbo diesel"], ["Transmission", "6-speed manual or automatic (by variant)"], ["Drivetrain", "2WD or 4WD (by variant)"]]}, {"slug": "l300", "name": "L300", "cat": "Commercial", "blurb": "The workhorse of Philippine small businesses, available as a cab and chassis for custom bodies or as a ready-to-work dual-AC unit.", "who": "business owners in delivery, hauling, catering, hardware and retail", "specs": [["Engine", "2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4"], ["Transmission", "5-speed manual"], ["Fuel", "Diesel"]]}, {"slug": "versa-van", "name": "Versa Van", "cat": "15-seater diesel van", "blurb": "A full-size diesel van for shuttle services, company transport and big families who travel together.", "who": "shuttle and tour operators, companies and large families", "specs": [["Engine", "2.5L (2,488 cc) DOHC 16-valve VGS turbo diesel"], ["Max power / torque", "129 PS / 356 Nm"], ["Transmission", "5-speed manual"], ["Drivetrain", "2WD"], ["Seating", "15 (including driver)"], ["Colors", "Silver Metallic, White Solid"]]}], "optionAB": [{"family": "Mirage Hatchback", "unit": "Mirage GLX 1.2G MT", "srp": 720000, "a_dp": 18000, "a_mo": 14833, "b_dp": 108000, "b_mo": 14079, "fuel": null, "flags": ""}, {"family": "Mirage Hatchback", "unit": "Mirage GLX 1.2G CVT", "srp": 781000, "a_dp": 23000, "a_mo": 16090, "b_dp": 118000, "b_mo": 14079, "fuel": null, "flags": ""}, {"family": "Mirage G4", "unit": "Mirage G4 GLX 1.2G M/T", "srp": 793000, "a_dp": 3000, "a_mo": 16133, "b_dp": 93000, "b_mo": 14295, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [58000, 15316], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Mirage G4", "unit": "Mirage G4 GLX 1.2G CVT", "srp": 841000, "a_dp": 3000, "a_mo": 16542, "b_dp": 73000, "b_mo": 15160, "fuel": null, "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [33000, 16243], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Mirage G4", "unit": "Mirage G4 GLS 1.2G CVT", "srp": 937000, "a_dp": 3000, "a_mo": 18804, "b_dp": 98000, "b_mo": 16891, "fuel": null, "flags": "20% promo DP ₱3,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [53000, 18097], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xpander", "unit": "Xpander GLX 1.5G 2WD M/T", "srp": 1099000, "a_dp": 18000, "a_mo": 22401, "b_dp": 143000, "b_mo": 19811, "fuel": 30000, "flags": "", "a_old": [33000, 23284], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xpander", "unit": "Xpander GLX 1.5G 2WD A/T", "srp": 1159000, "a_dp": 23000, "a_mo": 23592, "b_dp": 153000, "b_mo": 20892, "fuel": null, "flags": "", "a_old": [38000, 24555], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xpander", "unit": "Xpander GLS 1.5G 2WD A/T", "srp": 1259000, "a_dp": 8000, "a_mo": 26143, "b_dp": 173000, "b_mo": 22695, "fuel": null, "flags": "", "a_old": [23000, 26674], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xpander", "unit": "Xpander GLS 1.5G 2WD A/T (Quartz White Pearl)", "srp": 1274000, "a_dp": 8000, "a_mo": 26407, "b_dp": 173000, "b_mo": 22965, "fuel": null, "flags": "color variant, SRP differs", "a_old": [23000, 26992], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander GLS 1.5G 2WD A/T"}, {"family": "Xpander Cross", "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone)", "srp": 1378000, "a_dp": 0, "a_mo": 28406, "b_dp": 173000, "b_mo": 24840, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [93000, 26614], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xpander Cross", "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone, Quartz White Pearl)", "srp": 1393000, "a_dp": 0, "a_mo": 28671, "b_dp": 173000, "b_mo": 25110, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [93000, 26904], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander Cross 1.5G 2WD A/T (Two-Tone)"}, {"family": "Xforce", "unit": "XFORCE GLX 1.5G 2WD CVT", "srp": 1119000, "a_dp": 23000, "a_mo": 23874, "b_dp": 193000, "b_mo": 20171, "fuel": null, "flags": "", "a_old": [63000, 23708], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xforce", "unit": "XFORCE GLX 1.5G 2WD CVT (Quartz White Pearl)", "srp": 1134000, "a_dp": 23000, "a_mo": 24135, "b_dp": 193000, "b_mo": 20442, "fuel": null, "flags": "color variant, SRP differs", "a_old": [58000, 24026], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLX 1.5G 2WD CVT"}, {"family": "Xforce", "unit": "XFORCE GLS 1.5G 2WD CVT (Monotone)", "srp": 1299000, "a_dp": 33000, "a_mo": 27679, "b_dp": 228000, "b_mo": 23416, "fuel": null, "flags": "", "a_old": [73000, 27521], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xforce", "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone)", "srp": 1309000, "a_dp": 33000, "a_mo": 27852, "b_dp": 228000, "b_mo": 23596, "fuel": null, "flags": "", "a_old": [78000, 27733], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xforce", "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone, Quartz White Pearl)", "srp": 1324000, "a_dp": 33000, "a_mo": 28113, "b_dp": 228000, "b_mo": 23867, "fuel": null, "flags": "color variant, SRP differs", "a_old": [73000, 28051], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLS 1.5G 2WD CVT (Two-Tone)"}, {"family": "Xforce", "unit": "XFORCE GT 1.5G 2WD CVT", "srp": 1661000, "a_dp": 48000, "a_mo": 35433, "b_dp": 298000, "b_mo": 29941, "fuel": null, "flags": "", "a_old": [103000, 35191], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Xforce", "unit": "XFORCE GT 1.5G 2WD CVT (Quartz White Pearl)", "srp": 1676000, "a_dp": 48000, "a_mo": 35693, "b_dp": 298000, "b_mo": 30212, "fuel": null, "flags": "color variant, SRP differs", "a_old": [103000, 35509], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GT 1.5G 2WD CVT"}, {"family": "Destinator", "unit": "Destinator GLX 1.5G Turbo 2WD CVT", "srp": 1389000, "a_dp": 8000, "a_mo": 29032, "b_dp": 198000, "b_mo": 25038, "fuel": null, "flags": "", "a_old": [33000, 29428], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Destinator", "unit": "Destinator GLX 1.5G Turbo 2WD CVT (Quartz White Pearl)", "srp": 1404000, "a_dp": 8000, "a_mo": 29296, "b_dp": 198000, "b_mo": 25309, "fuel": null, "flags": "color variant, SRP differs", "a_old": [33000, 29746], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLX 1.5G Turbo 2WD CVT"}, {"family": "Destinator", "unit": "Destinator GLS 1.5G Turbo 2WD CVT", "srp": 1599000, "a_dp": 48000, "a_mo": 33588, "b_dp": 268000, "b_mo": 28824, "fuel": null, "flags": "", "a_old": [78000, 33877], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Destinator", "unit": "Destinator GLS 1.5G Turbo 2WD CVT (Quartz White Pearl)", "srp": 1614000, "a_dp": 48000, "a_mo": 33849, "b_dp": 268000, "b_mo": 29094, "fuel": null, "flags": "color variant, SRP differs", "a_old": [78000, 34195], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLS 1.5G Turbo 2WD CVT"}, {"family": "Destinator", "unit": "Destinator GT 1.5G Turbo 2WD CVT (Monotone)", "srp": 1929000, "a_dp": 0, "a_mo": 39666, "b_dp": 238000, "b_mo": 34772, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [123000, 37256], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Destinator", "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)", "srp": 1939000, "a_dp": 0, "a_mo": 39844, "b_dp": 238000, "b_mo": 34953, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [128000, 37449], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Destinator", "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone) (Quartz White", "srp": 1954000, "a_dp": 0, "a_mo": 40108, "b_dp": 238000, "b_mo": 35223, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [123000, 37739], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)"}, {"family": "Triton", "unit": "Triton GL 2.4D 2WD M/T", "srp": 1266000, "a_dp": 93000, "a_mo": 27371, "b_dp": 288000, "b_mo": 22821, "fuel": null, "flags": "", "a_old": [138000, 26822], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GX 2.4D 2WD A/T", "srp": 1430000, "a_dp": 0, "a_mo": 29799, "b_dp": 193000, "b_mo": 25777, "fuel": null, "flags": "", "a_old": [23000, 30297], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GX 2.4D 2WD A/T (White Diamond)", "srp": 1445000, "a_dp": 0, "a_mo": 30063, "b_dp": 193000, "b_mo": 26048, "fuel": null, "flags": "color variant, SRP differs", "a_old": [23000, 30615], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GX 2.4D 2WD A/T"}, {"family": "Triton", "unit": "Triton GLX 2.4D 2WD M/T", "srp": 1649000, "a_dp": 43000, "a_mo": 35205, "b_dp": 293000, "b_mo": 29725, "fuel": null, "flags": "", "a_old": [103000, 34937], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GLX 2.4D 2WD M/T (White Diamond)", "srp": 1664000, "a_dp": 43000, "a_mo": 35466, "b_dp": 293000, "b_mo": 29996, "fuel": null, "flags": "color variant, SRP differs", "a_old": [98000, 35255], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 2WD M/T"}, {"family": "Triton", "unit": "Triton GLX 2.4D 2WD A/T", "srp": 1735000, "a_dp": 3000, "a_mo": 36675, "b_dp": 258000, "b_mo": 31275, "fuel": null, "flags": "", "a_old": [58000, 36759], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GLX 2.4D 2WD A/T (White Diamond)", "srp": 1750000, "a_dp": 3000, "a_mo": 36938, "b_dp": 258000, "b_mo": 31546, "fuel": null, "flags": "color variant, SRP differs", "a_old": [53000, 37077], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 2WD A/T"}, {"family": "Triton", "unit": "Triton GLS 2.4D 2WD A/T", "srp": 1999000, "a_dp": 3000, "a_mo": 41076, "b_dp": 248000, "b_mo": 36034, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [128000, 38608], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GLS 2.4D 2WD A/T (White Diamond)", "srp": 2014000, "a_dp": 3000, "a_mo": 41342, "b_dp": 248000, "b_mo": 36305, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [128000, 38898], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLS 2.4D 2WD A/T"}, {"family": "Triton", "unit": "Triton GL 2.4D 4WD M/T", "srp": 1292000, "a_dp": 98000, "a_mo": 27836, "b_dp": 293000, "b_mo": 23290, "fuel": null, "flags": "", "a_old": [138000, 27373], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GLX 2.4D 4WD M/T", "srp": 1949000, "a_dp": 88000, "a_mo": 41751, "b_dp": 383000, "b_mo": 35133, "fuel": null, "flags": "", "a_old": [153000, 41293], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton GLX 2.4D 4WD M/T (White Diamond)", "srp": 1964000, "a_dp": 88000, "a_mo": 41876, "b_dp": 378000, "b_mo": 35403, "fuel": null, "flags": "color variant, SRP differs", "a_old": [148000, 41611], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton GLX 2.4D 4WD M/T"}, {"family": "Triton", "unit": "Triton Athlete 2.4D 4WD A/T", "srp": 2359000, "a_dp": 0, "a_mo": 48438, "b_dp": 288000, "b_mo": 42524, "fuel": null, "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [148000, 45561], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Triton", "unit": "Triton Athlete 2.4D 4WD A/T (White Diamond)", "srp": 2374000, "a_dp": 0, "a_mo": 48702, "b_dp": 288000, "b_mo": 42794, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier", "a_old": [148000, 45851], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Triton Athlete 2.4D 4WD A/T"}, {"family": "Montero Sport", "unit": "Montero Sport GLX 2.4D 2WD M/T", "srp": 1568000, "a_dp": 0, "a_mo": 30284, "b_dp": 80000, "b_mo": 28265, "fuel": null, "flags": "20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)", "a_old": [80000, 28265], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from data.py Zero DP monthly (B row inconsistent, CONFIRM)"}, {"family": "Montero Sport", "unit": "Montero Sport GLX 2.4D 2WD M/T (White Diamond)", "srp": 1583000, "a_dp": 0, "a_mo": 30574, "b_dp": 80000, "b_mo": 28535, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 30% MMFP tier; Option A = Option B (no lower tier >₱13K)", "a_old": [80000, 28535], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from data.py Zero DP monthly (B row inconsistent, CONFIRM) ; DP from base variant Montero Sport GLX 2.4D 2WD M/T"}, {"family": "Montero Sport", "unit": "Montero Sport GLS 2.4D 2WD A/T", "srp": 1927000, "a_dp": 28000, "a_mo": 40997, "b_dp": 318000, "b_mo": 34736, "fuel": null, "flags": "", "a_old": [93000, 40827], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Montero Sport", "unit": "Montero Sport GLS 2.4D 2WD A/T (White Diamond)", "srp": 1942000, "a_dp": 28000, "a_mo": 41386, "b_dp": 323000, "b_mo": 35007, "fuel": null, "flags": "color variant, SRP differs", "a_old": [93000, 41145], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport GLS 2.4D 2WD A/T"}, {"family": "Montero Sport", "unit": "Montero Sport Black Series 2.4D 2WD A/T", "srp": 2190000, "a_dp": 88000, "a_mo": 46829, "b_dp": 418000, "b_mo": 39477, "fuel": null, "flags": "", "a_old": [158000, 46399], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Montero Sport", "unit": "Montero Sport Black Series 2.4D 2WD A/T (White Diamond)", "srp": 2205000, "a_dp": 88000, "a_mo": 46957, "b_dp": 413000, "b_mo": 39748, "fuel": null, "flags": "color variant, SRP differs", "a_old": [158000, 46717], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport Black Series 2.4D 2WD A/T"}, {"family": "Montero Sport", "unit": "Montero Sport Black Series 2.4D 4WD A/T", "srp": 2530000, "a_dp": 133000, "a_mo": 53931, "b_dp": 503000, "b_mo": 45606, "fuel": null, "flags": "", "a_old": [208000, 53602], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Montero Sport", "unit": "Montero Sport Black Series 2.4D 4WD A/T (White Diamond)", "srp": 2545000, "a_dp": 133000, "a_mo": 54190, "b_dp": 503000, "b_mo": 45877, "fuel": null, "flags": "color variant, SRP differs", "a_old": [203000, 53920], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Montero Sport Black Series 2.4D 4WD A/T"}, {"family": "L300", "unit": "L300 CAB & CHASIS 2.2D M/T", "srp": 829000, "a_dp": 0, "a_mo": 17800, "b_dp": 133000, "b_mo": 14944, "fuel": null, "flags": "", "a_old": [48000, 17564], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "L300", "unit": "L300 FB BODY WITH SINGLE AC 2.2D M/T", "srp": 1012000, "a_dp": 0, "a_mo": 21617, "b_dp": 158000, "b_mo": 18242, "fuel": null, "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)", "a_old": [53000, 21441], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "L300", "unit": "L300 FB BODY WITHDUAL AC 2.2D M/T", "srp": 1039000, "a_dp": 0, "a_mo": 22214, "b_dp": 163000, "b_mo": 18729, "fuel": 20000, "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱53,000)", "a_old": [58000, 22013], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Versa Van", "unit": "Versa Van GLX 2.5D 2WD M/T", "srp": 1749000, "a_dp": 38000, "a_mo": 36059, "b_dp": 253000, "b_mo": 31528, "fuel": null, "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱48,000)", "a_old": [68000, 37055], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Versa Van", "unit": "Versa Van GLX 2.5D 2WD M/T (White Diamond)", "srp": 1764000, "a_dp": 38000, "a_mo": 36323, "b_dp": 253000, "b_mo": 31798, "fuel": null, "flags": "color variant, SRP differs; p1 promo DP matches PSB not MMFP (MMFP 20% = ₱43,000)", "a_old": [63000, 37373], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Versa Van GLX 2.5D 2WD M/T"}, {"family": "Versa Van", "unit": "Versa Van GLX 2.5D 2WD M/T (UPGRADED) 18 SEATER", "srp": 1764000, "a_dp": 23000, "a_mo": 36397, "b_dp": 243000, "b_mo": 31798, "fuel": null, "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱33,000)", "a_old": [53000, 37373], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Outlander PHEV", "unit": "OUTLANDER PHEV GT 2.4G AWD", "srp": 2848000, "a_dp": 68000, "a_mo": 59098, "b_dp": 433000, "b_mo": 51339, "fuel": null, "flags": "p1 promo DP matches PSB not MMFP (MMFP 20% = ₱93,000); Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer", "a_old": [123000, 60340], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"}, {"family": "Outlander PHEV", "unit": "OUTLANDER PHEV GT 2.4G AWD (White)", "srp": 2863000, "a_dp": 68000, "a_mo": 59978, "b_dp": 458000, "b_mo": 51609, "fuel": null, "flags": "color variant, SRP differs; 20% promo DP ₱0 ≤ ₱13K → Option A uses 25% MMFP tier; Outlander sheet anomalies (negative/odd bank DPs; White p1 DP ₱0) — confirm with dealer", "a_old": [288000, 55295], "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant OUTLANDER PHEV GT 2.4G AWD"}], "families": [{"family": "Mirage Hatchback", "slug": "mirage", "name": "Mirage"}, {"family": "Mirage G4", "slug": "mirage-g4", "name": "Mirage G4"}, {"family": "Xpander", "slug": "xpander", "name": "Xpander"}, {"family": "Xpander Cross", "slug": "xpander-cross", "name": "Xpander Cross"}, {"family": "Xforce", "slug": "xforce", "name": "Xforce"}, {"family": "Destinator", "slug": "destinator", "name": "Destinator"}, {"family": "Triton", "slug": "triton", "name": "Triton"}, {"family": "Montero Sport", "slug": "montero-sport", "name": "Montero Sport"}, {"family": "L300", "slug": "l300", "name": "L300"}, {"family": "Versa Van", "slug": "versa-van", "name": "Versa Van"}, {"family": "Outlander PHEV", "slug": "outlander-phev", "name": "Outlander PHEV"}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const ORIG = JSON.parse(JSON.stringify(DATA));
+const ENDPOINT = "/api/site-update";
+function $(id){ return document.getElementById(id); }
+function toast(msg, ok){
+  const t=$("toast"); t.textContent=msg; t.className="toast on"+(ok?" ok":" warn");
+  clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("on"), 5000);
+}
+function lines(id){ return $(id).value.split(/\n/).map(s=>s.trim()).filter(Boolean); }
+function fillSite(){
+  const s=DATA.site, p=s.promo||{}, l=s.promo_labels||{};
+  $("phone_display").value=s.phone_display||"";
+  $("phone_e164").value=s.phone_e164||"";
+  $("email").value=s.email||"";
+  $("hours").value=s.hours||"";
+  $("hours_open").value=s.hours_open||"";
+  $("hours_close").value=s.hours_close||"";
+  $("facebook").value=s.facebook||"";
+  $("messenger").value=s.messenger||"";
+  $("service_area").value=s.service_area||"";
+  $("office_note").value=s.office_note||"";
+  $("application_form_app").value=s.application_form_app||"";
+  $("promo_year").value=p.year||"";
+  $("promo_month").value=p.month||"";
+  $("promo_updated").value=p.updated||"";
+  $("label_a").value=l.lowest_dp||"Lowest DP";
+  $("label_b").value=l.lowest_monthly||"Lowest Monthly";
+  $("label_a_tl").value=l.lowest_dp_tl||"";
+  $("label_b_tl").value=l.lowest_monthly_tl||"";
+  $("inclusions").value=(s.inclusions||[]).join("\n");
+  $("freebies").value=(s.freebies||[]).join("\n");
+}
+function collectSite(){
+  const s=JSON.parse(JSON.stringify(DATA.site));
+  s.phone_display=$("phone_display").value.trim();
+  s.phone_e164=$("phone_e164").value.trim();
+  s.email=$("email").value.trim();
+  s.hours=$("hours").value.trim();
+  s.hours_open=$("hours_open").value.trim();
+  s.hours_close=$("hours_close").value.trim();
+  s.facebook=$("facebook").value.trim();
+  s.messenger=$("messenger").value.trim();
+  s.service_area=$("service_area").value.trim();
+  s.office_note=$("office_note").value.trim();
+  s.application_form_app=$("application_form_app").value.trim();
+  s.promo={year:+$("promo_year").value, month:+$("promo_month").value, updated:$("promo_updated").value.trim()};
+  s.promo_labels={
+    lowest_dp:$("label_a").value.trim(),
+    lowest_monthly:$("label_b").value.trim(),
+    lowest_dp_tl:$("label_a_tl").value.trim(),
+    lowest_monthly_tl:$("label_b_tl").value.trim()
+  };
+  s.inclusions=lines("inclusions");
+  s.freebies=lines("freebies");
+  s.models={};
+  DATA.models.forEach(m=>{
+    s.models[m.slug]={name:m.name,cat:m.cat,blurb:m.blurb,who:m.who,specs:m.specs};
+  });
+  return s;
+}
+function num(v){ if(v===""||v==null) return null; return Number(String(v).replace(/,/g,"")); }
+function familyOf(slug){ return (DATA.families.find(f=>f.slug===slug)||{}).family; }
+function variantsFor(slug){ return DATA.optionAB.filter(r=>r.family===familyOf(slug)); }
+function renderSelect(){
+  $("model").innerHTML=DATA.models.map(m=>`<option value="${m.slug}">${m.name}</option>`).join("");
+}
+function renderModel(){
+  const slug=$("model").value;
+  const m=DATA.models.find(x=>x.slug===slug); if(!m) return;
+  const specs=m.specs.map((sp,i)=>`<div class="spec" data-i="${i}">
+    <input data-k="0" value="${esc(sp[0]||"")}" placeholder="Spec">
+    <input data-k="1" value="${esc(sp[1]||"")}" placeholder="Detail">
+    <button class="btn g" type="button" data-del="${i}">Remove</button></div>`).join("");
+  const rows=variantsFor(slug).map((r,i)=>{
+    const idx=DATA.optionAB.indexOf(r);
+    return `<tr data-idx="${idx}">
+      <td>${esc(r.unit)}</td>
+      <td><input data-f="srp" inputmode="numeric" value="${r.srp??""}"></td>
+      <td><input data-f="a_dp" inputmode="numeric" value="${r.a_dp??""}"></td>
+      <td><input data-f="a_mo" inputmode="numeric" value="${r.a_mo??""}"></td>
+      <td><input data-f="b_dp" inputmode="numeric" value="${r.b_dp??""}"></td>
+      <td><input data-f="b_mo" inputmode="numeric" value="${r.b_mo??""}"></td>
+      <td><input data-f="fuel" inputmode="numeric" value="${r.fuel??""}"></td>
+    </tr>`;
+  }).join("");
+  $("modelbox").innerHTML=`
+    <div class="grid">
+      <div><label>Model name</label><input id="m_name" value="${esc(m.name)}"></div>
+      <div><label>Type</label><input id="m_cat" value="${esc(m.cat)}"></div>
+    </div>
+    <div style="margin-top:12px"><label>Short description</label><textarea id="m_blurb">${esc(m.blurb)}</textarea></div>
+    <div style="margin-top:12px"><label>Who it is for</label><textarea id="m_who">${esc(m.who)}</textarea></div>
+    <p style="margin:16px 0 8px"><b>Key specs</b></p>
+    <div id="specs">${specs}</div>
+    <button class="btn g" type="button" id="addspec">Add spec</button>
+    <p style="margin:18px 0 8px"><b>SRP and promo figures</b></p>
+    <div class="wide"><div class="tw"><table><thead><tr>
+      <th>Variant</th><th>SRP</th><th>Lowest DP</th><th>Lowest DP monthly</th>
+      <th>Lowest Monthly DP</th><th>Lowest Monthly amort</th><th>Fuel points</th>
+    </tr></thead><tbody id="vtab">${rows}</tbody></table></div></div>`;
+  $("m_name").oninput=()=>{m.name=$("m_name").value};
+  $("m_cat").oninput=()=>{m.cat=$("m_cat").value};
+  $("m_blurb").oninput=()=>{m.blurb=$("m_blurb").value};
+  $("m_who").oninput=()=>{m.who=$("m_who").value};
+  $("specs").oninput=e=>{
+    const wrap=e.target.closest(".spec"); if(!wrap) return;
+    const i=+wrap.dataset.i, k=+e.target.dataset.k;
+    m.specs[i]=[wrap.querySelector('[data-k="0"]').value, wrap.querySelector('[data-k="1"]').value];
+  };
+  $("specs").onclick=e=>{
+    if(e.target.dataset.del==null) return;
+    m.specs.splice(+e.target.dataset.del,1); renderModel();
+  };
+  $("addspec").onclick=()=>{m.specs.push(["",""]); renderModel();};
+  $("vtab").oninput=e=>{
+    const tr=e.target.closest("tr"); if(!tr) return;
+    const r=DATA.optionAB[+tr.dataset.idx];
+    const f=e.target.dataset.f;
+    r[f]=num(e.target.value);
+  };
+}
+function esc(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function collect(){ return {site:collectSite(), optionAB:DATA.optionAB}; }
+function summarize(){
+  const now=collect(), old={site:ORIG.site, optionAB:ORIG.optionAB};
+  const changes=[];
+  function walk(a,b,path){
+    if(typeof a!=="object" || a===null || typeof b!=="object" || b===null){
+      if(JSON.stringify(a)!==JSON.stringify(b)) changes.push(path+": "+fmt(b)+" → "+fmt(a));
+      return;
+    }
+    if(Array.isArray(a) && Array.isArray(b) && a.every(x=>typeof x!=="object") && b.every(x=>typeof x!=="object")){
+      if(JSON.stringify(a)!==JSON.stringify(b)) changes.push(path+": "+b.join("; ")+" → "+a.join("; "));
+      return;
+    }
+    const keys=new Set([...Object.keys(a||{}),...Object.keys(b||{})]);
+    keys.forEach(k=>walk(a?a[k]:undefined, b?b[k]:undefined, path?path+"."+k:k));
+  }
+  walk(now.site, old.site, "site");
+  now.optionAB.forEach((r,i)=>{
+    const o=old.optionAB[i]||{};
+    ["srp","a_dp","a_mo","b_dp","b_mo","fuel"].forEach(k=>{
+      if(r[k]!==o[k]) changes.push((r.unit||("row "+i))+" "+k+": "+fmt(o[k])+" → "+fmt(r[k]));
+    });
+  });
+  return changes;
+}
+function fmt(v){ return v==null||v==="" ? "(empty)" : String(v); }
+function showDiff(){
+  const changes=summarize();
+  $("diff").textContent=changes.length?changes.join("\n"):"No changes yet.";
+  return changes;
+}
+async function publish(){
+  const changes=showDiff();
+  if(!changes.length){ toast("There are no changes to publish."); return; }
+  if(!confirm("Publish "+changes.length+" change"+(changes.length===1?"":"s")+" to the live website?")) return;
+  const payload=collect();
+  payload.note="Editor publish";
+  if(!ENDPOINT){
+    toast("The editor is ready. Publishing to the live website will be connected when this page goes live.");
+    return;
+  }
+  try{
+    const key=($("publish_key").value||"").trim();
+    if(!key){ toast("Enter your publish key first."); return; }
+    try{ localStorage.setItem("mitsu_publish_key", key); }catch(e){}
+    const res=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","X-Publish-Key":key},body:JSON.stringify(payload),credentials:"include"});
+    const text=await res.text();
+    if(!res.ok) throw new Error(text||res.status);
+    toast("Published. The website will refresh in about one to two minutes.", true);
+  }catch(err){
+    toast("Could not publish: "+err.message);
+  }
+}
+try{ const saved=localStorage.getItem("mitsu_publish_key"); if(saved) $("publish_key").value=saved; }catch(e){}
+fillSite();
+renderSelect();
+if(DATA.models[0]) $("model").value=DATA.models[0].slug;
+renderModel();
+$("model").onchange=renderModel;
+$("review").onclick=()=>{ showDiff(); document.getElementById("diff").scrollIntoView({behavior:"smooth"}); };
+$("publish").onclick=publish;
+["phone_display","phone_e164","email","hours","hours_open","hours_close","facebook","messenger","service_area","office_note","application_form_app","promo_year","promo_month","promo_updated","label_a","label_b","label_a_tl","label_b_tl","inclusions","freebies"].forEach(id=>{
+  $(id).addEventListener("input", ()=>showDiff());
+});
+</script>
+<script>window.SITECHAT_ON=false;window.SITECHAT_V="02ed7a3a"</script><script src="/assets/sitechat.js?v=688fe10a" defer></script><script src="/assets/track.js?v=16aebe62" defer></script><a class="fmsg" id="fmsg" href="https://m.me/504759566043148" target="_blank" rel="noopener" data-msgr="floating" aria-label="Chat with Richard on Messenger" title="Chat with Richard on Messenger"><svg viewBox="0 0 36 36" aria-hidden="true" focusable="false"><path fill="#fff" d="M18 2.5C9.3 2.5 2.5 8.9 2.5 17.1c0 4.3 1.8 8 4.6 10.6.2.2.4.6.4.9l.1 2.6c0 .8.9 1.4 1.7 1l2.9-1.3c.2-.1.5-.1.8-.1 1.6.4 3.2.7 5 .7 8.7 0 15.5-6.4 15.5-14.6S26.7 2.5 18 2.5zm9.3 11.6-4.6 7.2c-.7 1.2-2.3 1.4-3.3.7l-3.6-2.7a.9.9 0 0 0-1.1 0l-4.9 3.7c-.7.5-1.5-.3-1.1-1l4.6-7.2c.7-1.2 2.3-1.4 3.3-.7l3.6 2.7c.3.3.8.3 1.1 0l4.9-3.7c.7-.5 1.5.3 1.1 1z"/></svg></a><script>(function(){var f=document.getElementById("fmsg");if(!f)return;var q="button[type=submit],input[type=submit],form button.btn,.af-big,.la-fina,.st-err,#st-r .btn";function c(){var r=f.getBoundingClientRect(),h=0;document.querySelectorAll(q).forEach(function(e){if(h||!e.offsetParent)return;var b=e.getBoundingClientRect();if(!(b.right<r.left-8||b.left>r.right+8||b.bottom<r.top-8||b.top>r.bottom+8))h=1});f.classList.toggle("fmsg-off",!!h)}var t;function s(){if(!t)t=requestAnimationFrame(function(){t=0;c()})}addEventListener("scroll",s,{passive:true});addEventListener("resize",s);document.addEventListener("click",function(){setTimeout(c,50)});setTimeout(c,0);addEventListener("load",c);try{new ResizeObserver(s).observe(document.body)}catch(_){}setInterval(c,1000)})()</script><link rel="stylesheet" href="/assets/push.css?v=2b9344d7" media="print" onload="this.media='all'"><script>window.PUSH_APP_ID="1120476f-b2bb-472f-abc1-386890ccc432"</script><script src="/assets/push.js?v=1e39a4de" defer></script></body>
+</html>

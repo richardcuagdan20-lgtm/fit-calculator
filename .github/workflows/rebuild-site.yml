@@ -1,0 +1,58 @@
+name: Rebuild site after editor update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_src/site.json"
+      - "_src/optionAB_oct2026.json"
+      - ".github/workflows/rebuild-site.yml"
+  repository_dispatch:
+    types: [site-update]
+  workflow_dispatch:
+    inputs:
+      note:
+        description: "What changed"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-site
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply editor payload
+        if: github.event_name == 'repository_dispatch'
+        env:
+          CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: python3 _src/apply_payload.py
+      - name: Install build tools
+        run: pip install pillow
+      - name: Rebuild pages
+        run: python3 _src/build.py
+      - name: Commit published pages
+        env:
+          NOTE: ${{ github.event.client_payload.note || inputs.note }}
+        run: |
+          git config user.name "website-editor"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No website changes to publish"
+            exit 0
+          fi
+          msg="Publish website update"
+          if [ -n "$NOTE" ]; then msg="$msg: $NOTE"; fi
+          git commit -m "$msg"
+          git push

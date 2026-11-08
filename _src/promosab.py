@@ -1,4 +1,5 @@
 from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # promo month (data.py)
+from data import LABEL_LOWEST_DP as LDA, LABEL_LOWEST_MO as LDB, LABEL_LOWEST_DP_TL as LDAT, LABEL_LOWEST_MO_TL as LDBT
 # /promos/ Option A / Option B (2026-10-29, Richard): every unit shows two options.
 # Option A = lowest DP + monthly (LOCKED until the visitor unlocks with name/mobile/email+consent; one unlock reveals all units).
 # Option B = 30% DP + low monthly, public (same figures as the saved replies). Source: /workspace/loanapp/pricelist/optionAB.json (Oct 2026).
@@ -77,17 +78,17 @@ def build(page,e,f,R,hero_cta,ALLIN_HTML,FREE_HTML,NOTE,MSG):
         trs=""
         for r in vs:
             i=len(A); A.append([r["a_dp"],r["a_mo"]]); n=NICE.get(r["unit"],r["unit"].replace("XFORCE","Xforce"))
-            fu=f'<span class="fuel"><span class="en">+ {FUEL[r["unit"]]:,} fuel points</span><span class="tl">+ {FUEL[r["unit"]]:,} fuel points</span></span>' if r["unit"] in FUEL else ""
+            fu=f'<span class="fuel"><span class="en">+ {int(r["fuel"]):,} fuel points</span><span class="tl">+ {int(r["fuel"]):,} fuel points</span></span>' if r.get("fuel") else ""
             iq,iqp=inq_side(MSG,"inquire-"+uslug(n),e(n),i,bfig(r))
             trs+=f'''<tr><th scope="row"><span class="ab-vn">{e(n)}</span>{fu}</th><td class="ab-srp"><span class="ab-l">SRP </span>{f(r["srp"])}</td>
-<td class="ab-ca" data-a="{i}"><span class="ab-l">Option A</span>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
-<td class="ab-cb"><span class="ab-l">Option B</span>{bcell(r)}</td><td class="ab-ci">{iq}</td></tr><tr class="ab-iqr"><td colspan="5">{iqp}</td></tr>'''
+<td class="ab-ca" data-a="{i}"><span class="ab-l">{LDA}</span>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock</span><span class="tl">🔒 I-unlock</span></button></td>
+<td class="ab-cb"><span class="ab-l">{LDB}</span>{bcell(r)}</td><td class="ab-ci">{iq}</td></tr><tr class="ab-iqr"><td colspan="5">{iqp}</td></tr>'''
         im=MODELIMG.get(slug); ph=""
         if im:
             EAG[0]+=1; w,h=__import__("PIL.Image",fromlist=["x"]).open(f"{R}/assets/img/{im}.webp").size
             iv=hashlib.md5(open(f"{R}/assets/img/{im}.webp","rb").read()).hexdigest()[:8]
             ph=f'<div class="ab-ph"><img src="/assets/img/{im}.webp?v={iv}" width="{w}" height="{h}" alt="Mitsubishi {e(name)}" {'fetchpriority="high"' if EAG[0]==1 else 'loading="lazy"'} decoding="async"></div>'
-        tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></th><th scope="col">Option B <small class="en">· Low monthly</small><small class="tl">· Mababang monthly</small></th><th scope="col" class="ab-cih"><span class="en">Inquire</span><span class="tl">Inquire</span></th></tr></thead><tbody>{trs}</tbody></table>
+        tbl=f'''<div class="ab-tw"><table class="ab-t"><thead><tr><th scope="col"><span class="en">Variant</span><span class="tl">Variant</span></th><th scope="col">SRP</th><th scope="col"><span class="en">{LDA}</span><span class="tl">{LDAT}</span></th><th scope="col"><span class="en">{LDB}</span><span class="tl">{LDBT}</span></th><th scope="col" class="ab-cih"><span class="en">Inquire</span><span class="tl">Inquire</span></th></tr></thead><tbody>{trs}</tbody></table>
 <p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p><p class="row"><a class="btn sm ab-pq" href="/loan-assessment/"><span class="en">See if you're Pre-Qualified in 2 minutes →</span><span class="tl">Alamin kung Pre-Qualified ka na ngayon →</span></a> <a class="btn sm ghost dk" href="/budgetcalculator/">Compare with my own DP</a></p></div>'''
         secs+=f'<section class="pm card pad ab-m{"" if ph else " ab-np"}" id="{slug}"><h2>{e(name)}</h2>{rl}<div class="ab-mg">{ph}{tbl}</div></section>'
         CARSEC[slug]=(name,rl,tbl,[A[k] for k in range(len(A)-len(vs),len(A))])
@@ -134,36 +135,39 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <script>try{if(localStorage.getItem("promos_optA_unlocked")==="1")document.documentElement.classList.add("ab-open")}catch(_){}</script>'''
     form=f'''<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">
 <div class="ab-lockonly"><div class="ab-fh"><h2 class="h3" style="margin:0 0 6px"><span class="en">Unlock the lowest DP</span><span class="tl">I-unlock ang lowest DP</span></h2>
-<p class="muted" style="margin:0 0 12px"><span class="en">Leave your details once to see Option A on every unit.</span><span class="tl">Iwan ang details mo isang beses para makita ang Option A ng bawat unit.</span></p></div>
+<p class="muted" style="margin:0 0 12px"><span class="en">Leave your details once to see {LDA} on every unit.</span><span class="tl">Iwan ang details mo isang beses para makita ang {LDA} ng bawat unit.</span></p></div>
 <form id="ab-form" novalidate><div class="ab-fg">
 <div class="fld"><label for="ab-name"><span class="en">Full name</span><span class="tl">Buong pangalan</span></label><input id="ab-name" autocomplete="name" required><p class="ferr" id="e_ab-name" hidden><span class="en">Please enter your name.</span><span class="tl">Pakilagay ang pangalan mo.</span></p></div>
 <div class="fld"><label for="ab-mobile">Mobile number</label><input id="ab-mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><p class="ferr" id="e_ab-mobile" hidden><span class="en">Enter a valid mobile number (09XXXXXXXXX).</span><span class="tl">Maglagay ng tamang mobile number (09XXXXXXXXX).</span></p></div>
 <div class="fld"><label for="ab-email">Email</label><input id="ab-email" type="email" autocomplete="email" required><p class="ferr" id="e_ab-email" hidden><span class="en">Enter a valid email.</span><span class="tl">Maglagay ng tamang email.</span></p></div></div>
 <label class="chk"><input type="checkbox" id="ab-consent"><span><span class="en">I agree to be contacted by Richard Cuagdan, authorized Mitsubishi sales executive, about these promos, and to the <a href="/privacy/">privacy policy</a>.</span><span class="tl">Pumapayag akong i-contact ni Richard Cuagdan, authorized Mitsubishi sales executive, tungkol sa promos na ito, at sa <a href="/privacy/">privacy policy</a>.</span></span></label>
 <p class="ferr" id="e_ab-consent" hidden><span class="en">Please tick the consent box.</span><span class="tl">Paki-check ang consent box.</span></p>
-<button class="btn ab-btn" id="ab-btn" type="submit"><span class="en">Unlock Option A</span><span class="tl">I-unlock ang Option A</span></button>
+<button class="btn ab-btn" id="ab-btn" type="submit"><span class="en">Unlock {LDA}</span><span class="tl">I-unlock ang {LDA}</span></button>
 <p class="muted ab-s" style="margin-top:10px">Pre-qualified, subject to bank approval.</p></form></div>
-<div class="ab-openonly ab-ok" id="ab-ok" aria-live="polite"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b> <span class="en">Richard can send the exact all-in computation for your chosen unit.</span><span class="tl">Puwedeng i-send ni Richard ang eksaktong all-in computation ng unit na gusto mo.</span></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div>
+<div class="ab-openonly ab-ok" id="ab-ok" aria-live="polite"><p style="margin:0"><b><span class="en">{LDA} is unlocked for every unit.</span><span class="tl">Na-unlock na ang {LDA} ng bawat unit.</span></b> <span class="en">Richard can send the exact all-in computation for your chosen unit.</span><span class="tl">Puwedeng i-send ni Richard ang eksaktong all-in computation ng unit na gusto mo.</span></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div>
 </div></div></section>'''
     POP=('<div id="ab-pop" class="abw" hidden><div class="abp-d" role="dialog" aria-modal="true" aria-labelledby="abp-h" aria-describedby="abp-s">'
      '<button type="button" class="abp-x" data-popclose aria-label="Close">×</button>'
      '<h2 id="abp-h"><span class="en">Unlock the Lowest DP Promo, up to Zero DP</span><span class="tl">I-unlock ang Lowest DP Promo, hanggang Zero DP</span></h2>'
-     '<p class="abp-sub" id="abp-s"><span class="en">See Option A (lowest down payment and monthly) on every unit. Subject to bank approval.</span><span class="tl">Makita ang Option A (pinakamababang DP at monthly) ng bawat unit. Subject to bank approval.</span></p>'
+     '<p class="abp-sub" id="abp-s"><span class="en">See {LDA} (lowest down payment and monthly) on every unit. Subject to bank approval.</span><span class="tl">Makita ang {LDA} (pinakamababang DP at monthly) ng bawat unit. Subject to bank approval.</span></p>'
      '<div class="abp-slot">'+form.replace('<section class="sec" id="unlock" style="padding-bottom:0"><div class="w"><div class="card pad ab-box">','<div id="unlock" class="ab-box pm-unl">',1)[:-len('</div></div></section>')]+'</div></div></div></div>')
     TEASER=('<section class="sec" id="unlock-cta" style="padding-bottom:0"><div class="w"><div class="card pad ab-box abw">'
      '<div class="ab-lockonly"><h2 class="h3" style="margin:0 0 6px"><span class="en">Unlock the lowest DP</span><span class="tl">I-unlock ang lowest DP</span></h2>'
-     '<p class="muted" style="margin:0 0 12px"><span class="en">See Option A on every unit, up to Zero DP. Subject to bank approval.</span><span class="tl">Makita ang Option A ng bawat unit, hanggang Zero DP. Subject to bank approval.</span></p>'
-     '<button type="button" class="ab-ul" data-unlock style="max-width:360px"><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>'
-     '<div class="ab-openonly ab-ok"><p style="margin:0"><b><span class="en">Option A is unlocked for every unit.</span><span class="tl">Na-unlock na ang Option A ng bawat unit.</span></b></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div></div></div></section>')
+     '<p class="muted" style="margin:0 0 12px"><span class="en">See {LDA} on every unit, up to Zero DP. Subject to bank approval.</span><span class="tl">Makita ang {LDA} ng bawat unit, hanggang Zero DP. Subject to bank approval.</span></p>'
+     '<button type="button" class="ab-ul" data-unlock style="max-width:360px"><span class="en">🔒 Unlock {LDA}</span><span class="tl">🔒 I-unlock ang {LDA}</span></button></div>'
+     '<div class="ab-openonly ab-ok"><p style="margin:0"><b><span class="en">{LDA} is unlocked for every unit.</span><span class="tl">Na-unlock na ang {LDA} ng bawat unit.</span></b></p><p class="muted ab-s" style="margin:6px 0 0">Pre-qualified, subject to bank approval.</p></div></div></div></section>')
+    def _labs(x):
+        return x.replace('{LDA}',LDA).replace('{LDB}',LDB).replace('{LDAT}',LDAT).replace('{LDBT}',LDBT)
+    POP=_labs(POP); TEASER=_labs(TEASER)
     CARPARTS.update(css=css,form=form,lv=lv,jv=jv,qv=qv,f=f,msg=MSG,pop=POP)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
-<p class="kick">{_PL}</p><h1><span class="en">Mitsubishi Promos This Month in San Jose del Monte (SJDM)</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>Option A</b>, the lowest down payment (unlock to see), and <b>Option B</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>Option A</b>, ang pinakamababang down payment (i-unlock para makita), at <b>Option B</b>, 30% down payment na mas mababa ang monthly.</span></p>
+<p class="kick">{_PL}</p><h1><span class="en">Mitsubishi Promos This Month in San Jose del Monte (SJDM)</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>{LDA}</b>, the lowest down payment (unlock to see), and <b>{LDB}</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>{LDA}</b>, ang pinakamababang down payment (i-unlock para makita), at <b>{LDB}</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
 {TEASER}
 <section class="sec" id="list"><div class="w"><nav class="pnav" aria-label="Jump to model">{" ".join(nav)}</nav>
 {secs}
 <p class="note">{NOTE}</p><p class="muted"><span class="en">Other down payment options: </span><span class="tl">Ibang DP options: </span><a href="{MSG}" rel="noopener" data-msgr="promos-other">message Richard on Messenger</a>.</p></div></section>
-<section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and Option A or B</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a> (standard formula: (SRP − DP) × add-on rate ÷ months; 5 years at 1.55).</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
+<section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and {LDA} or {LDB}</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a> (standard formula: (SRP − DP) × add-on rate ÷ months; 5 years at 1.55).</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section></div>
 {POP}<script type="text/plain" id="ab-a">{blob}</script>
 <script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
@@ -205,9 +209,9 @@ def inject_cars(R):
             u=byk.get(key(CARD_ALIAS.get(vu,vu))); n=N[0]; N[0]+=1
             if u:
                 r=rs[u]; i=len(A); A.append([r["a_dp"],r["a_mo"]])
-                fu=f'<span class="fuel"><span class="en">+ {FUEL[u]:,} fuel points</span><span class="tl">+ {FUEL[u]:,} fuel points</span></span>' if u in FUEL else ""
-                inner=(f'{rl}<div class="ab-o ab-a" data-a="{i}"><p class="ab-k">Option A <small class="en">· Lowest DP</small><small class="tl">· Pinakamababang DP</small></p>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock Option A</span><span class="tl">🔒 I-unlock ang Option A</span></button></div>\n'
-                 f'<div class="ab-o ab-b"><p class="ab-k">Option B <small class="en">· 30% DP, low monthly</small><small class="tl">· 30% DP, mababang monthly</small></p>{bcell(r)}</div>{fu}\n'
+                fu=f'<span class="fuel"><span class="en">+ {int(r.get("fuel") or 0):,} fuel points</span><span class="tl">+ {int(r.get("fuel") or 0):,} fuel points</span></span>' if r.get("fuel") else ""
+                inner=(f'{rl}<div class="ab-o ab-a" data-a="{i}"><p class="ab-k"><span class="en">{LDA}</span><span class="tl">{LDAT}</span></p>{ZT if r["a_dp"]==0 else ""}<span class="ab-dp">DP <b class="ab-x">₱••,•••</b></span><span class="ab-mo"><b class="ab-x">₱••,•••</b>/mo</span><button type="button" class="ab-ul" data-unlock><span class="en">🔒 Unlock {LDA}</span><span class="tl">🔒 I-unlock ang {LDA}</span></button></div>\n'
+                 f'<div class="ab-o ab-b"><p class="ab-k"><span class="en">{LDB}</span><span class="tl">{LDBT}</span></p>{bcell(r)}</div>{fu}\n'
                  '<p class="muted ab-s"><span class="en">All-in, 60 months. Pre-qualified, subject to bank approval.</span><span class="tl">All-in, 60 months. Pre-qualified, subject to bank approval.</span></p>'
                  +inq(CARPARTS["msg"],"inquire-"+slug+"-"+uslug(vu),H.escape(vu),i,bfig(r),"ab-iq vp-iq"))
                 REPORT.append([slug,vu,u,r["srp"],r["a_dp"] is not None,r["b_dp"]])

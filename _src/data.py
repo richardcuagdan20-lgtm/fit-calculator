@@ -1,12 +1,28 @@
 D="https://www.mitsubishi-sjdm.com"
-FB="https://www.facebook.com/504759566043148"
-MSG="https://m.me/504759566043148"
+import json as _json, os as _os, re as _re, calendar as _cal
+SITE=_json.load(open(_os.path.join(_os.path.dirname(__file__),"site.json")))
+FB=SITE.get("facebook") or "https://www.facebook.com/504759566043148"
+MSG=SITE.get("messenger") or "https://m.me/504759566043148"
+TEL=SITE.get("phone_e164") or "+639542911201"
+TELD=SITE.get("phone_display") or "0954 291 1201"
+EMAIL=SITE.get("email") or "richard.cuagdan20@gmail.com"
+HOURS=SITE.get("hours") or "Monday to Saturday, 8:00 AM to 5:00 PM"
+HOURS_OPEN=SITE.get("hours_open") or "08:00"
+HOURS_CLOSE=SITE.get("hours_close") or "17:00"
+OFFICE_NOTE=SITE.get("office_note") or ""
+SERVICE_AREA=SITE.get("service_area") or "Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions."
+APP_FORM=SITE.get("application_form_app") or "https://richard-mitsu-application-form.grok.me"
 SITECHAT=False  # SHELVED 2026-10-29 (Messenger is the main chat route). Own site-wide chat bubble (needs webhook v8). One-line flip: True, then python3 _src/build.py
 # ==== PROMO MONTH (single source of truth) ====
-# Monthly update = change PROMO_YM (and PROMO_UPDATED). Every promo label, title, H1, JSON-LD validity,
-# og image, illustration and PDF reads these. Peso figures live separately in _src/optionAB_oct2026.json.
-import calendar as _cal
-PROMO_YM=(2026,11); PROMO_UPDATED="2026-11-04"
+# Monthly update = change site.json promo.year / promo.month / promo.updated (or PROMO_YM below as fallback).
+# Peso figures live separately in _src/optionAB_oct2026.json.
+_pr=SITE.get("promo") or {}
+PROMO_YM=(int(_pr.get("year") or 2026), int(_pr.get("month") or 11)); PROMO_UPDATED=str(_pr.get("updated") or "2026-11-04")
+_pl=SITE.get("promo_labels") or {}
+LABEL_LOWEST_DP=_pl.get("lowest_dp") or "Lowest DP"
+LABEL_LOWEST_MO=_pl.get("lowest_monthly") or "Lowest Monthly"
+LABEL_LOWEST_DP_TL=_pl.get("lowest_dp_tl") or "Pinakamababang DP"
+LABEL_LOWEST_MO_TL=_pl.get("lowest_monthly_tl") or "Pinakamababang monthly"
 PROMO_MONTH=_cal.month_name[PROMO_YM[1]]; PROMO_YEAR=str(PROMO_YM[0])
 PROMO_LABEL=f"{PROMO_MONTH} {PROMO_YEAR}"                      # "November 2026"
 PROMO_SHORT=f"{_cal.month_abbr[PROMO_YM[1]]} {PROMO_YEAR}"       # "Nov 2026"
@@ -97,8 +113,16 @@ MODELS=[
   specs=[("Engine","2.5L (2,488 cc) DOHC 16-valve VGS turbo diesel"),("Max power / torque","129 PS / 356 Nm"),("Transmission","5-speed manual"),("Drivetrain","2WD"),("Seating","15 (including driver)"),("Colors","Silver Metallic, White Solid")],
   variants=[V("vvglx","2026 Versa Van GLX 2.5D 2WD M/T",1764000,"vv_glx",P([("₱33K DP",36340),("₱243K DP",31798)],20000,srp=1764000))]),
 ]
-ALLIN=["3 years LTO registration","3 years TPL insurance","1 year comprehensive insurance, rate locked for 3 years","Chattel mortgage","Free labor up to 5,000 km","3 years warranty"]
-FREEBIES=['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain']
+ALLIN=list(SITE.get("inclusions") or ["3 years LTO registration","3 years TPL insurance","1 year comprehensive insurance, rate locked for 3 years","Chattel mortgage","Free labor up to 5,000 km","3 years warranty"])
+FREEBIES=list(SITE.get("freebies") or ['Full tint','Floor mats','Seat cover (fabric seats)','Reverse camera','Early warning device','Basic tools','Umbrella','Microfiber cloth','Keychain'])
+_ovm=SITE.get("models") or {}
+for _m in MODELS:
+    _ov=_ovm.get(_m["slug"]) or {}
+    if _ov.get("blurb"): _m["blurb"]=_ov["blurb"]
+    if _ov.get("who"): _m["who"]=_ov["who"]
+    if _ov.get("cat"): _m["cat"]=_ov["cat"]
+    if _ov.get("name"): _m["name"]=_ov["name"]
+    if _ov.get("specs"): _m["specs"]=[tuple(x) for x in _ov["specs"]]
 NOTE=f"Promo valid for {PROMO_LABEL}, subject to bank approval and change without notice."
 SRPNOTE="SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026), subject to change without notice; freight and handling not included."
 def srp_txt(v): return f(v["srp"]) if v["srp"] else "Ask for price"
@@ -108,7 +132,6 @@ UNITS=[v["n"] for m in MODELS for v in m["variants"]]
 # ---- PROMO SOURCE OF TRUTH (Richard 2026-10-30): every variant's promo opts come from _src/optionAB_oct2026.json
 # opts = [Option A (lowest DP; "Zero DP Promo" when DP is 0), Option B (30% DP, low monthly)], 60 months, subject to bank approval.
 # The older hand-entered "Zero DP / ₱XK DP" pairs are replaced. Fuel points kept as entered above.
-import json as _json, os as _os, re as _re
 _AB=_json.load(open(_os.path.join(_os.path.dirname(__file__),"optionAB_oct2026.json")))
 def _abk(x):
     x={"2026 L300 Dual AC":"L300 FB Body Dual AC 2.2D M/T","2026 Versa Van GLX 2.5D 2WD M/T":"Versa Van GLX 2.5D 2WD M/T"}.get(x,x)
@@ -127,7 +150,10 @@ for _m in MODELS:
         if not _r: AB_UNMATCHED.append(_v["n"]); continue
         _old=_v["promo"] or {}
         _bok=b_ok(_r)  # flagged "confirm" Option B (sheet copy error) -> not published; shown as "Ask for latest"
-        _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"])]+([(dplabel(_r["b_dp"]),_r["b_mo"])] if _bok else []),_old.get("fuel"),srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
+        _fuel=_r["fuel"] if _r.get("fuel") not in (None,"") else _old.get("fuel")
+        if _v["srp"] is not None and _r.get("srp"):
+            _v["srp"]=int(_r["srp"])
+        _v["promo"]=P([(dplabel(_r["a_dp"]),_r["a_mo"])]+([(dplabel(_r["b_dp"]),_r["b_mo"])] if _bok else []),_fuel,srp=_old.get("srp") or (None if _v["srp"] else _r["srp"]))
         _v["ab"]=dict(a_dp=_r["a_dp"],a_mo=_r["a_mo"],b_dp=_r["b_dp"] if _bok else None,b_mo=_r["b_mo"] if _bok else None,srp=_r["srp"])
 # ---- PRICE FRESHNESS (Wave 1, draft): ONE setting for every price badge on hub/model/price pages. Edit here when the November list lands.
 FRESH="Oct 2026 list, November update pending"

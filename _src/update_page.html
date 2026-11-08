@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-PH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Website editor · Mitsubishi SJDM</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--line:#262a33;--tx:#e8eaf0;--mut:#8b92a3;--red:#e60012;--ok:#22c55e;--warn:#f59e0b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,Segoe UI,Roboto,Inter,sans-serif}
+header{position:sticky;top:0;z-index:8;background:rgba(15,17,21,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 18px}
+header h1{margin:0;font-size:17px}
+header p{margin:4px 0 0;color:var(--mut);font-size:13px}
+main{max-width:1100px;margin:0 auto;padding:18px 18px 120px}
+h2{font-size:18px;margin:28px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:block;color:var(--mut);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+input,textarea,select{width:100%;background:#0c0e12;color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+textarea{min-height:110px;resize:vertical}
+.hint{color:var(--mut);font-size:13px;margin:8px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--red);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.btn.g{background:#2a2f3a}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td input{padding:8px 10px}
+.spec{display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;margin:0 0 8px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:rgba(15,17,21,.96);border-top:1px solid var(--line);padding:12px 18px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;z-index:9}
+.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:#232836;border:1px solid var(--line);padding:10px 16px;border-radius:10px;display:none;z-index:20;max-width:min(520px,92vw)}
+.toast.on{display:block}
+.diff{background:#0c0e12;border-radius:10px;padding:12px;max-height:280px;overflow:auto;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap}
+.ok{color:#4ade80}.warn{color:#fbbf24}
+.note{border-left:3px solid var(--warn);padding:8px 12px;background:rgba(245,158,11,.07);border-radius:6px;color:#fcd34d;font-size:13px;margin:0 0 14px}
+@media(max-width:760px){
+  .wide{overflow:auto}
+  table{min-width:720px}
+  .spec{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Website editor</h1>
+  <p>Private page for Richard. Change the details, review them, then publish. The live website updates even if I cannot help that day.</p>
+</header>
+<main>
+  <p class="note">This page is not in the public menu. Bookmark it. Nothing goes live until you press Publish and confirm. Publishing is private: enter your publish key below. It is saved in your vault as “Mitsubishi SJDM publish key”.</p>
+
+  <h2>Publish key</h2>
+  <div class="card">
+    <label for="publish_key">Private publish key</label>
+    <input id="publish_key" type="password" autocomplete="current-password" spellcheck="false">
+    <p class="hint">Only you should have this key. It stays on this device after you type it, so you do not have to re-enter it every time on the same phone or computer.</p>
+  </div>
+
+  <h2>Business details</h2>
+  <div class="card grid">
+    <div><label for="phone_display">Phone (how it appears)</label><input id="phone_display"></div>
+    <div><label for="phone_e164">Phone (tap-to-call)</label><input id="phone_e164" placeholder="+639xxxxxxxxx"></div>
+    <div><label for="email">Email</label><input id="email" type="email"></div>
+    <div><label for="hours_open">Opens (24-hour)</label><input id="hours_open" placeholder="08:00"></div>
+    <div><label for="hours_close">Closes (24-hour)</label><input id="hours_close" placeholder="17:00"></div>
+    <div style="grid-column:1/-1"><label for="hours">Showroom hours</label><input id="hours"></div>
+    <div style="grid-column:1/-1"><label for="facebook">Facebook page</label><input id="facebook"></div>
+    <div style="grid-column:1/-1"><label for="messenger">Messenger link</label><input id="messenger"></div>
+    <div style="grid-column:1/-1"><label for="service_area">Service area / office note in the footer</label><textarea id="service_area"></textarea></div>
+    <div style="grid-column:1/-1"><label for="office_note">Visit note</label><textarea id="office_note"></textarea></div>
+    <div style="grid-column:1/-1"><label for="application_form_app">Application form app</label><input id="application_form_app"></div>
+  </div>
+
+  <h2>Promo month and option names</h2>
+  <div class="card grid">
+    <div><label for="promo_year">Year</label><input id="promo_year" inputmode="numeric"></div>
+    <div><label for="promo_month">Month (1-12)</label><input id="promo_month" inputmode="numeric"></div>
+    <div><label for="promo_updated">Figures updated on</label><input id="promo_updated" placeholder="2026-11-04"></div>
+    <div><label for="label_a">First option name</label><input id="label_a"></div>
+    <div><label for="label_b">Second option name</label><input id="label_b"></div>
+    <div><label for="label_a_tl">First option (Taglish)</label><input id="label_a_tl"></div>
+    <div><label for="label_b_tl">Second option (Taglish)</label><input id="label_b_tl"></div>
+  </div>
+  <p class="hint">These names appear on the Promos page and on each car page. Current names: Lowest DP and Lowest Monthly.</p>
+
+  <h2>Inclusions and freebies</h2>
+  <div class="card grid">
+    <div><label for="inclusions">All-in includes (one per line)</label><textarea id="inclusions"></textarea></div>
+    <div><label for="freebies">Freebies (one per line)</label><textarea id="freebies"></textarea></div>
+  </div>
+
+  <h2>Cars, SRP, and promo figures</h2>
+  <div class="card">
+    <label for="model">Model</label>
+    <select id="model"></select>
+    <div id="modelbox" style="margin-top:14px"></div>
+    <p class="hint">Changing an SRP here also updates that unit on the Promos page. Lowest DP range is computed from the Lowest DP figures you enter.</p>
+  </div>
+
+  <h2>Review changes</h2>
+  <div class="card">
+    <div id="diff" class="diff">No changes yet.</div>
+  </div>
+</main>
+<div class="foot">
+  <button class="btn g" type="button" id="review">Review changes</button>
+  <button class="btn" type="button" id="publish">Publish to website</button>
+</div>
+<div class="toast" id="toast"></div>
+<script id="data" type="application/json">__PAYLOAD__</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const ORIG = JSON.parse(JSON.stringify(DATA));
+const ENDPOINT = "/api/site-update";
+function $(id){ return document.getElementById(id); }
+function toast(msg, ok){
+  const t=$("toast"); t.textContent=msg; t.className="toast on"+(ok?" ok":" warn");
+  clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("on"), 5000);
+}
+function lines(id){ return $(id).value.split(/\n/).map(s=>s.trim()).filter(Boolean); }
+function fillSite(){
+  const s=DATA.site, p=s.promo||{}, l=s.promo_labels||{};
+  $("phone_display").value=s.phone_display||"";
+  $("phone_e164").value=s.phone_e164||"";
+  $("email").value=s.email||"";
+  $("hours").value=s.hours||"";
+  $("hours_open").value=s.hours_open||"";
+  $("hours_close").value=s.hours_close||"";
+  $("facebook").value=s.facebook||"";
+  $("messenger").value=s.messenger||"";
+  $("service_area").value=s.service_area||"";
+  $("office_note").value=s.office_note||"";
+  $("application_form_app").value=s.application_form_app||"";
+  $("promo_year").value=p.year||"";
+  $("promo_month").value=p.month||"";
+  $("promo_updated").value=p.updated||"";
+  $("label_a").value=l.lowest_dp||"Lowest DP";
+  $("label_b").value=l.lowest_monthly||"Lowest Monthly";
+  $("label_a_tl").value=l.lowest_dp_tl||"";
+  $("label_b_tl").value=l.lowest_monthly_tl||"";
+  $("inclusions").value=(s.inclusions||[]).join("\n");
+  $("freebies").value=(s.freebies||[]).join("\n");
+}
+function collectSite(){
+  const s=JSON.parse(JSON.stringify(DATA.site));
+  s.phone_display=$("phone_display").value.trim();
+  s.phone_e164=$("phone_e164").value.trim();
+  s.email=$("email").value.trim();
+  s.hours=$("hours").value.trim();
+  s.hours_open=$("hours_open").value.trim();
+  s.hours_close=$("hours_close").value.trim();
+  s.facebook=$("facebook").value.trim();
+  s.messenger=$("messenger").value.trim();
+  s.service_area=$("service_area").value.trim();
+  s.office_note=$("office_note").value.trim();
+  s.application_form_app=$("application_form_app").value.trim();
+  s.promo={year:+$("promo_year").value, month:+$("promo_month").value, updated:$("promo_updated").value.trim()};
+  s.promo_labels={
+    lowest_dp:$("label_a").value.trim(),
+    lowest_monthly:$("label_b").value.trim(),
+    lowest_dp_tl:$("label_a_tl").value.trim(),
+    lowest_monthly_tl:$("label_b_tl").value.trim()
+  };
+  s.inclusions=lines("inclusions");
+  s.freebies=lines("freebies");
+  s.models={};
+  DATA.models.forEach(m=>{
+    s.models[m.slug]={name:m.name,cat:m.cat,blurb:m.blurb,who:m.who,specs:m.specs};
+  });
+  return s;
+}
+function num(v){ if(v===""||v==null) return null; return Number(String(v).replace(/,/g,"")); }
+function familyOf(slug){ return (DATA.families.find(f=>f.slug===slug)||{}).family; }
+function variantsFor(slug){ return DATA.optionAB.filter(r=>r.family===familyOf(slug)); }
+function renderSelect(){
+  $("model").innerHTML=DATA.models.map(m=>`<option value="${m.slug}">${m.name}</option>`).join("");
+}
+function renderModel(){
+  const slug=$("model").value;
+  const m=DATA.models.find(x=>x.slug===slug); if(!m) return;
+  const specs=m.specs.map((sp,i)=>`<div class="spec" data-i="${i}">
+    <input data-k="0" value="${esc(sp[0]||"")}" placeholder="Spec">
+    <input data-k="1" value="${esc(sp[1]||"")}" placeholder="Detail">
+    <button class="btn g" type="button" data-del="${i}">Remove</button></div>`).join("");
+  const rows=variantsFor(slug).map((r,i)=>{
+    const idx=DATA.optionAB.indexOf(r);
+    return `<tr data-idx="${idx}">
+      <td>${esc(r.unit)}</td>
+      <td><input data-f="srp" inputmode="numeric" value="${r.srp??""}"></td>
+      <td><input data-f="a_dp" inputmode="numeric" value="${r.a_dp??""}"></td>
+      <td><input data-f="a_mo" inputmode="numeric" value="${r.a_mo??""}"></td>
+      <td><input data-f="b_dp" inputmode="numeric" value="${r.b_dp??""}"></td>
+      <td><input data-f="b_mo" inputmode="numeric" value="${r.b_mo??""}"></td>
+      <td><input data-f="fuel" inputmode="numeric" value="${r.fuel??""}"></td>
+    </tr>`;
+  }).join("");
+  $("modelbox").innerHTML=`
+    <div class="grid">
+      <div><label>Model name</label><input id="m_name" value="${esc(m.name)}"></div>
+      <div><label>Type</label><input id="m_cat" value="${esc(m.cat)}"></div>
+    </div>
+    <div style="margin-top:12px"><label>Short description</label><textarea id="m_blurb">${esc(m.blurb)}</textarea></div>
+    <div style="margin-top:12px"><label>Who it is for</label><textarea id="m_who">${esc(m.who)}</textarea></div>
+    <p style="margin:16px 0 8px"><b>Key specs</b></p>
+    <div id="specs">${specs}</div>
+    <button class="btn g" type="button" id="addspec">Add spec</button>
+    <p style="margin:18px 0 8px"><b>SRP and promo figures</b></p>
+    <div class="wide"><table><thead><tr>
+      <th>Variant</th><th>SRP</th><th>Lowest DP</th><th>Lowest DP monthly</th>
+      <th>Lowest Monthly DP</th><th>Lowest Monthly amort</th><th>Fuel points</th>
+    </tr></thead><tbody id="vtab">${rows}</tbody></table></div>`;
+  $("m_name").oninput=()=>{m.name=$("m_name").value};
+  $("m_cat").oninput=()=>{m.cat=$("m_cat").value};
+  $("m_blurb").oninput=()=>{m.blurb=$("m_blurb").value};
+  $("m_who").oninput=()=>{m.who=$("m_who").value};
+  $("specs").oninput=e=>{
+    const wrap=e.target.closest(".spec"); if(!wrap) return;
+    const i=+wrap.dataset.i, k=+e.target.dataset.k;
+    m.specs[i]=[wrap.querySelector('[data-k="0"]').value, wrap.querySelector('[data-k="1"]').value];
+  };
+  $("specs").onclick=e=>{
+    if(e.target.dataset.del==null) return;
+    m.specs.splice(+e.target.dataset.del,1); renderModel();
+  };
+  $("addspec").onclick=()=>{m.specs.push(["",""]); renderModel();};
+  $("vtab").oninput=e=>{
+    const tr=e.target.closest("tr"); if(!tr) return;
+    const r=DATA.optionAB[+tr.dataset.idx];
+    const f=e.target.dataset.f;
+    r[f]=num(e.target.value);
+  };
+}
+function esc(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function collect(){ return {site:collectSite(), optionAB:DATA.optionAB}; }
+function summarize(){
+  const now=collect(), old={site:ORIG.site, optionAB:ORIG.optionAB};
+  const changes=[];
+  function walk(a,b,path){
+    if(typeof a!=="object" || a===null || typeof b!=="object" || b===null){
+      if(JSON.stringify(a)!==JSON.stringify(b)) changes.push(path+": "+fmt(b)+" → "+fmt(a));
+      return;
+    }
+    if(Array.isArray(a) && Array.isArray(b) && a.every(x=>typeof x!=="object") && b.every(x=>typeof x!=="object")){
+      if(JSON.stringify(a)!==JSON.stringify(b)) changes.push(path+": "+b.join("; ")+" → "+a.join("; "));
+      return;
+    }
+    const keys=new Set([...Object.keys(a||{}),...Object.keys(b||{})]);
+    keys.forEach(k=>walk(a?a[k]:undefined, b?b[k]:undefined, path?path+"."+k:k));
+  }
+  walk(now.site, old.site, "site");
+  now.optionAB.forEach((r,i)=>{
+    const o=old.optionAB[i]||{};
+    ["srp","a_dp","a_mo","b_dp","b_mo","fuel"].forEach(k=>{
+      if(r[k]!==o[k]) changes.push((r.unit||("row "+i))+" "+k+": "+fmt(o[k])+" → "+fmt(r[k]));
+    });
+  });
+  return changes;
+}
+function fmt(v){ return v==null||v==="" ? "(empty)" : String(v); }
+function showDiff(){
+  const changes=summarize();
+  $("diff").textContent=changes.length?changes.join("\n"):"No changes yet.";
+  return changes;
+}
+async function publish(){
+  const changes=showDiff();
+  if(!changes.length){ toast("There are no changes to publish."); return; }
+  if(!confirm("Publish "+changes.length+" change"+(changes.length===1?"":"s")+" to the live website?")) return;
+  const payload=collect();
+  payload.note="Editor publish";
+  if(!ENDPOINT){
+    toast("The editor is ready. Publishing to the live website will be connected when this page goes live.");
+    return;
+  }
+  try{
+    const key=($("publish_key").value||"").trim();
+    if(!key){ toast("Enter your publish key first."); return; }
+    try{ localStorage.setItem("mitsu_publish_key", key); }catch(e){}
+    const res=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","X-Publish-Key":key},body:JSON.stringify(payload),credentials:"include"});
+    const text=await res.text();
+    if(!res.ok) throw new Error(text||res.status);
+    toast("Published. The website will refresh in about one to two minutes.", true);
+  }catch(err){
+    toast("Could not publish: "+err.message);
+  }
+}
+try{ const saved=localStorage.getItem("mitsu_publish_key"); if(saved) $("publish_key").value=saved; }catch(e){}
+fillSite();
+renderSelect();
+if(DATA.models[0]) $("model").value=DATA.models[0].slug;
+renderModel();
+$("model").onchange=renderModel;
+$("review").onclick=()=>{ showDiff(); document.getElementById("diff").scrollIntoView({behavior:"smooth"}); };
+$("publish").onclick=publish;
+["phone_display","phone_e164","email","hours","hours_open","hours_close","facebook","messenger","service_area","office_note","application_form_app","promo_year","promo_month","promo_updated","label_a","label_b","label_a_tl","label_b_tl","inclusions","freebies"].forEach(id=>{
+  $(id).addEventListener("input", ()=>showDiff());
+});
+</script>
+</body>
+</html>
