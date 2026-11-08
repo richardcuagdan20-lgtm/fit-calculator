@@ -52,6 +52,8 @@ try{new MutationObserver(function(){wire()}).observe(document.documentElement,{c
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-herocta]');if(!a||!window.rpTrack)return;var p={source:a.getAttribute('data-herocta'),content_name:'hero_view_promos',content_category:'promos'};window.rpTrack('ViewContent',p);window.rpTrack('HeroCTA',p,true)});
 
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[data-brochure]');if(!a)return;try{if(typeof window.gtag==='function')window.gtag('event','brochure_download',{model:a.getAttribute('data-brochure'),link_url:a.href})}catch(_){}},true);
+document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[data-brochure-read]');if(!a)return;try{if(typeof window.gtag==='function')window.gtag('event','brochure_read',{model:a.getAttribute('data-brochure-read'),link_url:a.href})}catch(_){}},true);
+(function(){function ga(ev,p){try{if(typeof window.gtag==='function')window.gtag('event',ev,p)}catch(_){}}function init(){var v=document.querySelector('[data-brochure-view]');if(v)ga('brochure_view',{model:v.getAttribute('data-brochure-view')})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();
 
 /* Wave 1 (draft): funnel events. ViewContent/view_item on [data-vc]; Contact/contact_messenger on [data-track=msg];
    PreQualStart/prequal_start on every link to /loan-assessment/; faq_open on accordion FAQs. */

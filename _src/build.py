@@ -207,7 +207,7 @@ hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, finan
 <p class="sub">Starting SRP per model from the official price list. Tap a model for every variant, or <a href="/promos/">see this month's promo figures</a>, including Zero DP Promo on select units (subject to bank approval). Every unit has two promo options on the <a href="/promos/">promos page</a>.</p>
 <div class="grid g3">{feat}</div>
 <p class="note">{SRPNOTE}</p>
-<p><a class="more" href="/cars/">View all current models →</a> <a class="more" href="/brochures/">Download brochures (PDF) →</a> <a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p>
+<p><a class="more" href="/cars/">View all current models →</a> <a class="more" href="/brochures/">Read brochures (PDF) →</a> <a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p>
 </div></section>
 <section class="sec alt"><div class="w">
 <h2>Why buy from Richard</h2>
@@ -262,16 +262,21 @@ BRO=[("mirage","Mirage","Hatchback","Compact, frugal hatchback built for easy ci
  ("versa-van","Versa Van","15-seater diesel van","A 15-seat diesel van for shuttles, school service and large groups.","13.1 MB","versa-van","Versa Van")]
 BROM={}
 for _k,_n,*_r in BRO: BROM.setdefault(_r[3],[]).append((_k,_n))
+def _bpdf(n):
+    return _BU+n.replace(' ','%20')+'%20Brochure.pdf'
+def _bview(n):
+    raw="https://www.mitsubishi-motors.com.ph/content/dam/mitsubishi-motors-ph/images/brochures/current-brochures/"+n+" Brochure.pdf"
+    return "https://docs.google.com/gview?embedded=true&url="+_up.quote(raw, safe='')
 def bro_link(slug):
     if slug not in BROM: return ""
-    return '<section class="sec"><div class="w"><h2>Official brochure</h2><p>'+" · ".join(f'<a class="more" href="/brochures/#{k}">Download brochure: {e(n)} (PDF) →</a>' for k,n in BROM[slug])+'</p><p class="muted">Brochure SRPs may differ from this month\'s promo. See all <a href="/brochures/">Mitsubishi brochures</a>.</p></div></section>'
+    return '<section class="sec"><div class="w"><h2>Official brochure</h2><p>'+" · ".join(f'<a class="more" href="/brochures/{k}/">Read brochure: {e(n)} →</a>' for k,n in BROM[slug])+'</p><p class="muted">Brochure SRPs may differ from this month\'s promo. See all <a href="/brochures/">Mitsubishi brochures</a>.</p></div></section>'
 
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
  "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
-<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See {_PM} promos</a> <a class="btn ghost dk" href="/brochures/">Download brochures (PDF)</a></p></div></section>''',
+<section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See {_PM} promos</a> <a class="btn ghost dk" href="/brochures/">Read brochures (PDF)</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
 
 from PIL import Image as _PI
@@ -281,15 +286,66 @@ def _bsz(k):
 BROCSS='<style>.bros{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.bcov{display:block;background:#eceef0;border-radius:10px;padding:18px 18px 14px;text-align:center;margin-bottom:10px}.bcov img{display:block;width:100%;max-width:220px;height:auto;margin:0 auto;box-shadow:0 6px 18px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);border-radius:2px}.bcap{font-size:11px;color:#777;margin:6px 0 0}@media(max-width:600px){.bros{grid-template-columns:1fr 1fr;gap:10px}.bros .card{padding:10px}.bcov{padding:10px 10px 8px}.bros .row a{white-space:normal}.bros .btn{display:block;text-align:center}}</style>'
 def _bcov(k,n):
     w,h=_bsz(k)
-    return f'''<a class="bcov" href="{_BU}{n.replace(' ','%20')}%20Brochure.pdf" target="_blank" rel="noopener" data-brochure="{e(n)}"><img src="/assets/brochures/{k}.webp" width="{w}" height="{h}" loading="lazy" decoding="async" alt="Mitsubishi {e(n)} official brochure cover"></a>'''
-cards="".join(f'''<div class="card pad bro" id="{k}">{_bcov(k,n)}<p class="bcap">Cover © Mitsubishi Motors Philippines Corporation</p><p class="kick">{e(c)}</p><h3>Mitsubishi {e(n)}</h3><p class="muted">{e(d)}</p><p class="muted small">PDF, {sz}. Official brochure from Mitsubishi Motors Philippines.</p><p class="row"><a class="btn sm" href="{_BU}{n.replace(' ','%20')}%20Brochure.pdf" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official brochure (PDF)</a></p><p class="row"><a class="more" href="/cars/{ms}/">See current promo →</a> <a class="more" href="/budgetcalculator/">Check my monthly →</a> <a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p></div>''' for k,n,c,d,sz,ms,_ in BRO)
-page("/brochures/","Mitsubishi Brochure Download 2026 | SJDM San Jose del Monte",
- "Mitsubishi brochure download: official PDFs for every 2026 model in the Philippines, plus the current SJDM, San Jose del Monte promo from Richard.",
-f'''<section class="ph"><div class="w"><h1>Mitsubishi brochures Philippines 2026: download the PDF, get the SJDM (San Jose del Monte) promo</h1><p class="lead">Every current Mitsubishi brochure in one place, linked directly to the official PDF files, with the latest all-in promo for each unit one tap away.</p></div></section>
+    return (
+        f'<a class="bcov" href="/brochures/{k}/" data-brochure-read="{e(n)}">'
+        f'<img src="/assets/brochures/{k}.webp" width="{w}" height="{h}" loading="lazy" decoding="async" '
+        f'alt="Mitsubishi {e(n)} official brochure cover"></a>'
+    )
+_card_bits=[]
+for k,n,c,d,sz,ms,_ in BRO:
+    _card_bits.append(
+        f'<div class="card pad bro" id="{k}">{_bcov(k,n)}'
+        f'<p class="bcap">Cover © Mitsubishi Motors Philippines Corporation</p>'
+        f'<p class="kick">{e(c)}</p><h3>Mitsubishi {e(n)}</h3>'
+        f'<p class="muted">{e(d)}</p>'
+        f'<p class="muted small">PDF, {sz}. Official brochure from Mitsubishi Motors Philippines.</p>'
+        f'<p class="row"><a class="btn sm" href="/brochures/{k}/" data-brochure-read="{e(n)}">Read brochure</a> '
+        f'<a class="btn ghost dk sm" href="{_bpdf(n)}" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official PDF</a></p>'
+        f'<p class="row"><a class="more" href="/cars/{ms}/">See current promo →</a> '
+        f'<a class="more" href="/budgetcalculator/">Check my monthly →</a> '
+        f'<a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p></div>'
+    )
+cards="".join(_card_bits)
+page("/brochures/","Mitsubishi Brochures 2026 | SJDM, San Jose del Monte",
+ "Read official Mitsubishi brochures (PDF) for every 2026 model in the Philippines, plus the current SJDM, San Jose del Monte promo from Richard.",
+f'''<section class="ph"><div class="w"><h1>Mitsubishi brochures Philippines 2026: read the PDF, get the SJDM (San Jose del Monte) promo</h1><p class="lead">Every current Mitsubishi brochure in one place. Read the official PDF here, then check the latest all-in promo for each unit.</p></div></section>
 <section class="sec"><div class="w"><h2>Brochure vs. current promo</h2><p>Brochures cover features, specs, colors and variants. They do not reflect this month\'s promos, so any SRP printed in a brochure may differ from the current price and promo package. For today\'s figures, ask for the latest <b>Option A</b> (lowest down payment) or <b>Option B</b> (30% down payment, lower monthly) for your unit. Pre-qualified, subject to bank approval.</p><p class="row"><a class="btn" href="/promos/">Get the latest Option A / Option B promo</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="brochures-intro">Message Richard on Messenger</a></p></div></section>
-{BROCSS}<section class="sec alt"><div class="w"><div class="grid g3 bros">{cards}</div><p class="note">Brochures open on the official Mitsubishi Motors Philippines website in a new tab. Files are hosted by Mitsubishi Motors Philippines; this independent sales page only links to them.</p></div></section>''',
- ld=[{"@type":"CollectionPage","name":"Mitsubishi Brochures Philippines 2026","url":D+"/brochures/","mainEntity":{"@type":"ItemList","numberOfItems":len(BRO),"itemListElement":[{"@type":"ListItem","position":i+1,"name":f"Mitsubishi {n} brochure (PDF)","url":f"{_BU}{n.replace(' ','%20')}%20Brochure.pdf","image":f"{D}/assets/brochures/{k}.webp"} for i,(k,n,*_) in enumerate(BRO)]}}],
+{BROCSS}<section class="sec alt"><div class="w"><div class="grid g3 bros">{cards}</div><p class="note">You can read each brochure on this site. The files themselves are hosted by Mitsubishi Motors Philippines; this independent sales page displays them and links to the official PDF.</p></div></section>''',
+ ld=[{"@type":"CollectionPage","name":"Mitsubishi Brochures Philippines 2026","url":D+"/brochures/","mainEntity":{"@type":"ItemList","numberOfItems":len(BRO),"itemListElement":[{"@type":"ListItem","position":i+1,"name":f"Mitsubishi {n} brochure","url":D+f"/brochures/{k}/","image":f"{D}/assets/brochures/{k}.webp"} for i,(k,n,*_) in enumerate(BRO)]}}],
  crumbs=[("/","Home"),("/brochures/","Brochures")])
+READCSS='<style>.bwrap{display:grid;gap:22px}@media(min-width:960px){.bwrap{grid-template-columns:minmax(0,1fr) 280px;align-items:start}}.bview{background:#202124;border-radius:12px;overflow:hidden}.bview iframe{display:block;width:100%;height:min(78vh,860px);border:0;background:#202124}.bnext{position:sticky;top:88px}@media(max-width:959px){.bview iframe{height:70vh}.bnext{position:static}}</style>'
+for k,n,c,d,sz,ms,_ in BRO:
+    pdf=_bpdf(n); view=_bview(n)
+    btitle=f"Mitsubishi {n} Brochure | SJDM, San Jose del Monte"
+    bdesc=f"Read the official Mitsubishi {n} brochure (PDF) for the Philippines, plus the current promo in SJDM, San Jose del Monte from Richard."
+    body=(
+        f'{READCSS}<section class="ph"><div class="w"><p class="kick">Official brochure · {e(c)}</p>'
+        f'<h1>Mitsubishi {e(n)} official brochure in SJDM, San Jose del Monte</h1>'
+        f'<p class="lead">Features, specs, colors and variants from Mitsubishi Motors Philippines. Brochure SRPs may differ from this month\'s promo.</p>'
+        f'<p class="row"><a class="btn" href="/promos/#{ms}">See current promo</a> '
+        f'<a class="btn ghost dk" href="/budgetcalculator/">Compute my monthly</a> '
+        f'<a class="btn ghost dk" href="/test-drive/">Book a test drive</a></p>'
+        f'</div></section>'
+        f'<section class="sec" data-brochure-view="{e(n)}"><div class="w bwrap"><div>'
+        f'<div class="bview"><iframe title="Official Mitsubishi {e(n)} brochure" src="{e(view)}" loading="lazy" allowfullscreen></iframe></div>'
+        f'<p class="muted small">Official brochure from Mitsubishi Motors Philippines. Shown here so you can read it without leaving this page. This independent sales page does not host the file. Cover © Mitsubishi Motors Philippines Corporation.</p>'
+        f'<p class="row"><a class="more" href="{pdf}" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official brochure (PDF), {sz} →</a></p>'
+        f'</div><aside class="bnext"><div class="card pad">'
+        f'<p class="kick">Next step</p><h2>After you read</h2>'
+        f'<p class="muted">Check this month\'s all-in promo or estimate a monthly. Pre-qualified, subject to bank approval.</p>'
+        f'<p class="row"><a class="btn sm" href="/promos/#{ms}">See {e(n)} promo</a></p>'
+        f'<p><a class="more" href="/cars/{ms}/">See model and SRP →</a></p>'
+        f'<p><a class="more" href="/budgetcalculator/">Compute my monthly →</a></p>'
+        f'<p><a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p>'
+        f'<p><a class="more" href="/test-drive/">Book a test drive →</a></p>'
+        f'<p><a class="more" href="/loan-assessment/">Loan Application Assessment →</a></p>'
+        f'<p><a class="more" href="/brochures/">All brochures →</a></p>'
+        f'</div></aside></div></section>'
+    )
+    page(f"/brochures/{k}/",btitle,bdesc,body,
+     ld=[{"@type":"WebPage","name":f"Mitsubishi {n} official brochure","url":D+f"/brochures/{k}/","description":bdesc,"primaryImageOfPage":D+f"/assets/brochures/{k}.webp","isPartOf":{"@type":"CollectionPage","url":D+"/brochures/"},"copyrightNotice":"Brochure © Mitsubishi Motors Philippines Corporation","associatedMedia":{"@type":"DigitalDocument","name":f"Mitsubishi {n} Brochure","encodingFormat":"application/pdf","url":pdf,"copyrightHolder":{"@type":"Organization","name":"Mitsubishi Motors Philippines Corporation"}}}],
+     crumbs=[("/","Home"),("/brochures/","Brochures"),(f"/brochures/{k}/",n)],
+     img=f"/assets/brochures/{k}.webp")
 
 # ---------- model pages
 def MTITLE(m):
@@ -634,7 +690,7 @@ open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales
 - [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
 - [Apply]({D}/apply/): financing or cash application
 - [Promos]({D}/promos/): this month's all-in promos, two options per unit (Option A lowest down payment, unlocked with a short form; Option B 30% down payment with a lower monthly), subject to bank approval
-- [Brochures]({D}/brochures/): links to the official Mitsubishi Motors Philippines PDF brochure for each model
+- [Brochures]({D}/brochures/): official Mitsubishi Motors Philippines PDF brochure for each model, readable on this site
 - [Guides & Tips]({D}/tips/): every guide, blog post and tip in one list, newest first
 - [About]({D}/about/) and [Contact]({D}/contact/)
 
