@@ -2,6 +2,8 @@
 import json, os
 from data import SITE, MODELS
 
+GOOGLE_CLIENT_ID = "1028793506920-3arv7cdvlgglr0v9r2kcoobj1c3npofp.apps.googleusercontent.com"
+
 FAM = [
     ("Mirage Hatchback", "mirage", "Mirage"),
     ("Mirage G4", "mirage-g4", "Mirage G4"),
@@ -39,7 +41,7 @@ def write(R):
     }
     raw = json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
     tmpl = open(os.path.join(src, "update_page.html"), encoding="utf-8").read()
-    html = tmpl.replace("__PAYLOAD__", raw)
+    html = tmpl.replace("__PAYLOAD__", raw).replace("__GOOGLE_CLIENT_ID__", GOOGLE_CLIENT_ID)
     out = os.path.join(R, "update")
     os.makedirs(out, exist_ok=True)
     open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(html)

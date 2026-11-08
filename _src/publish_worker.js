@@ -3,8 +3,9 @@
  * Secrets (set in the Cloudflare dashboard, never in this file):
  *   PUBLISH_KEY — private key Richard enters on the Update page
  *   GITHUB_PAT — fine-grained token with Contents: Read and write on fit-calculator
- * Auth: X-Publish-Key matching PUBLISH_KEY, or Cloudflare Access email
- * (richard.cuagdan20@gmail.com) if Access is later enabled.
+ *   GOOGLE_CLIENT_ID — OAuth web client ID for Sign in with Google
+ * Auth: valid Google ID token (or Cloudflare Access email) for
+ * richard.cuagdan20@gmail.com, AND X-Publish-Key matching PUBLISH_KEY.
  */
 const ALLOWED_EMAILS = ["richard.cuagdan20@gmail.com"];
 const ALLOWED_ORIGINS = new Set([
@@ -18,7 +19,7 @@ function corsHeaders(origin) {
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, X-Publish-Key",
+    "Access-Control-Allow-Headers": "Content-Type, X-Publish-Key, X-Google-Token",
     "Access-Control-Allow-Credentials": "true",
     "Vary": "Origin",
   };
@@ -43,9 +44,23 @@ function timingSafeEqual(a, b) {
   return out === 0;
 }
 
-function authorized(request, env) {
-  const email = (request.headers.get("Cf-Access-Authenticated-User-Email") || "").trim().toLowerCase();
-  if (email && ALLOWED_EMAILS.includes(email)) return true;
+async function verifyGoogleJwt(token, env) {
+  const expectedAud = (env.GOOGLE_CLIENT_ID || "").trim();
+  if (!token || !expectedAud) return false;
+  const r = await fetch("https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(token));
+  if (!r.ok) return false;
+  const t = await r.json();
+  if (String(t.aud || "") !== expectedAud) return false;
+  const email = String(t.email || "").trim().toLowerCase();
+  const verified = t.email_verified === true || t.email_verified === "true";
+  return verified && ALLOWED_EMAILS.includes(email);
+}
+
+async function authorized(request, env) {
+  const accessEmail = (request.headers.get("Cf-Access-Authenticated-User-Email") || "").trim().toLowerCase();
+  const googleTok = (request.headers.get("X-Google-Token") || "").trim();
+  const identityOk = (accessEmail && ALLOWED_EMAILS.includes(accessEmail)) || await verifyGoogleJwt(googleTok, env);
+  if (!identityOk) return false;
   const sent = (request.headers.get("X-Publish-Key") || "").trim();
   const expected = (env.PUBLISH_KEY || "").trim();
   if (expected && sent && timingSafeEqual(sent, expected)) return true;
@@ -61,7 +76,7 @@ export default {
     if (request.method !== "POST") {
       return json(405, { error: "Method not allowed" }, origin);
     }
-    if (!authorized(request, env)) {
+    if (!(await authorized(request, env))) {
       return json(401, { error: "Unauthorized" }, origin);
     }
     if (!env.GITHUB_PAT) {

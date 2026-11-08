@@ -35,6 +35,13 @@ td input{padding:8px 10px}
 .diff{background:#0c0e12;border-radius:10px;padding:12px;max-height:280px;overflow:auto;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap}
 .ok{color:#4ade80}.warn{color:#fbbf24}
 .note{border-left:3px solid var(--warn);padding:8px 12px;background:rgba(245,158,11,.07);border-radius:6px;color:#fcd34d;font-size:13px;margin:0 0 14px}
+.gate{max-width:520px;margin:48px auto;padding:0 18px}
+.gate .card{padding:28px 22px}
+.gate h2{margin:0 0 8px}
+#google_btn{margin-top:18px;min-height:44px}
+#who{color:var(--mut);font-size:13px;margin:8px 0 0}
+[hidden]{display:none!important}
+
 @media(max-width:760px){
   .wide{overflow:auto}
   table{min-width:720px}
@@ -47,8 +54,17 @@ td input{padding:8px 10px}
   <h1>Website editor</h1>
   <p>Private page for Richard. Change the details, review them, then publish. The live website updates even if I cannot help that day.</p>
 </header>
+<div id="gate" class="gate">
+  <div class="card">
+    <h2>Sign in to continue</h2>
+    <p>This editor is only for richard.cuagdan20@gmail.com. Sign in with that Google account to open it. Publishing still needs your publish key too.</p>
+    <div id="google_btn"></div>
+    <p id="gate_err" class="note" hidden></p>
+  </div>
+</div>
+<div id="app" hidden>
 <main>
-  <p class="note">This page is not in the public menu. Bookmark it. Nothing goes live until you press Publish and confirm. Publishing is private: enter your publish key below. It is saved in your vault as “Mitsubishi SJDM publish key”.</p>
+  <p class="note">This page is not in the public menu. A small Editor link is also in the website footer, next to Admin. Nothing goes live until you press Publish and confirm. After you sign in, enter your publish key below. It is saved in your vault as “Mitsubishi SJDM publish key”.</p>
 
   <h2>Publish key</h2>
   <div class="card">
@@ -103,16 +119,21 @@ td input{padding:8px 10px}
     <div id="diff" class="diff">No changes yet.</div>
   </div>
 </main>
-<div class="foot">
+</div>
+<div class="foot" id="foot" hidden>
   <button class="btn g" type="button" id="review">Review changes</button>
   <button class="btn" type="button" id="publish">Publish to website</button>
 </div>
 <div class="toast" id="toast"></div>
 <script id="data" type="application/json">__PAYLOAD__</script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const DATA = JSON.parse(document.getElementById("data").textContent);
 const ORIG = JSON.parse(JSON.stringify(DATA));
 const ENDPOINT = "/api/site-update";
+const GOOGLE_CLIENT_ID = "__GOOGLE_CLIENT_ID__";
+const ALLOWED_EDITOR_EMAIL = "richard.cuagdan20@gmail.com";
+let googleTok = "";
 function $(id){ return document.getElementById(id); }
 function toast(msg, ok){
   const t=$("toast"); t.textContent=msg; t.className="toast on"+(ok?" ok":" warn");
@@ -277,7 +298,8 @@ async function publish(){
     const key=($("publish_key").value||"").trim();
     if(!key){ toast("Enter your publish key first."); return; }
     try{ localStorage.setItem("mitsu_publish_key", key); }catch(e){}
-    const res=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","X-Publish-Key":key},body:JSON.stringify(payload),credentials:"include"});
+    if(!googleTok){ toast("Sign in with Google first."); return; }
+    const res=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","X-Publish-Key":key,"X-Google-Token":googleTok},body:JSON.stringify(payload),credentials:"include"});
     const text=await res.text();
     if(!res.ok) throw new Error(text||res.status);
     toast("Published. The website will refresh in about one to two minutes.", true);
@@ -285,17 +307,74 @@ async function publish(){
     toast("Could not publish: "+err.message);
   }
 }
-try{ const saved=localStorage.getItem("mitsu_publish_key"); if(saved) $("publish_key").value=saved; }catch(e){}
-fillSite();
-renderSelect();
-if(DATA.models[0]) $("model").value=DATA.models[0].slug;
-renderModel();
-$("model").onchange=renderModel;
-$("review").onclick=()=>{ showDiff(); document.getElementById("diff").scrollIntoView({behavior:"smooth"}); };
-$("publish").onclick=publish;
-["phone_display","phone_e164","email","hours","hours_open","hours_close","facebook","messenger","service_area","office_note","application_form_app","promo_year","promo_month","promo_updated","label_a","label_b","label_a_tl","label_b_tl","inclusions","freebies"].forEach(id=>{
-  $(id).addEventListener("input", ()=>showDiff());
-});
+function decodeJwt(tok){
+  const p=tok.split(".")[1];
+  if(!p) throw new Error("bad token");
+  const json=atob(p.replace(/-/g,"+").replace(/_/g,"/"));
+  return JSON.parse(json);
+}
+function acceptToken(tok){
+  let p;
+  try{ p=decodeJwt(tok); }catch(e){ return false; }
+  const email=String(p.email||"").trim().toLowerCase();
+  if(email!==ALLOWED_EDITOR_EMAIL) return false;
+  if(p.email_verified!==true && p.email_verified!=="true") return false;
+  if(GOOGLE_CLIENT_ID && p.aud && p.aud!==GOOGLE_CLIENT_ID) return false;
+  if(p.exp && p.exp*1000<Date.now()) return false;
+  googleTok=tok;
+  try{ sessionStorage.setItem("mitsu_google_token", tok); }catch(e){}
+  return true;
+}
+function showApp(){
+  $("gate").hidden=true;
+  $("app").hidden=false;
+  $("foot").hidden=false;
+}
+function showGate(msg){
+  $("gate").hidden=false;
+  $("app").hidden=true;
+  $("foot").hidden=true;
+  const err=$("gate_err");
+  if(msg){ err.textContent=msg; err.hidden=false; }
+  else { err.hidden=true; }
+}
+function initEditor(){
+  try{ const saved=localStorage.getItem("mitsu_publish_key"); if(saved) $("publish_key").value=saved; }catch(e){}
+  fillSite();
+  renderSelect();
+  if(DATA.models[0]) $("model").value=DATA.models[0].slug;
+  renderModel();
+  $("model").onchange=renderModel;
+  $("review").onclick=()=>{ showDiff(); document.getElementById("diff").scrollIntoView({behavior:"smooth"}); };
+  $("publish").onclick=publish;
+  ["phone_display","phone_e164","email","hours","hours_open","hours_close","facebook","messenger","service_area","office_note","application_form_app","promo_year","promo_month","promo_updated","label_a","label_b","label_a_tl","label_b_tl","inclusions","freebies"].forEach(id=>{
+    $(id).addEventListener("input", ()=>showDiff());
+  });
+}
+function startGoogle(){
+  function boot(){
+    if(!GOOGLE_CLIENT_ID){
+      showGate("Google sign-in is being connected. Refresh this page in a moment.");
+      return;
+    }
+    if(!window.google || !google.accounts || !google.accounts.id){ setTimeout(boot, 80); return; }
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: function(resp){
+        if(acceptToken(resp.credential)){ showApp(); initEditor(); }
+        else showGate("Sign in with richard.cuagdan20@gmail.com to open the editor.");
+      },
+      auto_select: false
+    });
+    google.accounts.id.renderButton($("google_btn"), { theme:"filled_black", size:"large", text:"signin_with", shape:"rectangular", width:320 });
+  }
+  boot();
+}
+try{
+  const savedTok=sessionStorage.getItem("mitsu_google_token");
+  if(savedTok && acceptToken(savedTok)){ showApp(); initEditor(); }
+  else startGoogle();
+}catch(e){ startGoogle(); }
 </script>
 </body>
 </html>
