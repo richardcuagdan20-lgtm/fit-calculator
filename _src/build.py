@@ -283,7 +283,7 @@ from PIL import Image as _PI
 def _bsz(k):
     try: return _PI.open(f"assets/brochures/{k}.webp").size
     except Exception: return (360,500)
-BROCSS='<style>.bros{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.bcov{display:block;background:#eceef0;border-radius:10px;padding:18px 18px 14px;text-align:center;margin-bottom:10px}.bcov img{display:block;width:100%;max-width:220px;height:auto;margin:0 auto;box-shadow:0 6px 18px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);border-radius:2px}.bcap{font-size:11px;color:#777;margin:6px 0 0}@media(max-width:600px){.bros{grid-template-columns:1fr 1fr;gap:10px}.bros .card{padding:10px}.bcov{padding:10px 10px 8px}.bros .row a{white-space:normal}.bros .btn{display:block;text-align:center}}</style>'
+BROCSS='<style>.bros{grid-template-columns:1fr 1fr;gap:16px}@media(min-width:960px){.bros{grid-template-columns:repeat(3,1fr);gap:24px}}.bros .card{padding:16px}.bcov{display:block;background:#eceef0;border-radius:10px;padding:12px;text-align:center;margin:0 0 8px}.bcov img{display:block;width:auto;max-width:160px;max-height:210px;height:auto;object-fit:contain;margin:0 auto;box-shadow:0 6px 18px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);border-radius:2px}.bcap{font-size:11px;color:#777;margin:0 0 8px}.bros h3{margin:0 0 12px;font-size:18px}.bros .kick{margin-bottom:.4em}.bros .row{flex-direction:column;align-items:stretch;gap:8px}.bros .btn{text-align:center}@media(max-width:600px){.bros{gap:10px}.bros .card{padding:12px}.bcov{padding:8px}.bcov img{max-width:130px;max-height:170px}}</style>'
 def _bcov(k,n):
     w,h=_bsz(k)
     return (
@@ -292,25 +292,19 @@ def _bcov(k,n):
         f'alt="Mitsubishi {e(n)} official brochure cover"></a>'
     )
 _card_bits=[]
-for k,n,c,d,sz,ms,_ in BRO:
+for k,n,c,_,_,_,_ in BRO:
     _card_bits.append(
         f'<div class="card pad bro" id="{k}">{_bcov(k,n)}'
-        f'<p class="bcap">Cover © Mitsubishi Motors Philippines Corporation</p>'
         f'<p class="kick">{e(c)}</p><h3>Mitsubishi {e(n)}</h3>'
-        f'<p class="muted">{e(d)}</p>'
-        f'<p class="muted small">PDF, {sz}. Official brochure from Mitsubishi Motors Philippines.</p>'
         f'<p class="row"><a class="btn sm" href="/brochures/{k}/" data-brochure-read="{e(n)}">Read brochure</a> '
-        f'<a class="btn ghost dk sm" href="{_bpdf(n)}" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official PDF</a></p>'
-        f'<p class="row"><a class="more" href="/cars/{ms}/">See current promo →</a> '
-        f'<a class="more" href="/budgetcalculator/">Check my monthly →</a> '
-        f'<a class="more" href="/promos/#{ms}">Inquire about this promo →</a></p></div>'
+        f'<a class="btn ghost dk sm" href="{_bpdf(n)}" target="_blank" rel="noopener" data-brochure="{e(n)}">Download official PDF</a></p></div>'
     )
 cards="".join(_card_bits)
 page("/brochures/","Mitsubishi Brochures 2026 | SJDM, San Jose del Monte",
  "Read official Mitsubishi brochures (PDF) for every 2026 model in the Philippines, plus the current SJDM, San Jose del Monte promo from Richard.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi brochures Philippines 2026: read the PDF, get the SJDM (San Jose del Monte) promo</h1><p class="lead">Every current Mitsubishi brochure in one place. Read the official PDF here, then check the latest all-in promo for each unit.</p></div></section>
 <section class="sec"><div class="w"><h2>Brochure vs. current promo</h2><p>Brochures cover features, specs, colors and variants. They do not reflect this month\'s promos, so any SRP printed in a brochure may differ from the current price and promo package. For today\'s figures, ask for the latest <b>Option A</b> (lowest down payment) or <b>Option B</b> (30% down payment, lower monthly) for your unit. Pre-qualified, subject to bank approval.</p><p class="row"><a class="btn" href="/promos/">Get the latest Option A / Option B promo</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="brochures-intro">Message Richard on Messenger</a></p></div></section>
-{BROCSS}<section class="sec alt"><div class="w"><div class="grid g3 bros">{cards}</div><p class="note">You can read each brochure on this site. The files themselves are hosted by Mitsubishi Motors Philippines; this independent sales page displays them and links to the official PDF.</p></div></section>''',
+{BROCSS}<section class="sec alt"><div class="w"><div class="grid g3 bros">{cards}</div><p class="note">You can read each brochure on this site. Brochure covers and files are from Mitsubishi Motors Philippines; this independent sales page displays them and links to the official PDF.</p></div></section>''',
  ld=[{"@type":"CollectionPage","name":"Mitsubishi Brochures Philippines 2026","url":D+"/brochures/","mainEntity":{"@type":"ItemList","numberOfItems":len(BRO),"itemListElement":[{"@type":"ListItem","position":i+1,"name":f"Mitsubishi {n} brochure","url":D+f"/brochures/{k}/","image":f"{D}/assets/brochures/{k}.webp"} for i,(k,n,*_) in enumerate(BRO)]}}],
  crumbs=[("/","Home"),("/brochures/","Brochures")])
 READCSS='<style>.bwrap{display:grid;gap:22px}@media(min-width:960px){.bwrap{grid-template-columns:minmax(0,1fr) 280px;align-items:start}}.bview{background:#202124;border-radius:12px;overflow:hidden}.bview iframe{display:block;width:100%;height:min(78vh,860px);border:0;background:#202124}.bnext{position:sticky;top:88px}@media(max-width:959px){.bview iframe{height:70vh}.bnext{position:static}}</style>'
