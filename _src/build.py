@@ -32,7 +32,7 @@ CL='''<!-- Microsoft Clarity -->
 '''
 SUF0=" | Richard Cuagdan, Mitsubishi SJDM Bulacan"
 V4="V4:true" in open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"assets","lead.js")).read()  # status page flag lives in assets/lead.js
-NAV=[("/","Home"),("/cars/","Cars"),("/tips/","Guides & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]+([("/status/","Track Application")] if V4 else [])
+NAV=[("/","Home"),("/cars/","Cars"),("/tips/","Guides & Tips"),("/apply/","Apply Now"),("/test-drive/","Book a Test Drive"),("/about/","About"),("/contact/","Contact")]
 # Guides & Tips (2026-10-29): ONE combined article index at /tips/; /blog/, /guides/, /promos-tips/ are redirect stubs to it.
 GT="/tips/"; GT_EN="Guides & Tips"; GT_TL="Guides at Tips"
 GT_PFX=("/tips/","/blog/","/guides/")
@@ -62,7 +62,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
     nav=(item("/","Home")
         +dd("Cars",[("/cars/","All models and prices"),("/mitsubishi-price-list-philippines/","Price list"),("/mitsubishi-hybrid-phev/","Mitsubishi PHEV / hybrid"),("/promos/","Promos"),("/test-drive/","Book a test drive"),("/brochures/","Brochures (PDF)")],"cars")
         +item(GT,GT_EN)
-        +dd("Apply",[("/apply/","Apply now"),("/status/","Track your application"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
+        +dd("Apply",[("/apply/","Apply now"),("/loan-assessment/","Loan Application Assessment"),("/budgetcalculator/","Compute my monthly")],"apply")
         +item("/about/","About")+item("/contact/","Contact"))
     bc=""
     if crumbs:
@@ -120,7 +120,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 <footer class="ft"><div class="w">
 <div class="fg">
 <div><p class="fb">Richard Dennis Cuagdan</p><p>Authorized Mitsubishi Sales Executive</p><p>Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions.</p><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: Monday to Saturday, 8:00 AM to 5:00 PM</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
-<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/brochures/">Brochures</a> · <a href="/tips/">Guides &amp; Tips</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a>{' · <a href="/status/">Track your application</a>' if V4 else ''}</p></div>
+<div><p class="fb">Explore</p><p><a href="/cars/">Cars</a> · <a href="/promos/">Promos</a> · <a href="/brochures/">Brochures</a> · <a href="/tips/">Guides &amp; Tips</a></p><p><a href="/apply/">Apply</a> · <a href="/test-drive/">Book a Test Drive</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p></div>
 </div>
 <p class="fsoc"><a class="fbl" href="{FB}" target="_blank" rel="noopener" aria-label="Mitsubishi Motors by Richard Dennis Cuagdan on Facebook"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg><span>Facebook</span></a> <a class="fbl" href="{MSG}" target="_blank" rel="noopener" aria-label="Message Mitsubishi Motors by Richard on Messenger"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2C6.4 2 2 6.1 2 11.7c0 2.9 1.2 5.5 3.2 7.2v3.5l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg><span>Messenger</span></a></p>
 <p class="disc">Richard Dennis Cuagdan is an authorized Mitsubishi sales executive. This is his personal sales website and is not the official website of Mitsubishi Motors Philippines Corporation. Prices, monthly amortizations and freebies are dealer promos, subject to bank approval and change without notice. Mitsubishi names and logos belong to their respective owners.</p>

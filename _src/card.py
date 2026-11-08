@@ -7,7 +7,6 @@ _NAVC=[("/promos/","Promos","Option A and Option B for every unit","M4 7h16v3H4z
  ("/cars/","Cars and prices","All models, variants and inclusions","M5 16l1.5-5h11L19 16M5 16v3h2v-1h10v1h2v-3M7.5 14h.01M16.5 14h.01"),
  ("/loan-assessment/","Pre-qualify in 2 minutes","Free AI Car Loan Assessment","M12 3l7 3v5c0 4-3 7-7 9-4-2-7-5-7-9V6z"),
  ("/apply/","Apply now","Send your details and documents online","M7 3h8l4 4v14H7zM15 3v4h4"),
- ("/status/","Track my application","Use your MP- reference number","M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18"),
  ("/test-drive/","Book a test drive","Pick a unit and a schedule","M3 13l2-5h14l2 5M5 13v5h3v-2h8v2h3v-5M7 13h.01M17 13h.01"),
  ("/budgetcalculator/","Compute my monthly","Estimate by DP and term","M6 3h12v18H6zM9 7h6M9 11h2M13 11h2M9 15h2M13 15h2"),
  ("/tips/","Guides and tips","Requirements, OFW, FAQ and more","M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM8 8h7M8 12h7"),

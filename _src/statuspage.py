@@ -1,37 +1,21 @@
-# ---------- /status/ : Application Status (ref + last 4 of mobile). exec'd from build.py after applyform.py. Hidden behind Lead.V4 (assets/lead.js).
-ST_CSS='''<style>.st .fld input{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;font:inherit;font-size:17px}.st .la-card{margin-bottom:16px}
-.st-bank{list-style:none;padding:0;margin:8px 0}.st-bank li{border:1px solid var(--ln);border-radius:12px;padding:10px 12px;margin-bottom:8px}.st-bank b{display:block}.st-n{font-size:14px;color:#52525b;margin:4px 0 0}
-.st-pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:14px;font-weight:700;margin-top:4px}.s-ok{background:#dcfce7;color:#166534}.s-no{background:#e4e4e7;color:#3f3f46}.st-bank .s-ok{background:#16a34a;color:#fff;font-size:15px;padding:5px 12px}.st-bank li.b-ok{border:2px solid #16a34a;background:#f0fdf4}.st-bank li.b-no{background:#fafafa;color:#52525b}.s-doc{background:#ffedd5;color:#9a3412}.s-rev{background:#fef3c7;color:#92400e}.s-sub{background:#e0e7ff;color:#3730a3}
-.st-docs li{display:block}.st-dh{display:flex;justify-content:space-between;gap:8px;align-items:center}.st-pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.st-pick label,.af-cam label{flex:1 1 130px;border:1px dashed #a1a1aa;border-radius:10px;padding:10px;text-align:center;font-weight:600;font-size:14px;cursor:pointer;min-height:44px}
-.st-pick input,.af-cam input{position:absolute;width:1px;height:1px;opacity:0}.st-fn{font-size:13px;color:#555;margin:4px 0 0}.st-err{color:#b91c1c;font-weight:600}.st-tabs{display:flex;gap:6px;margin:0 0 12px;background:#f4f4f5;border-radius:12px;padding:4px}.st-tabs button{flex:1;border:0;background:none;border-radius:9px;padding:10px 6px;font:inherit;font-weight:700;font-size:15px;color:#52525b;min-height:44px}.st-tabs button[aria-selected=true]{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.15)}.st-save{background:#fef3c7;border-radius:12px;padding:10px 12px;margin:8px 0}.st-trk{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:0}.st-trk li{display:flex;gap:12px;align-items:flex-start;position:relative;padding:0 0 18px;color:#71717a}.st-trk li:not(:last-child):after{content:'';position:absolute;left:15px;top:32px;bottom:0;width:2px;background:#e4e4e7}.st-trk li.done:after{background:#16a34a}.st-dot{flex:0 0 32px;height:32px;border-radius:50%;background:#e4e4e7;color:#52525b;display:flex;align-items:center;justify-content:center;font-weight:700}.st-trk li.done .st-dot{background:#16a34a;color:#fff}.st-trk li.cur .st-dot{background:#E60012;color:#fff;box-shadow:0 0 0 4px #fecaca}.st-trk li.done,.st-trk li.cur{color:#111;font-weight:700}.st-tl{padding-top:5px}.st-tl small{display:block;font-weight:400;color:#52525b;font-size:13px}.st-ok{color:#166534;font-weight:600}.st-lock{border:2px solid #3730a3;background:#eef2ff}</style>'''
-ST_BODY=f'''<section class="la-hero"><div class="w">
-<div class="la-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Tagalog / Taglish</button></div>
-<p class="kick" style="color:#fca5a5">Mitsubishi SJDM · Mitsubishi</p>
-<h1>{B("I-track ang application mo","Track your application")}</h1>
-<p class="lead">{B("Tingnan ang status ng car loan application mo at mag-upload ng kulang na requirements.","Check your car loan application status and upload missing requirements.")}</p>
-<div class="rxm"><picture><source type="image/webp" srcset="/assets/img/richard/xpander-avatar-320.webp"><img src="/assets/img/richard/xpander-avatar-320.jpg" alt="Richard Cuagdan, Mitsubishi Car Sales Executive" width="320" height="320" loading="lazy" decoding="async"></picture><p class="rx1">{B("Ang sales executive mo: <b>Richard Cuagdan</b>","Your sales executive: <b>Richard Cuagdan</b>")}</p></div>
-</div></section>
-<section class="la st"><div class="w" style="padding-top:18px">
-<div id="st-off" class="la-card" hidden><p>{B("Malapit na ang online status tracking. Pansamantala, i-message si Fina o si Richard kasama ang reference number mo (MP-XXXXX).","Online status tracking is coming soon. For now, message Fina or Richard with your reference number (MP-XXXXX).")}</p><p><a class="btn" href="/contact/">{B("Makipag-ugnayan","Contact us")}</a></p></div>
-<form id="st-f" class="la-card" novalidate hidden>
-<h2 class="h3">{B("Hanapin ang application","Find your application")}</h2>
-<div class="st-tabs" id="st-tabs" role="tablist" hidden><button type="button" role="tab" data-mode="ref" aria-selected="true">Reference number</button><button type="button" role="tab" data-mode="surname" aria-selected="false">{B("Apelyido (surname)","Surname")}</button></div>
-<div class="fld" id="st-refw"><label for="st-ref">Reference number</label><input id="st-ref" autocomplete="off" autocapitalize="characters" placeholder="MP-XXXXX" maxlength="8" required></div>
-<div class="fld" id="st-snw" hidden><label for="st-sn">{B("Apelyido (surname) na nasa application","Surname on your application")}</label><input id="st-sn" autocomplete="family-name" autocapitalize="words" placeholder="Dela Cruz" maxlength="60"></div>
-<div class="fld"><label for="st-l4">{B("Huling 4 digits ng mobile number sa application","Last 4 digits of the mobile number on your application")}</label><input id="st-l4" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="1234" required></div>
-<p class="st-err" id="st-e" hidden role="alert"></p>
-<button class="btn af-big" id="st-btn" type="submit" style="margin-top:8px">{B("Tingnan ang status","Check status")}</button>
-<p class="muted small">🔒 {B("Para sa privacy mo, kailangan ang reference number at huling 4 digits ng mobile mo. Wala kaming ipinapakitang buong personal details dito.","For your privacy we need both the reference number and the last 4 digits of your mobile. We never show full personal details here.")}</p>
-</form>
-<div id="st-r" hidden aria-live="polite"></div>
-<div class="la-card" style="margin:14px 0"><p><b>{B("May tanong sa application mo?","Questions about your application?")}</b></p><p>{B("Ikaw na may-ari ng application ay pwedeng mag-follow up kay Richard sa Facebook Messenger o sa comments ng Facebook page. Ibigay lang ang reference number mo (MP-XXXXX); huwag i-post ang buong personal details sa comments.","As the application owner, you can also follow up with Richard on Facebook Messenger or through comments on the Facebook page. Just give your reference number (MP-XXXXX); please don't post full personal details in public comments.")}</p><p class="row"><a class="btn" href="{MSG}" rel="noopener" data-msgr="status">{B("I-message si Richard sa Messenger","Message Richard on Messenger")}</a> <a class="btn ghost dk" href="{FB}" target="_blank" rel="noopener">{B("Facebook page","Facebook page")}</a></p></div>
-<p class="muted small">{B("Ang status ay ina-update ng aming team para gabayan ka. Ang final approval ay desisyon ng bank (subject to bank approval). Ang files mo ay gagamitin lang para sa loan processing.","Statuses are updated by our team to guide you. Final approval is the bank's decision (subject to bank approval). Your files are used only for loan processing.")}</p>
-</div></section>
-<script src="/assets/lead.js" defer></script>
-<script src="/assets/status.js" defer></script>'''
-page("/status/","Track Your Application | Richard Cuagdan, Mitsubishi SJDM Bulacan",
- "Check your Mitsubishi car loan application status with your MP- reference number, and upload missing requirements. Subject to bank approval.",
- LA_CSS+AF_CSS+ST_CSS+ST_BODY, noindex=True, crumbs=[("/","Home"),("/status/","Track Your Application")])
-_sp=R+"/status/index.html"; _s=open(_sp).read()
-_s=_s.replace('src="/assets/status.js"',f'src="/assets/status.js?v={_vh("/assets/status.js")}"').replace('src="/assets/lead.js"',f'src="/assets/lead.js?v={_vh("/assets/lead.js")}"').replace('href="/assets/site.css"',f'href="/assets/site.css?v={_vh("/assets/site.css")}"')
-open(_sp,'w').write(_s)
+# ---------- /status/ : redirect stub to /contact/ (tracker removed; old links and NFC URLs keep working).
+# exec'd from build.py after applyform.py.
+import os
+_sp = os.path.join(R, "status")
+os.makedirs(_sp, exist_ok=True)
+open(os.path.join(_sp, "index.html"), "w").write("""<!doctype html>
+<html lang="en-PH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta http-equiv="refresh" content="0;url=/contact/">
+<link rel="canonical" href="https://www.mitsubishi-sjdm.com/contact/">
+<title>Contact Richard</title>
+<script>location.replace("/contact/"+location.search+location.hash)</script>
+</head>
+<body>
+<p>This page has moved. <a href="/contact/">Contact Richard</a>.</p>
+</body>
+</html>
+""")
