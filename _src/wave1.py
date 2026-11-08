@@ -33,7 +33,7 @@ def W_vtable(slug,place="variant-row"):
         fz=f'<br><small class="fpts">+ {fu:,} fuel points</small>' if fu else ""
         rows+=f'<tr><th scope="row">{e(W_short(v,m))}</th><td>{t}</td><td>{d}</td><td>{f(v["srp"])}</td><td>{dp}</td><td>{mo}{fz}</td><td>{W_msg(slug,place,v["n"],label="Ask about this")}</td></tr>'
     return (f'<div class="tw"><table class="pt vtab"><thead><tr><th scope="col">Variant</th><th scope="col">Transmission</th><th scope="col">Drive</th><th scope="col">SRP</th><th scope="col">Low DP</th><th scope="col">Sample monthly</th><th scope="col">Message</th></tr></thead><tbody>{rows}</tbody></table></div>'
-            f'<p class="muted vnote">SRP: {e(FRESH)}. Sample monthly: 60 months, all-in. {MSQ}. Promos change monthly; ask Richard for the current figures.</p>')
+            f'<p class="muted vnote">SRP from the official Mitsubishi Motors Philippines price list; freight and handling not included. Sample monthly: 60 months, all-in. {MSQ}. Promos change monthly; ask Richard for the current figures.</p>')
 def W_ptab(slug,only=None):
     m=WM[slug];vs=[v for v in m["variants"] if (only is None or only in v["n"])]
     rows="".join(f'<tr><th scope="row">{e(W_short(v,m))}</th><td>{f(v["srp"])}</td><td>{f(W_low(v)[0]) if W_low(v) else "Ask Richard"}</td><td>{(f(W_low(v)[1])+"/mo") if W_low(v) else "Ask Richard"}</td></tr>' for v in vs)
@@ -67,8 +67,8 @@ def W_cards(items):
 def W_itemlist(name,items): return {"@type":"ItemList","name":name,"itemListElement":[{"@type":"ListItem","position":i+1,"url":D+u,"name":t} for i,(u,t,_) in enumerate(items)]}
 def W_tiles(items): return '<div class="tiles">'+"".join(f'<div class="tile"><b>{e(a)}</b><span>{e(b)}</span></div>' for a,b in items)+'</div><p class="muted">According to Mitsubishi Motors Philippines.</p>'
 def W_hero_extra(slug,name):
-    return (f'<div class="pcard2"><p class="pfrom">SRP from <b>{W_from(slug)}</b></p>{W_badge()}'
-            f'<p class="row"><a class="btn sm" href="#calc">See my monthly</a> {W_msg(slug,"hero",cls="btn sm ghost dk",label="Message Richard")} {W_pq(slug,"hero",cls="btn sm ghost dk",label="Pre-qualify")}</p></div>')
+    return (f'<div class="pcard2"><p class="pfrom">SRP from <b>{W_from(slug)}</b></p>'
+            f'<p class="row"><a class="btn sm" href="#calc">See my monthly</a></p></div>')
 def W_vrow(slug,vid):
     v=next(x for x in WM[slug]["variants"] if x["id"]==vid);return v,W_low(v)
 

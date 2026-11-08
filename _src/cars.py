@@ -15,8 +15,8 @@ def C_vtable(slug,place="variant-row"):
         dp=f(lo[0]) if lo else "Ask Richard";mo=(f'<b>{f(lo[1])}</b>/mo' if lo else "Ask Richard")
         fz=f'<br><small class="fpts">+ {fu:,} fuel points</small>' if fu else ""
         rows+=f'<tr><th scope="row">{e(C_short(v,m))}</th><td>{t}</td><td>{f(C_srp(v))}</td><td>{dp}</td><td>{mo}{fz}</td><td>{W_msg(slug,place,v["n"],label="Ask about this")}</td></tr>'
-    return (f'{W_badge()}<div class="tw"><table class="pt vtab"><thead><tr><th scope="col">Variant</th><th scope="col">Transmission</th><th scope="col">SRP</th><th scope="col">Low DP</th><th scope="col">Sample monthly</th><th scope="col">Message</th></tr></thead><tbody>{rows}</tbody></table></div>'
-            f'<p class="muted vnote">SRP: {e(FRESH)}; freight and handling not included. Low DP: lowest published promo option with a down payment. Sample monthly: 60 months, all-in. {MSQ}.</p>')
+    return (f'<div class="tw"><table class="pt vtab"><thead><tr><th scope="col">Variant</th><th scope="col">Transmission</th><th scope="col">SRP</th><th scope="col">Low DP</th><th scope="col">Sample monthly</th><th scope="col">Message</th></tr></thead><tbody>{rows}</tbody></table></div>'
+            f'<p class="muted vnote">SRP from the official Mitsubishi Motors Philippines price list; freight and handling not included. Low DP: lowest published promo option with a down payment. Sample monthly: 60 months, all-in. {MSQ}.</p>')
 def C_ptab(slug):
     m=WM[slug];rows=""
     for v in m["variants"]:
