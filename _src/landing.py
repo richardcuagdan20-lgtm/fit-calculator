@@ -220,7 +220,7 @@ L(slug="mitsubishi-zero-down-payment-promo",kw="Mitsubishi zero down payment pro
  ("What's the cheapest Mitsubishi on Zero DP?","See the promo table, sorted by Zero DP monthly, lowest first."),
  ("Can OFWs get Zero DP?","Yes, OFWs can apply. Banks usually ask for a contract, proof of remittance and an SPA or co-borrower in the Philippines.")])
 
-L(slug="transfer-of-approval",kw="Transfer of Approval",img="xpglx_x37",alt="Mitsubishi Xpander GLX, available through Transfer of Approval with Richard Cuagdan in San Jose del Monte (SJDM), Bulacan",
+L(slug="transfer-of-approval",kw="Transfer of Approval",img="toa_docs",alt="Car loan approval letter, checklist and ID on a desk, ready for Transfer of Approval in San Jose del Monte (SJDM), Bulacan",
  title="Transfer of Approval: Mitsubishi SJDM, San Jose del Monte",
  h1="Transfer of Approval for Mitsubishi in SJDM (San Jose del Monte), Bulacan",
  desc="Have a car loan approval from another dealer or brand? I accept Transfer of Approval for Mitsubishi in SJDM, San Jose del Monte. Subject to bank approval.",
