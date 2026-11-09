@@ -220,6 +220,48 @@ L(slug="mitsubishi-zero-down-payment-promo",kw="Mitsubishi zero down payment pro
  ("What's the cheapest Mitsubishi on Zero DP?","See the promo table, sorted by Zero DP monthly, lowest first."),
  ("Can OFWs get Zero DP?","Yes, OFWs can apply. Banks usually ask for a contract, proof of remittance and an SPA or co-borrower in the Philippines.")])
 
+L(slug="transfer-of-approval",kw="Transfer of Approval",img="xpglx_x37",alt="Mitsubishi Xpander GLX, available through Transfer of Approval with Richard Cuagdan in San Jose del Monte (SJDM), Bulacan",
+ title="Transfer of Approval: Mitsubishi SJDM, San Jose del Monte",
+ h1="Transfer of Approval for Mitsubishi in SJDM (San Jose del Monte), Bulacan",
+ desc="Have a car loan approval from another dealer or brand? I accept Transfer of Approval for Mitsubishi in SJDM, San Jose del Monte. Subject to bank approval.",
+ kick="We accept Transfer of Approval · SJDM",
+ lead="May bank approval ka na from another dealer, agent or even another brand, and gusto mo nang ituloy sa Mitsubishi? I accept Transfer of Approval for buyers in San Jose del Monte (SJDM), Bulacan and nearby Quezon City. Send your approval details and I'll tell you the clear next step. Final financing is always subject to bank approval.",
+ figs=[],table=[],tcap="",
+ body=lambda T:f'''<p class="row">{W_msg("transfer-of-approval","toa-hero",cls="btn",label="Message Richard")} <a class="btn ghost dk" href="tel:{TEL}">Call or text {TELD}</a></p>
+<h2>Who this page is for</h2>
+<ul class="ticks"><li>May approval ka na, pero mabagal or hindi ka comfortable sa previous agent.</li>
+<li>You were approved for one unit, but now you want a different Mitsubishi.</li>
+<li>Your approval is from another brand or casa, and you want to move it to Mitsubishi with me.</li>
+<li>The original dealer is far, and an SJDM or Quezon City follow-through is more practical for you.</li></ul>
+<h2>How Transfer of Approval usually works</h2>
+<ol class="steps"><li><h3>Send your approval details</h3><p>A clear photo or screenshot of your approval or credit advice, the bank or financing company, the original dealer or brand, and the unit you want now.</p></li>
+<li><h3>I check what can move</h3><p>I review whether your file can be transferred as is or needs a new computation for the Mitsubishi unit you picked. Policies vary per bank.</p></li>
+<li><h3>Sign a short transfer request letter</h3><p>Most transfers use a simple letter asking the bank to move your approval so you can continue with me. I can share a template.</p></li>
+<li><h3>Bank coordination, then release</h3><p>Once the bank confirms the new quotation, we continue with your down payment, documents and release. Timelines vary, and the final decision is always the bank's.</p></li></ol>
+<h2>What usually stays and what can change</h2>
+<div class="grid g2"><div class="card pad"><h3>Usually stays</h3><ul class="ticks"><li>Your identity and most of your income documents, if still current</li><li>The fact that a bank already evaluated you</li><li>A faster start than applying from zero, when the bank cooperates</li></ul></div>
+<div class="card pad"><h3>Can change</h3><ul class="ticks"><li>Down payment and monthly, if the price, term or promo package is different</li><li>Insurance, chattel mortgage and other items on the new quotation</li><li>The dealer and agent handling your release</li><li>Whether a more expensive unit still fits after the bank recomputes</li></ul></div></div>
+<h2>What to send me</h2>
+<ul class="ticks"><li><b>Required:</b> your approval letter, credit advice or a clear screenshot with the bank name visible</li>
+<li><b>Required:</b> the original dealer or brand and the unit on the approval</li>
+<li><b>Required:</b> the Mitsubishi unit you want now, or your shortlist</li>
+<li><b>Usually needed:</b> one or two valid government IDs</li>
+<li><b>If the bank asks:</b> proof of billing, and your latest payslips, COE, ITR or business documents</li>
+<li><b>Later:</b> a signed transfer request letter (I'll send the template)</li></ul>
+<p class="row">{W_msg("transfer-of-approval","toa-checklist",cls="btn",label="Send my approval details")}</p>
+<h2>Choose your Mitsubishi and check the numbers</h2>
+<p>See this month's <a href="/promos/">Mitsubishi promos</a>, browse <a href="/cars/">all models and prices</a>, or estimate your new monthly with the <a href="/budgetcalculator/">budget calculator</a>. No approval yet? Start with the free <a href="/loan-assessment/">loan application assessment</a> or the <a href="/apply/">application form</a>.</p>
+'''+CTAX("May approval ka na? Message me with the checklist above and I'll give you a clear, no-pressure next step in San Jose del Monte (SJDM)."),
+ faq=[("What is Transfer of Approval?","It means moving an existing car loan approval from one dealer, agent, brand or unit so you can continue with another agent or unit before the car is released. It is not the same as transferring ownership of a car that is already financed."),
+ ("Pwede bang i-transfer ang approval sa ibang dealer?","Often yes, with a signed transfer request and coordination with the bank. The bank's policy decides the outcome, so send your approval details first and I'll check."),
+ ("Pwede ba from another brand papuntang Mitsubishi?","Many buyers do this. The bank usually recomputes the loan for the new Mitsubishi unit against your income. Subject to bank approval."),
+ ("Gaano katagal valid ang approval?","It depends on the bank and what your approval letter says. Check the date on your letter and message me early if it is close to expiring."),
+ ("Ilang araw ang transfer process?","It varies per bank and on whether your unit and documents are ready. I'll give you a realistic timeline after I see your approval details."),
+ ("Magbabago ba ang DP at monthly?","If the unit, price, term or promo package changes, yes. Your previous monthly does not automatically carry over to a different car."),
+ ("Kailangan ko pa bang magsubmit ulit ng documents?","Sometimes the bank reuses your existing file. Have your IDs and approval copy ready either way; the bank may ask for updated income documents if the file is old or the loan amount changes a lot."),
+ ("Paano kung in-house financing ang approval ko?","In-house and brand financing have their own transfer rules. Send me the approval details first so I can check what is possible."),
+ ("Ano ang next step kung may approval na ako ngayon?","Message me on Messenger or call 0954 291 1201 with your approval screenshot, your preferred Mitsubishi unit and your IDs.")])
+
 for _k in LANDINGS: _k["faq"]=list(_k["faq"])+C_LFAQ.get(_k["slug"],[])  # draft-cars A17
 LAND_PATHS=[]
 for a in LANDINGS:
