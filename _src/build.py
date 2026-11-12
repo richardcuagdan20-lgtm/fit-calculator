@@ -195,11 +195,14 @@ LACTA='<aside class="lacta"><h2>Will you qualify for a car loan?</h2><p>Find out
 LACTA_TL='<aside class="lacta"><h2>Pasok ka ba sa car loan?</h2><p>Alamin sa loob ng 3 minuto gamit ang libreng AI Car Loan Application Assessment. Walang documents na kailangan.</p><a class="btn" href="/loan-assessment/?lang=tl">Simulan ang AI Car Loan Application Assessment</a></aside>'
 CONSENT='<label class="chk"><input type="checkbox" id="consent" required> <span>I agree to the collection and processing of my personal information under the Data Privacy Act of 2012 (RA 10173), as described in the <a href="/privacy/">Privacy Policy</a>, so Richard Cuagdan can contact me about this inquiry.</span></label><p class="er" id="e_consent" hidden>Please tick the consent box.</p>'
 
+def hero_intro_video():
+    return open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"hero_intro.html")).read()
+
 # ---------- HOME
 feat="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/","Mitsubishi SJDM, San Jose del Monte Bulacan: Promos & Prices",
  "Mitsubishi in San Jose del Monte, Bulacan with Richard Cuagdan, authorized sales executive: 2026 price list, low down payment promos, test drives and loan help.",
-hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",rx_card("xpander",eager=True,ratio="4x5",cls="rx himg"),kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM, Bulacan",src="home")+f'''
+hero("Mitsubishi in SJDM (San Jose del Monte), Bulacan: explained clearly, financed sensibly.","Official SRPs, this month's all-in down payment and monthly promos, and help with your bank application for employed buyers, business owners and OFWs.",hero_intro_video(),kick="Richard Cuagdan · Authorized Mitsubishi Sales Executive · SJDM, Bulacan",src="home",cls="hero hero-vid")+f'''
 <div class="w">{LACTA}</div>
 <section class="sec"><div class="w">
 <h2>The 2026 Mitsubishi lineup</h2>
