@@ -477,6 +477,8 @@ def C_SCRUB(R):
 # ---- Zero DP removal on changed articles (lowest option WITH a down payment only)
 def C_nozero(s):
     import re as _r
+    # Xpander range includes the Xpander Cross variant (Option A Zero DP) since 2026-11-15: keep the Xpander line as "up to ₱X DP"
+    s=_r.sub(r"(Xpander(?:</a>:)? )Zero DP Promo to (₱[\d,]+ DP)",r"\1up to \2",s)
     s=_r.sub(r"<li>(?:(?!</li>).)*Zero DP(?:(?!</li>).)*</li>","",s,flags=_r.S)
     s=_r.sub(r"<td>Zero DP Promo / [^<]*</td>","<td>Ask Richard</td>",s)
     s=_r.sub(r"\s*\(Zero DP Promo on select units\)","",s)
