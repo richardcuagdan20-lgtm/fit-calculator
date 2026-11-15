@@ -1,34 +1,7 @@
 {
-  "phone_e164": "+639542911201",
-  "phone_display": "0954 291 1201",
+  "application_form_app": "https://richard-mitsu-application-form.grok.me",
   "email": "richard.cuagdan20@gmail.com",
   "facebook": "https://www.facebook.com/504759566043148",
-  "messenger": "https://m.me/504759566043148",
-  "hours": "Monday to Saturday, 8:00 AM to 5:00 PM",
-  "hours_open": "08:00",
-  "hours_close": "17:00",
-  "office_note": "Message me before you visit so I can have your preferred unit ready for viewing or a test drive.",
-  "service_area": "Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions.",
-  "application_form_app": "https://richard-mitsu-application-form.grok.me",
-  "promo": {
-    "year": 2026,
-    "month": 11,
-    "updated": "2026-11-04"
-  },
-  "promo_labels": {
-    "lowest_dp": "Lowest DP",
-    "lowest_monthly": "Lowest Monthly",
-    "lowest_dp_tl": "Pinakamababang DP",
-    "lowest_monthly_tl": "Pinakamababang monthly"
-  },
-  "inclusions": [
-    "3 years LTO registration",
-    "3 years TPL insurance",
-    "1 year comprehensive insurance, rate locked for 3 years",
-    "Chattel mortgage",
-    "Free labor up to 5,000 km",
-    "3 years warranty"
-  ],
   "freebies": [
     "Full tint",
     "Floor mats",
@@ -40,12 +13,67 @@
     "Microfiber cloth",
     "Keychain"
   ],
+  "hours": "Monday to Saturday, 8:00 AM to 5:00 PM",
+  "hours_close": "17:00",
+  "hours_open": "08:00",
+  "inclusions": [
+    "3 years LTO registration",
+    "3 years TPL insurance",
+    "1 year comprehensive insurance, rate locked for 3 years",
+    "Chattel mortgage",
+    "Free labor up to 5,000 km",
+    "3 years warranty"
+  ],
+  "messenger": "https://m.me/504759566043148",
   "models": {
+    "destinator": {
+      "blurb": "Mitsubishi's newest 7-seat SUV, with a turbocharged 1.5L engine and a roomy, tech-forward cabin.",
+      "cat": "7-seater SUV",
+      "name": "Destinator",
+      "specs": [
+        [
+          "Engine",
+          "1.5L turbocharged gasoline (4B40), Euro 4"
+        ],
+        [
+          "Max power / torque",
+          "163 PS / 250 Nm"
+        ],
+        [
+          "Transmission",
+          "CVT"
+        ],
+        [
+          "Seating",
+          "7"
+        ]
+      ],
+      "who": "families stepping up from an MPV who want more power, comfort and safety tech"
+    },
+    "l300": {
+      "blurb": "The workhorse of Philippine small businesses, available as a cab and chassis for custom bodies or as a ready-to-work dual-AC unit.",
+      "cat": "Commercial",
+      "name": "L300",
+      "specs": [
+        [
+          "Engine",
+          "2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4"
+        ],
+        [
+          "Transmission",
+          "5-speed manual"
+        ],
+        [
+          "Fuel",
+          "Diesel"
+        ]
+      ],
+      "who": "business owners in delivery, hauling, catering, hardware and retail"
+    },
     "mirage": {
-      "name": "Mirage",
-      "cat": "Hatchback",
       "blurb": "A compact five-door hatchback with a 1.2L MIVEC engine and a 4.6-meter turning radius, made for narrow streets, tight parking and an easy first-car budget.",
-      "who": "first-time owners, solo commuters and young professionals who mostly drive in the city",
+      "cat": "Hatchback",
+      "name": "Mirage",
       "specs": [
         [
           "Engine",
@@ -71,13 +99,13 @@
           "Seating",
           "5"
         ]
-      ]
+      ],
+      "who": "first-time owners, solo commuters and young professionals who mostly drive in the city"
     },
     "mirage-g4": {
-      "name": "Mirage G4",
-      "cat": "Sedan",
       "blurb": "A compact, fuel-sipping sedan that is easy to park around SJDM and Metro Manila and gentle on a first-car budget.",
-      "who": "first-time buyers, daily commuters and young professionals",
+      "cat": "Sedan",
+      "name": "Mirage G4",
       "specs": [
         [
           "Engine",
@@ -95,121 +123,13 @@
           "Seating",
           "5"
         ]
-      ]
-    },
-    "xpander": {
-      "name": "Xpander",
-      "cat": "7-seater MPV",
-      "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips.",
-      "who": "growing families, carpool parents, and OFW families who want one car for school runs and weekend trips",
-      "specs": [
-        [
-          "Engine",
-          "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"
-        ],
-        [
-          "Max power / torque",
-          "105 PS / 141 Nm"
-        ],
-        [
-          "Transmission",
-          "5-speed manual or 4-speed automatic"
-        ],
-        [
-          "Seating",
-          "7"
-        ]
-      ]
-    },
-    "xpander-cross": {
-      "name": "Xpander Cross",
-      "cat": "7-seater crossover MPV",
-      "blurb": "Everything families like about the Xpander, with a rugged crossover look and a more premium cabin.",
-      "who": "families who want MPV practicality with SUV styling",
-      "specs": [
-        [
-          "Engine",
-          "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"
-        ],
-        [
-          "Max power / torque",
-          "105 PS / 141 Nm"
-        ],
-        [
-          "Transmission",
-          "4-speed automatic"
-        ],
-        [
-          "Seating",
-          "7"
-        ]
-      ]
-    },
-    "xforce": {
-      "name": "Xforce",
-      "cat": "Compact SUV",
-      "blurb": "A compact SUV with bold styling and a raised driving position, sized for city streets but ready for out-of-town weekends.",
-      "who": "young families and professionals moving up from a sedan or hatchback",
-      "specs": [
-        [
-          "Engine",
-          "1.5L gasoline"
-        ],
-        [
-          "Transmission",
-          "CVT"
-        ],
-        [
-          "Drivetrain",
-          "2WD"
-        ]
-      ]
-    },
-    "destinator": {
-      "name": "Destinator",
-      "cat": "7-seater SUV",
-      "blurb": "Mitsubishi's newest 7-seat SUV, with a turbocharged 1.5L engine and a roomy, tech-forward cabin.",
-      "who": "families stepping up from an MPV who want more power, comfort and safety tech",
-      "specs": [
-        [
-          "Engine",
-          "1.5L turbocharged gasoline (4B40), Euro 4"
-        ],
-        [
-          "Max power / torque",
-          "163 PS / 250 Nm"
-        ],
-        [
-          "Transmission",
-          "CVT"
-        ],
-        [
-          "Seating",
-          "7"
-        ]
-      ]
-    },
-    "outlander-phev": {
-      "name": "Outlander PHEV",
-      "cat": "Plug-in hybrid SUV",
-      "blurb": "Mitsubishi's plug-in hybrid SUV: drive on electricity for everyday trips and let the gasoline engine take over for long ones.",
-      "who": "buyers who want electrified driving without range worries",
-      "specs": [
-        [
-          "Powertrain",
-          "2.4L gasoline plug-in hybrid"
-        ],
-        [
-          "Drivetrain",
-          "AWD"
-        ]
-      ]
+      ],
+      "who": "first-time buyers, daily commuters and young professionals"
     },
     "montero-sport": {
-      "name": "Montero Sport",
-      "cat": "7-seater diesel SUV",
       "blurb": "The full-size diesel SUV, including the Black Series. Built on a ladder frame for long drives, rough roads and heavy loads.",
-      "who": "executives, large families and anyone who drives far from the city often",
+      "cat": "7-seater diesel SUV",
+      "name": "Montero Sport",
       "specs": [
         [
           "Engine",
@@ -227,13 +147,29 @@
           "Seating",
           "7"
         ]
-      ]
+      ],
+      "who": "executives, large families and anyone who drives far from the city often"
+    },
+    "outlander-phev": {
+      "blurb": "Mitsubishi's plug-in hybrid SUV: drive on electricity for everyday trips and let the gasoline engine take over for long ones.",
+      "cat": "Plug-in hybrid SUV",
+      "name": "Outlander PHEV",
+      "specs": [
+        [
+          "Powertrain",
+          "2.4L gasoline plug-in hybrid"
+        ],
+        [
+          "Drivetrain",
+          "AWD"
+        ]
+      ],
+      "who": "buyers who want electrified driving without range worries"
     },
     "triton": {
-      "name": "Triton",
-      "cat": "Pickup",
       "blurb": "A tough diesel pickup that works hard on weekdays and still feels comfortable for the family on weekends.",
-      "who": "contractors, farm and resort owners, and anyone who needs a cargo bed",
+      "cat": "Pickup",
+      "name": "Triton",
       "specs": [
         [
           "Engine",
@@ -247,33 +183,13 @@
           "Drivetrain",
           "2WD or 4WD (by variant)"
         ]
-      ]
-    },
-    "l300": {
-      "name": "L300",
-      "cat": "Commercial",
-      "blurb": "The workhorse of Philippine small businesses, available as a cab and chassis for custom bodies or as a ready-to-work dual-AC unit.",
-      "who": "business owners in delivery, hauling, catering, hardware and retail",
-      "specs": [
-        [
-          "Engine",
-          "2.2L 16-valve DOHC (4N14) turbo-intercooled diesel, Euro 4"
-        ],
-        [
-          "Transmission",
-          "5-speed manual"
-        ],
-        [
-          "Fuel",
-          "Diesel"
-        ]
-      ]
+      ],
+      "who": "contractors, farm and resort owners, and anyone who needs a cargo bed"
     },
     "versa-van": {
-      "name": "Versa Van",
-      "cat": "15-seater diesel van",
       "blurb": "A full-size diesel van for shuttle services, company transport and big families who travel together.",
-      "who": "shuttle and tour operators, companies and large families",
+      "cat": "15-seater diesel van",
+      "name": "Versa Van",
       "specs": [
         [
           "Engine",
@@ -299,7 +215,91 @@
           "Colors",
           "Silver Metallic, White Solid"
         ]
-      ]
+      ],
+      "who": "shuttle and tour operators, companies and large families"
+    },
+    "xforce": {
+      "blurb": "A compact SUV with bold styling and a raised driving position, sized for city streets but ready for out-of-town weekends.",
+      "cat": "Compact SUV",
+      "name": "Xforce",
+      "specs": [
+        [
+          "Engine",
+          "1.5L gasoline"
+        ],
+        [
+          "Transmission",
+          "CVT"
+        ],
+        [
+          "Drivetrain",
+          "2WD"
+        ]
+      ],
+      "who": "young families and professionals moving up from a sedan or hatchback"
+    },
+    "xpander": {
+      "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips.",
+      "cat": "7-seater MPV",
+      "name": "Xpander",
+      "specs": [
+        [
+          "Engine",
+          "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"
+        ],
+        [
+          "Max power / torque",
+          "105 PS / 141 Nm"
+        ],
+        [
+          "Transmission",
+          "5-speed manual or 4-speed automatic"
+        ],
+        [
+          "Seating",
+          "7"
+        ]
+      ],
+      "who": "growing families, carpool parents, and OFW families who want one car for school runs and weekend trips"
+    },
+    "xpander-cross": {
+      "blurb": "Everything families like about the Xpander, with a rugged crossover look and a more premium cabin.",
+      "cat": "7-seater crossover MPV",
+      "name": "Xpander Cross",
+      "specs": [
+        [
+          "Engine",
+          "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"
+        ],
+        [
+          "Max power / torque",
+          "105 PS / 141 Nm"
+        ],
+        [
+          "Transmission",
+          "4-speed automatic"
+        ],
+        [
+          "Seating",
+          "7"
+        ]
+      ],
+      "who": "families who want MPV practicality with SUV styling"
     }
-  }
+  },
+  "office_note": "Message me before you visit so I can have your preferred unit ready for viewing or a test drive.",
+  "phone_display": "0954 291 1201",
+  "phone_e164": "+639542911201",
+  "promo": {
+    "year": 2026,
+    "month": 11,
+    "updated": "2026-11-04"
+  },
+  "promo_labels": {
+    "lowest_dp": "Lowest DP",
+    "lowest_dp_tl": "Pinakamababang DP",
+    "lowest_monthly": "Lowest Monthly",
+    "lowest_monthly_tl": "Pinakamababang monthly"
+  },
+  "service_area": "Serving San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call for showroom visits and directions."
 }
