@@ -8,7 +8,6 @@ FAM = [
     ("Mirage Hatchback", "mirage", "Mirage"),
     ("Mirage G4", "mirage-g4", "Mirage G4"),
     ("Xpander", "xpander", "Xpander"),
-    ("Xpander Cross", "xpander-cross", "Xpander Cross"),
     ("Xforce", "xforce", "Xforce"),
     ("Destinator", "destinator", "Destinator"),
     ("Triton", "triton", "Triton"),

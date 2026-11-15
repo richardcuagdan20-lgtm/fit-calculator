@@ -134,7 +134,7 @@
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander GLS 1.5G 2WD A/T"
   },
   {
-    "family": "Xpander Cross",
+    "family": "Xpander",
     "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone)",
     "srp": 1378000,
     "a_dp": 0,
@@ -150,7 +150,7 @@
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row"
   },
   {
-    "family": "Xpander Cross",
+    "family": "Xpander",
     "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone, Quartz White Pearl)",
     "srp": 1393000,
     "a_dp": 0,

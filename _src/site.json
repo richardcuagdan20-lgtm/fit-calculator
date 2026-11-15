@@ -100,7 +100,7 @@
     "xpander": {
       "name": "Xpander",
       "cat": "7-seater MPV",
-      "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips.",
+      "blurb": "The family MPV built around Filipino life: seven seats, high ground clearance for flooded streets, and a cabin that handles provincial trips. Also available as the crossover-styled Xpander Cross.",
       "who": "growing families, carpool parents, and OFW families who want one car for school runs and weekend trips",
       "specs": [
         [
@@ -114,30 +114,6 @@
         [
           "Transmission",
           "5-speed manual or 4-speed automatic"
-        ],
-        [
-          "Seating",
-          "7"
-        ]
-      ]
-    },
-    "xpander-cross": {
-      "name": "Xpander Cross",
-      "cat": "7-seater crossover MPV",
-      "blurb": "Everything families like about the Xpander, with a rugged crossover look and a more premium cabin.",
-      "who": "families who want MPV practicality with SUV styling",
-      "specs": [
-        [
-          "Engine",
-          "1.5L in-line 4 DOHC 16-valve MIVEC gasoline"
-        ],
-        [
-          "Max power / torque",
-          "105 PS / 141 Nm"
-        ],
-        [
-          "Transmission",
-          "4-speed automatic"
         ],
         [
           "Seating",

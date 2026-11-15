@@ -68,7 +68,7 @@ function init(root){
   if(t.dataset.go){var g=+t.dataset.go;(g===1?step1:g===2?step2:step3)();top();return}});
  root.addEventListener('submit',function(e){e.preventDefault();lead(e.target)});
  root.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='cc-dpi'){e.preventDefault();$('[data-cust]',B).click()}});
- var q=new URLSearchParams(location.search).get('unit');
+ var q=new URLSearchParams(location.search).get('unit');if(q==='xpander-cross')q='xcross';
  if(q){D.forEach(function(m,i){if(lockI>=0&&i!==lockI)return;m.v.forEach(function(v,j){if(v.id===q||(m.slug===q&&S.m===null)){S.m=i;if(v.id===q)S.v=j}})})}
  if(S.m!==null&&S.v!==null)step2();else step1();
 }

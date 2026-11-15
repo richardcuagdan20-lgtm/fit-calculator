@@ -54,7 +54,7 @@ def zl(slug):
 P=[]
 LOW4=", ".join(f"{v['n']} ({f(ZDP(v))}/mo)" for v in sorted([v for m in MODELS for v in m["variants"] if ZDP(v)],key=ZDP)[:4])
 # ---------------------------------------------------------------- 1 monthly amortization (all models)
-_ALLS=["mirage-g4","xpander","xpander-cross","xforce","destinator","triton","montero-sport","l300","versa-van","outlander-phev"]
+_ALLS=["mirage-g4","xpander","xforce","destinator","triton","montero-sport","l300","versa-van","outlander-phev"]
 P.append(dict(base="tips",car="xpander",slug="mitsubishi-monthly-amortization-philippines",date=DT,by=BY,img="xpglx_x37",
 alt="Mitsubishi Xpander GLX, one of the most-asked monthly amortization questions in SJDM",
 title=("Mitsubishi Monthly Amortization Philippines ("+_PL+")"),
@@ -118,7 +118,7 @@ body=f'''<p>"Zero DP" is the most searched promo term I see for Mitsubishi in Bu
 <tr><th scope="row">Documents</th><td>Complete, consistent names, addresses and income figures</td></tr>
 <tr><th scope="row">Reachability</th><td>Answering the bank's verification call</td></tr></tbody></table>
 <h2>{MON} Option A (lowest DP) by unit</h2>
-{table(["mirage-g4","xpander","xpander-cross","destinator","triton","montero-sport","l300"],cols=("srp","zdp","inc","fuel"))}
+{table(["mirage-g4","xpander","destinator","triton","montero-sport","l300"],cols=("srp","zdp","inc","fuel"))}
 <h2>Zero DP vs paying a down payment</h2>
 <p>Zero DP keeps your savings intact, which matters if you need an emergency fund. A down payment lowers the monthly and the total paid. Option B on the promos page shows a 30% DP version for every unit. For a deeper comparison, read <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a> and the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p>
 <h2>Paano tumaas ang chance ma-approve</h2>
@@ -152,7 +152,7 @@ body=f'''<p>Many of my clients are OFWs and seafarers buying a car for the famil
 <h2>How to apply from abroad, step by step</h2>
 <ol><li>Check what fits your budget with the <a href="/budgetcalculator/">calculator</a>.</li><li>Take the free <a href="/loan-assessment/">assessment</a>; a good result reads Pre-qualified, subject to bank approval.</li><li>Fill out the <a href="/apply/">application</a> and send clear scans of your documents.</li><li>Answer the bank's verification call or email, even if you're on a different time zone.</li><li>Once the bank approves, your SPA or co-borrower signs, and your family picks up the unit in SJDM.</li></ol>
 <h2>Popular units for OFW families this month</h2>
-{table(["xpander","xpander-cross","destinator","mirage-g4"],cols=("srp","zdp","b"))}
+{table(["xpander","destinator","mirage-g4"],cols=("srp","zdp","b"))}
 <h2>Common reasons OFW applications get delayed</h2>
 <ul class="ticks"><li>Expired or soon-to-expire contract.</li><li>Remittances to different recipients every month.</li><li>Names spelled differently across IDs and documents.</li><li>The bank cannot reach the applicant for verification.</li></ul>
 <h2>Timing tips</h2>
@@ -231,8 +231,8 @@ kw=("Xforce price Philippines",["Xforce 2026 price","Xforce GLX vs GLS","Xforce 
 desc="Mitsubishi Xforce 2026 price Philippines: GLX, GLS and GT SRPs, Option B monthly, what changes per variant, and who the compact SUV fits best.",
 answer=f"The Mitsubishi Xforce 2026 SRP in the Philippines is {f(1119000)} for the GLX, {f(1299000)} for the GLS monotone, {f(1309000)} for the GLS two-tone and {f(1661000)} for the GT, all 1.5L gasoline CVT 2WD (official price list as of August 2026). Option A is a lowest DP of {rng('xforce')}, subject to bank approval.",
 faq=[("What engine does the Xforce have?","A 1.5L gasoline engine with a CVT and front-wheel drive (2WD) across the lineup."),
-("Is the Xforce a 7-seater?","No, it's a 5-seat compact SUV. For 7 seats, look at the Xpander, Xpander Cross or Destinator."),
-("Xforce or Xpander Cross?","The Xforce is a 5-seat compact SUV with a more car-like drive; the Xpander Cross is a 7-seat crossover MPV. Choose by how many people you carry."),
+("Is the Xforce a 7-seater?","No, it's a 5-seat compact SUV. For 7 seats, look at the Xpander (including its Xpander Cross variant) or the Destinator."),
+("Xforce or Xpander Cross?","The Xforce is a 5-seat compact SUV with a more car-like drive; the Xpander Cross is the crossover-styled variant of the 7-seat Xpander MPV. Choose by how many people you carry."),
 ("Does the Xforce have Zero DP this month?",f"For {MON}, the Xforce Option A on the promos page is {rng('xforce')}, subject to bank approval."),
 ("Where can I test drive the Xforce near SJDM?","Book online and I'll prepare a unit in San Jose del Monte, Bulacan.")],
 body=f'''<p>The Xforce is Mitsubishi's compact SUV for buyers moving up from a sedan or hatchback: raised seating, bold styling, and a size that still parks easily in SM San Jose del Monte or Fairview. Here are the 2026 prices and how the variants differ.</p>
@@ -245,7 +245,7 @@ body=f'''<p>The Xforce is Mitsubishi's compact SUV for buyers moving up from a s
 <ul class="ticks"><li><b>GLX</b> is the entry point and the lowest monthly, good for first SUV owners watching the budget.</li><li><b>GLS</b> (monotone or two-tone) is the middle trim most buyers look at for a more premium feel; the two-tone adds a contrasting roof for {f(10000)} more on SRP.</li><li><b>GT</b> is the top variant for buyers who want the most equipment.</li></ul>
 <p>Feature lists change by model year, so I'll send you the official spec sheet for the exact variant before you decide. Don't rely on a feature unless it's on that sheet.</p>
 <h2>Who the Xforce fits</h2>
-<p>A good fit for {xf["who"]}. If you regularly carry more than 5 people, compare the <a href="/cars/xpander-cross/">Xpander Cross</a> or the <a href="/cars/destinator/">Destinator</a>; read <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
+<p>A good fit for {xf["who"]}. If you regularly carry more than 5 people, compare the <a href="/cars/xpander/#variants">Xpander Cross</a> or the <a href="/cars/destinator/">Destinator</a>; read <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
 <h2>Financing the Xforce</h2>
 <p>On the <a href="/promos/">promos page</a>, every Xforce variant has Option A (lowest DP, {rng('xforce')}) and Option B (30% DP, lower monthly), both all-in and subject to bank approval. Freebies vary per variant and month; ask me for this month's list.</p>
 '''+CTA("Want to see the Xforce in person? Book a test drive in SJDM.","xforce")))

@@ -511,13 +511,13 @@ title="Xpander GLX MT vs GLX AT vs GLS vs Cross",
 desc=("Which Xpander should you get? GLX MT, GLX AT, GLS AT or Xpander Cross compared, with "+_PL+" promo monthlies, fuel freebies and who each fits."),
 answer="All four seat seven and use the same 1.5L MIVEC gasoline engine (105 PS, 141 Nm). The GLX MT (₱1,099,000) is the lowest monthly at ₱22,401 with ₱18K DP. The GLX AT (₱1,159,000) adds a 4-speed automatic. The GLS AT (₱1,259,000) is the higher trim, and the Xpander Cross (₱1,378,000) adds a rugged crossover look and a more premium cabin.",
 faq=[("Which Xpander variant is cheapest?",("The Xpander GLX MT, at ₱1,099,000 SRP. In "+_PL+" it's ₱22,401 a month at ₱18K DP or ₱19,811 with ₱143K DP, plus 30K fuel.")),
-("Is the Xpander Cross more powerful than the Xpander?","No. Both use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm and a 4-speed automatic on the AT units. The Cross differs in styling and cabin."),
+("Is the Xpander Cross more powerful than the other Xpander variants?","No. All use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm and a 4-speed automatic on the AT units. The Cross differs in styling and cabin."),
 ("Manual or automatic Xpander?","Get the manual for the lowest monthly if you're comfortable with a clutch. Get the automatic if you sit in daily traffic or if several family members will drive."),
 ("Which Xpander gets the biggest fuel freebie?",("In "+_PL+", the GLX AT, GLS AT and Xpander Cross each come with 60K fuel; the GLX MT comes with 30K."))],
 body=('''<p>The <a href="/cars/xpander/">Xpander</a> is the car I'm asked about most on the showroom floor. The question is usually not "Xpander o hindi?" but "Alin sa Xpander?" Here's how the four choices differ, with this month's promo numbers.</p>
 
 <h2>Same engine, different packages</h2>
-<p>Every Xpander and the <a href="/cars/xpander-cross/">Xpander Cross</a> share a 1.5L in-line 4 DOHC 16-valve MIVEC gasoline engine with 105 PS and 141 Nm, and seven seats. What changes is the transmission, the trim and the look.</p>
+<p>Every Xpander variant, including the <a href="/cars/xpander/#variants">Xpander Cross</a>, shares a 1.5L in-line 4 DOHC 16-valve MIVEC gasoline engine with 105 PS and 141 Nm, and seven seats. What changes is the transmission, the trim and the look.</p>
 
 <h2>'''+_PL+''' promos at a glance</h2>
 ''')+T(["Variant","SRP","Option A","Option B","Fuel points"],[
@@ -678,7 +678,7 @@ body='''<p>Congrats sa bagong sasakyan! The first weeks are exciting, and it's t
 <p>Once you're past the break-in period, keep up with PMS, check tire pressure monthly and drive the way you'd want to be driven. Your car and your passengers will thank you. If you're still choosing your new car, my <a href="/tips/first-time-car-buyer-checklist/">first-time car buyer checklist</a> is a good start.</p>
 '''+CTA2("Still choosing your new car? Check what fits your budget, then book a test drive in San Jose del Monte.","destinator")),
 
-dict(base="tips",car="xpander-cross",slug="car-insurance-explained-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross insured under an all-in package",
+dict(base="tips",car="xpander",slug="car-insurance-explained-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross insured under an all-in package",
 title="Car Insurance Explained: CTPL vs Comprehensive",
 desc="CTPL, comprehensive, acts of nature and participation fees explained in plain English, plus what the all-in package covers and how to file a claim.",
 answer="CTPL (compulsory third-party liability) is required for LTO registration and covers injury or death of third parties. Comprehensive insurance covers your own car against accidents, theft and more, plus extra third-party coverage. Acts of nature (flood, typhoon) is often an add-on. The all-in package includes TPL and 1-year comprehensive with the rate locked for 3 years.",
@@ -721,7 +721,7 @@ body='''<p>"Insured naman 'yan, di ba?" Many owners only learn what their insura
 <li><h3>Submit the documents</h3><p>Usually the claim form, OR/CR, driver's license, photos and report.</p></li>
 <li><h3>Pay the participation fee</h3><p>The amount per claim is stated in your policy; the insurer covers the rest of the approved repair.</p></li>
 </ol>
-'''+CTA2("Want a unit with insurance already in the all-in package? Check your budget, then book a test drive in SJDM.","xpander-cross")),
+'''+CTA2("Want a unit with insurance already in the all-in package? Check your budget, then book a test drive in SJDM.","xcross")),
 ]
 BULK2=[
 dict(base="tips",car="xpander",slug="child-car-seat-law-philippines",date="2026-10-22",by=BY,img="xpgls_w81",alt="Mitsubishi Xpander family MPV with room for child car seats",
@@ -956,7 +956,7 @@ body='''<p>The day you buy a car is also the day you start building its resale v
 <p>Full-size SUVs like the <a href="/cars/montero-sport/">Montero Sport</a> are built for long service lives, and good care shows when you sell. See <a href="/blog/montero-sport-variants-explained/">Montero Sport variants explained</a>.</p>
 '''+CTA2("Choosing a car you'll keep for years? Check your budget, then test drive in SJDM.","montero-sport")),
 
-dict(base="tips",car="xpander-cross",slug="new-car-release-day-checklist",date="2026-10-22",by=BY,img="xc_green",alt="Mitsubishi Xpander Cross on release day",
+dict(base="tips",car="xpander",slug="new-car-release-day-checklist",date="2026-10-22",by=BY,img="xc_green",alt="Mitsubishi Xpander Cross on release day",
 title="New Car Release Day Checklist",
 desc="Getting your new car soon? What to bring, how to inspect the unit, which documents to check, and what to ask before you drive home.",
 answer="On release day, bring your valid IDs and any remaining payment or documents, inspect the car in good light (paint, glass, tires, interior, lights and features), check that the VIN and engine numbers match your documents, confirm the freebies and accessories, and ask for the owner's manual, warranty booklet and PMS schedule before driving home.",
@@ -1009,7 +1009,7 @@ body='''<p>Excited na sa release? Me too, it's my favorite part of the job. A ca
 <li>How do I use the key features: lights, wipers, safety systems, phone pairing?</li>
 </ul>
 <p>Then drive gently. My <a href="/tips/first-1000-km-break-in-tips/">first 1,000 km tips</a> are your next read.</p>
-'''+CTA2("Haven't picked your unit yet? Check what fits your budget, then book a test drive in San Jose del Monte.","xpander-cross")),
+'''+CTA2("Haven't picked your unit yet? Check what fits your budget, then book a test drive in San Jose del Monte.","xcross")),
 
 dict(base="tips",car="xpander",slug="christmas-holiday-driving-tips",date="2026-10-22",by=BY,img="xpgls_red",alt="Mitsubishi Xpander ready for Christmas holiday family trips",
 title="Christmas Holiday Driving Tips for Families",
@@ -1109,7 +1109,7 @@ body='''<p>"Sir, L300 o Triton para sa negosyo?" Both are Mitsubishi workhorses,
 '''+CTA2("Not sure yet? Check your budget, then test drive the L300 and Triton back-to-back in SJDM.","triton")),
 ]
 BULK3=[
-dict(base="tips",car="xpander-cross",slug="rainy-season-driving-tips",date="2026-10-22",by=BY,img="xc_orange",alt="Mitsubishi Xpander Cross ready for rainy-season roads",
+dict(base="tips",car="xpander",slug="rainy-season-driving-tips",date="2026-10-22",by=BY,img="xc_orange",alt="Mitsubishi Xpander Cross ready for rainy-season roads",
 title="Rainy Season Driving Tips: See, Slow, Space",
 desc="How to drive safely in heavy rain: visibility, hydroplaning, braking distance, headlights, and a pre-rain car check for wipers, tires and lights.",
 answer="In heavy rain, slow down, double your following distance, turn on your headlights (not hazards while moving), and avoid sudden steering or braking. If the car hydroplanes, ease off the gas and steer straight until the tires grip again. Before the rainy months, check wipers, tire tread and all lights.",
@@ -1155,7 +1155,7 @@ body='''<p>Biglang buhos ng ulan sa Quirino Highway o sa NLEX? Rain changes ever
 <li>Payong and a towel in the car</li>
 </ul>
 <p>When the rain turns into flooding, follow my <a href="/tips/el-nino-typhoon-car-care-tips/">flood rules and after-flood checklist</a>, and keep an <a href="/tips/car-emergency-kit-list/">emergency kit</a> in the trunk.</p>
-'''+CTA2("Want more clearance for rainy days? Check your budget, then test drive the Xpander Cross or Destinator in SJDM.","xpander-cross")),
+'''+CTA2("Want more clearance for rainy days? Check your budget, then test drive the Xpander Cross or Destinator in SJDM.","xcross")),
 
 dict(base="tips",car="destinator",slug="tire-care-tips-philippines",date="2026-10-22",by=BY,img="de_u33",alt="Mitsubishi Destinator wheels and tires",
 title="Tire Care Guide: Pressure, Tread and Rotation",
@@ -1544,7 +1544,7 @@ body='''<p>Two 7-seat SUVs, two different personalities. The <a href="/cars/mont
 </ul>
 '''+CTA2("Drive the Montero Sport and Destinator back-to-back in SJDM after checking which fits your budget.","montero-sport")),
 
-dict(base="blog",car="xpander-cross",slug="xpander-cross-2026-price-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross for provincial roads",
+dict(base="blog",car="xpander",slug="xpander-cross-2026-price-philippines",date="2026-10-22",by=BY,img="xc_x3n",alt="Mitsubishi Xpander Cross for provincial roads",
 title="Xpander Cross for Provincial Roads and Probinsya Life",
 desc=("Is the Xpander Cross right for provincial roads and frequent uwian? What it shares with the Xpander, what it adds, and the "+_PL+" promo."),
 answer=("The Xpander Cross keeps the Xpander's seven seats and 1.5L MIVEC engine (105 PS, 141 Nm) with a 4-speed automatic, and adds a rugged crossover look and a more premium cabin. It suits families who split time between the city and the province. In "+_PL+": SRP ₱1,378,000, Zero DP Promo ₱28,406 a month or ₱173K DP ₱24,840, with 60K fuel."),
@@ -1552,7 +1552,7 @@ faq=[("Is the Xpander Cross 4WD?","No. It's a 2WD crossover-styled MPV. For regu
 ("Does the Xpander Cross have a bigger engine than the Xpander?","No. Both use the 1.5L MIVEC gasoline engine with 105 PS and 141 Nm."),
 ("How much is the Xpander Cross monthly?",("₱28,406 at Zero DP Promo or ₱24,840 with ₱173K DP, 60 months, all-in, with 60K fuel ("+_PL+", subject to bank approval).")),
 ("Is it good for rough provincial roads?","Like the Xpander, it has high ground clearance for rough patches and flooded streets. Drive carefully on unpaved roads and avoid deep water.")],
-body=('''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families live between two places. The <a href="/cars/xpander-cross/">Xpander Cross</a> is built for that life: an MPV's practicality with an SUV-style look.</p>
+body=('''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families live between two places. The <a href="/cars/xpander/#variants">Xpander Cross</a>, the crossover-styled variant of the Xpander, is built for that life: an MPV's practicality with an SUV-style look.</p>
 
 <h2>What it shares with the Xpander</h2>
 <ul class="ticks">
@@ -1583,7 +1583,7 @@ body=('''<p>Weekdays sa Bulacan o Maynila, weekends sa probinsya? Many families 
 <li><h3>Rinse after muddy trips</h3><p>Including the underside.</p></li>
 </ol>
 <p>For more power on mountain climbs, compare with the Destinator in <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
-'''+CTA2("Check if the Xpander Cross fits your budget, then test drive it in SJDM.","xpander-cross")),
+'''+CTA2("Check if the Xpander Cross fits your budget, then test drive it in SJDM.","xcross")),
 
 dict(base="blog",car="triton",slug="triton-gx-2wd-at-first-pickup-guide",date="2026-10-22",by=BY,img="tr_gx_u28",alt="Mitsubishi Triton GX automatic pickup",
 title="Triton GX AT: A Guide for First-Time Pickup Owners",
@@ -1743,7 +1743,7 @@ body='''<p>Looking for an authorized Mitsubishi sales executive in Bulacan? Rich
 
 <h2>What you can do at the showroom</h2>
 <ul class="ticks">
-<li>See and compare the current lineup: Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Montero Sport, Triton, L300 and more (<a href="/cars/">all models</a>)</li>
+<li>See and compare the current lineup: Mirage G4, Xpander (including the Xpander Cross), Xforce, Destinator, Montero Sport, Triton, L300 and more (<a href="/cars/">all models</a>)</li>
 <li>Take a test drive (<a href="/test-drive/">book here</a>)</li>
 <li>Get the month's promo: Option A (lowest DP) and Option B (30% DP) all-in options</li>
 <li>Have your loan documents pre-checked before bank submission</li>
@@ -1936,7 +1936,7 @@ body='''<p>These car loan approval tips come from what I see every week when app
 <p>Declined before? It's not the end. Read <a href="/blog/car-loan-myths-philippines/">car loan myths</a>, and if you're starting out, the <a href="/blog/minimum-salary-for-car-loan-philippines/">minimum salary guide</a>.</p>
 '''+CTA2("Want me to pre-check your documents? Check your budget, then call or text me.","xpander")),
 
-dict(base="tips",car="xpander-cross",slug="car-reservation-fee-philippines",date="2026-10-22",by=BY,img="xc_green",alt="Reserving a Mitsubishi Xpander Cross unit",
+dict(base="tips",car="xpander",slug="car-reservation-fee-philippines",date="2026-10-22",by=BY,img="xc_green",alt="Reserving a Mitsubishi Xpander Cross unit",
 title="Car Reservation Fee Philippines: What to Know",
 desc="",answer="",
 faq=[("What is a car reservation fee?","An amount paid to hold a unit or color for you while your loan is processed or payment is arranged."),
@@ -1960,7 +1960,7 @@ body='''<p>Asked to pay a car reservation fee in the Philippines? Here's what it
 <h2>When to reserve</h2>
 <ul class="ticks"><li>You've test driven and decided on the unit</li><li>The monthly fits your budget (see the <a href="/blog/zero-down-payment-car-philippines/">Zero DP list</a>)</li><li>Your documents are ready (see <a href="/tips/car-loan-approval-tips/">approval tips</a>)</li></ul>
 <p>For the current reservation amount and terms for your unit, message me for the latest. After approval, prepare for <a href="/tips/new-car-release-day-checklist/">release day</a>.</p>
-'''+CTA2("Ready to reserve? Check your budget, test drive, then call or text me for the current terms.","xpander-cross")),
+'''+CTA2("Ready to reserve? Check your budget, test drive, then call or text me for the current terms.","xcross")),
 
 dict(base="tips",car="destinator",slug="mitsubishi-test-drive-sjdm",date="2026-10-22",by=BY,img="de_w81",alt="Mitsubishi Destinator test drive in SJDM",
 title="Mitsubishi Test Drive in SJDM: What to Expect",

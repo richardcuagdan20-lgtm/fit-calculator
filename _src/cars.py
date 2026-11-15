@@ -17,9 +17,10 @@ def C_vtable(slug,place="variant-row"):
         rows+=f'<tr><th scope="row">{e(C_short(v,m))}</th><td>{t}</td><td>{f(C_srp(v))}</td><td>{dp}</td><td>{mo}{fz}</td><td>{W_msg(slug,place,v["n"],label="Ask about this")}</td></tr>'
     return (f'<div class="tw"><table class="pt vtab"><thead><tr><th scope="col">Variant</th><th scope="col">Transmission</th><th scope="col">SRP</th><th scope="col">Low DP</th><th scope="col">Sample monthly</th><th scope="col">Message</th></tr></thead><tbody>{rows}</tbody></table></div>'
             f'<p class="muted vnote">SRP from the official Mitsubishi Motors Philippines price list; freight and handling not included. Low DP: lowest published promo option with a down payment. Sample monthly: 60 months, all-in. {MSQ}.</p>')
-def C_ptab(slug):
+def C_ptab(slug,ids=None):
     m=WM[slug];rows=""
     for v in m["variants"]:
+        if ids and v["id"] not in ids: continue
         lo=W_low(v)
         rows+=f'<tr><th scope="row">{e(C_short(v,m))}</th><td>{f(C_srp(v))}</td><td>{f(lo[0]) if lo else "Ask Richard"}</td><td>{(f(lo[1])+"/mo") if lo else "Ask Richard"}</td></tr>'
     return f'{W_badge()}<div class="tw"><table class="pt"><thead><tr><th scope="col">Variant</th><th scope="col">SRP</th><th scope="col">Low DP</th><th scope="col">Sample monthly</th></tr></thead><tbody>{rows}</tbody></table></div><p class="muted">SRP: {e(FRESH)}; freight and handling not included. 60 months, all-in. {MSQ}.</p>'
@@ -36,7 +37,7 @@ def C_cta(slug,name,unit,biz=False):
 PL_LINK='<a href="/mitsubishi-price-list-philippines/">Full Mitsubishi price list</a>'
 
 # ================= SPECS (MANUFACTURER_CLAIMS_OTHER_MODELS.md only; "not found" items skipped)
-SP_XP=[("Engine","1.5L in-line 4 DOHC 16V MIVEC gasoline (4A91), 1,499 cc"),("Max power / torque","105 PS @ 6,000 rpm / 141 Nm @ 4,000 rpm"),("Transmission","4-speed AT or 5-speed MT"),("Seating","7"),("Dimensions (L x W x H)","4,595 x 1,750 x 1,750 mm; wheelbase 2,775 mm"),("Ground clearance","225 mm"),("Safety","Driver and passenger airbags, ABS with EBD, ISO-Fix; the GLS adds ASC, Traction Control, Active Yaw Control, Hill Start Assist and Multi-Around Monitor")]
+SP_XP=[("Engine","1.5L in-line 4 DOHC 16V MIVEC gasoline (4A91), 1,499 cc"),("Max power / torque","105 PS @ 6,000 rpm / 141 Nm @ 4,000 rpm"),("Transmission","4-speed AT or 5-speed MT"),("Seating","7"),("Dimensions (L x W x H)","4,595 x 1,750 x 1,750 mm; wheelbase 2,775 mm"),("Ground clearance","225 mm"),("Safety","Driver and passenger airbags, ABS with EBD, ISO-Fix; the GLS and the Xpander Cross add ASC, Traction Control, Active Yaw Control, Hill Start Assist and Multi-Around Monitor")]
 SP_XC=[("Engine","1.5L MIVEC DOHC 16-valve gasoline"),("Transmission / drive","4-speed AT, front-wheel drive (2WD)"),("Seating","7 (family-friendly crossover MPV)"),("Ground clearance","225 mm"),("Safety","Dual front airbags, ABS with EBD, Brake Assist, ASC, Traction Control, AYC, HSA, Multi-Around Monitor, ISO-Fix")]
 SP_MI=[("Engine","1.2L 12-valve inline 3-cylinder DOHC MIVEC (3A92)"),("Transmission","INVECS III CVT or 5-speed manual"),("Seating","Space for 5 adults"),("Dimensions (L x W x H)","3,795 x 1,665 x 1,500 mm"),("Turning radius","4.6 m"),("Safety","Front SRS airbags; front 3-point ELR seatbelts with pretensioner")]
 SP_G4=[("Engine","1.2L in-line 3 DOHC MIVEC (3A92), 1,193 cc"),("Max power / torque","78 PS @ 6,000 rpm / 100 Nm @ 4,000 rpm"),("Transmission","CVT or 5-speed MT"),("Seating / fuel tank","5 / 42 L"),("Dimensions (L x W x H)","4,305 x 1,670 x 1,515 mm; wheelbase 2,550 mm"),("Ground clearance","170 mm"),("Safety","Driver and passenger airbags, ABS with EBD, ASC, Hill Start Assist, ISO-Fix")]
@@ -45,11 +46,12 @@ SP_L3=[("Engine (Cab and Chassis)","4N14 2.2L 16V DOHC turbo intercooler common-
 SP_VV=[("Engine","YD25 DDTI 2.5L inline-4 DOHC 16V variable turbo diesel, 2,488 cc"),("Max power / torque","129 PS @ 3,200 rpm / 356 Nm @ 1,400-2,000 rpm"),("Transmission","5-speed manual"),("Seating","15"),("Dimensions (L x W x H)","4,710 x 1,695 x 1,990 mm; wheelbase 2,555 mm"),("Ground clearance / fuel tank","195 mm / 65 L"),("Safety","Driver and passenger airbags, ABS with EBD, Vehicle Dynamic Control (VDC)")]
 def _lo_txt(vid):
     v,lo=C_lo(vid); return (f"{f(lo[0])} DP and {f(lo[1])} a month" if lo else "Ask Richard")
-FAQ_XP=[("How much is the Mitsubishi Xpander 2026?",f"SRP from {W_from('xpander')} (GLX M/T) to {f(1259000)} (GLS A/T), {FRESH}. See the variant table for each variant's low DP and sample monthly."),
+FAQ_XP=[("How much is the Mitsubishi Xpander 2026?",f"SRP from {W_from('xpander')} (GLX M/T) to {f(C_srp(C_lo("xcross")[0]))} (Xpander Cross A/T Two-Tone), {FRESH}. See the variant table for each variant's low DP and sample monthly."),
  ("What is the lowest Xpander down payment?",f"On the GLX M/T, {_lo_txt('xglxmt')} (60 months, all-in). {MSQ}."),
  ("How many seats does the Xpander have?","Seven, according to Mitsubishi Motors Philippines."),
  ("What engine does the Xpander have?","According to Mitsubishi Motors Philippines, a 1.5L MIVEC gasoline engine (4A91) with 105 PS and 141 Nm, with a 4-speed AT or 5-speed MT."),
  ("What is the Xpander ground clearance?","225 mm, according to Mitsubishi Motors Philippines."),
+ ("Is the Xpander Cross a separate model?","No. The Xpander Cross is the crossover-styled variant of the Xpander, listed in the variant table on this page. According to Mitsubishi Motors Philippines, it keeps the 1.5L MIVEC engine and seven seats, with a 4-speed AT and front-wheel drive."),
  ("What does the GLS add over the GLX?","According to Mitsubishi Motors Philippines, the GLS adds ASC, Traction Control, Active Yaw Control, Hill Start Assist and the Multi-Around Monitor."),
  ("Is it Xpander or 'Expander'?","The official name is Xpander. Many buyers search for 'Expander', but it is the same Mitsubishi 7-seater MPV."),
  ("Can I test drive the Xpander in SJDM?","Yes. Book online and Richard will confirm your schedule in San Jose del Monte (SJDM), Monday to Saturday.")]
@@ -94,9 +96,7 @@ def _md(name): return f"{name} 2026 variants, Oct 2026 list prices, low DP and m
 CUP={
 "xpander":dict(title="Mitsubishi Xpander 2026 | SJDM, San Jose del Monte",h1="Mitsubishi Xpander 2026 in San Jose del Monte (SJDM)",
  desc="Xpander 2026 variants, Oct 2026 list prices, low DP and monthly in SJDM, Bulacan. Pre-qualified, subject to bank approval. Book a test drive.",specs=SP_XP,faq=FAQ_XP,c="xpander",unit="xpander",
- rel=[("/blog/xpander-price-philippines-2026/","Xpander price Philippines","Every variant's SRP, low DP and monthly"),("/blog/xpander-monthly-amortization/","Xpander monthly installment","DP and amortization"),("/cars/xpander-cross/","Xpander Cross 2026","The crossover version"),("/blog/xpander-vs-avanza/","Xpander vs Avanza","Feature comparison"),("/blog/xforce-vs-xpander/","Xforce vs Xpander","SUV or MPV"),("/blog/xpander-variants-explained/","Xpander variants explained","GLX vs GLS")]),
-"xpander-cross":dict(title="Mitsubishi Xpander Cross 2026 | SJDM Bulacan",h1="Mitsubishi Xpander Cross 2026 in San Jose del Monte (SJDM)",desc=_md("Xpander Cross"),specs=SP_XC,faq=FAQ_XC,c="xpander",unit="xcross",
- rel=[("/blog/xpander-cross-2026-price-philippines/","Xpander Cross price Philippines","SRP, low DP and monthly"),("/cars/xpander/","Xpander 2026","The family MPV"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Cross vs Destinator","Which 7-seater")]),
+ rel=[("/blog/xpander-price-philippines-2026/","Xpander price Philippines","Every variant's SRP, low DP and monthly"),("/blog/xpander-monthly-amortization/","Xpander monthly installment","DP and amortization"),("/blog/xpander-cross-2026-price-philippines/","Xpander Cross 2026","The crossover-styled variant"),("/blog/xpander-vs-avanza/","Xpander vs Avanza","Feature comparison"),("/blog/xforce-vs-xpander/","Xforce vs Xpander","SUV or MPV"),("/blog/xpander-variants-explained/","Xpander variants explained","GLX vs GLS")]),
 "mirage":dict(title="Mitsubishi Mirage 2026 Hatchback | SJDM Bulacan",h1="Mitsubishi Mirage 2026 in San Jose del Monte (SJDM)",desc=_md("Mirage"),specs=SP_MI,faq=FAQ_MI,c="mirage",unit="mirage",
  rel=[("/blog/mirage-price-philippines-2026/","Mirage price Philippines","Hatchback SRP, low DP, monthly"),("/tips/mirage-hatchback-down-payment-monthly-sjdm/","Mirage down payment and monthly","DP and monthly guide"),("/tips/mirage-hatchback-vs-mirage-g4/","Mirage vs Mirage G4","Hatchback or sedan")]),
 "mirage-g4":dict(title="Mitsubishi Mirage G4 2026 Sedan | SJDM Bulacan",h1="Mitsubishi Mirage G4 2026 in San Jose del Monte (SJDM)",desc=_md("Mirage G4"),specs=SP_G4,faq=FAQ_G4,c="mirage",unit="mirage-g4",
@@ -128,8 +128,8 @@ CA=[
 C_A(slug="xpander-price-philippines-2026",car="xpander",img="xpglx_x37",alt="Mitsubishi Xpander GLX, with 2026 price in the Philippines",crumbs=CR_C("xpander","Xpander"),
  title="Mitsubishi Xpander Price Philippines 2026",seo="Mitsubishi Xpander Price Philippines 2026: All Variants",
  desc="Xpander 2026 SRP per variant from the Oct 2026 list, plus low DP and sample monthly. Pre-qualified, subject to bank approval. Richard, SJDM.",
- answer=f"The Mitsubishi Xpander price in the Philippines is {f(1099000)} for the GLX M/T, {f(1159000)} for the GLX A/T and {f(1259000)} for the GLS A/T ({FRESH}).",
- faq=[("How much is the Xpander in the Philippines?",f"SRP: GLX M/T {f(1099000)}, GLX A/T {f(1159000)}, GLS A/T {f(1259000)} ({FRESH})."),
+ answer=f"The Mitsubishi Xpander price in the Philippines is {f(1099000)} for the GLX M/T, {f(1159000)} for the GLX A/T, {f(1259000)} for the GLS A/T and {f(C_srp(C_lo("xcross")[0]))} for the Xpander Cross A/T Two-Tone ({FRESH}).",
+ faq=[("How much is the Xpander in the Philippines?",f"SRP: GLX M/T {f(1099000)}, GLX A/T {f(1159000)}, GLS A/T {f(1259000)}, Xpander Cross A/T Two-Tone {f(C_srp(C_lo("xcross")[0]))} ({FRESH})."),
   ("What is the cheapest Xpander?",f"The GLX 1.5G 2WD M/T at {f(1099000)} SRP."),
   ("What is the lowest Xpander down payment?",f"On the GLX M/T, {f(_xl[0])} DP with a sample monthly of {f(_xl[1])} (60 months, all-in). {MSQ}."),
   ("Is the SRP the final price?","The SRP excludes freight and handling. The promo package is all-in; ask Richard for the current breakdown."),
@@ -140,11 +140,11 @@ C_A(slug="xpander-price-philippines-2026",car="xpander",img="xpglx_x37",alt="Mit
 {C_ptab("xpander")}
 <p class="row"><a class="btn sm" href="/budgetcalculator/?m=xpander">Compute my Xpander monthly</a> {W_msg("xpander","price-table",label="Message Richard about the Xpander")}</p>
 <h2>GLX or GLS?</h2>
-<p>All three variants share the 1.5L MIVEC engine (105 PS, 141 Nm) and seven seats, according to Mitsubishi Motors Philippines. The GLX comes with a manual or automatic; the GLS is automatic and, according to Mitsubishi Motors Philippines, adds ASC, Traction Control, Active Yaw Control, Hill Start Assist and the Multi-Around Monitor. More in <a href="/blog/xpander-variants-explained/">Xpander variants explained</a>.</p>
+<p>All four variants, including the Xpander Cross, share the 1.5L MIVEC engine (105 PS, 141 Nm) and seven seats, according to Mitsubishi Motors Philippines. The GLX comes with a manual or automatic; the GLS is automatic and, according to Mitsubishi Motors Philippines, adds ASC, Traction Control, Active Yaw Control, Hill Start Assist and the Multi-Around Monitor. More in <a href="/blog/xpander-variants-explained/">Xpander variants explained</a>.</p>
 <h2>Xpander DP and monthly</h2>
 <p>A bigger down payment lowers the monthly and the total you pay. The table shows the lowest published promo option with a down payment; Richard can compute any other amount. See the <a href="/blog/xpander-monthly-amortization/">Xpander monthly installment</a> guide. Every figure is {MSQ}.</p>
 <h2>Xpander Cross</h2>
-<p>Want the crossover look? See the <a href="/blog/xpander-cross-2026-price-philippines/">Xpander Cross price Philippines</a> guide, or compare every model in the {PL_LINK.replace("Full M","full M")}.</p>
+<p>Want the crossover look? The Xpander Cross is the crossover-styled Xpander variant in the table above. See the <a href="/blog/xpander-cross-2026-price-philippines/">Xpander Cross price Philippines</a> guide, or compare every model in the {PL_LINK.replace("Full M","full M")}.</p>
 '''+C_cta("xpander","Xpander","xpander"),
  after=W_vc("xpander","price_article")+W_sbar("xpander","Xpander",W_from("xpander"))),
 C_A(slug="mirage-price-philippines-2026",car="mirage",img="mir_glx_red",alt="Mitsubishi Mirage GLX hatchback, with 2026 price in the Philippines",crumbs=CR_C("mirage","Mirage"),
@@ -274,17 +274,17 @@ C_ref("xforce-2026-price-philippines",title="Mitsubishi Xforce Price Philippines
 '''+C_cta("xforce","Xforce","xforce"),after=W_vc("xforce","price_article")+W_sbar("xforce","Xforce",W_from("xforce")))
 C_ref("xpander-cross-2026-price-philippines",title="Mitsubishi Xpander Cross Price Philippines 2026",seo="Xpander Cross Price Philippines 2026: SRP and Monthly",
  desc="Xpander Cross 2026 SRP from the Oct 2026 list, low DP and sample monthly. Pre-qualified, subject to bank approval. Richard, San Jose del Monte.",
- answer=f"The Xpander Cross 1.5G 2WD A/T (Two-Tone) has an SRP of {f(1378000)} ({FRESH}).",crumbs=CR_C("xpander-cross","Xpander Cross"),
- faq=FAQ_XC[:4],more=[("/cars/xpander-cross/","Mitsubishi Xpander Cross 2026"),("/blog/xpander-price-philippines-2026/","Xpander price Philippines"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
+ answer=f"The Xpander Cross 1.5G 2WD A/T (Two-Tone) has an SRP of {f(1378000)} ({FRESH}).",crumbs=CR_C("xpander","Xpander"),
+ faq=FAQ_XC[:4],more=[("/cars/xpander/","Mitsubishi Xpander 2026, all variants"),("/blog/xpander-price-philippines-2026/","Xpander price Philippines"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
  body=f'''<h2>Xpander Cross price</h2>
-{C_ptab("xpander-cross")}
-<p class="row"><a class="btn sm" href="/budgetcalculator/?m=xcross">Compute my Xpander Cross monthly</a> {W_msg("xpander-cross","price-table",label="Message Richard")}</p>
-<p>See the <a href="/cars/xpander-cross/">Mitsubishi Xpander Cross 2026</a> page for specs and a test drive, or compare with the regular Xpander in the <a href="/blog/xpander-price-philippines-2026/">Xpander price Philippines</a> guide.</p>
+{C_ptab("xpander",ids=["xcross"])}
+<p class="row"><a class="btn sm" href="/budgetcalculator/?m=xcross">Compute my Xpander Cross monthly</a> {W_msg("xpander","price-table",label="Message Richard")}</p>
+<p>The Xpander Cross is a variant of the Xpander. See the <a href="/cars/xpander/#variants">Mitsubishi Xpander 2026</a> page for every variant, specs and a test drive, or compare it with the other Xpander variants in the <a href="/blog/xpander-price-philippines-2026/">Xpander price Philippines</a> guide.</p>
 <h2>What you get</h2>
 <p>According to Mitsubishi Motors Philippines, the Xpander Cross is a family-friendly 7-seater crossover MPV with a 1.5L MIVEC engine, a 4-speed AT and a class-leading 225 mm ground clearance. Safety equipment includes dual front airbags, ABS with EBD, Brake Assist, ASC, Traction Control, AYC, HSA, the Multi-Around Monitor and ISO-Fix.</p>
 <h2>For probinsya trips</h2>
 <p>If your family often drives home to the province, the high ground clearance helps on rough or flooded roads, and seven seats fit relatives and pasalubong. Book a test drive on the routes you know in and around San Jose del Monte. Compare all three family 7-seaters in <a href="/guides/xpander-vs-xpander-cross-vs-destinator/">Xpander vs Xpander Cross vs Destinator</a>.</p>
-'''+C_cta("xpander-cross","Xpander Cross","xcross"),after=W_vc("xpander-cross","price_article")+W_sbar("xpander-cross","Xpander Cross",W_from("xpander-cross")))
+'''+C_cta("xpander","Xpander Cross","xcross"),after=W_vc("xpander","price_article")+W_sbar("xpander","Xpander Cross",f(C_srp(C_lo("xcross")[0]))))
 def C_dpterm(slug):
     m=WM[slug];rows=""
     for v in m["variants"]:
@@ -355,7 +355,7 @@ C_LFAQ={"mitsubishi-sjdm-bulacan":[("Who will assist me?","Richard Cuagdan, auth
 C_PATHS.append("/mitsubishi-sjdm-bulacan/")
 
 # ================= A1 /mitsubishi-price-list-philippines/
-PL_GROUPS=[("Hatchback and sedan",["mirage","mirage-g4"]),("MPV",["xpander","xpander-cross"]),("SUV",["xforce","destinator","outlander-phev","montero-sport"]),("Pickup",["triton"]),("Commercial",["l300","versa-van"])]
+PL_GROUPS=[("Hatchback and sedan",["mirage","mirage-g4"]),("MPV",["xpander"]),("SUV",["xforce","destinator","outlander-phev","montero-sport"]),("Pickup",["triton"]),("Commercial",["l300","versa-van"])]
 def _plrows():
     out=""
     for g,ss in PL_GROUPS:
@@ -377,7 +377,7 @@ _plchips="".join(f'<a class="chip" href="#pl-{s}">{e(WM[s]["name"])}</a>' for _,
 _plt="Mitsubishi Price List Philippines 2026: All Models";_pld="Every 2026 Mitsubishi model and variant SRP in one table, with low DP and sample monthly. Pre-qualified, subject to bank approval. Ask Richard in SJDM."
 C_chk(_plt,_pld,"pricelist")
 _plart=[(f"/cars/{s}/",f"{WM[s]['name']} variants and promo","Model page") for _,ss in PL_GROUPS for s in ss]
-_plprice=[("/blog/xpander-price-philippines-2026/","Xpander price Philippines","SRP, low DP, monthly"),("/blog/mirage-price-philippines-2026/","Mirage price Philippines","Hatchback"),("/blog/mirage-g4-price-philippines-2026/","Mirage G4 price Philippines","Sedan"),("/tips/xforce-2026-price-philippines/","Xforce price Philippines","Compact SUV"),("/blog/xpander-cross-2026-price-philippines/","Xpander Cross price Philippines","Crossover MPV"),("/blog/l300-price-philippines-2026/","L300 price Philippines","Commercial"),("/blog/destinator-price-philippines/","Destinator price Philippines","7-seater SUV"),("/blog/montero-sport-price-philippines-2026/","Montero Sport price Philippines","Diesel SUV"),("/blog/triton-price-philippines/","Triton price Philippines","Pickup")]
+_plprice=[("/blog/xpander-price-philippines-2026/","Xpander price Philippines","SRP, low DP, monthly"),("/blog/mirage-price-philippines-2026/","Mirage price Philippines","Hatchback"),("/blog/mirage-g4-price-philippines-2026/","Mirage G4 price Philippines","Sedan"),("/tips/xforce-2026-price-philippines/","Xforce price Philippines","Compact SUV"),("/blog/xpander-cross-2026-price-philippines/","Xpander Cross price Philippines","Crossover-styled Xpander"),("/blog/l300-price-philippines-2026/","L300 price Philippines","Commercial"),("/blog/destinator-price-philippines/","Destinator price Philippines","7-seater SUV"),("/blog/montero-sport-price-philippines-2026/","Montero Sport price Philippines","Diesel SUV"),("/blog/triton-price-philippines/","Triton price Philippines","Pickup")]
 page("/mitsubishi-price-list-philippines/",_plt,_pld,
 f'''<section class="ph"><div class="w"><p class="kick">Price list · 2026 · SJDM</p><h1>Mitsubishi Price List Philippines 2026 (Oct 2026 List)</h1>
 <p class="lead">Every Mitsubishi model and variant in one table, with the lowest published down payment and a sample monthly. From Richard Cuagdan, authorized Mitsubishi sales executive in San Jose del Monte (SJDM).</p>
