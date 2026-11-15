@@ -278,14 +278,14 @@
     "unit": "XFORCE GT 1.5G 2WD CVT (Quartz White Pearl)"
   },
   {
-    "a_dp": 8000,
-    "a_mo": 29032,
+    "a_dp": 23000,
+    "a_mo": 28616,
     "a_old": [
       33000,
       29428
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 198000,
+    "b_dp": 183000,
     "b_mo": 25038,
     "family": "Destinator",
     "flags": "",
@@ -294,14 +294,14 @@
     "unit": "Destinator GLX 1.5G Turbo 2WD CVT"
   },
   {
-    "a_dp": 8000,
-    "a_mo": 29296,
+    "a_dp": 18000,
+    "a_mo": 28925,
     "a_old": [
       33000,
       29746
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLX 1.5G Turbo 2WD CVT",
-    "b_dp": 198000,
+    "b_dp": 183000,
     "b_mo": 25309,
     "family": "Destinator",
     "flags": "color variant, SRP differs",
@@ -310,82 +310,82 @@
     "unit": "Destinator GLX 1.5G Turbo 2WD CVT (Quartz White Pearl)"
   },
   {
-    "a_dp": 48000,
-    "a_mo": 33588,
+    "a_dp": 68000,
+    "a_mo": 32942,
     "a_old": [
       78000,
       33877
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 268000,
+    "b_dp": 248000,
     "b_mo": 28824,
     "family": "Destinator",
     "flags": "",
-    "fuel": null,
+    "fuel": 20000,
     "srp": 1599000,
     "unit": "Destinator GLS 1.5G Turbo 2WD CVT"
   },
   {
-    "a_dp": 48000,
-    "a_mo": 33849,
+    "a_dp": 63000,
+    "a_mo": 33251,
     "a_old": [
       78000,
       34195
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GLS 1.5G Turbo 2WD CVT",
-    "b_dp": 268000,
+    "b_dp": 248000,
     "b_mo": 29094,
     "family": "Destinator",
     "flags": "color variant, SRP differs",
-    "fuel": null,
+    "fuel": 20000,
     "srp": 1614000,
     "unit": "Destinator GLS 1.5G Turbo 2WD CVT (Quartz White Pearl)"
   },
   {
-    "a_dp": 0,
-    "a_mo": 39666,
+    "a_dp": 3000,
+    "a_mo": 39740,
     "a_old": [
       123000,
       37256
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 238000,
+    "b_dp": 223000,
     "b_mo": 34772,
     "family": "Destinator",
     "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1929000,
     "unit": "Destinator GT 1.5G Turbo 2WD CVT (Monotone)"
   },
   {
     "a_dp": 0,
-    "a_mo": 39844,
+    "a_mo": 39946,
     "a_old": [
       128000,
       37449
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 238000,
+    "b_dp": 223000,
     "b_mo": 34953,
     "family": "Destinator",
     "flags": "20% promo DP ₱13,000 ≤ ₱13K → Option A uses 25% MMFP tier",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1939000,
     "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)"
   },
   {
     "a_dp": 0,
-    "a_mo": 40108,
+    "a_mo": 40256,
     "a_old": [
       123000,
       37739
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Destinator GT 1.5G Turbo 2WD CVT (Two-Tone)",
-    "b_dp": 238000,
+    "b_dp": 223000,
     "b_mo": 35223,
     "family": "Destinator",
     "flags": "color variant, SRP differs; 20% promo DP ₱8,000 ≤ ₱13K → Option A uses 25% MMFP tier",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1954000,
     "unit": "Destinator GT 1.5G Turbo 2WD CVT (Two-Tone) (Quartz White"
   },
