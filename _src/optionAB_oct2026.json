@@ -177,7 +177,7 @@
     "b_mo": 20171,
     "family": "Xforce",
     "flags": "",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1119000,
     "unit": "XFORCE GLX 1.5G 2WD CVT"
   },
@@ -193,7 +193,7 @@
     "b_mo": 20442,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1134000,
     "unit": "XFORCE GLX 1.5G 2WD CVT (Quartz White Pearl)"
   },
@@ -209,7 +209,7 @@
     "b_mo": 23416,
     "family": "Xforce",
     "flags": "",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1299000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Monotone)"
   },
@@ -225,7 +225,7 @@
     "b_mo": 23597,
     "family": "Xforce",
     "flags": "",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1309000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone)"
   },
@@ -241,7 +241,7 @@
     "b_mo": 23867,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1324000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone, Quartz White Pearl)"
   },
@@ -257,7 +257,7 @@
     "b_mo": 29941,
     "family": "Xforce",
     "flags": "",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1661000,
     "unit": "XFORCE GT 1.5G 2WD CVT"
   },
@@ -273,7 +273,7 @@
     "b_mo": 30212,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": 10000,
+    "fuel": 20000,
     "srp": 1676000,
     "unit": "XFORCE GT 1.5G 2WD CVT (Quartz White Pearl)"
   },
