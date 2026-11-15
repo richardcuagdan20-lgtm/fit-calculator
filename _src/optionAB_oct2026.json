@@ -166,114 +166,114 @@
     "unit": "Xpander Cross 1.5G 2WD A/T (Two-Tone, Quartz White Pearl)"
   },
   {
-    "a_dp": 23000,
-    "a_mo": 23874,
+    "a_dp": 28000,
+    "a_mo": 23053,
     "a_old": [
       63000,
       23708
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 193000,
+    "b_dp": 153000,
     "b_mo": 20171,
     "family": "Xforce",
     "flags": "",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1119000,
     "unit": "XFORCE GLX 1.5G 2WD CVT"
   },
   {
     "a_dp": 23000,
-    "a_mo": 24135,
+    "a_mo": 23362,
     "a_old": [
       58000,
       24026
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLX 1.5G 2WD CVT",
-    "b_dp": 193000,
+    "b_dp": 153000,
     "b_mo": 20442,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1134000,
     "unit": "XFORCE GLX 1.5G 2WD CVT (Quartz White Pearl)"
   },
   {
-    "a_dp": 33000,
-    "a_mo": 27679,
+    "a_dp": 43000,
+    "a_mo": 26762,
     "a_old": [
       73000,
       27521
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 228000,
+    "b_dp": 188000,
     "b_mo": 23416,
     "family": "Xforce",
     "flags": "",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1299000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Monotone)"
   },
   {
-    "a_dp": 33000,
-    "a_mo": 27852,
+    "a_dp": 43000,
+    "a_mo": 26968,
     "a_old": [
       78000,
       27733
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 228000,
-    "b_mo": 23596,
+    "b_dp": 193000,
+    "b_mo": 23597,
     "family": "Xforce",
     "flags": "",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1309000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone)"
   },
   {
-    "a_dp": 33000,
-    "a_mo": 28113,
+    "a_dp": 38000,
+    "a_mo": 27277,
     "a_old": [
       73000,
       28051
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GLS 1.5G 2WD CVT (Two-Tone)",
-    "b_dp": 228000,
+    "b_dp": 188000,
     "b_mo": 23867,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1324000,
     "unit": "XFORCE GLS 1.5G 2WD CVT (Two-Tone, Quartz White Pearl)"
   },
   {
-    "a_dp": 48000,
-    "a_mo": 35433,
+    "a_dp": 68000,
+    "a_mo": 34219,
     "a_old": [
       103000,
       35191
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 298000,
+    "b_dp": 258000,
     "b_mo": 29941,
     "family": "Xforce",
     "flags": "",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1661000,
     "unit": "XFORCE GT 1.5G 2WD CVT"
   },
   {
-    "a_dp": 48000,
-    "a_mo": 35693,
+    "a_dp": 68000,
+    "a_mo": 34528,
     "a_old": [
       103000,
       35509
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant XFORCE GT 1.5G 2WD CVT",
-    "b_dp": 298000,
+    "b_dp": 258000,
     "b_mo": 30212,
     "family": "Xforce",
     "flags": "color variant, SRP differs",
-    "fuel": null,
+    "fuel": 10000,
     "srp": 1676000,
     "unit": "XFORCE GT 1.5G 2WD CVT (Quartz White Pearl)"
   },

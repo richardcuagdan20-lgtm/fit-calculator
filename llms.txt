@@ -49,10 +49,10 @@
 - Mitsubishi Xpander GLX 1.5G 2WD A/T: SRP ₱1,159,000; Option A ₱28K DP / ₱23,877 per month; Option B ₱158K DP / ₱20,892 per month; freebie 80,000 fuel points
 - Mitsubishi Xpander GLS 1.5G 2WD A/T: SRP ₱1,259,000; Option A ₱18K DP / ₱25,938 per month; Option B ₱158K DP / ₱22,695 per month; freebie 80,000 fuel points
 - Mitsubishi Xpander Cross 1.5G 2WD A/T (Two-Tone): SRP ₱1,378,000; Option A ₱8K DP / ₱28,389 per month; Option B ₱163K DP / ₱24,841 per month; freebie 80,000 fuel points
-- Mitsubishi Xforce GLX 1.5G 2WD CVT: SRP ₱1,119,000; Option A ₱23K DP / ₱23,874 per month; Option B ₱193K DP / ₱20,171 per month
-- Mitsubishi Xforce GLS 1.5G 2WD CVT (Monotone): SRP ₱1,299,000; Option A ₱33K DP / ₱27,679 per month; Option B ₱228K DP / ₱23,416 per month
-- Mitsubishi Xforce GLS 1.5G 2WD CVT (Two-Tone): SRP ₱1,309,000; Option A ₱33K DP / ₱27,852 per month; Option B ₱228K DP / ₱23,596 per month
-- Mitsubishi Xforce GT 1.5G 2WD CVT: SRP ₱1,661,000; Option A ₱48K DP / ₱35,433 per month; Option B ₱298K DP / ₱29,941 per month
+- Mitsubishi Xforce GLX 1.5G 2WD CVT: SRP ₱1,119,000; Option A ₱28K DP / ₱23,053 per month; Option B ₱153K DP / ₱20,171 per month; freebie 10,000 fuel points
+- Mitsubishi Xforce GLS 1.5G 2WD CVT (Monotone): SRP ₱1,299,000; Option A ₱43K DP / ₱26,762 per month; Option B ₱188K DP / ₱23,416 per month; freebie 10,000 fuel points
+- Mitsubishi Xforce GLS 1.5G 2WD CVT (Two-Tone): SRP ₱1,309,000; Option A ₱43K DP / ₱26,968 per month; Option B ₱193K DP / ₱23,597 per month; freebie 10,000 fuel points
+- Mitsubishi Xforce GT 1.5G 2WD CVT: SRP ₱1,661,000; Option A ₱68K DP / ₱34,219 per month; Option B ₱258K DP / ₱29,941 per month; freebie 10,000 fuel points
 - Mitsubishi Destinator GLX 1.5G Turbo 2WD CVT: SRP ₱1,389,000; Option A ₱8K DP / ₱29,032 per month; Option B ₱198K DP / ₱25,038 per month
 - Mitsubishi Destinator GLS 1.5G Turbo 2WD CVT: SRP ₱1,599,000; Option A ₱48K DP / ₱33,588 per month; Option B ₱268K DP / ₱28,824 per month; freebie 20,000 fuel points
 - Mitsubishi Destinator GT 1.5G Turbo 2WD CVT (Monotone): SRP ₱1,929,000; Option A Zero DP Promo / ₱39,666 per month; Option B ₱238K DP / ₱34,772 per month; freebie 40,000 fuel points
