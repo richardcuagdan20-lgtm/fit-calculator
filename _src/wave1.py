@@ -10,7 +10,7 @@ MSQ="Pre-qualified, subject to bank approval"
 WM={m["slug"]:m for m in MODELS}
 W_PATHS=[]  # every new or changed URL (scrubbed + checked)
 def W_badge(): return f'<p class="fresh"><span>{e(FRESH)}</span></p>'
-def W_short(v,m): return v["n"].replace(m["name"]+" ","",1)
+def W_short(v,m): return v["n"] if v["n"].startswith(m["name"]+" Cross") else v["n"].replace(m["name"]+" ","",1)  # Xpander Cross stays "Xpander Cross ..." (variant of the Xpander since 2026-11-15)
 def W_trans(n):
     t="CVT" if "CVT" in n else "Automatic" if "A/T" in n else "Manual" if "M/T" in n else "Automatic"
     d="AWD" if "AWD" in n else "4WD" if "4WD" in n else "2WD"

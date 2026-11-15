@@ -91,7 +91,7 @@ function cnt(){var l=reqList(),m=missing(),u=l.filter(function(x){return files[x
 function setV(i,v){var e=$(i);if(e&&v!=null&&v!==''){e.value=String(v);if(e.tagName==='SELECT'&&e.value!==String(v))e.value=''}}
 function ym(i,m){if(m==null||isNaN(m))return;m=Math.round(m);setV(i+'_y',Math.min(40,Math.floor(m/12)));setV(i+'_m',m%12)}
 function prefill(){try{P=JSON.parse(sessionStorage.getItem('mp_app_prefill')||'null')}catch(_){P=null}
-  if(!P){var q=new URLSearchParams(location.search).get('unit');if(q){q=q.replace(/[^a-z0-9-]/gi,'');var u=U.filter(function(x){return x.id===q})[0]||U.filter(function(x){return x.slug===q})[0];if(u){setV('model',u.model);fillVariants();if(u.id===q)setV('variant',u.id);fillColors()}}return}
+  if(!P){var q=new URLSearchParams(location.search).get('unit');if(q){q=q.replace(/[^a-z0-9-]/gi,'');if(q==='xpander-cross')q='xcross';var u=U.filter(function(x){return x.id===q})[0]||U.filter(function(x){return x.slug===q})[0];if(u){setV('model',u.model);fillVariants();if(u.id===q)setV('variant',u.id);fillColors()}}return}
   var nm=String(P.name||'').trim().split(/\s+/);if(nm.length>1){setV('last',nm.pop());setV('first',nm.join(' '))}else setV('first',nm[0]);
   setV('mobile',P.mobile);setV('email',P.email);setV('dob',P.dob);setV('civil',P.civil_status);setV('res',P.residential_status);ym('stay',P.stay_months);
   setV('emp',P.employment_type);setV('estat',P.employment_status);ym('ten',P.tenure_months);setV('gross',P.gross_monthly_income);setV('otherinc',P.other_household_income);setV('oblig',P.existing_monthly_obligations);

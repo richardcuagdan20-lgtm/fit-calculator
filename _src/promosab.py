@@ -7,17 +7,17 @@ import json, hashlib, base64, os
 from data import b_ok, BASK
 SRC="/workspace/loanapp/pricelist/optionAB.json"
 CACHE=os.path.join(os.path.dirname(__file__),"optionAB_oct2026.json")
-FAM=[("Mirage Hatchback","mirage","Mirage"),("Mirage G4","mirage-g4","Mirage G4"),("Xpander","xpander","Xpander"),("Xpander Cross","xpander-cross","Xpander Cross"),
+FAM=[("Mirage Hatchback","mirage","Mirage"),("Mirage G4","mirage-g4","Mirage G4"),("Xpander","xpander","Xpander"),
  ("Xforce","xforce","Xforce"),("Destinator","destinator","Destinator"),("Triton","triton","Triton"),("Montero Sport","montero-sport","Montero Sport"),
  ("L300","l300","L300"),("Versa Van","versa-van","Versa Van"),("Outlander PHEV","outlander-phev","Outlander PHEV")]
-# Richard's lowest-DP range per family (2026-10-29). Mirage hatchback / Xpander Cross unknown -> no range line.
+# Richard's lowest-DP range per family (2026-10-29). Mirage hatchback unknown -> no range line. Xpander Cross rows are family "Xpander" since 2026-11-15 (one model).
 RANGE={"mirage-g4":(0,18000),"xpander":(18000,33000),"xforce":(18000,48000),"destinator":(0,33000),"triton":(0,18000),
  "montero-sport":(0,33000),"l300":(18000,53000),"versa-van":(18000,48000),"outlander-phev":(68000,183000)}
 # fuel points only where the current site already shows the same figure
 FUEL={"Xpander GLX 1.5G 2WD M/T":30000,"L300 FB BODY WITHDUAL AC 2.2D M/T":20000}
 NICE={"L300 CAB & CHASIS 2.2D M/T":"L300 Cab & Chassis 2.2D M/T","L300 FB BODY WITH SINGLE AC 2.2D M/T":"L300 FB Body Single AC 2.2D M/T",
  "L300 FB BODY WITHDUAL AC 2.2D M/T":"L300 FB Body Dual AC 2.2D M/T","OUTLANDER PHEV GT 2.4G AWD":"Outlander PHEV GT 2.4G AWD"}
-MODELIMG={'mirage':'mir_glx_red','mirage-g4':'mg4gls_u17','xpander':'xpglx_x37','xpander-cross':'xc_x3n','xforce':'xf_glx','destinator':'de_x3n','triton':'tr_lineup',
+MODELIMG={'mirage':'mir_glx_red','mirage-g4':'mg4gls_u17','xpander':'xpglx_x37','xforce':'xf_glx','destinator':'de_x3n','triton':'tr_lineup',
  'montero-sport':'ms_white','l300':'l300_fb','versa-van':'vv_glx','outlander-phev':'op_gt'}  # one picture per model module (2026-10-29)
 # (old) card photos (2026-10-29): same image each /cars/ page uses per variant; Mirage hatchback has none -> no photo
 IMG={"Mirage GLX 1.2G MT":"mir_glx_red","Mirage GLX 1.2G CVT":"mir_glx_red","Mirage G4 GLX 1.2G M/T":"mg4glx_u17","Mirage G4 GLX 1.2G CVT":"mg4glx_a66","Mirage G4 GLS 1.2G CVT":"mg4gls_u17",

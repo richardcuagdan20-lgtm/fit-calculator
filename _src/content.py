@@ -76,8 +76,8 @@ body='''<p>"All-in" means the usual extra charges of buying a car are already pa
 dict(slug="xpander-vs-xpander-cross-vs-destinator",date="2026-10-21",img="de_x3n",alt="Mitsubishi Destinator GT two-tone with black roof",
 title="Xpander vs Xpander Cross vs Destinator: Which 7-Seater?",
 desc=("Compare the Mitsubishi Xpander, Xpander Cross and Destinator for Filipino families: engine, transmission, features and "+_PL+" monthly promos."),
-body='''<p>All three seat seven and are popular with families in Bulacan. The right choice depends on your budget, how often you travel far, and how much power and tech you want.</p>
-<div class="tw"><table class="pt"><thead><tr><th scope="col"></th><th scope="col">Xpander</th><th scope="col">Xpander Cross</th><th scope="col">Destinator</th></tr></thead><tbody>
+body='''<p>All three seat seven and are popular with families in Bulacan. The Xpander Cross is the crossover-styled variant of the Xpander, so the first column covers the other Xpander variants (GLX and GLS). The right choice depends on your budget, how often you travel far, and how much power and tech you want.</p>
+<div class="tw"><table class="pt"><thead><tr><th scope="col"></th><th scope="col">Xpander GLX / GLS</th><th scope="col">Xpander Cross</th><th scope="col">Destinator</th></tr></thead><tbody>
 <tr><th scope="row">Engine</th><td>1.5L MIVEC gasoline</td><td>1.5L MIVEC gasoline</td><td>1.5L turbo gasoline</td></tr>
 <tr><th scope="row">Power / torque</th><td>105 PS / 141 Nm</td><td>105 PS / 141 Nm</td><td>163 PS / 250 Nm</td></tr>
 <tr><th scope="row">Transmission</th><td>5MT or 4AT</td><td>4AT</td><td>CVT</td></tr>
@@ -87,7 +87,7 @@ body='''<p>All three seat seven and are popular with families in Bulacan. The ri
 <h2>Choose the Xpander if…</h2>
 <p>You want the most affordable 7-seater, mostly drive around town and on weekend trips, and value practicality over extras. The GLS AT adds a 10-inch display with wireless smartphone connectivity and a Multi-Around Monitor. <a href="/cars/xpander/">See Xpander promos</a>.</p>
 <h2>Choose the Xpander Cross if…</h2>
-<p>You like the Xpander's packaging but want a tougher crossover look and a nicer cabin, including two-tone synthetic leather with Heat Guard. <a href="/cars/xpander-cross/">See Xpander Cross promos</a>.</p>
+<p>You like the Xpander's packaging but want a tougher crossover look and a nicer cabin, including two-tone synthetic leather with Heat Guard. <a href="/cars/xpander/#variants">See the Xpander Cross on the Xpander page</a>.</p>
 <h2>Choose the Destinator if…</h2>
 <p>You often carry a full load or drive long distances and want noticeably more power from the turbo engine. Higher variants add more technology, and the GT adds Forward Collision Mitigation and a panoramic sunroof. <a href="/cars/destinator/">See Destinator promos</a>.</p>
 <h2>Still undecided?</h2>
@@ -97,11 +97,11 @@ POSTS=[
 dict(slug="best-7-seater-for-filipino-families-2026",date="2026-10-21",img="xc_green",alt="Mitsubishi Xpander Cross in Green Bronze Metallic with black roof",
 title="Best 7-Seater for Filipino Families in 2026",
 desc="Which Mitsubishi 7-seater suits your family in 2026? A practical look at the Xpander, Xpander Cross, Destinator and Montero Sport by budget and lifestyle.",
-body='''<p>Seven seats is the magic number for many Filipino households: parents, kids, a lola or yaya, and room for pasalubong. Mitsubishi has four 7-seaters in the current lineup, and each fits a different kind of family.</p>
+body='''<p>Seven seats is the magic number for many Filipino households: parents, kids, a lola or yaya, and room for pasalubong. Mitsubishi has three 7-seat models in the current lineup, the Xpander (including its crossover-styled Xpander Cross variant), the Destinator and the Montero Sport, and each fits a different kind of family.</p>
 <h2>For the tightest budget: Xpander</h2>
 <p>With an SRP starting at ₱1,099,000, the <a href="/cars/xpander/">Xpander</a> is the most affordable way into a Mitsubishi 7-seater. Its high ground clearance is a real advantage during the rainy season.</p>
 <h2>For style with practicality: Xpander Cross</h2>
-<p>The <a href="/cars/xpander-cross/">Xpander Cross</a> keeps the Xpander's space and adds a crossover look and a more upscale interior, at an SRP of ₱1,378,000.</p>
+<p>The <a href="/cars/xpander/#variants">Xpander Cross</a>, the crossover-styled Xpander variant, keeps the Xpander's space and adds a crossover look and a more upscale interior, at an SRP of ₱1,378,000.</p>
 <h2>For more power and tech: Destinator</h2>
 <p>The <a href="/cars/destinator/">Destinator</a>'s turbocharged engine makes 163 PS, a big step up for families who regularly fill every seat and head north or south on the expressway.</p>
 <h2>For long drives and rough roads: Montero Sport</h2>
@@ -114,7 +114,7 @@ title="Mitsubishi October 2026 Promos in Bulacan",
 desc="October 2026 with Richard Cuagdan in San Jose del Monte: official SRPs per model, all-in packages with freebies, and how to see this month's promo figures.",
 body='''<p>October is a good month to shop with Richard Cuagdan in San Jose del Monte. Most models come with all-in packages, Zero DP or low-DP financing options and freebies. Here is where each model starts, based on the official SRP.</p>
 <h2>Starting SRP per model</h2>
-<ul class="ticks"><li><a href="/cars/mirage/">Mirage</a> (hatchback): from ₱720,000</li><li><a href="/cars/mirage-g4/">Mirage G4</a>: from ₱793,000</li><li><a href="/cars/l300/">L300</a>: from ₱829,000 (cab and chassis)</li><li><a href="/cars/xpander/">Xpander</a>: from ₱1,099,000</li><li><a href="/cars/xforce/">Xforce</a>: from ₱1,119,000</li><li><a href="/cars/triton/">Triton</a>: from ₱1,266,000</li><li><a href="/cars/xpander-cross/">Xpander Cross</a>: ₱1,378,000</li><li><a href="/cars/destinator/">Destinator</a>: from ₱1,389,000</li><li><a href="/cars/montero-sport/">Montero Sport</a>: from ₱1,568,000</li><li><a href="/cars/versa-van/">Versa Van</a>: ₱1,764,000</li><li><a href="/cars/outlander-phev/">Outlander PHEV</a>: ₱2,848,000</li></ul>
+<ul class="ticks"><li><a href="/cars/mirage/">Mirage</a> (hatchback): from ₱720,000</li><li><a href="/cars/mirage-g4/">Mirage G4</a>: from ₱793,000</li><li><a href="/cars/l300/">L300</a>: from ₱829,000 (cab and chassis)</li><li><a href="/cars/xpander/">Xpander</a>: from ₱1,099,000</li><li><a href="/cars/xforce/">Xforce</a>: from ₱1,119,000</li><li><a href="/cars/triton/">Triton</a>: from ₱1,266,000</li><li><a href="/cars/xpander/#variants">Xpander Cross</a> (Xpander variant): ₱1,378,000</li><li><a href="/cars/destinator/">Destinator</a>: from ₱1,389,000</li><li><a href="/cars/montero-sport/">Montero Sport</a>: from ₱1,568,000</li><li><a href="/cars/versa-van/">Versa Van</a>: ₱1,764,000</li><li><a href="/cars/outlander-phev/">Outlander PHEV</a>: ₱2,848,000</li></ul>
 <p class="muted">SRPs from the official Mitsubishi Motors Philippines price list (as of August 2026), subject to change without notice.</p>
 <h2>What this month's promos include</h2>
 <p>Promo packages are all-in: three years of LTO registration and TPL, first-year comprehensive insurance with the rate locked for three years, chattel mortgage, free labor up to 5,000 km and a three-year warranty. Freebies include full tint and floor mats, and many variants add a fuel freebie. <a href="/guides/what-all-in-includes/">See the full list</a>.</p>

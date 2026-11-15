@@ -254,7 +254,7 @@ BRO=[("mirage","Mirage","Hatchback","Compact, frugal hatchback built for easy ci
  ("mirage-g4","Mirage G4","Sedan","An efficient first sedan with a usable trunk for daily commutes and weekend trips.","2.2 MB","mirage-g4","Mirage G4"),
  ("xforce","XFORCE","Compact SUV","A stylish compact SUV with high ground clearance and a tech-forward cabin.","4.7 MB","xforce","XFORCE"),
  ("xpander","Xpander","7-seater MPV","A roomy seven-seat family MPV with flexible seating and a comfortable ride.","2.6 MB","xpander","Xpander"),
- ("xpander-cross","Xpander Cross","7-seater crossover MPV","Crossover styling and extra ground clearance on a practical seven-seat platform.","2.4 MB","xpander-cross","Xpander Cross"),
+ ("xpander-cross","Xpander Cross","7-seater MPV · Xpander variant","The crossover-styled Xpander variant: crossover styling on the same practical seven-seat platform.","2.4 MB","xpander","Xpander Cross"),
  ("destinator","Destinator","7-seater SUV","A modern seven-seat SUV for families who want more space and presence.","4.4 MB","destinator","Destinator"),
  ("outlander-phev","Outlander PHEV","Plug-in hybrid SUV","A plug-in hybrid SUV with electric driving for short trips and all-wheel control.","4.4 MB","outlander-phev","Outlander PHEV"),
  ("montero-sport","Montero Sport","7-seater diesel SUV","A body-on-frame diesel SUV ready for long drives, rough roads and full loads.","2.9 MB","montero-sport","Montero Sport"),
@@ -276,7 +276,7 @@ def bro_link(slug):
 # ---------- CARS index
 cards="".join(f'''<a class="card mc" href="/cars/{m['slug']}/">{img(m['img'],f"Mitsubishi {m['name']}")}<div class="pad"><p class="kick">{e(m['cat'])}</p><h3>{m['name']}</h3><p class="muted">{len(m['variants'])} variant{'s' if len(m['variants'])>1 else ''}</p><p class="low">{from_txt(m)}</p></div></a>''' for m in MODELS)
 page("/cars/","Mitsubishi Price List 2026 SJDM, San Jose del Monte Bulacan",
- "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander, Xpander Cross, Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
+ "Mitsubishi price list 2026 in SJDM, San Jose del Monte, Bulacan: Mirage, Mirage G4, Xpander (incl. Xpander Cross), Xforce, Destinator, Outlander PHEV, Montero Sport, Triton, L300 and Versa Van with official SRPs.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi price list 2026 in SJDM, San Jose del Monte: every model and SRP</h1><p class="lead">Browse every current model and variant with its official SRP. Promo packages are all-in and come with freebies.</p></div></section>
 <section class="sec"><div class="w"><div class="grid g3">{cards}</div><p class="note">{SRPNOTE}</p><p><a class="more" href="/destinator/">Destinator guide →</a> <a class="more" href="/mitsubishi-hybrid-phev/">Mitsubishi PHEV / hybrid →</a></p><p class="row"><a class="btn" href="/promos/">See {_PM} promos</a> <a class="btn ghost dk" href="/brochures/">Read brochures (PDF)</a></p></div></section>''',
  crumbs=[("/","Home"),("/cars/","Cars")])
@@ -348,7 +348,6 @@ def MTITLE(m):
         if len(t)<=62: return t
     return t
 _MG={"xpander":[("/tips/mitsubishi-monthly-amortization-philippines/","Mitsubishi monthly amortization table"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
- "xpander-cross":[("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
  "destinator":[("/tips/option-a-vs-option-b-mitsubishi-promo/","Option A vs Option B promo"),("/guides/xpander-vs-xpander-cross-vs-destinator/","Xpander vs Xpander Cross vs Destinator")],
  "xforce":[("/tips/xforce-2026-price-philippines/","Xforce 2026 price: GLX vs GLS vs GT"),("/tips/best-mitsubishi-for-sjdm-manila-commute/","Best Mitsubishi for the SJDM to Manila commute")],
  "montero-sport":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],"triton":[("/tips/montero-sport-vs-triton/","Montero Sport vs Triton")],
@@ -531,7 +530,7 @@ if(mn.getDay()===0)mn.setDate(mn.getDate()+1);
 $('date').min=ymd(mn);$('date').max=ymd(mx);
 function badDate(v){{if(!v)return true;var p=v.split('-'),d=new Date(+p[0],p[1]-1,+p[2]);return d.getDay()===0||d<mn||d>mx}}
 $('date').addEventListener('change',function(){{Lead.err('date',badDate(this.value))}});
-var q=new URLSearchParams(location.search).get('unit');
+var q=new URLSearchParams(location.search).get('unit');if(q==='xpander-cross')q='xcross';
 if(q){{var k=q.replace(/[^a-z0-9-]/gi,''),ex=U.filter(function(u){{return u.id===k}})[0],ms=U.filter(function(u){{return u.m===k}});
  if(ex){{pick(ex.id,false);toStep2()}}
  else if(ms.length){{pick(ms[0].id,false);toStep2();if(ms.length>1){{var ch=$('chips');
@@ -613,6 +612,9 @@ for _old,_nm in (("/blog/","Blog"),("/guides/","Guides"),("/promos-tips/","Promo
 # ---------- OFW guide merge: redirect old URL
 os.makedirs(R+"/guides/ofw-car-buying-guide",exist_ok=True)
 open(R+"/guides/ofw-car-buying-guide/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: OFW Car Loan Guide</title><link rel="canonical" href="'+D+'/blog/ofw-car-buying-guide/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/blog/ofw-car-buying-guide/"></head><body><p>This guide has moved to <a href="/blog/ofw-car-buying-guide/">the OFW car loan guide</a>.</p></body></html>\n')
+# ---------- Xpander Cross merged into the Xpander (Richard 2026-11-15): one model, Cross is a variant. Old model URL -> redirect stub
+os.makedirs(R+"/cars/xpander-cross",exist_ok=True)
+open(R+"/cars/xpander-cross/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: Mitsubishi Xpander (Xpander Cross variant)</title><link rel="canonical" href="'+D+'/cars/xpander/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/cars/xpander/#variants"><script>location.replace("/cars/xpander/"+location.search+(location.hash||"#variants"))</script></head><body><p>The Xpander Cross is now listed as a variant on the <a href="/cars/xpander/#variants">Mitsubishi Xpander</a> page.</p></body></html>\n')
 # ---------- /preview-loan/ retired: redirect stub to the live assessment
 os.makedirs(R+"/preview-loan",exist_ok=True)
 open(R+"/preview-loan/index.html","w").write('<!doctype html><html lang="en-PH"><head><meta charset="utf-8"><title>Moved: AI Car Loan Application Assessment</title><link rel="canonical" href="'+D+'/loan-assessment/"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=/loan-assessment/"><script>location.replace("/loan-assessment/"+location.search)</script></head><body><p>Moved to <a href="/loan-assessment/">the AI Car Loan Application Assessment</a>.</p></body></html>\n')
