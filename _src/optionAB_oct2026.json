@@ -70,66 +70,66 @@
     "unit": "Mirage G4 GLS 1.2G CVT"
   },
   {
-    "a_dp": 18000,
-    "a_mo": 22401,
+    "a_dp": 23000,
+    "a_mo": 22641,
     "a_old": [
       33000,
       23284
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 143000,
+    "b_dp": 148000,
     "b_mo": 19811,
     "family": "Xpander",
     "flags": "",
-    "fuel": 30000,
+    "fuel": 80000,
     "srp": 1099000,
     "unit": "Xpander GLX 1.5G 2WD M/T"
   },
   {
-    "a_dp": 23000,
-    "a_mo": 23592,
+    "a_dp": 28000,
+    "a_mo": 23877,
     "a_old": [
       38000,
       24555
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 153000,
+    "b_dp": 158000,
     "b_mo": 20892,
     "family": "Xpander",
     "flags": "",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1159000,
     "unit": "Xpander GLX 1.5G 2WD A/T"
   },
   {
-    "a_dp": 8000,
-    "a_mo": 26143,
+    "a_dp": 18000,
+    "a_mo": 25938,
     "a_old": [
       23000,
       26674
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row",
-    "b_dp": 173000,
+    "b_dp": 158000,
     "b_mo": 22695,
     "family": "Xpander",
     "flags": "",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1259000,
     "unit": "Xpander GLS 1.5G 2WD A/T"
   },
   {
-    "a_dp": 8000,
-    "a_mo": 26407,
+    "a_dp": 13000,
+    "a_mo": 26247,
     "a_old": [
       23000,
       26992
     ],
     "a_rule": "Richard 2026-10-30 lowest-DP list; A monthly = (SRP-A_DP) x factor / 60, factor from this unit's own Option B row ; DP from base variant Xpander GLS 1.5G 2WD A/T",
-    "b_dp": 173000,
+    "b_dp": 158000,
     "b_mo": 22965,
     "family": "Xpander",
     "flags": "color variant, SRP differs",
-    "fuel": null,
+    "fuel": 80000,
     "srp": 1274000,
     "unit": "Xpander GLS 1.5G 2WD A/T (Quartz White Pearl)"
   },

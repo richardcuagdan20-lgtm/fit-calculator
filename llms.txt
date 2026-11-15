@@ -45,9 +45,9 @@
 - Mitsubishi Mirage G4 GLX 1.2G M/T: SRP ₱793,000; Option A ₱3K DP / ₱16,337 per month; Option B ₱93K DP / ₱14,295 per month; freebie 20,000 fuel points
 - Mitsubishi Mirage G4 GLX 1.2G CVT: SRP ₱841,000; Option A ₱3K DP / ₱17,326 per month; Option B ₱73K DP / ₱15,160 per month; freebie 20,000 fuel points
 - Mitsubishi Mirage G4 GLS 1.2G CVT: SRP ₱937,000; Option A ₱3K DP / ₱19,304 per month; Option B ₱98K DP / ₱16,891 per month; freebie 20,000 fuel points
-- Mitsubishi Xpander GLX 1.5G 2WD M/T: SRP ₱1,099,000; Option A ₱18K DP / ₱22,401 per month; Option B ₱143K DP / ₱19,811 per month; freebie 30,000 fuel points
-- Mitsubishi Xpander GLX 1.5G 2WD A/T: SRP ₱1,159,000; Option A ₱23K DP / ₱23,592 per month; Option B ₱153K DP / ₱20,892 per month; freebie 60,000 fuel points
-- Mitsubishi Xpander GLS 1.5G 2WD A/T: SRP ₱1,259,000; Option A ₱8K DP / ₱26,143 per month; Option B ₱173K DP / ₱22,695 per month; freebie 60,000 fuel points
+- Mitsubishi Xpander GLX 1.5G 2WD M/T: SRP ₱1,099,000; Option A ₱23K DP / ₱22,641 per month; Option B ₱148K DP / ₱19,811 per month; freebie 80,000 fuel points
+- Mitsubishi Xpander GLX 1.5G 2WD A/T: SRP ₱1,159,000; Option A ₱28K DP / ₱23,877 per month; Option B ₱158K DP / ₱20,892 per month; freebie 80,000 fuel points
+- Mitsubishi Xpander GLS 1.5G 2WD A/T: SRP ₱1,259,000; Option A ₱18K DP / ₱25,938 per month; Option B ₱158K DP / ₱22,695 per month; freebie 80,000 fuel points
 - Mitsubishi Xpander Cross 1.5G 2WD A/T (Two-Tone): SRP ₱1,378,000; Option A Zero DP Promo / ₱28,406 per month; Option B ₱173K DP / ₱24,840 per month; freebie 60,000 fuel points
 - Mitsubishi Xforce GLX 1.5G 2WD CVT: SRP ₱1,119,000; Option A ₱23K DP / ₱23,874 per month; Option B ₱193K DP / ₱20,171 per month
 - Mitsubishi Xforce GLS 1.5G 2WD CVT (Monotone): SRP ₱1,299,000; Option A ₱33K DP / ₱27,679 per month; Option B ₱228K DP / ₱23,416 per month
