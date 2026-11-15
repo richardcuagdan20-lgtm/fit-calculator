@@ -26,15 +26,18 @@ def rng(slug):
     if not ds: return "message me"
     lo,hi=min(ds),max(ds)
     t=lambda x:"Zero DP Promo" if x==0 else f(x)
+    if slug=="xpander" and lo==0 and hi>0: return f"up to {f(hi)} DP"  # Cross (Zero DP) merged into Xpander 2026-11-15: no new Zero DP wording on the Xpander range
     return t(lo) if lo==hi else f"{t(lo)} to {f(hi)} DP"
 def fuel(v): return f'{v["promo"]["fuel"]:,} fuel points' if v["promo"] and v["promo"]["fuel"] else "—"
-def table(slugs,cols=("srp","zdp","b","inc")):
+def table(slugs,cols=("srp","zdp","b","inc"),cross=False):
+    # cross=True only where the table listed the Xpander Cross before the 2026-11-15 merge (keeps other tables as they were, no new Zero DP rows)
     h={"srp":"SRP","zdp":"Option A (lowest DP / monthly)","b":"Option B (DP / monthly)","inc":"Gross income guide*","fuel":"Freebie","a":"Option A range"}
     rows=""
     for s in slugs:
         m=M(s)
         for v in m["variants"]:
             if not SRP(v): continue
+            if v["id"]=="xcross" and not cross: continue
             z=ZDP(v); b=B(v["n"])
             c={"srp":f(SRP(v)),"zdp":(ADP(v)+" / "+f(z)+"/mo") if z else "—","b":(f"{f(b[0])} / {f(b[1])}/mo" if b else "—"),
                "inc":inc(z or (b[1] if b else 0)) if (z or b) else "—","fuel":fuel(v),"a":rng(s)}
@@ -73,7 +76,7 @@ body=f'''<p>"Magkano ang monthly?" is the first question I get on Messenger, alm
 <p>Want to try your own DP and term? Use the <a href="/budgetcalculator/">monthly estimate calculator</a>. It also shows the official promo for the same unit so you can compare.</p>
 <h2>{MON} Mitsubishi monthly amortization table</h2>
 <p>Units listed by model. "—" means there is no promo of that type for the unit this month; message me for the latest.</p>
-{table(_ALLS)}
+{table(_ALLS,cross=True)}
 <h2>Option A: the lowest down payment</h2>
 <p>Every unit on the promos page also has an <b>Option A</b>, the lowest down payment for that unit. On some units this is a <b>Zero DP Promo</b>; on others it is a small DP (for example, the Mirage G4 is "{rng('mirage-g4')}"), subject to bank approval. Option A figures are unlocked with a short form on the <a href="/promos/">promos page</a> so I can send you the exact computation for your profile.</p>
 <h2>What the all-in package includes</h2>
@@ -118,7 +121,7 @@ body=f'''<p>"Zero DP" is the most searched promo term I see for Mitsubishi in Bu
 <tr><th scope="row">Documents</th><td>Complete, consistent names, addresses and income figures</td></tr>
 <tr><th scope="row">Reachability</th><td>Answering the bank's verification call</td></tr></tbody></table>
 <h2>{MON} Option A (lowest DP) by unit</h2>
-{table(["mirage-g4","xpander","destinator","triton","montero-sport","l300"],cols=("srp","zdp","inc","fuel"))}
+{table(["mirage-g4","xpander","destinator","triton","montero-sport","l300"],cols=("srp","zdp","inc","fuel"),cross=True)}
 <h2>Zero DP vs paying a down payment</h2>
 <p>Zero DP keeps your savings intact, which matters if you need an emergency fund. A down payment lowers the monthly and the total paid. Option B on the promos page shows a 30% DP version for every unit. For a deeper comparison, read <a href="/guides/zero-dp-vs-low-dp/">Zero DP vs low DP</a> and the <a href="/mitsubishi-zero-down-payment-promo/">Mitsubishi zero down payment promo</a> guide.</p>
 <h2>Paano tumaas ang chance ma-approve</h2>
@@ -152,7 +155,7 @@ body=f'''<p>Many of my clients are OFWs and seafarers buying a car for the famil
 <h2>How to apply from abroad, step by step</h2>
 <ol><li>Check what fits your budget with the <a href="/budgetcalculator/">calculator</a>.</li><li>Take the free <a href="/loan-assessment/">assessment</a>; a good result reads Pre-qualified, subject to bank approval.</li><li>Fill out the <a href="/apply/">application</a> and send clear scans of your documents.</li><li>Answer the bank's verification call or email, even if you're on a different time zone.</li><li>Once the bank approves, your SPA or co-borrower signs, and your family picks up the unit in SJDM.</li></ol>
 <h2>Popular units for OFW families this month</h2>
-{table(["xpander","destinator","mirage-g4"],cols=("srp","zdp","b"))}
+{table(["xpander","destinator","mirage-g4"],cols=("srp","zdp","b"),cross=True)}
 <h2>Common reasons OFW applications get delayed</h2>
 <ul class="ticks"><li>Expired or soon-to-expire contract.</li><li>Remittances to different recipients every month.</li><li>Names spelled differently across IDs and documents.</li><li>The bank cannot reach the applicant for verification.</li></ul>
 <h2>Timing tips</h2>
