@@ -39,7 +39,7 @@ GT_LAND=set()  # landing-guide paths, filled by landing.py
 from figs import FIGS
 ILLS=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"ill_sizes.json")))
 def e(s): return html.escape(s,quote=True)
-def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None,og=None):
+def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x37.webp",noindex=False,crumbs=None,og=None,cta=True):
     url=D+path
     import og as _og
     ogimg=og or _og.make(path,_og.heading(path,title,crumbs,[SUF0," | Mitsubishi Motors"]),img)
@@ -66,6 +66,12 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
     bc=""
     if crumbs:
         bc='<nav class="bc" aria-label="Breadcrumb"><div class="w">'+" <span>/</span> ".join(f'<a href="{p}">{e(n)}</a>' for p,n in crumbs[:-1])+f' <span>/</span> <span aria-current="page">{e(crumbs[-1][1])}</span></div></nav>'
+    cta_html=(f'''<section class="cta"><div class="w">
+<h2>Estimate your monthly in a minute</h2>
+<p>Choose a car, a down payment and a term to see an estimated monthly, compared with the official promo for that unit.</p>
+<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="{MSG}" rel="noopener" data-msgr="cta-band">Message Richard on Messenger</a></p>
+</div></section>
+''' if cta else "")
     h=f'''<!doctype html>
 <html lang="en-PH">
 <head>
@@ -110,12 +116,7 @@ def page(path,title,desc,body,ld=None,ogtype="website",img="/assets/img/xpglx_x3
 {bc}
 <main id="main">
 {body}
-<section class="cta"><div class="w">
-<h2>Estimate your monthly in a minute</h2>
-<p>Choose a car, a down payment and a term to see an estimated monthly, compared with the official promo for that unit.</p>
-<p class="row"><a class="btn" href="/budgetcalculator/">Compute my monthly</a> <a class="btn ghost" href="{MSG}" rel="noopener" data-msgr="cta-band">Message Richard on Messenger</a></p>
-</div></section>
-</main>
+{cta_html}</main>
 <footer class="ft"><div class="w">
 <div class="fg">
 <div><p class="fb">Richard Dennis Cuagdan</p><p>Authorized Mitsubishi Sales Executive</p><p>{SERVICE_AREA}</p><p>Mobile: <a href="tel:{TEL}">{TELD}</a></p><p>Showroom hours: {HOURS}</p><p><a class="btn sm" href="/apply/">Apply Now</a></p></div>
@@ -443,10 +444,11 @@ def articles(base,items,label,title=None,desc=None,intro=None):
 {top}
 {body}
 {rx_bio(rx_pick(a["slug"]),a.get("lang")=="tl")}
-{LACTA}
+{'' if a.get("no_finance_cta") else LACTA}
 {fq}{a.get("after","")}
 <aside class="box"><h2 class="h3">More guides &amp; tips</h2><ul class="links">{others}</ul><p><a class="more" href="{GT}">See all guides &amp; tips →</a></p></aside></div></article>''',ld=ld,ogtype="article",img=f"/assets/img/{a['img']}.webp",
-        crumbs=(a["crumbs"]+[(f"/{base}/{a['slug']}/",a["title"])]) if a.get("crumbs") else [("/","Home"),(GT,GT_EN),(f"/{base}/{a['slug']}/",a["title"])])
+        crumbs=(a["crumbs"]+[(f"/{base}/{a['slug']}/",a["title"])]) if a.get("crumbs") else [("/","Home"),(GT,GT_EN),(f"/{base}/{a['slug']}/",a["title"])],
+        cta=not a.get("no_finance_cta"))
 articles("guides",GUIDES,"Guides","Car Buying Guides | Richard Cuagdan, Mitsubishi SJDM Bulacan",
  "Plain-language guides to buying a car in the Philippines: how financing works, loan documents, Zero DP vs low DP, OFW buying and all-in packages.",
  "Practical, plain-language guides to help you plan your purchase before you visit the showroom.")
