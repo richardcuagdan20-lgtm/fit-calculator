@@ -512,21 +512,34 @@ XH_SRC=[("https://www.mitsubishi-motors.com/en/newsroom/newsrelease/2024/2024020
  ("https://www.mitsubishi-motors.co.th/en/news-activity/news/MMTh-XPANDER-XPANDER-CROSS-HEV-First-Ever-Debut-Motor-Expo-2025-0-interest","Mitsubishi Motors Thailand: New Xpander HEV and Xpander Cross HEV debut, Nov 28, 2025"),
  ("https://www.mitsubishi-motors.co.th/en/buy/all-models-price","Mitsubishi Motors Thailand: official price list"),
  ("https://www.mitsubishi-motors.co.th/en/cars/xpanderhev","Mitsubishi Motors Thailand: New Xpander HEV"),
- ("https://www.mitsubishi-motors.co.th/en/cars/xpandercrosshev","Mitsubishi Motors Thailand: New Xpander Cross HEV")]
+ ("https://www.mitsubishi-motors.co.th/en/cars/xpandercrosshev","Mitsubishi Motors Thailand: New Xpander Cross HEV"),
+ ("https://www.mitsubishi-motors.co.th/content/dam/mitsubishi-motors-th/images/site-images/vehicle-page-assets/xpanderhev/2024/manuals_and_guides/xpander-hev-owner-manual-en.pdf","Mitsubishi Motors Thailand: Xpander HEV owner's manual (English, PDF)"),
+ ("https://www.mitsubishi-motors.com/en/newsroom/stories/phev4/index.html","Mitsubishi Motors story: the HEV system and its NEDC fuel consumption claims"),
+ ("https://toyota.com.ph/zenix","Toyota Motor Philippines: Zenix"),
+ ("https://content.toyota.com.ph/uploads/vehicles/49/001_49_1724138891546_000.pdf","Toyota Motor Philippines: Zenix brochure and specifications (PDF)"),
+ ("https://www.mitsubishi-motors.com.ph/cars/outlander-phev","Mitsubishi Motors Philippines: Outlander PHEV"),
+ ("https://www.mitsubishi-motors.com.ph/articles/mmpc-introduces-new-outlander-phev","Mitsubishi Motors Philippines: MMPC introduces the new Outlander PHEV, Aug 20, 2026"),
+ ("https://www.mitsubishi-motors.com.ph/guides/enriching-life-with-outlander-phev","Mitsubishi Motors Philippines: Enriching life with the Outlander PHEV (battery and charging)")]
 def XH_fig(k,alt,w,h,cap="Official photo: Mitsubishi Motors (2024 launch model)."):
     return f'<figure class="fig"><img src="/assets/img/{k}.webp" alt="{e(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"><figcaption class="zsm">{e(cap)}</figcaption></figure>'
 def XH_msg(place,cls="btn",label="Message Richard for Xpander Hybrid updates"):
     return f'<a class="{cls}" href="{MSG}" rel="noopener" data-msgr="xpander-hybrid-{e(place)}" data-track="msg" data-place="{e(place)}">{label}</a>'
 _xh=W_A(slug="xpander-hybrid-philippines",car="xpander",date="2026-11-16",img="xh_hero",
  alt="Mitsubishi Xpander HEV hybrid MPV in White Diamond, official Mitsubishi Motors launch photo",crumbs=CR_GT,
- title="Xpander Hybrid Philippines: What We Know | SJDM, San Jose del Monte",seo="Xpander Hybrid Philippines News | SJDM San Jose del Monte",
- desc="Xpander Hybrid (HEV): official specs, Thai prices in pesos and PH status. No PH launch date or SRP yet. Ask Richard in SJDM, San Jose del Monte.",
+ title="Xpander Hybrid Philippines: Specs, Fuel Consumption | SJDM, San Jose del Monte",seo="Xpander Hybrid Fuel Consumption | SJDM San Jose del Monte",
+ desc="Xpander Hybrid (HEV): fuel consumption, electric specs, hybrid 7-seater comparison and PH status. No PH SRP yet. Richard, SJDM, San Jose del Monte.",
  answer="The Xpander Hybrid (Xpander HEV and Xpander Cross HEV) has been on sale in Thailand since February 1, 2024. Mitsubishi Motors Philippines has not announced a local launch date or SRP, so it is not available in the Philippines yet.",
  faq=[("Is the Xpander Hybrid available in the Philippines?","Not yet. Mitsubishi Motors Philippines (MMPC) sells the Xpander and Xpander Cross with a 1.5L gasoline engine. The hybrid versions are sold in Thailand, and MMPC has not announced a Philippine launch."),
   ("When will the Xpander Hybrid come to the Philippines?","There is no announced date. In April 2026, Mitsubishi Motors said MMPC plans to start building a new hybrid model at its Santa Rosa, Laguna plant around mid-2028, subject to approval under the government's EVIS program. Mitsubishi Motors has not said which model it will be."),
   ("How much is the Xpander Hybrid in the Philippines?","There is no Philippine SRP. In Thailand, the official price is THB 935,000 for the Xpander HEV and THB 953,000 for the Xpander Cross HEV. That is about ₱1,755,000 and ₱1,789,000 at the BSP reference rate of November 12, 2026, for reference only. A future Philippine price could be quite different."),
   ("What engine does the Xpander HEV have?","According to Mitsubishi Motors Thailand, a 1.6L MIVEC gasoline engine (95 PS, 134 Nm) works with an 85 kW (116 PS) electric motor with 255 Nm of torque and a lithium-ion hybrid battery, driving the front wheels."),
-  ("How fuel efficient is the Xpander Hybrid?","According to Mitsubishi Motors, fuel consumption is about 34% better in urban driving and about 15% better in combined driving than its gasoline CVT model, on the NEDC lab test. Real-world results depend on how and where you drive."),
+  ("What is the Xpander Hybrid's fuel consumption?","According to Mitsubishi Motors, fuel consumption is about 34% better in urban driving and about 15% better in combined driving than its gasoline CVT model, on the NEDC lab test used in Thailand. Mitsubishi Motors hasn't published a km/L figure in the official sources I checked, so I don't quote one. Real-world results depend on how and where you drive."),
+  ("Do you need to charge the Xpander Hybrid? Is it a plug-in hybrid?","No. It is a full hybrid (HEV), not a plug-in. According to the Xpander HEV owner's manual, the drive battery is charged by the engine and by regenerative braking, so it doesn't need charging from an outside source. There is no charging port."),
+  ("What battery does the Xpander Hybrid use?","A lithium-ion drive battery placed under the front seats, according to Mitsubishi Motors. Mitsubishi Motors hasn't published the battery capacity in the brochure or owner's manual I checked."),
+  ("How far can the Xpander Hybrid run on electricity alone?","Mitsubishi Motors doesn't publish an EV-only range for the Xpander HEV. The owner's manual says EV drive is mainly used when starting off, the EV cruising range varies with driving conditions, and it gets shorter at high speed or uphill."),
+  ("Xpander Hybrid vs Toyota Zenix Hybrid: what's the difference?","Both are seven-seat full hybrids that don't plug in. On official specs, the Xpander HEV (Thailand) has a 1.6L engine and an 85 kW (116 PS), 255 Nm motor. The Zenix 2.0 Q HEV sold by Toyota Motor Philippines has a 2.0L engine (152 PS), a 113 PS motor generator and 186 PS total system output, and it is longer and wider. Only the Zenix is sold in the Philippines today."),
+  ("Is there a 7-seater hybrid in the Philippines?","Yes. For example, Toyota Motor Philippines sells the Zenix 2.0 Q HEV, a seven-seat full hybrid. The Xpander Hybrid isn't sold here yet. Mitsubishi Motors Philippines' Outlander PHEV is a plug-in hybrid, but it seats five."),
+  ("HEV vs PHEV: which is better?","It depends on how you drive. An HEV like the Xpander HEV charges itself and never needs a plug. A PHEV like the Outlander PHEV has a much bigger battery you charge from a socket: Mitsubishi Motors Philippines quotes up to 100 km of pure electric range. If you can't charge at home, an HEV is simpler. If you can, a PHEV can cover short daily trips on electricity."),
   ("Can I reserve an Xpander Hybrid with Richard now?","Not yet, because there are no Philippine variants or prices to reserve. Message me and I will update you when MMPC announces local details. If you need a seven-seater now, the current Xpander and Xpander Cross are available.")],
  more=[("/cars/xpander/","Mitsubishi Xpander 2026"),
       ("/blog/xpander-variants-explained/","Xpander variants explained"),
@@ -593,6 +606,57 @@ _xh=W_A(slug="xpander-hybrid-philippines",car="xpander",date="2026-11-16",img="x
 <tr><th scope="row">Available in the Philippines</th><td>Not yet</td><td>Yes, four variants including the Xpander Cross</td></tr>
 </tbody></table></div>
 <p>The current Xpander lineup and its official promos are on the <a href="/cars/xpander/">Mitsubishi Xpander 2026</a> page.</p>
+<h2>Xpander Hybrid fuel consumption and electric specs</h2>
+<div class="box ans"><p><b>Fuel consumption, according to Mitsubishi Motors:</b> about <b>34% better in urban driving</b> and about <b>15% better combined</b> than its gasoline CVT model, on the NEDC lab test commonly used in Thailand. Mitsubishi Motors also says the engine on its own is about 10% more fuel efficient. These are percentages, not km/L. Mitsubishi Motors hasn't published a km/L figure in the official sources I checked.</p></div>
+<p>New cars in Thailand also carry a government Eco Sticker label with fuel and CO2 figures. I couldn't confirm the Xpander HEV's label figure from an official source, so I haven't listed a km/L number. km/L figures you see online vary by source and test.</p>
+<div class="tw"><table class="pt"><thead><tr><th scope="col">Item</th><th scope="col">According to Mitsubishi Motors (Thailand)</th></tr></thead><tbody>
+<tr><th scope="row">Electric motor</th><td>S91 motor: 85 kW (116 PS) maximum output, 255 N·m; maximum 30-minute power 40 kW</td></tr>
+<tr><th scope="row">Engine</th><td>4A92 1.6L (1,590 cc): 70 kW (95 PS) at 5,100 rpm, 134 N·m at 4,500 rpm. Its main job is to generate power.</td></tr>
+<tr><th scope="row">Drive battery</th><td>Lithium-ion, under the front seats. Capacity not published.</td></tr>
+<tr><th scope="row">Charging</th><td>No plug. The battery is charged by the engine and by regenerative braking.</td></tr>
+<tr><th scope="row">EV (battery-only) driving</th><td>Mainly when starting off and at low speeds. No official EV-only range. It gets shorter at high speed or uphill.</td></tr>
+<tr><th scope="row">EV Priority mode</th><td>Runs on the battery without starting the engine. Not available when the battery is low, cruise control is on or the battery is too cold.</td></tr>
+<tr><th scope="row">Charge mode</th><td>Runs the engine to charge the battery to nearly full, while driving or stopped. Use it only in a well-ventilated space.</td></tr>
+<tr><th scope="row">Regenerative braking</th><td>Recovers energy when you lift off the accelerator or brake. The "B" selector position gives stronger regenerative braking.</td></tr>
+<tr><th scope="row">Top speed and weight</th><td>155 km/h; kerb weight 1,455 to 1,460 kg</td></tr>
+<tr><th scope="row">Fuel tank</th><td>40 L</td></tr>
+</tbody></table></div>
+<p class="muted">From the Xpander HEV owner's manual and 2026 model year brochure (Mitsubishi Motors Thailand) and Mitsubishi Motors' Feb 1, 2024 news release.</p>
+<p>The engine can also start on its own. According to the owner's manual, the car switches from EV to hybrid drive when you accelerate hard, climb or drive on an expressway with a heavy foot, use the air conditioning, or when the system is too hot or too cold.</p>
+<h2>How it compares with other hybrid 7-seaters</h2>
+<p>This is a spec comparison only, using each maker's official figures. The Zenix 2.0 Q HEV is a seven-seat full hybrid that Toyota Motor Philippines sells here. The gasoline Xpander is shown as a baseline.</p>
+<div class="tw"><table class="pt"><thead><tr><th scope="col">Spec</th><th scope="col">Xpander HEV (Thailand)</th><th scope="col">Toyota Zenix 2.0 Q HEV (PH)</th><th scope="col">Xpander gasoline (PH)</th></tr></thead><tbody>
+<tr><th scope="row">Sold in the Philippines</th><td>Not yet</td><td>Yes</td><td>Yes</td></tr>
+<tr><th scope="row">Type</th><td>Full hybrid, self-charging</td><td>Full hybrid, self-charging</td><td>Gasoline</td></tr>
+<tr><th scope="row">Engine</th><td>1.6L (1,590 cc), 95 PS, 134 Nm</td><td>2.0L (1,987 cc), 152 PS, 188 Nm</td><td>1.5L (1,499 cc), 105 PS, 141 Nm</td></tr>
+<tr><th scope="row">Electric motor</th><td>116 PS (85 kW), 255 Nm</td><td>113 PS (motor generator)</td><td>None</td></tr>
+<tr><th scope="row">Total system output</th><td>Not published</td><td>186 PS</td><td>105 PS</td></tr>
+<tr><th scope="row">Drive battery</th><td>Lithium-ion</td><td>Not listed in the brochure</td><td>None</td></tr>
+<tr><th scope="row">Plug-in charging</th><td>No</td><td>No</td><td>Not applicable</td></tr>
+<tr><th scope="row">EV-only driving</th><td>Yes, EV Priority mode</td><td>Yes, EV Mode</td><td>No</td></tr>
+<tr><th scope="row">Transmission and drive</th><td>Transaxle, front-wheel drive</td><td>CVT, front-wheel drive</td><td>4-speed AT or 5-speed MT</td></tr>
+<tr><th scope="row">Seats</th><td>7</td><td>7</td><td>7</td></tr>
+<tr><th scope="row">Length × width × height</th><td>4,595 × 1,750 × 1,750 mm</td><td>4,755 × 1,850 × 1,790 mm</td><td>4,595 × 1,750 × 1,750 mm</td></tr>
+<tr><th scope="row">Fuel tank</th><td>40 L</td><td>52 L</td><td>Not listed here</td></tr>
+<tr><th scope="row">Official fuel consumption claim</th><td>About 34% better urban and 15% better combined vs its gasoline CVT model (NEDC)</td><td>Not stated in the brochure</td><td>Not stated</td></tr>
+</tbody></table></div>
+<p class="muted">Sources: Mitsubishi Motors Thailand (Xpander HEV), Toyota Motor Philippines' Zenix brochure (Zenix 2.0 Q HEV) and Mitsubishi Motors Philippines (Xpander). Makers test and publish figures in different ways, and the Xpander HEV figures are for Thailand, so these numbers aren't directly comparable. Fuel consumption figures from different tests (NEDC, WLTP or others) shouldn't be compared side by side.</p>
+<h2>HEV vs PHEV vs gas: what's the difference?</h2>
+<p>People often search "hybrid vs PHEV". Here's the difference, using three Mitsubishi models: the gasoline Xpander, the Xpander HEV and the Outlander PHEV.</p>
+<div class="tw"><table class="pt"><thead><tr><th scope="col">Question</th><th scope="col">Gas (Xpander, PH)</th><th scope="col">HEV (Xpander HEV, Thailand)</th><th scope="col">PHEV (Outlander PHEV, PH)</th></tr></thead><tbody>
+<tr><th scope="row">What moves the car</th><td>1.5L gasoline engine</td><td>Mostly the electric motor. The 1.6L engine generates power and helps at high speed.</td><td>Front and rear electric motors (116 PS and 136 PS) with a 2.4L gasoline engine</td></tr>
+<tr><th scope="row">Drive battery</th><td>None</td><td>Lithium-ion, capacity not published</td><td>Lithium-ion, 22.7 kWh</td></tr>
+<tr><th scope="row">Do you plug it in?</th><td>No</td><td>No, it charges itself</td><td>Yes: Type 2 AC charging and CHAdeMO DC quick charging</td></tr>
+<tr><th scope="row">Pure electric driving</th><td>None</td><td>Short distances, mainly starting off and at low speeds</td><td>Up to 100 km, according to MMPC (test cycle not stated; actual range varies)</td></tr>
+<tr><th scope="row">Seats</th><td>7</td><td>7</td><td>5</td></tr>
+<tr><th scope="row">Sold in the Philippines</th><td>Yes</td><td>Not yet</td><td>Yes</td></tr>
+</tbody></table></div>
+<ul class="ticks">
+<li><b>Gas:</b> the simplest setup, with one engine and no drive battery.</li>
+<li><b>HEV (full hybrid):</b> nothing changes in your routine. You fill up with gasoline, and the car uses its battery and motor to save fuel, especially in stop-and-go traffic.</li>
+<li><b>PHEV (plug-in hybrid):</b> a much bigger battery that you charge from a socket. If you can charge at home, many daily trips can be electric, and the engine is there for long drives.</li>
+</ul>
+<p>Want to see the plug-in option? Read the <a href="/cars/outlander-phev/">Outlander PHEV</a> page.</p>
 {XH_fig("xh_drive","Mitsubishi Xpander Cross HEV driving on a gravel road with headlights on, official Mitsubishi Motors photo",1200,800,"Xpander Cross HEV. Official photo: Mitsubishi Motors (2024 launch model).")}
 <h2>Fun facts about the Xpander Hybrid</h2>
 <ul class="ticks">
