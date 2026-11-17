@@ -524,6 +524,54 @@ def XH_fig(k,alt,w,h,cap="Official photo: Mitsubishi Motors (2024 launch model).
     return f'<figure class="fig"><img src="/assets/img/{k}.webp" alt="{e(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"><figcaption class="zsm">{e(cap)}</figcaption></figure>'
 def XH_msg(place,cls="btn",label="Message Richard for Xpander Hybrid updates"):
     return f'<a class="{cls}" href="{MSG}" rel="noopener" data-msgr="xpander-hybrid-{e(place)}" data-track="msg" data-place="{e(place)}">{label}</a>'
+def XH_watch():
+    """Lite YouTube Short facade (9:16): poster + play button, iframe loads on click."""
+    import json as _json
+    vid="G7ooToxPNQU"
+    name="Xpander Hybrid Philippines: Fuel Consumption, Specs & PH Release (2026)"
+    desc="A 60-second explainer of the Mitsubishi Xpander Hybrid (HEV): official specs, fuel consumption, and Philippine release status. The model is not sold in the Philippines yet; Mitsubishi Motors Philippines has not announced a local launch date or SRP."
+    poster=f"https://i.ytimg.com/vi/{vid}/oardefault.jpg"  # official 9:16 thumb; hqdefault is 16:9 and crops poorly
+    hq=f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
+    embed=f"https://www.youtube-nocookie.com/embed/{vid}"
+    watch=f"https://www.youtube.com/shorts/{vid}"
+    ld=_json.dumps({"@context":"https://schema.org","@type":"VideoObject","name":name,"description":desc,
+        "thumbnailUrl":[poster,hq],"uploadDate":"2026-11-17","embedUrl":embed,"contentUrl":watch},ensure_ascii=False)
+    css=(
+        ".xh-watch{margin:32px 0 8px}.xh-watch .muted,.xh-watch noscript{text-align:center;max-width:360px;margin-left:auto;margin-right:auto}"
+        ".xh-yt{position:relative;margin:0 auto;max-width:360px;width:100%;aspect-ratio:9/16;background:#0b0b0c;border-radius:var(--r);overflow:hidden}"
+        ".xh-yt iframe,.xh-yt-facade{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}"
+        ".xh-yt-facade{padding:0;background:#0b0b0c;cursor:pointer}"
+        ".xh-yt-facade img{width:100%;height:100%;object-fit:cover;object-position:center}"
+        ".xh-yt-play{position:absolute;left:50%;top:50%;width:68px;height:48px;margin:-24px 0 0 -34px;background:var(--red);border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.35);pointer-events:none;transition:background .15s,transform .15s}"
+        ".xh-yt-play:before{content:\"\";position:absolute;left:26px;top:14px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent #fff}"
+        ".xh-yt-facade:hover .xh-yt-play,.xh-yt-facade:focus-visible .xh-yt-play{background:var(--redd);transform:scale(1.06);transform-origin:center}"
+        ".xh-yt-facade:focus-visible{outline:3px solid var(--red);outline-offset:3px}"
+    )
+    js=(
+        "(function(){var r=document.getElementById(\"xh-yt\");if(!r)return;var b=r.querySelector(\"[data-yt]\");if(!b)return;"
+        "b.addEventListener(\"click\",function(){var f=document.createElement(\"iframe\");"
+        "f.src=\"https://www.youtube-nocookie.com/embed/\"+b.getAttribute(\"data-yt\")+\"?autoplay=1\";"
+        "f.title="+_json.dumps(name)+";"
+        "f.setAttribute(\"allow\",\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\");"
+        "f.setAttribute(\"allowfullscreen\",\"\");f.setAttribute(\"loading\",\"lazy\");"
+        "f.setAttribute(\"referrerpolicy\",\"strict-origin-when-cross-origin\");b.replaceWith(f);f.focus();});})();"
+    )
+    return (
+        f"<style>{css}</style>"
+        f'<section class="xh-watch" aria-label="{e(name)}">'
+        f"<h2>Watch: Xpander Hybrid in 60 seconds</h2>"
+        f"<p>A short explainer of the official specs, fuel consumption, and what Mitsubishi Motors has announced about a Philippine release.</p>"
+        f'<div class="xh-yt" id="xh-yt">'
+        f'<button type="button" class="xh-yt-facade" data-yt="{vid}" aria-label="Play video: {e(name)}">'
+        f'<img src="{poster}" alt="{e(name)}" width="360" height="640" loading="lazy" decoding="async">'
+        f'<span class="xh-yt-play" aria-hidden="true"></span></button></div>'
+        f'<p class="muted">Also on <a href="{watch}" rel="noopener" target="_blank">YouTube</a>.</p>'
+        f'<noscript><p><a href="{watch}" rel="noopener" target="_blank">Watch on YouTube</a></p></noscript>'
+        f"</section>"
+        f'<script type="application/ld+json">{ld}</script>'
+        f"<script>{js}</script>"
+    )
+
 _xh=W_A(slug="xpander-hybrid-philippines",car="xpander",date="2026-11-16",img="xh_hero",
  alt="Mitsubishi Xpander HEV hybrid MPV in White Diamond, official Mitsubishi Motors launch photo",crumbs=CR_GT,
  title="Xpander Hybrid Philippines: Specs, Fuel Consumption | SJDM, San Jose del Monte",seo="Xpander Hybrid Fuel Consumption | SJDM San Jose del Monte",
@@ -546,6 +594,7 @@ _xh=W_A(slug="xpander-hybrid-philippines",car="xpander",date="2026-11-16",img="x
       ("/blog/best-7-seater-for-filipino-families-2026/","Best 7-seater for Filipino families 2026")],
  body=f'''<p>Many of you in San Jose del Monte (SJDM) and around Bulacan have asked me about the <b>Xpander Hybrid</b>. Mitsubishi calls it the <b>Xpander HEV</b> (hybrid electric vehicle), and there is also an <b>Xpander Cross HEV</b>. This page puts what Mitsubishi Motors has officially announced in one place: where it is sold, the key specs, its official Thai prices converted to pesos for reference, and how it compares with the Xpander we sell here today.</p>
 <div class="box ans"><p><b>Not available in the Philippines yet:</b> Mitsubishi Motors Philippines (MMPC) has not announced a local launch date, variants or SRP for the Xpander Hybrid. It is not in Philippine showrooms, so I can't quote a local price or take reservations for it yet. I'll update this page when MMPC announces local details.</p></div>
+{XH_watch()}
 <h2>What is the Xpander Hybrid?</h2>
 <p>According to Mitsubishi Motors, the Xpander HEV and Xpander Cross HEV are full hybrid versions of the Xpander seven-seater. They don't need charging from a plug: a 1.6L gasoline engine and a generator make electricity, and an electric motor drives the front wheels. Mitsubishi Motors says the system was newly developed from its plug-in hybrid (PHEV) technology.</p>
 <p>The car runs on the battery alone when starting off and at low speeds. It switches to hybrid driving when climbing or accelerating, the engine helps at high speeds, and braking recovers energy back into the battery. Mitsubishi Motors put the drive battery under the front seats, so the three-row, seven-seat cabin is kept.</p>
@@ -677,7 +726,7 @@ _xh=W_A(slug="xpander-hybrid-philippines",car="xpander",date="2026-11-16",img="x
 <p class="muted">Photos: official Mitsubishi Motors newsroom images of the 2024 launch model, used here for editorial purposes. I'll update this page when Mitsubishi Motors Philippines announces local details.</p>
 <p class="row">{XH_msg("article-end",cls="btn ghost dk",label="Message Richard")}</p>{W_LOCAL}
 ''')
-_xh["mod"]="2026-11-16"
+_xh["mod"]="2026-11-17"
 _xh["no_finance_cta"]=True  # not sold in PH; loan/monthly CTAs would send people to another car
 WA.append(_xh)
 _WS={a["slug"] for a in WA}
