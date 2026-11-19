@@ -1,9 +1,10 @@
 /* "Inquire this promo" (2026-10-30): inline inquiry form per variant on /promos/ and car pages.
    Lead source promos-inquiry via lead.js (same webhook + fields as the unlock; message/figures go in usage/dpPreference).
-   Contact prefilled from the Option A unlock (localStorage promos_contact); otherwise name/mobile/email + consent are asked.
-   Inquiry does NOT unlock Option A. */
+   Contact prefilled from the Lowest DP unlock (localStorage promos_contact); otherwise name/mobile/email + consent are asked.
+   Inquiry does NOT unlock Lowest DP.
+   After a successful send, redirects to /thank-you/, which fires the conversion events once (token iq_ty in sessionStorage). */
 (function(){
-var H=document.documentElement,CK='promos_contact',S='promos-inquiry',A=[];
+var H=document.documentElement,CK='promos_contact',S='promos-inquiry',A=[],TY='/thank-you/',TK='iq_ty';
 try{A=JSON.parse(atob(document.getElementById('ab-a').textContent.trim()))}catch(_){}
 function tl(){return H.getAttribute('data-lang')==='tl'}
 function L2(en,t){return '<span class="en">'+en+'</span><span class="tl">'+t+'</span>'}
@@ -11,9 +12,12 @@ function peso(n){return '₱'+Math.round(n).toLocaleString('en-PH')}
 function who(){try{var c=JSON.parse(localStorage.getItem(CK)||'null');if(c&&c.n&&c.m&&c.e)return c}catch(_){}return null}
 function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function T(ev,p,c){try{if(window.rpTrack){window.rpTrack(ev,p,c);return}if(typeof window.fbq==='function')window.fbq(c?'trackCustom':'track',ev,p)}catch(_){}}
+function la(){return window.PROMO_LA||'Lowest DP'}
+function lb(){return window.PROMO_LB||'Lowest Monthly'}
+function thanksUrl(u){return TY+(u?('?unit='+encodeURIComponent(u)):'')}
 var N=0;
 function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=who();
- var msgEn='I would like to inquire about the '+u+' promo options (Option A and Option B).',msgTl='Gusto ko pong mag-inquire tungkol sa promo options ng '+u+' (Option A at Option B).';
+ var msgEn='I would like to inquire about the '+u+' promo options (Lowest DP and Lowest Monthly).',msgTl='Gusto ko pong mag-inquire tungkol sa promo options ng '+u+' (Lowest DP at Lowest Monthly).';
  panel.innerHTML='<form class="iq-f" novalidate>'+
  '<label for="'+id+'-m">'+L2('Your message','Ang mensahe mo')+'</label><textarea id="'+id+'-m" rows="4" maxlength="1000">'+esc(tl()?msgTl:msgEn)+'</textarea>'+
  (c?'<p class="iq-as">'+L2('Sending as','Ipapadala bilang')+' <b>'+esc(c.n)+'</b> · '+esc(c.m)+' · '+esc(c.e)+' <button type="button" class="iq-edit">'+L2('Edit','Palitan')+'</button></p>':'')+
@@ -36,17 +40,22 @@ function build(box,panel){var id='iq'+(++N),u=box.getAttribute('data-unit'),c=wh
   if(x){f.querySelector('.iq-who').hidden=false;f.querySelector('.chk').hidden=false;var a=f.querySelector('[aria-invalid=true]')||k;a.focus();return}
   var b=f.querySelector('.iq-send');b.disabled=true;
   var ai=+box.getAttribute('data-ai'),a=A[ai],open=H.classList.contains('ab-open');
-  var fa=a?(open?'Option A: '+(a[0]===0?'Zero DP Promo':peso(a[0])+' DP')+', '+peso(a[1])+'/mo':'Option A: locked (not unlocked)'):'Option A: n/a';
-  var fig=fa+' | Option B: '+box.getAttribute('data-b');
-  var ok=function(){try{localStorage.setItem(CK,JSON.stringify({n:n.value.trim(),m:m.value.trim(),e:e.value.trim()}))}catch(_){}panel.setAttribute('data-ck',ck());
+  var fa=a?(open?la()+': '+(a[0]===0?'Zero DP Promo':peso(a[0])+' DP')+', '+peso(a[1])+'/mo':la()+': locked (not unlocked)'):la()+': n/a';
+  var fig=fa+' | '+lb()+': '+box.getAttribute('data-b');
+  /* ok(sent): success panel always shown as before. Only a real send (sent!==false) arms the thank-you page:
+     the Pixel Lead, GA4 generate_lead, InquirePromo and Google Ads conversion are fired ONCE by /thank-you/ (assets/thanks.js)
+     from this sessionStorage token, so they are not fired here as well (no double count). Anti-spam skipped sends: redirect, no token. */
+  var ok=function(sent){try{localStorage.setItem(CK,JSON.stringify({n:n.value.trim(),m:m.value.trim(),e:e.value.trim()}))}catch(_){}panel.setAttribute('data-ck',ck());
    f.hidden=true;var o=panel.querySelector('.iq-ok');o.hidden=false;o.setAttribute('tabindex','-1');o.focus();
-   if(!(window.Lead&&Lead.skipped())){var p={content_name:'promos-inquiry',content_category:'promos',source:S,unit:u};if(window.Lead&&Lead.fire&&L)Lead.fire('promos-inquiry',L,{content_category:'promos',source:S,unit:u});else T('Lead',p);T('InquirePromo',p,true)}};
-  var L=null;if(!window.Lead){ok();return}
+   if(sent===false||!window.Lead||!L)return;
+   if(!Lead.skipped()){try{sessionStorage.setItem(TK,JSON.stringify({id:L.event_id,unit:u,ts:Date.now()}))}catch(_){}}
+   setTimeout(function(){location.assign(thanksUrl(u))},300)};
+  var L=null;if(!window.Lead){ok(false);return}
   L=Lead.base(S);L.leadSource=S;L.campaign=S;L.name=n.value.trim();L.mobile=m.value.trim();L.email=e.value.trim();L.chosenUnit=u;L.unitParam=box.getAttribute('data-ref');
   L.dpPreference=fig;L.timeline='Promos: inquiry about '+u;L.lang=tl()?'tl':'en';
   L.usage=['Email: '+L.email,'source='+S,'Message: '+t.value.trim().slice(0,1000),fig,'Pre-qualified, subject to bank approval'].join(' | ');
-  Lead.send(L).then(ok,ok)})}
-/* Contact is re-read every time a form opens and on the unlock event (fix 2026-10-30: a form opened before the Option A unlock kept asking for name/mobile/email).
+  Lead.send(L).then(function(r){ok(r!==false)},function(){ok(false)})})}
+/* Contact is re-read every time a form opens and on the unlock event (fix 2026-10-30: a form opened before the Lowest DP unlock kept asking for name/mobile/email).
    An unsent form is rebuilt when the saved contact changed; the typed message is kept. If unlocked with no saved contact, the fields are asked once and saved on send. */
 function ck(){var c=who();return c?c.n+'|'+c.m+'|'+c.e:''}
 function sync(box,p){if(!p.firstChild){build(box,p);p.setAttribute('data-ck',ck());return}
