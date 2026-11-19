@@ -159,7 +159,8 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
     def _labs(x):
         return x.replace('{LDA}',LDA).replace('{LDB}',LDB).replace('{LDAT}',LDAT).replace('{LDBT}',LDBT)
     POP=_labs(POP); TEASER=_labs(TEASER)
-    CARPARTS.update(css=css,form=form,lv=lv,jv=jv,qv=qv,f=f,msg=MSG,pop=POP)
+    labels=f'<script>window.PROMO_LA={json.dumps(LDA)};window.PROMO_LB={json.dumps(LDB)};</script>'
+    CARPARTS.update(css=css,form=form,lv=lv,jv=jv,qv=qv,f=f,msg=MSG,pop=POP,labels=labels)
     body=css+f'''<div class="abw"><section class="ph"><div class="w"><div class="ab-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
 <p class="kick">{_PL}</p><h1><span class="en">Mitsubishi Promos This Month in San Jose del Monte (SJDM)</span><span class="tl">Mitsubishi promos ngayong buwan</span></h1><p class="lead"><span class="en">Every unit comes with two all-in options on 60 months: <b>{LDA}</b>, the lowest down payment (unlock to see), and <b>{LDB}</b>, a 30% down payment with a lower monthly.</span><span class="tl">Bawat unit may dalawang all-in option sa 60 months: <b>{LDA}</b>, ang pinakamababang down payment (i-unlock para makita), at <b>{LDB}</b>, 30% down payment na mas mababa ang monthly.</span></p>
 {hero_cta("#list",src="promos")}</div></section>
@@ -170,7 +171,7 @@ html.ab-popon,html.ab-popon body{overflow:hidden}html:not(.ab-open) [data-a]{cur
 <section class="sec alt"><div class="w"><h2>How to use this month's promo</h2><ol class="psteps"><li><b>Pick a unit and {LDA} or {LDB}</b> above.</li><li><b>Estimate your own plan</b> with the <a href="/budgetcalculator/">monthly calculator</a> (standard formula: (SRP − DP) × add-on rate ÷ months; 5 years at 1.55).</li><li><b>Check your chances</b> with the free <a href="/loan-assessment/">Loan Application Assessment</a> (Pre-qualified, subject to bank approval).</li><li><b>Apply or ask</b>: <a href="/apply/">apply online</a> or <a href="{MSG}" rel="noopener" data-msgr="promos-steps">message Richard on Messenger</a>.</li></ol></div></section>
 <section class="sec"><div class="w split"><div><h2>All-in includes</h2>{ALLIN_HTML}</div><div><h2>Freebies</h2>{FREE_HTML}</div></div></section></div>
 {POP}<script type="text/plain" id="ab-a">{blob}</script>
-<script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
+{labels}<script src="/assets/lead.js?v={lv}" defer></script><script src="/assets/promos.js?v={jv}" defer></script><script src="/assets/inquiry.js?v={qv}" defer></script>'''
     page("/promos/","Mitsubishi Promo 2026 | SJDM, San Jose del Monte",
      "Current Mitsubishi low DP and monthly offers per model in SJDM, Bulacan. November update pending. Pre-qualified, subject to bank approval.",
      body, crumbs=[("/","Home"),("/promos/","Promos")])
@@ -242,6 +243,6 @@ def inject_cars(R):
              f'<a class="btn ghost" href="/test-drive/" data-heroact="testdrive-{slug}"><span class="en">Book a Test Drive</span><span class="tl">Mag-book ng Test Drive</span></a></p>')
         h,c=re.subn(r'<p class="row hcta"><a class="btn" href="/promos/[^"]*" data-herocta="([^"]*)">[^<]*</a></p>',hero,h,count=1); assert c==1,slug
         h=h.replace('Promo down payment and monthly options are shared on the <a href="/promos/">promos page</a>.','Tap <b>See promo</b> on a variant for its down payment and monthly options.')
-        h=h.replace("</body>",f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script><script src="/assets/inquiry.js?v={CARPARTS["qv"]}" defer></script></body>',1)
+        h=h.replace("</body>",CARPARTS["labels"]+f'<script src="/assets/lead.js?v={CARPARTS["lv"]}" defer></script><script src="/assets/promos.js?v={CARPARTS["jv"]}" defer></script><script src="/assets/inquiry.js?v={CARPARTS["qv"]}" defer></script></body>',1)
         open(fp,"w").write(h)
     json.dump(REPORT,open("/tmp/carpromo_map.json","w"),indent=1,ensure_ascii=False)

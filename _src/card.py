@@ -3,7 +3,7 @@
 CARD_NAME="Richard Dennis Cuagdan"
 CARD_CORP="Authorized Mitsubishi Sales Executive · SJDM Bulacan"
 _U="?utm_source=nfc&utm_medium=card&utm_campaign=business-card"
-_NAVC=[("/promos/","Promos","Option A and Option B for every unit","M4 7h16v3H4zm2 5h12v7H6z"),
+_NAVC=[("/promos/","Promos","Lowest DP and Lowest Monthly for every unit","M4 7h16v3H4zm2 5h12v7H6z"),
  ("/cars/","Cars and prices","All models, variants and inclusions","M5 16l1.5-5h11L19 16M5 16v3h2v-1h10v1h2v-3M7.5 14h.01M16.5 14h.01"),
  ("/loan-assessment/","Pre-qualify in 2 minutes","Free AI Car Loan Assessment","M12 3l7 3v5c0 4-3 7-7 9-4-2-7-5-7-9V6z"),
  ("/apply/","Apply now","Send your details and documents online","M7 3h8l4 4v14H7zM15 3v4h4"),

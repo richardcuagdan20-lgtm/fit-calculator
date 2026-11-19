@@ -5,6 +5,7 @@ from data import PROMO_LABEL as _PL, PROMO_SHORT as _PLS, PROMO_MONTH as _PM  # 
 from content import GUIDES, POSTS
 GUIDES=[g for g in GUIDES if g["slug"]!="ofw-car-buying-guide"]  # merged into /blog/ofw-car-buying-guide/
 from drafts import DRAFT_POSTS, PUBLISH
+from tracking_cfg import GADS_ID, GADS_LABEL
 # Posts in drafts.py go live only when their slug is in PUBLISH.
 LIVE=[a for a in DRAFT_POSTS if a["slug"] in PUBLISH]
 TIPS=[a for a in LIVE if a["base"]=="tips"]
@@ -14,6 +15,7 @@ PAGES=[]
 GA='''<!-- Google tag (gtag.js) GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T89CH2TJS6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T89CH2TJS6');</script>'''
+if GADS_ID: GA=GA.replace("gtag('config','G-T89CH2TJS6');","gtag('config','G-T89CH2TJS6');gtag('config','"+GADS_ID+"');")  # Ads tag site-wide so gclid is captured on landing
 ADDR="Richard Cuagdan, authorized Mitsubishi sales executive, serving San Jose del Monte (SJDM), Bulacan and Quezon City"
 AREAS=[{"@type":"City","name":"San Jose del Monte","alternateName":"SJDM","containedInPlace":{"@type":"AdministrativeArea","name":"Bulacan"}},{"@type":"City","name":"Quezon City"}]
 import urllib.parse as _up
@@ -306,7 +308,7 @@ cards="".join(_card_bits)
 page("/brochures/","Mitsubishi Brochures 2026 | SJDM, San Jose del Monte",
  "Read official Mitsubishi brochures (PDF) for every 2026 model in the Philippines, plus the current SJDM, San Jose del Monte promo from Richard.",
 f'''<section class="ph"><div class="w"><h1>Mitsubishi brochures Philippines 2026: read the PDF, get the SJDM (San Jose del Monte) promo</h1><p class="lead">Every current Mitsubishi brochure in one place. Read the official PDF here, then check the latest all-in promo for each unit.</p></div></section>
-<section class="sec"><div class="w"><h2>Brochure vs. current promo</h2><p>Brochures cover features, specs, colors and variants. They do not reflect this month\'s promos, so any SRP printed in a brochure may differ from the current price and promo package. For today\'s figures, ask for the latest <b>Option A</b> (lowest down payment) or <b>Option B</b> (30% down payment, lower monthly) for your unit. Pre-qualified, subject to bank approval.</p><p class="row"><a class="btn" href="/promos/">Get the latest Option A / Option B promo</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="brochures-intro">Message Richard on Messenger</a></p></div></section>
+<section class="sec"><div class="w"><h2>Brochure vs. current promo</h2><p>Brochures cover features, specs, colors and variants. They do not reflect this month\'s promos, so any SRP printed in a brochure may differ from the current price and promo package. For today\'s figures, ask for the latest <b>Lowest DP</b> or <b>Lowest Monthly</b> (30% down payment, lower monthly) for your unit. Pre-qualified, subject to bank approval.</p><p class="row"><a class="btn" href="/promos/">See this month\'s promos</a> <a class="btn ghost dk" href="{MSG}" rel="noopener" data-msgr="brochures-intro">Message Richard on Messenger</a></p></div></section>
 {BROCSS}<section class="sec alt"><div class="w"><div class="grid g3 bros">{cards}</div><p class="note">You can read each brochure on this site. Brochure covers and files are from Mitsubishi Motors Philippines; this independent sales page displays them and links to the official PDF.</p></div></section>''',
  ld=[{"@type":"CollectionPage","name":"Mitsubishi Brochures Philippines 2026","url":D+"/brochures/","mainEntity":{"@type":"ItemList","numberOfItems":len(BRO),"itemListElement":[{"@type":"ListItem","position":i+1,"name":f"Mitsubishi {n} brochure","url":D+f"/brochures/{k}/","image":f"{D}/assets/brochures/{k}.webp"} for i,(k,n,*_) in enumerate(BRO)]}}],
  crumbs=[("/","Home"),("/brochures/","Brochures")])
@@ -572,6 +574,67 @@ f'''<section class="ph"><div class="w"><h1>Contact</h1><p class="lead">The quick
 <div class="card pad"><h2 class="h3">Compute first</h2><p>See your all-in monthly options before you visit.</p><p><a class="btn ghost" href="/budgetcalculator/">Compute my monthly</a></p></div>
 </div></section>
 <section class="sec"><div class="w"><h2>Visiting the showroom</h2><p>I serve buyers in San Jose del Monte (SJDM), Bulacan and Quezon City. Message or call me before you come so I can send directions and have your preferred unit ready for viewing or a test drive.</p><p class="row"><a class="btn" href="{MSG}" rel="noopener">Message Richard on Messenger</a> <a class="btn ghost dk" href="tel:{TEL}">Call {TELD}</a></p></div></section>''', ld=[{"@type":"ContactPage","about":{"@id":D+"/#dealer"}}], crumbs=[("/","Home"),("/contact/","Contact")], og=rx_og("xforce"))
+# ---------- inquiry confirmation (noindex; "Inquire this promo" redirects here after a successful send)
+_ty_note=f'<p class="ty-note">{e(OFFICE_NOTE)}</p>' if OFFICE_NOTE else ""
+page("/thank-you/","Thanks, your inquiry was sent | SJDM, San Jose del Monte",
+ "Your inquiry was sent. Other ways to reach Richard Cuagdan in San Jose del Monte (SJDM), Bulacan.",
+f'''<style>
+html[data-lang=tl] .ty .en,html:not([data-lang=tl]) .ty .tl{{display:none!important}}
+.ty-lang{{display:flex;gap:8px;margin:0 0 16px}}
+.ty-lang button{{background:none;border:1px solid #52525b;color:inherit;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-size:14px;cursor:pointer}}
+html[data-lang=tl] .ty-lang [data-setlang=tl],html:not([data-lang=tl]) .ty-lang [data-setlang=en]{{background:#0b0b0c;color:#fff}}
+.ty .lead{{font-size:18px;max-width:34em}}
+.ty-about{{font-size:18px;margin:0 0 1em}}
+.ty-ways{{list-style:none;padding:0;margin:0 0 1.6em;display:grid;gap:12px}}
+@media(min-width:640px){{.ty-ways{{grid-template-columns:1fr 1fr}}}}
+.ty-ways a{{display:flex;align-items:flex-start;flex-direction:column;gap:2px;padding:16px 18px;min-height:56px;border:1px solid var(--ln);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}}
+.ty-ways a:hover{{border-color:var(--ink)}}
+.ty-ways b{{font-size:16px}}
+.ty-ways a>span{{color:var(--mu);font-size:14px;font-weight:400}}
+.ty-visit{{margin:0 0 8px}}
+.ty-home{{margin:28px 0 0;font-size:18px}}
+.ty-home a{{font-weight:700}}
+</style>
+<section class="ph"><div class="w ty">
+<div class="ty-lang" role="group" aria-label="Language / Wika"><button type="button" data-setlang="en">English</button><button type="button" data-setlang="tl">Taglish</button></div>
+<h1><span class="en">Thanks! Your inquiry was sent.</span><span class="tl">Salamat! Naipadala na ang inquiry mo.</span></h1>
+<p class="ty-about" id="ty-about" hidden>
+ <span class="en">Your inquiry about <b id="ty-unit-en"></b> was sent.</span>
+ <span class="tl">Naipadala na ang inquiry mo tungkol sa <b id="ty-unit-tl"></b>.</span>
+</p>
+<p class="lead"><span class="en">Richard received your details and will follow up with you.</span><span class="tl">Natanggap ni Richard ang details mo at magfo-follow up siya sa iyo.</span></p>
+</div></section>
+<section class="sec"><div class="w ty nar">
+<h2><span class="en">Other ways to reach Richard</span><span class="tl">Iba pang paraan para makontak si Richard</span></h2>
+<ul class="ty-ways">
+<li><a href="tel:{TEL}"><b><span class="en">Call</span><span class="tl">Tawag</span></b><span>{e(TELD)}</span></a></li>
+<li><a href="sms:{TEL}"><b><span class="en">Text / SMS</span><span class="tl">Text / SMS</span></b><span>{e(TELD)}</span></a></li>
+<li><a href="{MSG}" rel="noopener" data-msgr="thank-you"><b>Messenger</b><span><span class="en">Send Richard a message</span><span class="tl">Mag-message kay Richard</span></span></a></li>
+<li><a href="{FB}" target="_blank" rel="noopener"><b>Facebook</b><span><span class="en">Richard&rsquo;s Facebook page</span><span class="tl">Facebook page ni Richard</span></span></a></li>
+<li><a href="mailto:{e(EMAIL)}"><b>Email</b><span>{e(EMAIL)}</span></a></li>
+</ul>
+<h3 class="h3"><span class="en">Showroom visits</span><span class="tl">Pagbisita sa showroom</span></h3>
+<p class="ty-visit">{e(SERVICE_AREA)}</p>
+<p><b><span class="en">Showroom hours</span><span class="tl">Oras ng showroom</span>:</b> {e(HOURS)}</p>
+{_ty_note}
+<p class="ty-home"><a href="/"><span class="en">Back to home</span><span class="tl">Bumalik sa home</span></a></p>
+</div></section>
+<script>
+(function(){{
+ try{{var l=localStorage.getItem("site_lang");if(l==="tl"||l==="en")document.documentElement.setAttribute("data-lang",l)}}catch(_){{}}
+ document.querySelectorAll("[data-setlang]").forEach(function(b){{b.addEventListener("click",function(){{var l=b.getAttribute("data-setlang")==="tl"?"tl":"en";document.documentElement.setAttribute("data-lang",l);try{{localStorage.setItem("site_lang",l)}}catch(_){{}}}})}});
+ var raw=(new URLSearchParams(location.search).get("unit")||"").replace(/\\s+/g," ").trim().slice(0,80);
+ if(!/^[\\w][\\w\\s./()+\\-,&]*$/.test(raw)) raw="";
+ if(raw){{
+  var en=document.getElementById("ty-unit-en"),tl=document.getElementById("ty-unit-tl"),box=document.getElementById("ty-about");
+  if(en)en.textContent=raw;if(tl)tl.textContent=raw;if(box)box.hidden=false;
+ }}
+}})();
+</script>
+<script>window.GADS_CONV={json.dumps({"id":GADS_ID,"label":GADS_LABEL} if (GADS_ID and GADS_LABEL) else {})};</script>
+<script src="/assets/lead.js?v={__import__("hashlib").md5(open(R+"/assets/lead.js","rb").read()).hexdigest()[:8]}" defer></script><script src="/assets/thanks.js?v={__import__("hashlib").md5(open(R+"/assets/thanks.js","rb").read()).hexdigest()[:8]}" defer></script>
+''', noindex=True, cta=False, crumbs=[("/","Home"),("/thank-you/","Thank you")])
+
 
 # ---------- calculator (replaces the old budget-fit page; old copy kept in git history and /workspace/loanapp/budgetcalculator-old-20261029.html)
 CALC_FAQ=[("How do I compute a brand new car installment in the Philippines?","Subtract the down payment from the SRP, apply the bank's add-on rate for your term, then divide by the number of months. The calculator does this for you; figures are estimates."),
@@ -689,7 +752,7 @@ open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales
 - [Budget calculator]({D}/budgetcalculator/): match a unit to your income
 - [Book a test drive]({D}/test-drive/): Monday to Saturday, 8 AM to 5 PM
 - [Apply]({D}/apply/): financing or cash application
-- [Promos]({D}/promos/): this month's all-in promos, two options per unit (Option A lowest down payment, unlocked with a short form; Option B 30% down payment with a lower monthly), subject to bank approval
+- [Promos]({D}/promos/): this month's all-in promos, two options per unit (Lowest DP, unlocked with a short form; Lowest Monthly, 30% down payment with a lower monthly), subject to bank approval
 - [Brochures]({D}/brochures/): official Mitsubishi Motors Philippines PDF brochure for each model, readable on this site
 - [Guides & Tips]({D}/tips/): every guide, blog post and tip in one list, newest first
 - [About]({D}/about/) and [Contact]({D}/contact/)
@@ -713,8 +776,8 @@ open(R+"/llms.txt","w").write(f"""# Richard Cuagdan, Authorized Mitsubishi Sales
 - All-in includes: {"; ".join(ALLIN)}.
 - Assessment results are worded "Pre-qualified, subject to bank approval"; the bank makes the final decision. Fuel freebies are stated in fuel points.
 
-## Option A (lowest DP) and Option B by variant ({NOTE.split("valid for ")[1].split(",")[0]}, 60 months, all-in, subject to bank approval)
-"""+"".join(f"- Mitsubishi {v['n']}: SRP {f(v['promo']['srp'] or v['srp']) if v['promo'] else srp_txt(v)}; Option A {v['promo']['opts'][0][0]} / {f(v['promo']['opts'][0][1])} per month; "+(f"Option B {v['promo']['opts'][1][0]} / {f(v['promo']['opts'][1][1])} per month" if len(v['promo']['opts'])>1 else "Option B: ask for latest (being confirmed)")+(f"; freebie {v['promo']['fuel']:,} fuel points" if v['promo'].get('fuel') else "")+"\n" for m in MODELS for v in m["variants"] if v['promo'] and (len(v['promo']['opts'])>1 or v.get('ab')))+f"""
+## Lowest DP and Lowest Monthly by variant ({NOTE.split("valid for ")[1].split(",")[0]}, 60 months, all-in, subject to bank approval)
+"""+"".join(f"- Mitsubishi {v['n']}: SRP {f(v['promo']['srp'] or v['srp']) if v['promo'] else srp_txt(v)}; Lowest DP {v['promo']['opts'][0][0]} / {f(v['promo']['opts'][0][1])} per month; "+(f"Lowest Monthly {v['promo']['opts'][1][0]} / {f(v['promo']['opts'][1][1])} per month" if len(v['promo']['opts'])>1 else "Lowest Monthly: ask for latest (being confirmed)")+(f"; freebie {v['promo']['fuel']:,} fuel points" if v['promo'].get('fuel') else "")+"\n" for m in MODELS for v in m["variants"] if v['promo'] and (len(v['promo']['opts'])>1 or v.get('ab')))+f"""
 ## Models
 """+"".join(f"- [{m['name']}]({D}/cars/{m['slug']}/): {m['blurb']}\n" for m in MODELS)+"\n## Guides & Tips (all articles, newest first; index: "+D+GT+")\n"+"".join(f"- [{t}]({D}{u}): {d}\n" for u,t,d,dt in _GTL if u not in GT_LAND))
 import og as _og
@@ -780,7 +843,7 @@ _FM_A=_re.compile(r'(\s*·\s*)?(\s?)<a ([^>]*href="https://m\.me/[^"]*"[^>]*)>(.
 def _fm_strip(s,status):
     def f(m):
         attrs,txt=m.group(3),m.group(4)
-        if 'class="fbl"' in attrs or 'class="fmsg"' in attrs or 'data-inquire=' in attrs: return m.group(0)  # Richard 2026-10-30: "Inquire this promo" -> Messenger stays
+        if 'class="fbl"' in attrs or 'class="fmsg"' in attrs or 'data-inquire=' in attrs or 'data-msgr="thank-you"' in attrs: return m.group(0)  # footer, floating, inquire alt-link, and thank-you contact card stay
         plain=_re.sub(r'<[^>]+>','',txt).strip()
         if _re.search(r'class="[^"]*\bbtn\b',attrs) or plain.lower() in ('message richard on messenger','i-message si richard sa messenger'):
             return ''  # button / standalone CTA -> removed (floating button replaces it)
